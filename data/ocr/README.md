@@ -17,3 +17,7 @@ October 13 expansion adds separate PolyOCR-9B parsing configurations, an explici
 `pricing.jsonl` records `unit: usd_per_1000_pages`, provider/mode, verification status and date. Preserve imported observations as `unverified_import`; add newly verified observations with direct source IDs. Use `comparison_default: false` for alternate batch/annotation modes and for current-service rates that do not pin a benchmarked historical generation.
 
 `pricing-tokens.jsonl` uses `unit: usd_per_million_tokens` and distinct input/cached-input/output fields. It must not contain `usd_per_1000_pages`. A vendor token tariff is not a workload measurement. Self-hosting has no numeric page rate unless a defined hardware/workload measurement establishes one.
+
+Ranking policy v2 accepts comparable observed public-benchmark scores across operators, then records provisional reasons for both own and reference-cohort evidence. Assumptions and vendor-internal tests are never eligible. Two mature core families allow a provisional number; three remove only the coverage reason. Family maturity and exclusion of correlated/task-only variants are unchanged.
+
+The Real5 maintainer publication (October 12) and Xiaomi author report disagree: 92.73 versus 95.24. Keep both records and their configurations/operator caveats; prefer the maintainer publication without claiming an independently reproduced execution. Additional recognition and VQA variants use `primary: false` and `core: false`.

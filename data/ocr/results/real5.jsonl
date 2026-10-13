@@ -30,3 +30,4 @@
 {"model":"dolphin-1-5","metrics":{"overall":61.48},"source_id":"real5"}
 {"model":"marker-1-8-2","metrics":{"overall":60.1},"source_id":"real5"}
 {"model":"xiaomi-ocr-0","metrics":{"overall":95.24},"source_id":"xiaomi-paper","evidence":"author_reported"}
+{"model":"xiaomi-ocr-0","metrics":{"overall":92.73,"scanning":93.73,"warping":92.76,"screen_photo":92.8,"illumination":92.68,"skew":91.69},"source_id":"real5-xiaomi-maintainer","evidence":"official","verified_on":"2026-10-13","evaluation_date":"2026-10-12","dataset_version":"Real5-OmniDocBench, 6,775 reconstructed OmniDoc v1.5 images","measurement_operator":"Real5 benchmark maintainer publication; execution operator/pipeline not established","configuration":"Maintainer table; Xiaomi run pipeline not pinned","note":"Maintainer-published 92.73; author paper reports 95.24 with PP-DocLayoutV3. Runs/pipelines may differ; no averaging or inference."}

@@ -335,5 +335,14 @@
     "verified_on": "2026-10-13",
     "note": "Batch documentation states a 50% discount and supports the OCR endpoint. Applied to the verified $4 OCR 4.1 standard page rate: $2 per 1,000 pages.",
     "source_excerpt": "running large workloads at a 50% discount"
+  },
+  "real5-xiaomi-maintainer": {
+    "title": "Real5 maintainer-published Xiaomi evaluation, October 12",
+    "url": "https://huggingface.co/datasets/PaddlePaddle/Real5-OmniDocBench#1-overall",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "measurement_operator": "Real5 benchmark maintainer publication; execution operator/pipeline not established",
+    "note": "News adds Xiaomi on October 12. Main table reports 92.73 overall, versus 95.24 in the Xiaomi paper. Exact run pipeline is not specified; preserve both source-specific observations, do not average. Real5 reuses OmniDoc v1.5 pages and is not an independent aggregate vote.",
+    "source_excerpt": "Xiaomi-OCR-0 | Specialized VLMs | 0.8B | 92.73 | 93.73 | 92.76 | 92.80 | 92.68 | 91.69"
   }
 }

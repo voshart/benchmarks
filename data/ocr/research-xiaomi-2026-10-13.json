@@ -1,0 +1,20 @@
+{
+  "checked_on": "2026-10-13",
+  "model": "xiaomi-ocr-0",
+  "findings": [
+    {
+      "source_id": "real5-xiaomi-maintainer",
+      "finding": "Maintainer table adds Xiaomi October 12, reporting 92.73 vs author 95.24. Execution pipeline not pinned; preserved as separate observations."
+    },
+    {
+      "source_id": "xiaomi-paper",
+      "finding": "Additional table/formula/script/VQA comparisons are task-specific author evidence, not extra full-page benchmark families."
+    }
+  ],
+  "searched_without_locating_matching_results": [
+    "https://github.com/opendatalab/OmniDocBench",
+    "https://github.com/zhihengli-casia/PureDocBench",
+    "https://github.com/Yuliang-Liu/MultimodalOCR/blob/main/MDPBench/README.md"
+  ],
+  "limitation": "Absence in these checked pages is not proof no other evaluation exists. Mirrored model cards and summaries do not establish independent reproduction."
+}

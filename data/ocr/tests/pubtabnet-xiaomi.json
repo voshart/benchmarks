@@ -1,0 +1,16 @@
+{
+  "id": "pubtabnet-xiaomi",
+  "label": "PubTabNet · Xiaomi paper comparison",
+  "short": "PubTab",
+  "source": "xiaomi-paper",
+  "primary_metric": "teds",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "pubtabnet-xiaomi",
+  "min_models": 6,
+  "min_organizations": 3,
+  "scope": "Element-level table recognition",
+  "note": "Author-paper comparison; task/split is separate from full-page parsing. Excluded from aggregate and primary coverage."
+}

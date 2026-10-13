@@ -1,0 +1,16 @@
+{
+  "id": "chronicles-mature-xiaomi",
+  "label": "Chronicles-OCR mature scripts · Xiaomi paper",
+  "short": "Scripts",
+  "source": "xiaomi-paper",
+  "primary_metric": "mature_average",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "chronicles-mature-xiaomi",
+  "min_models": 6,
+  "min_organizations": 3,
+  "scope": "1,600 images; 400 each Clerical, Regular, Running, Cursive",
+  "note": "Author-paper comparison; task/split is separate from full-page parsing. Excluded from aggregate and primary coverage."
+}

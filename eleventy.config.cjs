@@ -1,5 +1,8 @@
 module.exports=function(config){
  config.addPassthroughCopy({'src/assets':'assets'});
+ const rankUI=require('./src/assets/js/rank-ui.js');
+ config.addFilter('rankCell',rankUI.renderRank);
+ config.addFilter('scoreTooltip',rankUI.scoreTooltip);
  config.addWatchTarget('data/');
  config.addWatchTarget('lib/');
  config.addFilter('money',v=>typeof v==='number'&&Number.isFinite(v)?v.toFixed(3).replace(/0+$/,'').replace(/\.$/,''):'—');

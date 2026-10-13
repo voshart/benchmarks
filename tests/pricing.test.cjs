@@ -54,8 +54,9 @@ test('new research shows qualified models while retaining default coverage and r
   const data = loadOCR(), rows = build(data, undefined, {view:'new'}).rows;
   assert.ok(rows.some(r => r.id === 'xiaomi-ocr-0'));
   assert.ok(rows.some(r => r.id === 'polyocr-9b-layout'));
-  assert.ok(rows.every(r => r.rank == null));
-  assert.ok(!build(data).rows.some(r => r.id === 'xiaomi-ocr-0'));
+  assert.equal(rows.find(r => r.id === 'xiaomi-ocr-0').rankStatus, 'provisional');
+  assert.ok(build(data).rows.some(r => r.id === 'xiaomi-ocr-0'));
+  assert.ok(rows.filter(r => r.id.startsWith('polyocr')).every(r => r.rank == null));
   assert.equal(data.tests.find(t => t.id === 'omnidoc-v15-idp').core, false);
   assert.ok(!data.primaryTests.some(t => t.id === 'omnidoc-v15-idp'));
 });
