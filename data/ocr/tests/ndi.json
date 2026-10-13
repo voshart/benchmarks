@@ -1,0 +1,13 @@
+{
+  "id": "ndi",
+  "short": "NDI",
+  "label": "NDI normalized",
+  "source": "ndi-vendor",
+  "primary_metric": "normalized",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": false,
+  "family": "ndi",
+  "min_models": 6,
+  "min_organizations": 3
+}

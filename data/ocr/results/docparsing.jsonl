@@ -1,0 +1,9 @@
+{"model":"paddleocr-1-5","metrics":{"overall":0.8535,"text":0.8959,"formula":0.7527,"tables":0.7104},"source_id":"dp-community"}
+{"model":"monkeyocr-pro-3b","metrics":{"overall":0.826,"text":0.8669,"formula":0.7206,"tables":0.7014},"source_id":"dp-community"}
+{"model":"mineru2-5","metrics":{"overall":0.8164,"text":0.8426,"formula":0.7993,"tables":0.7557},"source_id":"dp-community"}
+{"model":"qwen3-vl-235b-instruct","metrics":{"overall":0.7971,"text":0.8496,"formula":0.4355,"tables":0.6691},"source_id":"dp-community"}
+{"model":"chandra-2-open","metrics":{"overall":0.7906,"text":0.8361,"formula":0.7772,"tables":0.7242},"source_id":"dp-community"}
+{"model":"deepseek-ocr-2","metrics":{"overall":0.7403,"text":0.7917,"formula":0.6775,"tables":0.5741},"source_id":"dp-community"}
+{"model":"glm-ocr","metrics":{"overall":0.7348,"text":0.7695,"formula":0.5773,"tables":0.5046},"source_id":"dp-community"}
+{"model":"dots-ocr-1-5","metrics":{"overall":0.6564,"text":0.6885,"formula":0.6236,"tables":0.5655},"source_id":"dp-community"}
+{"model":"hunyuanocr","metrics":{"overall":0.5128,"text":0.5319,"formula":0.6018,"tables":0.6428},"source_id":"dp-community"}

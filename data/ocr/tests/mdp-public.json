@@ -1,0 +1,13 @@
+{
+  "id": "mdp-public",
+  "short": "MDP pub",
+  "label": "MDP public",
+  "source": "mdp-official",
+  "primary_metric": "public",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "mdp",
+  "min_models": 6,
+  "min_organizations": 3
+}

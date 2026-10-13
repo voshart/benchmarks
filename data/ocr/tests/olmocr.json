@@ -1,0 +1,13 @@
+{
+  "id": "olmocr",
+  "short": "olm",
+  "label": "olmOCR",
+  "source": "olm-mixed",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": true,
+  "family": "olmocr",
+  "min_models": 6,
+  "min_organizations": 3
+}

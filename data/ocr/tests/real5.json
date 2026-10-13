@@ -1,0 +1,13 @@
+{
+  "id": "real5",
+  "short": "Real5",
+  "label": "Real5",
+  "source": "real5",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "real5",
+  "min_models": 6,
+  "min_organizations": 3
+}

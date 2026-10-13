@@ -1,0 +1,46 @@
+{"model":"infinity-parser2-pro","metrics":{"overall":87.6},"source_id":"olm-mixed","note":"Datalab release comparison"}
+{"model":"nanonets-ocr-3","metrics":{"overall":87.4},"source_id":"olm-mixed","note":"Nanonets leaderboard"}
+{"model":"chandra-2-api","metrics":{"overall":86.7},"source_id":"olm-mixed","note":"Datalab vendor run"}
+{"model":"chandra-2-open","metrics":{"overall":85.9},"source_id":"olm-mixed","note":"Datalab vendor run"}
+{"model":"dots-mocr","metrics":{"overall":83.9},"source_id":"olm-mixed","note":"Datalab Surya 2 comparison"}
+{"model":"surya-ocr-2","metrics":{"overall":83.3},"source_id":"olm-mixed","note":"Datalab vendor run"}
+{"model":"chandra-1-open","metrics":{"overall":83.1},"source_id":"olm-mixed","note":"AllenAI table: author-reported"}
+{"model":"infinity-parser-7b","metrics":{"overall":82.5},"source_id":"olm-mixed","note":"AllenAI table: author-reported"}
+{"model":"olmocr-v0-4-0","metrics":{"overall":82.4},"source_id":"olm-mixed","note":"AllenAI reproduced"}
+{"model":"paddleocr-vl","metrics":{"overall":80},"source_id":"olm-mixed","note":"AllenAI table: author-reported"}
+{"model":"mistral-ocr-api-older","metrics":{"overall":72},"source_id":"olm-mixed","note":"AllenAI reproduced"}
+{"model":"gpt-5-4","metrics":{"overall":81},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gemini-3-pro","metrics":{"overall":77.7},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gemini-3-flash","metrics":{"overall":75.3},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"nanonets-ocr2","metrics":{"overall":82},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gemini-3-1-pro","metrics":{"overall":69.8},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gpt-5-2","metrics":{"overall":79.1},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"claude-sonnet-4-6","metrics":{"overall":73.9},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"claude-opus-4-6","metrics":{"overall":74.1},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"qwen3-vl-plus","metrics":{"overall":77.9},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"qwen3-vl-235b","metrics":{"overall":76.8},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"qwen3-5-9b","metrics":{"overall":77.2},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gpt-5-mini","metrics":{"overall":69.9},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"qwen3-5-4b","metrics":{"overall":75.4},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"mistral-small-4","metrics":{"overall":69.6},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"claude-haiku-4-5","metrics":{"overall":61.2},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"ministral-8b","metrics":{"overall":58.7},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gpt-4-1","metrics":{"overall":49.4},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"glm-ocr","metrics":{"overall":68.4},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"qwen3-5-2b","metrics":{"overall":71.9},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"qwen3-5-0-8b","metrics":{"overall":64.8},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gpt-5-nano","metrics":{"overall":35.2},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gemma-4-e4b-it","metrics":{"overall":47},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"llama-3-2-vision-11b","metrics":{"overall":49.1},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"pixtral-12b","metrics":{"overall":38.3},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"gemma-4-e2b-it","metrics":{"overall":38.2},"source_id":"olm-mixed","note":"IDP Leaderboard v1.5"}
+{"model":"marker-1-10-1","metrics":{"overall":76.1},"source_id":"olm-mixed","note":"AllenAI reproduced"}
+{"model":"mineru-2-5-4","metrics":{"overall":75.2},"source_id":"olm-mixed","note":"AllenAI reproduced"}
+{"model":"deepseek-ocr","metrics":{"overall":75.7},"source_id":"olm-mixed","note":"AllenAI reproduced"}
+{"model":"nanonets-ocr2-3b","metrics":{"overall":69.5},"source_id":"olm-mixed","note":"AllenAI reproduced"}
+{"model":"dots-ocr","metrics":{"overall":79.1},"source_id":"olm-mixed","note":"Datalab comparison"}
+{"model":"gpt-4o-anchored","metrics":{"overall":69.9},"source_id":"olm-mixed","note":"Datalab comparison"}
+{"model":"gemini-flash-2-anchored","metrics":{"overall":63.8},"source_id":"olm-mixed","note":"Datalab comparison"}
+{"model":"qwen-3-vl-8b","metrics":{"overall":64.6},"source_id":"olm-mixed","note":"Datalab comparison"}
+{"model":"got-ocr","metrics":{"overall":48.3},"source_id":"olm-mixed","note":"Datalab / Surya 2 comparison"}
+{"model":"marker-2","metrics":{"overall":76},"source_id":"olm-mixed","note":"Datalab release comparison"}

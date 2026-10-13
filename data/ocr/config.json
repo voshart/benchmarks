@@ -1,0 +1,11 @@
+{
+  "title": "OCR evidence benchmark",
+  "description": "Cross-benchmark scores, historical cohorts and documented prices.",
+  "snapshot_date": "2026-10-13",
+  "release_start": "2025-10-13",
+  "default_families": 4,
+  "min_core_for_rank": 3,
+  "accent": "#637fa4",
+  "provisional_note": "Author-reported, small-sample, and vendor-internal tests do not enter the aggregate.",
+  "path": "/ocr/"
+}

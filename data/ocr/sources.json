@@ -1,0 +1,104 @@
+{
+  "omni-official": {
+    "title": "Official OmniDocBench comprehensive table",
+    "url": "https://github.com/opendatalab/OmniDocBench",
+    "kind": "official",
+    "note": "Current displayed table labelled v1.6_full; repo update log mentions v1.7."
+  },
+  "pure-official": {
+    "title": "PureDocBench leaderboard",
+    "url": "https://github.com/zhihengli-casia/PureDocBench",
+    "kind": "official",
+    "note": "Source-traceable clean / digital degradation / real degradation."
+  },
+  "mdp-official": {
+    "title": "Official MDPBench leaderboard",
+    "url": "https://github.com/Yuliang-Liu/MultimodalOCR/blob/main/MDPBench/README.md",
+    "kind": "official",
+    "note": "Public and held-out private results; 17 languages."
+  },
+  "ndi-vendor": {
+    "title": "Nace AI seven-benchmark aggregate",
+    "url": "https://ndi.nace.ai/",
+    "kind": "vendor",
+    "note": "Seven-benchmark same-harness normalized aggregate; vendor operated, may overlap underlying tests."
+  },
+  "wild-teleocr": {
+    "title": "TeleOCR public project comparison",
+    "url": "https://github.com/caipeng328/TeleOCR",
+    "kind": "vendor_comparison",
+    "note": "TeleOCR team reports its comparison with competitors using Wild-OmniDoc and a limited four-model Dr.Doc run; not an independent reproduction."
+  },
+  "olm-mixed": {
+    "title": "olmOCR / Datalab / Nanonets published comparisons",
+    "url": "https://github.com/allenai/olmocr",
+    "kind": "mixed",
+    "note": "Provenance is specified per entry; different runs and harnesses."
+  },
+  "dp-community": {
+    "title": "DocParsingBench",
+    "url": "https://github.com/SoMarkAI/DocParsingBench",
+    "kind": "community",
+    "note": "Community document-parsing aggregate."
+  },
+  "idp-secondary": {
+    "title": "Nanonets IDP benchmarking",
+    "url": "https://benchmarking.nanonets.com/",
+    "kind": "vendor",
+    "note": "Independent model comparisons in vendor-operated harness."
+  },
+  "real5": {
+    "title": "Real5-OmniDocBench",
+    "url": "https://huggingface.co/datasets/PaddlePaddle/Real5-OmniDocBench",
+    "kind": "official",
+    "note": "Real-world degradations of OmniDoc v1.5 pages; correlated with OmniDoc."
+  },
+  "more": {
+    "title": "MORE 149-language benchmark",
+    "url": "https://github.com/zimoqingfeng/MORE",
+    "kind": "research",
+    "note": "Multilingual real document parsing."
+  },
+  "poly-paper": {
+    "title": "PolyOCR-Venus technical report",
+    "url": "https://arxiv.org/abs/2609.37712",
+    "kind": "author_reported",
+    "note": "MDP public; no private score; weights unavailable per project release."
+  },
+  "xiaomi-paper": {
+    "title": "Xiaomi-OCR-0 technical report",
+    "url": "https://arxiv.org/abs/2609.36136",
+    "kind": "author_reported",
+    "note": "OCR authors evaluated their own released weights; external layout detector for parsing."
+  },
+  "openocr": {
+    "title": "OpenOCR 20-page hard set",
+    "url": "https://open-ocr.com/rankings",
+    "kind": "third_party",
+    "note": "Published 2026-10-05; 20 pages and 141 rule tests, uncertainty intervals overlap."
+  },
+  "chandra-internal": {
+    "title": "Datalab Chandra 2.1 release",
+    "url": "https://app.datalab.to/blog/chandra-2.1-release",
+    "kind": "vendor_internal",
+    "note": "90-language and complex table scores; not comparable with public suites."
+  },
+  "mistral-pricing": {
+    "title": "Mistral OCR pricing",
+    "url": "https://docs.mistral.ai/inference/pricing",
+    "kind": "vendor_price",
+    "note": "OCR 4.1 is 4 per 1000 pages, 0.40 batch; annotated 5."
+  },
+  "legacy-snapshot": {
+    "title": "OCR research snapshot 2026-09-30",
+    "url": "https://github.com/voshart/benchmarks",
+    "kind": "imported",
+    "note": "Prior research import; not a new independent rerun. Underlying source links preserved."
+  },
+  "indic-english": {
+    "title": "IndicOCR v1.6 English subset",
+    "url": "https://huggingface.co/bodhan-ai/indic-ocr",
+    "kind": "secondary",
+    "note": "English subset is not v1.6_full and must not silently replace it."
+  }
+}

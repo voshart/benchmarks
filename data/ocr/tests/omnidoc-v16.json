@@ -1,0 +1,13 @@
+{
+  "id": "omnidoc-v16",
+  "short": "OmniDoc",
+  "label": "OmniDoc v1.6 full",
+  "source": "omni-official",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": true,
+  "family": "omnidoc",
+  "min_models": 6,
+  "min_organizations": 3
+}

@@ -1,0 +1,1 @@
+const {loadOCR}=require('../../lib/load.cjs');const {build}=require('../../lib/ranking.cjs');module.exports=()=>{const d=loadOCR();return {...d,modelNameById:Object.fromEntries(d.models.map(m=>[m.id,m.name])),initial:build(d)};};

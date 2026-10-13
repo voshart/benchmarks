@@ -1,0 +1,14 @@
+{
+  "name": "voshart-benchmarks",
+  "private": true,
+  "version": "0.1.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "eleventy --serve",
+    "validate": "node scripts/validate.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "build": "npm run validate && npm test && eleventy"
+  },
+  "engines": {"node": ">=20"},
+  "devDependencies": {"@11ty/eleventy": "3.1.6"}
+}

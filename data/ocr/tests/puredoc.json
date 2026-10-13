@@ -1,0 +1,13 @@
+{
+  "id": "puredoc",
+  "short": "Pure",
+  "label": "PureDoc Avg₃",
+  "source": "pure-official",
+  "primary_metric": "avg3",
+  "unit": "percent",
+  "direction": "higher",
+  "core": true,
+  "family": "puredoc",
+  "min_models": 6,
+  "min_organizations": 3
+}

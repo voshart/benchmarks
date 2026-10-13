@@ -1,0 +1,13 @@
+{
+  "id": "mdp-private",
+  "short": "MDP",
+  "label": "MDP private",
+  "source": "mdp-official",
+  "primary_metric": "private",
+  "unit": "percent",
+  "direction": "higher",
+  "core": true,
+  "family": "mdp",
+  "min_models": 6,
+  "min_organizations": 3
+}

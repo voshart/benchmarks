@@ -1,0 +1,13 @@
+{
+  "id": "wild",
+  "short": "Wild",
+  "label": "Wild-OmniDoc",
+  "source": "wild-teleocr",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": true,
+  "family": "wild",
+  "min_models": 6,
+  "min_organizations": 3
+}
