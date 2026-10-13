@@ -1,0 +1,15 @@
+{
+  "id": "parsebench-lighton-202610",
+  "label": "ParseBench 5-category · LightOn run",
+  "short": "Parse L3",
+  "source": "lightonocr-3-report",
+  "family": "parsebench",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Five categories; exact corpus revision not pinned in release table",
+  "configuration": "Author normalization; distinct from 3-category aggregate and NVIDIA run",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "parsebench-nemotron-202608",
+  "label": "ParseBench · NVIDIA card",
+  "short": "Parse NV",
+  "source": "nemotron-parse-2-card",
+  "family": "parsebench",
+  "primary_metric": "overall",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Model-card evaluation; exact corpus revision not pinned",
+  "configuration": "Five-checkpoint equal-weight soup; separate from LightOn ParseBench run",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}

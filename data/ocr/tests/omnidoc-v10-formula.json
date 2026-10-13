@@ -1,0 +1,15 @@
+{
+  "id": "omnidoc-v10-formula",
+  "label": "OmniDoc v1.0 formula subset",
+  "short": "Formula v1",
+  "source": "omni-official",
+  "family": "omnidoc",
+  "primary_metric": "cdm",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Official v1.0 display-formula subset, component evaluation",
+  "configuration": "Unversioned historical Mathpix result; not current API generation",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}

@@ -74,8 +74,8 @@
     const eligible = [...byFamily.values()];
     const groups = {structure:['omnidoc-v16','puredoc','docparsing'], robust:['wild','real5','drdoc'],
       multilingual:['mdp-private','mdp-public','more'], production:['ndi','idp'],
-      recognition:['pubtabnet-xiaomi','unimer-test-xiaomi','chronicles-mature-xiaomi'], understanding:['ocr-vqa-xiaomi'],
-      new:['omnidoc-v16','wild','real5','mdp-public','pubtabnet-xiaomi','unimer-test-xiaomi','chronicles-mature-xiaomi','ocr-vqa-xiaomi']};
+      recognition:['omnidoc-v10-formula','omnidoc-v15-gt-layout-moss','omnidoc-v16-gt-layout-moss','fintabnet-docling-150dpi','omnidoc-notes-nemotron','pubtabnet-xiaomi','unimer-test-xiaomi','chronicles-mature-xiaomi'], understanding:['ocr-vqa-xiaomi'],
+      new:['omnidoc-v16','olmocr','wild','real5','mdp-public','parsebench-lighton-202610','fr-bench-lighton-202610','omnidoc-v15-gt-layout-moss','omnidoc-v16-gt-layout-moss','parsebench-nemotron-202608','indicvision-nemotron','moscar-nemotron','omnidoc-notes-nemotron','fintabnet-docling-150dpi','pubtabnet-xiaomi','unimer-test-xiaomi','chronicles-mature-xiaomi','ocr-vqa-xiaomi']};
     const ids = groups[view];
     const show = data.tests.filter(test => view === 'secondary' ? !data.primaryTests.some(p => p.id === test.id)
       : view === 'all' ? data.primaryTests.some(p => p.id === test.id) : ids ? ids.includes(test.id) : test.family === view);
@@ -115,7 +115,7 @@
       const rankExplanation = rank === null
         ? `No aggregate index: ${contributions.length} mature core families with comparable measured results; at least ${provisionalMinimum} required. Assumed scores, internal tests and overlapping secondary variants are excluded.`
         : [`Mean percentile across ${contributions.length} mature core families: ${contributions.map(item=>item.label).join(', ')}.`, ...reasons].join('\n');
-      return {id:model.id, name:model.name, access:model.access, release_date:model.release_date, count, coreCount:contributions.length,
+      return {id:model.id, name:model.name, access:model.access, release_date:model.release_date, modelSourceId:model.source_id || model.release_source_id, modelNote:[model.configuration,model.evidence_note].filter(Boolean).join(' · '), count, coreCount:contributions.length,
         rank, rankStatus, provisionalReasons:reasons, rankExplanation,
         rankContributions:contributions.map(({cohort,...item}) => item), price:data.pricingByModel[model.id]?.usd_per_1000_pages ?? null, scores};
     }).filter(row => (view==='new' ? show.some(test => (data.resultsByKey[row.id+'|'+test.id] || []).some(obs=>obs.evidence==='author_reported'))

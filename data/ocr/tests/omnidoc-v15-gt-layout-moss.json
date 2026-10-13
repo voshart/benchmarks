@@ -1,0 +1,15 @@
+{
+  "id": "omnidoc-v15-gt-layout-moss",
+  "label": "OmniDoc v1.5 · GT layout",
+  "short": "Omni GT 15",
+  "source": "hiro-moss-card",
+  "family": "omnidoc",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Ground-truth-layout-assisted recognition; not full-page parsing",
+  "configuration": "GT layout labels",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}

@@ -1,0 +1,40 @@
+{
+  "verified_on": "2026-10-13",
+  "added_models": [
+    "jina-ocr-v1",
+    "lightonocr-3-0.8b",
+    "lightonocr-3-1b",
+    "lightonocr-3-4b",
+    "nemotron-parse-2",
+    "hiro-moss-ocr-0-3b",
+    "docling-pipeline",
+    "granite-docling-258m",
+    "smoldocling-256m-preview",
+    "amazon-textract",
+    "google-docai-ocr",
+    "mathpix-ocr",
+    "tesseract"
+  ],
+  "new_secondary_variants": [
+    "parsebench-lighton-202610",
+    "fr-bench-lighton-202610",
+    "omnidoc-v15-gt-layout-moss",
+    "omnidoc-v16-gt-layout-moss",
+    "parsebench-nemotron-202608",
+    "indicvision-nemotron",
+    "moscar-nemotron",
+    "omnidoc-notes-nemotron",
+    "fintabnet-docling-150dpi",
+    "omnidoc-v10-formula"
+  ],
+  "limitations": [
+    "Jina weights availability uses the explicit September 14 public release, not September 1 Hub creation.",
+    "LightOn benchmarks use documented author normalization and resolution settings.",
+    "ParseBench has separate LightOn and NVIDIA variants because protocol/corpus identity is not established.",
+    "MOSS uses ground-truth layout assistance; no unassisted score is invented.",
+    "Granite/Smol full-page OCR tables lack a pinned split in the inspected cards; only FinTabNet task results are imported.",
+    "Docling pipeline, Amazon, Google and Tesseract have no matched core measurements verified in this addition.",
+    "Mathpix v1.0 formula result is a historical unversioned component measurement, not a current API score.",
+    "New catalog entries without enough evidence remain unranked; no zero score or free hosting cost is inferred."
+  ]
+}

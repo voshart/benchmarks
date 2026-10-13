@@ -344,5 +344,131 @@
     "measurement_operator": "Real5 benchmark maintainer publication; execution operator/pipeline not established",
     "note": "News adds Xiaomi on October 12. Main table reports 92.73 overall, versus 95.24 in the Xiaomi paper. Exact run pipeline is not specified; preserve both source-specific observations, do not average. Real5 reuses OmniDoc v1.5 pages and is not an independent aggregate vote.",
     "source_excerpt": "Xiaomi-OCR-0 | Specialized VLMs | 0.8B | 92.73 | 93.73 | 92.76 | 92.80 | 92.68 | 91.69"
+  },
+  "jina-ocr-v1-report": {
+    "title": "Jina-OCR-v1 technical report",
+    "url": "https://arxiv.org/html/2609.03181",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Author measurements: OmniDocBench v1.6 and olmOCR-Bench; default dynamic resolution and the strict evaluation prompt. Baselines are partly copied from other publications."
+  },
+  "jina-ocr-v1-release": {
+    "title": "Jina-OCR-v1 public release announcement",
+    "url": "https://jina.ai/news/jina-ocr-v1-faster-document-parsing-on-low-budget-gpus/",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "September 14 announcement explicitly releases public weights. Hub repository creation September 1 is not treated as a weights release."
+  },
+  "lightonocr-3-report": {
+    "title": "LightOnOCR-3 release and evaluation tables",
+    "url": "https://huggingface.co/blog/lightonai/lightonocr-3",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "October 8 author release; scores use published normalization/postprocessing. ParseBench three-category and five-category means remain distinct; no independent reproduction is claimed."
+  },
+  "lightonocr-3-0.8b-card": {
+    "title": "LightOnOCR-3-0.8B model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-3-0.8B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Exact public checkpoint and Apache-2.0 license; the 1B keeps the LightOnOCR-2 architecture, while 0.8B/4B use Qwen3.5."
+  },
+  "lightonocr-3-1b-card": {
+    "title": "LightOnOCR-3-1B model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-3-1B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Exact public checkpoint and Apache-2.0 license; the 1B keeps the LightOnOCR-2 architecture, while 0.8B/4B use Qwen3.5."
+  },
+  "lightonocr-3-4b-card": {
+    "title": "LightOnOCR-3-4B model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-3-4B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Exact public checkpoint and Apache-2.0 license; the 1B keeps the LightOnOCR-2 architecture, while 0.8B/4B use Qwen3.5."
+  },
+  "nemotron-parse-2-card": {
+    "title": "NVIDIA Nemotron Parse 2.0 model card",
+    "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "August 3 public release. Author benchmark results use a five-checkpoint equal-weight soup. Dataset/protocol revisions are not fully pinned; no overall OmniDoc score is inferred from the notes subset."
+  },
+  "hiro-moss-card": {
+    "title": "Hiro-MOSS-OCR-0.3B model card",
+    "url": "https://huggingface.co/PatSnap/Hiro-MOSS-OCR-0.3B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "May 26 public weights. OmniDoc v1.5/v1.6 scores explicitly use ground-truth layout labels, so they are separate assisted recognition variants, never full-page rank votes."
+  },
+  "granite-docling-card": {
+    "title": "Granite-Docling-258M model card",
+    "url": "https://huggingface.co/ibm-granite/granite-docling-258M",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "September 17, 2025 release. FinTabNet 150dpi table TEDS is task-specific. Full-page OCR/layout tables do not pin an exact dataset split in the card and are not assigned to a core benchmark."
+  },
+  "smoldocling-card": {
+    "title": "SmolDocling-256M-preview model card",
+    "url": "https://huggingface.co/docling-project/SmolDocling-256M-preview",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Official checkpoint, Apache-2.0. Exact public-weights release date not established by this audit; paper publication is not used as a weights date."
+  },
+  "docling-project": {
+    "title": "Docling official project",
+    "url": "https://github.com/docling-project/docling",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Pipeline catalog entry; backend and exact package/model versions must be pinned before adding a comparable score."
+  },
+  "amazon-textract-product": {
+    "title": "Amazon Textract official product",
+    "url": "https://aws.amazon.com/textract/",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Hosted service. DetectDocumentText, forms, tables, queries and layout are separate configurations; no matched full-page public score verified in this addition."
+  },
+  "google-docai-ocr-product": {
+    "title": "Google Document AI Enterprise Document OCR",
+    "url": "https://docs.cloud.google.com/document-ai/docs/enterprise-document-ocr",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Hosted OCR processor; parser/add-ons and processor versions must remain distinct. No matched core score verified in this addition."
+  },
+  "mathpix-ocr-product": {
+    "title": "Mathpix OCR API documentation",
+    "url": "https://docs.mathpix.com/",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Hosted STEM OCR service. Historical unversioned Mathpix observations do not identify the current API generation."
+  },
+  "tesseract-project": {
+    "title": "Tesseract official repository",
+    "url": "https://github.com/tesseract-ocr/tesseract",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Open-source OCR engine; version, traineddata, languages and page-segmentation settings must be pinned. Catalog entry has no invented full-page parsing score."
+  },
+  "google-docai-ocr-pricing": {
+    "title": "Google Document AI official pricing",
+    "url": "https://cloud.google.com/products/document-ai/pricing",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "On-demand Enterprise Document OCR rate bands only; OCR add-ons and parsing processors are separate charges, and commitment discounts are not assumed."
+  },
+  "amazon-textract-pricing": {
+    "title": "Amazon Textract official pricing",
+    "url": "https://aws.amazon.com/textract/pricing/",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Published US West (Oregon) DetectDocumentText examples; OCR-only tier rates. Tables/forms/queries incur other charges."
+  },
+  "mathpix-ocr-pricing": {
+    "title": "Mathpix official OCR API pricing",
+    "url": "https://mathpix.com/pricing/api",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "v3/pdf document-page rates and Files API batch-page rates remain distinct. Image/stroke request prices are not converted into page prices; one-time activation fee is excluded from marginal page costs."
   }
 }

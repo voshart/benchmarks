@@ -1,0 +1,15 @@
+{
+  "id": "omnidoc-notes-nemotron",
+  "label": "OmniDoc notes · NVIDIA card",
+  "short": "Notes ED",
+  "source": "nemotron-parse-2-card",
+  "family": "omnidoc",
+  "primary_metric": "text_edit",
+  "unit": "ratio",
+  "direction": "lower",
+  "core": false,
+  "primary": false,
+  "scope": "Model-card evaluation; exact corpus revision not pinned; data_source: note subset",
+  "configuration": "Five-checkpoint equal-weight soup; separate from LightOn ParseBench run",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}

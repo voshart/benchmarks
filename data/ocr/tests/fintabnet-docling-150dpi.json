@@ -1,0 +1,15 @@
+{
+  "id": "fintabnet-docling-150dpi",
+  "label": "FinTabNet 150dpi · Docling card",
+  "short": "FinTab",
+  "source": "granite-docling-card",
+  "family": "fintabnet",
+  "primary_metric": "teds_content",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Table recognition at 150dpi; exact split not specified in card",
+  "configuration": "Task-specific table recognition",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}
