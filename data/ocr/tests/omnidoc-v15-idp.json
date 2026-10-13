@@ -1,0 +1,16 @@
+{
+  "id": "omnidoc-v15-idp",
+  "short": "Omni 1.5",
+  "label": "OmniDoc v1.5 · IDP operator",
+  "source": "idp-secondary",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "omnidoc",
+  "primary": false,
+  "min_models": 6,
+  "min_organizations": 3,
+  "dataset_version": "v1.5",
+  "note": "Separate vendor-operated v1.5 run, excluded from aggregate to avoid mixing dataset versions."
+}

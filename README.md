@@ -7,7 +7,7 @@ Small data-driven benchmark pages. Eleventy generates static HTML; a dependency-
 Requires Node 20+.
 
 ```bash
-npm install
+npm ci
 npm run validate
 npm test
 npm run build
@@ -54,3 +54,24 @@ Ask the contributor to follow `AGENTS.md`, verify primary sources, update the da
 Example request:
 
 > Update the OCR benchmark with verified results for [model/version or source URLs]. Follow AGENTS.md, preserve source provenance and missing values, and list any unverified claims. Run npm run validate, npm test, and npm run build, then open a PR with source links and the expected leaderboard effect.
+
+## Verified expansion — October 13, 2026
+
+The initial scaffold is deployed through Cloudflare Pages at https://benchmarks-15s.pages.dev/ocr/. The custom domain remains a separate configuration step; deployment from `main` is confirmed. This update contains 164 model records, 336 scored observations, 16 test variants, 54 page-price observations (including 23 preserved/unverified imports), 19 official token-rate observations, and 49 source records.
+
+- `New research` exposes Xiaomi-OCR-0, PolyOCR-2.7B and the distinct PolyOCR-9B direct/pipeline configurations. It labels insufficient aggregate evidence as **Unranked**. The default four-family filter and aggregate eligibility rules are unchanged.
+- Xiaomi's public model card establishes the weights release as September 30, 2026. Its OmniDoc/Wild component scores now retain text, formulas, tables and reading order. PolyOCR weights remain unreleased; the report date is not a weights release date.
+- PolyOCR-9B's direct and layout-guided OmniDoc v1.6 results are distinct observations/model configurations. They are not assigned to the specialized 2.7B MDP model or treated as independent evaluations. The redundant public-only PolyOCR record was removed from the private-results file; no private score was created.
+- Thirteen IDP model pages supply additional IDP Core v1.0 task breakdowns and a separate OmniDoc v1.5 operator comparison. The v1.5 variant stays secondary, outside aggregate rank and primary coverage. Five additional OpenOCR observations retain reported uncertainty and remain secondary.
+
+Pricing retains mode, provider, source, verification date and basis. Official page tariffs, credit-derived vendor rates, benchmark workload estimates and USD-per-million-token rates have separate meanings. Pricing links lead to the original rate card or operator model page. **Service** prices describe current hosted products without promising a pinned historical model generation. **Self-hosted** means a deployment-specific compute cost, not zero. Imported prices remain in a collapsible table and carry a qualification marker when selected for the matrix.
+
+`data/ocr/pricing-tokens.jsonl` stores official API input, cached-input and output tariffs separately. No page cost is inferred from those token rates. Gemini 3.1 Pro Preview has separate prompt-length bands; its prices are not attached to Gemini 3 Pro. Discounts, annotations and service modes are separate page-price observations. The handoff's $0.40 Mistral batch claim was not verified: the official pricing table places that value under cached input, while Batch Processing documentation specifies 50% off. The verified batch observation is therefore $2/1,000 pages from the $4 standard rate; the old claim is retained with an unverified flag. `comparison_default: false` keeps an alternative rate from silently replacing the matrix's selected configuration.
+
+Validation now checks raw observations before display filtering, model/source references, metric ranges, dates, duplicate pricing configurations and pricing units. The preview watches `data/` and `lib/`; the history slider takes its range from page configuration rather than fixed JavaScript dates.
+
+### Remaining evidence gaps
+
+The inherited registry and benchmark records have not undergone a complete source audit. The old NDI URL now redirects to a product page, so its inherited score/cost observations remain unverified imports. Model release dates marked `legacy_import` remain candidates for verification. The inherited Chandra API display-floor policy can still contribute assumed values to aggregate rank; that policy was left intact so this evidence/pricing update does not silently alter existing ranks. All 16 current default model ranks were checked against the prior build and remain unchanged.
+
+Reverify rate cards before making purchasing decisions. Numeric prices describe the identified configurations and source dates, excluding unlisted taxes, license charges, hardware, regional surcharges or add-ons.

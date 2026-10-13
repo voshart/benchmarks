@@ -571,12 +571,28 @@
     "organization": null
   },
   {
+    "id": "llamaparse-agentic-plus",
+    "name": "LlamaParse Agentic Plus",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "access": "closed",
+    "organization": "LlamaIndex"
+  },
+  {
     "id": "llamaparse-cost-effective",
     "name": "LlamaParse Cost Effective",
     "release_date": null,
     "release_provenance": "unknown",
     "access": "closed",
     "organization": null
+  },
+  {
+    "id": "llamaparse-fast",
+    "name": "LlamaParse Fast",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "access": "closed",
+    "organization": "LlamaIndex"
   },
   {
     "id": "logics-parsing-v2",
@@ -992,10 +1008,31 @@
   {
     "id": "polyocr-2-7b",
     "name": "PolyOCR-2.7B",
-    "release_date": "2026-09-29",
-    "release_provenance": "report",
+    "release_date": null,
+    "release_provenance": "weights_unreleased",
     "access": "unreleased",
-    "organization": "Ant Group"
+    "organization": "Ant Group",
+    "release_source_id": "poly-release"
+  },
+  {
+    "id": "polyocr-9b",
+    "name": "PolyOCR-9B",
+    "release_date": null,
+    "release_provenance": "weights_unreleased",
+    "release_source_id": "poly-release",
+    "access": "unreleased",
+    "organization": "Ant Group",
+    "configuration": "direct full-page parsing"
+  },
+  {
+    "id": "polyocr-9b-layout",
+    "name": "PolyOCR-9B + PP-DocLayoutV3",
+    "release_date": null,
+    "release_provenance": "weights_unreleased",
+    "release_source_id": "poly-release",
+    "access": "unreleased",
+    "organization": "Ant Group",
+    "configuration": "PP-DocLayoutV3 pipeline"
   },
   {
     "id": "pp-structurev3",
@@ -1272,10 +1309,12 @@
   {
     "id": "xiaomi-ocr-0",
     "name": "Xiaomi-OCR-0",
-    "release_date": "2026-09-28",
-    "release_provenance": "technical_report",
+    "release_date": "2026-09-30",
+    "release_provenance": "model_card",
     "access": "open",
-    "organization": "Xiaomi"
+    "organization": "Xiaomi",
+    "release_source_id": "xiaomi-weights",
+    "license": "Apache-2.0"
   },
   {
     "id": "youtu-parsing",

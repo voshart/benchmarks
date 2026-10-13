@@ -1,25 +1,25 @@
-{"model":"nanonets-ocr-3","metrics":{"overall":80.2},"source_id":"idp-secondary"}
-{"model":"gpt-5-4","metrics":{"overall":84.4},"source_id":"idp-secondary"}
-{"model":"gemini-3-pro","metrics":{"overall":81.8},"source_id":"idp-secondary"}
-{"model":"gemini-3-flash","metrics":{"overall":80.5},"source_id":"idp-secondary"}
+{"model":"nanonets-ocr-3","metrics":{"overall":80.2,"kie":84.3,"ocr":73.8,"table":85.2,"vqa":73.0},"source_id":"idp-nanonets-ocr-3","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"80.2 | 84.3 | 73.8 | 85.2 | 73.0"}
+{"model":"gpt-5-4","metrics":{"overall":84.4,"kie":85.7,"ocr":69.1,"table":94.8,"vqa":78.2},"source_id":"idp-gpt-5-4","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"84.4 | 85.7 | 69.1 | 94.8 | 78.2"}
+{"model":"gemini-3-pro","metrics":{"overall":81.8,"kie":85.7,"ocr":81.8,"table":95.8,"vqa":64.1},"source_id":"idp-gemini-3-pro","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"81.8 | 85.7 | 81.8 | 95.8 | 64.1"}
+{"model":"gemini-3-flash","metrics":{"overall":80.5,"kie":91.1,"ocr":81.7,"table":85.6,"vqa":63.5},"source_id":"idp-gemini-3-flash","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"80.5 | 91.1 | 81.7 | 85.6 | 63.5"}
 {"model":"nanonets-ocr2","metrics":{"overall":73.8},"source_id":"idp-secondary"}
-{"model":"gemini-3-1-pro","metrics":{"overall":89.6},"source_id":"idp-secondary"}
-{"model":"gpt-5-2","metrics":{"overall":77.4},"source_id":"idp-secondary"}
-{"model":"claude-sonnet-4-6","metrics":{"overall":81.2},"source_id":"idp-secondary"}
-{"model":"claude-opus-4-6","metrics":{"overall":81.1},"source_id":"idp-secondary"}
+{"model":"gemini-3-1-pro","metrics":{"overall":89.6,"kie":86.8,"ocr":82.8,"table":96.4,"vqa":85},"source_id":"idp-gemini-3-1-pro","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"89.6 | 86.8 | 82.8 | 96.4 | 85"}
+{"model":"gpt-5-2","metrics":{"overall":77.4,"kie":87.5,"ocr":72.8,"table":86,"vqa":63.5},"source_id":"idp-gpt-5-2","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"77.4 | 87.5 | 72.8 | 86 | 63.5"}
+{"model":"claude-sonnet-4-6","metrics":{"overall":81.2,"kie":89.5,"ocr":73.7,"table":96.3,"vqa":65.2},"source_id":"idp-claude-sonnet-4-6","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"81.2 | 89.5 | 73.7 | 96.3 | 65.2"}
+{"model":"claude-opus-4-6","metrics":{"overall":81.1,"kie":89.8,"ocr":74,"table":96,"vqa":64.4},"source_id":"idp-claude-opus-4-6","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"81.1 | 89.8 | 74 | 96 | 64.4"}
 {"model":"qwen3-vl-plus","metrics":{"overall":79.8},"source_id":"idp-secondary"}
-{"model":"qwen3-vl-235b","metrics":{"overall":80},"source_id":"idp-secondary"}
+{"model":"qwen3-vl-235b","metrics":{"overall":80,"kie":83.8,"ocr":71.7,"table":85,"vqa":75.5},"source_id":"idp-qwen3-vl-235b","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"80 | 83.8 | 71.7 | 85 | 75.5"}
 {"model":"qwen3-5-9b","metrics":{"overall":76.2},"source_id":"idp-secondary"}
-{"model":"gpt-5-mini","metrics":{"overall":73.3},"source_id":"idp-secondary"}
+{"model":"gpt-5-mini","metrics":{"overall":73.3,"kie":85.7,"ocr":73,"table":69.5,"vqa":65},"source_id":"idp-gpt-5-mini","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"73.3 | 85.7 | 73 | 69.5 | 65"}
 {"model":"qwen3-5-4b","metrics":{"overall":74.5},"source_id":"idp-secondary"}
 {"model":"mistral-small-4","metrics":{"overall":68.5},"source_id":"idp-secondary"}
-{"model":"claude-haiku-4-5","metrics":{"overall":72.9},"source_id":"idp-secondary"}
+{"model":"claude-haiku-4-5","metrics":{"overall":72.9,"kie":85.6,"ocr":65,"table":81.7,"vqa":59.2},"source_id":"idp-claude-haiku-4-5","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"72.9 | 85.6 | 65 | 81.7 | 59.2"}
 {"model":"ministral-8b","metrics":{"overall":71.7},"source_id":"idp-secondary"}
-{"model":"gpt-4-1","metrics":{"overall":74.7},"source_id":"idp-secondary"}
+{"model":"gpt-4-1","metrics":{"overall":74.7,"kie":87.1,"ocr":75.6,"table":73.1,"vqa":63},"source_id":"idp-gpt-4-1","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"74.7 | 87.1 | 75.6 | 73.1 | 63"}
 {"model":"glm-ocr","metrics":{"overall":54.9},"source_id":"idp-secondary"}
 {"model":"qwen3-5-2b","metrics":{"overall":67.1},"source_id":"idp-secondary"}
 {"model":"qwen3-5-0-8b","metrics":{"overall":61.2},"source_id":"idp-secondary"}
-{"model":"gpt-5-nano","metrics":{"overall":65.8},"source_id":"idp-secondary"}
+{"model":"gpt-5-nano","metrics":{"overall":65.8,"kie":84.7,"ocr":69.6,"table":45.3,"vqa":63.5},"source_id":"idp-gpt-5-nano","verified_on":"2026-10-13","dataset_version":"IDP Core Bench v1.0","evidence":"vendor","measurement_operator":"Nanonets IDP benchmark operator","source_excerpt":"65.8 | 84.7 | 69.6 | 45.3 | 63.5"}
 {"model":"gemma-4-e4b-it","metrics":{"overall":55},"source_id":"idp-secondary"}
 {"model":"llama-3-2-vision-11b","metrics":{"overall":58.6},"source_id":"idp-secondary"}
 {"model":"pixtral-12b","metrics":{"overall":59},"source_id":"idp-secondary"}

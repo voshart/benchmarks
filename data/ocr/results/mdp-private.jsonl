@@ -32,4 +32,3 @@
 {"model":"mineru-2-5-vlm","metrics":{"public":46.3,"digital":61.9,"photo":40.8,"private":48.7},"source_id":"mdp-official"}
 {"model":"pp-structurev3","metrics":{"public":45.4,"digital":56.2,"photo":41.7,"private":49.6},"source_id":"mdp-official"}
 {"model":"mineru-2-5-pipeline","metrics":{"public":33.5,"digital":57.6,"photo":25.4,"private":36.2},"source_id":"mdp-official"}
-{"model":"polyocr-2-7b","metrics":{"public":87.0,"digital":91.0,"photo":85.6,"non_latin":84.9},"source_id":"poly-paper","evidence":"author_reported","note":"Private MDPBench score not published; weights unavailable in paper repository."}

@@ -7,4 +7,4 @@
 {"model":"dots-ocr","metrics":{"overall":81.84,"text_edit":0.1483,"formula":85,"tables":75.32,"order_edit":0.22},"source_id":"wild-teleocr"}
 {"model":"hunyuanocr-1-5","metrics":{"overall":77.62,"text_edit":0.1979,"formula":85.12,"tables":67.54,"order_edit":0.275},"source_id":"wild-teleocr"}
 {"model":"logics-parsing-v2","metrics":{"overall":77.1,"text_edit":0.4029,"formula":91.4,"tables":80.19,"order_edit":0.2355},"source_id":"wild-teleocr"}
-{"model":"xiaomi-ocr-0","metrics":{"overall":87.94},"source_id":"xiaomi-paper","evidence":"author_reported"}
+{"model":"xiaomi-ocr-0","metrics":{"overall":87.94,"text_edit":0.1233,"formula":89.55,"tables":86.61,"table_structure":90.94,"reading_order_edit":0.1931},"source_id":"xiaomi-paper","evidence":"author_reported","verified_on":"2026-10-13","configuration":"Xiaomi-OCR-0 + PP-DocLayoutV3","note":"Author-reported two-stage parsing; 0.8B excludes PP-DocLayoutV3; no independent reproduction.","measurement_operator":"model authors","dataset_version":"Wild-OmniDocBench","source_excerpt":"Ours | 0.8B | 87.94 | 0.1233 | 89.55 | 86.61 | 90.94 | 0.1931"}
