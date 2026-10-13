@@ -1,0 +1,21 @@
+/* Shared pure ranking engine: CommonJS + browser global. */
+(function(root,make){const api=make();if(typeof module==='object'&&module.exports)module.exports=api;else root.BenchmarkRank=api;})(globalThis,()=>{
+const valid=x=>typeof x==='number'&&Number.isFinite(x);
+const releases=(models,date,latest)=>models.filter(m=>m.release_date?m.release_date<=date:date>=latest);
+const rankable=o=>o&&valid(o.value)&&!['author_reported','vendor_internal'].includes(o.evidence);
+const choose=(d,id,test)=>{const values=d.resultsByKey[id+'|'+test]||[];const weights={official:0,community:1,third_party:2,mixed:3,vendor:4,imported:5,secondary:6,author_reported:7,vendor_internal:8};const best=values.slice().sort((a,b)=>(weights[a.evidence]??5)-(weights[b.evidence]??5))[0]||null; if(id==='chandra-2-api' && test!=='ndi' && test!=='chandra-internal'){const open=(d.resultsByKey['chandra-2-open|'+test]||[])[0];if(open && (!best || best.value<open.value)){return {...open,model:id,evidence:'assumed',note:'Open-model lower bound; observed API result retained separately.',source_id:open.source_id};}}return best};
+function latestByLine(rows){const kept=[],lines=new Map();for(const item of rows){const m=item.model||item; if(!m.lineage){kept.push(item);continue;}const old=lines.get(m.lineage);if(!old||(m.release_date||'')>(old.model||old).release_date)lines.set(m.lineage,item);}return kept.concat([...lines.values()]);}
+function scored(d,cutoff,t){return latestByLine(releases(d.models,cutoff,d.config.snapshot_date).map(m=>({model:m,obs:choose(d,m.id,t.id)})).filter(x=>rankable(x.obs)));}
+function maturity(rows,t){const orgs=new Set(rows.map(r=>r.model.organization).filter(Boolean));return {n:rows.length,orgs:orgs.size,active:rows.length>=(t.min_models||6)&&orgs.size>=(t.min_organizations||3)};}
+function pctRanks(rows,t){const ordered=[...rows].sort((a,b)=>t.direction==='lower'?a.obs.value-b.obs.value:b.obs.value-a.obs.value);const out=new Map(),n=ordered.length;for(let i=0;i<n;){let j=i+1;while(j<n&&ordered[j].obs.value===ordered[i].obs.value)j++;const mid=((i+1)+j)/2;for(let k=i;k<j;k++)out.set(ordered[k].model.id,n<=1?100:100*(n-mid)/(n-1));i=j;}return out;}
+function build(d,cutoff=d.config.snapshot_date,opts={}){
+const min=Number(opts.min??d.config.default_families),view=opts.view||'all',access=opts.access||'all',query=(opts.query||'').trim().toLowerCase();
+const models=latestByLine(releases(d.models,cutoff,d.config.snapshot_date));const core=d.tests.filter(t=>t.core);
+const eligible=core.map(t=>{const s=scored(d,cutoff,t),m=maturity(s,t);return {t,s,...m,ranks:m.active?pctRanks(s,t):new Map()}}).filter(x=>x.active);
+const groups={structure:['omnidoc-v16','puredoc','docparsing'],robust:['wild','real5','drdoc'],multilingual:['mdp-private','mdp-public','more'],production:['ndi','idp']}; const ids=groups[view];const show=d.tests.filter(t=>view==='secondary'?!d.primaryTests.some(p=>p.id===t.id):view==='all'?d.primaryTests.some(p=>p.id===t.id):ids?ids.includes(t.id):t.family===view);
+const rows=models.map(m=>{const scores=Object.fromEntries(d.tests.map(t=>[t.id,choose(d,m.id,t.id)]));const count=new Set((d.coverageTests||d.primaryTests).filter(t=>valid(scores[t.id]?.value)).map(t=>t.family)).size;const ps=eligible.map(x=>x.ranks.get(m.id)).filter(valid);const rank=ps.length>=d.config.min_core_for_rank?ps.reduce((a,b)=>a+b,0)/ps.length:null;const price=d.pricingByModel[m.id]?.usd_per_1000_pages??null;return {id:m.id,name:m.name,access:m.access,release_date:m.release_date,count,coreCount:ps.length,rank,price,scores};}).filter(r=>(view==='secondary'?show.some(t=>valid(r.scores[t.id]?.value)):r.count>=min)&&(!query||r.name.toLowerCase().includes(query))&&(access==='all'||r.access===access));
+rows.sort((a,b)=>(b.rank??-1)-(a.rank??-1)||b.coreCount-a.coreCount||b.count-a.count||a.name.localeCompare(b.name));
+const ranges=Object.fromEntries(show.map(t=>{const arr=rows.map(r=>r.scores[t.id]?.value).filter(valid);return [t.id,arr.length?[Math.min(...arr),Math.max(...arr)]:[null,null]];}));
+return {rows,columns:show,ranges,matureCount:eligible.length,coreTotal:core.length};}
+return {build,scored,maturity,pctRanks,choose,latestByLine};
+});

@@ -1,0 +1,13 @@
+{
+  "id": "idp",
+  "short": "IDP",
+  "label": "IDP Core",
+  "source": "idp-secondary",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": true,
+  "family": "idp",
+  "min_models": 6,
+  "min_organizations": 3
+}

@@ -1,0 +1,2 @@
+{"model":"mistral-ocr-4-1","metrics":{"quality":84.0,"ci95":6.3,"degraded":69,"math":80,"tables":92,"columns":95},"source_id":"openocr","evidence":"third_party","note":"Small 20-document test; evaluated as pinned 4.1."}
+{"model":"datalab-convert-accurate","metrics":{"quality":77.2,"ci95":7.1,"degraded":54,"math":73,"tables":92,"columns":91},"source_id":"openocr","evidence":"third_party","note":"Hosted service, model version not pinned to standalone Chandra 2."}

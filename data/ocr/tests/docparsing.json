@@ -1,0 +1,13 @@
+{
+  "id": "docparsing",
+  "short": "DPB",
+  "label": "DocParsing DPB",
+  "source": "dp-community",
+  "primary_metric": "overall",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": true,
+  "family": "docparsing",
+  "min_models": 6,
+  "min_organizations": 3
+}

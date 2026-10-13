@@ -1,0 +1,13 @@
+{
+  "id": "omnidoc-v16-en",
+  "short": "EN Omni",
+  "label": "OmniDoc v1.6 English only",
+  "source": "indic-english",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "omnidoc",
+  "min_models": 6,
+  "min_organizations": 3
+}

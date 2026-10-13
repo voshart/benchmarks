@@ -1,0 +1,13 @@
+{
+  "id": "openocr-hard",
+  "short": "OpenOCR",
+  "label": "OpenOCR hard subset",
+  "source": "openocr",
+  "primary_metric": "quality",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "openocr",
+  "min_models": 6,
+  "min_organizations": 3
+}

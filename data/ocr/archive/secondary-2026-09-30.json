@@ -1,0 +1,486 @@
+{
+  "secDatalabElo": [
+    [
+      "Datalab Accurate",
+      1798
+    ],
+    [
+      "Datalab Balanced",
+      1638
+    ],
+    [
+      "Datalab Fast",
+      1528
+    ],
+    [
+      "dots.ocr",
+      1489
+    ],
+    [
+      "olmOCR2",
+      1387
+    ],
+    [
+      "DeepSeek OCR",
+      1336
+    ],
+    [
+      "RolmOCR",
+      1324
+    ]
+  ],
+  "secXDocElo": [
+    [
+      "MonkeyOCR-pro-3B",
+      637.1
+    ],
+    [
+      "GLM-OCR",
+      820.7
+    ],
+    [
+      "PaddleOCR-VL-1.5",
+      866.4
+    ],
+    [
+      "HunyuanOCR",
+      951.1
+    ],
+    [
+      "dots.ocr",
+      1190.3
+    ],
+    [
+      "dots.mocr",
+      1210.7
+    ],
+    [
+      "Gemini 3 Pro",
+      1323.7
+    ]
+  ],
+  "secPatent": [
+    [
+      "Dolphin (0.3B)",
+      85.17
+    ],
+    [
+      "MonkeyOCR Pro 1.2B",
+      85.7
+    ],
+    [
+      "MinerU2.5",
+      89.78
+    ],
+    [
+      "MinerU2.5-Pro",
+      92.27
+    ],
+    [
+      "PaddleOCR-VL",
+      90.06
+    ],
+    [
+      "PaddleOCR-VL-1.5",
+      88.24
+    ],
+    [
+      "GLM-OCR",
+      91.33
+    ],
+    [
+      "MOSS-OCR-0.3B",
+      93.49
+    ]
+  ],
+  "secOpenOCR": [
+    [
+      "Mistral OCR 4.x",
+      84.8
+    ],
+    [
+      "Ministral-8B",
+      69.7
+    ],
+    [
+      "Claude Opus 4.6",
+      63.4
+    ],
+    [
+      "Gemini 3 Flash Preview",
+      63.6
+    ],
+    [
+      "Qwen3-VL-235B",
+      63
+    ],
+    [
+      "Gemini 3.6 Flash",
+      56.5
+    ],
+    [
+      "Claude Sonnet 4.6",
+      54.1
+    ],
+    [
+      "Qwen3.8-27B",
+      47.3
+    ],
+    [
+      "Claude Opus 5",
+      45.5
+    ],
+    [
+      "Claude Haiku 4.5",
+      42.6
+    ],
+    [
+      "GPT-5.6 Sol",
+      36.1
+    ],
+    [
+      "GPT-4.1",
+      36.1
+    ],
+    [
+      "Gemini-2.5 Pro",
+      25.6
+    ],
+    [
+      "GPT-5.6 Terra",
+      29.4
+    ]
+  ],
+  "secArenaElo": [
+    [
+      "Gemini 3 Flash",
+      1784
+    ],
+    [
+      "dots.ocr",
+      1484
+    ],
+    [
+      "olmOCR2",
+      1408
+    ],
+    [
+      "GLM-OCR",
+      1390
+    ],
+    [
+      "DeepSeek OCR",
+      1377
+    ]
+  ],
+  "secOcr4Subset": [
+    [
+      "Mistral OCR 4.x",
+      74.9
+    ],
+    [
+      "Qwen3-VL-235B",
+      72.6
+    ],
+    [
+      "GPT-5.5",
+      71.3
+    ],
+    [
+      "Claude Opus 4.8",
+      71.3
+    ],
+    [
+      "Gemini 3.1 Pro",
+      70.4
+    ],
+    [
+      "Marker",
+      55.2
+    ],
+    [
+      "Docling",
+      37.7
+    ],
+    [
+      "LlamaParse",
+      32.7
+    ],
+    [
+      "unstructured",
+      31.8
+    ]
+  ],
+  "secDatalab90": [
+    [
+      "Chandra 2.1 API",
+      75.2
+    ]
+  ],
+  "secDatalabTables": [
+    [
+      "Chandra 2.1 API",
+      82.1
+    ]
+  ],
+  "secNanonetsOmni": [
+    [
+      "Nanonets OCR-3",
+      90.5
+    ],
+    [
+      "Chandra 2 open",
+      85.5
+    ],
+    [
+      "DeepSeek-OCR 2",
+      87.7
+    ],
+    [
+      "Mistral OCR 3",
+      85.3
+    ],
+    [
+      "Gemini 3.1 Pro",
+      85.3
+    ],
+    [
+      "GPT-5.4",
+      85.3
+    ]
+  ],
+  "secIdpOmni": [
+    [
+      "Nanonets OCR-3",
+      90
+    ],
+    [
+      "GPT-5.4",
+      85.3
+    ],
+    [
+      "Gemini 3 Pro",
+      88.8
+    ],
+    [
+      "Gemini 3 Flash",
+      90.1
+    ],
+    [
+      "Nanonets OCR2+",
+      89.5
+    ],
+    [
+      "Gemini 3.1 Pro",
+      85.3
+    ],
+    [
+      "GPT-5.2",
+      88
+    ],
+    [
+      "Claude Sonnet 4.6",
+      86.9
+    ],
+    [
+      "Claude Opus 4.6",
+      85.9
+    ],
+    [
+      "Qwen3-VL-Plus",
+      82.5
+    ],
+    [
+      "Qwen3-VL-235B",
+      81.9
+    ],
+    [
+      "Qwen3.5-9B",
+      76.7
+    ],
+    [
+      "GPT-5-Mini",
+      82.5
+    ],
+    [
+      "Qwen3.5-4B",
+      67.6
+    ],
+    [
+      "Mistral Small 4",
+      76.4
+    ],
+    [
+      "Claude Haiku 4.5",
+      79.6
+    ],
+    [
+      "Ministral-8B",
+      78.3
+    ],
+    [
+      "GPT-4.1",
+      79.9
+    ],
+    [
+      "GLM-OCR",
+      69.2
+    ],
+    [
+      "Qwen3.5-2B",
+      48.7
+    ],
+    [
+      "Qwen3.5-0.8B",
+      47.3
+    ],
+    [
+      "GPT-5-Nano",
+      63.4
+    ],
+    [
+      "Gemma-4-E4B-it",
+      59.7
+    ],
+    [
+      "Llama-3.2-Vision-11B",
+      44.6
+    ],
+    [
+      "Pixtral-12B",
+      42.3
+    ],
+    [
+      "Gemma-4-E2B-it",
+      43.3
+    ]
+  ],
+  "secIndicOmniEN": [
+    [
+      "PaddleOCR-VL-1.6",
+      96.36
+    ],
+    [
+      "Chandra 2 open",
+      93.11
+    ],
+    [
+      "IndicOCR",
+      92.76
+    ],
+    [
+      "GPT-5.6 Sol",
+      92.46
+    ],
+    [
+      "Gemini 3.1 Pro",
+      91.15
+    ],
+    [
+      "Surya OCR 2",
+      91.13
+    ],
+    [
+      "Sarvam Vision",
+      90.08
+    ],
+    [
+      "Gemma-4-31B",
+      86.71
+    ],
+    [
+      "Nemotron Parse 2",
+      79.12
+    ]
+  ],
+  "secIndicOlmEN": [
+    [
+      "Chandra 2 open",
+      85.9
+    ],
+    [
+      "Sarvam Vision",
+      84.3
+    ],
+    [
+      "Gemini 3.1 Pro",
+      82.6
+    ],
+    [
+      "IndicOCR",
+      82.2
+    ],
+    [
+      "Surya OCR 2",
+      81.4
+    ],
+    [
+      "Gemma-4-31B",
+      80.4
+    ],
+    [
+      "PaddleOCR-VL-1.6",
+      78.7
+    ],
+    [
+      "GPT-5.6 Sol",
+      78
+    ],
+    [
+      "Nemotron Parse 2",
+      68.2
+    ]
+  ],
+  "secHiroOmni": [
+    [
+      "Dolphin (0.3B)",
+      87.33
+    ],
+    [
+      "MonkeyOCR Pro 1.2B",
+      91.95
+    ],
+    [
+      "MinerU2.5",
+      94.46
+    ],
+    [
+      "MinerU2.5-Pro",
+      96.36
+    ],
+    [
+      "PaddleOCR-VL",
+      95.26
+    ],
+    [
+      "PaddleOCR-VL-1.5",
+      95.61
+    ],
+    [
+      "GLM-OCR",
+      96.08
+    ],
+    [
+      "MOSS-OCR-0.3B",
+      94.46
+    ]
+  ],
+  "secDatalab43": [
+    [
+      "Chandra 2 open",
+      77.8
+    ],
+    [
+      "Chandra 1 open",
+      69.4
+    ],
+    [
+      "Gemini 2.5 Flash",
+      67.6
+    ],
+    [
+      "GPT-5-Mini",
+      60.5
+    ]
+  ]
+}

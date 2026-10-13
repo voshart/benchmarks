@@ -1,0 +1,13 @@
+{
+  "id": "chandra-internal",
+  "short": "Vendor",
+  "label": "Chandra internal tests",
+  "source": "chandra-internal",
+  "primary_metric": "languages90",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "chandra",
+  "min_models": 6,
+  "min_organizations": 3
+}

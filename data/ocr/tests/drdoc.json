@@ -1,0 +1,13 @@
+{
+  "id": "drdoc",
+  "short": "DrDoc",
+  "label": "Dr.Doc (limited)",
+  "source": "wild-teleocr",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "family": "drdoc",
+  "min_models": 6,
+  "min_organizations": 3
+}

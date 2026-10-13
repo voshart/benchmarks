@@ -1,0 +1,10 @@
+{"model":"teleocr","metrics":{"overall":88.53,"text_edit":0.1173,"formula":88.26,"tables":89.05,"order_edit":0.2011},"source_id":"wild-teleocr"}
+{"model":"ovisocr2","metrics":{"overall":87.91,"text_edit":0.129,"formula":90.37,"tables":85.13,"order_edit":0.2021},"source_id":"wild-teleocr"}
+{"model":"paddleocr-vl-1-6","metrics":{"overall":87.36,"text_edit":0.1369,"formula":88.42,"tables":85.76,"order_edit":0.2057},"source_id":"wild-teleocr"}
+{"model":"mineru2-5-pro","metrics":{"overall":87.33,"text_edit":0.1362,"formula":90.15,"tables":85.46,"order_edit":0.2013},"source_id":"wild-teleocr"}
+{"model":"glm-ocr","metrics":{"overall":85.08,"text_edit":0.1514,"formula":89.09,"tables":81.31,"order_edit":0.2228},"source_id":"wild-teleocr"}
+{"model":"paddleocr-vl-1-5","metrics":{"overall":84.64,"text_edit":0.1461,"formula":86.72,"tables":81.8,"order_edit":0.2138},"source_id":"wild-teleocr"}
+{"model":"dots-ocr","metrics":{"overall":81.84,"text_edit":0.1483,"formula":85,"tables":75.32,"order_edit":0.22},"source_id":"wild-teleocr"}
+{"model":"hunyuanocr-1-5","metrics":{"overall":77.62,"text_edit":0.1979,"formula":85.12,"tables":67.54,"order_edit":0.275},"source_id":"wild-teleocr"}
+{"model":"logics-parsing-v2","metrics":{"overall":77.1,"text_edit":0.4029,"formula":91.4,"tables":80.19,"order_edit":0.2355},"source_id":"wild-teleocr"}
+{"model":"xiaomi-ocr-0","metrics":{"overall":87.94},"source_id":"xiaomi-paper","evidence":"author_reported"}

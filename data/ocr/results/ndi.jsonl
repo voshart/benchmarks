@@ -1,0 +1,13 @@
+{"model":"ndi-ocr-high","metrics":{"normalized":0.82,"omni_component":92.6,"mdp_component":85.9,"parsebench":91.16,"realdoc":0.868,"extract":0.562,"financial":64.1,"synthetic":97.5},"source_id":"ndi-vendor"}
+{"model":"llamaparse-agentic","metrics":{"normalized":0.82,"omni_component":89.4,"mdp_component":83.6,"parsebench":91.78,"realdoc":0.846,"extract":0.582,"financial":69.6,"synthetic":97},"source_id":"ndi-vendor"}
+{"model":"gpt-6-astra-low","metrics":{"normalized":0.813,"omni_component":89.6,"mdp_component":80.6,"parsebench":90.67,"realdoc":0.917,"extract":0.573,"financial":63.2,"synthetic":96.2},"source_id":"ndi-vendor"}
+{"model":"ndi-ocr-low","metrics":{"normalized":0.805,"omni_component":93.8,"mdp_component":84.3,"parsebench":89.05,"realdoc":0.798,"extract":0.553,"financial":63.7,"synthetic":97.3},"source_id":"ndi-vendor"}
+{"model":"llamaparse-cost-effective","metrics":{"normalized":0.799,"omni_component":87.4,"mdp_component":79.8,"parsebench":89.87,"realdoc":0.803,"extract":0.569,"financial":69.1,"synthetic":95.9},"source_id":"ndi-vendor"}
+{"model":"mistral-ocr-4","metrics":{"normalized":0.796,"omni_component":89.2,"mdp_component":78.7,"parsebench":89.55,"realdoc":0.824,"extract":0.557,"financial":64.1,"synthetic":97.5},"source_id":"ndi-vendor"}
+{"model":"anthropic-opus-4-7","metrics":{"normalized":0.787,"omni_component":88.2,"mdp_component":74.6,"parsebench":90.26,"realdoc":0.841,"extract":0.571,"financial":61.8,"synthetic":94.6},"source_id":"ndi-vendor"}
+{"model":"databricks-parse-high","metrics":{"normalized":0.784,"omni_component":90.3,"mdp_component":77.3,"parsebench":88.25,"realdoc":0.833,"extract":0.546,"financial":62.1,"synthetic":92.6},"source_id":"ndi-vendor"}
+{"model":"chandra-2-api","metrics":{"normalized":0.773,"omni_component":88.6,"mdp_component":83.2,"parsebench":83.7,"realdoc":0.781,"extract":0.544,"financial":61.2,"synthetic":91.9},"source_id":"ndi-vendor"}
+{"model":"extend-ai-v1","metrics":{"normalized":0.766,"omni_component":85.9,"mdp_component":79.7,"parsebench":84.59,"realdoc":0.836,"extract":0.522,"financial":59.5,"synthetic":90.5},"source_id":"ndi-vendor"}
+{"model":"gpt-5-6-terra","metrics":{"normalized":0.766,"omni_component":89.1,"mdp_component":73.1,"parsebench":82.56,"realdoc":0.825,"extract":0.541,"financial":59.7,"synthetic":95.3},"source_id":"ndi-vendor"}
+{"model":"azure-di","metrics":{"normalized":0.762,"omni_component":86.3,"mdp_component":80,"parsebench":84.93,"realdoc":0.796,"extract":0.524,"financial":59.7,"synthetic":90.8},"source_id":"ndi-vendor"}
+{"model":"reducto-parse","metrics":{"normalized":0.744,"omni_component":83.1,"mdp_component":71,"parsebench":86.37,"realdoc":0.785,"extract":0.544,"financial":57.8,"synthetic":89.7},"source_id":"ndi-vendor"}
