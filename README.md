@@ -39,7 +39,11 @@ Create a `data/<topic>/config.json`, tests, sources, observations, and a page us
 
 ## Deploy
 
-Keep `bench.voshart.com` as the canonical site, with `/ocr/` as the OCR route. Link `ocr.voshart.com` with a redirect if desired. A GitHub push triggers Cloudflare Pages. Run `npm run build` and review the deployment preview before merging a PR.
+This site isn't precious. The owner authorizes contributors to commit, merge into `main`, and publish requested site updates without asking for separate merge or deployment confirmation. Direct commits to `main` are welcome for small changes; when using a PR, merge it once the required checks pass. Do not leave completed work waiting in an unmerged PR for another approval.
+
+Keep the evidence provenance and ranking rules in `AGENTS.md`, and run `npm run validate`, `npm test`, and `npm run build` before publishing. Ship promptly and verify the live result.
+
+Keep `bench.voshart.com` as the canonical site, with `/ocr/` as the OCR route. Link `ocr.voshart.com` with a redirect if desired. A GitHub push to `main` triggers the Cloudflare Pages production deployment.
 
 ### Cloudflare Pages setup
 
@@ -49,15 +53,15 @@ Commit source files and `package-lock.json`; Cloudflare builds the site from Git
 
 ### Routine LLM updates
 
-Ask the contributor to follow `AGENTS.md`, verify primary sources, update the data files, run validation/tests/build, and open a pull request with exact source links and caveats. Review the Cloudflare preview and merge the pull request into `main` to trigger production deployment. GitHub Actions validates the change; Cloudflare Pages performs the deployment separately.
+Contributors should follow `AGENTS.md`, verify primary sources, update the data files, run validation/tests/build, and publish to `main` without another confirmation. If using a PR, include exact source links and caveats, check the Cloudflare preview, and merge it to trigger production deployment. GitHub Actions validates the change; Cloudflare Pages performs the deployment separately. Verify the production site after deployment.
 
 Example request:
 
-> Update the OCR benchmark with verified results for [model/version or source URLs]. Follow AGENTS.md, preserve source provenance and missing values, and list any unverified claims. Run npm run validate, npm test, and npm run build, then open a PR with source links and the expected leaderboard effect.
+> Update the OCR benchmark with verified results for [model/version or source URLs]. Follow AGENTS.md, preserve source provenance and missing values, and list any unverified claims. Run npm run validate, npm test, and npm run build, then publish to main and verify the live site. If using a PR, include source links and the expected leaderboard effect, then merge it without asking for another confirmation.
 
 ## Verified expansion — October 13, 2026
 
-The initial scaffold is deployed through Cloudflare Pages at https://benchmarks-15s.pages.dev/ocr/. The custom domain remains a separate configuration step; deployment from `main` is confirmed. This update contains 177 model records, 381 scored observations, 30 test variants, 62 page-price observations (including 23 preserved/unverified imports), 19 official token-rate observations, and 68 source records.
+Production is live at https://bench.voshart.com/ocr/ and https://benchmarks-15s.pages.dev/ocr/. PR #2 was merged into `main` and the expanded dataset was verified on both production addresses on October 15, 2026. This update contains 177 model records, 381 scored observations, 30 test variants, 62 page-price observations (including 23 preserved/unverified imports), 19 official token-rate observations, and 68 source records.
 
 - `New research` exposes Xiaomi-OCR-0, PolyOCR-2.7B and the distinct PolyOCR-9B direct/pipeline configurations. It labels one-family evidence **Unranked** and shows qualified multi-family indices with a **◊** marker. The default filter is now two primary families, under the explicit provisional policy below.
 - Xiaomi's public model card establishes the weights release as September 30, 2026. Its OmniDoc/Wild component scores now retain text, formulas, tables and reading order. PolyOCR weights remain unreleased; the report date is not a weights release date.
