@@ -61,15 +61,17 @@
   },
   "poly-paper": {
     "title": "PolyOCR-Venus technical report",
-    "url": "https://arxiv.org/abs/2609.37712",
+    "url": "https://arxiv.org/html/2609.37712",
     "kind": "author_reported",
-    "note": "MDP public; no private score; weights unavailable per project release."
+    "note": "Table 8: specialized PolyOCR-2.7B MDP public results; no private score. Table 6 evaluates distinct PolyOCR-9B direct and PP-DocLayoutV3 pipeline configurations. Weights absent from reviewed release.",
+    "verified_on": "2026-10-13"
   },
   "xiaomi-paper": {
     "title": "Xiaomi-OCR-0 technical report",
-    "url": "https://arxiv.org/abs/2609.36136",
+    "url": "https://arxiv.org/html/2609.36136",
     "kind": "author_reported",
-    "note": "OCR authors evaluated their own released weights; external layout detector for parsing."
+    "note": "Author-reported two-stage parsing with PP-DocLayoutV3; reported 0.8B excludes the layout detector. Tables 1–3: OmniDoc v1.6, Real5 (recaptured OmniDoc v1.5) and Wild; no independent reproduction.",
+    "verified_on": "2026-10-13"
   },
   "openocr": {
     "title": "OpenOCR 20-page hard set",
@@ -87,7 +89,9 @@
     "title": "Mistral OCR pricing",
     "url": "https://docs.mistral.ai/inference/pricing",
     "kind": "vendor_price",
-    "note": "OCR 4.1 is 4 per 1000 pages, 0.40 batch; annotated 5."
+    "note": "OCR 4.1 standard USD 4/1,000 pages. The flattened pricing table places 0.40 under cached input, not batch; the old 0.40 batch claim is unverified. Official batch documentation specifies 50% off.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "OCR 4.1 | $4 /1000 Pages | $0.4 /1000 Pages"
   },
   "legacy-snapshot": {
     "title": "OCR research snapshot 2026-09-30",
@@ -100,5 +104,371 @@
     "url": "https://huggingface.co/bodhan-ai/indic-ocr",
     "kind": "secondary",
     "note": "English subset is not v1.6_full and must not silently replace it."
+  },
+  "datalab-pricing": {
+    "title": "Datalab hosted processor rate card",
+    "url": "https://app.datalab.to/pricing",
+    "kind": "vendor_price",
+    "note": "Convert fast/balanced $4 and accurate $10 per 1,000 pages; EU +25%; optional retention discount and add-ons. Current service rates do not pin a historical Chandra generation.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "Convert — fast / balanced | 4; Convert — accurate | 10"
+  },
+  "extend-pricing": {
+    "title": "Extend Pay As You Go pricing",
+    "url": "https://www.extend.ai/pricing",
+    "kind": "vendor_price",
+    "note": "PAYG $0.0125/credit; Light Parse 0.5 credits/page, Performance Parse 2 credits/page. Scale uses a different credit rate and monthly plan.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "Performance Parse is 2 credits per page and Light Parse is 0.5 credits per page"
+  },
+  "reducto-pricing": {
+    "title": "Reducto r-1 Parse pricing",
+    "url": "https://reducto.ai/pricing",
+    "kind": "vendor_price",
+    "note": "Standard r-1 Parse $10/1,000 pages; batch Parse 20% discount. Optional OCR data return and prompted regions cost extra.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "r-1 Parse | $10"
+  },
+  "llamaparse-pricing": {
+    "title": "LlamaParse v2 tier pricing",
+    "url": "https://developers.llamaindex.ai/llamaparse/general/pricing/",
+    "kind": "vendor_price",
+    "note": "USD 1.25/1,000 credits; v2 Fast 1, Cost-effective 3, Agentic 10, Agentic Plus 45 credits/page. Add-ons and billable-page definitions vary.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "Fast | 1; Cost-effective | 3; Agentic | 10; Agentic Plus | 45"
+  },
+  "claude-token-pricing": {
+    "title": "Anthropic direct API token pricing",
+    "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "kind": "vendor_price",
+    "note": "Standard direct/global API prices per million tokens, separate from benchmark page-cost estimates; caching, batch, fast mode and regional pricing have distinct rates.",
+    "verified_on": "2026-10-13"
+  },
+  "gemini-token-pricing": {
+    "title": "Gemini 3.1 Pro Preview token pricing",
+    "url": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-pro-preview",
+    "kind": "vendor_price",
+    "note": "Prices apply to gemini-3.1-pro-preview, not Gemini 3 Pro. Separate <=200k and >200k prompt bands; output includes thinking. Cache storage and grounding extra.",
+    "verified_on": "2026-10-13"
+  },
+  "xiaomi-weights": {
+    "title": "Xiaomi-OCR-0 release and weights",
+    "url": "https://huggingface.co/SeerRay-Lab/Xiaomi-OCR-0",
+    "kind": "official",
+    "note": "Model card news states September 30 release of technical report and weights; Apache-2.0 license. Self-hosted compute costs are not a vendor page rate.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "2026-09-30: Technical report published and model weights released."
+  },
+  "poly-release": {
+    "title": "PolyOCR-Venus release contents",
+    "url": "https://github.com/inclusionAI/PolyOCR-Venus",
+    "kind": "author_reported",
+    "note": "Repository publishes report and evaluation code; weights, training code and complete parsing pipelines are absent. Do not use report publication as a weights release date.",
+    "verified_on": "2026-10-13"
+  },
+  "mistral-ocr41-model": {
+    "title": "Mistral OCR 4.1 version and annotated price",
+    "url": "https://docs.mistral.ai/models/ocr-4-1",
+    "kind": "official",
+    "note": "Version 4.1 released July 16, 2026; standard $4 and annotated $5 per 1,000 pages.",
+    "verified_on": "2026-10-13",
+    "source_excerpt": "July 16, 2026; $5 /1000 Annotated Pages"
+  },
+  "idp-nanonets-ocr-3": {
+    "title": "IDP Leaderboard: Nanonets OCR-3",
+    "url": "https://benchmarking.nanonets.com/models/nanonets-ocr-3",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gpt-5-2": {
+    "title": "IDP Leaderboard: GPT-5.2",
+    "url": "https://benchmarking.nanonets.com/models/gpt-5-2",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gemini-3-pro": {
+    "title": "IDP Leaderboard: Gemini 3 Pro",
+    "url": "https://benchmarking.nanonets.com/models/gemini-3-pro",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gpt-5-4": {
+    "title": "IDP Leaderboard: GPT-5.4",
+    "url": "https://benchmarking.nanonets.com/models/gpt-5-4",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gemini-3-flash": {
+    "title": "IDP Leaderboard: Gemini 3 Flash",
+    "url": "https://benchmarking.nanonets.com/models/gemini-3-flash",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gemini-3-1-pro": {
+    "title": "IDP Leaderboard: Gemini-3.1-Pro",
+    "url": "https://benchmarking.nanonets.com/models/gemini-3-1-pro",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-claude-sonnet-4-6": {
+    "title": "IDP Leaderboard: Claude-Sonnet-4.6",
+    "url": "https://benchmarking.nanonets.com/models/claude-sonnet-4-6",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-claude-opus-4-6": {
+    "title": "IDP Leaderboard: Claude Opus 4.6",
+    "url": "https://benchmarking.nanonets.com/models/claude-opus-4-6",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-claude-haiku-4-5": {
+    "title": "IDP Leaderboard: Claude Haiku 4.5",
+    "url": "https://benchmarking.nanonets.com/models/claude-haiku-4-5",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gpt-5-mini": {
+    "title": "IDP Leaderboard: GPT-5-Mini",
+    "url": "https://benchmarking.nanonets.com/models/gpt-5-mini",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gpt-5-nano": {
+    "title": "IDP Leaderboard: GPT-5-Nano",
+    "url": "https://benchmarking.nanonets.com/models/gpt-5-nano",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-gpt-4-1": {
+    "title": "IDP Leaderboard: GPT-4.1",
+    "url": "https://benchmarking.nanonets.com/models/gpt-4-1",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "idp-qwen3-vl-235b": {
+    "title": "IDP Leaderboard: Qwen3-VL-235B",
+    "url": "https://benchmarking.nanonets.com/models/qwen3-vl-235b",
+    "kind": "vendor",
+    "note": "Nanonets-operated evaluation: IDP Core Bench v1.0 and OmniDocBench v1.5 are separate tests. Page costs, where listed, are operator benchmark estimates, not token list rates.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-6-astra-low": {
+    "title": "OpenAI gpt-6-astra API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-6-sol": {
+    "title": "OpenAI gpt-5.6-sol API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-6-terra": {
+    "title": "OpenAI gpt-5.6-terra API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-6-luna": {
+    "title": "OpenAI gpt-5.6-luna API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-4": {
+    "title": "OpenAI gpt-5.4 API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.4",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-2": {
+    "title": "OpenAI gpt-5.2 API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.2",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-mini": {
+    "title": "OpenAI gpt-5-mini API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5-mini",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-5-nano": {
+    "title": "OpenAI gpt-5-nano API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5-nano",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "openai-price-gpt-4-1": {
+    "title": "OpenAI gpt-4.1 API price",
+    "url": "https://developers.openai.com/api/docs/models/gpt-4.1",
+    "kind": "vendor_price",
+    "note": "Direct API standard USD per million text tokens. Image tokenization and output length determine document cost; no fixed page conversion.",
+    "verified_on": "2026-10-13"
+  },
+  "mistral-batch-pricing": {
+    "title": "Mistral Batch Processing discount",
+    "url": "https://docs.mistral.ai/studio/batch-processing",
+    "kind": "vendor_price",
+    "verified_on": "2026-10-13",
+    "note": "Batch documentation states a 50% discount and supports the OCR endpoint. Applied to the verified $4 OCR 4.1 standard page rate: $2 per 1,000 pages.",
+    "source_excerpt": "running large workloads at a 50% discount"
+  },
+  "real5-xiaomi-maintainer": {
+    "title": "Real5 maintainer-published Xiaomi evaluation, October 12",
+    "url": "https://huggingface.co/datasets/PaddlePaddle/Real5-OmniDocBench#1-overall",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "measurement_operator": "Real5 benchmark maintainer publication; execution operator/pipeline not established",
+    "note": "News adds Xiaomi on October 12. Main table reports 92.73 overall, versus 95.24 in the Xiaomi paper. Exact run pipeline is not specified; preserve both source-specific observations, do not average. Real5 reuses OmniDoc v1.5 pages and is not an independent aggregate vote.",
+    "source_excerpt": "Xiaomi-OCR-0 | Specialized VLMs | 0.8B | 92.73 | 93.73 | 92.76 | 92.80 | 92.68 | 91.69"
+  },
+  "jina-ocr-v1-report": {
+    "title": "Jina-OCR-v1 technical report",
+    "url": "https://arxiv.org/html/2609.03181",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Author measurements: OmniDocBench v1.6 and olmOCR-Bench; default dynamic resolution and the strict evaluation prompt. Baselines are partly copied from other publications."
+  },
+  "jina-ocr-v1-release": {
+    "title": "Jina-OCR-v1 public release announcement",
+    "url": "https://jina.ai/news/jina-ocr-v1-faster-document-parsing-on-low-budget-gpus/",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "September 14 announcement explicitly releases public weights. Hub repository creation September 1 is not treated as a weights release."
+  },
+  "lightonocr-3-report": {
+    "title": "LightOnOCR-3 release and evaluation tables",
+    "url": "https://huggingface.co/blog/lightonai/lightonocr-3",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "October 8 author release; scores use published normalization/postprocessing. ParseBench three-category and five-category means remain distinct; no independent reproduction is claimed."
+  },
+  "lightonocr-3-0.8b-card": {
+    "title": "LightOnOCR-3-0.8B model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-3-0.8B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Exact public checkpoint and Apache-2.0 license; the 1B keeps the LightOnOCR-2 architecture, while 0.8B/4B use Qwen3.5."
+  },
+  "lightonocr-3-1b-card": {
+    "title": "LightOnOCR-3-1B model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-3-1B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Exact public checkpoint and Apache-2.0 license; the 1B keeps the LightOnOCR-2 architecture, while 0.8B/4B use Qwen3.5."
+  },
+  "lightonocr-3-4b-card": {
+    "title": "LightOnOCR-3-4B model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-3-4B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Exact public checkpoint and Apache-2.0 license; the 1B keeps the LightOnOCR-2 architecture, while 0.8B/4B use Qwen3.5."
+  },
+  "nemotron-parse-2-card": {
+    "title": "NVIDIA Nemotron Parse 2.0 model card",
+    "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "August 3 public release. Author benchmark results use a five-checkpoint equal-weight soup. Dataset/protocol revisions are not fully pinned; no overall OmniDoc score is inferred from the notes subset."
+  },
+  "hiro-moss-card": {
+    "title": "Hiro-MOSS-OCR-0.3B model card",
+    "url": "https://huggingface.co/PatSnap/Hiro-MOSS-OCR-0.3B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "May 26 public weights. OmniDoc v1.5/v1.6 scores explicitly use ground-truth layout labels, so they are separate assisted recognition variants, never full-page rank votes."
+  },
+  "granite-docling-card": {
+    "title": "Granite-Docling-258M model card",
+    "url": "https://huggingface.co/ibm-granite/granite-docling-258M",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "September 17, 2025 release. FinTabNet 150dpi table TEDS is task-specific. Full-page OCR/layout tables do not pin an exact dataset split in the card and are not assigned to a core benchmark."
+  },
+  "smoldocling-card": {
+    "title": "SmolDocling-256M-preview model card",
+    "url": "https://huggingface.co/docling-project/SmolDocling-256M-preview",
+    "kind": "author_reported",
+    "verified_on": "2026-10-13",
+    "note": "Official checkpoint, Apache-2.0. Exact public-weights release date not established by this audit; paper publication is not used as a weights date."
+  },
+  "docling-project": {
+    "title": "Docling official project",
+    "url": "https://github.com/docling-project/docling",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Pipeline catalog entry; backend and exact package/model versions must be pinned before adding a comparable score."
+  },
+  "amazon-textract-product": {
+    "title": "Amazon Textract official product",
+    "url": "https://aws.amazon.com/textract/",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Hosted service. DetectDocumentText, forms, tables, queries and layout are separate configurations; no matched full-page public score verified in this addition."
+  },
+  "google-docai-ocr-product": {
+    "title": "Google Document AI Enterprise Document OCR",
+    "url": "https://docs.cloud.google.com/document-ai/docs/enterprise-document-ocr",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Hosted OCR processor; parser/add-ons and processor versions must remain distinct. No matched core score verified in this addition."
+  },
+  "mathpix-ocr-product": {
+    "title": "Mathpix OCR API documentation",
+    "url": "https://docs.mathpix.com/",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Hosted STEM OCR service. Historical unversioned Mathpix observations do not identify the current API generation."
+  },
+  "tesseract-project": {
+    "title": "Tesseract official repository",
+    "url": "https://github.com/tesseract-ocr/tesseract",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Open-source OCR engine; version, traineddata, languages and page-segmentation settings must be pinned. Catalog entry has no invented full-page parsing score."
+  },
+  "google-docai-ocr-pricing": {
+    "title": "Google Document AI official pricing",
+    "url": "https://cloud.google.com/products/document-ai/pricing",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "On-demand Enterprise Document OCR rate bands only; OCR add-ons and parsing processors are separate charges, and commitment discounts are not assumed."
+  },
+  "amazon-textract-pricing": {
+    "title": "Amazon Textract official pricing",
+    "url": "https://aws.amazon.com/textract/pricing/",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "Published US West (Oregon) DetectDocumentText examples; OCR-only tier rates. Tables/forms/queries incur other charges."
+  },
+  "mathpix-ocr-pricing": {
+    "title": "Mathpix official OCR API pricing",
+    "url": "https://mathpix.com/pricing/api",
+    "kind": "official",
+    "verified_on": "2026-10-13",
+    "note": "v3/pdf document-page rates and Files API batch-page rates remain distinct. Image/stroke request prices are not converted into page prices; one-time activation fee is excluded from marginal page costs."
   }
 }

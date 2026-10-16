@@ -3,9 +3,11 @@
   "description": "Cross-benchmark scores, historical cohorts and documented prices.",
   "snapshot_date": "2026-10-13",
   "release_start": "2025-10-13",
-  "default_families": 4,
+  "default_families": 2,
   "min_core_for_rank": 3,
   "accent": "#637fa4",
-  "provisional_note": "Author-reported, small-sample, and vendor-internal tests do not enter the aggregate.",
-  "path": "/ocr/"
+  "provisional_note": "Comparable measured public-benchmark results can contribute regardless of operator. Two mature core families permit a provisional index; three or more remove only the coverage qualification. Qualified own/cohort evidence remains provisional. Assumed scores and internal/overlapping/task-only tests never contribute.",
+  "path": "/ocr/",
+  "min_core_for_provisional": 2,
+  "rank_policy_version": 2
 }

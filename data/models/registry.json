@@ -8,6 +8,17 @@
     "organization": null
   },
   {
+    "id": "amazon-textract",
+    "name": "Amazon Textract (unversioned service)",
+    "organization": "Amazon Web Services",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "amazon-textract-product",
+    "evidence_note": "No comparable core score verified; service generation is not pinned.",
+    "configuration": "Catalog entry; current DetectDocumentText pricing is separate from structured AnalyzeDocument"
+  },
+  {
     "id": "anthropic-opus-4-7",
     "name": "Anthropic Opus 4.7",
     "release_date": null,
@@ -177,6 +188,18 @@
     "release_provenance": "unknown",
     "access": "unknown",
     "organization": "DeepSeek"
+  },
+  {
+    "id": "docling-pipeline",
+    "name": "Docling pipeline (unversioned)",
+    "organization": "Docling project",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "docling-project",
+    "evidence_note": "Catalog entry: no version-pinned comparable score verified in this audit.",
+    "configuration": "Unpinned standard pipeline; OCR backend/layout/table models unspecified",
+    "license": "MIT"
   },
   {
     "id": "dolphin",
@@ -387,6 +410,17 @@
     "organization": "Z.ai"
   },
   {
+    "id": "google-docai-ocr",
+    "name": "Google Document AI Enterprise OCR (unversioned service)",
+    "organization": "Google",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "google-docai-ocr-product",
+    "evidence_note": "No comparable core score verified; processor generation is not pinned.",
+    "configuration": "Enterprise Document OCR processor; no layout/form parser or premium add-on assumed"
+  },
+  {
     "id": "got-ocr",
     "name": "GOT OCR",
     "release_date": "2024-01-01",
@@ -475,6 +509,31 @@
     "organization": "OpenAI"
   },
   {
+    "id": "granite-docling-258m",
+    "name": "Granite-Docling-258M",
+    "organization": "IBM Research",
+    "access": "open",
+    "release_date": "2025-09-17",
+    "release_provenance": "release_announcement",
+    "source_id": "granite-docling-card",
+    "evidence_note": "FinTabNet table evidence is task-specific; card OCR tables do not pin a core dataset split.",
+    "release_source_id": "granite-docling-card",
+    "configuration": "Full-page DocTags model; table task is separately identified",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "hiro-moss-ocr-0-3b",
+    "name": "Hiro-MOSS-OCR-0.3B",
+    "organization": "PatSnap",
+    "access": "open",
+    "release_date": "2026-05-26",
+    "release_provenance": "release_announcement",
+    "source_id": "hiro-moss-card",
+    "evidence_note": "Assisted OmniDoc recognition; not equivalent to unassisted full-page document parsing.",
+    "release_source_id": "hiro-moss-card",
+    "configuration": "Task-specific text/table/math recognition with ground-truth layouts"
+  },
+  {
     "id": "hunyuanocr",
     "name": "HunyuanOCR",
     "release_date": "2025-11-30",
@@ -523,6 +582,19 @@
     "organization": null
   },
   {
+    "id": "jina-ocr-v1",
+    "name": "Jina-OCR-v1",
+    "organization": "Jina AI",
+    "access": "open",
+    "release_date": "2026-09-14",
+    "release_provenance": "release_announcement",
+    "source_id": "jina-ocr-v1-release",
+    "evidence_note": "Author-reported core scores; publicly announced weights date, not Hub repository creation date.",
+    "release_source_id": "jina-ocr-v1-release",
+    "configuration": "Public checkpoint; default dynamic resolution and strict benchmark prompt",
+    "license": "CC-BY-NC-4.0"
+  },
+  {
     "id": "kimi-k2-5",
     "name": "Kimi K2.5",
     "release_date": "2026-01-31",
@@ -555,6 +627,45 @@
     "organization": null
   },
   {
+    "id": "lightonocr-3-0.8b",
+    "name": "LightOnOCR-3-0.8B",
+    "organization": "LightOn AI",
+    "access": "open",
+    "release_date": "2026-10-08",
+    "release_provenance": "release_announcement",
+    "source_id": "lightonocr-3-0.8b-card",
+    "evidence_note": "One verified core family (olmOCR); ParseBench and French author evaluations remain secondary. Release date from the October 8 release announcement.",
+    "release_source_id": "lightonocr-3-report",
+    "configuration": "Exact size; author evaluation with published postprocessing",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "lightonocr-3-1b",
+    "name": "LightOnOCR-3-1B",
+    "organization": "LightOn AI",
+    "access": "open",
+    "release_date": "2026-10-08",
+    "release_provenance": "release_announcement",
+    "source_id": "lightonocr-3-1b-card",
+    "evidence_note": "One verified core family (olmOCR); ParseBench and French author evaluations remain secondary. Release date from the October 8 release announcement.",
+    "release_source_id": "lightonocr-3-report",
+    "configuration": "Exact size; author evaluation with published postprocessing",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "lightonocr-3-4b",
+    "name": "LightOnOCR-3-4B",
+    "organization": "LightOn AI",
+    "access": "open",
+    "release_date": "2026-10-08",
+    "release_provenance": "release_announcement",
+    "source_id": "lightonocr-3-4b-card",
+    "evidence_note": "One verified core family (olmOCR); ParseBench and French author evaluations remain secondary. Release date from the October 8 release announcement.",
+    "release_source_id": "lightonocr-3-report",
+    "configuration": "Exact size; author evaluation with published postprocessing",
+    "license": "Apache-2.0"
+  },
+  {
     "id": "llama-3-2-vision-11b",
     "name": "Llama-3.2-Vision-11B",
     "release_date": null,
@@ -571,12 +682,28 @@
     "organization": null
   },
   {
+    "id": "llamaparse-agentic-plus",
+    "name": "LlamaParse Agentic Plus",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "access": "closed",
+    "organization": "LlamaIndex"
+  },
+  {
     "id": "llamaparse-cost-effective",
     "name": "LlamaParse Cost Effective",
     "release_date": null,
     "release_provenance": "unknown",
     "access": "closed",
     "organization": null
+  },
+  {
+    "id": "llamaparse-fast",
+    "name": "LlamaParse Fast",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "access": "closed",
+    "organization": "LlamaIndex"
   },
   {
     "id": "logics-parsing-v2",
@@ -617,6 +744,17 @@
     "release_provenance": "legacy_import",
     "access": "unknown",
     "organization": "Datalab"
+  },
+  {
+    "id": "mathpix-ocr",
+    "name": "Mathpix OCR API (unversioned service)",
+    "organization": "Mathpix",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "mathpix-ocr-product",
+    "evidence_note": "Formula subset evidence only; the old benchmark does not pin the current API model.",
+    "configuration": "Hosted service; historical formula evaluation generation unspecified"
   },
   {
     "id": "mineru-2-5-4",
@@ -851,6 +989,19 @@
     "organization": null
   },
   {
+    "id": "nemotron-parse-2",
+    "name": "NVIDIA Nemotron Parse 2.0",
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2026-08-03",
+    "release_provenance": "release_announcement",
+    "source_id": "nemotron-parse-2-card",
+    "evidence_note": "Public benchmark/task measurements available; no verified aggregate core coverage.",
+    "release_source_id": "nemotron-parse-2-card",
+    "configuration": "Equal-weight soup: checkpoints 58k, 60k, 62k, 64k, 66k",
+    "license": "OpenMDW-1.1"
+  },
+  {
     "id": "ocrflux-3b",
     "name": "OCRFlux-3B",
     "release_date": "2025-08-31",
@@ -992,10 +1143,31 @@
   {
     "id": "polyocr-2-7b",
     "name": "PolyOCR-2.7B",
-    "release_date": "2026-09-29",
-    "release_provenance": "report",
+    "release_date": null,
+    "release_provenance": "weights_unreleased",
     "access": "unreleased",
-    "organization": "Ant Group"
+    "organization": "Ant Group",
+    "release_source_id": "poly-release"
+  },
+  {
+    "id": "polyocr-9b",
+    "name": "PolyOCR-9B",
+    "release_date": null,
+    "release_provenance": "weights_unreleased",
+    "release_source_id": "poly-release",
+    "access": "unreleased",
+    "organization": "Ant Group",
+    "configuration": "direct full-page parsing"
+  },
+  {
+    "id": "polyocr-9b-layout",
+    "name": "PolyOCR-9B + PP-DocLayoutV3",
+    "release_date": null,
+    "release_provenance": "weights_unreleased",
+    "release_source_id": "poly-release",
+    "access": "unreleased",
+    "organization": "Ant Group",
+    "configuration": "PP-DocLayoutV3 pipeline"
   },
   {
     "id": "pp-structurev3",
@@ -1214,6 +1386,18 @@
     "organization": null
   },
   {
+    "id": "smoldocling-256m-preview",
+    "name": "SmolDocling-256M-preview",
+    "organization": "Docling project",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "smoldocling-card",
+    "evidence_note": "Task-specific FinTabNet evidence; weights release date unknown.",
+    "configuration": "Exact preview checkpoint; DocTags output",
+    "license": "Apache-2.0"
+  },
+  {
     "id": "step3-vl",
     "name": "Step3-VL",
     "release_date": "2026-01-31",
@@ -1246,6 +1430,18 @@
     "organization": "Baidu"
   },
   {
+    "id": "tesseract",
+    "name": "Tesseract (unversioned engine)",
+    "organization": "Tesseract project",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "tesseract-project",
+    "evidence_note": "Catalog entry: no matched full-page parsing score verified in this audit.",
+    "configuration": "Version, language traineddata and page-segmentation mode unpinned",
+    "license": "Apache-2.0"
+  },
+  {
     "id": "unlimited-ocr",
     "name": "Unlimited-OCR",
     "release_date": "2026-06-30",
@@ -1272,10 +1468,12 @@
   {
     "id": "xiaomi-ocr-0",
     "name": "Xiaomi-OCR-0",
-    "release_date": "2026-09-28",
-    "release_provenance": "technical_report",
+    "release_date": "2026-09-30",
+    "release_provenance": "model_card",
     "access": "open",
-    "organization": "Xiaomi"
+    "organization": "Xiaomi",
+    "release_source_id": "xiaomi-weights",
+    "license": "Apache-2.0"
   },
   {
     "id": "youtu-parsing",

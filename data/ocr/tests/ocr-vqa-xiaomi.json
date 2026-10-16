@@ -1,0 +1,16 @@
+{
+  "id": "ocr-vqa-xiaomi",
+  "label": "Five OCR-VQA tasks · Xiaomi paper mean",
+  "short": "OCR-VQA",
+  "source": "xiaomi-paper",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "ocr-vqa-xiaomi",
+  "min_models": 6,
+  "min_organizations": 3,
+  "scope": "Arithmetic mean of DocVQA, InfoVQA, ChartQA, OCRBench and TextVQA; splits not pinned in summary",
+  "note": "Author-paper comparison; task/split is separate from full-page parsing. Excluded from aggregate and primary coverage."
+}

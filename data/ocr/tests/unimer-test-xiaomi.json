@@ -1,0 +1,16 @@
+{
+  "id": "unimer-test-xiaomi",
+  "label": "UniMER-Test · Xiaomi paper comparison",
+  "short": "UniMER",
+  "source": "xiaomi-paper",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "unimer-test-xiaomi",
+  "min_models": 6,
+  "min_organizations": 3,
+  "scope": "23,757 real-world mathematical expressions",
+  "note": "Author-paper comparison; task/split is separate from full-page parsing. Excluded from aggregate and primary coverage."
+}

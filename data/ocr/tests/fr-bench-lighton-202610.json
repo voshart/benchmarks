@@ -1,0 +1,15 @@
+{
+  "id": "fr-bench-lighton-202610",
+  "label": "fr-bench-pdf2md · LightOn run",
+  "short": "French",
+  "source": "lightonocr-3-report",
+  "family": "fr-bench",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Eight document categories; corpus revision not pinned",
+  "configuration": "Author release evaluation/postprocessing",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}

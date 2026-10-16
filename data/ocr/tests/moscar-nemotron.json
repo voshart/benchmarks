@@ -1,0 +1,15 @@
+{
+  "id": "moscar-nemotron",
+  "label": "MOSCAR multilingual · NVIDIA card",
+  "short": "MOSCAR",
+  "source": "nemotron-parse-2-card",
+  "family": "moscar",
+  "primary_metric": "boc_f1",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "Model-card evaluation; exact corpus revision not pinned",
+  "configuration": "Five-checkpoint equal-weight soup; separate from LightOn ParseBench run",
+  "note": "Secondary only; no aggregate rank or primary coverage vote."
+}
