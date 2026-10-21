@@ -1,0 +1,10 @@
+{
+  "id": "fermion-ls-other-speed",
+  "label": "Fermion CPU LibriSpeech test-other",
+  "task": "throughput",
+  "family": "fermion-throughput",
+  "core": false,
+  "source": "fermion-phonon-2-launch",
+  "unit": "audio_seconds_per_wall_second",
+  "note": "All 2,939 LibriSpeech test-other clips; one stream; log-mel included and model load excluded. Not the same workload as the 20 Mac dictations."
+}

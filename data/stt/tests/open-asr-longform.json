@@ -1,0 +1,78 @@
+{
+  "id": "open-asr-longform",
+  "label": "CORAAL / long-form",
+  "short": "CORAAL / long-form",
+  "task": "transcription",
+  "family": "coraal",
+  "core": true,
+  "primary": true,
+  "source": "open-asr-longform-2026-10-17",
+  "metrics": [
+    {
+      "id": "coraal",
+      "short": "CORAAL",
+      "label": "CORAAL",
+      "source_column": "coraal_avg",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "bezzam/coraal",
+        "config": null,
+        "split": "entire corpus",
+        "revision": null
+      }
+    },
+    {
+      "id": "earnings21",
+      "short": "Earnings21",
+      "label": "Earnings21",
+      "source_column": "earnings21",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": false,
+      "dataset": {
+        "repository": "hf-audio/asr-leaderboard-longform",
+        "config": "earnings21",
+        "split": "test",
+        "revision": null
+      }
+    },
+    {
+      "id": "earnings22",
+      "short": "Earnings22",
+      "label": "Earnings22",
+      "source_column": "earnings22",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": false,
+      "dataset": {
+        "repository": "hf-audio/asr-leaderboard-longform",
+        "config": "earnings22",
+        "split": "test",
+        "revision": null
+      }
+    },
+    {
+      "id": "tedlium",
+      "short": "TED-LIUM",
+      "label": "TED-LIUM",
+      "source_column": "tedlium",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": false,
+      "dataset": {
+        "repository": "hf-audio/asr-leaderboard-longform",
+        "config": "tedlium",
+        "split": "test",
+        "revision": null
+      }
+    }
+  ],
+  "mean_metrics": [],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "CORAAL is the selected core measurement: sociolinguistic interviews, entire corpus, as documented by Open ASR. Other long-form columns remain visible but do not add votes or reuse Earnings22 in another core average. Exact run operators and chunking/model revisions are unspecified in the CSV.",
+  "show_all_metrics": true,
+  "summary_metric": "coraal"
+}

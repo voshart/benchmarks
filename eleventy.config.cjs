@@ -1,6 +1,14 @@
 module.exports=function(config){
  config.addPassthroughCopy({'src/assets':'assets'});
  const rankUI=require('./src/assets/js/rank-ui.js');
+ const speech=require('./src/assets/js/speech.js');
+ const speechMatrix=require('./src/assets/js/speech-matrix.js');
+ config.addFilter('speechHead',speech.renderHead);
+ config.addFilter('speechRows',speech.renderRows);
+ config.addFilter('speechMatrixHead',speechMatrix.renderHead);
+ config.addFilter('speechMatrixRows',speechMatrix.renderRows);
+ config.addFilter('speechTiming',speechMatrix.renderTiming);
+ config.addFilter('rate',value=>typeof value==='number'&&Number.isFinite(value)?value.toFixed(6).replace(/0+$/,'').replace(/\.$/,''):'—');
  config.addFilter('rankCell',rankUI.renderRank);
  config.addFilter('scoreTooltip',rankUI.scoreTooltip);
  config.addWatchTarget('data/');

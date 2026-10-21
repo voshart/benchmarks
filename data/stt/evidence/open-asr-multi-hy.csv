@@ -1,0 +1,18 @@
+model,RTFx,FLEURS WER,MCV WER,Size (B)
+assemblyai/universal-3-5-pro,,45.23,50.38,
+facebook/mms-1b-all,973.6,13.43,26.57,0.96
+facebook/omniASR-CTC-1B-v2,763.86,9.55,16.83,
+facebook/omniASR-CTC-300M-v2,1084.19,18.13,27.79,
+facebook/omniASR-CTC-3B-v2,527.63,6.49,12,
+facebook/omniASR-CTC-7B-v2,310.88,5.88,12.04,
+facebook/omniASR-LLM-1B-v2,46.83,4.74,9.98,
+facebook/omniASR-LLM-300M-v2,47.73,7.04,12.05,
+facebook/omniASR-LLM-3B-v2,45.23,4.38,9.48,
+facebook/omniASR-LLM-7B-v2,42.55,3.61,10.04,
+facebook/seamless-m4t-v2-large,91.56,6.36,11.61,1.5
+gemini/gemini-3.5-transcribe,,4.79,11.74,
+modulate/multilingual,,43.84,57.43,
+nvidia/stt_hy_fastconformer_hybrid_large_pc,2879.4,6.8,4.94,0.11
+openai/whisper-large-v3,73.36,43.03,57.04,
+elevenlabs/scribe_v2,,3.22,7.6,
+openai/gpt-transcribe,,7.23,12.21,

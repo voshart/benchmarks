@@ -1,0 +1,11 @@
+{
+  "id": "moonshine-response-latency",
+  "label": "Moonshine paper response latency",
+  "task": "latency",
+  "family": "runtime-latency",
+  "core": false,
+  "primary": false,
+  "source": "moonshine-v2-paper",
+  "unit": "milliseconds",
+  "note": "End-of-utterance to returned transcript; Apple MacBook M3, live transcription, paper Table 2. Statistic and exact test utterance set are unspecified. Not TTFT, p50/p95, throughput or a core accuracy family."
+}

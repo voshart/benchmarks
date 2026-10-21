@@ -10,9 +10,10 @@
   const rankable = observation => observed(observation) && observation.evidence !== 'vendor_internal' && observation.comparable !== false;
   const evidenceOrder = {official:0, third_party:1, community:2, author_reported:3, vendor_comparison:4, vendor:4, mixed:5, research:5, imported:6, secondary:7, vendor_internal:8};
 
-  function choose(data, model, test) {
+  function choose(data, model, test, preferPublication=false) {
+    const priority = observation => evidenceOrder[preferPublication ? data.sources?.[observation.source_id]?.kind || observation.evidence : observation.evidence] ?? 6;
     return (data.resultsByKey[model + '|' + test] || []).filter(observed).slice()
-      .sort((a, b) => (evidenceOrder[a.evidence] ?? 6) - (evidenceOrder[b.evidence] ?? 6))[0] || null;
+      .sort((a, b) => priority(a)-priority(b))[0] || null;
   }
 
   function latestByLine(rows) {

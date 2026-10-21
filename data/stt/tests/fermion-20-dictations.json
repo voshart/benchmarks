@@ -1,0 +1,10 @@
+{
+  "id": "fermion-20-dictations",
+  "label": "Fermion 20 dictations",
+  "task": "throughput",
+  "family": "fermion-throughput",
+  "core": false,
+  "source": "fermion-phonon-2-launch",
+  "unit": "audio_seconds_per_wall_second",
+  "note": "20 dictations; 797 seconds of speech; exact recordings not published. One stream at a time; runtime defaults; log-mel included and model load excluded."
+}

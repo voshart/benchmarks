@@ -1,0 +1,11 @@
+{
+  "id": "handy-single-clip-speed",
+  "label": "transcribe.cpp fixed-clip speed",
+  "task": "throughput",
+  "family": "runtime-throughput",
+  "core": false,
+  "primary": false,
+  "source": "handy-protocol",
+  "unit": "audio_seconds_per_wall_second",
+  "note": "Published Q8_0 wall-time RTFx on jfk (11s) and dots (35.332s), exact hardware/backend/engine revision per row. Tiny speed checks; not dataset accuracy or aggregate votes. Warm-load inference excludes model loading."
+}

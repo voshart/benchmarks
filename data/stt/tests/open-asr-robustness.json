@@ -1,0 +1,62 @@
+{
+  "id": "open-asr-robustness",
+  "label": "Noise / English accent",
+  "short": "Noise / English accent",
+  "task": "transcription",
+  "family": "open-asr-english",
+  "core": false,
+  "primary": false,
+  "source": "open-asr-2026-10-17",
+  "metrics": [
+    {
+      "id": "urgent24",
+      "short": "URGENT24 noise",
+      "label": "URGENT2024 noisy/reverberant test",
+      "source_column": "URGENT2024 WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "urgent2024",
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "monsoon",
+      "short": "Monsoon en-IN",
+      "label": "Voice Arena Monsoon en-IN test",
+      "source_column": "Voice Arena Monsoon WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "VoiceArena/Monsoon_en_IN_test",
+        "config": null,
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "urgent24_clean",
+      "short": "URGENT24 clean",
+      "label": "URGENT2024 clean test",
+      "source_column": "URGENT2024-Clean WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "urgent2024_clean",
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    }
+  ],
+  "mean_metrics": [],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "URGENT24 noisy and clean versions share speech; Monsoon is Indian English. Secondary detail columns from the English CSV; no extra family or aggregate vote.",
+  "summary_metric": "urgent24"
+}

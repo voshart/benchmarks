@@ -1,0 +1,136 @@
+{
+  "id": "open-asr-fleurs",
+  "label": "FLEURS · 5 languages",
+  "short": "FLEURS · 5 languages",
+  "task": "transcription",
+  "family": "multilingual",
+  "core": true,
+  "primary": true,
+  "source": "open-asr-multi-fr",
+  "metrics": [
+    {
+      "id": "fr",
+      "short": "French",
+      "label": "French",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "nithinraok/asr-leaderboard-datasets",
+        "config": "fleurs_fr",
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-fr"
+    },
+    {
+      "id": "de",
+      "short": "German",
+      "label": "German",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "nithinraok/asr-leaderboard-datasets",
+        "config": "fleurs_de",
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-de"
+    },
+    {
+      "id": "es",
+      "short": "Spanish",
+      "label": "Spanish",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "nithinraok/asr-leaderboard-datasets",
+        "config": "fleurs_es",
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-es"
+    },
+    {
+      "id": "it",
+      "short": "Italian",
+      "label": "Italian",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "nithinraok/asr-leaderboard-datasets",
+        "config": "fleurs_it",
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-it"
+    },
+    {
+      "id": "pt",
+      "short": "Portuguese",
+      "label": "Portuguese",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "nithinraok/asr-leaderboard-datasets",
+        "config": "fleurs_pt",
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-pt"
+    },
+    {
+      "id": "nl",
+      "short": "Dutch",
+      "label": "Dutch",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": false,
+      "dataset": {
+        "repository": "nithinraok/asr-leaderboard-datasets",
+        "config": "fleurs_nl",
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-nl"
+    },
+    {
+      "id": "hy",
+      "short": "Armenian",
+      "label": "Armenian",
+      "source_column": "FLEURS WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": false,
+      "dataset": {
+        "repository": "Metric-AI/open-asr-leaderboard-multilingual-datasets",
+        "config": null,
+        "split": "test",
+        "revision": null
+      },
+      "source_id": "open-asr-multi-hy"
+    }
+  ],
+  "mean_metrics": [
+    "fr",
+    "de",
+    "es",
+    "it",
+    "pt"
+  ],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "Fixed fr,de,es,it,pt test-language macro mean; every language is required. Each component retains its pinned language CSV and source. Selected multilingual core family; other language/corpus variants add no extra votes.",
+  "component_sources": true,
+  "rank_priority": 0
+}

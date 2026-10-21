@@ -1,0 +1,157 @@
+/* Speech evidence selection and rendering, shared by Eleventy and the browser. */
+(function(root, make) {
+  const api = make(typeof module === 'object' && module.exports ? require('./ranking.js') : root.BenchmarkRank);
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.BenchmarkSpeech = api;
+})(globalThis, Rank => {
+  const finite = value => typeof value === 'number' && Number.isFinite(value);
+  const observed = record => record && record.status !== 'assumed' && record.evidence !== 'assumed';
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const link = (source, label, title='') => source && /^https?:\/\//.test(source.url)
+    ? `<a href="${esc(source.url)}" target="_blank" rel="noreferrer"${title ? ` title="${esc(title)}"` : ''}>${esc(label)}</a>` : esc(label);
+  const evidenceLabel = record => !record ? 'No matched result' : ({official:'Maintainer publication', third_party:'Third-party run',
+    community:'Community record', author_reported:'Author run', vendor_comparison:'Competitor run', secondary:'Quoted leaderboard row'})[record.evidence] || 'Qualified evidence';
+
+  function selectSize(data, model) {
+    return data.sizes.filter(record => record.model === model && observed(record))
+      .slice().sort((a,b) => (a.selection_priority || 0) - (b.selection_priority || 0) || b.as_of.localeCompare(a.as_of))[0] || null;
+  }
+
+  function available(model, cutoff, snapshot) {
+    return model.release_date ? model.release_date <= cutoff : cutoff >= snapshot;
+  }
+
+  function summarize(data, test, model) {
+    const scores = Object.fromEntries(test.metrics.map(metric => [metric.id, Rank.choose(data, model, test.id + ':' + metric.id, true)]));
+    const keys = test.summary_metric ? [test.summary_metric] : test.published_mean_metric
+      ? test.metrics.filter(metric => metric.primary).map(metric => metric.id) : test.mean_metrics;
+    const selected = keys.map(key => scores[key]);
+    const complete = keys.length > 0 && selected.every(Rank.rankable);
+    const sourceIds = new Set(selected.filter(Boolean).map(record => record.source_id));
+    const matchedSources = test.component_sources
+      ? keys.every(key => scores[key]?.source_id === test.metrics.find(metric => metric.id === key)?.source_id)
+      : sourceIds.size === 1;
+    let mean = null, meanBasis = null;
+    if (complete && matchedSources) {
+      if (test.published_mean_metric) {
+        const record = Rank.choose(data, model, test.id + ':' + test.published_mean_metric, true);
+        if (Rank.rankable(record) && sourceIds.has(record.source_id)) {mean = record.value; meanBasis = 'published';}
+      } else {
+        mean = selected.reduce((sum,record) => sum + record.value, 0) / selected.length;
+        meanBasis = test.summary_metric ? 'published' : 'derived';
+      }
+    }
+    const count = test.metrics.filter(metric => metric.primary && Rank.rankable(scores[metric.id])).length;
+    const conflicts = keys.filter(key => scores[key] && (data.resultsByKey[model+'|'+test.id+':'+key] || [])
+      .some(other => Rank.rankable(other) && other.value !== scores[key].value));
+    const provenance = selected.find(Boolean) || Object.values(scores).find(Boolean) || null;
+    let summary = null;
+    if (mean != null) {
+      const unclear = selected.some(record => /^unspecified/i.test(record.measurement_operator || '') || !record.measurement_operator);
+      const qualified = selected.find(record => Rank.qualification(record));
+      summary = {...provenance, value:mean, derived:meanBasis === 'derived', source_ids:[...sourceIds],
+        evidence:qualified?.evidence || (unclear ? 'research' : provenance.evidence),
+        publication_evidence:provenance.evidence,
+        components:keys.map(key => ({metric:key, label:test.metrics.find(metric => metric.id === key).short,
+          source_id:scores[key].source_id, value:scores[key].value, evidence:scores[key].evidence, measurement_operator:scores[key].measurement_operator})),
+        provisional_reasons:conflicts.length ? [`Published observations disagree within ${test.label}: ${conflicts.join(', ')}; preferred sources are selected and alternatives preserved.`] : [],
+        note:[test.note, provenance.note].filter(Boolean).join(' ')};
+    }
+    return {scores, count, mean, meanBasis, provenance, summary, conflicts};
+  }
+
+  function selectPrice(data, model) {
+    return (data.pricing || []).filter(record => record.model === model && record.comparison_default !== false && record.verification_status === 'verified')
+      .slice().sort((a,b) => b.as_of.localeCompare(a.as_of))[0] || null;
+  }
+
+  function priceInfo(data, model) {
+    const selected = selectPrice(data, model.id);
+    if (selected) return {record:selected, label:(selected.currency === 'USD' ? '$' : selected.currency === 'EUR' ? '€' : selected.currency+' ')
+      + selected.amount.toFixed(3).replace(/0+$/,'').replace(/\.$/,'') + '†', source_id:selected.source_id,
+      note:[selected.provider,selected.mode,selected.tier,'as of '+selected.as_of,selected.note].join(' · ')};
+    const tokens = (data.tokenPricing || []).find(record => record.model === model.id);
+    if (tokens) return {label:'Token-priced†',source_id:tokens.source_id,note:'Current service token tariff; see Pricing. No audio-hour workload cost is inferred.'};
+    return {label:model.access === 'open' ? 'Self-hosted' : '—', note:model.access === 'open'
+      ? 'Compute cost depends on hardware and workload. Open weights do not imply zero processing cost.' : 'No matched hourly rate verified.'};
+  }
+
+  function sizeLabel(size) {
+    return size?.download_mb != null ? size.download_mb.toLocaleString('en-US',{maximumFractionDigits:1}) + ' MB'
+      : size?.parameters_million != null ? size.parameters_million.toLocaleString('en-US',{maximumFractionDigits:1}) + 'M params' : '—';
+  }
+
+  function build(data, options={}) {
+    const test = data.accuracyTests.find(test => test.id === options.test) || data.accuracyTests.find(test => test.id === data.config.default_test);
+    const columns = test.metrics.filter(metric => metric.primary || options.extra || test.show_all_metrics);
+    const query = (options.query || '').trim().toLowerCase();
+    const cutoff = options.cutoff || data.config.snapshot_date;
+    const rows = data.models.filter(model => available(model,cutoff,data.config.snapshot_date)).map(model => {
+      const selected = summarize(data,test,model.id);
+      const size = selectSize(data, model.id);
+      return {model, id:model.id, name:model.name, ...selected, size, rank:null,
+        familyCount:selected.count ? 1 : 0};
+    }).filter(row => (options.missing || row.count > 0)
+      && (!query || (row.name + ' ' + row.model.organization + ' ' + row.model.hub_id).toLowerCase().includes(query))
+      && (!options.access || options.access === 'all' || row.model.access === options.access)
+      && (!options.maxParams || (finite(row.size?.parameters_million) && row.size.parameters_million <= Number(options.maxParams)))
+      && (!options.maxDownload || (finite(row.size?.download_mb) && row.size.download_mb <= Number(options.maxDownload))));
+    const sort = options.sort || 'mean';
+    rows.sort((a,b) => {
+      if (sort === 'name') return a.name.localeCompare(b.name);
+      const value = row => {
+        if (sort === 'download') return row.size?.download_mb;
+        if (sort === 'params') return row.size?.parameters_million;
+        if (sort === 'price') {const price=selectPrice(data,row.id);return price?.currency === 'USD' ? price.amount : null;}
+        return row.mean;
+      };
+      const av=value(a),bv=value(b);
+      return (finite(av) ? av : Infinity) - (finite(bv) ? bv : Infinity) || a.name.localeCompare(b.name);
+    });
+    return {test, columns, rows, mode:'protocol'};
+  }
+
+  function renderHead(result) {
+    return '<th scope="col">Model</th><th scope="col">Download / params</th><th scope="col">'
+      + (result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
+        : result.test.published_mean_metric ? 'Reported mean WER ↓' : 'Fixed '+result.test.mean_metrics.length+' mean WER ↓') + '</th>'
+      + result.columns.map(metric => `<th scope="col" title="${esc(metric.label)} · ${metric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER'} %, lower is better">${esc(metric.short)}</th>`).join('')
+      + '<th scope="col">Evidence</th>';
+  }
+
+  function renderRows(result, data) {
+    if (!result.rows.length) return `<tr><td colspan="${result.columns.length + 4}">No models match these filters.</td></tr>`;
+    return result.rows.map(row => {
+      const source = data.sources[row.provenance?.source_id];
+      const infoId = 'speech-evidence-' + result.test.id + '-' + row.id;
+      const modelNote = [row.model.configuration, row.model.release_date ? 'Released ' + row.model.release_date : 'Exact release date unverified'].filter(Boolean).join(' · ');
+      const sizeText = sizeLabel(row.size);
+      const meanTitle = row.mean == null ? 'Every required comparable measurement and matched source is required.'
+        : row.meanBasis === 'published' ? 'Exactly as reported by this source. Not an aggregate rank.'
+        : 'Arithmetic mean of the '+result.test.mean_metrics.length+' named WER columns, calculated here. Not the current Open ASR default average or an aggregate rank. Extra columns never change this panel.';
+      const details = `<div id="${esc(infoId)}" class="rank-note" popover><button type="button" class="rank-note-close" popovertarget="${esc(infoId)}" popovertargetaction="hide" aria-label="Close evidence explanation">×</button>`
+        + `<strong>${esc(row.name)} · ${esc(evidenceLabel(row.provenance))}</strong><p>${esc(modelNote)}</p>`
+        + (row.provenance ? `<p>Exact source row: ${esc(row.provenance.source_model)}. Measurement operator: ${esc(row.provenance.measurement_operator)}. ${esc(row.provenance.note)}</p>` : '')
+        + `<p>${esc(result.test.note)}</p>`
+        + (source ? `<p>${link(source, source.title)}. ${esc(source.note)}</p>` : '')
+        + (row.size ? `<p>${link(data.sources[row.size.source_id], 'Size source')}: ${esc(row.size.note)}</p>` : '')
+        + '</div>';
+      const cells = result.columns.map(metric => {
+        const record = row.scores[metric.id];
+        if (!record) return '<td class="score">—</td>';
+        const alternatives = (data.resultsByKey[row.id + '|' + result.test.id + ':' + metric.id] || [])
+          .filter(other => observed(other) && finite(other.value) && other.source_id !== record.source_id)
+          .map(other => `${other.value}% (${evidenceLabel(other)}; ${data.sources[other.source_id]?.title || other.source_id})`);
+        const tooltip = [metric.label, (metric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' %, lower is better', evidenceLabel(record), 'Measurement operator: ' + record.measurement_operator,
+          record.note, alternatives.length ? 'Other observations: ' + alternatives.join('; ') : ''].filter(Boolean).join(' · ');
+        return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
+      }).join('');
+      return `<tr><th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}</th>`
+        + `<td>${row.size ? link(data.sources[row.size.source_id], sizeText, row.size.note) : sizeText}</td>`
+        + `<td class="index" title="${esc(meanTitle)}">${row.mean == null ? '—' : row.mean.toFixed(2)}</td>${cells}`
+        + `<td>${esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">†</button>${details}</td></tr>`;
+    }).join('');
+  }
+
+  return {build, summarize, available, selectSize, sizeLabel, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
+});

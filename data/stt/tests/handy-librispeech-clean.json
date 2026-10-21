@@ -1,0 +1,32 @@
+{
+  "id": "handy-librispeech-clean",
+  "label": "GGUF Q8 · Libri clean",
+  "short": "GGUF Q8 · Libri clean",
+  "task": "transcription",
+  "family": "open-asr-english",
+  "core": false,
+  "primary": false,
+  "source": "handy-protocol",
+  "metrics": [
+    {
+      "id": "wer",
+      "short": "GGUF Q8 · Libri clean",
+      "label": "GGUF Q8 · Libri clean",
+      "source_column": "err_pct",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "openslr/librispeech_asr",
+        "config": "clean",
+        "split": "test-clean",
+        "revision": null
+      }
+    }
+  ],
+  "mean_metrics": [],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "Pinned transcribe.cpp Q8_0 conversion results. Distinct model configurations from upstream weights. Standard benchmark, secondary variant: does not add an extra family beside the primary FLEURS or English panel. Per-row CI, sample count, batch size, run provenance and engine revision remain in the data.",
+  "summary_metric": "wer"
+}

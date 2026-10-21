@@ -1,0 +1,32 @@
+{
+  "id": "open-asr-monsoon-hi",
+  "label": "Monsoon Hindi · OI-WER",
+  "short": "Monsoon Hindi · OI-WER",
+  "task": "transcription",
+  "family": "monsoon-hi",
+  "core": false,
+  "primary": false,
+  "source": "open-asr-multi-hi",
+  "metrics": [
+    {
+      "id": "hi",
+      "short": "Hindi OI-WER",
+      "label": "Hindi OI-WER",
+      "source_column": "Monsoon WER",
+      "unit": "oiwer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "VoiceArena/Monsoon_hi_test",
+        "config": null,
+        "split": "test",
+        "revision": null
+      }
+    }
+  ],
+  "mean_metrics": [],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "Public VoiceArena/Monsoon_hi_test, test split. Hindi uses lattice references and the voi-oiwer orthographic-variant scorer, not flattened-reference standard WER. The public Monsoon WER CSV column is preserved; no private Hindi average is inferred. Secondary evidence, outside core ranking.",
+  "summary_metric": "hi"
+}

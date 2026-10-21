@@ -1,0 +1,10 @@
+{
+  "id": "fermion-seven-set-speed",
+  "label": "Fermion GPU seven-set workload",
+  "task": "throughput",
+  "family": "fermion-throughput",
+  "core": false,
+  "source": "fermion-phonon-2-launch",
+  "unit": "audio_seconds_per_wall_second",
+  "note": "Seven English sets as named in the launch report; exact dataset versions unspecified. Log-mel included and model load excluded; batch size is recorded per observation."
+}

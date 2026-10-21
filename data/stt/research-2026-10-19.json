@@ -1,0 +1,40 @@
+{
+  "verified_on": "2026-10-19",
+  "scope": "Initial English open-weight evidence index, prioritizing Phonon-2 and small ASR models. Public source research only; no local model evaluation was performed.",
+  "added_models": [
+    "phonon-2",
+    "phonon-1",
+    "parakeet-redux",
+    "canary-180m-flash",
+    "niagara-9m-batch-en",
+    "niagara-19m-batch-en",
+    "niagara-38m-batch-en",
+    "niagara-84m-batch-en",
+    "parakeet-tdt-0-6b-v3",
+    "whisper-large-v3-turbo",
+    "qwen3-asr-0-6b-hf",
+    "qwen3-asr-1-7b-hf",
+    "granite-speech-5-0-470m-turboctc",
+    "voxtral-mini-4b-realtime-2602",
+    "nemotron-3-5-asr-streaming-0-6b"
+  ],
+  "maintainer_observations": 12,
+  "launch_observations": 8,
+  "primary_source_revision": "e85ed601d17ab0e008721a19fc9cba36b4ee9c9c",
+  "caveats": [
+    "The maintainer CSV and Fermion launch table differ: Phonon-2 AMI 9.32 vs 9.37 and LS clean 1.73 vs 1.72; Parakeet v3 VoxPopuli 3.05 vs 3.19. Keep both protocols and their labels.",
+    "The CSV avg column does not mean Fermion's original seven-set panel. Only explicit per-dataset columns are imported. The UI seven-column mean is derived and never saved as a measured result.",
+    "Both accuracy tables belong to one evidence family; split count is not evidence-family coverage. There is no aggregate rank.",
+    "Maintainer publication does not identify every run operator or establish independent reproduction.",
+    "A download in MB, a parameter count, an installed package and peak runtime memory are distinct. Voxtral's parameter-derived 8,000 MB estimate is excluded from observed sizes.",
+    "Do not apply the original Qwen3-ASR release date to a later -hf conversion; unknown exact release dates remain null. No Hub repository creation date is used as release evidence.",
+    "The separate Phonon-1 model card reports an eight-set evaluation and other WER values; it is not merged into the seven-set Phonon-2 launch table.",
+    "Mac, CPU and NVIDIA batch throughput use different workloads and runtimes. No streaming latency, USD per audio hour, energy or RAM values are inferred."
+  ],
+  "next_evidence": [
+    "Matched Moonshine and Whisper tiny/base measurements on a pinned shared protocol.",
+    "Independent noise/accent, long-form, multilingual and silence/hallucination evaluations with exact checkpoint and scorer revisions.",
+    "Same-machine measurements of real-time factor, p50/p95 streaming latency, cold/warm starts and peak RAM; keep batch and single-stream modes distinct.",
+    "Hosted reference models with pinned generation and direct USD per audio hour tariffs; do not substitute open-weight results or convert token prices without an observed workload."
+  ]
+}

@@ -1,6 +1,6 @@
 # Voshart Benchmarks
 
-Small data-driven benchmark pages. Eleventy generates static HTML; a dependency-free JavaScript module progressively enhances sorting, filters, and release-date replay. Designed to publish at `bench.voshart.com/ocr/` via Cloudflare Pages.
+Small data-driven benchmark pages for [OCR](https://bench.voshart.com/ocr/) and speech-to-text (`/stt/`). Eleventy generates static HTML; dependency-free JavaScript progressively enhances sorting, filters and release-date replay. Designed to publish at `bench.voshart.com` via Cloudflare Pages.
 
 ## Local use
 
@@ -32,6 +32,16 @@ The historical slider uses *model release dates* to choose eligible generations,
 ## Evidence rules
 
 The dashboard is an index of third-party and author-reported research, not a single reproducible test harness. Do not silently merge OmniDoc v1.5, v1.6 English subset and v1.6 full. Do not equate NDI's MDP component with official MDP *private*. Never infer PolyOCR's private score from its public score. A hosted product and open weights are different deployments; assumed floors must stay outside source selection, coverage, maturity and ranking.
+
+## Speech-to-text
+
+The `/stt/` page contains **172 model configurations, 975 accuracy source rows across 11 protocols, 464 throughput measurements, nine latency observations, nine hourly tariffs and two token-rate configurations**. Its Matrix, English, Long-form, Multilingual, Noise & accent, Small models, New research, Secondary, Local speed, Latency and Pricing views share OCR's styling and core evidence policy. Search, access/coverage/download/parameter filters and verified-release replay work in the browser; the default matrix is rendered statically. Speech identities use `topics: ["stt"]` and stay outside OCR cohorts.
+
+Sources include the [64-row English CSV](https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results/blob/e85ed601d17ab0e008721a19fc9cba36b4ee9c9c/english_short_latest.csv), [27-row long-form CSV](https://huggingface.co/datasets/hf-audio/leaderboard_longform/blob/4f164c2c904b630d9777323b5d2e7f1f549d0143/longform_latest.csv), eight pinned language tables, the [transcribe.cpp runtime catalog](https://github.com/handy-computer/transcribe.cpp/tree/9f102d1ab18d01c0e21f9b3465531360c888251d/catalog), [Moonshine v2 paper](https://arxiv.org/html/2602.12241v1) and [Fermion launch report](https://www.fermionresearch.com/research/phonon-2/). Original/open/hosted/quantized generations remain separate. Phonon-2's 164 MB original package is distinct from its 739,508,608-byte GGUF Q8_0 conversion; neither inherits the other's measurements. Source rows retain CI95, sample count, batch size, engine revision and execution attribution where reported.
+
+Speech ranking explicitly selects three disjoint core families: the fixed seven-set English panel, CORAAL alone from long-form, and five-language FLEURS. Other long-form corpora, MCV/MLS, extra languages, author versions, GGUF variants and tiny speed checks add no extra votes. Maturity stays six configurations across three organizations; two families permit a provisional index and three remove only the coverage qualification. Unknown execution operators, conflicting observations and undated model availability qualify own and dependent cohort indices, with accessible ◊ explanations. A lone family stays unranked, including original Phonon-2, which is discoverable in Small models/New research. OCR data and ranking behavior are unchanged.
+
+Prices retain currency, provider, tier, service mode and date. Gladia stays in EUR; no exchange rate is assumed. Soniox's actual audio/text token tariffs remain separate from estimated hourly equivalents. Hosted Mistral Transcribe 2602 does not borrow the open Realtime 4B result. Historical views use verified model availability; most conversion dates remain unknown and current-only. Hindi Monsoon retains lattice-reference OI-WER rather than standard WER. [Speech data documentation](data/stt/README.md) gives the schema, source revisions, qualifications and remaining gaps. No transcription model was executed locally. Validation, tests and build cover both topics.
 
 ## Adding another benchmark
 

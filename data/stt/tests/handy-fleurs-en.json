@@ -1,0 +1,32 @@
+{
+  "id": "handy-fleurs-en",
+  "label": "GGUF Q8 · FLEURS English",
+  "short": "GGUF Q8 · FLEURS English",
+  "task": "transcription",
+  "family": "multilingual",
+  "core": false,
+  "primary": false,
+  "source": "handy-protocol",
+  "metrics": [
+    {
+      "id": "wer",
+      "short": "GGUF Q8 · FLEURS English",
+      "label": "GGUF Q8 · FLEURS English",
+      "source_column": "err_pct",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": "google/fleurs",
+        "config": "en_us",
+        "split": "test",
+        "revision": null
+      }
+    }
+  ],
+  "mean_metrics": [],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "Pinned transcribe.cpp Q8_0 conversion results. Distinct model configurations from upstream weights. Standard benchmark, secondary variant: does not add an extra family beside the primary FLEURS or English panel. Per-row CI, sample count, batch size, run provenance and engine revision remain in the data.",
+  "summary_metric": "wer"
+}

@@ -1,0 +1,50 @@
+{
+  "title": "Speech-to-text evidence benchmark",
+  "description": "Cross-benchmark speech recognition, release cohorts, local runtimes and documented API rates.",
+  "snapshot_date": "2026-10-19",
+  "path": "/stt/",
+  "language": "multilingual",
+  "default_test": "open-asr-english-2026-10-17",
+  "accuracy_tests": [
+    "open-asr-english-2026-10-17",
+    "open-asr-longform",
+    "open-asr-fleurs",
+    "open-asr-mcv",
+    "open-asr-mls",
+    "open-asr-robustness",
+    "open-asr-monsoon-hi",
+    "handy-fleurs-en",
+    "handy-librispeech-clean",
+    "moonshine-v2-paper",
+    "phonon-2-launch-english"
+  ],
+  "focus_model": "phonon-2",
+  "ranking": "speech-distinct-corpora-v1",
+  "ranking_note": "Mean percentile across mature English short-form, CORAAL and fixed five-language FLEURS families. Six model configurations from three organizations mature a family; one runtime variant per weights identity in reference cohorts. Two families permit a provisional index. Overlapping corpora, extra languages, tiny timing tests and private/vendor-internal tests do not create votes.",
+  "release_start": "2025-05-01",
+  "default_families": 2,
+  "min_core_for_rank": 3,
+  "min_core_for_provisional": 2,
+  "matrix_tests": [
+    "open-asr-english-2026-10-17",
+    "open-asr-longform",
+    "open-asr-fleurs"
+  ],
+  "small_tests": [
+    "open-asr-english-2026-10-17",
+    "handy-fleurs-en",
+    "handy-librispeech-clean",
+    "moonshine-v2-paper",
+    "phonon-2-launch-english"
+  ],
+  "secondary_tests": [
+    "open-asr-mcv",
+    "open-asr-mls",
+    "open-asr-robustness",
+    "open-asr-monsoon-hi",
+    "handy-fleurs-en",
+    "handy-librispeech-clean",
+    "moonshine-v2-paper",
+    "phonon-2-launch-english"
+  ]
+}

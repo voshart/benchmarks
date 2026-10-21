@@ -1482,5 +1482,2787 @@
     "release_provenance": "legacy_import",
     "access": "unknown",
     "organization": null
+  },
+  {
+    "id": "canary-180m-flash",
+    "name": "Canary 180M Flash",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-model-canary-180m-flash",
+    "hub_id": "nvidia/canary-180m-flash",
+    "license": "cc-by-4.0",
+    "configuration": "Launch-table accuracy is a leaderboard row quoted by Fermion; no matching current maintainer row is imported."
+  },
+  {
+    "id": "granite-speech-5-0-470m-turboctc",
+    "name": "Granite Speech 5.0 470M TurboCTC",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": "2026-08-25",
+    "release_provenance": "verified",
+    "source_id": "stt-model-granite-speech-5-0-470m-turboctc",
+    "hub_id": "ibm-granite/granite-speech-5.0-470m-turboctc",
+    "license": "apache-2.0",
+    "configuration": "Apache-2.0 TurboCTC checkpoint; the -nc checkpoint is a distinct model and is not substituted.",
+    "release_source_id": "stt-model-granite-speech-5-0-470m-turboctc"
+  },
+  {
+    "id": "nemotron-3-5-asr-streaming-0-6b",
+    "name": "Nemotron 3.5 ASR Streaming 0.6B",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2026-06-04",
+    "release_provenance": "verified",
+    "source_id": "stt-model-nemotron-3-5-asr-streaming-0-6b",
+    "hub_id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "license": "OpenMDW-1.1",
+    "configuration": "Exact Nemotron 3.5 generation; offline short-form scoring does not establish streaming latency.",
+    "release_source_id": "stt-model-nemotron-3-5-asr-streaming-0-6b"
+  },
+  {
+    "id": "niagara-19m-batch-en",
+    "name": "Niagara 19M batch.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Applied Brain Research",
+    "access": "open",
+    "release_date": "2026-04-15",
+    "release_provenance": "verified",
+    "source_id": "stt-model-niagara-19m-batch-en",
+    "hub_id": "abr-ai/niagara-19m-batch.en",
+    "license": "applied-brain-research-open-license",
+    "configuration": "Exact public non-causal batch.en model; the commercial streaming model is a different deployment.",
+    "release_source_id": "stt-model-niagara-19m-batch-en"
+  },
+  {
+    "id": "niagara-38m-batch-en",
+    "name": "Niagara 38M batch.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Applied Brain Research",
+    "access": "open",
+    "release_date": "2026-04-15",
+    "release_provenance": "verified",
+    "source_id": "stt-model-niagara-38m-batch-en",
+    "hub_id": "abr-ai/niagara-38m-batch.en",
+    "license": "applied-brain-research-open-license",
+    "configuration": "Exact public non-causal batch.en model; the commercial streaming model is a different deployment.",
+    "release_source_id": "stt-model-niagara-38m-batch-en"
+  },
+  {
+    "id": "niagara-84m-batch-en",
+    "name": "Niagara 84M batch.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Applied Brain Research",
+    "access": "open",
+    "release_date": "2026-09-12",
+    "release_provenance": "verified",
+    "source_id": "stt-model-niagara-84m-batch-en",
+    "hub_id": "abr-ai/niagara-84m-batch.en",
+    "license": "applied-brain-research-open-license",
+    "configuration": "Exact public non-causal batch.en model; the commercial streaming model is a different deployment.",
+    "release_source_id": "stt-model-niagara-84m-batch-en"
+  },
+  {
+    "id": "niagara-9m-batch-en",
+    "name": "Niagara 9M batch.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Applied Brain Research",
+    "access": "open",
+    "release_date": "2026-09-11",
+    "release_provenance": "verified",
+    "source_id": "stt-model-niagara-9m-batch-en",
+    "hub_id": "abr-ai/niagara-9m-batch.en",
+    "license": "applied-brain-research-open-license",
+    "configuration": "Exact public non-causal batch.en model; the commercial streaming model is a different deployment.",
+    "release_source_id": "stt-model-niagara-9m-batch-en"
+  },
+  {
+    "id": "parakeet-redux",
+    "name": "Parakeet Redux",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moondream",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-model-parakeet-redux",
+    "hub_id": "moondream/parakeet-redux",
+    "license": "cc-by-4.0",
+    "configuration": "Low-bit Parakeet derivative. Only the Fermion launch comparison is imported; exact launch checkpoint revision was not reported."
+  },
+  {
+    "id": "parakeet-tdt-0-6b-v3",
+    "name": "Parakeet TDT 0.6B v3",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2025-08-14",
+    "release_provenance": "verified",
+    "source_id": "stt-model-parakeet-tdt-0-6b-v3",
+    "hub_id": "nvidia/parakeet-tdt-0.6b-v3",
+    "license": "cc-by-4.0",
+    "configuration": "Standard leaderboard configuration; fast-gpu-asr reruns are separate configurations and are not substituted.",
+    "release_source_id": "stt-model-parakeet-tdt-0-6b-v3",
+    "lineage": "stt-runtime-nvidia-parakeet-tdt-0-6b-v3",
+    "cohort_priority": 0
+  },
+  {
+    "id": "phonon-1",
+    "name": "Phonon-1",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Fermion Research",
+    "access": "open",
+    "release_date": "2026-08-28",
+    "release_provenance": "verified",
+    "source_id": "stt-model-phonon-1",
+    "hub_id": "FermionResearch/Phonon-1",
+    "license": "apache-2.0",
+    "configuration": "Low-bit Qwen3-ASR derivative; English. The Phonon-2 launch comparison is a different protocol from the eight-set Phonon-1 model card.",
+    "release_source_id": "fermion-releases"
+  },
+  {
+    "id": "phonon-2",
+    "name": "Phonon-2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Fermion Research",
+    "access": "open",
+    "release_date": "2026-09-29",
+    "release_provenance": "verified",
+    "source_id": "stt-model-phonon-2",
+    "hub_id": "FermionResearch/Phonon-2",
+    "license": "cc-by-4.0",
+    "configuration": "Low-bit Parakeet TDT 0.6B v3 derivative; English. Download size is not runtime memory.",
+    "release_source_id": "fermion-releases"
+  },
+  {
+    "id": "qwen3-asr-0-6b-hf",
+    "name": "Qwen3-ASR-0.6B-hf",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Qwen",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-model-qwen3-asr-0-6b-hf",
+    "hub_id": "Qwen/Qwen3-ASR-0.6B-hf",
+    "license": "apache-2.0",
+    "configuration": "Exact Transformers-native -hf checkpoint from the leaderboard. Its original-model release date is not assigned to this variant."
+  },
+  {
+    "id": "qwen3-asr-1-7b-hf",
+    "name": "Qwen3-ASR-1.7B-hf",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Qwen",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-model-qwen3-asr-1-7b-hf",
+    "hub_id": "Qwen/Qwen3-ASR-1.7B-hf",
+    "license": "apache-2.0",
+    "configuration": "Exact Transformers-native -hf checkpoint from the leaderboard. Its original-model release date is not assigned to this variant."
+  },
+  {
+    "id": "stt-ai4bharat-indic-conformer-600m-multilingual",
+    "name": "indic-conformer-600m-multilingual",
+    "hub_id": "ai4bharat/indic-conformer-600m-multilingual",
+    "topics": [
+      "stt"
+    ],
+    "organization": "AI4Bharat",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-hi",
+    "configuration": "Exact benchmark row: ai4bharat/indic-conformer-600m-multilingual. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-artpark-iisc-sravaani-1-0",
+    "name": "SraVaani-1.0",
+    "hub_id": "ARTPARK-IISc/SraVaani-1.0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "ARTPARK-IISc",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-hi",
+    "configuration": "Exact benchmark row: ARTPARK-IISc/SraVaani-1.0. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-assemblyai-universal-2",
+    "name": "AssemblyAI Universal-2",
+    "organization": "AssemblyAI",
+    "topics": [
+      "stt"
+    ],
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "assembly-pricing",
+    "configuration": "Current hosted Universal-2. No matched benchmark score imported.",
+    "configuration_kind": "hosted_service"
+  },
+  {
+    "id": "stt-assemblyai-universal-3-5-pro",
+    "name": "universal-3-5-pro",
+    "hub_id": "assemblyai/universal-3-5-pro",
+    "topics": [
+      "stt"
+    ],
+    "organization": "AssemblyAI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: assemblyai/universal-3-5-pro. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-assemblyai-universal-3-pro",
+    "name": "universal-3-pro",
+    "hub_id": "assemblyai/universal-3-pro",
+    "topics": [
+      "stt"
+    ],
+    "organization": "AssemblyAI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-longform-2026-10-17",
+    "configuration": "Exact benchmark row: assemblyai/universal-3-pro. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-bharatgenai-shrutam-2",
+    "name": "Shrutam-2",
+    "hub_id": "bharatgenai/Shrutam-2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "BharatGen",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-bharatgenai-shrutam-2",
+    "configuration": "Exact benchmark row: bharatgenai/Shrutam-2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-bosonai-higgs-audio-v3-stt",
+    "name": "higgs-audio-v3-stt",
+    "hub_id": "bosonai/higgs-audio-v3-stt",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Boson AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-bosonai-higgs-audio-v3-stt",
+    "configuration": "Exact benchmark row: bosonai/higgs-audio-v3-stt. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-coherelabs-cohere-transcribe-03-2026",
+    "name": "cohere-transcribe-03-2026",
+    "hub_id": "CohereLabs/cohere-transcribe-03-2026",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Cohere",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: CohereLabs/cohere-transcribe-03-2026. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-deepgram-nova-3-monolingual",
+    "name": "Deepgram Nova-3 Monolingual",
+    "organization": "Deepgram",
+    "topics": [
+      "stt"
+    ],
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "deepgram-pricing",
+    "configuration": "Current hosted Nova-3 Monolingual configuration. No matched accuracy score imported; streaming and pre-recorded prices are distinct.",
+    "configuration_kind": "hosted_service"
+  },
+  {
+    "id": "stt-deepgram-nova-3-multilingual",
+    "name": "Deepgram Nova-3 Multilingual",
+    "organization": "Deepgram",
+    "topics": [
+      "stt"
+    ],
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "deepgram-pricing",
+    "configuration": "Current hosted Nova-3 Multilingual configuration. No matched accuracy score imported; streaming and pre-recorded prices are distinct.",
+    "configuration_kind": "hosted_service"
+  },
+  {
+    "id": "stt-distil-whisper-distil-large-v3-5",
+    "name": "distil-large-v3.5",
+    "hub_id": "distil-whisper/distil-large-v3.5",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Hugging Face",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-distil-whisper-distil-large-v3-5",
+    "configuration": "Exact benchmark row: distil-whisper/distil-large-v3.5. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-edge0-ark-asr-0-6b",
+    "name": "ARK-ASR-0.6B",
+    "hub_id": "Edge0/ARK-ASR-0.6B",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Edge0",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-edge0-ark-asr-0-6b",
+    "configuration": "Exact benchmark row: Edge0/ARK-ASR-0.6B. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-edge0-ark-asr-3b",
+    "name": "ARK-ASR-3B",
+    "hub_id": "Edge0/ARK-ASR-3B",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Edge0",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-edge0-ark-asr-3b",
+    "configuration": "Exact benchmark row: Edge0/ARK-ASR-3B. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-edge0-audio8-asr-0-1b",
+    "name": "Audio8-ASR-0.1B",
+    "hub_id": "Edge0/Audio8-ASR-0.1B",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Edge0",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-edge0-audio8-asr-0-1b",
+    "configuration": "Exact benchmark row: Edge0/Audio8-ASR-0.1B. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-elevenlabs-scribe-v2",
+    "name": "scribe_v2",
+    "hub_id": "elevenlabs/scribe_v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "ElevenLabs",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: elevenlabs/scribe_v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-espnet-owsm-ctc-v4-1b",
+    "name": "owsm_ctc_v4_1B",
+    "hub_id": "espnet/owsm_ctc_v4_1B",
+    "topics": [
+      "stt"
+    ],
+    "organization": "ESPnet",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-espnet-owsm-ctc-v4-1b",
+    "configuration": "Exact benchmark row: espnet/owsm_ctc_v4_1B. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-facebook-mms-1b-all",
+    "name": "mms-1b-all",
+    "hub_id": "facebook/mms-1b-all",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-facebook-mms-1b-all",
+    "configuration": "Exact benchmark row: facebook/mms-1b-all. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-nc-4.0"
+  },
+  {
+    "id": "stt-facebook-omniasr-ctc-1b-v2",
+    "name": "omniASR-CTC-1B-v2",
+    "hub_id": "facebook/omniASR-CTC-1B-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: facebook/omniASR-CTC-1B-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-facebook-omniasr-ctc-300m-v2",
+    "name": "omniASR-CTC-300M-v2",
+    "hub_id": "facebook/omniASR-CTC-300M-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: facebook/omniASR-CTC-300M-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-facebook-omniasr-ctc-3b-v2",
+    "name": "omniASR-CTC-3B-v2",
+    "hub_id": "facebook/omniASR-CTC-3B-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: facebook/omniASR-CTC-3B-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-facebook-omniasr-ctc-7b-v2",
+    "name": "omniASR-CTC-7B-v2",
+    "hub_id": "facebook/omniASR-CTC-7B-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: facebook/omniASR-CTC-7B-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-facebook-omniasr-llm-1b-v2",
+    "name": "omniASR-LLM-1B-v2",
+    "hub_id": "facebook/omniASR-LLM-1B-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: facebook/omniASR-LLM-1B-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-facebook-omniasr-llm-300m-v2",
+    "name": "omniASR-LLM-300M-v2",
+    "hub_id": "facebook/omniASR-LLM-300M-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: facebook/omniASR-LLM-300M-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-facebook-omniasr-llm-3b-v2",
+    "name": "omniASR-LLM-3B-v2",
+    "hub_id": "facebook/omniASR-LLM-3B-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: facebook/omniASR-LLM-3B-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-facebook-omniasr-llm-7b-v2",
+    "name": "omniASR-LLM-7B-v2",
+    "hub_id": "facebook/omniASR-LLM-7B-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: facebook/omniASR-LLM-7B-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-facebook-seamless-m4t-v2-large",
+    "name": "seamless-m4t-v2-large",
+    "hub_id": "facebook/seamless-m4t-v2-large",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-facebook-seamless-m4t-v2-large",
+    "configuration": "Exact benchmark row: facebook/seamless-m4t-v2-large. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-nc-4.0"
+  },
+  {
+    "id": "stt-funaudiollm-fun-asr-nano-2512-hf",
+    "name": "Fun-ASR-Nano-2512-hf",
+    "hub_id": "FunAudioLLM/Fun-ASR-Nano-2512-hf",
+    "topics": [
+      "stt"
+    ],
+    "organization": "FunAudioLLM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-funaudiollm-fun-asr-nano-2512-hf",
+    "configuration": "Exact benchmark row: FunAudioLLM/Fun-ASR-Nano-2512-hf. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-gemini-gemini-3-5-transcribe",
+    "name": "gemini-3.5-transcribe",
+    "hub_id": "gemini/gemini-3.5-transcribe",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Google",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-hy",
+    "configuration": "Exact benchmark row: gemini/gemini-3.5-transcribe. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-gladia-solaria-3",
+    "name": "solaria-3",
+    "hub_id": "gladia/solaria-3",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Gladia",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: gladia/solaria-3. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-google-chirp",
+    "name": "chirp",
+    "hub_id": "google/chirp",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Google",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-longform-2026-10-17",
+    "configuration": "Exact benchmark row: google/chirp. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-google-gemma-4-12b-it",
+    "name": "gemma-4-12B-it",
+    "hub_id": "google/gemma-4-12B-it",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Google",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-google-gemma-4-12b-it",
+    "configuration": "Exact benchmark row: google/gemma-4-12B-it. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-google-gemma-4-e2b-it",
+    "name": "gemma-4-E2B-it",
+    "hub_id": "google/gemma-4-E2B-it",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Google",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-google-gemma-4-e2b-it",
+    "configuration": "Exact benchmark row: google/gemma-4-E2B-it. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-google-gemma-4-e4b-it",
+    "name": "gemma-4-E4B-it",
+    "hub_id": "google/gemma-4-E4B-it",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Google",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-google-gemma-4-e4b-it",
+    "configuration": "Exact benchmark row: google/gemma-4-E4B-it. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-handy-breeze-asr-25-q8-0",
+    "name": "breeze-asr-25 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "MediaTek-Research",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-breeze-asr-25",
+    "hub_id": "handy-computer/Breeze-ASR-25-gguf",
+    "upstream_hub_id": "MediaTek-Research/Breeze-ASR-25",
+    "upstream_commit": "cffe7cc",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Breeze-ASR-25-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-canary-180m-flash-q8-0",
+    "name": "canary-180m-flash · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-canary-180m-flash",
+    "hub_id": "handy-computer/canary-180m-flash-gguf",
+    "upstream_hub_id": "nvidia/canary-180m-flash",
+    "upstream_commit": "b12ab41",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/canary-180m-flash-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-canary-1b-flash-q8-0",
+    "name": "canary-1b-flash · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-canary-1b-flash",
+    "hub_id": "handy-computer/canary-1b-flash-gguf",
+    "upstream_hub_id": "nvidia/canary-1b-flash",
+    "upstream_commit": "a9a55e0",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/canary-1b-flash-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-canary-1b-q8-0",
+    "name": "canary-1b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-canary-1b",
+    "hub_id": "handy-computer/canary-1b-gguf",
+    "upstream_hub_id": "nvidia/canary-1b",
+    "upstream_commit": "1698acf",
+    "license": "cc-by-nc-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/canary-1b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-canary-1b-v2-q8-0",
+    "name": "canary-1b-v2 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-canary-1b-v2",
+    "hub_id": "handy-computer/canary-1b-v2-gguf",
+    "upstream_hub_id": "nvidia/canary-1b-v2",
+    "upstream_commit": "87bc526",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/canary-1b-v2-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-canary-qwen-2-5b-q8-0",
+    "name": "canary-qwen-2.5b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-canary-qwen-2-5b",
+    "hub_id": "handy-computer/canary-qwen-2.5b-gguf",
+    "upstream_hub_id": "nvidia/canary-qwen-2.5b",
+    "upstream_commit": "b1469e1",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/canary-qwen-2.5b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-cohere-transcribe-03-2026-q8-0",
+    "name": "cohere-transcribe-03-2026 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Cohere",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-cohere-transcribe-03-2026",
+    "hub_id": "handy-computer/cohere-transcribe-03-2026-gguf",
+    "upstream_hub_id": "CohereLabs/cohere-transcribe-03-2026",
+    "upstream_commit": "76b8b23",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/cohere-transcribe-03-2026-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-cohere-transcribe-arabic-07-2026-q8-0",
+    "name": "cohere-transcribe-arabic-07-2026 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Cohere",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-cohere-transcribe-arabic-07-2026",
+    "hub_id": "handy-computer/cohere-transcribe-arabic-07-2026-gguf",
+    "upstream_hub_id": "CohereLabs/cohere-transcribe-arabic-07-2026",
+    "upstream_commit": "0a8193c",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/cohere-transcribe-arabic-07-2026-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-fun-asr-mlt-nano-2512-q8-0",
+    "name": "fun-asr-mlt-nano-2512 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "FunAudioLLM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-fun-asr-mlt-nano-2512",
+    "hub_id": "handy-computer/Fun-ASR-MLT-Nano-2512-gguf",
+    "upstream_hub_id": "FunAudioLLM/Fun-ASR-MLT-Nano-2512",
+    "upstream_commit": "cf67a93",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Fun-ASR-MLT-Nano-2512-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-fun-asr-nano-2512-q8-0",
+    "name": "fun-asr-nano-2512 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "FunAudioLLM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-fun-asr-nano-2512",
+    "hub_id": "handy-computer/Fun-ASR-Nano-2512-gguf",
+    "upstream_hub_id": "FunAudioLLM/Fun-ASR-Nano-2512",
+    "upstream_commit": "a7088d6",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Fun-ASR-Nano-2512-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-granite-4-0-1b-speech-q8-0",
+    "name": "granite-4.0-1b-speech · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-granite-4-0-1b-speech",
+    "hub_id": "handy-computer/granite-4.0-1b-speech-gguf",
+    "upstream_hub_id": "ibm-granite/granite-4.0-1b-speech",
+    "upstream_commit": "bd87ab8",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/granite-4.0-1b-speech-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-granite-speech-4-1-2b-nar-q8-0",
+    "name": "granite-speech-4.1-2b-nar · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-granite-speech-4-1-2b-nar",
+    "hub_id": "handy-computer/granite-speech-4.1-2b-nar-gguf",
+    "upstream_hub_id": "ibm-granite/granite-speech-4.1-2b-nar",
+    "upstream_commit": "99a4df9",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/granite-speech-4.1-2b-nar-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-granite-speech-4-1-2b-plus-q8-0",
+    "name": "granite-speech-4.1-2b-plus · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-granite-speech-4-1-2b-plus",
+    "hub_id": "handy-computer/granite-speech-4.1-2b-plus-gguf",
+    "upstream_hub_id": "ibm-granite/granite-speech-4.1-2b-plus",
+    "upstream_commit": "edd3bf5",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/granite-speech-4.1-2b-plus-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-granite-speech-4-1-2b-q8-0",
+    "name": "granite-speech-4.1-2b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-granite-speech-4-1-2b",
+    "hub_id": "handy-computer/granite-speech-4.1-2b-gguf",
+    "upstream_hub_id": "ibm-granite/granite-speech-4.1-2b",
+    "upstream_commit": "8f4bb5f",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/granite-speech-4.1-2b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-granite-speech-5-0-470m-turboctc-nc-q8-0",
+    "name": "Granite Speech 5.0 470M TurboCTC NC · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-granite-speech-5-0-470m-turboctc-nc",
+    "hub_id": "handy-computer/granite-speech-5.0-470m-turboctc-nc-gguf",
+    "upstream_hub_id": "ibm-granite/granite-speech-5.0-470m-turboctc-nc",
+    "upstream_commit": "0eb7b4f",
+    "license": "cc-by-nc-sa-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/granite-speech-5.0-470m-turboctc-nc-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-granite-speech-5-0-470m-turboctc-q8-0",
+    "name": "Granite Speech 5.0 470M TurboCTC · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-granite-speech-5-0-470m-turboctc",
+    "hub_id": "handy-computer/granite-speech-5.0-470m-turboctc-gguf",
+    "upstream_hub_id": "ibm-granite/granite-speech-5.0-470m-turboctc",
+    "upstream_commit": "18ca3c1",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/granite-speech-5.0-470m-turboctc-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-medasr-q8-0",
+    "name": "medasr · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Google",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-medasr",
+    "hub_id": "handy-computer/medasr-gguf",
+    "upstream_hub_id": "google/medasr",
+    "upstream_commit": "ae1e484",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/medasr-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-moonshine-base-q8-0",
+    "name": "moonshine-base · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-moonshine-base",
+    "hub_id": "handy-computer/moonshine-base-gguf",
+    "upstream_hub_id": "UsefulSensors/moonshine-base",
+    "upstream_commit": "7a73d8d",
+    "license": "mit",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/moonshine-base-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-moonshine-streaming-medium-q8-0",
+    "name": "moonshine-streaming-medium · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-moonshine-streaming-medium",
+    "hub_id": "handy-computer/moonshine-streaming-medium-gguf",
+    "upstream_hub_id": "UsefulSensors/moonshine-streaming-medium",
+    "upstream_commit": "57b8436",
+    "license": "mit",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/moonshine-streaming-medium-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-moonshine-streaming-small-q8-0",
+    "name": "moonshine-streaming-small · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-moonshine-streaming-small",
+    "hub_id": "handy-computer/moonshine-streaming-small-gguf",
+    "upstream_hub_id": "UsefulSensors/moonshine-streaming-small",
+    "upstream_commit": "2c03650",
+    "license": "mit",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/moonshine-streaming-small-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-moonshine-streaming-tiny-q8-0",
+    "name": "moonshine-streaming-tiny · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-moonshine-streaming-tiny",
+    "hub_id": "handy-computer/moonshine-streaming-tiny-gguf",
+    "upstream_hub_id": "UsefulSensors/moonshine-streaming-tiny",
+    "upstream_commit": "f8e9dfd",
+    "license": "mit",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/moonshine-streaming-tiny-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-moonshine-tiny-q8-0",
+    "name": "moonshine-tiny · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-moonshine-tiny",
+    "hub_id": "handy-computer/moonshine-tiny-gguf",
+    "upstream_hub_id": "UsefulSensors/moonshine-tiny",
+    "upstream_commit": "390624e",
+    "license": "mit",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/moonshine-tiny-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-moss-transcribe-diarize-q8-0",
+    "name": "moss-transcribe-diarize · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenMOSS",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-moss-transcribe-diarize",
+    "hub_id": "handy-computer/MOSS-Transcribe-Diarize-gguf",
+    "upstream_hub_id": "OpenMOSS-Team/MOSS-Transcribe-Diarize",
+    "upstream_commit": "d7231bb",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/MOSS-Transcribe-Diarize-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-multitalker-parakeet-streaming-0-6b-v1-q8-0",
+    "name": "multitalker-parakeet-streaming-0.6b-v1 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-multitalker-parakeet-streaming-0-6b-v1",
+    "hub_id": "handy-computer/multitalker-parakeet-streaming-0.6b-v1-gguf",
+    "upstream_hub_id": "nvidia/multitalker-parakeet-streaming-0.6b-v1",
+    "upstream_commit": "8749fc7",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/multitalker-parakeet-streaming-0.6b-v1-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-nemotron-3-5-asr-streaming-0-6b-q8-0",
+    "name": "nemotron-3.5-asr-streaming-0.6b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-nemotron-3-5-asr-streaming-0-6b",
+    "hub_id": "handy-computer/nemotron-3.5-asr-streaming-0.6b-gguf",
+    "upstream_hub_id": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "upstream_commit": "24b151a",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/nemotron-3.5-asr-streaming-0.6b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-nemotron-speech-streaming-en-0-6b-q8-0",
+    "name": "nemotron-speech-streaming-en-0.6b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-nemotron-speech-streaming-en-0-6b",
+    "hub_id": "handy-computer/nemotron-speech-streaming-en-0.6b-gguf",
+    "upstream_hub_id": "nvidia/nemotron-speech-streaming-en-0.6b",
+    "upstream_commit": "ef3bf40",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/nemotron-speech-streaming-en-0.6b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-orukeet-q8-0",
+    "name": "Orukeet · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "oruk",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-orukeet",
+    "hub_id": "handy-computer/orukeet-gguf",
+    "upstream_hub_id": "oruk/orukeet",
+    "upstream_commit": "b59c13a",
+    "license": "cc-by-sa-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/orukeet-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-ctc-0-6b-q8-0",
+    "name": "parakeet-ctc-0.6b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-ctc-0-6b",
+    "hub_id": "handy-computer/parakeet-ctc-0.6b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-ctc-0.6b",
+    "upstream_commit": "ad09ba1",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-ctc-0.6b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-ctc-1-1b-q8-0",
+    "name": "parakeet-ctc-1.1b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-ctc-1-1b",
+    "hub_id": "handy-computer/parakeet-ctc-1.1b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-ctc-1.1b",
+    "upstream_commit": "a707e81",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-ctc-1.1b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-primeline-q8-0",
+    "name": "parakeet-primeline · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "primeline",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-primeline",
+    "hub_id": "handy-computer/parakeet-primeline-gguf",
+    "upstream_hub_id": "primeline/parakeet-primeline",
+    "upstream_commit": "3f1a9bc",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-primeline-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-rnnt-0-6b-q8-0",
+    "name": "parakeet-rnnt-0.6b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-rnnt-0-6b",
+    "hub_id": "handy-computer/parakeet-rnnt-0.6b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-rnnt-0.6b",
+    "upstream_commit": "c0c1f09",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-rnnt-0.6b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-rnnt-1-1b-q8-0",
+    "name": "parakeet-rnnt-1.1b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-rnnt-1-1b",
+    "hub_id": "handy-computer/parakeet-rnnt-1.1b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-rnnt-1.1b",
+    "upstream_commit": "a07b19e",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-rnnt-1.1b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-tdt-0-6b-v2-q8-0",
+    "name": "parakeet-tdt-0.6b-v2 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-tdt-0-6b-v2",
+    "hub_id": "handy-computer/parakeet-tdt-0.6b-v2-gguf",
+    "upstream_hub_id": "nvidia/parakeet-tdt-0.6b-v2",
+    "upstream_commit": "1b149a3",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-tdt-0.6b-v2-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-tdt-0-6b-v3-q8-0",
+    "name": "parakeet-tdt-0.6b-v3 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-tdt-0-6b-v3",
+    "hub_id": "handy-computer/parakeet-tdt-0.6b-v3-gguf",
+    "upstream_hub_id": "nvidia/parakeet-tdt-0.6b-v3",
+    "upstream_commit": "6d590f7",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-tdt-0.6b-v3-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-tdt-1-1b-q8-0",
+    "name": "parakeet-tdt-1.1b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-tdt-1-1b",
+    "hub_id": "handy-computer/parakeet-tdt-1.1b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-tdt-1.1b",
+    "upstream_commit": "53276c6",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-tdt-1.1b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-tdt-ctc-1-1b-q8-0",
+    "name": "parakeet-tdt_ctc-1.1b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-tdt-ctc-1-1b",
+    "hub_id": "handy-computer/parakeet-tdt_ctc-1.1b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-tdt_ctc-1.1b",
+    "upstream_commit": "675e786",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-tdt_ctc-1.1b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-tdt-ctc-110m-q8-0",
+    "name": "parakeet-tdt_ctc-110m · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-tdt-ctc-110m",
+    "hub_id": "handy-computer/parakeet-tdt_ctc-110m-gguf",
+    "upstream_hub_id": "nvidia/parakeet-tdt_ctc-110m",
+    "upstream_commit": "431a349",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-tdt_ctc-110m-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-ultra-q8-0",
+    "name": "Parakeet Ultra · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "moondream",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-ultra",
+    "hub_id": "handy-computer/parakeet-ultra-gguf",
+    "upstream_hub_id": "moondream/parakeet-ultra",
+    "upstream_commit": "73175eb",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-ultra-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-parakeet-unified-en-0-6b-q8-0",
+    "name": "Parakeet Unified EN 0.6B · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-parakeet-unified-en-0-6b",
+    "hub_id": "handy-computer/parakeet-unified-en-0.6b-gguf",
+    "upstream_hub_id": "nvidia/parakeet-unified-en-0.6b",
+    "upstream_commit": "d4ac992",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/parakeet-unified-en-0.6b-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-phonon-2-q8-0",
+    "name": "Phonon-2 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "FermionResearch",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-phonon-2",
+    "hub_id": "handy-computer/phonon-2-gguf",
+    "upstream_hub_id": "FermionResearch/Phonon-2",
+    "upstream_commit": "7e153e4",
+    "license": "cc-by-4.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/phonon-2-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-qwen3-asr-0-6b-q8-0",
+    "name": "qwen3-asr-0.6b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Qwen",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-qwen3-asr-0-6b",
+    "hub_id": "handy-computer/Qwen3-ASR-0.6B-gguf",
+    "upstream_hub_id": "Qwen/Qwen3-ASR-0.6B",
+    "upstream_commit": "5eb1441",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Qwen3-ASR-0.6B-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-qwen3-asr-1-7b-q8-0",
+    "name": "qwen3-asr-1.7b · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Qwen",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-qwen3-asr-1-7b",
+    "hub_id": "handy-computer/Qwen3-ASR-1.7B-gguf",
+    "upstream_hub_id": "Qwen/Qwen3-ASR-1.7B",
+    "upstream_commit": "7278e1e",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Qwen3-ASR-1.7B-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-sensevoice-small-q8-0",
+    "name": "sensevoice-small · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "FunAudioLLM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-sensevoice-small",
+    "hub_id": "handy-computer/SenseVoiceSmall-gguf",
+    "upstream_hub_id": "FunAudioLLM/SenseVoiceSmall",
+    "upstream_commit": "3eb3b4e",
+    "license": "other",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/SenseVoiceSmall-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-voxtral-mini-3b-2507-q8-0",
+    "name": "voxtral-mini-3b-2507 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Mistral AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-voxtral-mini-3b-2507",
+    "hub_id": "handy-computer/Voxtral-Mini-3B-2507-gguf",
+    "upstream_hub_id": "mistralai/Voxtral-Mini-3B-2507",
+    "upstream_commit": "3060fe3",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Voxtral-Mini-3B-2507-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-voxtral-mini-4b-realtime-2602-q8-0",
+    "name": "voxtral-mini-4b-realtime-2602 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Mistral AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-voxtral-mini-4b-realtime-2602",
+    "hub_id": "handy-computer/Voxtral-Mini-4B-Realtime-2602-gguf",
+    "upstream_hub_id": "mistralai/Voxtral-Mini-4B-Realtime-2602",
+    "upstream_commit": "2769294",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Voxtral-Mini-4B-Realtime-2602-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-voxtral-small-24b-2507-q8-0",
+    "name": "voxtral-small-24b-2507 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Mistral AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-voxtral-small-24b-2507",
+    "hub_id": "handy-computer/Voxtral-Small-24B-2507-gguf",
+    "upstream_hub_id": "mistralai/Voxtral-Small-24B-2507",
+    "upstream_commit": "da5b424",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/Voxtral-Small-24B-2507-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-base-en-q8-0",
+    "name": "whisper-base.en · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-base-en",
+    "hub_id": "handy-computer/whisper-base.en-gguf",
+    "upstream_hub_id": "openai/whisper-base.en",
+    "upstream_commit": "911407f",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-base.en-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-base-q8-0",
+    "name": "whisper-base · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-base",
+    "hub_id": "handy-computer/whisper-base-gguf",
+    "upstream_hub_id": "openai/whisper-base",
+    "upstream_commit": "e37978b",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-base-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-large-q8-0",
+    "name": "whisper-large · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-large",
+    "hub_id": "handy-computer/whisper-large-gguf",
+    "upstream_hub_id": "openai/whisper-large",
+    "upstream_commit": "4ef9b41",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-large-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-large-v2-q8-0",
+    "name": "whisper-large-v2 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-large-v2",
+    "hub_id": "handy-computer/whisper-large-v2-gguf",
+    "upstream_hub_id": "openai/whisper-large-v2",
+    "upstream_commit": "ae46427",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-large-v2-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-large-v3-q8-0",
+    "name": "whisper-large-v3 · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-large-v3",
+    "hub_id": "handy-computer/whisper-large-v3-gguf",
+    "upstream_hub_id": "openai/whisper-large-v3",
+    "upstream_commit": "06f233f",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-large-v3-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-large-v3-turbo-q8-0",
+    "name": "Whisper large-v3-turbo · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-large-v3-turbo",
+    "hub_id": "handy-computer/whisper-large-v3-turbo-gguf",
+    "upstream_hub_id": "openai/whisper-large-v3-turbo",
+    "upstream_commit": "41f01f3",
+    "license": "mit",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-large-v3-turbo-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-medium-en-q8-0",
+    "name": "whisper-medium.en · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-medium-en",
+    "hub_id": "handy-computer/whisper-medium.en-gguf",
+    "upstream_hub_id": "openai/whisper-medium.en",
+    "upstream_commit": "2e98eb6",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-medium.en-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-medium-q8-0",
+    "name": "whisper-medium · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-medium",
+    "hub_id": "handy-computer/whisper-medium-gguf",
+    "upstream_hub_id": "openai/whisper-medium",
+    "upstream_commit": "abdf7c3",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-medium-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-small-en-q8-0",
+    "name": "whisper-small.en · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-small-en",
+    "hub_id": "handy-computer/whisper-small.en-gguf",
+    "upstream_hub_id": "openai/whisper-small.en",
+    "upstream_commit": "e872752",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-small.en-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-small-q8-0",
+    "name": "whisper-small · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-small",
+    "hub_id": "handy-computer/whisper-small-gguf",
+    "upstream_hub_id": "openai/whisper-small",
+    "upstream_commit": "973afd2",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-small-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-tiny-en-q8-0",
+    "name": "whisper-tiny.en · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-tiny-en",
+    "hub_id": "handy-computer/whisper-tiny.en-gguf",
+    "upstream_hub_id": "openai/whisper-tiny.en",
+    "upstream_commit": "87c7102",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-tiny.en-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-handy-whisper-tiny-q8-0",
+    "name": "whisper-tiny · GGUF Q8_0",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "handy-whisper-tiny",
+    "hub_id": "handy-computer/whisper-tiny-gguf",
+    "upstream_hub_id": "openai/whisper-tiny",
+    "upstream_commit": "169d4a4",
+    "license": "apache-2.0",
+    "configuration": "transcribe.cpp GGUF Q8_0; handy-computer/whisper-tiny-gguf. Conversion release date is unverified; does not inherit upstream availability.",
+    "configuration_kind": "runtime_conversion"
+  },
+  {
+    "id": "stt-hojoai-hojo-asr-multi-v1",
+    "name": "Hojo-ASR-Multi-V1",
+    "hub_id": "HojoAI/Hojo-ASR-Multi-V1",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Hojo AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-hojoai-hojo-asr-multi-v1",
+    "configuration": "Exact benchmark row: HojoAI/Hojo-ASR-Multi-V1. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-hojoai-hojo-asr-v1",
+    "name": "Hojo-ASR-V1",
+    "hub_id": "HojoAI/Hojo-ASR-V1",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Hojo AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-hojoai-hojo-asr-v1",
+    "configuration": "Exact benchmark row: HojoAI/Hojo-ASR-V1. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-ibm-granite-granite-4-0-1b-speech",
+    "name": "granite-4.0-1b-speech",
+    "hub_id": "ibm-granite/granite-4.0-1b-speech",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": "2026-03-06",
+    "release_provenance": "verified",
+    "source_id": "model-stt-ibm-granite-granite-4-0-1b-speech",
+    "configuration": "Exact benchmark row: ibm-granite/granite-4.0-1b-speech. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0",
+    "release_source_id": "model-stt-ibm-granite-granite-4-0-1b-speech"
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-3-3-2b",
+    "name": "granite-speech-3.3-2b",
+    "hub_id": "ibm-granite/granite-speech-3.3-2b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": "2025-06-19",
+    "release_provenance": "verified",
+    "source_id": "model-stt-ibm-granite-granite-speech-3-3-2b",
+    "configuration": "Exact benchmark row: ibm-granite/granite-speech-3.3-2b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0",
+    "release_source_id": "model-stt-ibm-granite-granite-speech-3-3-2b"
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-3-3-8b",
+    "name": "granite-speech-3.3-8b",
+    "hub_id": "ibm-granite/granite-speech-3.3-8b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": "2025-06-19",
+    "release_provenance": "verified",
+    "source_id": "model-stt-ibm-granite-granite-speech-3-3-8b",
+    "configuration": "Exact benchmark row: ibm-granite/granite-speech-3.3-8b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0",
+    "release_source_id": "model-stt-ibm-granite-granite-speech-3-3-8b"
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-4-1-2b",
+    "name": "granite-speech-4.1-2b",
+    "hub_id": "ibm-granite/granite-speech-4.1-2b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": "2026-04-29",
+    "release_provenance": "verified",
+    "source_id": "model-stt-ibm-granite-granite-speech-4-1-2b",
+    "configuration": "Exact benchmark row: ibm-granite/granite-speech-4.1-2b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0",
+    "release_source_id": "model-stt-ibm-granite-granite-speech-4-1-2b"
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-4-1-2b-nar",
+    "name": "granite-speech-4.1-2b-nar",
+    "hub_id": "ibm-granite/granite-speech-4.1-2b-nar",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-ibm-granite-granite-speech-4-1-2b-nar",
+    "configuration": "Exact benchmark row: ibm-granite/granite-speech-4.1-2b-nar. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-5-0-470m-turboctc-nc",
+    "name": "granite-speech-5.0-470m-turboctc-nc",
+    "hub_id": "ibm-granite/granite-speech-5.0-470m-turboctc-nc",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "release_date": "2026-08-25",
+    "release_provenance": "verified",
+    "source_id": "model-stt-ibm-granite-granite-speech-5-0-470m-turboctc-nc",
+    "configuration": "Exact benchmark row: ibm-granite/granite-speech-5.0-470m-turboctc-nc. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-nc-sa-4.0",
+    "release_source_id": "model-stt-ibm-granite-granite-speech-5-0-470m-turboctc-nc"
+  },
+  {
+    "id": "stt-meta-muse-voice-transcribe",
+    "name": "muse-voice-transcribe",
+    "hub_id": "meta/muse-voice-transcribe",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Meta",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: meta/muse-voice-transcribe. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-microsoft-azure-speech-06-2026",
+    "name": "azure-speech-06-2026",
+    "hub_id": "microsoft/azure-speech-06-2026",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Microsoft",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: microsoft/azure-speech-06-2026. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-microsoft-azure-speech-07-2026",
+    "name": "azure-speech-07-2026",
+    "hub_id": "microsoft/azure-speech-07-2026",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Microsoft",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: microsoft/azure-speech-07-2026. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-microsoft-phi-4-multimodal-instruct",
+    "name": "Phi-4-multimodal-instruct",
+    "hub_id": "microsoft/Phi-4-multimodal-instruct",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Microsoft",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-microsoft-phi-4-multimodal-instruct",
+    "configuration": "Exact benchmark row: microsoft/Phi-4-multimodal-instruct. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-microsoft-vibevoice-asr-hf",
+    "name": "VibeVoice-ASR-HF",
+    "hub_id": "microsoft/VibeVoice-ASR-HF",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Microsoft",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-microsoft-vibevoice-asr-hf",
+    "configuration": "Exact benchmark row: microsoft/VibeVoice-ASR-HF. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-mistralai-voxtral-mini-3b-2507",
+    "name": "Voxtral-Mini-3B-2507",
+    "hub_id": "mistralai/Voxtral-Mini-3B-2507",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Mistral AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-mistralai-voxtral-mini-3b-2507",
+    "configuration": "Exact benchmark row: mistralai/Voxtral-Mini-3B-2507. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-mistralai-voxtral-small-24b-2507",
+    "name": "Voxtral-Small-24B-2507",
+    "hub_id": "mistralai/Voxtral-Small-24B-2507",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Mistral AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-mistralai-voxtral-small-24b-2507",
+    "configuration": "Exact benchmark row: mistralai/Voxtral-Small-24B-2507. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-modulate-multilingual",
+    "name": "multilingual",
+    "hub_id": "modulate/multilingual",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Modulate",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: modulate/multilingual. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-nvidia-canary-1b-v2",
+    "name": "canary-1b-v2",
+    "hub_id": "nvidia/canary-1b-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2025-08-14",
+    "release_provenance": "verified",
+    "source_id": "model-stt-nvidia-canary-1b-v2",
+    "configuration": "Exact benchmark row: nvidia/canary-1b-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0",
+    "release_source_id": "model-stt-nvidia-canary-1b-v2"
+  },
+  {
+    "id": "stt-nvidia-canary-qwen-2-5b",
+    "name": "canary-qwen-2.5b",
+    "hub_id": "nvidia/canary-qwen-2.5b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2025-07-17",
+    "release_provenance": "verified",
+    "source_id": "model-stt-nvidia-canary-qwen-2-5b",
+    "configuration": "Exact benchmark row: nvidia/canary-qwen-2.5b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0",
+    "release_source_id": "model-stt-nvidia-canary-qwen-2-5b"
+  },
+  {
+    "id": "stt-nvidia-nemotron-speech-streaming-en-0-6b",
+    "name": "nemotron-speech-streaming-en-0.6b",
+    "hub_id": "nvidia/nemotron-speech-streaming-en-0.6b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2026-03-13",
+    "release_provenance": "verified",
+    "source_id": "model-stt-nvidia-nemotron-speech-streaming-en-0-6b",
+    "configuration": "Exact benchmark row: nvidia/nemotron-speech-streaming-en-0.6b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "nvidia-open-model-license",
+    "release_source_id": "model-stt-nvidia-nemotron-speech-streaming-en-0-6b"
+  },
+  {
+    "id": "stt-nvidia-parakeet-ctc-0-6b",
+    "name": "parakeet-ctc-0.6b",
+    "hub_id": "nvidia/parakeet-ctc-0.6b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-parakeet-ctc-0-6b",
+    "configuration": "Exact benchmark row: nvidia/parakeet-ctc-0.6b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-parakeet-ctc-1-1b",
+    "name": "parakeet-ctc-1.1b",
+    "hub_id": "nvidia/parakeet-ctc-1.1b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-parakeet-ctc-1-1b",
+    "configuration": "Exact benchmark row: nvidia/parakeet-ctc-1.1b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-parakeet-rnnt-0-6b",
+    "name": "parakeet-rnnt-0.6b",
+    "hub_id": "nvidia/parakeet-rnnt-0.6b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-parakeet-rnnt-0-6b",
+    "configuration": "Exact benchmark row: nvidia/parakeet-rnnt-0.6b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-parakeet-rnnt-1-1b",
+    "name": "parakeet-rnnt-1.1b",
+    "hub_id": "nvidia/parakeet-rnnt-1.1b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-parakeet-rnnt-1-1b",
+    "configuration": "Exact benchmark row: nvidia/parakeet-rnnt-1.1b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-parakeet-tdt-0-6b-v2",
+    "name": "parakeet-tdt-0.6b-v2",
+    "hub_id": "nvidia/parakeet-tdt-0.6b-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": "2025-05-01",
+    "release_provenance": "verified",
+    "source_id": "model-stt-nvidia-parakeet-tdt-0-6b-v2",
+    "configuration": "Exact benchmark row: nvidia/parakeet-tdt-0.6b-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0",
+    "release_source_id": "model-stt-nvidia-parakeet-tdt-0-6b-v2",
+    "lineage": "stt-runtime-nvidia-parakeet-tdt-0-6b-v2",
+    "cohort_priority": 0
+  },
+  {
+    "id": "stt-nvidia-parakeet-tdt-1-1b",
+    "name": "parakeet-tdt-1.1b",
+    "hub_id": "nvidia/parakeet-tdt-1.1b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-parakeet-tdt-1-1b",
+    "configuration": "Exact benchmark row: nvidia/parakeet-tdt-1.1b. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-stt-en-conformer-ctc-large",
+    "name": "stt_en_conformer_ctc_large",
+    "hub_id": "nvidia/stt_en_conformer_ctc_large",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-stt-en-conformer-ctc-large",
+    "configuration": "Exact benchmark row: nvidia/stt_en_conformer_ctc_large. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-stt-en-conformer-ctc-small",
+    "name": "stt_en_conformer_ctc_small",
+    "hub_id": "nvidia/stt_en_conformer_ctc_small",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-stt-en-conformer-ctc-small",
+    "configuration": "Exact benchmark row: nvidia/stt_en_conformer_ctc_small. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-stt-en-conformer-transducer-large",
+    "name": "stt_en_conformer_transducer_large",
+    "hub_id": "nvidia/stt_en_conformer_transducer_large",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-stt-en-conformer-transducer-large",
+    "configuration": "Exact benchmark row: nvidia/stt_en_conformer_transducer_large. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-stt-en-conformer-transducer-small",
+    "name": "stt_en_conformer_transducer_small",
+    "hub_id": "nvidia/stt_en_conformer_transducer_small",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "unknown",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-longform-2026-10-17",
+    "configuration": "Exact benchmark row: nvidia/stt_en_conformer_transducer_small. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-nvidia-stt-en-fastconformer-ctc-large",
+    "name": "stt_en_fastconformer_ctc_large",
+    "hub_id": "nvidia/stt_en_fastconformer_ctc_large",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-stt-en-fastconformer-ctc-large",
+    "configuration": "Exact benchmark row: nvidia/stt_en_fastconformer_ctc_large. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-stt-en-fastconformer-transducer-large",
+    "name": "stt_en_fastconformer_transducer_large",
+    "hub_id": "nvidia/stt_en_fastconformer_transducer_large",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-stt-en-fastconformer-transducer-large",
+    "configuration": "Exact benchmark row: nvidia/stt_en_fastconformer_transducer_large. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-nvidia-stt-hy-fastconformer-hybrid-large-pc",
+    "name": "stt_hy_fastconformer_hybrid_large_pc",
+    "hub_id": "nvidia/stt_hy_fastconformer_hybrid_large_pc",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-nvidia-stt-hy-fastconformer-hybrid-large-pc",
+    "configuration": "Exact benchmark row: nvidia/stt_hy_fastconformer_hybrid_large_pc. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-openai-gpt-transcribe",
+    "name": "gpt-transcribe",
+    "hub_id": "openai/gpt-transcribe",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: openai/gpt-transcribe. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-openai-whisper-base",
+    "name": "whisper-base",
+    "hub_id": "openai/whisper-base",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-base",
+    "configuration": "Exact benchmark row: openai/whisper-base. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-base-en",
+    "name": "whisper-base.en",
+    "hub_id": "openai/whisper-base.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-base-en",
+    "configuration": "Exact benchmark row: openai/whisper-base.en. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-large-v2",
+    "name": "whisper-large-v2",
+    "hub_id": "openai/whisper-large-v2",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-large-v2",
+    "configuration": "Exact benchmark row: openai/whisper-large-v2. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-large-v3",
+    "name": "whisper-large-v3",
+    "hub_id": "openai/whisper-large-v3",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-large-v3",
+    "configuration": "Exact benchmark row: openai/whisper-large-v3. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-medium",
+    "name": "whisper-medium",
+    "hub_id": "openai/whisper-medium",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-medium",
+    "configuration": "Exact benchmark row: openai/whisper-medium. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-small",
+    "name": "whisper-small",
+    "hub_id": "openai/whisper-small",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-small",
+    "configuration": "Exact benchmark row: openai/whisper-small. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-small-en",
+    "name": "whisper-small.en",
+    "hub_id": "openai/whisper-small.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-small-en",
+    "configuration": "Exact benchmark row: openai/whisper-small.en. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-tiny",
+    "name": "whisper-tiny",
+    "hub_id": "openai/whisper-tiny",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-tiny",
+    "configuration": "Exact benchmark row: openai/whisper-tiny. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openai-whisper-tiny-en",
+    "name": "whisper-tiny.en",
+    "hub_id": "openai/whisper-tiny.en",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openai-whisper-tiny-en",
+    "configuration": "Exact benchmark row: openai/whisper-tiny.en. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-openmoss-team-moss-transcribe-diarize",
+    "name": "MOSS-Transcribe-Diarize",
+    "hub_id": "OpenMOSS-Team/MOSS-Transcribe-Diarize",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenMOSS",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-openmoss-team-moss-transcribe-diarize",
+    "configuration": "Exact benchmark row: OpenMOSS-Team/MOSS-Transcribe-Diarize. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "apache-2.0"
+  },
+  {
+    "id": "stt-otterai-speech-v3-1",
+    "name": "speech-v3.1",
+    "hub_id": "OtterAI/speech-v3.1",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OtterAI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: OtterAI/speech-v3.1. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-reson8-resonant-1",
+    "name": "resonant-1",
+    "hub_id": "reson8/resonant-1",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Reson8",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: reson8/resonant-1. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-reson8-resonant-1-flash",
+    "name": "resonant-1-flash",
+    "hub_id": "reson8/resonant-1-flash",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Reson8",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: reson8/resonant-1-flash. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-revai-fusion",
+    "name": "fusion",
+    "hub_id": "revai/fusion",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Rev AI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-longform-2026-10-17",
+    "configuration": "Exact benchmark row: revai/fusion. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-revai-machine",
+    "name": "machine",
+    "hub_id": "revai/machine",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Rev AI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-longform-2026-10-17",
+    "configuration": "Exact benchmark row: revai/machine. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-smallestai-pulse",
+    "name": "pulse",
+    "hub_id": "smallestai/pulse",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Smallest AI",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: smallestai/pulse. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-soniox-stt-async-v5",
+    "name": "stt-async-v5",
+    "hub_id": "soniox/stt-async-v5",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Soniox",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-multi-fr",
+    "configuration": "Exact benchmark row: soniox/stt-async-v5. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-speechmatics-enhanced",
+    "name": "enhanced",
+    "hub_id": "speechmatics/enhanced",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Speechmatics",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-longform-2026-10-17",
+    "configuration": "Exact benchmark row: speechmatics/enhanced. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": null
+  },
+  {
+    "id": "stt-sprag-symphony",
+    "name": "symphony",
+    "hub_id": "sprag/symphony",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Sprag",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: sprag/symphony. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-thestageai-thewhisper-large-v3-turbo",
+    "name": "thewhisper-large-v3-turbo",
+    "hub_id": "TheStageAI/thewhisper-large-v3-turbo",
+    "topics": [
+      "stt"
+    ],
+    "organization": "TheStage AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-thestageai-thewhisper-large-v3-turbo",
+    "configuration": "Exact benchmark row: TheStageAI/thewhisper-large-v3-turbo. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "cc-by-4.0"
+  },
+  {
+    "id": "stt-usefulsensors-moonshine-base",
+    "name": "moonshine-base",
+    "hub_id": "UsefulSensors/moonshine-base",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-usefulsensors-moonshine-base",
+    "configuration": "Exact benchmark row: UsefulSensors/moonshine-base. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-usefulsensors-moonshine-streaming-medium",
+    "name": "Moonshine v2 Medium",
+    "hub_id": "UsefulSensors/moonshine-streaming-medium",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-usefulsensors-moonshine-streaming-medium",
+    "configuration": "Exact benchmark row: UsefulSensors/moonshine-streaming-medium. Model commit and evaluation date are unspecified unless the observation records them. Author paper/card parameter counts and Hub stored-tensor counts differ; both are preserved.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-usefulsensors-moonshine-streaming-small",
+    "name": "Moonshine v2 Small",
+    "hub_id": "UsefulSensors/moonshine-streaming-small",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-usefulsensors-moonshine-streaming-small",
+    "configuration": "Exact benchmark row: UsefulSensors/moonshine-streaming-small. Model commit and evaluation date are unspecified unless the observation records them. Author paper/card parameter counts and Hub stored-tensor counts differ; both are preserved.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-usefulsensors-moonshine-streaming-tiny",
+    "name": "Moonshine v2 Tiny",
+    "hub_id": "UsefulSensors/moonshine-streaming-tiny",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-usefulsensors-moonshine-streaming-tiny",
+    "configuration": "Exact benchmark row: UsefulSensors/moonshine-streaming-tiny. Model commit and evaluation date are unspecified unless the observation records them. Author paper/card parameter counts and Hub stored-tensor counts differ; both are preserved.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-usefulsensors-moonshine-tiny",
+    "name": "moonshine-tiny",
+    "hub_id": "UsefulSensors/moonshine-tiny",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Moonshine AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "model-stt-usefulsensors-moonshine-tiny",
+    "configuration": "Exact benchmark row: UsefulSensors/moonshine-tiny. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "mit"
+  },
+  {
+    "id": "stt-voxtral-mini-transcribe-2602-api",
+    "name": "Voxtral Mini Transcribe 2602 API",
+    "organization": "Mistral AI",
+    "topics": [
+      "stt"
+    ],
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "mistral-transcribe-pricing",
+    "configuration": "Hosted voxtral-mini-2602 transcription API; distinct from the open Realtime 4B checkpoint. No matched score imported.",
+    "configuration_kind": "hosted_service"
+  },
+  {
+    "id": "stt-zoom-scribe-v1",
+    "name": "scribe_v1",
+    "hub_id": "zoom/scribe_v1",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Zoom",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: zoom/scribe_v1. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "stt-zoom-scribe-v2-pro",
+    "name": "scribe_v2_pro",
+    "hub_id": "zoom/scribe_v2_pro",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Zoom",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Exact benchmark row: zoom/scribe_v2_pro. Model commit and evaluation date are unspecified unless the observation records them.",
+    "license": "Proprietary"
+  },
+  {
+    "id": "voxtral-mini-4b-realtime-2602",
+    "name": "Voxtral Mini 4B Realtime 2602",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Mistral AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-model-voxtral-mini-4b-realtime-2602",
+    "hub_id": "mistralai/Voxtral-Mini-4B-Realtime-2602",
+    "license": "apache-2.0",
+    "configuration": "Exact 2602 open-weight generation. The launch article estimates its bytes from parameter count; that estimate is not stored as an observed download size."
+  },
+  {
+    "id": "whisper-large-v3-turbo",
+    "name": "Whisper large-v3-turbo",
+    "topics": [
+      "stt"
+    ],
+    "organization": "OpenAI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-model-whisper-large-v3-turbo",
+    "hub_id": "openai/whisper-large-v3-turbo",
+    "license": "mit",
+    "configuration": "Open-weight large-v3-turbo only; no hosted Whisper or GPT transcription scores are inferred."
+  },
+  {
+    "id": "stt-nvidia-parakeet-tdt-0-6b-v2-fast-gpu-asr",
+    "name": "parakeet-tdt-0.6b-v2 (fast-gpu-asr)",
+    "hub_id": "nvidia/parakeet-tdt-0.6b-v2 (fast-gpu-asr)",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Separate decoding/runtime configuration: nvidia/parakeet-tdt-0.6b-v2 (fast-gpu-asr). It never substitutes for the standard checkpoint and does not add another reference-cohort entry for the same weights.",
+    "license": "cc-by-4.0",
+    "lineage": "stt-runtime-nvidia-parakeet-tdt-0-6b-v2",
+    "cohort_priority": 10
+  },
+  {
+    "id": "stt-nvidia-parakeet-tdt-0-6b-v3-fast-gpu-asr",
+    "name": "parakeet-tdt-0.6b-v3 (fast-gpu-asr)",
+    "hub_id": "nvidia/parakeet-tdt-0.6b-v3 (fast-gpu-asr)",
+    "topics": [
+      "stt"
+    ],
+    "organization": "NVIDIA",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Separate decoding/runtime configuration: nvidia/parakeet-tdt-0.6b-v3 (fast-gpu-asr). It never substitutes for the standard checkpoint and does not add another reference-cohort entry for the same weights.",
+    "license": "cc-by-4.0",
+    "lineage": "stt-runtime-nvidia-parakeet-tdt-0-6b-v3",
+    "cohort_priority": 10
+  },
+  {
+    "id": "stt-sophea-asr-k1-preview",
+    "name": "asr-k1 (preview)",
+    "hub_id": "sophea/asr-k1 (preview)",
+    "topics": [
+      "stt"
+    ],
+    "organization": "Sophea",
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Separate decoding/runtime configuration: sophea/asr-k1 (preview). It never substitutes for the standard checkpoint and does not add another reference-cohort entry for the same weights.",
+    "license": "Proprietary",
+    "lineage": "stt-runtime-sophea-asr-k1",
+    "cohort_priority": 10
+  },
+  {
+    "id": "stt-soundsgoodai-zipformer-cr-ctc-transducer-xl-290m-fast-gpu-asr-ctc-greedy-search",
+    "name": "Zipformer-cr-ctc-transducer-XL-290M (fast-gpu-asr, ctc_greedy_search)",
+    "hub_id": "soundsgoodai/Zipformer-cr-ctc-transducer-XL-290M (fast-gpu-asr, ctc_greedy_search)",
+    "topics": [
+      "stt"
+    ],
+    "organization": "SoundsGood AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Separate decoding/runtime configuration: soundsgoodai/Zipformer-cr-ctc-transducer-XL-290M (fast-gpu-asr, ctc_greedy_search). It never substitutes for the standard checkpoint and does not add another reference-cohort entry for the same weights.",
+    "license": "cc-by-nc-4.0",
+    "lineage": "stt-runtime-soundsgoodai-zipformer-cr-ctc-transducer-xl-290m",
+    "cohort_priority": 10
+  },
+  {
+    "id": "stt-soundsgoodai-zipformer-cr-ctc-transducer-xl-290m-fast-gpu-asr-transducer-modified-beam-search",
+    "name": "Zipformer-cr-ctc-transducer-XL-290M (fast-gpu-asr, transducer_modified_beam_search)",
+    "hub_id": "soundsgoodai/Zipformer-cr-ctc-transducer-XL-290M (fast-gpu-asr, transducer_modified_beam_search)",
+    "topics": [
+      "stt"
+    ],
+    "organization": "SoundsGood AI",
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "open-asr-2026-10-17",
+    "configuration": "Separate decoding/runtime configuration: soundsgoodai/Zipformer-cr-ctc-transducer-XL-290M (fast-gpu-asr, transducer_modified_beam_search). It never substitutes for the standard checkpoint and does not add another reference-cohort entry for the same weights.",
+    "license": "cc-by-nc-4.0",
+    "lineage": "stt-runtime-soundsgoodai-zipformer-cr-ctc-transducer-xl-290m",
+    "cohort_priority": 10
   }
 ]

@@ -1,0 +1,174 @@
+{
+  "id": "open-asr-english-2026-10-17",
+  "label": "Open ASR · October 17, 2026",
+  "task": "transcription",
+  "family": "open-asr-english",
+  "core": true,
+  "source": "open-asr-2026-10-17",
+  "metrics": [
+    {
+      "id": "ls_clean",
+      "short": "LS clean",
+      "label": "LibriSpeech test.clean",
+      "source_column": "LS Clean WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "librispeech",
+        "split": "test.clean",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "ls_other",
+      "short": "LS other",
+      "label": "LibriSpeech test.other",
+      "source_column": "LS Other WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "librispeech",
+        "split": "test.other",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "ami",
+      "short": "AMI cleaned",
+      "label": "AMI-Cleaned test",
+      "source_column": "AMI-Cleaned WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "ami_cleaned",
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "earnings22",
+      "short": "Earnings22 AA",
+      "label": "Earnings22-Cleaned-AA-chunked test",
+      "source_column": "Earnings22-Cleaned-AA-chunked WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "ArtificialAnalysis/Earnings22-Cleaned-AA-chunked",
+        "config": null,
+        "split": "test",
+        "revision": null
+      },
+      "primary": true,
+      "note": "Chunk predictions are concatenated per session and scored against the call-level ArtificialAnalysis/Earnings22-Cleaned-AA references."
+    },
+    {
+      "id": "gigaspeech",
+      "short": "Giga cleaned",
+      "label": "Gigaspeech-Cleaned test",
+      "source_column": "Gigaspeech-Cleaned WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "gigaspeech_cleaned",
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "spgispeech",
+      "short": "SPGI",
+      "label": "SPGISpeech test",
+      "source_column": "SPGISpeech WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "spgispeech",
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "voxpopuli",
+      "short": "VoxPopuli AA",
+      "label": "Voxpopuli-AA-Cleaned test",
+      "source_column": "Voxpopuli-AA-Cleaned WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "voxpopuli_cleaned_aa",
+        "split": "test",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "urgent24",
+      "short": "URGENT24 noise",
+      "label": "URGENT2024 noisy/reverberant test",
+      "source_column": "URGENT2024 WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "urgent2024",
+        "split": "test",
+        "revision": null
+      },
+      "primary": false
+    },
+    {
+      "id": "monsoon",
+      "short": "Monsoon en-IN",
+      "label": "Voice Arena Monsoon en-IN test",
+      "source_column": "Voice Arena Monsoon WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "VoiceArena/Monsoon_en_IN_test",
+        "config": null,
+        "split": "test",
+        "revision": null
+      },
+      "primary": false
+    },
+    {
+      "id": "urgent24_clean",
+      "short": "URGENT24 clean",
+      "label": "URGENT2024 clean test",
+      "source_column": "URGENT2024-Clean WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": "hf-audio/open-asr-leaderboard",
+        "config": "urgent2024_clean",
+        "split": "test",
+        "revision": null
+      },
+      "primary": false
+    }
+  ],
+  "mean_metrics": [
+    "ls_clean",
+    "ls_other",
+    "ami",
+    "earnings22",
+    "gigaspeech",
+    "spgispeech",
+    "voxpopuli"
+  ],
+  "note": "Fixed seven-column WER mean from the pinned October 17 maintainer CSV. All seven matched measurements are required. Noise/Monsoon extras never alter it. This is one family; individual dataset splits and alternate launch tables do not create extra votes. Run operators/model commits are not specified in the CSV.",
+  "primary": true,
+  "short": "English · 7 sets",
+  "rank_priority": 0
+}

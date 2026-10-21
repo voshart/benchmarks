@@ -1,0 +1,125 @@
+{
+  "id": "phonon-2-launch-english",
+  "label": "Fermion launch comparison · version unspecified",
+  "task": "transcription",
+  "family": "open-asr-english",
+  "core": false,
+  "source": "fermion-phonon-2-launch",
+  "metrics": [
+    {
+      "id": "ls_clean",
+      "short": "LS clean",
+      "label": "Fermion launch table: LS clean",
+      "source_column": "LS clean",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    },
+    {
+      "id": "ls_other",
+      "short": "LS other",
+      "label": "Fermion launch table: LS other",
+      "source_column": "LS other",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    },
+    {
+      "id": "ami",
+      "short": "AMI",
+      "label": "Fermion launch table: AMI",
+      "source_column": "AMI",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    },
+    {
+      "id": "earnings22",
+      "short": "Earnings-22",
+      "label": "Fermion launch table: Earnings-22",
+      "source_column": "Earnings-22",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    },
+    {
+      "id": "gigaspeech",
+      "short": "GigaSpeech",
+      "label": "Fermion launch table: GigaSpeech",
+      "source_column": "GigaSpeech",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    },
+    {
+      "id": "spgispeech",
+      "short": "SPGISpeech",
+      "label": "Fermion launch table: SPGISpeech",
+      "source_column": "SPGISpeech",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    },
+    {
+      "id": "voxpopuli",
+      "short": "VoxPopuli",
+      "label": "Fermion launch table: VoxPopuli",
+      "source_column": "VoxPopuli",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "full test sets (author statement)",
+        "revision": null
+      },
+      "note": "Short launch-table label; exact cleaned-reference version and dataset revision are not specified."
+    }
+  ],
+  "mean_metrics": [],
+  "published_mean_metric": "published_mean_wer",
+  "note": "Reported seven-set average is preserved exactly, not recomputed or blended with maintainer columns. Authors do not pin the dataset versions or upstream leaderboard revision. Author runs, competitor reruns and copied rows retain separate operator labels. This is the same evidence family as Open ASR, not a second aggregate vote."
+}

@@ -1,0 +1,42 @@
+model,RTFx,FLEURS WER,MCV WER
+assemblyai/universal-3-5-pro,-1,2.17,2.69
+assemblyai/universal-3-pro,-1,2.42,2.76
+CohereLabs/cohere-transcribe-03-2026,606.88,3.33,2.87
+elevenlabs/scribe_v2,-1,2.3,2.19
+facebook/omniASR-CTC-1B-v2,762.41,7.2,9.64
+facebook/omniASR-CTC-300M-v2,1011.36,14.06,18.89
+facebook/omniASR-CTC-3B-v2,526.62,5.04,7.3
+facebook/omniASR-CTC-7B-v2,310.76,4.89,7.01
+facebook/omniASR-LLM-1B-v2,47.07,5.92,6.6
+facebook/omniASR-LLM-300M-v2,47.8,7.78,10.31
+facebook/omniASR-LLM-3B-v2,45.28,4.63,6.48
+facebook/omniASR-LLM-7B-v2,42.5,3.72,5.06
+google/gemma-4-E4B-it,135.79,5.75,9.49
+HojoAI/Hojo-ASR-Multi-V1,46.76,4.03,3.81
+ibm-granite/granite-speech-4.1-2b-nar,1402.39,4.87,3.78
+microsoft/azure-speech-06-2026,-1,1.93,1.88
+microsoft/azure-speech-07-2026,-1,1.83,2.01
+microsoft/Phi-4-multimodal-instruct,122.69,3.99,4.25
+microsoft/VibeVoice-ASR-HF,113.69,7.44,20.97
+mistralai/Voxtral-Mini-3B-2507,149.66,3.64,5.29
+mistralai/Voxtral-Mini-4B-Realtime-2602,42.1,4.87,7.81
+mistralai/Voxtral-Small-24B-2507,82.96,2.61,3.19
+modulate/multilingual,-1,4.02,2.87
+nvidia/canary-1b-v2,1307.83,3.43,4.69
+nvidia/nemotron-3.5-asr-streaming-0.6b,1109.98,8.46,9.46
+nvidia/parakeet-tdt-0.6b-v3,3362.94,4.16,4.07
+openai/whisper-large-v3,327.55,3.2,4.79
+openai/whisper-large-v3-turbo,338.32,3.67,8.58
+OpenMOSS-Team/MOSS-Transcribe-Diarize,243.3,6.26,9.78
+Qwen/Qwen3-ASR-0.6B-hf,384.27,5.41,7.97
+Qwen/Qwen3-ASR-1.7B-hf,368.59,3.35,4.6
+reson8/resonant-1,-1,2.56,3.01
+reson8/resonant-1-flash,-1,2.56,3.01
+soniox/stt-async-v5,-1,2.66,4.62
+speechmatics/enhanced,-1,3.56,1.99
+meta/muse-voice-transcribe,-1,3.35,5.3
+sprag/symphony,-1,2.41,3.02
+nvidia/parakeet-tdt-0.6b-v3 (fast-gpu-asr),10862.38,4.06,3.93
+TheStageAI/thewhisper-large-v3-turbo,960.42,2.91,3.17
+openai/gpt-transcribe,-1,2.34,3.34
+sophea/asr-k1 (preview),-1,2.74,2.33
