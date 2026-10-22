@@ -98,15 +98,23 @@
 
   function build(data, options={}) {
     const test = data.accuracyTests.find(test => test.id === options.test) || data.accuracyTests.find(test => test.id === data.config.default_test);
-    const columns = test.metrics.filter(metric => metric.primary || options.extra || test.show_all_metrics);
+    const rankMetric = test.metrics.find(metric => metric.id === options.rankMetric) || null;
+    const columns = test.metrics.filter(metric => metric.primary || options.extra || test.show_all_metrics || metric === rankMetric);
     const query = (options.query || '').trim().toLowerCase();
     const cutoff = options.cutoff || data.config.snapshot_date;
-    const rows = data.models.filter(model => available(model,cutoff,data.config.snapshot_date)).map(model => {
+    const candidates = data.models.filter(model => available(model,cutoff,data.config.snapshot_date)).map(model => {
       const selected = summarize(data,test,model.id);
       const size = selectSize(data, model.id);
-      return {model, id:model.id, name:model.name, ...selected, size, rank:null,
+      const rankRecord = rankMetric ? selected.scores[rankMetric.id] : selected.summary;
+      return {model, id:model.id, name:model.name, ...selected, provenance:rankMetric ? rankRecord : selected.provenance, size, rank:null,
+        benchmarkValue:Rank.rankable(rankRecord) ? rankRecord.value : null,
         familyCount:selected.count ? 1 : 0};
-    }).filter(row => (options.missing || row.count > 0)
+    });
+    // Benchmark positions use every eligible configuration at this date, before UI filters.
+    // Unlike the aggregate reference cohort, these explicitly compare runtime configurations too.
+    const cohort = candidates.filter(row => finite(row.benchmarkValue)).sort((a,b) => a.benchmarkValue-b.benchmarkValue);
+    cohort.forEach((row,i) => {row.benchmarkRank = i && row.benchmarkValue === cohort[i-1].benchmarkValue ? cohort[i-1].benchmarkRank : i+1;});
+    const rows = candidates.filter(row => (options.missing || (rankMetric ? Rank.rankable(row.scores[rankMetric.id]) : Object.values(row.scores).some(Rank.rankable)))
       && (!query || (row.name + ' ' + row.model.organization + ' ' + row.model.hub_id).toLowerCase().includes(query))
       && (!options.access || options.access === 'all' || row.model.access === options.access)
       && (!options.maxParams || (finite(row.size?.parameters_million) && row.size.parameters_million <= Number(options.maxParams)))
@@ -118,29 +126,29 @@
         if (sort === 'download') return row.size?.download_mb;
         if (sort === 'params') return row.size?.parameters_million;
         if (sort === 'price') {const price=selectPrice(data,row.id);return price?.currency === 'USD' ? price.amount : null;}
-        return row.mean;
+        return row.benchmarkValue;
       };
       const av=value(a),bv=value(b);
       return (finite(av) ? av : Infinity) - (finite(bv) ? bv : Infinity) || a.name.localeCompare(b.name);
     });
-    return {test, columns, rows, mode:'protocol'};
+    return {test, columns, rows, mode:'protocol',rankMetric,benchmarkCount:cohort.length};
   }
 
   function renderHead(result) {
-    return '<th scope="col">Model</th><th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">'
-      + (result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
+    return '<th scope="col">Model</th><th scope="col">Benchmark rank</th><th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">'
+      + (result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
         : result.test.published_mean_metric ? 'Reported mean WER ↓' : 'Fixed '+result.test.mean_metrics.length+' mean WER ↓') + '</th>'
       + result.columns.map(metric => `<th scope="col" title="${esc(metric.label)} · ${metric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER'} %, lower is better">${esc(metric.short)}</th>`).join('')
       + '<th scope="col">Evidence</th>';
   }
 
   function renderRows(result, data) {
-    if (!result.rows.length) return `<tr><td colspan="${result.columns.length + 5}">No models match these filters.</td></tr>`;
+    if (!result.rows.length) return `<tr><td colspan="${result.columns.length + 6}">No models match these filters.</td></tr>`;
     return result.rows.map(row => {
       const source = data.sources[row.provenance?.source_id];
       const infoId = 'speech-evidence-' + result.test.id + '-' + row.id;
       const modelNote = [row.model.configuration, row.model.release_date ? 'Released ' + row.model.release_date : 'Exact release date unverified'].filter(Boolean).join(' · ');
-      const meanTitle = row.mean == null ? 'Every required comparable measurement and matched source is required.'
+      const meanTitle = result.rankMetric ? result.rankMetric.label+' · matched protocol only, lower is better' : row.mean == null ? 'Every required comparable measurement and matched source is required.'
         : row.meanBasis === 'published' ? 'Exactly as reported by this source. Not an aggregate rank.'
         : 'Arithmetic mean of the '+result.test.mean_metrics.length+' named WER columns, calculated here. Not the current Open ASR default average or an aggregate rank. Extra columns never change this panel.';
       const details = `<div id="${esc(infoId)}" class="rank-note" popover><button type="button" class="rank-note-close" popovertarget="${esc(infoId)}" popovertargetaction="hide" aria-label="Close evidence explanation">×</button>`
@@ -162,8 +170,9 @@
         return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
       }).join('');
       return `<tr><th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}</th>`
+        + `<td class="index" title="Position within ${esc(result.test.label)} · ${esc(result.rankMetric?.label || 'complete panel')} before display filters; ties share a position. Not an overall index.">${row.benchmarkRank ? '#'+row.benchmarkRank+' / '+result.benchmarkCount : 'No matched score'}</td>`
         + renderSizeCells(row.size, data)
-        + `<td class="index" title="${esc(meanTitle)}">${row.mean == null ? '—' : row.mean.toFixed(2)}</td>${cells}`
+        + `<td class="index" title="${esc(meanTitle)}">${row.benchmarkValue == null ? '—' : row.benchmarkValue.toFixed(2)}</td>${cells}`
         + `<td>${esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">†</button>${details}</td></tr>`;
     }).join('');
   }

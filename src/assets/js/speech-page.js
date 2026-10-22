@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const controls = {test:$('speechProtocol'),query:$('speechSearch'),sort:$('speechSort'),maxDownload:$('speechSize'),
+  const controls = {test:$('speechProtocol'),rankMetric:$('speechRankMetric'),query:$('speechSearch'),sort:$('speechSort'),maxDownload:$('speechSize'),
     maxParams:$('speechParams'),access:$('speechAccess'),min:$('speechCoverage'),missing:$('speechMissing'),extra:$('speechExtra')};
   const panels = {matrix:$('speechMatrixPanel'),throughput:$('speechThroughputPanel'),latency:$('speechLatencyPanel'),price:$('speechPricingPanel')};
   const history = document.querySelector('.history-bar');
@@ -9,18 +9,26 @@
   const day = value => Math.round((Date.parse(value+'T00:00:00Z')-Date.parse(start+'T00:00:00Z'))/864e5);
   const date = value => new Date(Date.parse(start+'T00:00:00Z')+value*864e5).toISOString().slice(0,10);
   const protocolViews = {english:'open-asr-english-2026-10-17',longform:'open-asr-longform',multilingual:'open-asr-fleurs',robustness:'open-asr-robustness'};
-  let data, view='matrix', timer;
+  let data, view='matrix', timer, metricProtocol;
   function render() {
     if (!data) return;
     const cutoff = date(Number($('historyRange').value));
     $('historyDate').textContent = cutoff;
-    const protocol = Boolean(protocolViews[view]);
+    const protocol = view === 'benchmark' || Boolean(protocolViews[view]);
+    if (metricProtocol !== controls.test.value) {
+      const selected = data.accuracyTests.find(test => test.id === controls.test.value);
+      controls.rankMetric.innerHTML = '<option value="">Complete panel / headline metric</option>'+selected.metrics.map(metric => `<option value="${BenchmarkSpeech.escape(metric.id)}">${BenchmarkSpeech.escape(metric.label)}</option>`).join('');
+      controls.rankMetric.value=''; metricProtocol=controls.test.value;
+    }
+    $('speechBenchmarkNote').hidden = !protocol;
+    for (const option of controls.sort.options || []) if (option.value.startsWith('wer:')) {option.hidden=protocol;option.disabled=protocol;}
+    if (protocol && controls.sort.value.startsWith('wer:')) controls.sort.value='score';
     controls.min.hidden = protocol;
     $('speechComparability').hidden = protocol;
     $('speechProtocolControls').hidden = !protocol;
     const options = {cutoff,view,test:controls.test.value,query:controls.query.value,sort:controls.sort.value,
       maxDownload:controls.maxDownload.value,maxParams:controls.maxParams.value,access:controls.access.value,min:controls.min.value,
-      missing:controls.missing.checked,extra:controls.extra.checked};
+      missing:controls.missing.checked,extra:controls.extra.checked,rankMetric:controls.rankMetric.value};
     const result = protocol ? BenchmarkSpeech.build(data,options) : BenchmarkSpeechMatrix.build(data,options);
     $('speechHead').innerHTML = protocol ? BenchmarkSpeech.renderHead(result) : BenchmarkSpeechMatrix.renderHead(result);
     $('speechBody').innerHTML = protocol ? BenchmarkSpeech.renderRows(result,data) : BenchmarkSpeechMatrix.renderRows(result,data);
@@ -29,8 +37,12 @@
       : view === 'new' ? 'Author and competitor research, including the original Phonon models and Moonshine paper. Alternate protocols do not add another core family.'
       : view === 'secondary' ? 'Alternate corpora, language details and runtime protocols are preserved as secondary evidence; they do not add aggregate votes.'
       : data.config.ranking_note;
-    $('speechStatus').textContent = protocol ? `${result.rows.length} models · ${result.test.metrics.every(metric=>metric.unit==='oiwer_percent') ? 'OI-WER' : 'WER'} %, lower is better · ${result.test.label}`
-      : `${result.rows.length} models · ${result.matureCount} mature core families · index higher is better; WER lower is better`;
+    const otherSort = {name:'Model name',download:'Download size (MB), unknowns last',params:'Parameters (M), unknowns last',price:'USD / audio hour, unknowns last'}[controls.sort.value];
+    const ordering = otherSort || (protocol ? 'Selected benchmark error, lower is better; missing scores last'
+      : result.sortTest ? (result.sortTest.short || result.sortTest.label)+' WER, lower is better; missing scores last'
+      : 'Overall index first; models without an index follow (not a performance ranking)');
+    $('speechStatus').textContent = protocol ? `${result.rows.length} models · ${result.benchmarkCount} scored configurations · ${result.rankMetric?.label || result.test.label} · Sort: ${ordering}`
+      : `${result.rows.length} models · ${result.matureCount} mature core families · Sort: ${ordering}`;
     const undated = data.models.filter(model => !model.release_date).length;
     $('historyStatus').textContent = cutoff === end ? `${undated} undated configurations included only in the current view · rates retain their pricing dates`
       : `${undated} undated configurations excluded · model availability cutoff, not the date results were published`;
@@ -42,7 +54,11 @@
     $('timingStatus').textContent = `${rows.length} measurements · exact workload, hardware and runtime per row`;
   }
   function setView(next) {
+    if (!data) return;
+    const previous = view;
     view = next;
+    if (view === 'small') controls.sort.value='wer:'+data.config.default_test;
+    else if (previous === 'small' || view === 'benchmark' || protocolViews[view]) controls.sort.value='score';
     const panel = ['throughput','latency','price'].includes(view) ? view : 'matrix';
     for (const [name,element] of Object.entries(panels)) element.hidden = name !== panel;
     document.querySelectorAll('.views button').forEach(button => {
@@ -55,6 +71,15 @@
   }
   for (const [name,control] of Object.entries(controls)) control.addEventListener(name === 'query' ? 'input' : 'change', () => {
     if (name === 'query') {clearTimeout(timer); timer=setTimeout(render,100);} else render();
+  });
+  $('speechBody').addEventListener('click',event => {
+    const button=event.target.closest('[data-benchmark]');
+    if (!button || !data) return;
+    controls.test.value=button.dataset.benchmark;
+    controls.query.value=button.dataset.model || '';
+    controls.maxDownload.value='';controls.maxParams.value='';controls.access.value='all';
+    setView('benchmark');
+    if (button.dataset.metric) {controls.rankMetric.value=button.dataset.metric;render();}
   });
   document.querySelectorAll('.views button').forEach(button => button.addEventListener('click',() => setView(button.dataset.view)));
   for (const id of ['timingTest','timingHardware','timingSample','timingSearch']) $(id).addEventListener(id === 'timingSearch' ? 'input' : 'change',renderTiming);

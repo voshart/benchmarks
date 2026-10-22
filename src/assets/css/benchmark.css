@@ -12,3 +12,5 @@ html[data-theme=dark]{color-scheme:dark;--paper:oklch(.18 0 0);--paper2:oklch(.2
 
 .rank-coverage{display:block;color:var(--muted);font:normal .65rem var(--mono);margin-top:.2rem}
 @media(max-width:700px){#speechMatrixPanel .controls{flex-wrap:wrap;overflow:visible}#speechMatrixPanel .controls>*{flex:1 1 150px}#speechMatrixPanel .controls input[type=search]{width:auto}}
+
+.benchmark-link{display:block;border:0;background:none;padding:.15rem 0;color:var(--accent);font:normal .7rem var(--sans);text-decoration:underline;cursor:pointer;white-space:normal}

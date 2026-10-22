@@ -55,7 +55,7 @@
         rankExplanation:'No aggregate index: this runtime variant is not the selected reference configuration for its weights identity. Its measurements remain available in protocol views.'};
       return {...(existing || fallback), model, scores, count, size:Speech.selectSize(data,model.id), priceInfo:Speech.priceInfo(data,model)};
     }).filter(row => {
-      const shown = columns.some(test => Rank.rankable(row.scores[test.id]));
+      const shown = columns.some(test => Rank.rankable(row.scores[test.id]) || Object.values(Speech.summarize(data,test,row.id).scores).some(Rank.rankable));
       if (view === 'small') {
         if (!shown || !((row.size?.download_mb != null && row.size.download_mb <= 1000)
           || (row.size?.parameters_million != null && row.size.parameters_million <= 1000))) return false;
@@ -69,9 +69,11 @@
         && (!options.maxDownload || (finite(row.size?.download_mb) && row.size.download_mb <= Number(options.maxDownload)))
         && (!options.maxParams || (finite(row.size?.parameters_million) && row.size.parameters_million <= Number(options.maxParams)));
     });
-    const sort = options.sort || 'score';
+    const sort = options.sort || (view === 'small' ? 'wer:'+data.config.default_test : 'score');
+    const sortTest = sort.startsWith('wer:') ? data.accuracyTests.find(test => test.id === sort.slice(4)) : null;
     rows.sort((a,b) => {
       if (sort === 'name') return a.name.localeCompare(b.name);
+      if (sortTest) return (a.scores[sortTest.id]?.value ?? Infinity)-(b.scores[sortTest.id]?.value ?? Infinity) || a.name.localeCompare(b.name);
       if (sort === 'score') return (b.rank ?? -1)-(a.rank ?? -1) || b.coreCount-a.coreCount || b.count-a.count || a.name.localeCompare(b.name);
       const value = row => sort === 'download' ? row.size?.download_mb : sort === 'params' ? row.size?.parameters_million
         : sort === 'price' && row.priceInfo.record?.currency === 'USD' ? row.priceInfo.record.amount : null;
@@ -81,7 +83,7 @@
       const values = ranked.rows.map(row => row.scores[test.id]?.value).filter(finite);
       return [test.id,values.length ? [Math.min(...values),Math.max(...values)] : [null,null]];
     }));
-    return {mode:'matrix',view,rows,columns,ranges,matureCount:ranked.matureCount,coreTotal:ranked.coreTotal,cutoff};
+    return {mode:'matrix',view,rows,columns,ranges,matureCount:ranked.matureCount,coreTotal:ranked.coreTotal,cutoff,sortTest};
   }
 
   function renderHead(result) {
@@ -98,9 +100,16 @@
       // files, without treating those components as additional rank votes.
       const rankRow = {...row,rankContributions:(row.rankContributions || []).flatMap(item => item.observation.components?.length
         ? item.observation.components.map(component => ({...item,label:item.label+' · '+component.label,observation:component})) : [item])};
+      const benchmarkTest = data.accuracyTests.find(test => row.scores[test.id]) || data.accuracyTests.find(test => Object.values(Speech.summarize(data,test,row.id).scores).some(Rank.rankable));
+      const benchmarkMetric = benchmarkTest && !row.scores[benchmarkTest.id] ? Object.values(Speech.summarize(data,benchmarkTest,row.id).scores).find(Rank.rankable)?.metric : '';
+      const benchmarkButton = benchmarkTest ? `<button type="button" class="benchmark-link" data-benchmark="${esc(benchmarkTest.id)}" data-model="${esc(row.name)}" data-metric="${esc(benchmarkMetric)}">View benchmark rank</button>` : '';
+      const index = row.rank == null ? `<span title="${esc(row.rankExplanation)}">No overall index</span>${benchmarkButton}` : RankUI.renderRank(rankRow,data.sources);
       const cells = result.columns.map(test => {
         const observation = row.scores[test.id];
-        if (!observation) return '<td class="score">—</td>';
+        if (!observation) {
+          const partial = Object.values(Speech.summarize(data,test,row.id).scores).filter(Rank.rankable);
+          return partial.length ? `<td class="score"><button type="button" class="benchmark-link" data-benchmark="${esc(test.id)}" data-model="${esc(row.name)}" data-metric="${esc(partial[0].metric)}">Partial: ${partial.length} metrics</button></td>` : '<td class="score" title="No matched published result in this protocol; not zero or proof of nonparticipation">—</td>';
+        }
         const range = result.ranges[test.id], shade = !range || range[0] == null ? 0 : range[0] === range[1] ? 15 : 30*(range[1]-observation.value)/(range[1]-range[0]);
         const tooltip = [test.label,observation.derived ? 'Fixed-panel mean calculated here' : 'Published WER',
           'Execution operator: '+observation.measurement_operator,observation.note,
@@ -108,7 +117,7 @@
           ...(observation.provisional_reasons || [])].filter(Boolean).join(' · ');
         return `<td class="score" style="--shade:${Math.max(0,Math.min(30,shade)).toFixed(1)}%">${link(data.sources[observation.source_id],observation.value.toFixed(2),tooltip)}${Rank.qualification(observation) ? '<sup title="Qualified evidence; see source and rank explanation">†</sup>' : ''}</td>`;
       }).join('');
-      return `<tr><th scope="row">${link(data.sources[row.model.source_id],row.name,modelNote)}</th><td class="index">${RankUI.renderRank(rankRow,data.sources)}<small class="rank-coverage" title="${esc((row.rankContributions || []).map(item => item.label).join(', ') || 'No contributing core families')}">${row.coreCount}/${result.coreTotal} families</small></td>${cells}`
+      return `<tr><th scope="row">${link(data.sources[row.model.source_id],row.name,modelNote)}</th><td class="index">${index}<small class="rank-coverage" title="${esc((row.rankContributions || []).map(item => item.label).join(', ') || 'No contributing core families')}">${row.coreCount}/${result.coreTotal} families</small></td>${cells}`
         + Speech.renderSizeCells(row.size, data)
         + `<td class="price" title="${esc(row.priceInfo.note)}">${row.priceInfo.source_id ? link(data.sources[row.priceInfo.source_id],row.priceInfo.label) : esc(row.priceInfo.label)}</td></tr>`;
     }).join('');

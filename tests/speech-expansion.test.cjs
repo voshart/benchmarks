@@ -13,8 +13,8 @@ const getRow=(result,id)=>result.rows.find(row=>row.id===id);
 test('full expansion preserves raw observations, missing long-form values and separate corpus roles',()=>{
  validateSTT(data);
  assert.equal(data.models.length,172);
- assert.equal(data.rawRecords.length,975);
- assert.equal(data.accuracyTests.length,11);
+ assert.equal(data.rawRecords.length,979);
+ assert.equal(data.accuracyTests.length,12);
  assert.equal(data.rawRecords.filter(record=>record.benchmark==='open-asr-longform').length,27);
  const m=byHub('nvidia/stt_en_conformer_transducer_small');
  const record=data.rawRecords.find(record=>record.model===m.id&&record.benchmark==='open-asr-longform');

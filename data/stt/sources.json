@@ -3150,5 +3150,16 @@
     "snapshot": "data/stt/evidence/size-metadata-2026-10-22.json",
     "quote": "merged_full_model.safetensors: 11956909856 bytes",
     "note": "Complete model checkpoint selected by https://github.com/HojoAI/Hojo-ASR/blob/ba2fbb658c5ccfcec858044de9ff717dd4ebd06f/hojo_asr/hf_hub_loader.py. Published file bytes converted to decimal MB; excludes configuration, tokenizer and runtime software. Not a parameter-to-byte estimate. Parameter count remains unverified: checkpoint tensors include buffers and potentially tied duplicate weights."
+  },
+  "moonshine-v1-paper": {
+    "title": "Original Moonshine paper, Tables 2–3 (2024)",
+    "url": "https://arxiv.org/html/2410.15608v2",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Useful Sensors",
+    "verified_on": "2026-10-22",
+    "revision": "arXiv:2410.15608v2",
+    "quote": "We use greedy decoding",
+    "note": "Section 4 and Tables 2–3 identify original Moonshine Base/Tiny versus Whisper base.en/tiny.en, using greedy decoding with a six-output-token-per-second heuristic. Eight dataset WERs and their published averages are preserved. The paper does not pin exact model commits or dataset/reference revisions; these are a separate secondary protocol, not the current cleaned English panel. Moonshine results are author evidence and Whisper results are competitor evidence."
   }
 }

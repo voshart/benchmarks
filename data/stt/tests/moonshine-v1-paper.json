@@ -1,0 +1,137 @@
+{
+  "id": "moonshine-v1-paper",
+  "label": "Moonshine v1 · author 8 sets",
+  "short": "Moonshine v1 · author 8 sets",
+  "task": "transcription",
+  "family": "open-asr-english",
+  "core": false,
+  "primary": false,
+  "source": "moonshine-v1-paper",
+  "metrics": [
+    {
+      "id": "ami",
+      "short": "AMI",
+      "label": "AMI",
+      "source_column": "AMI",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "earnings22",
+      "short": "Earnings-22",
+      "label": "Earnings-22",
+      "source_column": "Earnings22",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "gigaspeech",
+      "short": "GigaSpeech",
+      "label": "GigaSpeech",
+      "source_column": "Gigaspeech",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "ls_clean",
+      "short": "Libri clean",
+      "label": "Libri clean",
+      "source_column": "LibreSpeech (Clean)",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "ls_other",
+      "short": "Libri other",
+      "label": "Libri other",
+      "source_column": "LibreSpeech (Other)",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "spgispeech",
+      "short": "SPGISpeech",
+      "label": "SPGISpeech",
+      "source_column": "SPGISpeech",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "tedlium",
+      "short": "TED-LIUM",
+      "label": "TED-LIUM",
+      "source_column": "TEDLium",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    },
+    {
+      "id": "voxpopuli",
+      "short": "VoxPopuli",
+      "label": "VoxPopuli",
+      "source_column": "Voxpopuli",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "primary": true,
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "paper evaluation; exact split/version unspecified",
+        "revision": null
+      }
+    }
+  ],
+  "mean_metrics": [],
+  "unit": "percent",
+  "direction": "lower",
+  "note": "Original 2024 Moonshine paper Tables 2–3: author-run eight-set WER comparison using greedy decoding and a six-output-token-per-second limit. Exact checkpoint and dataset/reference revisions are unspecified. Published means are retained, not mixed with the cleaned seven-set core panel or the separate Moonshine v2 paper.",
+  "published_mean_metric": "published_mean_wer"
+}

@@ -1,0 +1,160 @@
+{
+  "verified_on": "2026-10-22",
+  "scope": "Read-only search for missing comparable English, CORAAL and fixed five-language FLEURS observations for original Phonon-1/2 and Niagara batch.en 9M/19M/38M/84M. No transcription model was executed; no scores, eligibility rules or observations were changed by this research.",
+  "models_checked": [
+    "phonon-1",
+    "phonon-2",
+    "niagara-9m-batch-en",
+    "niagara-19m-batch-en",
+    "niagara-38m-batch-en",
+    "niagara-84m-batch-en"
+  ],
+  "finding": "No additional second core-family result was found in the checked upstream sources. Existing English observations for Phonon-2 and all four Niagara batch.en configurations match the latest maintainer CSV. Absence from these checked sources is not proof that no other public evaluation exists.",
+  "maintainer_files_checked": [
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results/blob/f3f994901b393d72e65efc239d1f0bfa395de6c1/english_short_latest.csv",
+      "revision": "f3f994901b393d72e65efc239d1f0bfa395de6c1",
+      "rows": 65,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "Phonon-2 and all four Niagara batch.en rows present; component WER values match existing observations. Phonon-1 absent. Current upstream avg column is not substituted for the site fixed seven-set mean."
+    },
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/leaderboard_longform/blob/96e633a1e378a4f7af816654276ab9397f72a4b3/longform_latest.csv",
+      "revision": "96e633a1e378a4f7af816654276ab9397f72a4b3",
+      "rows": 16,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "No Phonon or Niagara model row; no CORAAL addition."
+    },
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/multilingual_evals/blob/3589b3c077cb16c935e52bdd15c7fb0a3f175f7a/multilingual_fr.csv",
+      "revision": "3589b3c077cb16c935e52bdd15c7fb0a3f175f7a",
+      "language": "fr",
+      "rows": 40,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "No Phonon or Niagara model row; no matching FLEURS component addition."
+    },
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/multilingual_evals/blob/3589b3c077cb16c935e52bdd15c7fb0a3f175f7a/multilingual_de.csv",
+      "revision": "3589b3c077cb16c935e52bdd15c7fb0a3f175f7a",
+      "language": "de",
+      "rows": 41,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "No Phonon or Niagara model row; no matching FLEURS component addition."
+    },
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/multilingual_evals/blob/3589b3c077cb16c935e52bdd15c7fb0a3f175f7a/multilingual_es.csv",
+      "revision": "3589b3c077cb16c935e52bdd15c7fb0a3f175f7a",
+      "language": "es",
+      "rows": 40,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "No Phonon or Niagara model row; no matching FLEURS component addition."
+    },
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/multilingual_evals/blob/3589b3c077cb16c935e52bdd15c7fb0a3f175f7a/multilingual_it.csv",
+      "revision": "3589b3c077cb16c935e52bdd15c7fb0a3f175f7a",
+      "language": "it",
+      "rows": 39,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "No Phonon or Niagara model row; no matching FLEURS component addition."
+    },
+    {
+      "url": "https://huggingface.co/datasets/hf-audio/multilingual_evals/blob/3589b3c077cb16c935e52bdd15c7fb0a3f175f7a/multilingual_pt.csv",
+      "revision": "3589b3c077cb16c935e52bdd15c7fb0a3f175f7a",
+      "language": "pt",
+      "rows": 40,
+      "publication_operator": "benchmark_maintainer",
+      "measurement_operator": "unspecified",
+      "result": "No Phonon or Niagara model row; no matching FLEURS component addition."
+    }
+  ],
+  "model_cards_checked": [
+    {
+      "model": "phonon-1",
+      "url": "https://huggingface.co/FermionResearch/Phonon-1/blob/68f96e309cd19bf5b9b72c0ead80eed92a499eae/README.md",
+      "revision": "68f96e309cd19bf5b9b72c0ead80eed92a499eae",
+      "publication_operator": "model_author",
+      "result": "English-only evidence; no CORAAL or fixed five-language FLEURS panel. Phonon-1 card uses an eight-set author protocol with different values from its later seven-set launch comparison."
+    },
+    {
+      "model": "phonon-2",
+      "url": "https://huggingface.co/FermionResearch/Phonon-2/blob/fb09063c9dc8e130d97b3a2191ed5aed6b71bb31/README.md",
+      "revision": "fb09063c9dc8e130d97b3a2191ed5aed6b71bb31",
+      "publication_operator": "model_author",
+      "result": "English-only evidence; no CORAAL or fixed five-language FLEURS panel. Phonon-2 launch seven-set observations are already preserved separately."
+    },
+    {
+      "model": "niagara-9m-batch-en",
+      "url": "https://huggingface.co/abr-ai/niagara-9m-batch.en/blob/1521edf95a146d06e3c7c1ad18a7209a899bc570/README.md",
+      "revision": "1521edf95a146d06e3c7c1ad18a7209a899bc570",
+      "publication_operator": "model_author",
+      "result": "Older English seven-set comparison only; no CORAAL or fixed five-language FLEURS panel. Card distinguishes June 13 leaderboard figures from author-measured 9M/84M results. Do not replace current cleaned-reference observations with these older values."
+    },
+    {
+      "model": "niagara-19m-batch-en",
+      "url": "https://huggingface.co/abr-ai/niagara-19m-batch.en/blob/d0276b85317389bc679d0206f60d88779cfbd15a/README.md",
+      "revision": "d0276b85317389bc679d0206f60d88779cfbd15a",
+      "publication_operator": "model_author",
+      "result": "Older English seven-set comparison only; no CORAAL or fixed five-language FLEURS panel. Card distinguishes June 13 leaderboard figures from author-measured 9M/84M results. Do not replace current cleaned-reference observations with these older values."
+    },
+    {
+      "model": "niagara-38m-batch-en",
+      "url": "https://huggingface.co/abr-ai/niagara-38m-batch.en/blob/7bfe48fb7fb065484419b1860c6b3d4e4f817c0c/README.md",
+      "revision": "7bfe48fb7fb065484419b1860c6b3d4e4f817c0c",
+      "publication_operator": "model_author",
+      "result": "Older English seven-set comparison only; no CORAAL or fixed five-language FLEURS panel. Card distinguishes June 13 leaderboard figures from author-measured 9M/84M results. Do not replace current cleaned-reference observations with these older values."
+    },
+    {
+      "model": "niagara-84m-batch-en",
+      "url": "https://huggingface.co/abr-ai/niagara-84m-batch.en/blob/ed93390475b146ad5412c668f680609a3ffca1b0/README.md",
+      "revision": "ed93390475b146ad5412c668f680609a3ffca1b0",
+      "publication_operator": "model_author",
+      "result": "Older English seven-set comparison only; no CORAAL or fixed five-language FLEURS panel. Card distinguishes June 13 leaderboard figures from author-measured 9M/84M results. Do not replace current cleaned-reference observations with these older values."
+    }
+  ],
+  "additional_pages_checked": [
+    "https://www.fermionresearch.com/research/phonon-2/"
+  ],
+  "provenance_improvement": {
+    "url": "https://huggingface.co/FermionResearch/Phonon-2/blob/88baeef8afde2d9f410a2d3337f689d632d2d53f/README.md",
+    "revision": "88baeef8afde2d9f410a2d3337f689d632d2d53f",
+    "publication_operator": "model_author",
+    "measurement_operator": "Fermion Research",
+    "evidence": "author_reported",
+    "quote": "The other rows were scored with the same code on the same sets.",
+    "protocol": {
+      "metric": "WER percent, lower is better",
+      "scoring_code": "normalizer/eval_utils.py::score_results at 6fec425b",
+      "kaldialign": "0.12.0",
+      "compound_merge": true,
+      "decoding": "greedy",
+      "sets": "Full test sets",
+      "librispeech_test_clean_utterances": 2620,
+      "librispeech_test_other_utterances": 2939,
+      "ami_utterances": 7805,
+      "earnings22": "six sessions in chunks",
+      "gigaspeech_utterances": 18768,
+      "spgispeech_utterances": 39341,
+      "voxpopuli_utterances": 628,
+      "comparison_leaderboard_revision": "d2c5b384",
+      "comparison_leaderboard_date": "2026-09-25"
+    },
+    "phonon_1_existing_values": {
+      "ls_clean": 2.11,
+      "ls_other": 5.03,
+      "ami": 10.31,
+      "earnings22": 12.34,
+      "gigaspeech": 8.73,
+      "spgispeech": 3.67,
+      "voxpopuli": 3.73,
+      "published_mean_wer": 6.56
+    },
+    "interpretation": "Stronger protocol documentation than the abbreviated current launch page. Values match the existing separate phonon-2-launch-english observation. Does not establish a second corpus family, and does not by itself verify equivalence to the October cleaned-reference core protocol. Preserve existing separation pending exact dataset/protocol verification."
+  },
+  "ranking_implication": "Phonon-2 and all four Niagara variants have one matched core family. Phonon-1 has separate author-protocol English evidence. Additional English results, English FLEURS runtime conversions, noise tests and overlapping earnings corpora cannot manufacture another independent core vote. Keep missing CORAAL/FLEURS values missing; no aggregate eligibility change is supported by this search."
+}

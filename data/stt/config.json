@@ -16,7 +16,8 @@
     "handy-fleurs-en",
     "handy-librispeech-clean",
     "moonshine-v2-paper",
-    "phonon-2-launch-english"
+    "phonon-2-launch-english",
+    "moonshine-v1-paper"
   ],
   "focus_model": "phonon-2",
   "ranking": "speech-distinct-corpora-v1",
@@ -35,7 +36,8 @@
     "handy-fleurs-en",
     "handy-librispeech-clean",
     "moonshine-v2-paper",
-    "phonon-2-launch-english"
+    "phonon-2-launch-english",
+    "moonshine-v1-paper"
   ],
   "secondary_tests": [
     "open-asr-mcv",
@@ -45,6 +47,7 @@
     "handy-fleurs-en",
     "handy-librispeech-clean",
     "moonshine-v2-paper",
-    "phonon-2-launch-english"
+    "phonon-2-launch-english",
+    "moonshine-v1-paper"
   ]
 }
