@@ -84,15 +84,17 @@ test('metric ranking links its exact source and keeps selected detail visible',(
 
 async function pageHarness(hash='') {
  const fs=require('node:fs'),vm=require('node:vm');
- const elements={},defaults={speechProtocol:data.config.default_test,speechAccess:'all',timingTest:'fermion-20-dictations'};
+ let latestResult;
+ const pageSpeech={...Speech,build(...args){latestResult=Speech.build(...args);return latestResult;}};
+ const elements={},defaults={speechProtocol:data.config.default_test,speechAccess:'all',speechHourlyRate:'1'};
  const removed=new Set(['speechView','speechSort','speechRankMetric','speechExtra','speechCoverage']);
  const element=id=>{assert.ok(!removed.has(id),'removed control '+id+' must not be requested');return elements[id]??={value:defaults[id]||'',checked:false,handlers:{},dataset:{},attributes:{},classList:{toggle(){}},setAttribute(key,value){this.attributes[key]=value;},addEventListener(event,fn){this.handlers[event]=fn;}};};
  const document={getElementById:element,querySelector:()=>({dataset:{releaseStart:data.config.release_start,snapshotDate:data.config.snapshot_date}}),querySelectorAll:()=>[]};
  const location={hash,pathname:'/stt/',search:''};
  const history={replaceState(state,title,url){location.hash=url.includes('#')?url.slice(url.indexOf('#')):'';}};
- vm.runInNewContext(fs.readFileSync('src/assets/js/speech-page.js','utf8'),{document,location,history,BenchmarkSpeech:Speech,BenchmarkSpeechMatrix:Matrix,fetch:async()=>({ok:true,json:async()=>data}),console,setTimeout,clearTimeout});
+ vm.runInNewContext(fs.readFileSync('src/assets/js/speech-page.js','utf8'),{document,location,history,BenchmarkSpeech:pageSpeech,BenchmarkSpeechMatrix:Matrix,fetch:async()=>({ok:true,json:async()=>data}),console,setTimeout,clearTimeout});
  await new Promise(resolve=>setImmediate(resolve));
- return {element,location};
+ return {element,location,result:()=>latestResult};
 }
 
 test('single-selector navigation handles partial links, sortable headers and reset',async()=>{
@@ -208,8 +210,8 @@ test('main numeric headers sort in both directions with unknowns last and fixed 
  const baseline=Speech.build(data,{missing:true,compact:true});
  const positions=new Map(baseline.rows.map(row=>[row.id,row.benchmarkRank]));
  const valueFor={rank:row=>row.benchmarkRank,score:row=>row.benchmarkValue,
-  speed:row=>data.throughput.find(record=>record.model===row.id&&record.test_id==='fermion-20-dictations'&&record.hardware==='Apple M5 MacBook Air'&&record.batch_size===1&&record.status!=='assumed')?.rtfx,
-  price:row=>{const price=Speech.selectPrice(data,row.id);return price?.currency==='USD'&&price.unit==='currency_per_audio_hour'?price.amount:null;}};
+  speed:row=>row.deployment?.speed?.low,
+  price:row=>Speech.costSortValue(row)};
  for(const [sort,value] of Object.entries(valueFor)) for(const sortDirection of ['asc','desc']) {
   const result=Speech.build(data,{missing:true,compact:true,sort,sortDirection});
   let unknown=false,previous;
@@ -246,37 +248,59 @@ test('compact Details rounds size labels only and preserves precise size metadat
  assert.equal(row.size.parameters_million,9.8);
 });
 
-test('speed uses one explicitly labelled hardware workload cohort, without model alias inheritance',()=>{
- const english=Speech.build(data,{compact:true,missing:true});
- assert.equal(english.speedLabel,'M5 speed ×');
- assert.deepEqual(english.rows.filter(row=>row.speed).map(row=>[row.id,row.speed.rtfx]).sort(),[
-  ['phonon-2',174],['parakeet-tdt-0-6b-v3',104.9],['parakeet-redux',27.8]
- ].sort());
- for(const row of english.rows.filter(row=>row.speed)) {
-  assert.equal(row.speed.model,row.id);
-  assert.equal(row.speed.test_id,'fermion-20-dictations');
-  assert.equal(row.speed.hardware,'Apple M5 MacBook Air');
-  assert.equal(row.speed.batch_size,1);
+test('M4 speed spans distinguish twenty exact-upstream English proxies from measured Q8 configurations',()=>{
+ const english=Speech.build(data,{compact:true});
+ assert.equal(english.speedLabel,'M4 speed ×');
+ const proxies=english.rows.filter(row=>row.deployment?.speed);
+ assert.equal(proxies.length,20);
+ for(const row of proxies) {
+  const speed=row.deployment.speed;
+  assert.equal(speed.proxy,true);assert.equal(speed.status,'assumed');
+  const conversion=data.models.find(model=>model.id===speed.model);
+  assert.equal(conversion.upstream_hub_id.toLowerCase(),row.model.hub_id.toLowerCase());
+  assert.equal(speed.hardware,'m4-max');assert.equal(speed.batch_size,1);
+  assert.equal(speed.runtime,'transcribe.cpp metal / Q8_0');
+  assert.deepEqual(speed.records.map(record=>record.sample).sort(),['dots','jfk']);
  }
- const handy=Speech.build(data,{test:'handy-fleurs-en',compact:true,missing:true});
- assert.equal(handy.speedLabel,'M4 speed ×');
- assert.equal(handy.rows.filter(row=>row.speed).length,58);
- for(const row of handy.rows.filter(row=>row.speed)) {
-  assert.equal(row.speed.model,row.id);
-  assert.equal(row.speed.test_id,'handy-single-clip-speed');
-  assert.equal(row.speed.hardware,'m4-max');
-  assert.equal(row.speed.runtime,'transcribe.cpp metal / Q8_0');
-  assert.equal(row.speed.sample,'jfk');
-  assert.equal(row.speed.batch_size,1);
+ for(const id of ['qwen3-asr-0-6b-hf','qwen3-asr-1-7b-hf','stt-thestageai-thewhisper-large-v3-turbo'])
+  assert.equal(find(english,id)?.deployment?.speed ?? null,null,id);
+ const handy=Speech.build(data,{test:'handy-fleurs-en',compact:true});
+ const measured=handy.rows.filter(row=>row.deployment?.speed && !row.deployment.speed.proxy);
+ assert.equal(measured.length,58);
+ for(const row of measured) {
+  assert.equal(row.deployment.speed.model,row.id);
+  assert.equal(row.deployment.speed.status,'observed');
  }
- const altered=structuredClone(data),valid=find(english,'phonon-2').speed;
- altered.throughput.unshift(...[
-  {hardware:'m4-max'},{batch_size:8},{test_id:'handy-single-clip-speed'},{status:'assumed'}
- ].map(change=>({...valid,...change,rtfx:99999})));
- assert.equal(find(Speech.build(altered),'phonon-2').speed.rtfx,174);
- const handyRecord=handy.rows.find(row=>row.speed).speed;
- altered.throughput.unshift(...[
-  {hardware:'m3-max'},{runtime:'transcribe.cpp cpu / Q8_0'},{sample:'different'},{batch_size:8},{status:'assumed'}
- ].map(change=>({...handyRecord,...change,rtfx:99999})));
- assert.equal(find(Speech.build(altered,{test:'handy-fleurs-en',missing:true}),handyRecord.model).speed.rtfx,handyRecord.rtfx);
+ const id='stt-handy-whisper-large-v3-q8-0';
+ for(const change of [{hardware:'m5'},{runtime:'cpu'},{status:'assumed'}]) {
+  const altered=structuredClone(data);
+  altered.throughput=altered.throughput.map(record=>record.model===id&&record.sample==='jfk'?{...record,...change}:record);
+  assert.equal(find(Speech.build(altered),'stt-openai-whisper-large-v3').deployment.speed,null);
+ }
+});
+
+test('browser hourly rate changes only local scenario costs and reset restores one dollar',async()=>{
+ const {element,result}=await pageHarness();
+ const baseline=result();
+ assert.equal(element('speechHourlyRate').value,'1');
+ element('speechHourlyRate').value='2';element('speechHourlyRate').handlers.change();
+ const changed=result();
+ assert.ok(changed.rows.some(row=>row.deployment?.cost));
+ assert.ok(changed.rows.some(row=>row.price));
+ for(const row of changed.rows) {
+  const before=find(baseline,row.id);
+  assert.equal(row.benchmarkRank,before.benchmarkRank);assert.equal(row.benchmarkValue,before.benchmarkValue);
+  assert.deepEqual(row.price,before.price);
+  assert.deepEqual(row.deployment?.speed,before.deployment?.speed);
+  if(row.deployment?.cost) {
+   assert.equal(row.deployment.cost.low,before.deployment.cost.low*2);
+   assert.equal(row.deployment.cost.high,before.deployment.cost.high*2);
+  }
+ }
+ assert.match(element('speechBody').innerHTML,/est\. local/);
+ assert.match(element('speechBody').innerHTML,/100% utilization/);
+ assert.equal((element('speechHead').innerHTML.match(/<th /g)||[]).length,5);
+ element('speechReset').handlers.click();
+ assert.equal(element('speechHourlyRate').value,'1');
+ for(const row of result().rows) assert.deepEqual(row.deployment?.cost,find(baseline,row.id).deployment?.cost);
 });

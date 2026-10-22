@@ -1,0 +1,77 @@
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const Estimates = require('../src/assets/js/speech-estimates.js');
+const Speech = require('../src/assets/js/speech.js');
+const loadData = require('../src/_data/stt.cjs');
+const data = loadData();
+const model = data.models.find(m => m.id === 'stt-openai-whisper-large-v3');
+const size = Speech.selectSize(data, model.id);
+
+test('exact upstream proxy retains observations, clip span and reciprocal cost', () => {
+  const before = JSON.stringify(data);
+  const result = Estimates.getDeployment(data, model, size, {hourlyRate:2});
+  assert.equal(result.status, 'assumed');
+  assert.equal(result.speed.proxy, true);
+  assert.equal(result.speed.model, 'stt-handy-whisper-large-v3-q8-0');
+  assert.deepEqual([result.speed.low, result.speed.high], [14.76,19.74]);
+  assert.equal(result.speed.confidence_interval, false);
+  assert.equal(result.cost.low, 2 / 19.74);
+  assert.equal(result.cost.high, 2 / 14.76);
+  assert.equal(result.cost.market_price, false);
+  assert.equal(result.memory.fp16_weights_gb, size.parameters_million * .002);
+  assert.equal(result.memory.runtime_extra, true);
+  assert.equal(result.memory.documented_vram.gb, 10);
+  assert.equal(JSON.stringify(data), before);
+});
+
+test('same exact Q8 model is observed span, with only cost/memory assumed', () => {
+  const id = 'stt-handy-whisper-large-v3-q8-0';
+  const result = Estimates.getDeployment(data, id, Speech.selectSize(data,id));
+  assert.equal(result.status,'observed');
+  assert.equal(result.speed.proxy,false);
+  assert.equal(result.cost.status,'assumed');
+  assert.equal(result.memory.documented_vram,null);
+});
+
+test('closed API, unknown model and fuzzy HF aliases do not receive speed proxies', () => {
+  assert.equal(Estimates.getDeployment(data,{...model,access:'closed'},size),null);
+  assert.equal(Estimates.getDeployment(data,'absent',size),null);
+  for (const id of ['qwen3-asr-0-6b-hf','qwen3-asr-1-7b-hf','stt-funaudiollm-fun-asr-nano-2512-hf','stt-thestageai-thewhisper-large-v3-turbo']) {
+    const result = Estimates.getDeployment(data,id,Speech.selectSize(data,id));
+    assert.equal(result?.speed ?? null,null,id);
+  }
+});
+
+test('matching is case insensitive but otherwise exact; no conflicting conversion selection', () => {
+  assert.ok(Estimates.getDeployment(data,{...model,hub_id:model.hub_id.toUpperCase()},size).speed);
+  const duplicate = {...data.models.find(m => m.id === 'stt-handy-whisper-large-v3-q8-0'),id:'duplicate'};
+  assert.equal(Estimates.getDeployment({...data,models:[...data.models,duplicate]},model,size).speed,null);
+});
+
+test('panel rejects incomplete, wrong hardware, runtime, batch, assumed and mixed revision clips', () => {
+  for (const change of [{hardware:'m5'},{runtime:'other'},{batch_size:128},{status:'assumed'},{engine_sha:'other'},{rtfx:0},{load_time_included:true}]) {
+    const throughput = data.throughput.map(r => r.model === 'stt-handy-whisper-large-v3-q8-0' && r.sample === 'jfk' && r.hardware === 'm4-max' && r.runtime.includes('metal') ? {...r,...change} : r);
+    assert.equal(Estimates.getDeployment({...data,throughput},model,size).speed,null,JSON.stringify(change));
+  }
+});
+
+test('memory is a parameter floor, never file-size VRAM; exact Whisper documentation only', () => {
+  const noSize = Estimates.getDeployment(data,model,{download_mb:999});
+  assert.equal(noSize.memory,null);
+  const turbo = Estimates.getDeployment(data,'whisper-large-v3-turbo',{parameters_million:809});
+  assert.equal(turbo.memory.documented_vram.gb,6);
+  const distil = Estimates.getDeployment(data,{...model,hub_id:'distil-whisper/distil-large-v3.5'},{parameters_million:800});
+  assert.equal(distil.memory.documented_vram,null);
+  assert.equal(Estimates.getDeployment(data,model,size,{hourlyRate:-1}).cost,null);
+  assert.equal(Estimates.getDeployment(data,model,size,{hourlyRate:Infinity}).cost,null);
+});
+
+test('browser UMD export matches CommonJS and default English proxy coverage is bounded', () => {
+  const context = {};
+  vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech-estimates.js'),'utf8'),context);
+  assert.equal(typeof context.BenchmarkSpeechEstimates.getDeployment,'function');
+  const ids = data.rawRecords.filter(r => r.benchmark === 'open-asr-english-2026-10-17').map(r => r.model);
+  assert.equal(ids.filter(id => Estimates.getDeployment(data,id,Speech.selectSize(data,id))?.speed).length,20);
+});

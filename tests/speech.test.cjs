@@ -175,7 +175,7 @@ test('new speech identities remain outside OCR cohorts and unknown release dates
 
 test('speech UI switches its single benchmark selector and applies a download budget', async () => {
   const elements = {};
-  const defaults={speechProtocol:official,speechAccess:'all',timingTest:'fermion-20-dictations'};
+  const defaults={speechProtocol:official,speechAccess:'all',speechHourlyRate:'1'};
   const removed=new Set(['speechView','speechSort','speechRankMetric','speechExtra','speechCoverage']);
   const element = id => {assert.ok(!removed.has(id),'removed control '+id+' must not be requested');return elements[id] ??= {value:defaults[id] || '',checked:false, handlers:{}, dataset:{},classList:{toggle(){}},setAttribute(){},addEventListener(event, handler) {this.handlers[event] = handler;}};};
   const document = {getElementById:element,querySelector:()=>({dataset:{releaseStart:data.config.release_start,snapshotDate:data.config.snapshot_date}}),querySelectorAll:()=>[]};
@@ -198,7 +198,7 @@ test('speech UI switches its single benchmark selector and applies a download bu
   assert.match(element('speechBody').innerHTML, /Phonon-2/);
   assert.match(element('speechBody').innerHTML, /Parakeet Redux/);
   assert.doesNotMatch(element('speechBody').innerHTML, /Canary 180M/);
-  assert.match(element('speechHead').innerHTML,/M5 speed ×/);
+  assert.match(element('speechHead').innerHTML,/M4 speed ×/);
   assert.match(element('speechHead').innerHTML,/\$\/audio hr/);
   assert.doesNotMatch(element('speechHead').innerHTML,/Download|Parameters/);
 });

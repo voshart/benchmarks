@@ -1,9 +1,9 @@
 /* Speech evidence selection and rendering, shared by Eleventy and the browser. */
 (function(root, make) {
-  const api = make(typeof module === 'object' && module.exports ? require('./ranking.js') : root.BenchmarkRank);
+  const api = make(typeof module === 'object' && module.exports ? require('./ranking.js') : root.BenchmarkRank, typeof module === 'object' && module.exports ? require('./speech-estimates.js') : root.BenchmarkSpeechEstimates);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.BenchmarkSpeech = api;
-})(globalThis, Rank => {
+})(globalThis, (Rank, Estimates) => {
   const finite = value => typeof value === 'number' && Number.isFinite(value);
   const observed = record => record && record.status !== 'assumed' && record.evidence !== 'assumed';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -96,22 +96,42 @@
     }).join('');
   }
 
+
+  const number = value => value.toLocaleString('en-US',{maximumFractionDigits:value<1 ? 2 : 1});
+  const dollars = value => value.toLocaleString('en-US',{maximumSignificantDigits:2});
+  const speedNumber = value => value.toLocaleString('en-US',{maximumFractionDigits:value<10 ? 1 : 0});
+  const usdPrice = row => row.price?.currency==='USD' && row.price?.unit==='currency_per_audio_hour';
+  const costSortValue = row => usdPrice(row) ? row.price.amount : row.deployment?.cost?.high;
+  function deploymentDetails(row,data,result) {
+    const deployment=row.deployment,speed=deployment?.speed,memory=deployment?.memory,cost=deployment?.cost;
+    return `<p><strong>Speed column:</strong> ${esc(result.speedNote)} ${speed ? (speed.proxy ? 'Estimated deployment proxy: ' : 'Measured configuration: ')+esc(speed.model)+'. '+speed.records.map(record=>link(data.sources[record.source_id],record.sample+': '+record.rtfx+'×')).join(' · ')+(speed.proxy ? ' This is a separately converted Q8 model linked by exact upstream Hub identity, not a measurement of the accuracy checkpoint. Quantization/runtime may change accuracy. The displayed error score remains the original source result.' : '') : 'No supported deployment proxy or matched measurement.'}</p>`
+      + (memory ? `<p><strong>Memory:</strong> ≈${number(memory.fp16_weights_gb)} GB for FP16 weights alone (reported total parameters × 2 bytes). This is an assumed all-resident weight-memory floor, NOT required VRAM/RAM. Activations, caches, quantization metadata, runtime workspace and copies are extra. The speed scenario is Q8, not FP16; Apple M4 uses unified memory, not dedicated VRAM. ${memory.documented_vram ? link({url:memory.documented_vram.source_url},'OpenAI planning guidance')+': approximately '+memory.documented_vram.gb+' GB VRAM for the separate OpenAI PyTorch configuration, not the Q8 speed scenario.' : 'No supported full runtime-memory requirement is available.'}</p>` : '')
+      + (cost ? `<p><strong>Estimated local compute:</strong> $${dollars(cost.low)}–$${dollars(cost.high)} / audio hour = illustrative $${number(cost.hourlyRate)} / device-hour ÷ throughput, at 100% utilization. The assumed rate is adjustable under More filters; it is NOT a verified M4 rental price or API tariff. Startup/loading, idle time, minimum billing, tax and other charges are excluded. Lower utilization increases cost; the clip span is not a confidence interval.</p>` : '');
+  }
+  function renderDecisionCells(row,data,result) {
+    const speed=row.deployment?.speed,cost=row.deployment?.cost;
+    const speedCell=speed ? link(data.sources[speed.records[0].source_id],(speed.proxy ? '≈' : '')+speedNumber(speed.low)+'–'+speedNumber(speed.high)+'×',result.speedNote)+`<small class="metric-kind">${speed.proxy ? 'est. Q8' : 'measured Q8'}</small>` : '—';
+    const priceCell=usdPrice(row) ? link(data.sources[row.price.source_id],(row.price.approximate ? '≈$' : '$')+row.price.amount.toLocaleString('en-US',{maximumFractionDigits:4}),[row.price.mode,row.price.tier,row.price.as_of,row.price.note].join(' · '))+'<small class="metric-kind">API</small>' : cost ? `<span class="cost-range" title="Illustrative local compute at $${esc(cost.hourlyRate)}/device-hour and 100% utilization; not an API price"><span>≈$${dollars(cost.low)}–</span><wbr><span>$${dollars(cost.high)}</span></span><small class="metric-kind">est. local</small>` : row.model.access==='open' ? '<span title="No supported compute-cost estimate">Local —</span>' : row.price ? esc(row.price.currency)+' rate' : (data.tokenPricing || []).some(record=>record.model===row.id) ? 'Token rate' : '—';
+    return `<td class="deployment-speed" title="${esc(result.speedNote)}">${speedCell}</td><td class="deployment-cost">${priceCell}</td>`;
+  }
+
   function build(data, options={}) {
     const test = data.accuracyTests.find(test => test.id === options.test) || data.accuracyTests.find(test => test.id === data.config.default_test);
     const rankMetric = test.metrics.find(metric => metric.id === options.rankMetric) || null;
     const columns = options.compact ? [] : test.metrics.filter(metric => metric.primary || options.extra || test.show_all_metrics || metric === rankMetric);
-    const handy=test.id.startsWith('handy-');
-    const speedLabel=handy ? 'M4 speed ×' : 'M5 speed ×';
-    const speedNote=handy ? 'M4 Max · Metal Q8_0 · batch 1 · JFK 11-second clip. Community runtime measurements; loading excluded.' : 'M5 MacBook Air · batch 1 · 20 dictations. Vendor-run comparison; different runtimes, loading excluded. Not streaming latency.';
-    const speedFor=id=>(data.throughput || []).find(record=>record.model===id && observed(record) && record.batch_size===1 && (handy ? record.test_id==='handy-single-clip-speed' && record.hardware==='m4-max' && record.sample==='jfk' && record.runtime==='transcribe.cpp metal / Q8_0' : record.test_id==='fermion-20-dictations' && record.hardware==='Apple M5 MacBook Air')) || null;
+    const speedLabel='M4 speed ×';
+    const speedNote='M4 Max · Metal Q8_0 · batch 1 · two short clips, loading excluded. Ranges are observed clip spans, not confidence intervals or streaming latency.';
+    const enteredRate=Number(options.hourlyRate);
+    const hourlyRate=Number.isFinite(enteredRate)&&enteredRate>0&&enteredRate<=1000 ? enteredRate : 1;
     const query = (options.query || '').trim().toLowerCase();
     const cutoff = options.cutoff || data.config.snapshot_date;
     const candidates = data.models.filter(model => available(model,cutoff,data.config.snapshot_date)).map(model => {
       const selected = summarize(data,test,model.id);
       const size = selectSize(data, model.id);
+      const deployment = Estimates.getDeployment(data,model,size,{hourlyRate});
       const rankRecord = rankMetric ? selected.scores[rankMetric.id] : selected.summary;
       return {model, id:model.id, name:model.name, ...selected, provenance:rankMetric ? rankRecord : selected.provenance, size, rank:null,
-        benchmarkValue:Rank.rankable(rankRecord) ? rankRecord.value : null, speed:speedFor(model.id),price:selectPrice(data,model.id),
+        benchmarkValue:Rank.rankable(rankRecord) ? rankRecord.value : null, deployment,price:selectPrice(data,model.id),
         familyCount:selected.count ? 1 : 0};
     });
     // Benchmark positions use every eligible configuration at this date, before UI filters.
@@ -128,20 +148,20 @@
     const direction=sortDirection==='desc' ? -1 : 1;
     const compare=(a,b)=>{
       if(sort==='name') return direction*a.name.localeCompare(b.name) || a.id.localeCompare(b.id);
-      const value=row=>sort==='download' ? row.size?.download_mb : sort==='params' ? row.size?.parameters_million : sort==='speed' ? row.speed?.rtfx : sort==='price' ? (row.price?.currency==='USD' && row.price?.unit==='currency_per_audio_hour' ? row.price.amount : null) : row.benchmarkValue;
+      const value=row=>sort==='download' ? row.size?.download_mb : sort==='params' ? row.size?.parameters_million : sort==='speed' ? row.deployment?.speed?.low : sort==='price' ? costSortValue(row) : row.benchmarkValue;
       const av=value(a),bv=value(b);
       if(finite(av)!==finite(bv)) return finite(av) ? -1 : 1;
       return (finite(av) ? direction*(av-bv) : 0) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id);
     };
     rows.sort(compare);unscoredRows.sort(compare);
-    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,compact:Boolean(options.compact),benchmarkCount:cohort.length,sort,sortDirection,speedLabel,speedNote,speedCount:rows.filter(row=>finite(row.benchmarkValue)&&finite(row.speed?.rtfx)).length,priceCount:rows.filter(row=>finite(row.benchmarkValue)&&row.price?.currency==='USD'&&row.price?.unit==='currency_per_audio_hour').length};
+    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,compact:Boolean(options.compact),benchmarkCount:cohort.length,sort,sortDirection,speedLabel,speedNote,speedCount:rows.filter(row=>finite(row.benchmarkValue)&&finite(row.deployment?.speed?.low)).length,priceCount:rows.filter(row=>finite(row.benchmarkValue)&&row.price?.currency==='USD'&&row.price?.unit==='currency_per_audio_hour').length,localCostCount:rows.filter(row=>finite(row.benchmarkValue)&&row.deployment?.cost).length};
   }
 
   function renderHead(result) {
     const compactMetric=result.rankMetric || result.test.metrics.find(metric=>metric.id === (result.test.summary_metric || result.test.published_mean_metric));
     if(result.compact) {
       const header=(key,label,title='',narrow=label)=>`<th scope="col" aria-sort="${result.sort===key ? (result.sortDirection==='desc' ? 'descending' : 'ascending') : 'none'}"><button type="button" class="column-sort" data-sort-key="${key}" title="${esc(title || 'Sort by '+label)}"><span class="header-label-wide">${esc(label)}</span><span class="header-label-narrow">${esc(narrow)}</span>${result.sort===key ? (result.sortDirection==='desc' ? ' ↓' : ' ↑') : ' ↕'}</button></th>`;
-      return header('rank','Rank','Quality rank; unaffected by metadata sorting')+header('name','Model')+header('score',compactMetric?.unit==='oiwer_percent' ? 'OI-WER %' : 'Error %','Lower error is better')+header('speed',result.speedLabel,result.speedNote+' Higher is faster.',result.speedLabel.replace(' speed',''))+header('price','$/audio hr','Verified USD audio-hour tariff only. Local compute is not free; unlike token/currency rates are not numerically compared.','$/hr');
+      return header('rank','Rank','Quality rank; unaffected by metadata sorting')+header('name','Model')+header('score',compactMetric?.unit==='oiwer_percent' ? 'OI-WER %' : 'Error %','Lower error is better')+header('speed',result.speedLabel,result.speedNote+' Sorts by the lower throughput in the span; higher is faster.',result.speedLabel.replace(' speed',''))+header('price','$/audio hr','API tariffs or explicitly estimated local compute. Ranges sort by the higher cost (slower clip); not a confidence bound.','$/hr');
     }
     return (result.compact ? '<th scope="col">Rank</th><th scope="col">Model</th><th scope="col">' : '<th scope="col">Model</th><th scope="col">Accuracy rank</th><th scope="col">')
       + (result.compact ? (compactMetric?.unit === 'oiwer_percent' ? 'OI-WER % ↓' : 'WER % ↓') : result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
@@ -166,7 +186,7 @@
         + `<p>${esc(result.test.note)}</p><ul>${result.test.metrics.filter(metric=>row.scores[metric.id]).map(metric=>`<li>${esc(metric.label)}: ${link(data.sources[row.scores[metric.id].source_id],row.scores[metric.id].value.toFixed(2)+'%')}</li>`).join('')}</ul>`
         + (source ? `<p>${link(source, source.title)}. ${esc(source.note)}</p>` : '')
         + `<p><strong>Size:</strong> ${finite(row.size?.download_mb) ? row.size.download_mb.toLocaleString('en-US',{maximumFractionDigits:0})+' MB download' : 'Download not reported'} · ${finite(row.size?.parameters_million) ? row.size.parameters_million.toLocaleString('en-US',{maximumFractionDigits:0})+' M parameters' : 'Parameters not reported'}. Metadata only, never accuracy weights.</p>`
-        + `<p><strong>Speed column:</strong> ${esc(result.speedNote)} ${row.speed ? esc(row.speed.runtime)+'. '+link(data.sources[row.speed.source_id],'Speed source') : 'No matched speed result.'}</p>`
+        + deploymentDetails(row,data,result)
         + ((data.throughput || []).some(record=>record.model===row.id) ? '<details><summary>All reported speed measurements</summary><ul>'+(data.throughput || []).filter(record=>record.model===row.id).map(record=>`<li>${link(data.sources[record.source_id],String(record.rtfx)+'× realtime')}: ${esc(record.hardware)} · ${esc(record.runtime)} · ${esc(record.test_id)} ${esc(record.sample || '')} · batch ${esc(record.batch_size)} · ${esc(record.note)}</li>`).join('')+'</ul></details>' : '')
         + ((data.latency || []).filter(record=>record.model===row.id).map(record=>`<p>Response latency: ${link(data.sources[record.source_id],record.milliseconds+' ms')} · ${esc(record.hardware)} · ${esc(record.statistic)}. ${esc(record.note)}</p>`).join(''))
         + `<p><strong>Cost:</strong> ${row.model.access==='open' ? 'Self-hosted compute cost depends on deployment; not zero.' : 'Rates depend on service, mode and tier; not a claim about the benchmark endpoint.'}</p>`
@@ -187,11 +207,13 @@
         return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
       }).join('');
       const detailsButton=`<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">Details</button>`;
-      const modelCell=`<th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}${result.compact ? `<div class="model-subline"><small class="model-vendor">${esc(row.model.organization)}</small>${detailsButton}</div>${details}` : ''}</th>`;
+      const memory=row.deployment?.memory;
+      const memoryLine=memory ? `<small class="model-memory" title="FP16 weights-only floor, not total VRAM or RAM. Runtime requires additional memory; see Details.">FP16 weights ≈${number(memory.fp16_weights_gb)} GB + runtime</small>` : '';
+      const modelCell=`<th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}${result.compact ? `<div class="model-subline"><small class="model-vendor">${esc(row.model.organization)}</small>${detailsButton}</div>${memoryLine}${details}` : ''}</th>`;
       const rankCell=`<td class="index" title="${row.benchmarkRank == null ? 'No matched accuracy rank' : 'Rank '+row.benchmarkRank+' of '+result.benchmarkCount+' configurations on this benchmark before filters; ties share a rank'}">${row.benchmarkRank == null ? '—' : result.compact ? row.benchmarkRank : '#'+row.benchmarkRank+' / '+result.benchmarkCount}</td>`;
       return '<tr>'+(result.compact ? rankCell+modelCell : modelCell+rankCell)
         + `<td class="index" title="${esc(meanTitle)}">${finite(row.benchmarkValue) ? row.benchmarkValue.toFixed(2) : '—'}</td>`
-        + (result.compact ? `<td title="${esc(result.speedNote)}">${row.speed ? link(data.sources[row.speed.source_id],row.speed.rtfx.toLocaleString('en-US',{maximumFractionDigits:2})+'×',row.speed.runtime) : '—'}</td><td>${row.price?.currency==='USD' && row.price?.unit==='currency_per_audio_hour' ? link(data.sources[row.price.source_id],(row.price.approximate ? '≈$' : '$')+row.price.amount.toLocaleString('en-US',{maximumFractionDigits:4}),[row.price.mode,row.price.tier,row.price.as_of,row.price.note].join(' · ')) : row.model.access==='open' ? '<span title="Self-hosted compute cost varies; not free">Local</span>' : row.price ? esc(row.price.currency)+' rate' : (data.tokenPricing || []).some(record=>record.model===row.id) ? 'Token rate' : '—'}</td>` : renderSizeCells(row.size, data)) + cells
+        + (result.compact ? renderDecisionCells(row,data,result) : renderSizeCells(row.size, data)) + cells
         + (result.compact ? '' : `<td>${result.compact ? '' : esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">${result.compact ? 'Details' : '†'}</button>${details}</td>`)+'</tr>';
     }).join('');
   }
@@ -207,5 +229,5 @@
   }
   function renderUnscored(result,data) {return renderRows(result,data,true);}
 
-  return {build, renderUnscored, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
+  return {build, costSortValue, renderUnscored, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
 });

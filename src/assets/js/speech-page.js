@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $=id=>document.getElementById(id);
-  const controls={test:$('speechProtocol'),query:$('speechSearch'),access:$('speechAccess'),maxDownload:$('speechSize'),maxParams:$('speechParams')};
+  const controls={test:$('speechProtocol'),query:$('speechSearch'),access:$('speechAccess'),maxDownload:$('speechSize'),maxParams:$('speechParams'),hourlyRate:$('speechHourlyRate')};
   const historyBar=document.querySelector('.history-bar');
   const start=historyBar.dataset.releaseStart,end=historyBar.dataset.snapshotDate;
   const day=value=>Math.round((Date.parse(value+'T00:00:00Z')-Date.parse(start+'T00:00:00Z'))/864e5);
@@ -11,7 +11,7 @@
     if(!data) return;
     const [test,rankMetric]=controls.test.value.split('::');
     const cutoff=date(Number($('historyRange').value));
-    const result=BenchmarkSpeech.build(data,{test,rankMetric,compact:true,cutoff,sort,sortDirection,query:controls.query.value,access:controls.access.value,maxDownload:controls.maxDownload.value,maxParams:controls.maxParams.value});
+    const result=BenchmarkSpeech.build(data,{test,rankMetric,compact:true,cutoff,sort,sortDirection,query:controls.query.value,access:controls.access.value,maxDownload:controls.maxDownload.value,maxParams:controls.maxParams.value,hourlyRate:controls.hourlyRate.value});
     $('speechHead').innerHTML=BenchmarkSpeech.renderHead(result);
     $('speechUnscoredHead').innerHTML=BenchmarkSpeech.renderHead(result);
     $('speechBody').innerHTML=BenchmarkSpeech.renderRows(result,data);
@@ -19,9 +19,10 @@
     $('speechUnscoredSummary').textContent=`${result.unscoredRows.length} configurations without a matched accuracy score`;
     $('speechBenchmarkNote').textContent='Lower error and price. Higher speed.';
     $('speechProtocolNote').textContent=result.test.note;
-    $('speechSpeedNote').textContent=(result.speedLabel.startsWith('M4') ? 'Speed: M4 Max, JFK clip, community-run.' : 'Speed: M5, 20 dictations, vendor-run.')+' Price: published USD/audio-hour; mode and tier in Details.';
+    const rate=Number(controls.hourlyRate.value);
+    $('speechSpeedNote').textContent='Speed: M4 Max Q8 deployment spans. Cost: API rates or estimated local compute at $'+(Number.isFinite(rate)&&rate>0&&rate<=1000 ? rate : 1)+'/device-hour, fully utilized.';
     const labels={rank:'quality rank',score:'error',name:'model name',speed:result.speedLabel,price:'USD/audio hour'};
-    $('speechStatus').textContent=`${result.rows.filter(row=>row.benchmarkRank).length} ranked · ${sort==='score' && sortDirection==='asc' ? 'best accuracy first' : labels[sort]+' '+(sortDirection==='asc' ? '↑' : '↓')} · ${result.speedCount} speed results · ${result.priceCount} USD rates`;
+    $('speechStatus').textContent=`${result.rows.filter(row=>row.benchmarkRank).length} ranked · ${sort==='score' && sortDirection==='asc' ? 'best accuracy first' : labels[sort]+' '+(sortDirection==='asc' ? '↑' : '↓')} · ${result.speedCount} speed scenarios · ${result.priceCount} API rates · ${result.localCostCount} local estimates`;
     $('historyDate').textContent=cutoff;
     const undated=data.models.filter(model=>!model.release_date).length;
     $('historyStatus').textContent=cutoff===end ? `${undated} undated configurations included only in the current snapshot` : `${undated} undated configurations excluded · availability cutoff, not evaluation date`;
@@ -55,7 +56,7 @@
   $('speechUnscoredList').addEventListener('click',openBenchmark);
   $('speechReset').addEventListener('click',()=>{
     if(!data) return;
-    controls.test.value=data.config.default_test;controls.query.value='';controls.access.value='all';controls.maxDownload.value='';controls.maxParams.value='';
+    controls.test.value=data.config.default_test;controls.query.value='';controls.access.value='all';controls.maxDownload.value='';controls.maxParams.value='';controls.hourlyRate.value='1';
     $('historyRange').value=day(end);$('speechUnscored').open=false;$('speechMore').open=false;
     if(typeof location!=='undefined') globalThis.history?.replaceState(null,'',location.pathname+location.search);
     resetSort();render();
