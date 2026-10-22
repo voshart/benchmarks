@@ -7,6 +7,7 @@ module.exports=function(config){
  const speechMatrix=require('./src/assets/js/speech-matrix.js');
  config.addFilter('speechHead',speech.renderHead);
  config.addFilter('speechRows',speech.renderRows);
+ config.addFilter('speechUnscored',speech.renderUnscored);
  config.addFilter('speechMatrixHead',speechMatrix.renderHead);
  config.addFilter('speechMatrixRows',speechMatrix.renderRows);
  config.addFilter('speechTiming',speechMatrix.renderTiming);

@@ -182,8 +182,8 @@ test('speech UI switches complete protocols, retains sources and applies a downl
   const context = {document, BenchmarkSpeech:Speech,BenchmarkSpeechMatrix:Matrix,fetch:async () => ({ok:true, json:async () => data}), console,setTimeout,clearTimeout};
   vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech-page.js'), 'utf8'), context);
   await new Promise(resolve => setImmediate(resolve));
-  assert.match(element('speechStatus').textContent, /3 mature core families/);
-  assert.match(element('speechHead').innerHTML,/Rank index/);
+  assert.match(element('speechStatus').textContent, /64 scored configurations/);
+  assert.match(element('speechHead').innerHTML,/Accuracy rank/);
   buttons.find(button=>button.dataset.view==='english').handlers.click();
   assert.match(element('speechStatus').textContent, /^64 models/);
   assert.match(element('speechHead').innerHTML, /Fixed 7 mean WER/);

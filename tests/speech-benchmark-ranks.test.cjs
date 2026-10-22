@@ -108,4 +108,52 @@ test('benchmark navigation handles partial links, sort labels and repeated view 
  assert.equal(element('speechSort').options[1].disabled,false);
  click('small');click('english');click('small');
  assert.equal(element('speechSort').value,'wer:'+data.config.default_test);
+ click('english');
+ element('speechRankMetric').value='ls_clean';element('speechRankMetric').handlers.change();
+ click('english');assert.equal(element('speechRankMetric').value,'');
+ element('speechSearch').value='gemma';element('speechSize').value='200';element('speechSort').value='params';
+ element('speechAccess').value='closed';element('speechRankMetric').value='ls_other';element('historyRange').value='0';
+ element('speechReset').handlers.click();
+ assert.equal(element('speechSearch').value,'');assert.equal(element('speechSize').value,'');
+ assert.equal(element('speechSort').value,'score');assert.equal(element('speechAccess').value,'all');assert.equal(element('speechRankMetric').value,'');
+ assert.match(element('speechStatus').textContent,/64 models/);
+ assert.match(element('speechUnscoredSummary').textContent,/108 configurations/);
+ assert.ok(element('speechBody').innerHTML.indexOf('>Phonon-2</a>')<element('speechBody').innerHTML.indexOf('>gemma-4-E4B-it</a>'));
+ assert.doesNotMatch(element('speechBody').innerHTML,/GGUF Q8_0/);
+ assert.match(element('speechUnscoredList').innerHTML,/GGUF Q8_0/);
+});
+
+test('English landing separates no-score models and orders Phonon above every Gemma4 variant',()=>{
+ const result=Speech.build(data);
+ const html=Speech.renderRows(result,data),unscored=Speech.renderUnscored(result,data);
+ assert.equal(result.benchmarkCount,64);
+ assert.equal(result.unscoredRows.length,108);
+ for(const id of ['stt-google-gemma-4-e4b-it','stt-google-gemma-4-e2b-it','stt-google-gemma-4-12b-it']) {
+  assert.ok(find(result,'phonon-2').benchmarkRank<find(result,id).benchmarkRank);
+  assert.ok(html.indexOf('>Phonon-2</a>')<html.indexOf('>'+find(result,id).name+'</a>'));
+ }
+ assert.doesNotMatch(html,/No matched score|No overall index/);
+ assert.ok(unscored.includes('GGUF Q8_0'));
+ assert.equal(Speech.renderRows({...result,rows:[...result.rows,...result.unscoredRows]},data),html);
+ const header=Speech.renderHead(result);
+ assert.ok(header.indexOf('mean WER')<header.indexOf('Download (MB)'));
+});
+
+test('download and parameter metadata never affect accuracy values, positions or default order',()=>{
+ const original=Speech.build(data),altered=structuredClone(data);
+ for(const size of altered.sizes) {size.download_mb=999999;size.parameters_million=0.001;}
+ const changed=Speech.build(altered);
+ assert.deepEqual(changed.rows.map(row=>[row.id,row.benchmarkRank,row.benchmarkValue]),original.rows.map(row=>[row.id,row.benchmarkRank,row.benchmarkValue]));
+ const values=original.rows.filter(row=>row.benchmarkRank).map(row=>row.benchmarkValue);
+ assert.deepEqual(values,values.slice().sort((a,b)=>a-b));
+});
+
+test('server template starts in English accuracy, including without JavaScript',()=>{
+ const fs=require('node:fs');
+ const template=fs.readFileSync('src/stt/index.njk','utf8');
+ assert.match(template,/data-view="english" class="active" aria-pressed="true"/);
+ assert.match(template,/stt.protocolInitial \| speechRows/);
+ assert.match(template,/stt.protocolInitial \| speechUnscored/);
+ assert.match(template,/Downloads and parameters do not affect accuracy rank/);
+ assert.doesNotMatch(template,/id="speechMissing"/);
 });

@@ -114,11 +114,12 @@
     // Unlike the aggregate reference cohort, these explicitly compare runtime configurations too.
     const cohort = candidates.filter(row => finite(row.benchmarkValue)).sort((a,b) => a.benchmarkValue-b.benchmarkValue);
     cohort.forEach((row,i) => {row.benchmarkRank = i && row.benchmarkValue === cohort[i-1].benchmarkValue ? cohort[i-1].benchmarkRank : i+1;});
-    const rows = candidates.filter(row => (options.missing || (rankMetric ? Rank.rankable(row.scores[rankMetric.id]) : Object.values(row.scores).some(Rank.rankable)))
-      && (!query || (row.name + ' ' + row.model.organization + ' ' + row.model.hub_id).toLowerCase().includes(query))
+    const filtered = candidates.filter(row => (!query || (row.name + ' ' + row.model.organization + ' ' + row.model.hub_id).toLowerCase().includes(query))
       && (!options.access || options.access === 'all' || row.model.access === options.access)
       && (!options.maxParams || (finite(row.size?.parameters_million) && row.size.parameters_million <= Number(options.maxParams)))
       && (!options.maxDownload || (finite(row.size?.download_mb) && row.size.download_mb <= Number(options.maxDownload))));
+    const unscoredRows = filtered.filter(row => !finite(row.benchmarkValue)).sort((a,b)=>a.name.localeCompare(b.name));
+    const rows = filtered.filter(row => options.missing || (rankMetric ? Rank.rankable(row.scores[rankMetric.id]) : Object.values(row.scores).some(Rank.rankable)));
     const sort = options.sort || 'mean';
     rows.sort((a,b) => {
       if (sort === 'name') return a.name.localeCompare(b.name);
@@ -131,20 +132,21 @@
       const av=value(a),bv=value(b);
       return (finite(av) ? av : Infinity) - (finite(bv) ? bv : Infinity) || a.name.localeCompare(b.name);
     });
-    return {test, columns, rows, mode:'protocol',rankMetric,benchmarkCount:cohort.length};
+    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,benchmarkCount:cohort.length};
   }
 
   function renderHead(result) {
-    return '<th scope="col">Model</th><th scope="col">Benchmark rank</th><th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">'
+    return '<th scope="col">Model</th><th scope="col">Accuracy rank</th><th scope="col">'
       + (result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
-        : result.test.published_mean_metric ? 'Reported mean WER ↓' : 'Fixed '+result.test.mean_metrics.length+' mean WER ↓') + '</th>'
+        : result.test.published_mean_metric ? 'Reported mean WER ↓' : 'Fixed '+result.test.mean_metrics.length+' mean WER ↓') + '</th><th scope="col" title="Reported model artifact size, not a quality score">Download (MB)</th><th scope="col" title="Reported parameter count, not a quality score">Parameters (M)</th>'
       + result.columns.map(metric => `<th scope="col" title="${esc(metric.label)} · ${metric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER'} %, lower is better">${esc(metric.short)}</th>`).join('')
       + '<th scope="col">Evidence</th>';
   }
 
   function renderRows(result, data) {
-    if (!result.rows.length) return `<tr><td colspan="${result.columns.length + 6}">No models match these filters.</td></tr>`;
-    return result.rows.map(row => {
+    const rankedRows=result.rows.filter(row=>finite(row.benchmarkValue));
+    if (!rankedRows.length) return `<tr><td colspan="${result.columns.length + 6}">No models match these filters.</td></tr>`;
+    return rankedRows.map(row => {
       const source = data.sources[row.provenance?.source_id];
       const infoId = 'speech-evidence-' + result.test.id + '-' + row.id;
       const modelNote = [row.model.configuration, row.model.release_date ? 'Released ' + row.model.release_date : 'Exact release date unverified'].filter(Boolean).join(' · ');
@@ -171,11 +173,23 @@
       }).join('');
       return `<tr><th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}</th>`
         + `<td class="index" title="Position within ${esc(result.test.label)} · ${esc(result.rankMetric?.label || 'complete panel')} before display filters; ties share a position. Not an overall index.">${row.benchmarkRank ? '#'+row.benchmarkRank+' / '+result.benchmarkCount : 'No matched score'}</td>`
-        + renderSizeCells(row.size, data)
-        + `<td class="index" title="${esc(meanTitle)}">${row.benchmarkValue == null ? '—' : row.benchmarkValue.toFixed(2)}</td>${cells}`
+        + `<td class="index" title="${esc(meanTitle)}">${row.benchmarkValue.toFixed(2)}</td>`
+        + renderSizeCells(row.size, data) + cells
         + `<td>${esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">†</button>${details}</td></tr>`;
     }).join('');
   }
 
-  return {build, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
+
+  function renderUnscored(result,data) {
+    return (result.unscoredRows || []).map(row=>{
+      const alternatives=data.accuracyTests.filter(test=>test.id!==result.test.id).map(test=>({test,summary:summarize(data,test,row.id)}));
+      const alternative=alternatives.find(item=>finite(item.summary.mean)) || alternatives.find(item=>Object.values(item.summary.scores).some(Rank.rankable));
+      const metric=alternative && !finite(alternative.summary.mean) ? Object.values(alternative.summary.scores).find(Rank.rankable)?.metric : '';
+      const ownMetric=Object.values(row.scores).find(Rank.rankable)?.metric;
+      const target=alternative?.test.id || (ownMetric ? result.test.id : null);
+      return `<li>${esc(row.name)}${target ? `<button type="button" class="benchmark-link" data-benchmark="${esc(target)}" data-model="${esc(row.name)}" data-metric="${esc(alternative ? metric : ownMetric)}">View available benchmark</button>` : ' — no matched published accuracy result'}</li>`;
+    }).join('');
+  }
+
+  return {build, renderUnscored, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
 });
