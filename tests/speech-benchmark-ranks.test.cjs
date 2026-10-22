@@ -283,7 +283,7 @@ test('browser hourly rate changes only local scenario costs and reset restores o
  const {element,result}=await pageHarness();
  const baseline=result();
  assert.equal(element('speechHourlyRate').value,'1');
- element('speechHourlyRate').value='2';element('speechHourlyRate').handlers.change();
+ element('speechHourlyRate').value='2';element('speechHourlyRate').handlers.input();
  const changed=result();
  assert.ok(changed.rows.some(row=>row.deployment?.cost));
  assert.ok(changed.rows.some(row=>row.price));
@@ -300,6 +300,8 @@ test('browser hourly rate changes only local scenario costs and reset restores o
  assert.match(element('speechBody').innerHTML,/est\. local/);
  assert.match(element('speechBody').innerHTML,/100% utilization/);
  assert.equal((element('speechHead').innerHTML.match(/<th /g)||[]).length,5);
+ element('speechHourlyRate').value='3';element('speechHourlyRate').handlers.change();
+ assert.equal(find(result(),'phonon-2').deployment.cost.high,find(baseline,'phonon-2').deployment.cost.high*3);
  element('speechReset').handlers.click();
  assert.equal(element('speechHourlyRate').value,'1');
  for(const row of result().rows) assert.deepEqual(row.deployment?.cost,find(baseline,row.id).deployment?.cost);

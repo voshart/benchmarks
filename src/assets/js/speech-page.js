@@ -32,6 +32,8 @@
     if(key==='test') resetSort();
     if(key==='query'){clearTimeout(timer);timer=setTimeout(render,100);} else render();
   });
+  // Number inputs must update immediately while typing, not only on blur.
+  controls.hourlyRate.addEventListener('input',render);
   const sortColumn=event=>{
     const button=event.target.closest('[data-sort-key]');
     if(!button || !['rank','name','score','speed','price'].includes(button.dataset.sortKey)) return;
