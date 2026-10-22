@@ -33,6 +33,16 @@ The historical slider uses *model release dates* to choose eligible generations,
 
 The dashboard is an index of third-party and author-reported research, not a single reproducible test harness. Do not silently merge OmniDoc v1.5, v1.6 English subset and v1.6 full. Do not equate NDI's MDP component with official MDP *private*. Never infer PolyOCR's private score from its public score. A hosted product and open weights are different deployments; assumed floors must stay outside source selection, coverage, maturity and ranking.
 
+## OCR speed and cost
+
+The matrix headers sort in either direction; missing values stay last. Quality ranks are unchanged. `data/ocr/throughput.jsonl` preserves 75 source observations, with 16 exact model identities eligible for reported full-page throughput. Selected shared cohorts are explicit priorities, not the fastest available result. Hardware, rendering, workload, precision, batching and execution attribution remain in each row's Details. Image-only pipelines, median latency, unspecified-hardware comparisons and production lower bounds are context only. This is not hardware-normalized speed.
+
+Sortable costs distinguish verified API tariffs, explicitly eligible **current-service** tariffs (not a guarantee of the historical benchmark generation), benchmark workload estimates, token scenarios, and local compute scenarios. Nondefault service contexts, third-party listings, unverified imports and non-USD prices are not silently promoted to numeric comparable costs. Historical release filters retain source-dated deployment evidence.
+
+Collapsed cost assumptions default to an illustrative **$1 per complete reported setup-hour**, at 100% utilization, and **1,000 billable input + 1,000 output tokens per page**. Local cost is `hourly rate / (pages per second × 3600) × 1000`; it excludes idle time, loading, storage and licenses, and is not a hardware market quote. Unknown GPU counts cannot produce this estimate. Token cost is `(input tokens × input $/million + output tokens × output $/million) / 1000` per 1,000 pages. Input includes image tokens and output includes billed reasoning; identical token budgets do not represent identical physical pages across providers. One page/request is assumed; budgets are capped at 200,000 to stay within the selected input-price bands, not to guarantee every endpoint's context capacity. No API speed is borrowed from local weights.
+
+The bounded source audit and exclusions are in `data/ocr/deployment-audit-2026-10-22.json`. The shared browser/server renderer keeps estimates outside all accuracy source selection, coverage and rank calculations.
+
 ## Speech-to-text
 
 The `/stt/` page contains **172 model configurations, 975 accuracy source rows across 11 protocols, 464 throughput measurements, nine latency observations, nine hourly tariffs and two token-rate configurations**. Its Matrix, English, Long-form, Multilingual, Noise & accent, Small models, New research, Secondary, Local speed, Latency and Pricing views share OCR's styling and core evidence policy. Search, access/coverage/download/parameter filters and verified-release replay work in the browser; the default matrix is rendered statically. Speech identities use `topics: ["stt"]` and stay outside OCR cohorts.

@@ -549,5 +549,200 @@
     "quote": "Logics-Parsing-V3",
     "note": "Scores transcribed from author table images and visually inspected, not inferred from chart bars. OmniDocBench v1.6 is single-page; separate from MPDocBench multi-page context. MPDocBench evaluation420documents/3135pages; reported efficiency usesH100,batch1,window3; default runtime window2, singlepagewindow1. Edit-distance metrics lower better; CDM/TEDS/F1/overall higher better. MPDocBench-Long is constructed concatenated corpus and must remain separate from MPDocBench-Parse. ",
     "revision": "e6d324e30e0f64f1a0dfb652efcb83a4b244591e"
+  },
+  "ocr-speed-lighton3-512-h100": {
+    "title": "OCR throughput · lighton3-512-h100",
+    "url": "https://huggingface.co/blog/lightonai/lightonocr-3",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Each model uses its own evaluation rendering. This is not the full 1403-page LightOn2 cohort.",
+    "quote": "Peak throughput: all 512 pages submitted at once, every request completed.",
+    "measurement_operator": "LightOn AI",
+    "revision": null,
+    "image_url": "https://cdn-uploads.huggingface.co/production/uploads/63a042880c6d9efa305ea6cd/QKQIrgIR9NpILnyGLu9fW.png",
+    "cohort": {
+      "id": "lighton3-512-h100",
+      "source_url": "https://huggingface.co/blog/lightonai/lightonocr-3",
+      "evidence_image_url": "https://cdn-uploads.huggingface.co/production/uploads/63a042880c6d9efa305ea6cd/QKQIrgIR9NpILnyGLu9fW.png",
+      "source_date": "2026-10-08",
+      "operator": "LightOn AI",
+      "hardware": "1 NVIDIA H100 per model",
+      "runtime": "vLLM 0.30.0; guidellm 0.8; identical server flags",
+      "corpus": "same 512 olmOCR-Bench pages",
+      "task": "layout; grounding prompt for LightOn3, ocr_layout for Chandra",
+      "load": "peak: all 512 page requests submitted at once, every request completed; latency: single-page load",
+      "precision": "not specified in speed table",
+      "quote": "Peak throughput: all 512 pages submitted at once, every request completed.",
+      "warning": "Each model uses its own evaluation rendering. This is not the full 1403-page LightOn2 cohort."
+    }
+  },
+  "ocr-speed-lighton2-1403-h100": {
+    "title": "OCR throughput · lighton2-1403-h100",
+    "url": "https://huggingface.co/blog/lightonai/lightonocr-2",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Separate protocol from later512-page LightOn3 layout-speed experiment. Do not transfer throughput to bbox/base checkpoints.",
+    "quote": "Inference throughput on a single NVIDIA H100 (80GB).",
+    "measurement_operator": "LightOn AI",
+    "revision": null,
+    "image_url": "https://cdn-uploads.huggingface.co/production/uploads/6421a255eaad1bcb28afdd0e/nk3D0WIz4rXBIpr4ZLvVD.png",
+    "cohort": {
+      "id": "lighton2-1403-h100",
+      "source_url": "https://huggingface.co/blog/lightonai/lightonocr-2",
+      "evidence_image_url": "https://cdn-uploads.huggingface.co/production/uploads/6421a255eaad1bcb28afdd0e/nk3D0WIz4rXBIpr4ZLvVD.png",
+      "source_date": "2026-01-19",
+      "operator": "LightOn AI",
+      "hardware": "1 NVIDIA H100 80GB",
+      "corpus": "full1403-page olmOCR-Bench end-to-end",
+      "measurement": "pages divided by total wallclock duration",
+      "runtime": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+      "batch": "not specified in blog speed section",
+      "quote": "Inference throughput on a single NVIDIA H100 (80GB).",
+      "warning": "Separate protocol from later512-page LightOn3 layout-speed experiment. Do not transfer throughput to bbox/base checkpoints.",
+      "pinned_paper_url": "https://arxiv.org/html/2601.14251v1#A3.SS3",
+      "additional_context": "Paper Table7 confirms all blog values. AppendixB specifies LightOn evaluation T=.2/top_p=.9/top_k=0,maxresolution1540,no retries/rotations; three generations per page for accuracy evaluation. Timing section does not explicitly state whether repeats are included; do not multiply throughput by3."
+    }
+  },
+  "ocr-speed-chandra2-author-h100": {
+    "title": "OCR throughput · chandra2-author-h100",
+    "url": "https://huggingface.co/datalab-to/chandra-ocr-2/blob/af93b47dba1b47b6640c86ccf487ed2260ab9a09/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Authors also estimate2pps real-world usage; that estimate is excluded.",
+    "quote": "vLLM, 96 concurrent sequences",
+    "measurement_operator": "Datalab",
+    "revision": "af93b47dba1b47b6640c86ccf487ed2260ab9a09",
+    "image_url": null,
+    "cohort": {
+      "id": "chandra2-author-h100",
+      "source_url": "https://huggingface.co/datalab-to/chandra-ocr-2/blob/af93b47dba1b47b6640c86ccf487ed2260ab9a09/README.md",
+      "revision": "af93b47dba1b47b6640c86ccf487ed2260ab9a09",
+      "operator": "Datalab",
+      "hardware": "1 NVIDIA H10080GB",
+      "runtime": "vLLM;96 concurrent sequences",
+      "corpus": "diverse olmOCR benchmark mix: math,tables,scans,multicolumn; page count unspecified",
+      "quote": "vLLM, 96 concurrent sequences",
+      "warning": "Authors also estimate2pps real-world usage; that estimate is excluded."
+    }
+  },
+  "ocr-speed-logics3-mpdoc-h100": {
+    "title": "OCR throughput · logics3-mpdoc-h100",
+    "url": "https://huggingface.co/Logics-MLLM/Logics-Parsing-V3/blob/e6d324e30e0f64f1a0dfb652efcb83a4b244591e/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Reported times rounded; reciprocal gives approximate mean throughput. H100 count unspecified: do not assume per-single-GPU dollar cost. Logics uses window3, not default2.",
+    "quote": "Time per Page (s)",
+    "measurement_operator": "Logics-MLLM",
+    "revision": "e6d324e30e0f64f1a0dfb652efcb83a4b244591e",
+    "image_url": null,
+    "cohort": {
+      "id": "logics3-mpdoc-h100",
+      "source_url": "https://huggingface.co/Logics-MLLM/Logics-Parsing-V3/blob/e6d324e30e0f64f1a0dfb652efcb83a4b244591e/README.md",
+      "revision": "e6d324e30e0f64f1a0dfb652efcb83a4b244591e",
+      "operator": "Logics-MLLM",
+      "hardware": "NVIDIA H100 GPUs; GPU count unspecified",
+      "batch": 1,
+      "corpus": "MPDocBench420documents3135pages",
+      "runtime": "not explicitly specified in timing section",
+      "quote": "Time per Page (s)",
+      "warning": "Reported times rounded; reciprocal gives approximate mean throughput. H100 count unspecified: do not assume per-single-GPU dollar cost. Logics uses window3, not default2."
+    }
+  },
+  "ocr-speed-indra11-auto-latency": {
+    "title": "OCR throughput · indra11-auto-latency",
+    "url": "https://github.com/datalab-to/indra/blob/e20355319b5aa5705a876a8d2b40aca606d7df5f/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "PDF text assisted auto is not OCR-only. Median latency varies about15percent between runs; reciprocal median is NOT aggregate pages/sec.",
+    "quote": "Indra OCR (auto: text layer + OCR)",
+    "measurement_operator": "Datalab",
+    "revision": "e20355319b5aa5705a876a8d2b40aca606d7df5f",
+    "image_url": null,
+    "cohort": {
+      "id": "indra11-auto-latency",
+      "source_url": "https://github.com/datalab-to/indra/blob/e20355319b5aa5705a876a8d2b40aca606d7df5f/README.md",
+      "revision": "e20355319b5aa5705a876a8d2b40aca606d7df5f",
+      "operator": "Datalab",
+      "hardware": "x86,4vCPUs per engine",
+      "batch": "one page at a time",
+      "corpus": "OmniParseBench2937pages;dataset961c0f89",
+      "measurement": "median single-page latency",
+      "quote": "Indra OCR (auto: text layer + OCR)",
+      "warning": "PDF text assisted auto is not OCR-only. Median latency varies about15percent between runs; reciprocal median is NOT aggregate pages/sec."
+    }
+  },
+  "ocr-speed-indra11-ocr-cpu-throughput": {
+    "title": "OCR throughput · indra11-ocr-cpu-throughput",
+    "url": "https://github.com/datalab-to/indra/blob/e20355319b5aa5705a876a8d2b40aca606d7df5f/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Different deployment mode from auto model row; no direct substitution.32-core throughput25–51pps on other x86container types; hardware-dependent.",
+    "quote": "Model loading and one warm-up page per worker are not timed.",
+    "measurement_operator": "Datalab",
+    "revision": "e20355319b5aa5705a876a8d2b40aca606d7df5f",
+    "image_url": null,
+    "cohort": {
+      "id": "indra11-ocr-cpu-throughput",
+      "source_url": "https://github.com/datalab-to/indra/blob/e20355319b5aa5705a876a8d2b40aca606d7df5f/README.md",
+      "revision": "e20355319b5aa5705a876a8d2b40aca606d7df5f",
+      "operator": "Datalab",
+      "hardware": "AMD EPYC9004 Genoa,34core machine,noGPU",
+      "corpus": "300 OmniParseBench pages",
+      "runtime": "one single-threaded worker per used core;OCR-only/default settings",
+      "quote": "Model loading and one warm-up page per worker are not timed.",
+      "warning": "Different deployment mode from auto model row; no direct substitution.32-core throughput25–51pps on other x86container types; hardware-dependent."
+    }
+  },
+  "ocr-speed-ppocr6": {
+    "title": "OCR pipeline throughput · ppocr6",
+    "url": "https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/b03f46425e8ff4442b268ce449e3eef758146cd4/docs/version3.x/algorithm/PP-OCRv6/PP-OCRv6.en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Full-image text detection/recognition, not structured document parsing. Batch, resolution,precision unspecified.",
+    "quote": "Tested on 200 images (general + document scenes), including image I/O, pre/post-processing, and model inference.",
+    "measurement_operator": "author"
+  },
+  "ocr-speed-paddlevl-v4": {
+    "title": "OCR pipeline throughput · paddlevl-v4",
+    "url": "https://arxiv.org/html/2510.14528v4",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "OmniDocBenchv1.0; PDFpath to completeMarkdown; asynchronous rendering/layout/VLM pipeline. Same test corpus andhardware, optimized backends differ. dots uses200threads.",
+    "quote": "processing PDF files in batches of 512 on a single NVIDIA A100 GPU",
+    "measurement_operator": "author_and_competitor"
+  },
+  "ocr-speed-glm-v2": {
+    "title": "OCR pipeline throughput · glm-v2",
+    "url": "https://arxiv.org/html/2603.10910v2",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Parsing+Markdownexport. Samehardware claimed but device/backend/corpus/batch not named. PDFinputs and standaloneimageinputs separate.",
+    "quote": "single replica, single concurrency",
+    "measurement_operator": "author_and_competitor"
+  },
+  "ocr-speed-deepseek-v1": {
+    "title": "OCR pipeline throughput · deepseek-v1",
+    "url": "https://arxiv.org/html/2510.18234v1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Production data-generation claim; corpus/resolution/batch unspecified. Lowerbound, not precise average latency.",
+    "quote": "200k+ pages per day (a single A100-40G)",
+    "measurement_operator": "author"
+  },
+  "ocr-speed-ppstructure": {
+    "title": "OCR pipeline throughput · ppstructure",
+    "url": "https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/74bdc41608883843489425df8d0541199434fa12/docs/version3.x/algorithm/PP-StructureV3/PP-StructureV3.en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "280images withtables/seals/formulas/charts. Paddle3.1.0 CUDA11.8 cuDNN8.9; PaddleXdevelop f1eb28e23cfa54ce3e9234d2e61fcb87c93cf407. Configuration changes are not equivalent functionality.",
+    "quote": "Warm up with 20 samples, then repeat the full dataset once for performance testing.",
+    "measurement_operator": "author"
+  },
+  "ocr-google-price-gemini-3-6-flash-20261022": {
+    "title": "gemini-3.6-flash API token pricing",
+    "url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "kind": "vendor",
+    "verified_on": "2026-10-22",
+    "note": "Standard promotional tariff through 2026-12-31; from 2027-01-01 input1.50/output7.50/cached.15. Output includes thinking; storage/grounding extra."
   }
 }

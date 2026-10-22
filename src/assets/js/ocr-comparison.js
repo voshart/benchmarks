@@ -1,0 +1,50 @@
+/* Deployment evidence never enters the OCR quality cohorts or rank calculation. */
+(function(root,make){
+ const api=typeof module==='object'&&module.exports?make(require('./rank-ui.js'),require('./ranking.js')):make(root.BenchmarkRankUI,root.BenchmarkRank);
+ if(typeof module==='object'&&module.exports)module.exports=api;else root.OCRComparison=api;
+})(globalThis,(RankUI,Rank)=>{
+ const defaults={hourlyRate:1,inputTokens:1000,outputTokens:1000};
+ const finite=v=>typeof v==='number'&&Number.isFinite(v);
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const fmt=v=>v>=100?v.toFixed(0):v>=10?v.toFixed(1):v.toFixed(2);
+ const money=v=>'$'+(v<.01?v.toFixed(4):v.toFixed(2));
+ const link=(data,id,label)=>data.sources[id]?`<a href="${esc(data.sources[id].url)}" target="_blank" rel="noreferrer">${esc(label)}</a>`:esc(label);
+ function assumptions(options={}){return Object.fromEntries(Object.entries(defaults).map(([k,v])=>[k,finite(options[k])?Math.max(0,Math.min(k==='hourlyRate'?1e7:200000,options[k])):v]));}
+ function deployment(data,model,options={}){
+  const a=assumptions(options),records=(data.throughput||[]).filter(r=>r.model===model.id);
+  const speed=records.filter(r=>r.comparison_default===true&&r.unit==='pages_per_second'&&finite(r.pages_per_second)&&r.pages_per_second>0)
+   .sort((x,y)=>(x.selection_priority??100)-(y.selection_priority??100)||String(y.as_of).localeCompare(String(x.as_of))||x.source_id.localeCompare(y.source_id))[0]||null;
+  const page=(data.pricing||[]).filter(p=>p.model===model.id&&p.verification_status==='verified'&&p.comparison_default!==false&&['vendor_list','benchmark_estimate'].includes(p.basis)&&finite(p.usd_per_1000_pages))
+   .sort((x,y)=>(x.basis==='vendor_list'?0:1)-(y.basis==='vendor_list'?0:1)||String(y.as_of).localeCompare(String(x.as_of)))[0];
+  const token=(data.tokenPricing||[]).filter(p=>p.model===model.id&&p.verification_status==='verified'&&p.comparison_default!==false)
+   .sort((x,y)=>String(y.as_of).localeCompare(String(x.as_of)))[0];
+  const service=(data.pricing||[]).find(p=>p.model===model.id&&p.version_scope==='current_service'&&p.verification_status==='verified');
+  let cost;
+  if(page){const actual=page.basis==='vendor_list',current=actual&&page.version_scope==='current_service';cost={value:page.usd_per_1000_pages,label:(current?'Service ':'')+money(page.usd_per_1000_pages)+(current?'†':''),kind:current?'current service':actual?'API':'benchmark est.',estimated:!actual,source_id:page.source_id,note:[current?'Current service tariff, not a verified tariff for the historical benchmark generation.':null,page.provider,page.mode,page.basis,'as of '+page.as_of,page.note].filter(Boolean).join(' · ')};}
+  else if(token){const value=(a.inputTokens*token.input_usd_per_million_tokens+a.outputTokens*token.output_usd_per_million_tokens)/1000;cost={value,label:'≈'+money(value),kind:'token scenario',estimated:true,source_id:token.source_id,note:`Illustrative ${a.inputTokens} billable input + ${a.outputTokens} output tokens/page × 1,000 pages. Input includes image tokens; output includes billed reasoning. Not measured page usage. No caching, tool fees or additional charges included. ${token.provider} ${token.api_model} · ${token.mode} · as of ${token.as_of}. ${token.note||''}`};}
+  else if(service){cost={value:null,label:'Service '+money(service.usd_per_1000_pages)+'†',kind:'current service',source_id:service.source_id,note:'Current service, not a verified tariff for this benchmarked generation. '+service.note};}
+  else if(model.price_context){cost={value:null,...model.price_context,kind:'context'};}
+  else if(model.access==='open'&&speed&&speed.hardware_known===true&&speed.cost_eligible===true){const value=a.hourlyRate/(speed.pages_per_second*3600)*1000;cost={value,label:'≈'+money(value),kind:'local compute',estimated:true,source_id:speed.source_id,note:`${money(a.hourlyRate)}/reported setup-hour ÷ (${speed.pages_per_second} pages/sec × 3,600) × 1,000 pages. Illustrative 100% utilization; not a hardware market price or API tariff. Applies to the complete reported setup, not a normalized machine. Excludes idle/loading, storage, licenses and rental minimums.`};}
+  else cost={value:null,label:model.access==='open'?'Self-hosted':'—',kind:'unavailable',note:'No verified comparable page cost. Unknown is not zero; imported prices remain in the source/pricing details, not the sortable comparison.'};
+  return {speed,records,cost,assumptions:a};
+ }
+ function enrich(result,data,options={}){return {...result,rows:result.rows.map(r=>({...r,deployment:deployment(data,data.models.find(m=>m.id===r.id),options)}))};}
+ function value(row,key){if(key==='model')return row.name;if(key==='rank')return row.rank;if(key==='speed')return row.deployment?.speed?.pages_per_second??null;if(key==='price')return row.deployment?.cost?.value??null;return row.scores[key]?.value??null;}
+ function sortRows(rows,key='rank',direction='desc'){
+  return rows.map((row,i)=>({row,i})).sort((a,b)=>{const x=value(a.row,key),y=value(b.row,key);if(x==null||y==null)return x==null&&y==null?a.i-b.i:x==null?1:-1;const delta=typeof x==='string'?x.localeCompare(y):x-y;return (direction==='asc'?delta:-delta)||a.i-b.i;}).map(x=>x.row);
+ }
+ function defaultDirection(key,result){return key==='model'||key==='price'||result.columns.find(t=>t.id===key)?.direction==='lower'?'asc':'desc';}
+ function renderHead(result,options={}){const key=options.sortKey||'rank',dir=options.sortDirection||'desc';return [{id:'model',short:'Model',label:'Model name'},{id:'rank',short:'Rank index',label:'Quality only; speed and cost never affect this index'},{id:'speed',short:'Pages/s',label:'Reported end-to-end throughput; different hardware and workloads, not hardware-normalized'},{id:'price',short:'$/1k pages',label:'API tariffs, benchmark estimates, or explicitly assumed token/local costs'},...result.columns].map(t=>`<th scope="col" aria-sort="${t.id===key?(dir==='asc'?'ascending':'descending'):'none'}"><button type="button" class="column-sort" data-ocr-sort="${esc(t.id)}" title="${esc(t.label)}">${esc(t.short)} ${t.id===key?(dir==='asc'?'↑':'↓'):'↕'}</button></th>`).join('');}
+ function speedNote(r){return [r.hardware,r.pipeline,r.input_type&&('input: '+r.input_type),r.configuration&&('configuration: '+r.configuration),r.dataset,r.batch&&('batch: '+r.batch),r.concurrency!=null&&('concurrency: '+r.concurrency),r.precision,r.note,'as of '+r.as_of].filter(Boolean).join(' · ');}
+ function details(row,data){const d=row.deployment;let content=`<p>${esc(row.modelNote||row.name)}</p>`;
+  content+=`<p><strong>Cost:</strong> ${esc(d.cost.label)} /1,000 pages · ${esc(d.cost.kind)}. ${esc(d.cost.note)} ${d.cost.source_id?link(data,d.cost.source_id,'Source ↗'):''}</p>`;
+  if(d.records.length)content+='<p><strong>Speed observations:</strong> measured/reported, not normalized across setups. A matching model name does not establish the same quality-evaluation configuration.</p><ul>'+d.records.map(r=>`<li>${esc(r.unit==='pages_per_second'?fmt(r.pages_per_second)+' pages/s':r.display_value||'Context only')} · ${esc(speedNote(r))} · ${esc(r.evidence)}. ${r.comparison_default===false?'Context only; not used in the sortable speed/cost. ':''}${link(data,r.source_id,'Source ↗')}</li>`).join('')+'</ul>';
+  else content+='<p>No sourced full-page speed measurement for this model; parameter count is not a speed estimate.</p>';
+  const id="ocr-details-"+row.id; return `<button type="button" class="ocr-details-button" popovertarget="${esc(id)}" aria-label="Speed and cost details for ${esc(row.name)}">Details</button><div id="${esc(id)}" class="rank-note ocr-details" popover><button type="button" class="rank-note-close" popovertarget="${esc(id)}" popovertargetaction="hide" aria-label="Close speed and cost details">×</button><strong>${esc(row.name)} · deployment details</strong>${content}</div>`;
+ }
+ function renderRows(result,data,options={}){const enriched=enrich(result,data,options);return sortRows(enriched.rows,options.sortKey||'rank',options.sortDirection||'desc').map(r=>{
+  const d=r.deployment,s=d.speed,c=d.cost;
+  return `<tr data-model="${esc(r.id)}"><th scope="row" title="${esc(r.modelNote||r.name)}">${link(data,r.modelSourceId,r.name)}${details(r,data)}</th><td class="index">${RankUI.renderRank(r,data.sources)}</td><td class="ocr-speed" title="${esc(s?speedNote(s):'No comparable full-page measurement')}">${s?link(data,s.source_id,fmt(s.pages_per_second)+'†'):(d.records.length?'Context only':'—')}${s?`<small>${esc(s.hardware_short||s.hardware)}</small>`:''}</td><td class="price" title="${esc(c.note)}">${link(data,c.source_id,c.label)}<small>${esc(c.kind)}</small></td>`+result.columns.map(t=>{const o=r.scores[t.id],v=o?.value,range=result.ranges[t.id];const shade=v==null||!range?0:range[0]===range[1]?30:Math.max(0,Math.min(1,(v-range[0])/(range[1]-range[0])))*30;return `<td class="score" style="--shade:${shade.toFixed(1)}%" title="${esc(RankUI.scoreTooltip(o,data,r.id,t.id))}">${o?link(data,o.source_id,t.unit==='ratio'?v.toFixed(3):v.toFixed(1)):'—'}${o&&Rank.qualification(o)?'<sup>†</sup>':''}</td>`;}).join('')+'</tr>';
+ }).join('');}
+ return {defaults,assumptions,deployment,enrich,sortRows,defaultDirection,renderHead,renderRows};
+});

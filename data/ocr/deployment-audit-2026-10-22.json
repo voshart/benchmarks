@@ -1,0 +1,78 @@
+{
+  "verified_on": "2026-10-22",
+  "selection_policy": "Prefer declared shared cohorts, not the fastest observation. Hardware and page/rendering/concurrency differences remain explicit; no hardware normalization or parameter-based speed inference. Text-image pipeline speeds, unknown-hardware claims and median latencies stay context only.",
+  "speed_unavailable": [
+    {
+      "model_id": "ovisocr3",
+      "source_url": "https://huggingface.co/ATH-MaaS/OvisOCR3/blob/5f6ce6932efee9ec10c30746db55bd780214b7fd/README.md",
+      "reason": "No numeric speed found in current authorcard; never transferOvis2 speed."
+    },
+    {
+      "model_id": "granite-docling-258m",
+      "source_url": "https://huggingface.co/ibm-granite/granite-docling-258M",
+      "reason": "Card contains no per-page rate. Community discussion37 reports token benchmarks/single-example speeds with major runtime differences, insufficient corpus-normalized primaryauthor pps."
+    },
+    {
+      "model_id": "chandra-2-api",
+      "source_url": "https://huggingface.co/datalab-to/chandra-ocr-2",
+      "reason": "Open model throughput does not establish hostedAPI service throughput."
+    },
+    {
+      "model_id": "chandra-2-1-api",
+      "source_url": "https://huggingface.co/datalab-to/chandra-ocr-2",
+      "reason": "Do not transferChandra2open speed to2.1hosted."
+    },
+    {
+      "model_id": "datalab-convert-chandra-2-1",
+      "source_url": "https://huggingface.co/datalab-to/chandra-ocr-2",
+      "reason": "Distinct hostedpipeline; no sameprotocol pps verified."
+    }
+  ],
+  "mapping_notes": [
+    {
+      "model_id": "olmocr2",
+      "possible_alias": "olmocr-2-7b",
+      "note": "Registry has two canonical labels for same apparent generation; verify both source records resolve1025checkpoint before aliasing. Do not automatically populate both."
+    }
+  ],
+  "pipeline_exclusions": [
+    {
+      "model": "paddleocr-vl-1-6",
+      "reason": "Pinnedcard c5630abae1d940eafe0697512a0325494b02ab42 andreport2606.03264v1 inspected: no numeric throughput verified. Do not inheritv1/v1.5."
+    },
+    {
+      "model": "nanonets-ocr-s",
+      "source": "https://huggingface.co/nanonets/Nanonets-OCR-s/blob/3baad182cc87c65a1861f0c30357d3467e978172/README.md",
+      "reason": "No numeric throughput found."
+    },
+    {
+      "model": "nanonets-ocr2-3b",
+      "source": "https://huggingface.co/nanonets/Nanonets-OCR2-3B/blob/c3886ff00bb037ce7da24988c9eafaf1fe2bed72/README.md",
+      "reason": "No numeric throughput found."
+    },
+    {
+      "model": "nanonets-ocr-3",
+      "reason": "GuessedHFexactname lookup401; noaccessible primary model-speedproof. Do not infer private existence or usemarketingvendorlatency."
+    },
+    {
+      "model": "got-ocr",
+      "source": "https://github.com/Ucas-HaoranWei/GOT-OCR2.0",
+      "reason": "No hardware+fullpage numericalspeed verified in boundedpass."
+    },
+    {
+      "model": "deepseek-ocr-2",
+      "source": "https://github.com/deepseek-ai/DeepSeek-OCR-2",
+      "reason": "OwnREADMEon-parspeedclaim lacksnumber; onlyGLMcompetitorimage result retained, not inheritedOCR1productionrate."
+    }
+  ],
+  "pricing_findings": [
+    "lib/pricing.cjs selectPagePrices currently permits unverified_import records; exclude these from numeric sortable decision prices rather than silently treating them as current verified tariffs.",
+    "Nine default vendor-priced models and nine default benchmark-estimate models are different evidence classes. Benchmark workload prices are not provider flat tariffs.",
+    "current_service rates do not establish the benchmarked historical generation or configuration is still purchasable. Preserve this scope next to price.",
+    "Do not choose lowest tier or cheapest nondefault mode. Include region, volume band, batch versus standard, date and configuration.",
+    "Token-based scenarios must be identified as estimates; image tokenization, PDF text, prompt tokens, output and billed reasoning all contribute. A fixed billable token budget is not an equal physical page across models.",
+    "Self-hosted is not free. No numeric zero for absent hosted tariff or unknown local compute cost.",
+    "Missing tariff, no API, quote-only, token-priced, non-USD, retired endpoint and unknown endpoint identity require distinct statuses."
+  ],
+  "pricing_gaps": "Bounded audit did not research every third-party hosted open-weight provider, Doubao/Kimi/GLM/MiniMax/DeepSeek variant. Preserve unknown prices rather than inventing coverage."
+}

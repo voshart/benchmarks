@@ -2,6 +2,9 @@ module.exports=function(config){
  const fs=require('node:fs'),crypto=require('node:crypto');
  config.addFilter('assetUrl',url=>url+'?v='+crypto.createHash('sha256').update(fs.readFileSync('src'+url)).digest('hex').slice(0,12));
  config.addPassthroughCopy({'src/assets':'assets'});
+ const ocrComparison=require('./src/assets/js/ocr-comparison.js');
+ config.addFilter('ocrHead',ocrComparison.renderHead);
+ config.addFilter('ocrRows',ocrComparison.renderRows);
  const rankUI=require('./src/assets/js/rank-ui.js');
  const speech=require('./src/assets/js/speech.js');
  const speechMatrix=require('./src/assets/js/speech-matrix.js');
