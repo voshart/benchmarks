@@ -744,5 +744,194 @@
     "kind": "vendor",
     "verified_on": "2026-10-22",
     "note": "Standard promotional tariff through 2026-12-31; from 2027-01-01 input1.50/output7.50/cached.15. Output includes thinking; storage/grounding extra."
+  },
+  "ocr-plan-tele_official": {
+    "title": "OCR planning evidence · tele_official",
+    "url": "https://huggingface.co/XingChen-AGI/TeleOCR/blob/70a19ec6a3b036311af19ae5e762e650f41a5980/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "BF16; 28-layer decoder hidden1024,16Q/8KV heads,head128; 32-layer Qwen2.5VL vision encoder with full-attention blocks7/15/23/31, patch14, spatial merger2. Custom modeling_naviocr, not stockarchitecture."
+  },
+  "ocr-plan-tele_repo": {
+    "title": "OCR planning evidence · tele_repo",
+    "url": "https://github.com/caipeng328/TeleOCR/tree/1e71f4fe792d12bbb86d2671c5ed6f3a1499b27d",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "NaviDC renamed TeleOCR September10. Author calls ~1.2B. Layout segmentation followed by content parsing; vLLM asynchronous backend. No fullpage numeric speed verified."
+  },
+  "ocr-plan-tele_community": {
+    "title": "OCR planning evidence · tele_community",
+    "url": "https://huggingface.co/stefanj0/TeleOCR-ONNX/blob/3bbc0e0f541b2ddd6f2c238f3ee0493c982cb0ac/README.md",
+    "kind": "community",
+    "verified_on": "2026-10-22",
+    "note": "Same model converted without finetuning. Chrome154/Linux/Vulkan, Radeon8060S/RyzenAI MAX+395. q4f16: FP16 vision, INT4 decoder; 102–1683 visual tokens, TTFT0.13–2.1sec, decode65–90tok/s. FP16 decode29–33tok/s,TTFT0.15–2.1sec. Weights warm. Tiny-sample output fidelity checks are not full benchmark equivalence."
+  },
+  "ocr-plan-xiaomi_official": {
+    "title": "OCR planning evidence · xiaomi_official",
+    "url": "https://huggingface.co/SeerRay-Lab/Xiaomi-OCR-0/blob/ff990be318c4c68f7e621dd690231200f47e48c4/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "BF16 Qwen3.5; 24 decoder layers (18linear/6full),12vision layers; MTP1 head. Not architecturally identical to TeleOCR."
+  },
+  "ocr-plan-xiaomi_community": {
+    "title": "OCR planning evidence · xiaomi_community",
+    "url": "https://huggingface.co/ByronLeeee/Xiaomi-OCR-0-Ninfer/blob/58ecd918e1a810fa6c4d1a6c2dc1f6f12146bf55/README.md",
+    "kind": "community",
+    "verified_on": "2026-10-22",
+    "note": "BF16 weights+KV, single request,4Kcontext,greedy,warm-run medians. Compiled Transformer baseline RTX5070Ti decode162.3–166.4tok/s; NInfer MTP1 717.1–718.6tok/s. Three samples only (Chinese,English,formula256tokens). Fullrequest times are sample-specific, not page-corpus throughput."
+  },
+  "ocr-plan-dots-mocr": {
+    "title": "OCR planning evidence · dots-mocr",
+    "url": "https://huggingface.co/dots-studio/dots.mocr/blob/e539fbb52280393adc081b289ec597430a0f9031/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "DotsOCRForCausalLM;28-layer1536-wide decoder and42-layer1536-wide vision encoder. Complete config.json equals original dots.ocr config at pinned comparator commit. Official vLLM>=0.11.0, single tensor-parallel GPU, BF16/FlashAttention2. Document-parsing prompt; NOT SVG generation."
+  },
+  "ocr-plan-dots-mocr-config": {
+    "title": "OCR planning evidence · dots-mocr-config",
+    "url": "https://huggingface.co/dots-studio/dots.mocr/blob/e539fbb52280393adc081b289ec597430a0f9031/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "DotsOCRForCausalLM;28-layer1536-wide decoder and42-layer1536-wide vision encoder. Complete config.json equals original dots.ocr config at pinned comparator commit."
+  },
+  "ocr-plan-paddleocr-vl-1-6": {
+    "title": "OCR planning evidence · paddleocr-vl-1-6",
+    "url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6/blob/c5630abae1d940eafe0697512a0325494b02ab42/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "PP-DocLayoutV3 unchanged from1.5; same0.9B region recognizer with native-resolution visual encoder and ERNIE4.5-0.3B. Layout then crop recognition and Markdown/JSON assembly. Full PaddleOCR pipeline; compatible1.5 runtime. Do not treat isolated recognizer speed as full-page pipeline."
+  },
+  "ocr-plan-paddleocr-vl-1-6-config": {
+    "title": "OCR planning evidence · paddleocr-vl-1-6-config",
+    "url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6/blob/c5630abae1d940eafe0697512a0325494b02ab42/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "PP-DocLayoutV3 unchanged from1.5; same0.9B region recognizer with native-resolution visual encoder and ERNIE4.5-0.3B. Layout then crop recognition and Markdown/JSON assembly."
+  },
+  "ocr-plan-monkeyocrv2-b-parsing": {
+    "title": "OCR planning evidence · monkeyocrv2-b-parsing",
+    "url": "https://huggingface.co/zenosai/MonkeyOCRv2-B-Parsing/blob/e8871a0057c98378219b369f924a25ba10f392bf/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "~0.1B B vision encoder +Qwen3-0.6B decoder; autoregressively detects layout, then parallel recognition of cropped elements. vLLM0.11.2 non-DFlash baseline. vLLM0.25.1/CUDA12.9 DFlash uses a separate B-Parsing-DFlash checkpoint; do not assume for B/S baseline."
+  },
+  "ocr-plan-monkeyocrv2-b-parsing-config": {
+    "title": "OCR planning evidence · monkeyocrv2-b-parsing-config",
+    "url": "https://huggingface.co/zenosai/MonkeyOCRv2-B-Parsing/blob/e8871a0057c98378219b369f924a25ba10f392bf/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "~0.1B B vision encoder +Qwen3-0.6B decoder; autoregressively detects layout, then parallel recognition of cropped elements."
+  },
+  "ocr-plan-monkeyocrv2-s-parsing": {
+    "title": "OCR planning evidence · monkeyocrv2-s-parsing",
+    "url": "https://huggingface.co/zenosai/MonkeyOCRv2-S-Parsing/blob/ad223fabaa9efdccd15f1c9cf682b3c1b489c069/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "~0.03B S vision encoder +Qwen3-0.6B decoder; autoregressively detects layout, then parallel recognition of cropped elements. vLLM0.11.2 non-DFlash baseline. vLLM0.25.1/CUDA12.9 DFlash uses a separate B-Parsing-DFlash checkpoint; do not assume for B/S baseline."
+  },
+  "ocr-plan-monkeyocrv2-s-parsing-config": {
+    "title": "OCR planning evidence · monkeyocrv2-s-parsing-config",
+    "url": "https://huggingface.co/zenosai/MonkeyOCRv2-S-Parsing/blob/ad223fabaa9efdccd15f1c9cf682b3c1b489c069/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "~0.03B S vision encoder +Qwen3-0.6B decoder; autoregressively detects layout, then parallel recognition of cropped elements."
+  },
+  "ocr-plan-abot-ocr": {
+    "title": "OCR planning evidence · abot-ocr",
+    "url": "https://huggingface.co/acvlab/ABot-OCR/blob/6cb6799e7fa42258d0d568e4c7367dbc30781e39/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Qwen3VLForConditionalGeneration;2B class;28-layer2048-wide decoder. Full-page image to Markdown, not layout/crop pipeline. Official vLLM0.18.0/torch2.10;BF16;~4GB weights is not totalVRAM."
+  },
+  "ocr-plan-abot-ocr-config": {
+    "title": "OCR planning evidence · abot-ocr-config",
+    "url": "https://huggingface.co/acvlab/ABot-OCR/blob/6cb6799e7fa42258d0d568e4c7367dbc30781e39/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Qwen3VLForConditionalGeneration;2B class;28-layer2048-wide decoder. Full-page image to Markdown, not layout/crop pipeline."
+  },
+  "ocr-plan-qwen3-5-9b": {
+    "title": "OCR planning evidence · qwen3-5-9b",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Qwen3_5ForConditionalGeneration;9B language decoder,32layers;3GatedDeltaNet blocks per full-attention block; vision encoder.9B checkpoint is not MoE despite broad family marketing. Official vLLM/SGLang;TP1 example;thinking default. Use explicitly nonthinking OCR prompt/enable_thinking=false; no speculative/MTP acceleration assumed."
+  },
+  "ocr-plan-qwen3-5-9b-config": {
+    "title": "OCR planning evidence · qwen3-5-9b-config",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Qwen3_5ForConditionalGeneration;9B language decoder,32layers;3GatedDeltaNet blocks per full-attention block; vision encoder.9B checkpoint is not MoE despite broad family marketing."
+  },
+  "ocr-plan-youtu-parsing": {
+    "title": "OCR planning evidence · youtu-parsing",
+    "url": "https://huggingface.co/tencent/Youtu-Parsing/blob/b82ee76cca8aa94ffd6451de38cd72aa8362f3c2/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Shared dynamic-resolution visual encoder +YoutuLLM2B; parallel token verification and batched region queries. Official HuggingFace custom parser,FlashAttention>=2.7.0 recommended. Paper token/query parallelism; exact end-to-end run config not pinned."
+  },
+  "ocr-plan-youtu-parsing-config": {
+    "title": "OCR planning evidence · youtu-parsing-config",
+    "url": "https://huggingface.co/tencent/Youtu-Parsing/blob/b82ee76cca8aa94ffd6451de38cd72aa8362f3c2/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Shared dynamic-resolution visual encoder +YoutuLLM2B; parallel token verification and batched region queries."
+  },
+  "ocr-speed-hunyuan15-h20-930-ar": {
+    "title": "HunyuanOCR-1.5 official H20 single-request pipeline benchmark",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/HunyuanOCR/4cb4f125faf9dd831fb11fb1f3b109e59610d2a9/docs/benchmark.md",
+    "measurement_operator": "Tencent Hunyuan team; author runs and competitor runs",
+    "revision": "4cb4f125faf9dd831fb11fb1f3b109e59610d2a9",
+    "quote": "Hardware: single NVIDIA H20 (80 GB) per server",
+    "note": "930-image OmniDocBench speed evaluation, not claimed full benchmark. HTTP request to complete response; image reads/base64 prepared before timer. Paper Table2/3 matches values. Different native prompts and pipelines; no cross-model token-rate comparison. Published latency/page-rate rounding retained.",
+    "paper_url": "https://arxiv.org/html/2607.04884v1#S7.SS1"
+  },
+  "granite-community4090": {
+    "title": "OCR deployment evidence · granite-community4090",
+    "kind": "community",
+    "verified_on": "2026-10-22",
+    "url": "https://huggingface.co/ibm-granite/granite-docling-258M/discussions/37",
+    "measurement_operator": "InformaticsSolutions, community first-party operator",
+    "source_date": "2025-10-09/10",
+    "note": "BF16 GGUF llama.cpp RTX4090; new_arxiv.png sample,506tok/s first report,486tok/s followup. Same sample ~5–6seconds direct llama-server vs~35seconds Docker pipeline. Runtime revision and full page-corpus timings absent. These are not official IBM measurements.",
+    "quote": "gets OCRed at 506t/s."
+  },
+  "granite-architecture": {
+    "title": "OCR deployment evidence · granite-architecture",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "url": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/README.md",
+    "note": "Idefics3-based; SigLIP2-base-patch16-512 vision + Granite165M language model. Config30layers,hidden576,9query/3KVheads."
+  },
+  "smol-architecture": {
+    "title": "OCR deployment evidence · smol-architecture",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "url": "https://huggingface.co/docling-project/SmolDocling-256M-preview/blob/ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8/README.md",
+    "note": "Idefics3-based SmolVLM256M finetune; predecessor, not sameweights. Config30decoderlayers,hidden576,9query/3KVheads, supports coarse architectural analogy only."
+  },
+  "ocr-plan-hunyuan-family": {
+    "title": "HunyuanOCR1.5 architecture and baseline runtime",
+    "url": "https://arxiv.org/html/2607.04884v1#S3.SS1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "1.5 retains compact backbone but expands image resolution.1.0 speed transfer remains assumed."
+  },
+  "ocr-plan-youtu-license": {
+    "title": "Youtu-Parsing license",
+    "url": "https://huggingface.co/tencent/Youtu-Parsing/blob/b82ee76cca8aa94ffd6451de38cd72aa8362f3c2/LICENSE.txt",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Publicly downloadable weights; custom restricted license, not unrestricted open source."
+  },
+  "ocr-plan-youtu-latency": {
+    "title": "Youtu-Parsing author latency comparison",
+    "url": "https://arxiv.org/html/2601.20430v1#S4.SS3.SSS3",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Table13:1.75s/page onOmniDocBench1.5; hardware unspecified, no hardware-normalized inference."
   }
 }

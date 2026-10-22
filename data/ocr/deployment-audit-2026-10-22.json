@@ -74,5 +74,16 @@
     "Self-hosted is not free. No numeric zero for absent hosted tariff or unknown local compute cost.",
     "Missing tariff, no API, quote-only, token-priced, non-USD, retired endpoint and unknown endpoint identity require distinct statuses."
   ],
-  "pricing_gaps": "Bounded audit did not research every third-party hosted open-weight provider, Doubao/Kimi/GLM/MiniMax/DeepSeek variant. Preserve unknown prices rather than inventing coverage."
+  "pricing_gaps": "Bounded audit did not research every third-party hosted open-weight provider, Doubao/Kimi/GLM/MiniMax/DeepSeek variant. Preserve unknown prices rather than inventing coverage.",
+  "initial_audit_note": "Earlier exclusions below describe the measured-data pass. Followup adds separate low-confidence scenarios without rewriting observations; newer H20 source resolves several previously missing hardware contexts.",
+  "rough_estimate_followup": {
+    "reported_default_models": 20,
+    "modeled_fallback_models": 17,
+    "modeled_scenario_records": 18,
+    "numeric_cost_models": 62,
+    "scenario_file": "throughput-estimates.jsonl",
+    "new_reported_source": "ocr-speed-hunyuan15-h20-930-ar",
+    "unknowns_remaining": "Hosted services do not inherit local speeds. Unsupported giant/MoE models, composite pipelines and ambiguous checkpoint aliases remain unknown rather than receiving a universal parameter estimate. These are bounded planning scenarios, not an exhaustive benchmark run.",
+    "review": "Independent read-only review checked identity/source resolution, interval arithmetic, measured priority, raw quality preservation and primary PP-OCR/Hunyuan source context."
+  }
 }

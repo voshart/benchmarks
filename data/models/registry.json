@@ -4,8 +4,10 @@
     "name": "ABot-OCR",
     "release_date": "2026-05-31",
     "release_provenance": "legacy_import",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": null,
+    "evidence_note": "Publicly downloadable weights; license unspecified in official repository. Open access does not establish permissive reuse. ",
+    "source_id": "ocr-plan-abot-ocr"
   },
   {
     "id": "amazon-textract",
@@ -1174,8 +1176,10 @@
     "name": "PP-StructureV3",
     "release_date": null,
     "release_provenance": "unknown",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": null,
+    "evidence_note": "Publicly downloadable Paddle pipeline; speed scenario uses default full pipeline, not lightweight configuration. ",
+    "source_id": "ocr-speed-ppstructure"
   },
   {
     "id": "qianfan-ocr",
@@ -1480,8 +1484,10 @@
     "name": "Youtu-Parsing",
     "release_date": "2026-01-31",
     "release_provenance": "legacy_import",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": null,
+    "evidence_note": "Publicly downloadable weights under custom Tencent license with EU territorial restriction; not unrestricted open source. ",
+    "source_id": "ocr-plan-youtu-parsing"
   },
   {
     "id": "canary-180m-flash",
