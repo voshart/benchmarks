@@ -3261,5 +3261,168 @@
     "verified_on": "2026-10-22",
     "quote": "muse-voice-transcribe-1.0",
     "note": "Official Muse Voice Transcribe product lists current model muse-voice-transcribe-1.0 at $3/1000 audio minutes = $0.18/audio-hour for streaming. Benchmark uses the unversioned product name; exact benchmark endpoint revision is unspecified. Current service tariff, not historical run billing."
+  },
+  "ibm-granite-speech-5-0-2b-release": {
+    "title": "ibm-granite/granite-speech-5.0-2b pinned model card",
+    "url": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b/blob/f8478b4691b8f83e6413ded13fab28c039a77863/README.md",
+    "kind": "author_reported",
+    "publication_operator": "author",
+    "measurement_operator": "IBM",
+    "revision": "f8478b4691b8f83e6413ded13fab28c039a77863",
+    "verified_on": "2026-10-22",
+    "quote": "Release Date: October 20, 2026",
+    "note": "Exact released model generation; card publication does not establish a benchmark model revision."
+  },
+  "ibm-granite-speech-4-1-2b-plus-v2610": {
+    "title": "ibm-granite/granite-speech-4.1-2b-plus v2610 pinned model card",
+    "url": "https://huggingface.co/ibm-granite/granite-speech-4.1-2b-plus/blob/e69efe37f97b6283c61f5a8dadda2b3eb67765d6/README.md",
+    "kind": "author_reported",
+    "publication_operator": "author",
+    "measurement_operator": "IBM",
+    "revision": "e69efe37f97b6283c61f5a8dadda2b3eb67765d6",
+    "verified_on": "2026-10-22",
+    "quote": "April 28, 2026. Updated October 19, 2026.",
+    "note": "Exact released model generation; card publication does not establish a benchmark model revision."
+  },
+  "open-asr-2026-10-21-new-granite": {
+    "title": "Open ASR English October21 new Granite row",
+    "url": "https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results/blob/648e48575f9e691b8f7e54dbdb0b7b0144d3b23e/english_short_latest.csv",
+    "kind": "official",
+    "publication_operator": "benchmark_maintainer",
+    "measurement_operator": "unspecified",
+    "revision": "648e48575f9e691b8f7e54dbdb0b7b0144d3b23e",
+    "verified_on": "2026-10-22",
+    "quote": "ibm-granite/granite-speech-5.0-2b",
+    "note": "CSV names the exact model and compatible metric columns; individual execution operator, model revision and hardware are not established. Import only new model, not silently updated old rows."
+  },
+  "ibm-granite-speech-5-0-2b-release-files": {
+    "title": "Pinned Hugging Face model files and parameter metadata",
+    "url": "https://huggingface.co/api/models/ibm-granite/granite-speech-5.0-2b/revision/f8478b4691b8f83e6413ded13fab28c039a77863?blobs=true",
+    "kind": "author_reported",
+    "publication_operator": "author",
+    "measurement_operator": "Hugging Face Hub metadata",
+    "revision": "f8478b4691b8f83e6413ded13fab28c039a77863",
+    "verified_on": "2026-10-22",
+    "note": "Actual safetensors byte sizes, decimal MB. Main transcription weights only; not runtime package or peak memory.",
+    "quote": "model.safetensors"
+  },
+  "ibm-granite-speech-4-1-2b-plus-v2610-files": {
+    "title": "Pinned Hugging Face model files and parameter metadata",
+    "url": "https://huggingface.co/api/models/ibm-granite/granite-speech-4.1-2b-plus/revision/e69efe37f97b6283c61f5a8dadda2b3eb67765d6?blobs=true",
+    "kind": "author_reported",
+    "publication_operator": "author",
+    "measurement_operator": "Hugging Face Hub metadata",
+    "revision": "e69efe37f97b6283c61f5a8dadda2b3eb67765d6",
+    "verified_on": "2026-10-22",
+    "note": "Actual safetensors byte sizes, decimal MB. Main transcription weights only; not runtime package or peak memory.",
+    "quote": "model.safetensors"
+  },
+  "stt-audio8-asr-infinite-card": {
+    "title": "Audio8 ASR Infinite · preview",
+    "url": "https://huggingface.co/Edge0/Audio8-ASR-Infinite/blob/7476824bc222e4ad509d286e8cae8b8d3f371129/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "Audio8 ASR Infinite · preview",
+    "note": "Streaming Chinese/English preview; 80ms clock and 480ms algorithmic delay in author evaluation. Author LibriSpeech test-clean WER 3.042%, test-other 6.808%; AISHELL1/4 CER 1.750%/2.893%. These are not the matched English seven-set protocol; no mixed WER/CER average imported.",
+    "revision": "7476824bc222e4ad509d286e8cae8b8d3f371129"
+  },
+  "stt-audio8-asr-infinite-files": {
+    "title": "Audio8 ASR Infinite · preview artifact metadata",
+    "url": "https://huggingface.co/api/models/Edge0/Audio8-ASR-Infinite/revision/7476824bc222e4ad509d286e8cae8b8d3f371129?blobs=true",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Hugging Face Hub metadata",
+    "verified_on": "2026-10-22",
+    "quote": "model.safetensors",
+    "note": "Main reference weights only; decimal MB, not full installation or runtime memory.",
+    "revision": "7476824bc222e4ad509d286e8cae8b8d3f371129"
+  },
+  "stt-aurora-asr-1m-card": {
+    "title": "AuroraASR-1M",
+    "url": "https://huggingface.co/AuroraAI-Research/AuroraASR-1M/blob/cd307b54b4d666d6ad7dc982a7a58a96d6e7f942/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "AuroraASR-1M",
+    "note": "FP32 reference, greedy CTC, English only. Author LibriSpeech test-clean WER 11.43%, test-other 26.50%; own lowercase/no-punctuation normalization. Author throughput 1362× on RTX PRO6000 Blackwell, batch1, 100 test-clean clips, features/decoding included; not an M4 measurement. INT8 1.056232MB is an alternative artifact, not the FP32 accuracy checkpoint.",
+    "revision": "cd307b54b4d666d6ad7dc982a7a58a96d6e7f942"
+  },
+  "stt-aurora-asr-1m-files": {
+    "title": "AuroraASR-1M artifact metadata",
+    "url": "https://huggingface.co/api/models/AuroraAI-Research/AuroraASR-1M/revision/cd307b54b4d666d6ad7dc982a7a58a96d6e7f942?blobs=true",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Hugging Face Hub metadata",
+    "verified_on": "2026-10-22",
+    "quote": "model.safetensors",
+    "note": "Main reference weights only; decimal MB, not full installation or runtime memory.",
+    "revision": "cd307b54b4d666d6ad7dc982a7a58a96d6e7f942"
+  },
+  "stt-orukeet-r3-card": {
+    "title": "Orukeet r3",
+    "url": "https://huggingface.co/oruk/orukeet/blob/b59c13a733fce5cf193230d0fa317ee7f145a108/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "Orukeet r3",
+    "note": "NeMo/FP32 source, 25 languages. Author FLEURS25 pooled WER9.85%, English3.82%, LibriSpeech clean1.46%/other2.86%. Final adaptation AND checkpoint selection used LibriSpeech test-other, so these claims do not enter held-out English rankings. M5Max warm latency39.6ms is another hardware/protocol, not an M4 proxy.",
+    "revision": "b59c13a733fce5cf193230d0fa317ee7f145a108"
+  },
+  "stt-orukeet-r3-release": {
+    "title": "Orukeet release",
+    "url": "https://oruk.ai/research/orukeet",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "Model release",
+    "note": "Author announcement September11; r3 artifacts pinned in model card."
+  },
+  "stt-orukeet-r3-files": {
+    "title": "Orukeet r3 artifact metadata",
+    "url": "https://huggingface.co/api/models/oruk/orukeet/revision/b59c13a733fce5cf193230d0fa317ee7f145a108?blobs=true",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Hugging Face Hub metadata",
+    "verified_on": "2026-10-22",
+    "quote": "model.safetensors",
+    "note": "Main reference weights only; decimal MB, not full installation or runtime memory.",
+    "revision": "b59c13a733fce5cf193230d0fa317ee7f145a108"
+  },
+  "stt-granite-turboctc-multilingual-2610-card": {
+    "title": "Granite Speech 5.0 TurboCTC · multilingual Oct2026",
+    "url": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc/blob/1dd23f46f6d4e6eae2531982ba2e33220086dd97/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "Granite Speech 5.0 TurboCTC · multilingual Oct2026",
+    "note": "October multilingual checkpoint. Official card says the existing leaderboard entry remains the older English-only release. No old accuracy or Handy conversion speed is transferred to these weights.",
+    "revision": "1dd23f46f6d4e6eae2531982ba2e33220086dd97"
+  },
+  "stt-granite-turboctc-multilingual-2610-files": {
+    "title": "Granite Speech 5.0 TurboCTC · multilingual Oct2026 artifact metadata",
+    "url": "https://huggingface.co/api/models/ibm-granite/granite-speech-5.0-470m-turboctc/revision/1dd23f46f6d4e6eae2531982ba2e33220086dd97?blobs=true",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Hugging Face Hub metadata",
+    "verified_on": "2026-10-22",
+    "quote": "model.safetensors",
+    "note": "Main reference weights only; decimal MB, not full installation or runtime memory.",
+    "revision": "1dd23f46f6d4e6eae2531982ba2e33220086dd97"
+  },
+  "stt-falcon-asr-release": {
+    "title": "Falcon-ASR · hosted demo",
+    "url": "https://huggingface.co/blog/tiiuae/falcon-asr",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "Falcon-ASR",
+    "note": "Author English seven-set WER5.74% and Arabic six-set WER20.92%; evaluation differs from matched core panel. Public demo ≤60sec/20MB. Downloadable weights and commercial API tariff not verified; API is planned."
   }
 }

@@ -12,9 +12,9 @@ const getRow=(result,id)=>result.rows.find(row=>row.id===id);
 
 test('full expansion preserves raw observations, missing long-form values and separate corpus roles',()=>{
  validateSTT(data);
- assert.equal(data.models.length,172);
- assert.equal(data.rawRecords.length,979);
- assert.equal(data.accuracyTests.length,12);
+ assert.equal(data.models.length,179);
+ assert.equal(data.rawRecords.length,981);
+ assert.equal(data.accuracyTests.length,13);
  assert.equal(data.rawRecords.filter(record=>record.benchmark==='open-asr-longform').length,27);
  const m=byHub('nvidia/stt_en_conformer_transducer_small');
  const record=data.rawRecords.find(record=>record.model===m.id&&record.benchmark==='open-asr-longform');
@@ -279,7 +279,7 @@ test('Universal models retain their distinct baskets and expose coverage without
  const result=Matrix.build(data);
  const older=getRow(result,'stt-assemblyai-universal-3-pro');
  const newer=getRow(result,'stt-assemblyai-universal-3-5-pro');
- assert.ok(Math.abs(newer.rank-85.11261261261261)<1e-9);
+ assert.ok(Math.abs(newer.rank-85.29020824102791)<1e-9);
  assert.ok(Math.abs(older.rank-85.24324324324324)<1e-9);
  assert.deepEqual(older.rankContributions.map(item=>item.family).sort(),['coraal','multilingual']);
  assert.deepEqual(newer.rankContributions.map(item=>item.family).sort(),['multilingual','open-asr-english']);

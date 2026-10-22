@@ -1,0 +1,13 @@
+{
+  "id": "omniparse-indra-1-1",
+  "short": "OmniParse",
+  "label": "OmniParseBench · Indra1.1 auto",
+  "source": "indra-ocr-1-1-release",
+  "family": "omniparse",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "2937pages, dataset961c0f89, harness1.0.0rc1. Auto PDF-text-assisted; separate from image-only benchmarks."
+}

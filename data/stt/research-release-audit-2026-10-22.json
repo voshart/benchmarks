@@ -1,0 +1,54 @@
+{
+  "verified_on": "2026-10-22",
+  "added_models": [
+    "stt-ibm-granite-granite-speech-5-0-2b",
+    "stt-ibm-granite-granite-speech-4-1-2b-plus-v2610",
+    "stt-audio8-asr-infinite",
+    "stt-aurora-asr-1m",
+    "stt-orukeet-r3",
+    "stt-granite-turboctc-multilingual-2610",
+    "stt-falcon-asr"
+  ],
+  "scope": "Official source leaderboards and selected task-specific author releases; not a claim to exhaustively enumerate every fine-tune. Existing comparable ranking policy preserved.",
+  "covered": {
+    "coverage": {
+      "english_rows": 65,
+      "multilingual_rows": {
+        "fr": 40,
+        "de": 41,
+        "es": 40,
+        "it": 39,
+        "pt": 40,
+        "hi": 32,
+        "nl": 36,
+        "hy": 17
+      },
+      "longform_rows": 27,
+      "missing_registry_names": [
+        "ibm-granite/granite-speech-5.0-2b"
+      ]
+    },
+    "pins": {
+      "english": "648e48575f9e691b8f7e54dbdb0b7b0144d3b23e",
+      "multilingual_all8": "3589b3c077cb16c935e52bdd15c7fb0a3f175f7a",
+      "longform": "4f164c2c904b630d9777323b5d2e7f1f549d0143"
+    },
+    "exclusions": [
+      "All existing English/multilingual/longform row identities already represented except Granite5.0-2b.",
+      "Private scripted/conversational scores excluded.",
+      "4.1Plus WDER/cpWER/timing are not ordinary WER; separate metrics only.",
+      "ExistingTurboCTC updatedweights need explicitrevision distinction; oldscore mustnot silently migrate."
+    ],
+    "speed_note": "CSV544.52RTFx does not establish Mac hardware/batch/runtime; no comparable local measurement found.",
+    "turboctc_revision_warning": {
+      "new_revision": "1dd23f46f6d4e6eae2531982ba2e33220086dd97",
+      "old_revision": "947f59af40db9791170a0628cf0f3f4812d720f1",
+      "note": "Newmultilingual releasedOct21; cardexplicitlystatescurrentleaderboardentryremainsoldEnglishonly. Do nottransferoldaccuracy/speed to newweights."
+    }
+  },
+  "limitations": [
+    "Metadata-only claims never create core coverage or artificial matched scores.",
+    "No model code or remote custom inference code executed.",
+    "Hosted demos are not downloadable weights or priced production APIs."
+  ]
+}

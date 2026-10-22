@@ -1,0 +1,13 @@
+{
+  "id": "omnidoc-ovis3-reported",
+  "short": "Ovis3 report",
+  "label": "OmniDoc1.6 · OvisOCR3 reported protocol",
+  "source": "ovisocr3-release",
+  "family": "omnidoc",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "Author-reported96.74; full-set preprocessing/protocol not established. No core contribution."
+}

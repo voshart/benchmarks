@@ -68,7 +68,8 @@
       const lineage=reviewed?.model===model.id ? reviewed : null;
       const upstream=hub(lineage?.upstream_hub_id || model.hub_id);
       const candidates = (data.models || []).filter(m => m.access === 'open' &&
-        m.configuration_kind === 'runtime_conversion' && hub(m.upstream_hub_id) === upstream);
+        m.configuration_kind === 'runtime_conversion' && hub(m.upstream_hub_id) === upstream &&
+        (!model.model_revision || (m.upstream_commit && model.model_revision.toLowerCase().startsWith(m.upstream_commit.toLowerCase()))));
       if (candidates.length === 1) {
         const span = clipSpan(data, candidates[0]);
         if (span) speed = {...span, status:'assumed', proxy:true,

@@ -1,0 +1,151 @@
+{
+  "id": "ibm-granite-plus-v2610-author-2026-10",
+  "label": "Granite Plus · author9sets Oct2026",
+  "short": "Granite Plus · author9sets",
+  "task": "transcription",
+  "family": "open-asr-english",
+  "core": false,
+  "primary": false,
+  "source": "ibm-granite-speech-4-1-2b-plus-v2610",
+  "direction": "lower",
+  "metrics": [
+    {
+      "id": "ls_clean",
+      "short": "LS clean",
+      "label": "LibriSpeech test.clean",
+      "source_column": "LS Clean WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "ls_other",
+      "short": "LS other",
+      "label": "LibriSpeech test.other",
+      "source_column": "LS Other WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "ami",
+      "short": "AMI cleaned",
+      "label": "AMI-Cleaned test",
+      "source_column": "AMI-Cleaned WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "earnings22",
+      "short": "Earnings22",
+      "label": "Earnings22 (author cleaned evaluation)",
+      "source_column": "Earnings22",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "gigaspeech",
+      "short": "Giga cleaned",
+      "label": "Gigaspeech-Cleaned test",
+      "source_column": "Gigaspeech-Cleaned WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "spgispeech",
+      "short": "SPGI",
+      "label": "SPGISpeech test",
+      "source_column": "SPGISpeech WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "voxpopuli",
+      "short": "VoxPopuli",
+      "label": "VoxPopuli (author cleaned evaluation)",
+      "source_column": "Voxpopuli",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "urgent24",
+      "short": "URGENT24 noise",
+      "label": "URGENT2024 noisy/reverberant test",
+      "source_column": "URGENT2024 WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    },
+    {
+      "id": "monsoon",
+      "short": "Monsoon en-IN",
+      "label": "Voice Arena Monsoon en-IN test",
+      "source_column": "Voice Arena Monsoon WER",
+      "unit": "wer_percent",
+      "direction": "lower",
+      "dataset": {
+        "repository": null,
+        "config": null,
+        "split": "Author-described updated OpenASR test sets; exact dataset revision unspecified",
+        "revision": null
+      },
+      "primary": true
+    }
+  ],
+  "note": "IBM author-reported nine-set evaluation of v2610. Exact AA chunk/session protocol is not established; kept separate from the matched core panel. Default shows LibriSpeech test-clean; no invented nine-set average.",
+  "mean_metrics": [],
+  "summary_metric": "ls_clean"
+}

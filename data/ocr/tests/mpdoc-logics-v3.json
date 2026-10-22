@@ -1,0 +1,13 @@
+{
+  "id": "mpdoc-logics-v3",
+  "short": "MPDoc",
+  "label": "MPDocBench-Parse · LogicsV3",
+  "source": "logics-parsing-v3-release",
+  "family": "mpdoc",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "Author420documents/3135pages, window3 evaluation; not single-page OmniDoc or constructed MPDocBench-Long."
+}

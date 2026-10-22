@@ -1,1 +1,2 @@
 {"model":"chandra-2-open","metrics":{"overall":93.11},"source_id":"indic-english","evidence":"secondary","note":"English-only v1.6 subset, not v1.6_full."}
+{"model": "bodhan-indic-ocr", "metrics": {"overall": 92.76}, "source_id": "bodhan-indic-ocr-card", "evidence": "author_reported", "note": "Explicit OmniDocBench1.6 English subset; secondary noncore test, not fullset. TextEdit0.04 FormulaCDM97.53 TableTEDS85.10 TEDS-S90.58 ReadOrder0.11.", "measurement_operator": "Bodhan AI", "verified_on": "2026-10-22"}

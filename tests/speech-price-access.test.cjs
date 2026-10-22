@@ -10,7 +10,7 @@ test('every hosted model has sourced price or dated actionable access context',(
   assert.ok(price||context,model.id);
   if(context) {assert.equal(context.verified_on,'2026-10-22');assert.ok(context.source_urls.length);assert.ok(context.note.length>50);}
  }
- assert.equal(data.pricingContexts.length,17);
+ assert.equal(data.pricingContexts.length,18);
 });
 test('new exact-model API rates normalize correctly and retain product scope',()=>{
  for(const [model,amount] of Object.entries({'sprag-symphony':.09,'speechmatics-enhanced':.75,'revai-machine':.20,'google-chirp':.96,'microsoft-azure-speech-07-2026':.36,'meta-muse-voice-transcribe':.18})) {

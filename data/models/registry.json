@@ -1511,7 +1511,7 @@
     "source_id": "stt-model-granite-speech-5-0-470m-turboctc",
     "hub_id": "ibm-granite/granite-speech-5.0-470m-turboctc",
     "license": "apache-2.0",
-    "configuration": "Apache-2.0 TurboCTC checkpoint; the -nc checkpoint is a distinct model and is not substituted.",
+    "configuration": "Apache-2.0 TurboCTC checkpoint; the -nc checkpoint is a distinct model and is not substituted. This row retains the August English-only benchmark generation, not the October multilingual update.",
     "release_source_id": "stt-model-granite-speech-5-0-470m-turboctc"
   },
   {
@@ -4264,5 +4264,382 @@
     "license": "cc-by-nc-4.0",
     "lineage": "stt-runtime-soundsgoodai-zipformer-cr-ctc-transducer-xl-290m",
     "cohort_priority": 10
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-5-0-2b",
+    "name": "Granite Speech 5.0 2B",
+    "hub_id": "ibm-granite/granite-speech-5.0-2b",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "license": "apache-2.0",
+    "release_date": "2026-10-20",
+    "release_provenance": "verified",
+    "source_id": "ibm-granite-speech-5-0-2b-release",
+    "release_source_id": "ibm-granite-speech-5-0-2b-release",
+    "configuration": "Exact 5.0 release; not 4.1 or TurboCTC.",
+    "model_revision": "f8478b4691b8f83e6413ded13fab28c039a77863"
+  },
+  {
+    "id": "stt-ibm-granite-granite-speech-4-1-2b-plus-v2610",
+    "name": "Granite Speech 4.1 2B Plus · October 2026",
+    "hub_id": "ibm-granite/granite-speech-4.1-2b-plus",
+    "topics": [
+      "stt"
+    ],
+    "organization": "IBM",
+    "access": "open",
+    "license": "apache-2.0",
+    "release_date": "2026-10-19",
+    "release_provenance": "verified",
+    "source_id": "ibm-granite-speech-4-1-2b-plus-v2610",
+    "release_source_id": "ibm-granite-speech-4-1-2b-plus-v2610",
+    "configuration": "Updated v2610 weights; distinct from original v2604 and existing Handy Q8 conversion.",
+    "model_revision": "e69efe37f97b6283c61f5a8dadda2b3eb67765d6"
+  },
+  {
+    "id": "stt-audio8-asr-infinite",
+    "name": "Audio8 ASR Infinite · preview",
+    "organization": "Edge0",
+    "topics": [
+      "stt"
+    ],
+    "access": "open",
+    "hub_id": "Edge0/Audio8-ASR-Infinite",
+    "model_revision": "7476824bc222e4ad509d286e8cae8b8d3f371129",
+    "license": "apache-2.0",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-audio8-asr-infinite-card",
+    "configuration": "Streaming Chinese/English preview; 80ms clock and 480ms algorithmic delay in author evaluation. Author LibriSpeech test-clean WER 3.042%, test-other 6.808%; AISHELL1/4 CER 1.750%/2.893%. These are not the matched English seven-set protocol; no mixed WER/CER average imported."
+  },
+  {
+    "id": "stt-aurora-asr-1m",
+    "name": "AuroraASR-1M",
+    "organization": "AuroraAI Research",
+    "topics": [
+      "stt"
+    ],
+    "access": "open",
+    "hub_id": "AuroraAI-Research/AuroraASR-1M",
+    "model_revision": "cd307b54b4d666d6ad7dc982a7a58a96d6e7f942",
+    "license": "apache-2.0",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "stt-aurora-asr-1m-card",
+    "configuration": "FP32 reference, greedy CTC, English only. Author LibriSpeech test-clean WER 11.43%, test-other 26.50%; own lowercase/no-punctuation normalization. Author throughput 1362× on RTX PRO6000 Blackwell, batch1, 100 test-clean clips, features/decoding included; not an M4 measurement. INT8 1.056232MB is an alternative artifact, not the FP32 accuracy checkpoint."
+  },
+  {
+    "id": "stt-orukeet-r3",
+    "name": "Orukeet r3",
+    "organization": "Oruk AI",
+    "topics": [
+      "stt"
+    ],
+    "access": "open",
+    "hub_id": "oruk/orukeet",
+    "model_revision": "b59c13a733fce5cf193230d0fa317ee7f145a108",
+    "license": "cc-by-sa-4.0",
+    "release_date": "2026-09-11",
+    "release_provenance": "verified",
+    "source_id": "stt-orukeet-r3-card",
+    "configuration": "NeMo/FP32 source, 25 languages. Author FLEURS25 pooled WER9.85%, English3.82%, LibriSpeech clean1.46%/other2.86%. Final adaptation AND checkpoint selection used LibriSpeech test-other, so these claims do not enter held-out English rankings. M5Max warm latency39.6ms is another hardware/protocol, not an M4 proxy.",
+    "release_source_id": "stt-orukeet-r3-release"
+  },
+  {
+    "id": "stt-granite-turboctc-multilingual-2610",
+    "name": "Granite Speech 5.0 TurboCTC · multilingual Oct2026",
+    "organization": "IBM",
+    "topics": [
+      "stt"
+    ],
+    "access": "open",
+    "hub_id": "ibm-granite/granite-speech-5.0-470m-turboctc",
+    "model_revision": "1dd23f46f6d4e6eae2531982ba2e33220086dd97",
+    "license": "apache-2.0",
+    "release_date": "2026-10-21",
+    "release_provenance": "verified",
+    "source_id": "stt-granite-turboctc-multilingual-2610-card",
+    "configuration": "October multilingual checkpoint. Official card says the existing leaderboard entry remains the older English-only release. No old accuracy or Handy conversion speed is transferred to these weights.",
+    "release_source_id": "stt-granite-turboctc-multilingual-2610-card"
+  },
+  {
+    "id": "stt-falcon-asr",
+    "name": "Falcon-ASR · hosted demo",
+    "organization": "TII",
+    "topics": [
+      "stt"
+    ],
+    "access": "closed",
+    "release_date": "2026-10-06",
+    "release_provenance": "verified",
+    "source_id": "stt-falcon-asr-release",
+    "release_source_id": "stt-falcon-asr-release",
+    "configuration": "Author English seven-set WER5.74% and Arabic six-set WER20.92%; evaluation differs from matched core panel. Public demo ≤60sec/20MB. Downloadable weights and commercial API tariff not verified; API is planned.",
+    "parameters_million": 1600,
+    "price_context": {
+      "label": "Demo only",
+      "source_id": "stt-falcon-asr-release",
+      "verified_on": "2026-10-22",
+      "note": "Public demo access; no published production API tariff or weights license verified."
+    }
+  },
+  {
+    "id": "falcon-ocr-arabic",
+    "name": "Falcon-OCR-Arabic · hosted demo",
+    "organization": "TII",
+    "topics": [
+      "ocr"
+    ],
+    "access": "closed",
+    "release_date": "2026-10-06",
+    "release_provenance": "verified",
+    "source_id": "falcon-ocr-arabic-release",
+    "release_source_id": "falcon-ocr-arabic-release",
+    "configuration": "Arabic adaptation distinct from base Falcon-OCR. Author-only11974-sample evaluation: text accuracy81.87%, tableTEDS59.95%; not standard OmniDocBench. Public demo accepts PDFs≤5pages/1MB. No adaptation weights/license/API tariff verified.",
+    "parameters_million": 270,
+    "price_context": {
+      "label": "Demo only",
+      "source_id": "falcon-ocr-arabic-release",
+      "verified_on": "2026-10-22",
+      "note": "Public demo access; no published production API tariff or weights license verified."
+    }
+  },
+  {
+    "id": "sarvam-vision-2-1",
+    "name": "Sarvam Vision 2.1",
+    "organization": "Sarvam AI",
+    "access": "closed",
+    "release_date": "2026-09-24",
+    "release_provenance": "release_announcement",
+    "source_id": "sarvam-vision-21-release",
+    "release_source_id": "sarvam-vision-21-release",
+    "configuration": "Hosted document digitisation with semantic layout parser and reading-order network; current INR service pricing is contextual, not a frozen benchmark endpoint tariff.",
+    "evidence_note": "Author-operated official/full olmOCR evidence. Parameters unknown; original Vision 3B is not proof for 2.1.",
+    "topics": [
+      "ocr"
+    ],
+    "price_context": {
+      "label": "Service ₹500†",
+      "source_id": "sarvam-document-ai-pricing",
+      "verified_on": "2026-10-22",
+      "currency": "INR",
+      "amount_per_1000_pages": 500,
+      "note": "Current Digitisation API ₹0.50/page = ₹500/1000 pages, checked2026-10-22. INR only; no FX conversion or USD sorting. Ratecard does not freeze benchmark revision. Extract API is a separate service."
+    }
+  },
+  {
+    "id": "bodhan-indic-ocr",
+    "name": "Bodhan IndicOCR",
+    "organization": "Bodhan AI / AI4Bharat",
+    "access": "open",
+    "release_date": "2026-09-05",
+    "release_provenance": "release_announcement",
+    "source_id": "bodhan-indic-ocr-card",
+    "release_source_id": "bodhan-september-release",
+    "license": "Indic Open Model License v1.0",
+    "configuration": "IndicDocLayout (33M,133MB fp32) plus IndicBlockOCR (0.8B,1.7GB bf16); checkpoint cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25. Component sizes are author-reported, not full runtime memory. Indic Open Model License restricts hosted services; see source.",
+    "evidence_note": "Open weights with hosted-service restrictions; own English-subset results distinct from Sarvam competitor full-set run.",
+    "topics": [
+      "ocr"
+    ]
+  },
+  {
+    "id": "pp-ocrv6-tiny",
+    "name": "PP-OCRv6 tiny",
+    "organization": "PaddlePaddle",
+    "access": "open",
+    "release_date": "2026-06-11",
+    "release_provenance": "release_announcement",
+    "source_id": "pp-ocrv6-release",
+    "release_source_id": "pp-ocrv6-release",
+    "configuration": "PP-OCRv6_tiny general text detection/recognition tier; not PaddleOCR-VL or PP-StructureV3; author-reported 1.5M parameters.",
+    "evidence_note": "Catalog-only: no matched core full-document benchmark score verified.",
+    "topics": [
+      "ocr"
+    ],
+    "parameters_million": 1.5
+  },
+  {
+    "id": "pp-ocrv6-small",
+    "name": "PP-OCRv6 small",
+    "organization": "PaddlePaddle",
+    "access": "open",
+    "release_date": "2026-06-11",
+    "release_provenance": "release_announcement",
+    "source_id": "pp-ocrv6-release",
+    "release_source_id": "pp-ocrv6-release",
+    "configuration": "PP-OCRv6_small general text detection/recognition tier; not PaddleOCR-VL or PP-StructureV3; author-reported 7.7M parameters.",
+    "evidence_note": "Catalog-only: no matched core full-document benchmark score verified.",
+    "topics": [
+      "ocr"
+    ],
+    "parameters_million": 7.7
+  },
+  {
+    "id": "pp-ocrv6-medium",
+    "name": "PP-OCRv6 medium",
+    "organization": "PaddlePaddle",
+    "access": "open",
+    "release_date": "2026-06-11",
+    "release_provenance": "release_announcement",
+    "source_id": "pp-ocrv6-release",
+    "release_source_id": "pp-ocrv6-release",
+    "configuration": "PP-OCRv6_medium general text detection/recognition tier; not PaddleOCR-VL or PP-StructureV3; author-reported 34.5M parameters.",
+    "evidence_note": "Catalog-only: no matched core full-document benchmark score verified.",
+    "topics": [
+      "ocr"
+    ],
+    "parameters_million": 34.5
+  },
+  {
+    "id": "ovisocr3",
+    "name": "OvisOCR3",
+    "topics": [
+      "ocr"
+    ],
+    "organization": "ATH-MaaS / Alibaba",
+    "access": "open",
+    "release_date": "2026-10-21",
+    "release_provenance": "verified",
+    "source_id": "ovisocr3-release",
+    "release_source_id": "ovisocr3-release",
+    "model_revision": "5f6ce6932efee9ec10c30746db55bd780214b7fd",
+    "license": "Apache-2.0",
+    "parameters_million": 852.98592,
+    "configuration": "852.986M total BF16 parameters. Apache-2.0",
+    "evidence_note": "Technical report link explicitly not yet available. Author card explicitly states usage examples do not define benchmark protocol; prompts/preprocessing/generation/postprocessing need freezing. MDPBench card does not distinguish public/private split; no automatic merge into existing mdp-public or mdp-private. Do not import In-house KIE benchmark into shared quality cohort.  Author claims MDPBench88.80, PureDocBench82.31 and Real5 93.63 retained here; unresolved split/metric mapping, no core rank contribution.",
+    "reported_results": [
+      {
+        "benchmark": "OmniDocBench1.6",
+        "metric": "overall",
+        "value": 96.74,
+        "direction": "higher"
+      },
+      {
+        "benchmark": "MDPBench",
+        "metric": "overall",
+        "value": 88.8,
+        "direction": "higher"
+      },
+      {
+        "benchmark": "PureDocBench",
+        "metric": "overall",
+        "value": 82.31,
+        "direction": "higher"
+      },
+      {
+        "benchmark": "Real5-OmniDocBench",
+        "metric": "overall",
+        "value": 93.63,
+        "direction": "higher"
+      },
+      {
+        "benchmark": "OCRBench",
+        "metric": "overall",
+        "value": 88.8,
+        "direction": "higher",
+        "note": "Card0-100 presentation; do not silently mix with0-1000 OCRBench raw totals."
+      },
+      {
+        "benchmark": "OCRBench v2 EN",
+        "metric": "overall",
+        "value": 65.9,
+        "direction": "higher"
+      },
+      {
+        "benchmark": "OCRBench v2 ZH",
+        "metric": "overall",
+        "value": 61.3,
+        "direction": "higher"
+      }
+    ]
+  },
+  {
+    "id": "indra-ocr-1-1",
+    "name": "Indra OCR1.1 · auto",
+    "topics": [
+      "ocr"
+    ],
+    "organization": "Datalab",
+    "access": "open",
+    "release_date": "2026-10-19",
+    "release_provenance": "verified",
+    "source_id": "indra-ocr-1-1-release",
+    "release_source_id": "indra-ocr-1-1-release",
+    "model_revision": "bd02167fdf2005a19962cc15188f8496a2c87d3b",
+    "license": "Modified OpenRAIL-M weights; Apache-2.0 code",
+    "parameters_million": null,
+    "configuration": "About76MB default pipeline; recognizer-only1.25M is NOT full-pipeline parameter count. Modified OpenRAIL-M weights; Apache-2.0 code",
+    "evidence_note": "Not OmniDocBench and not olmOCR-bench; new secondary protocol necessary. Auto reads digitalPDF text layer and OCRs missing content; cannot silently combine with image-only scores. Pin1.1 generation: older authorcard/crawler scores62.1/66.8 are obsolete and different from current66.7/71.4. Current card offers only selected olmOCR-bench splits under own harness200dpi, no complete compatible overall; do not synthesize one. PP-StructureV3 comparator excludes19 stalled pages; avoid presenting that comparator as identical full2937page coverage. OmniParseBench: auto66.7, auto+math71.4, OCR-only61.2; auto reads PDF text layers, not image-only.",
+    "reported_results": [
+      {
+        "benchmark": "OmniParseBench",
+        "configuration": "auto: PDF text layer plus OCR",
+        "overall": 66.7,
+        "text": 46.7,
+        "tables": 61.1,
+        "layout": 92.2
+      },
+      {
+        "benchmark": "OmniParseBench",
+        "configuration": "auto plus --math",
+        "overall": 71.4,
+        "text": 62.7,
+        "tables": 59.6,
+        "layout": 92
+      },
+      {
+        "benchmark": "OmniParseBench",
+        "configuration": "OCR only",
+        "overall": 61.2,
+        "text": 40.7,
+        "tables": 52.7,
+        "layout": 90.3
+      }
+    ]
+  },
+  {
+    "id": "logics-parsing-v3",
+    "name": "Logics-Parsing-V3",
+    "topics": [
+      "ocr"
+    ],
+    "organization": "Alibaba Logics",
+    "access": "open",
+    "release_date": "2026-09-22",
+    "release_provenance": "verified",
+    "source_id": "logics-parsing-v3-release",
+    "release_source_id": "logics-parsing-v3-release",
+    "model_revision": "e6d324e30e0f64f1a0dfb652efcb83a4b244591e",
+    "license": "Apache-2.0 project code; weight-license metadata unspecified",
+    "parameters_million": 852.98592,
+    "configuration": "852.986M total BF16 parameters. Apache-2.0 project code; weight-license metadata unspecified",
+    "evidence_note": "Scores transcribed from author table images and visually inspected, not inferred from chart bars. OmniDocBench v1.6 is single-page; separate from MPDocBench multi-page context. MPDocBench evaluation420documents/3135pages; reported efficiency usesH100,batch1,window3; default runtime window2, singlepagewindow1. Edit-distance metrics lower better; CDM/TEDS/F1/overall higher better. MPDocBench-Long is constructed concatenated corpus and must remain separate from MPDocBench-Parse. ",
+    "reported_results": [
+      {
+        "benchmark": "OmniDocBench v1.6",
+        "overall": 95.58,
+        "text_edit": 0.036,
+        "formula_cdm": 96.73,
+        "table_teds": 93.03,
+        "table_teds_s": 95.72,
+        "read_order_edit": 0.129
+      },
+      {
+        "benchmark": "MPDocBench-Parse",
+        "overall": 85.26,
+        "text_edit": 0.042,
+        "truncated_text_edit": 0.065,
+        "formula_cdm": 91.35,
+        "table_teds": 87.74,
+        "truncated_table_teds": 88.05,
+        "figure_f1": 71.84,
+        "read_order_edit": 0.084,
+        "heading_teds": 62.33
+      }
+    ]
   }
 ]

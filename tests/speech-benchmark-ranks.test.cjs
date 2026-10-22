@@ -126,8 +126,8 @@ test('single-selector navigation handles partial links, sortable headers and res
  assert.equal(element('speechSearch').value,'');assert.equal(element('speechSize').value,'');assert.equal(element('speechParams').value,'');
  assert.equal(element('speechAccess').value,'all');assert.equal(location.hash,'');
  assert.equal(Number(element('historyRange').value),Number(element('historyRange').max));
- assert.match(element('speechStatus').textContent,/64 ranked/);
- assert.match(element('speechUnscoredSummary').textContent,/108 configurations/);
+ assert.match(element('speechStatus').textContent,/65 ranked/);
+ assert.match(element('speechUnscoredSummary').textContent,/114 configurations/);
  assert.ok(element('speechBody').innerHTML.indexOf('>Phonon-2</a>')<element('speechBody').innerHTML.indexOf('>gemma-4-E4B-it</a>'));
  assert.doesNotMatch(element('speechBody').innerHTML,/GGUF Q8_0/);
  assert.match(element('speechUnscoredList').innerHTML,/GGUF Q8_0/);
@@ -145,8 +145,8 @@ test('legacy hashes resolve to the single accuracy selector',async()=>{
 test('English landing separates no-score models and orders Phonon above every Gemma4 variant',()=>{
  const result=Speech.build(data);
  const html=Speech.renderRows(result,data),unscored=Speech.renderUnscored(result,data);
- assert.equal(result.benchmarkCount,64);
- assert.equal(result.unscoredRows.length,108);
+ assert.equal(result.benchmarkCount,65);
+ assert.equal(result.unscoredRows.length,114);
  for(const id of ['stt-google-gemma-4-e4b-it','stt-google-gemma-4-e2b-it','stt-google-gemma-4-12b-it']) {
   assert.ok(find(result,'phonon-2').benchmarkRank<find(result,id).benchmarkRank);
   assert.ok(html.indexOf('>Phonon-2</a>')<html.indexOf('>'+find(result,id).name+'</a>'));

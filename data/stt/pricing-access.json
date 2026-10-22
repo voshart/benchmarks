@@ -18,7 +18,7 @@
   {
     "model": "stt-speechmatics-enhanced",
     "status": "published_price",
-    "label": "$0.75/hr \u00b7 pre-recorded PAYG",
+    "label": "$0.75/hr · pre-recorded PAYG",
     "note": "Exact identity bridge: current batch API model='enhanced'; operating_point is its deprecated compatibility field. Official pricing UI checked in cloud browser with BOTH model-training and volume discount switches OFF: Enhanced pre-recorded USD0.75/hr, real-time USD0.80/hr. Default crawler-visible USD0.38 includes training opt-in and top volume discount and must NOT be used as undiscounted PAYG. Excludes add-ons; hosted current model/service may differ from benchmark revision.",
     "source_urls": [
       "https://www.speechmatics.com/pricing",
@@ -29,7 +29,7 @@
   {
     "model": "stt-revai-machine",
     "status": "published_price",
-    "label": "$0.20/hr \u00b7 English PAYG",
+    "label": "$0.20/hr · English PAYG",
     "note": "Official transcription-options documentation explicitly maps transcriber='machine' or omitted transcriber to Reverb ASR. Current rate card lists English Reverb Transcription at USD0.20/hr, rounded up to nearest second with 15-second minimum. Non-English requests ignore this transcriber selection and have a separate tariff, so do not apply English rate to foreign-language transcription. Current service rate; benchmark endpoint revision unspecified.",
     "source_urls": [
       "https://docs.rev.ai/api/asynchronous/transcribers",
@@ -109,7 +109,7 @@
     "model": "stt-reson8-resonant-1",
     "status": "subscription_version_unverified",
     "label": "Subscription",
-    "note": "Current Reson8 API pricing is public, but requests use an automatically updated pipeline without a public resonant-1/flash version selector; exact benchmark-version mapping remains unverified. Product context: Pro \u20ac20/month includes 100 batch hours; Growth \u20ac100/month includes 500. Fully used quotas equal \u20ac0.20/batch-hour. Batch overage is \u20ac0.36/hour Pro or \u20ac0.24/hour Growth. Streaming uses twice the credits. Not converted to USD and not asserted as a frozen benchmark-model tariff.",
+    "note": "Current Reson8 API pricing is public, but requests use an automatically updated pipeline without a public resonant-1/flash version selector; exact benchmark-version mapping remains unverified. Product context: Pro €20/month includes 100 batch hours; Growth €100/month includes 500. Fully used quotas equal €0.20/batch-hour. Batch overage is €0.36/hour Pro or €0.24/hour Growth. Streaming uses twice the credits. Not converted to USD and not asserted as a frozen benchmark-model tariff.",
     "source_urls": [
       "https://www.reson8.dev/#pricing",
       "https://docs.reson8.dev/versioning/",
@@ -121,7 +121,7 @@
     "model": "stt-reson8-resonant-1-flash",
     "status": "subscription_version_unverified",
     "label": "Subscription",
-    "note": "Current Reson8 API pricing is public, but requests use an automatically updated pipeline without a public resonant-1/flash version selector; exact benchmark-version mapping remains unverified. Product context: Pro \u20ac20/month includes 100 batch hours; Growth \u20ac100/month includes 500. Fully used quotas equal \u20ac0.20/batch-hour. Batch overage is \u20ac0.36/hour Pro or \u20ac0.24/hour Growth. Streaming uses twice the credits. Not converted to USD and not asserted as a frozen benchmark-model tariff.",
+    "note": "Current Reson8 API pricing is public, but requests use an automatically updated pipeline without a public resonant-1/flash version selector; exact benchmark-version mapping remains unverified. Product context: Pro €20/month includes 100 batch hours; Growth €100/month includes 500. Fully used quotas equal €0.20/batch-hour. Batch overage is €0.36/hour Pro or €0.24/hour Growth. Streaming uses twice the credits. Not converted to USD and not asserted as a frozen benchmark-model tariff.",
     "source_urls": [
       "https://www.reson8.dev/#pricing",
       "https://docs.reson8.dev/versioning/",
@@ -200,5 +200,16 @@
       "basis": "vendor_estimate",
       "note": "Exact gemini-3.5-transcribe is billed $2/million audio input tokens and $12/million output text tokens, not per hour. Google publishes an approximate $0.005/minute (~$0.30/hour) illustration using 25 audio tokens/sec and 175 output text tokens/minute; those assumptions calculate $0.306/hour before rounding. Actual speech/output/context changes the bill. This cell is the rounded vendor estimate, not a guaranteed flat tariff."
     }
+  },
+  {
+    "model": "stt-falcon-asr",
+    "status": "hosted_demo",
+    "label": "Demo only",
+    "verified_on": "2026-10-22",
+    "note": "Author English seven-set WER5.74% and Arabic six-set WER20.92%; evaluation differs from matched core panel. Public demo ≤60sec/20MB. Downloadable weights and commercial API tariff not verified; API is planned.",
+    "source_urls": [
+      "https://huggingface.co/blog/tiiuae/falcon-asr",
+      "https://huggingface.co/spaces/tiiuae/falcon-asr-demo"
+    ]
   }
 ]

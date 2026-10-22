@@ -470,5 +470,84 @@
     "kind": "official",
     "verified_on": "2026-10-13",
     "note": "v3/pdf document-page rates and Files API batch-page rates remain distinct. Image/stroke request prices are not converted into page prices; one-time activation fee is excluded from marginal page costs."
+  },
+  "falcon-ocr-arabic-release": {
+    "title": "Falcon-OCR-Arabic · hosted demo",
+    "url": "https://huggingface.co/blog/tiiuae/falcon-ocr-arabic",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "model_author",
+    "verified_on": "2026-10-22",
+    "quote": "Falcon-OCR-Arabic",
+    "note": "Arabic adaptation distinct from base Falcon-OCR. Author-only11974-sample evaluation: text accuracy81.87%, tableTEDS59.95%; not standard OmniDocBench. Public demo accepts PDFs≤5pages/1MB. No adaptation weights/license/API tariff verified."
+  },
+  "sarvam-vision-21-release": {
+    "title": "Sarvam Vision 2.1 release and author/competitor evaluations",
+    "url": "https://www.sarvam.ai/blogs/sarvam-vision-2-1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "September 24, 2026 public API release. Explicit official/full olmOCR set; all systems evaluated by Sarvam. OmniDoc v1.6 full-vs-English split unresolved."
+  },
+  "bodhan-indic-ocr-card": {
+    "title": "Bodhan IndicOCR pinned model card",
+    "url": "https://huggingface.co/bodhan-ai/indic-ocr/blob/cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Own OmniDoc v1.6 and olmOCR results explicitly English subsets. Pipeline layout33M plus recognizer0.8B."
+  },
+  "bodhan-september-release": {
+    "title": "Bodhan September 2026 official release collection",
+    "url": "https://huggingface.co/collections/bodhan-ai/bodhan-september-2026",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Collection explicitly identifies September 5, 2026 release; September 8 launch article https://ai4bharat.iitm.ac.in/blog/bodhan-ocr/ corroborates public availability. Not August 7 Hub creation."
+  },
+  "pp-ocrv6-release": {
+    "title": "PaddleOCR v3.7.0 / PP-OCRv6 release",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/releases/tag/v3.7.0",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Release June11 2026; explicit tiny1.5M/small7.7M/medium34.5M. Recognition pipelines, not PaddleOCR-VL."
+  },
+  "sarvam-document-ai-pricing": {
+    "title": "Sarvam current Document AI API pricing",
+    "url": "https://www.sarvam.ai/api-pricing",
+    "kind": "vendor",
+    "verified_on": "2026-10-22",
+    "note": "Current service rates INR; not a USD price or frozen benchmark-generation price."
+  },
+  "ovisocr3-release": {
+    "title": "OvisOCR3 release and evaluation",
+    "url": "https://huggingface.co/ATH-MaaS/OvisOCR3/blob/5f6ce6932efee9ec10c30746db55bd780214b7fd/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "ATH-MaaS model authors",
+    "verified_on": "2026-10-22",
+    "quote": "OvisOCR3",
+    "note": "Technical report link explicitly not yet available. Author card explicitly states usage examples do not define benchmark protocol; prompts/preprocessing/generation/postprocessing need freezing. MDPBench card does not distinguish public/private split; no automatic merge into existing mdp-public or mdp-private. Do not import In-house KIE benchmark into shared quality cohort. ",
+    "revision": "5f6ce6932efee9ec10c30746db55bd780214b7fd"
+  },
+  "indra-ocr-1-1-release": {
+    "title": "Indra OCR1.1 release and evaluation",
+    "url": "https://github.com/datalab-to/indra/blob/e20355319b5aa5705a876a8d2b40aca606d7df5f/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Datalab; author card says default auto and math accuracy use benchmark adapter/scorer; OCR-only is authors own run",
+    "verified_on": "2026-10-22",
+    "quote": "Indra OCR1.1",
+    "note": "Not OmniDocBench and not olmOCR-bench; new secondary protocol necessary. Auto reads digitalPDF text layer and OCRs missing content; cannot silently combine with image-only scores. Pin1.1 generation: older authorcard/crawler scores62.1/66.8 are obsolete and different from current66.7/71.4. Current card offers only selected olmOCR-bench splits under own harness200dpi, no complete compatible overall; do not synthesize one. PP-StructureV3 comparator excludes19 stalled pages; avoid presenting that comparator as identical full2937page coverage.",
+    "revision": "e20355319b5aa5705a876a8d2b40aca606d7df5f",
+    "model_revision": "bd02167fdf2005a19962cc15188f8496a2c87d3b"
+  },
+  "logics-parsing-v3-release": {
+    "title": "Logics-Parsing-V3 release and evaluation",
+    "url": "https://huggingface.co/Logics-MLLM/Logics-Parsing-V3/blob/e6d324e30e0f64f1a0dfb652efcb83a4b244591e/README.md",
+    "kind": "author_reported",
+    "publication_operator": "model_author",
+    "measurement_operator": "Alibaba Logics model authors",
+    "verified_on": "2026-10-22",
+    "quote": "Logics-Parsing-V3",
+    "note": "Scores transcribed from author table images and visually inspected, not inferred from chart bars. OmniDocBench v1.6 is single-page; separate from MPDocBench multi-page context. MPDocBench evaluation420documents/3135pages; reported efficiency usesH100,batch1,window3; default runtime window2, singlepagewindow1. Edit-distance metrics lower better; CDM/TEDS/F1/overall higher better. MPDocBench-Long is constructed concatenated corpus and must remain separate from MPDocBench-Parse. ",
+    "revision": "e6d324e30e0f64f1a0dfb652efcb83a4b244591e"
   }
 }

@@ -32,7 +32,8 @@ test('speech rows reproduce the pinned CSV per dataset without importing its cha
   validateSTT(data);
   const rows = csvRows(fs.readFileSync(require.resolve('../data/stt/evidence/open-asr-2026-10-17.csv'), 'utf8'));
   const protocol = data.accuracyTests.find(test => test.id === official);
-  for (const observation of data.rawRecords.filter(record => record.benchmark === official)) {
+  assert.equal(data.rawRecords.filter(record => record.benchmark === official && record.source_id === 'open-asr-2026-10-17').length, 64);
+  for (const observation of data.rawRecords.filter(record => record.benchmark === official && record.source_id === 'open-asr-2026-10-17')) {
     const values = rows.find(row => row.model === observation.source_model);
     for (const metric of protocol.metrics) {
       const original = values[metric.source_column];
@@ -42,7 +43,7 @@ test('speech rows reproduce the pinned CSV per dataset without importing its cha
     assert.equal(observation.metrics.published_mean_wer, undefined);
     assert.equal(observation.measurement_operator, observation.source_model === 'OtterAI/speech-v3.1' ? 'OtterAI contributor (public scores)' : 'unspecified');
   }
-  assert.equal(data.rawRecords.filter(record => record.benchmark === official).length, 64);
+  assert.equal(data.rawRecords.filter(record => record.benchmark === official).length, 65);
 });
 
 test('maintainer and launch observations stay separate and never become two ranking families', () => {
@@ -165,8 +166,8 @@ test('throughput retains workload, runtime and batch distinctions and never supp
 
 test('new speech identities remain outside OCR cohorts and unknown release dates remain null', () => {
   const ocr = loadOCR();
-  assert.equal(ocr.models.length, 177);
-  assert.equal(ocr.records.length, 381);
+  assert.equal(ocr.models.length, 186);
+  assert.equal(ocr.records.length, 388);
   assert.equal(ocr.models.some(model => model.topics?.includes('stt')), false);
   assert.equal(BenchmarkRank.build(ocr, ocr.config.snapshot_date, {min:0}).rows.some(row => row.id === 'phonon-2'), false);
   assert.equal(data.models.find(model => model.id === 'phonon-2').release_date, '2026-09-29');
@@ -182,7 +183,7 @@ test('speech UI switches its single benchmark selector and applies a download bu
   const context = {document, BenchmarkSpeech:Speech,BenchmarkSpeechMatrix:Matrix,fetch:async () => ({ok:true, json:async () => data}), console,setTimeout,clearTimeout};
   vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech-page.js'), 'utf8'), context);
   await new Promise(resolve => setImmediate(resolve));
-  assert.match(element('speechStatus').textContent, /64 ranked/);
+  assert.match(element('speechStatus').textContent, /65 ranked/);
   assert.equal((element('speechHead').innerHTML.match(/<th /g)||[]).length,5);
   assert.match(element('speechHead').innerHTML,/Rank/);
   assert.match(element('speechHead').innerHTML, /Error %/);
