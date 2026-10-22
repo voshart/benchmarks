@@ -76,9 +76,13 @@
       ? 'Compute cost depends on hardware and workload. Open weights do not imply zero processing cost.' : 'No matched hourly rate verified.'};
   }
 
-  function sizeLabel(size) {
-    return size?.download_mb != null ? size.download_mb.toLocaleString('en-US',{maximumFractionDigits:1}) + ' MB'
-      : size?.parameters_million != null ? size.parameters_million.toLocaleString('en-US',{maximumFractionDigits:1}) + 'M params' : '—';
+  // Keep the two quantities in separate columns; never substitute one for the other.
+  function renderSizeCells(size, data) {
+    return ['download_mb','parameters_million'].map(field => {
+      const value = size?.[field];
+      const label = finite(value) ? value.toLocaleString('en-US',{maximumFractionDigits:1}) : '—';
+      return `<td>${finite(value) ? link(data.sources[size.source_id], label, size.note) : label}</td>`;
+    }).join('');
   }
 
   function build(data, options={}) {
@@ -112,7 +116,7 @@
   }
 
   function renderHead(result) {
-    return '<th scope="col">Model</th><th scope="col">Download / params</th><th scope="col">'
+    return '<th scope="col">Model</th><th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">'
       + (result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
         : result.test.published_mean_metric ? 'Reported mean WER ↓' : 'Fixed '+result.test.mean_metrics.length+' mean WER ↓') + '</th>'
       + result.columns.map(metric => `<th scope="col" title="${esc(metric.label)} · ${metric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER'} %, lower is better">${esc(metric.short)}</th>`).join('')
@@ -120,12 +124,11 @@
   }
 
   function renderRows(result, data) {
-    if (!result.rows.length) return `<tr><td colspan="${result.columns.length + 4}">No models match these filters.</td></tr>`;
+    if (!result.rows.length) return `<tr><td colspan="${result.columns.length + 5}">No models match these filters.</td></tr>`;
     return result.rows.map(row => {
       const source = data.sources[row.provenance?.source_id];
       const infoId = 'speech-evidence-' + result.test.id + '-' + row.id;
       const modelNote = [row.model.configuration, row.model.release_date ? 'Released ' + row.model.release_date : 'Exact release date unverified'].filter(Boolean).join(' · ');
-      const sizeText = sizeLabel(row.size);
       const meanTitle = row.mean == null ? 'Every required comparable measurement and matched source is required.'
         : row.meanBasis === 'published' ? 'Exactly as reported by this source. Not an aggregate rank.'
         : 'Arithmetic mean of the '+result.test.mean_metrics.length+' named WER columns, calculated here. Not the current Open ASR default average or an aggregate rank. Extra columns never change this panel.';
@@ -147,11 +150,11 @@
         return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
       }).join('');
       return `<tr><th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}</th>`
-        + `<td>${row.size ? link(data.sources[row.size.source_id], sizeText, row.size.note) : sizeText}</td>`
+        + renderSizeCells(row.size, data)
         + `<td class="index" title="${esc(meanTitle)}">${row.mean == null ? '—' : row.mean.toFixed(2)}</td>${cells}`
         + `<td>${esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">†</button>${details}</td></tr>`;
     }).join('');
   }
 
-  return {build, summarize, available, selectSize, sizeLabel, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
+  return {build, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
 });

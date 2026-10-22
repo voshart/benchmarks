@@ -24,7 +24,7 @@
     $('speechHead').innerHTML = protocol ? BenchmarkSpeech.renderHead(result) : BenchmarkSpeechMatrix.renderHead(result);
     $('speechBody').innerHTML = protocol ? BenchmarkSpeech.renderRows(result,data) : BenchmarkSpeechMatrix.renderRows(result,data);
     $('speechProtocolNote').textContent = protocol ? result.test.note : view === 'small'
-      ? 'Models with a reported download ≤1,000 MB or ≤1B parameters. Secondary and one-family measurements remain visible; they cannot manufacture an aggregate index. Original and GGUF configurations stay separate.'
+      ? 'Models with a reported download ≤1,000 MB or ≤1,000 M parameters. Secondary and one-family measurements remain visible; they cannot manufacture an aggregate index. Original and GGUF configurations stay separate.'
       : view === 'new' ? 'Author and competitor research, including the original Phonon models and Moonshine paper. Alternate protocols do not add another core family.'
       : view === 'secondary' ? 'Alternate corpora, language details and runtime protocols are preserved as secondary evidence; they do not add aggregate votes.'
       : data.config.ranking_note;

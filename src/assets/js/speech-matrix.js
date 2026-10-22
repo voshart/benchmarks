@@ -87,11 +87,11 @@
   function renderHead(result) {
     return '<th scope="col">Model / configuration</th><th scope="col">Rank index</th>'
       + result.columns.map(test => `<th scope="col" title="${esc(test.note)}">${esc(test.short || test.label)} ↓</th>`).join('')
-      + '<th scope="col">Download / params</th><th scope="col">API / audio hour</th>';
+      + '<th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">API / audio hour</th>';
   }
 
   function renderRows(result, data) {
-    if (!result.rows.length) return `<tr><td colspan="${result.columns.length+4}">No models match this view and its filters. Choose All registered or another evidence view.</td></tr>`;
+    if (!result.rows.length) return `<tr><td colspan="${result.columns.length+5}">No models match this view and its filters. Choose All registered or another evidence view.</td></tr>`;
     return result.rows.map(row => {
       const modelNote = [row.model.organization,row.model.configuration,row.model.release_date ? 'Released '+row.model.release_date : 'Exact availability date unverified'].filter(Boolean).join(' · ');
       // Expose every contributing component source, including all five language
@@ -109,7 +109,7 @@
         return `<td class="score" style="--shade:${Math.max(0,Math.min(30,shade)).toFixed(1)}%">${link(data.sources[observation.source_id],observation.value.toFixed(2),tooltip)}${Rank.qualification(observation) ? '<sup title="Qualified evidence; see source and rank explanation">†</sup>' : ''}</td>`;
       }).join('');
       return `<tr><th scope="row">${link(data.sources[row.model.source_id],row.name,modelNote)}</th><td class="index">${RankUI.renderRank(rankRow,data.sources)}</td>${cells}`
-        + `<td>${row.size ? link(data.sources[row.size.source_id],Speech.sizeLabel(row.size),row.size.note) : '—'}</td>`
+        + Speech.renderSizeCells(row.size, data)
         + `<td class="price" title="${esc(row.priceInfo.note)}">${row.priceInfo.source_id ? link(data.sources[row.priceInfo.source_id],row.priceInfo.label) : esc(row.priceInfo.label)}</td></tr>`;
     }).join('');
   }

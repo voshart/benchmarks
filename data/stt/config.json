@@ -1,6 +1,6 @@
 {
   "title": "Speech-to-text evidence benchmark",
-  "description": "Cross-benchmark speech recognition, release cohorts, local runtimes and documented API rates.",
+  "description": "Compare published accuracy, model sizes and API rates.",
   "snapshot_date": "2026-10-19",
   "path": "/stt/",
   "language": "multilingual",

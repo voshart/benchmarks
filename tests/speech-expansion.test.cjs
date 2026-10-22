@@ -178,3 +178,46 @@ test('price units, currencies, current endpoints and token meters cannot be subs
  const altered=structuredClone(data);altered.pricing[0].amount=0;
  assert.throws(()=>validateSTT(altered),/invalid speech price normalization/);
 });
+
+test('download and parameter columns stay separate in matrix and protocol views',()=>{
+ const cases=[
+   [{download_mb:164}, /<td><a [^>]*>164<\/a><\/td><td>—<\/td>/],
+   [{parameters_million:9}, /<td>—<\/td><td><a [^>]*>9<\/a><\/td>/],
+   [{download_mb:164,parameters_million:9}, /<td><a [^>]*>164<\/a><\/td><td><a [^>]*>9<\/a><\/td>/],
+   [{}, /<td>—<\/td><td>—<\/td>/]
+ ];
+ for (const [values,pattern] of cases) {
+   const altered=structuredClone(data);
+   altered.sizes=altered.sizes.filter(record=>record.model!=='phonon-2');
+   altered.sizes.push({model:'phonon-2',...values,source_id:'fermion-phonon-2-launch',status:'observed',as_of:'2026-10-19',note:'Reported quantities'});
+   for (const renderer of [Speech,Matrix]) {
+     const result=renderer.build(altered,{query:'phonon-2',min:0});
+     const head=renderer.renderHead(result);
+     assert.match(head,/Download \(MB\)/);assert.match(head,/Parameters \(M\)/);
+     assert.doesNotMatch(head,/Download \/ params/);
+     const single={...result,rows:result.rows.filter(row=>row.id==='phonon-2')};
+     assert.match(renderer.renderRows(single,altered),pattern);
+     const columns=(head.match(/<th /g)||[]).length;
+     assert.match(renderer.renderRows({...result,rows:[]},altered),new RegExp(`colspan="${columns}"`));
+   }
+ }
+});
+
+test('size sorting and filters compare only their own unit and put unknowns last',()=>{
+ for (const renderer of [Speech,Matrix]) {
+   for (const [sort,field,filter] of [['download','download_mb','maxDownload'],['params','parameters_million','maxParams']]) {
+     const options={sort,min:0,missing:true};
+     const result=renderer.build(data,options);
+     const values=result.rows.map(row=>row.size?.[field]);
+     assert.ok(values.some(value=>value==null));
+     let previous=-Infinity;
+     for (const value of values) {
+       const comparable=value??Infinity;
+       assert.ok(comparable>=previous);previous=comparable;
+     }
+     const filtered=renderer.build(data,{...options,[filter]:200});
+     assert.ok(filtered.rows.length>0);
+     assert.ok(filtered.rows.every(row=>row.size?.[field]!=null&&row.size[field]<=200));
+   }
+ }
+});

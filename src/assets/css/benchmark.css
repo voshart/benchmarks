@@ -7,3 +7,5 @@ html[data-theme=dark]{color-scheme:dark;--paper:oklch(.18 0 0);--paper2:oklch(.2
 .pricing-table .pricing-note{white-space:normal;min-width:260px;text-align:left}.pricing-table td:nth-child(n+3){text-align:left}.score a{text-decoration:none}.score a:hover{text-decoration:underline}h2{font:400 1.3rem var(--serif);margin:1.2rem 0 .4rem}
 
 .rank-marker{border:0;background:none;color:var(--accent);font:700 .8rem var(--mono);padding:0 .3rem;vertical-align:super;cursor:pointer}.rank-marker:hover{background:var(--paper2)}.rank-note{max-width:min(34rem,calc(100vw - 2rem));max-height:80vh;overflow:auto;border:1px solid var(--rule);padding:1rem 1.2rem;background:var(--paper);color:var(--ink);font: .9rem/1.55 var(--sans);text-align:left;white-space:normal;box-shadow:0 4px 24px #0002}.rank-note::backdrop{background:#0002}.rank-note p{margin:.6rem 0}.rank-note ul{padding-left:1.2rem;margin:.3rem 0}.rank-note-close{float:right;border:0;background:none;color:var(--muted);font-size:1.2rem;padding:0 0 .2rem .8rem;cursor:pointer}
+
+.comparison-note{margin:.4rem 0;color:var(--muted);font:.83rem var(--serif)}.comparison-note summary{cursor:pointer}.comparison-note p{max-width:70rem}

@@ -5,7 +5,7 @@ permalink: /stt/index.html
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ stt.config.title }}</title>
-<meta name="description" content="Cross-benchmark speech recognition scores, small local models, release cohorts, runtime measurements and documented API rates, including Phonon-2.">
+<meta name="description" content="Compare speech-to-text accuracy, model downloads, parameter counts and API rates.">
 <link rel="stylesheet" href="/assets/css/benchmark.css">
 <script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('bench-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})();</script>
 </head><body><main>
@@ -18,24 +18,23 @@ permalink: /stt/index.html
 <nav class="views" aria-label="Speech benchmark views">
 <button type="button" data-view="matrix" class="active" aria-pressed="true">Matrix</button><button type="button" data-view="english" aria-pressed="false">English</button><button type="button" data-view="longform" aria-pressed="false">Long-form</button><button type="button" data-view="multilingual" aria-pressed="false">Multilingual</button><button type="button" data-view="robustness" aria-pressed="false">Noise & accent</button><button type="button" data-view="small" aria-pressed="false">Small models</button><button type="button" data-view="new" aria-pressed="false">New research</button><button type="button" data-view="secondary" aria-pressed="false">Secondary</button><button type="button" data-view="throughput" aria-pressed="false">Local speed</button><button type="button" data-view="latency" aria-pressed="false">Latency</button><button type="button" data-view="price" aria-pressed="false">Pricing</button>
 </nav>
-<p class="key">{{ stt.counts.models }} model configurations · {{ stt.counts.observations }} source rows · {{ stt.accuracyTests.length }} accuracy protocols · {{ stt.counts.throughput }} throughput measurements · checked {{ stt.config.snapshot_date }}</p>
 <section id="speechMatrixPanel" aria-label="Speech accuracy matrix">
 <div class="controls">
 <input id="speechSearch" type="search" placeholder="Search models…" aria-label="Search speech models">
 <select id="speechCoverage" aria-label="Primary evidence coverage"><option value="0">All registered</option><option value="1">1+ primary families</option><option value="2" selected>2+ primary families</option><option value="3">3 primary families</option></select>
 <select id="speechAccess" aria-label="Speech model access"><option value="all">All models</option><option value="open">Open weights</option><option value="closed">Closed / hosted</option><option value="unknown">Unknown access</option><option value="unreleased">Unreleased weights</option></select>
-<select id="speechSort" aria-label="Sort speech models"><option value="score">Highest index / lowest WER</option><option value="download">Smallest reported download</option><option value="params">Fewest reported parameters</option><option value="name">Model name</option><option value="price">Lowest USD / audio hour</option></select>
+<select id="speechSort" aria-label="Sort speech models"><option value="score">Highest index / lowest WER</option><option value="download">Smallest download (MB)</option><option value="params">Fewest parameters (M)</option><option value="name">Model name</option><option value="price">Lowest USD / audio hour</option></select>
 <select id="speechSize" aria-label="Reported download size"><option value="">All download sizes</option><option value="200">Download ≤200 MB</option><option value="500">Download ≤500 MB</option><option value="1000">Download ≤1,000 MB</option></select>
-<select id="speechParams" aria-label="Reported parameter count"><option value="">All parameter counts</option><option value="100">≤100M parameters</option><option value="500">≤500M parameters</option><option value="1000">≤1B parameters</option></select>
+<select id="speechParams" aria-label="Reported parameter count"><option value="">All parameter counts</option><option value="100">Parameters ≤100 M</option><option value="500">Parameters ≤500 M</option><option value="1000">Parameters ≤1,000 M</option></select>
 </div>
 <div class="controls" id="speechProtocolControls" hidden>
 <select id="speechProtocol" aria-label="Evaluation protocol">{% for id in stt.config.accuracy_tests %}{% for test in stt.accuracyTests %}{% if test.id == id %}<option value="{{ test.id }}"{% if test.id == stt.config.default_test %} selected{% endif %}>{{ test.label }}</option>{% endif %}{% endfor %}{% endfor %}</select>
 <label><input type="checkbox" id="speechMissing"> Include models without a matched result</label><label><input type="checkbox" id="speechExtra"> Additional datasets / languages</label>
 </div>
-<p class="key" id="speechProtocolNote">Rank uses distinct English short-form, CORAAL and five-language FLEURS families. WER columns are lower-is-better; the percentile index is higher-is-better. Two mature families permit a provisional index.</p>
+<details class="comparison-note"><summary>About this comparison</summary><p class="key" id="speechProtocolNote">Rank uses distinct English short-form, CORAAL and five-language FLEURS families. WER columns are lower-is-better; the percentile index is higher-is-better. Two mature families permit a provisional index.</p></details>
 <p class="key" id="speechStatus" role="status">{{ stt.initial.rows.length }} models · {{ stt.initial.matureCount }} mature core families · default coverage: 2+ primary families</p>
 <div class="table-scroll"><table><thead><tr id="speechHead">{{ stt.initial | speechMatrixHead | safe }}</tr></thead><tbody id="speechBody">{{ stt.initial | speechMatrixRows(stt) | safe }}</tbody></table></div>
-<p class="key">◊ provisional index: hover or click for reasons and sources · † qualified evidence / current service rate · — no matched observation. Small models and New research expose limited coverage. Quantized GGUF configurations keep separate identities. MB is download size; M params is parameter count; neither is runtime RAM. Unknown quantities are excluded by size filters.</p>
+<p class="key">Download is in MB; parameters are in millions (M). Neither is runtime RAM. — means no matched data; size filters exclude unknowns.<br>◊ provisional index (click for details) · † qualified evidence / current service rate.</p>
 <noscript><p>The current matrix and source documentation are available without JavaScript. JavaScript enables release replay, detailed protocol views and filters.</p></noscript>
 </section>
 <section id="speechThroughputPanel" hidden aria-labelledby="throughputTitle">
