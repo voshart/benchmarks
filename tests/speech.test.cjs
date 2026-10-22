@@ -173,44 +173,34 @@ test('new speech identities remain outside OCR cohorts and unknown release dates
   assert.equal(data.models.find(model => model.id === 'qwen3-asr-0-6b-hf').release_date, null);
 });
 
-test('speech UI switches complete protocols, retains sources and applies a download budget', async () => {
+test('speech UI switches its single benchmark selector and applies a download budget', async () => {
   const elements = {};
-  const defaults={speechProtocol:official,speechSort:'score',speechCoverage:'2',speechAccess:'all',timingTest:'fermion-20-dictations'};
-  const element = id => elements[id] ??= {value:defaults[id] || '',checked:false, handlers:{}, classList:{toggle(){}},setAttribute(){},addEventListener(event, handler) {this.handlers[event] = handler;}};
-  const buttons=['matrix','english','small','price','throughput','latency'].map(view=>({...element(view),dataset:{view}}));
-  const document = {getElementById:element,querySelector:()=>({dataset:{releaseStart:data.config.release_start,snapshotDate:data.config.snapshot_date}}),querySelectorAll:()=>buttons};
+  const defaults={speechProtocol:official,speechAccess:'all',timingTest:'fermion-20-dictations'};
+  const removed=new Set(['speechView','speechSort','speechRankMetric','speechExtra','speechCoverage']);
+  const element = id => {assert.ok(!removed.has(id),'removed control '+id+' must not be requested');return elements[id] ??= {value:defaults[id] || '',checked:false, handlers:{}, dataset:{},classList:{toggle(){}},setAttribute(){},addEventListener(event, handler) {this.handlers[event] = handler;}};};
+  const document = {getElementById:element,querySelector:()=>({dataset:{releaseStart:data.config.release_start,snapshotDate:data.config.snapshot_date}}),querySelectorAll:()=>[]};
   const context = {document, BenchmarkSpeech:Speech,BenchmarkSpeechMatrix:Matrix,fetch:async () => ({ok:true, json:async () => data}), console,setTimeout,clearTimeout};
   vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech-page.js'), 'utf8'), context);
   await new Promise(resolve => setImmediate(resolve));
-  assert.match(element('speechStatus').textContent, /64 models/);
+  assert.match(element('speechStatus').textContent, /64 ranked/);
+  assert.equal((element('speechHead').innerHTML.match(/<th /g)||[]).length,6);
   assert.match(element('speechHead').innerHTML,/Rank/);
-  buttons.find(button=>button.dataset.view==='english').handlers.click();
-  assert.match(element('speechStatus').textContent, /^64 models/);
-  assert.match(element('speechHead').innerHTML, /WER %/);
+  assert.match(element('speechHead').innerHTML, /Error %/);
   assert.match(element('speechBody').innerHTML, /e85ed601d17ab0e008721a19fc9cba36b4ee9c9c/);
   element('speechProtocol').value = launch;
   element('speechProtocol').handlers.change();
-  assert.match(element('speechStatus').textContent, /^8 models/);
-  assert.match(element('speechHead').innerHTML, /WER %/);
+  assert.match(element('speechStatus').textContent, /^8 ranked/);
   assert.match(element('speechBody').innerHTML, /Quoted leaderboard row/);
   assert.match(element('speechProtocolNote').textContent, /same evidence family/);
   element('speechSize').value = '200';
   element('speechSize').handlers.change();
-  assert.match(element('speechStatus').textContent, /^2 models/);
+  assert.match(element('speechStatus').textContent, /^2 ranked/);
   assert.match(element('speechBody').innerHTML, /Phonon-2/);
   assert.match(element('speechBody').innerHTML, /Parakeet Redux/);
   assert.doesNotMatch(element('speechBody').innerHTML, /Canary 180M/);
-  buttons.find(button=>button.dataset.view==='price').handlers.click();
-  assert.equal(element('speechMatrixPanel').hidden,true);
-  assert.equal(element('speechPricingPanel').hidden,false);
-  buttons.find(button=>button.dataset.view==='throughput').handlers.click();
-  assert.equal(element('speechThroughputPanel').hidden,false);
-  assert.match(element('timingStatus').textContent,/^3 measurements/);
-  element('timingTest').value='handy-single-clip-speed';element('timingHardware').value='m4-max';element('timingSample').value='dots';
-  element('timingTest').handlers.change();
-  assert.match(element('timingBody').innerHTML,/GGUF Q8_0/);
-  assert.match(element('timingBody').innerHTML,/35.332s/);
-  assert.doesNotMatch(element('timingBody').innerHTML,/ryzen-4750u/);
+  assert.match(element('speechHead').innerHTML,/M5 speed ×/);
+  assert.match(element('speechHead').innerHTML,/\$\/audio hr/);
+  assert.doesNotMatch(element('speechHead').innerHTML,/Download|Parameters/);
 });
 
 test('speech rendering escapes model and source text', () => {

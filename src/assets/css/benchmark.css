@@ -23,3 +23,6 @@ html[data-theme=dark]{color-scheme:dark;--paper:oklch(.18 0 0);--paper2:oklch(.2
 @media(max-width:700px){.speech-page main{padding:1rem 1rem 2rem}.speech-page h1{font-size:1.65rem}.speech-page .hero{margin-bottom:.8rem}.speech-page .hero p{font-size:.9rem}.speech-toolbar{grid-template-columns:1fr}.speech-toolbar>*{padding:.55rem .65rem}.speech-page .table-scroll{margin-left:-1rem;margin-right:-1rem;width:calc(100% + 2rem)}.speech-page .speech-table tbody th{min-width:160px;max-width:190px}.speech-page #speechUnscoredList{columns:1}.speech-more .controls>*{max-width:none}}
 
 .speech-page #speechMatrixPanel .table-scroll{max-height:none}.speech-table .model-vendor{display:block;font:normal .7rem var(--sans);color:var(--muted);margin-top:.15rem}
+.speech-table .column-sort{border:0;background:none;color:inherit;font:inherit;font-weight:inherit;padding:0;text-align:inherit;cursor:pointer;white-space:nowrap}.speech-table .column-sort:hover{text-decoration:underline}.speech-table th[aria-sort="ascending"],.speech-table th[aria-sort="descending"]{color:var(--ink)}.speech-page #speechUnscored .table-scroll{max-height:none}.speech-page #speechUnscored p{max-width:65rem}.speech-table{min-width:640px}
+
+.speech-page .speech-context{font:.7rem/1.4 var(--sans);color:var(--muted);margin:0 0 .25rem}

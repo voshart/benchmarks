@@ -82,52 +82,62 @@ test('metric ranking links its exact source and keeps selected detail visible',(
  assert.match(Matrix.renderRows({...matrix,rows:[find(matrix,id)]},data),/data-metric="hy">View benchmark rank/);
 });
 
-test('benchmark navigation handles partial links, sort labels and repeated view changes',async()=>{
+async function pageHarness(hash='') {
  const fs=require('node:fs'),vm=require('node:vm');
- const elements={},defaults={speechProtocol:data.config.default_test,speechSort:'score',speechCoverage:'2',speechAccess:'all'};
- const element=id=>elements[id]??={value:defaults[id]||'',checked:false,handlers:{},classList:{toggle(){}},setAttribute(){},addEventListener(event,fn){this.handlers[event]=fn;}};
- element('speechSort').options=[{value:'score'},{value:'wer:open-asr-fleurs'}];
- const buttons=['matrix','benchmark','english','small','secondary'].map(view=>({...element(view),dataset:{view}}));
- const document={getElementById:element,querySelector:()=>({dataset:{releaseStart:data.config.release_start,snapshotDate:data.config.snapshot_date}}),querySelectorAll:()=>buttons};
- vm.runInNewContext(fs.readFileSync('src/assets/js/speech-page.js','utf8'),{document,BenchmarkSpeech:Speech,BenchmarkSpeechMatrix:Matrix,fetch:async()=>({ok:true,json:async()=>data}),console,setTimeout,clearTimeout});
+ const elements={},defaults={speechProtocol:data.config.default_test,speechAccess:'all',timingTest:'fermion-20-dictations'};
+ const removed=new Set(['speechView','speechSort','speechRankMetric','speechExtra','speechCoverage']);
+ const element=id=>{assert.ok(!removed.has(id),'removed control '+id+' must not be requested');return elements[id]??={value:defaults[id]||'',checked:false,handlers:{},dataset:{},attributes:{},classList:{toggle(){}},setAttribute(key,value){this.attributes[key]=value;},addEventListener(event,fn){this.handlers[event]=fn;}};};
+ const document={getElementById:element,querySelector:()=>({dataset:{releaseStart:data.config.release_start,snapshotDate:data.config.snapshot_date}}),querySelectorAll:()=>[]};
+ const location={hash,pathname:'/stt/',search:''};
+ const history={replaceState(state,title,url){location.hash=url.includes('#')?url.slice(url.indexOf('#')):'';}};
+ vm.runInNewContext(fs.readFileSync('src/assets/js/speech-page.js','utf8'),{document,location,history,BenchmarkSpeech:Speech,BenchmarkSpeechMatrix:Matrix,fetch:async()=>({ok:true,json:async()=>data}),console,setTimeout,clearTimeout});
  await new Promise(resolve=>setImmediate(resolve));
- const click=view=>buttons.find(button=>button.dataset.view===view).handlers.click();
- click('small');
- assert.equal(element('speechSort').value,'wer:'+data.config.default_test);
+ return {element,location};
+}
+
+test('single-selector navigation handles partial links, sortable headers and reset',async()=>{
+ const {element,location}=await pageHarness('#small');
+ const select=value=>{element('speechProtocol').value=value;element('speechProtocol').handlers.change();};
+ const sort=key=>element('speechHead').handlers.click({target:{closest:()=>({dataset:{sortKey:key}})}});
+ assert.equal(element('speechProtocol').value,data.config.default_test);
  assert.ok(element('speechBody').innerHTML.indexOf('>Phonon-2</a>')<element('speechBody').innerHTML.indexOf('>Niagara 9M batch.en</a>'));
- click('benchmark');
- assert.equal(element('speechSort').options[1].disabled,true);
- element('speechBody').handlers.click({target:{closest:()=>({dataset:{benchmark:'open-asr-fleurs',model:'mms-1b-all',metric:'hy'}})}});
- assert.equal(element('speechRankMetric').value,'hy');
+ element('speechUnscoredList').handlers.click({target:{closest:()=>({dataset:{benchmark:'open-asr-fleurs',model:'mms-1b-all',metric:'hy'}})}});
+ assert.equal(element('speechProtocol').value,'open-asr-fleurs::hy');
  assert.match(element('speechBody').innerHTML,/13.43/);
- assert.match(element('speechStatus').textContent,/Armenian/);
- element('speechSort').value='download';element('speechSort').handlers.change();
- assert.match(element('speechStatus').textContent,/Download size/);
- assert.doesNotMatch(element('speechStatus').textContent,/missing scores last/);
- click('matrix');
- assert.equal(element('speechSort').options[1].disabled,false);
- click('small');click('english');click('small');
- assert.equal(element('speechSort').value,'wer:'+data.config.default_test);
- click('english');
- element('speechRankMetric').value='ls_clean';element('speechRankMetric').handlers.change();
- click('english');assert.equal(element('speechRankMetric').value,'');
- element('speechSearch').value='gemma';element('speechSize').value='200';element('speechSort').value='params';
- element('speechAccess').value='closed';element('speechRankMetric').value='ls_other';element('historyRange').value='0';
+ assert.match(element('speechBody').innerHTML,/Armenian/);
+ select(data.config.default_test);
+ element('speechSearch').value='';element('speechSearch').handlers.input();
+ await new Promise(resolve=>setTimeout(resolve,120));
+ for(const key of ['rank','name','score','speed','price']) {
+  sort(key);
+  assert.match(element('speechHead').innerHTML,new RegExp('aria-sort="(?:ascending|descending)"'));
+  assert.match(element('speechHead').innerHTML,new RegExp('data-sort-key="'+key+'"'));
+  const first=element('speechHead').innerHTML.match(/aria-sort="(ascending|descending)"/)[1];
+  sort(key);
+  const second=element('speechHead').innerHTML.match(/aria-sort="(ascending|descending)"/)[1];
+  assert.notEqual(second,first,key+' repeated click must toggle direction');
+ }
+ element('speechSearch').value='gemma';element('speechSize').value='200';element('speechParams').value='100';
+ element('speechAccess').value='closed';element('historyRange').value='0';
  element('speechReset').handlers.click();
- assert.equal(element('speechSearch').value,'');assert.equal(element('speechSize').value,'');
- assert.equal(element('speechSort').value,'score');assert.equal(element('speechAccess').value,'all');assert.equal(element('speechRankMetric').value,'');
- assert.match(element('speechStatus').textContent,/64 models/);
+ assert.equal(element('speechProtocol').value,data.config.default_test);
+ assert.equal(element('speechSearch').value,'');assert.equal(element('speechSize').value,'');assert.equal(element('speechParams').value,'');
+ assert.equal(element('speechAccess').value,'all');assert.equal(location.hash,'');
+ assert.equal(Number(element('historyRange').value),Number(element('historyRange').max));
+ assert.match(element('speechStatus').textContent,/64 ranked/);
  assert.match(element('speechUnscoredSummary').textContent,/108 configurations/);
  assert.ok(element('speechBody').innerHTML.indexOf('>Phonon-2</a>')<element('speechBody').innerHTML.indexOf('>gemma-4-E4B-it</a>'));
  assert.doesNotMatch(element('speechBody').innerHTML,/GGUF Q8_0/);
  assert.match(element('speechUnscoredList').innerHTML,/GGUF Q8_0/);
- element('speechView').value='price';element('speechView').handlers.change();
- assert.equal(element('speechSearch').hidden,true);assert.equal(element('speechStatus').hidden,true);
- element('speechProtocol').value='open-asr-fleurs';element('speechProtocol').handlers.change();
- assert.equal(element('speechSearch').hidden,false);assert.equal(element('speechView').value,'benchmark');
- element('speechView').value='matrix';element('speechView').handlers.change();
- assert.equal(element('speechRankMetric').hidden,true);assert.equal(element('speechExtraLabel').hidden,true);
- element('speechReset').handlers.click();assert.equal(element('speechRankMetric').hidden,false);
+
+});
+
+test('legacy hashes resolve to the single accuracy selector',async()=>{
+ const expected={english:data.config.default_test,benchmark:data.config.default_test,matrix:data.config.default_test,small:data.config.default_test,new:data.config.default_test,secondary:data.config.default_test,longform:'open-asr-longform',multilingual:'open-asr-fleurs',robustness:'open-asr-robustness',throughput:data.config.default_test,latency:data.config.default_test,price:data.config.default_test};
+ for(const [hash,value] of Object.entries(expected)) {
+  const {element}=await pageHarness('#'+hash);
+  assert.equal(element('speechProtocol').value,value,hash);
+ }
 });
 
 test('English landing separates no-score models and orders Phonon above every Gemma4 variant',()=>{
@@ -158,10 +168,12 @@ test('download and parameter metadata never affect accuracy values, positions or
 test('server template starts in English accuracy, including without JavaScript',()=>{
  const fs=require('node:fs');
  const template=fs.readFileSync('src/stt/index.njk','utf8');
- assert.match(template,/<option value="english" selected>/);
+ assert.match(template,/id="speechProtocol"/);
+ assert.match(template,/stt.config.default_test/);
+ for(const id of ['speechView','speechSort','speechRankMetric','speechExtra','speechCoverage']) assert.ok(!template.includes('id="'+id+'"'),id);
  assert.match(template,/stt.protocolInitial \| speechRows/);
  assert.match(template,/stt.protocolInitial \| speechUnscored/);
- assert.match(template,/Download sizes and parameter counts are metadata, not ranking weights/);
+ assert.doesNotMatch(template,/value="__(throughput|latency|price)"/);
  assert.doesNotMatch(template,/id="speechMissing"/);
 });
 
@@ -172,7 +184,8 @@ test('compact leaderboard preserves ranks and evidence with only six visible col
  assert.equal(compact.columns.length,0);
  const head=Speech.renderHead(compact),body=Speech.renderRows(compact,data);
  assert.equal((head.match(/<th /g)||[]).length,6);
- assert.match(head,/<th scope="col">Rank<\/th><th scope="col">Model/);
+ assert.match(head,/data-sort-key="rank"/);
+ assert.ok(head.indexOf('data-sort-key="rank"')<head.indexOf('data-sort-key="name"'));
  assert.match(body,/LibriSpeech test.clean/);
  assert.match(body,/aria-label="Evidence and qualifications for Phonon-2"/);
  assert.match(body,/>Details<\/button>/);
@@ -188,4 +201,82 @@ test('compact leaderboard preserves ranks and evidence with only six visible col
 test('compact benchmark header preserves OI-WER unit for Hindi',()=>{
  const result=Speech.build(data,{test:'open-asr-monsoon-hi',compact:true});
  assert.match(Speech.renderHead(result),/OI-WER %/);
+});
+
+
+test('main numeric headers sort in both directions with unknowns last and fixed accuracy ranks',()=>{
+ const baseline=Speech.build(data,{missing:true,compact:true});
+ const positions=new Map(baseline.rows.map(row=>[row.id,row.benchmarkRank]));
+ const valueFor={rank:row=>row.benchmarkRank,score:row=>row.benchmarkValue,
+  speed:row=>data.throughput.find(record=>record.model===row.id&&record.test_id==='fermion-20-dictations'&&record.hardware==='Apple M5 MacBook Air'&&record.batch_size===1&&record.status!=='assumed')?.rtfx,
+  price:row=>{const price=Speech.selectPrice(data,row.id);return price?.currency==='USD'&&price.unit==='currency_per_audio_hour'?price.amount:null;}};
+ for(const [sort,value] of Object.entries(valueFor)) for(const sortDirection of ['asc','desc']) {
+  const result=Speech.build(data,{missing:true,compact:true,sort,sortDirection});
+  let unknown=false,previous;
+  for(const row of result.rows) {
+   assert.equal(row.benchmarkRank,positions.get(row.id));
+   const current=value(row);
+   if(!Number.isFinite(current)) {unknown=true;continue;}
+   assert.equal(unknown,false,sort+' '+sortDirection+' unknowns must stay last');
+   if(previous!==undefined) assert.ok(sortDirection==='asc'?previous<=current:previous>=current,sort+' '+sortDirection);
+   previous=current;
+  }
+  const head=Speech.renderHead(result);
+  assert.equal((head.match(/<th /g)||[]).length,6);
+  assert.match(head,new RegExp('aria-sort="'+(sortDirection==='asc'?'ascending':'descending')+'"'));
+ }
+ for(const sortDirection of ['asc','desc']) {
+  const result=Speech.build(data,{sort:'name',sortDirection,compact:true});
+  const names=result.rows.map(row=>row.name),ordered=names.slice().sort((a,b)=>a.localeCompare(b)*(sortDirection==='asc'?1:-1));
+  assert.deepEqual(names,ordered);
+ }
+ const head=Speech.renderHead(Speech.build(data,{compact:true}));
+ for(const key of ['rank','name','score','speed','price']) assert.match(head,new RegExp('<button[^>]*type="button"[^>]*data-sort-key="'+key+'"'));
+});
+
+test('compact Details rounds size labels only and preserves precise size metadata',()=>{
+ const result=Speech.build(data,{compact:true});
+ const original=find(result,'niagara-9m-batch-en');
+ const row={...original,size:{...original.size,download_mb:1234.56789,parameters_million:9.8}};
+ const html=Speech.renderRows({...result,rows:[row]},data);
+ assert.match(html,/<strong>Size:<\/strong> 1,235 MB download · 10 M parameters/);
+ assert.match(html,/popovertarget="[^"]+"[^>]*>Details<\/button>/);
+ assert.doesNotMatch(Speech.renderHead(result),/Download \(MB\)|Parameters \(M\)/);
+ assert.equal(row.size.download_mb,1234.56789);
+ assert.equal(row.size.parameters_million,9.8);
+});
+
+test('speed uses one explicitly labelled hardware workload cohort, without model alias inheritance',()=>{
+ const english=Speech.build(data,{compact:true,missing:true});
+ assert.equal(english.speedLabel,'M5 speed ×');
+ assert.deepEqual(english.rows.filter(row=>row.speed).map(row=>[row.id,row.speed.rtfx]).sort(),[
+  ['phonon-2',174],['parakeet-tdt-0-6b-v3',104.9],['parakeet-redux',27.8]
+ ].sort());
+ for(const row of english.rows.filter(row=>row.speed)) {
+  assert.equal(row.speed.model,row.id);
+  assert.equal(row.speed.test_id,'fermion-20-dictations');
+  assert.equal(row.speed.hardware,'Apple M5 MacBook Air');
+  assert.equal(row.speed.batch_size,1);
+ }
+ const handy=Speech.build(data,{test:'handy-fleurs-en',compact:true,missing:true});
+ assert.equal(handy.speedLabel,'M4 speed ×');
+ assert.equal(handy.rows.filter(row=>row.speed).length,58);
+ for(const row of handy.rows.filter(row=>row.speed)) {
+  assert.equal(row.speed.model,row.id);
+  assert.equal(row.speed.test_id,'handy-single-clip-speed');
+  assert.equal(row.speed.hardware,'m4-max');
+  assert.equal(row.speed.runtime,'transcribe.cpp metal / Q8_0');
+  assert.equal(row.speed.sample,'jfk');
+  assert.equal(row.speed.batch_size,1);
+ }
+ const altered=structuredClone(data),valid=find(english,'phonon-2').speed;
+ altered.throughput.unshift(...[
+  {hardware:'m4-max'},{batch_size:8},{test_id:'handy-single-clip-speed'},{status:'assumed'}
+ ].map(change=>({...valid,...change,rtfx:99999})));
+ assert.equal(find(Speech.build(altered),'phonon-2').speed.rtfx,174);
+ const handyRecord=handy.rows.find(row=>row.speed).speed;
+ altered.throughput.unshift(...[
+  {hardware:'m3-max'},{runtime:'transcribe.cpp cpu / Q8_0'},{sample:'different'},{batch_size:8},{status:'assumed'}
+ ].map(change=>({...handyRecord,...change,rtfx:99999})));
+ assert.equal(find(Speech.build(altered,{test:'handy-fleurs-en',missing:true}),handyRecord.model).speed.rtfx,handyRecord.rtfx);
 });

@@ -284,14 +284,14 @@ test('Universal models retain their distinct baskets and expose coverage without
  assert.deepEqual(older.rankContributions.map(item=>item.family).sort(),['coraal','multilingual']);
  assert.deepEqual(newer.rankContributions.map(item=>item.family).sort(),['multilingual','open-asr-english']);
  assert.match(Matrix.renderRows({...result,rows:[older,newer]},data),/2\/3 families/);
- assert.match(fs.readFileSync('src/stt/index.njk','utf8'),/Indices from different benchmark families are not directly comparable/);
+ assert.match(fs.readFileSync('src/stt/index.njk','utf8'),/Different datasets and speed hardware must not be compared as one quality score/);
 });
 
 test('speech assets have content-derived versions and interactive data is revalidated',()=>{
  const filters={};
  require('../eleventy.config.cjs')({addFilter:(name,fn)=>filters[name]=fn,addPassthroughCopy(){},addWatchTarget(){}});
  const crypto=require('node:crypto');
- for (const path of ['/assets/css/benchmark.css','/assets/js/ranking.js','/assets/js/rank-ui.js','/assets/js/speech.js','/assets/js/speech-matrix.js','/assets/js/speech-page.js']) {
+ for (const path of ['/assets/css/benchmark.css','/assets/js/ranking.js','/assets/js/rank-ui.js','/assets/js/speech.js','/assets/js/speech-page.js']) {
   const hash=crypto.createHash('sha256').update(fs.readFileSync('src'+path)).digest('hex').slice(0,12);
   assert.equal(filters.assetUrl(path),path+'?v='+hash);
   assert.ok(fs.readFileSync('src/stt/index.njk','utf8').includes(`{{ "${path}" | assetUrl }}`));
