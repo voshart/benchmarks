@@ -4,7 +4,7 @@ const Matrix = require('../assets/js/speech-matrix.js');
 
 module.exports = () => {
   const data = loadSTT();
-  return {...data, initial:Matrix.build(data), protocolInitial:Speech.build(data),
+  return {...data, initial:Matrix.build(data), protocolInitial:Speech.build(data,{compact:true}),
     initialTiming:Matrix.timingRows(data,{test:'fermion-20-dictations'}),
     modelNames:Object.fromEntries(data.models.map(model => [model.id, model.name])),
     throughputTests:data.tests.filter(test => test.task === 'throughput'),

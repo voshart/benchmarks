@@ -102,7 +102,7 @@ test('benchmark navigation handles partial links, sort labels and repeated view 
  assert.match(element('speechBody').innerHTML,/13.43/);
  assert.match(element('speechStatus').textContent,/Armenian/);
  element('speechSort').value='download';element('speechSort').handlers.change();
- assert.match(element('speechStatus').textContent,/Sort: Download size/);
+ assert.match(element('speechStatus').textContent,/Download size/);
  assert.doesNotMatch(element('speechStatus').textContent,/missing scores last/);
  click('matrix');
  assert.equal(element('speechSort').options[1].disabled,false);
@@ -121,6 +121,13 @@ test('benchmark navigation handles partial links, sort labels and repeated view 
  assert.ok(element('speechBody').innerHTML.indexOf('>Phonon-2</a>')<element('speechBody').innerHTML.indexOf('>gemma-4-E4B-it</a>'));
  assert.doesNotMatch(element('speechBody').innerHTML,/GGUF Q8_0/);
  assert.match(element('speechUnscoredList').innerHTML,/GGUF Q8_0/);
+ element('speechView').value='price';element('speechView').handlers.change();
+ assert.equal(element('speechSearch').hidden,true);assert.equal(element('speechStatus').hidden,true);
+ element('speechProtocol').value='open-asr-fleurs';element('speechProtocol').handlers.change();
+ assert.equal(element('speechSearch').hidden,false);assert.equal(element('speechView').value,'benchmark');
+ element('speechView').value='matrix';element('speechView').handlers.change();
+ assert.equal(element('speechRankMetric').hidden,true);assert.equal(element('speechExtraLabel').hidden,true);
+ element('speechReset').handlers.click();assert.equal(element('speechRankMetric').hidden,false);
 });
 
 test('English landing separates no-score models and orders Phonon above every Gemma4 variant',()=>{
@@ -151,9 +158,34 @@ test('download and parameter metadata never affect accuracy values, positions or
 test('server template starts in English accuracy, including without JavaScript',()=>{
  const fs=require('node:fs');
  const template=fs.readFileSync('src/stt/index.njk','utf8');
- assert.match(template,/data-view="english" class="active" aria-pressed="true"/);
+ assert.match(template,/<option value="english" selected>/);
  assert.match(template,/stt.protocolInitial \| speechRows/);
  assert.match(template,/stt.protocolInitial \| speechUnscored/);
- assert.match(template,/Downloads and parameters do not affect accuracy rank/);
+ assert.match(template,/Download sizes and parameter counts are metadata, not ranking weights/);
  assert.doesNotMatch(template,/id="speechMissing"/);
+});
+
+test('compact leaderboard preserves ranks and evidence with only six visible columns',()=>{
+ const compact=Speech.build(data,{compact:true});
+ const full=Speech.build(data);
+ assert.deepEqual(compact.rows.map(row=>[row.id,row.benchmarkRank,row.benchmarkValue]),full.rows.map(row=>[row.id,row.benchmarkRank,row.benchmarkValue]));
+ assert.equal(compact.columns.length,0);
+ const head=Speech.renderHead(compact),body=Speech.renderRows(compact,data);
+ assert.equal((head.match(/<th /g)||[]).length,6);
+ assert.match(head,/<th scope="col">Rank<\/th><th scope="col">Model/);
+ assert.match(body,/LibriSpeech test.clean/);
+ assert.match(body,/aria-label="Evidence and qualifications for Phonon-2"/);
+ assert.match(body,/>Details<\/button>/);
+ assert.match(body,/<small class="model-vendor">OtterAI<\/small>/);
+ const template=require('node:fs').readFileSync('src/stt/index.njk','utf8');
+ assert.doesNotMatch(template,/<nav class="views"/);
+ assert.match(template,/<details id="speechMore" class="speech-more"><summary>More filters/);
+ assert.ok(template.indexOf('id="speechMore"')<template.indexOf('id="historyRange"'));
+ assert.ok(template.indexOf('id="speechProtocol"')<template.indexOf('id="speechMore"'));
+});
+
+
+test('compact benchmark header preserves OI-WER unit for Hindi',()=>{
+ const result=Speech.build(data,{test:'open-asr-monsoon-hi',compact:true});
+ assert.match(Speech.renderHead(result),/OI-WER %/);
 });

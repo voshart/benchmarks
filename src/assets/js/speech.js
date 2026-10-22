@@ -99,7 +99,7 @@
   function build(data, options={}) {
     const test = data.accuracyTests.find(test => test.id === options.test) || data.accuracyTests.find(test => test.id === data.config.default_test);
     const rankMetric = test.metrics.find(metric => metric.id === options.rankMetric) || null;
-    const columns = test.metrics.filter(metric => metric.primary || options.extra || test.show_all_metrics || metric === rankMetric);
+    const columns = options.compact ? [] : test.metrics.filter(metric => metric.primary || options.extra || test.show_all_metrics || metric === rankMetric);
     const query = (options.query || '').trim().toLowerCase();
     const cutoff = options.cutoff || data.config.snapshot_date;
     const candidates = data.models.filter(model => available(model,cutoff,data.config.snapshot_date)).map(model => {
@@ -132,15 +132,16 @@
       const av=value(a),bv=value(b);
       return (finite(av) ? av : Infinity) - (finite(bv) ? bv : Infinity) || a.name.localeCompare(b.name);
     });
-    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,benchmarkCount:cohort.length};
+    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,compact:Boolean(options.compact),benchmarkCount:cohort.length};
   }
 
   function renderHead(result) {
-    return '<th scope="col">Model</th><th scope="col">Accuracy rank</th><th scope="col">'
-      + (result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
+    const compactMetric=result.rankMetric || result.test.metrics.find(metric=>metric.id === (result.test.summary_metric || result.test.published_mean_metric));
+    return (result.compact ? '<th scope="col">Rank</th><th scope="col">Model</th><th scope="col">' : '<th scope="col">Model</th><th scope="col">Accuracy rank</th><th scope="col">')
+      + (result.compact ? (compactMetric?.unit === 'oiwer_percent' ? 'OI-WER % ↓' : 'WER % ↓') : result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
         : result.test.published_mean_metric ? 'Reported mean WER ↓' : 'Fixed '+result.test.mean_metrics.length+' mean WER ↓') + '</th><th scope="col" title="Reported model artifact size, not a quality score">Download (MB)</th><th scope="col" title="Reported parameter count, not a quality score">Parameters (M)</th>'
       + result.columns.map(metric => `<th scope="col" title="${esc(metric.label)} · ${metric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER'} %, lower is better">${esc(metric.short)}</th>`).join('')
-      + '<th scope="col">Evidence</th>';
+      + '<th scope="col">Details</th>';
   }
 
   function renderRows(result, data) {
@@ -156,7 +157,7 @@
       const details = `<div id="${esc(infoId)}" class="rank-note" popover><button type="button" class="rank-note-close" popovertarget="${esc(infoId)}" popovertargetaction="hide" aria-label="Close evidence explanation">×</button>`
         + `<strong>${esc(row.name)} · ${esc(evidenceLabel(row.provenance))}</strong><p>${esc(modelNote)}</p>`
         + (row.provenance ? `<p>Exact source row: ${esc(row.provenance.source_model)}. Measurement operator: ${esc(row.provenance.measurement_operator)}. ${esc(row.provenance.note)}</p>` : '')
-        + `<p>${esc(result.test.note)}</p>`
+        + `<p>${esc(result.test.note)}</p><ul>${result.test.metrics.filter(metric=>row.scores[metric.id]).map(metric=>`<li>${esc(metric.label)}: ${link(data.sources[row.scores[metric.id].source_id],row.scores[metric.id].value.toFixed(2)+'%')}</li>`).join('')}</ul>`
         + (source ? `<p>${link(source, source.title)}. ${esc(source.note)}</p>` : '')
         + (row.size ? [...new Set(Object.values(row.size.field_records || {size:row.size}).filter(Boolean))]
           .map(record => `<p>${link(data.sources[record.source_id], 'Size source')}: ${esc(record.note)}</p>`).join('') : '')
@@ -171,11 +172,12 @@
           record.note, alternatives.length ? 'Other observations: ' + alternatives.join('; ') : ''].filter(Boolean).join(' · ');
         return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
       }).join('');
-      return `<tr><th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}</th>`
-        + `<td class="index" title="Position within ${esc(result.test.label)} · ${esc(result.rankMetric?.label || 'complete panel')} before display filters; ties share a position. Not an overall index.">${row.benchmarkRank ? '#'+row.benchmarkRank+' / '+result.benchmarkCount : 'No matched score'}</td>`
+      const modelCell=`<th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}${result.compact ? `<small class="model-vendor">${esc(row.model.organization)}</small>` : ''}</th>`;
+      const rankCell=`<td class="index" title="Rank ${row.benchmarkRank} of ${result.benchmarkCount} configurations on this benchmark before filters; ties share a rank">${result.compact ? row.benchmarkRank : '#'+row.benchmarkRank+' / '+result.benchmarkCount}</td>`;
+      return '<tr>'+(result.compact ? rankCell+modelCell : modelCell+rankCell)
         + `<td class="index" title="${esc(meanTitle)}">${row.benchmarkValue.toFixed(2)}</td>`
         + renderSizeCells(row.size, data) + cells
-        + `<td>${esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">†</button>${details}</td></tr>`;
+        + `<td>${result.compact ? '' : esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">${result.compact ? 'Details' : '†'}</button>${details}</td></tr>`;
     }).join('');
   }
 

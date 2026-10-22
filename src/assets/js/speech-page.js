@@ -31,8 +31,11 @@
     $('speechProtocolControls').hidden = !protocol;
     const options = {cutoff,view,test:controls.test.value,query:controls.query.value,sort:controls.sort.value,
       maxDownload:controls.maxDownload.value,maxParams:controls.maxParams.value,access:controls.access.value,min:controls.min.value,
-      extra:controls.extra.checked,rankMetric:controls.rankMetric.value};
+      extra:controls.extra.checked,compact:!controls.extra.checked,rankMetric:controls.rankMetric.value};
     const result = protocol ? BenchmarkSpeech.build(data,options) : BenchmarkSpeechMatrix.build(data,options);
+    $('speechTable').classList.toggle('compact',protocol && options.compact);
+    controls.rankMetric.hidden=!protocol;
+    $('speechExtraLabel').hidden=!protocol;
     $('speechHead').innerHTML = protocol ? BenchmarkSpeech.renderHead(result) : BenchmarkSpeechMatrix.renderHead(result);
     $('speechBody').innerHTML = protocol ? BenchmarkSpeech.renderRows(result,data) : BenchmarkSpeechMatrix.renderRows(result,data);
     $('speechUnscored').hidden = !protocol;
@@ -41,7 +44,7 @@
       $('speechUnscoredList').innerHTML=BenchmarkSpeech.renderUnscored(result,data);
       const isEnglish=result.test.id===data.config.default_test && !result.rankMetric;
       $('speechAccuracyTitle').textContent=isEnglish ? 'English accuracy — seven-set mean WER' : `${result.test.label} — ${result.rankMetric?.label || 'benchmark accuracy'}`;
-      $('speechBenchmarkNote').textContent=(!['score','mean'].includes(controls.sort.value)) ? 'Table sorted by the selected field. Accuracy ranks still use only matched error scores; downloads and parameters are not quality weights.' : isEnglish ? 'Lower word error is better. Ranked best to worst on the same seven English test sets. Downloads and parameters do not affect accuracy rank.' : 'Lower error is better within this selected benchmark only. Ties share a rank; display filters do not change the reference cohort. Downloads and parameters do not affect accuracy rank.';
+      $('speechBenchmarkNote').textContent=(!['score','mean'].includes(controls.sort.value)) ? 'Sorted by your selected field. Accuracy ranks still use only error scores.' : isEnglish ? 'English accuracy. Lower word error is better.' : 'Benchmark accuracy. Lower word error is better.';
     }
     $('speechProtocolNote').textContent = protocol ? result.test.note : view === 'small'
       ? 'Models with a reported download ≤1,000 MB or ≤1,000 M parameters. Secondary and one-family measurements remain visible; they cannot manufacture an aggregate index. Original and GGUF configurations stay separate.'
@@ -52,7 +55,7 @@
     const ordering = otherSort || (protocol ? 'Accuracy, lower error is better; missing scores listed separately'
       : result.sortTest ? (result.sortTest.short || result.sortTest.label)+' WER, lower is better; missing scores last'
       : 'Overall index first; models without an index follow (not a performance ranking)');
-    $('speechStatus').textContent = protocol ? `${result.rows.filter(row=>row.benchmarkRank).length} models · ${result.benchmarkCount} scored configurations · ${result.rankMetric?.label || result.test.label} · Sort: ${ordering}`
+    $('speechStatus').textContent = protocol ? `${result.rows.filter(row=>row.benchmarkRank).length} models${result.rankMetric ? ' · '+result.rankMetric.label : ''} · ${otherSort || 'best accuracy first'}`
       : `${result.rows.length} models · ${result.matureCount} mature core families · Sort: ${ordering}`;
     const undated = data.models.filter(model => !model.release_date).length;
     $('historyStatus').textContent = cutoff === end ? `${undated} undated configurations included only in the current view · rates retain their pricing dates`
@@ -67,11 +70,19 @@
   function setView(next) {
     if (!data) return;
     const previous = view;
+    $('speechView').value=next;
     view = next;
     if (view === 'small') controls.sort.value='wer:'+data.config.default_test;
     else if (previous === 'small' || view === 'benchmark' || protocolViews[view]) controls.sort.value='score';
     const panel = ['throughput','latency','price'].includes(view) ? view : 'matrix';
     for (const [name,element] of Object.entries(panels)) element.hidden = name !== panel;
+    $('speechStatus').hidden=panel !== 'matrix';
+    for(const [name,control] of Object.entries(controls)) if(name !== 'test') control.hidden=panel !== 'matrix';
+    $('speechExtraLabel').hidden=panel !== 'matrix';
+    history.hidden=panel !== 'matrix';
+    $('speechProtocolNote').hidden=panel !== 'matrix';
+    $('speechComparability').hidden=panel !== 'matrix';
+    if(panel !== 'matrix') {$('speechBenchmarkNote').hidden=false;$('speechBenchmarkNote').textContent='Published model measurements and costs.';}
     document.querySelectorAll('.views button').forEach(button => {
       button.classList.toggle('active',button.dataset.view === view);
       button.setAttribute('aria-pressed',String(button.dataset.view === view));
@@ -81,8 +92,10 @@
     else if (panel === 'matrix') render();
   }
   for (const [name,control] of Object.entries(controls)) control.addEventListener(name === 'query' ? 'input' : 'change', () => {
+    if (name === 'test') {controls.rankMetric.value='';setView('benchmark');return;}
     if (name === 'query') {clearTimeout(timer); timer=setTimeout(render,100);} else render();
   });
+  $('speechView').addEventListener('change',()=>setView($('speechView').value));
   const openBenchmark=event => {
     const button=event.target.closest('[data-benchmark]');
     if (!button || !data) return;
@@ -97,7 +110,8 @@
   $('speechReset').addEventListener('click',()=>{
     controls.query.value='';controls.maxDownload.value='';controls.maxParams.value='';controls.access.value='all';
     controls.extra.checked=false;controls.rankMetric.value='';controls.min.value='2';controls.sort.value='score';
-    $('historyRange').value=day(end);$('speechUnscored').open=false;setView('english');
+    $('historyRange').value=day(end);$('speechUnscored').open=false;$('speechMore').open=false;
+    if(typeof location !== 'undefined') globalThis.history?.replaceState(null,'',location.pathname+location.search);setView('english');
   });
   document.querySelectorAll('.views button').forEach(button => button.addEventListener('click',() => setView(button.dataset.view)));
   for (const id of ['timingTest','timingHardware','timingSample','timingSearch']) $(id).addEventListener(id === 'timingSearch' ? 'input' : 'change',renderTiming);
@@ -116,7 +130,7 @@
     try {localStorage.setItem('bench-theme',root.dataset.theme);} catch (_) {}
   });
   fetch('/stt/data.json',{cache:'no-cache'}).then(response => {if (!response.ok) throw Error('HTTP '+response.status);return response.json();})
-    .then(result => {data=result;render();}).catch(error => {
+    .then(result => {data=result;const requested=typeof location!=='undefined' ? location.hash.slice(1) : '';if (['english','benchmark','matrix','longform','multilingual','robustness','small','new','secondary','throughput','latency','price'].includes(requested)) setView(requested);else render();}).catch(error => {
       $('speechStatus').textContent='Static snapshot available · interactive filters unavailable';
       for (const control of Object.values(controls)) control.disabled=true;
       console.warn('Speech data load',error);

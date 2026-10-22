@@ -284,7 +284,7 @@ test('Universal models retain their distinct baskets and expose coverage without
  assert.deepEqual(older.rankContributions.map(item=>item.family).sort(),['coraal','multilingual']);
  assert.deepEqual(newer.rankContributions.map(item=>item.family).sort(),['multilingual','open-asr-english']);
  assert.match(Matrix.renderRows({...result,rows:[older,newer]},data),/2\/3 families/);
- assert.match(fs.readFileSync('src/stt/index.njk','utf8'),/indices from different benchmark families are not directly comparable/);
+ assert.match(fs.readFileSync('src/stt/index.njk','utf8'),/Indices from different benchmark families are not directly comparable/);
 });
 
 test('speech assets have content-derived versions and interactive data is revalidated',()=>{
