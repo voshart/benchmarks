@@ -155,7 +155,7 @@
     "model": "stt-microsoft-azure-speech-07-2026",
     "status": "published_price",
     "label": "API rate",
-    "note": "Official July 2026 Azure LLM Speech release maps to Fast Transcription; pricing footnote 9 assigns the same SKU. Current US East standard consumption price is $0.36/audio-hour, retail meter e366297b-9194-5c2f-91f9-2b6472d890b3. Promotional $0.10 SKU, free quotas and commitments excluded. Service-managed updates mean the current endpoint is not a frozen benchmark backend. Region/currency may change price.",
+    "note": "Official Azure LLM Speech2607 model announcement maps to Fast Transcription; pricing footnote 9 assigns the same SKU. Current US East standard consumption price is $0.36/audio-hour, retail meter e366297b-9194-5c2f-91f9-2b6472d890b3. Promotional $0.10 SKU, free quotas and commitments excluded. Service-managed updates mean the current endpoint is not a frozen benchmark backend. Region/currency may change price.",
     "source_urls": [
       "https://devblogs.microsoft.com/foundry/announcing-azure-ai-speech-llm-2607/",
       "https://azure.microsoft.com/en-us/pricing/details/speech/",

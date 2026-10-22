@@ -3250,7 +3250,7 @@
     "measurement_operator": "vendor",
     "verified_on": "2026-10-22",
     "quote": "Fast Transcription",
-    "note": "Official July 2026 Azure LLM Speech release maps to Fast Transcription; pricing footnote 9 assigns the same SKU. Current US East standard consumption price is $0.36/audio-hour, retail meter e366297b-9194-5c2f-91f9-2b6472d890b3. Promotional $0.10 SKU, free quotas and commitments excluded. Service-managed updates mean the current endpoint is not a frozen benchmark backend. Region/currency may change price."
+    "note": "Official Azure LLM Speech2607 model announcement maps to Fast Transcription; pricing footnote 9 assigns the same SKU. Current US East standard consumption price is $0.36/audio-hour, retail meter e366297b-9194-5c2f-91f9-2b6472d890b3. Promotional $0.10 SKU, free quotas and commitments excluded. Service-managed updates mean the current endpoint is not a frozen benchmark backend. Region/currency may change price."
   },
   "stt-meta-muse-voice-transcribe-price-2026-10-22": {
     "title": "Meta official model pricing and access",
