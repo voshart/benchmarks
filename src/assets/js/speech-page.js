@@ -21,14 +21,12 @@
       controls.rankMetric.value=''; metricProtocol=controls.test.value;
     }
     $('speechBenchmarkNote').hidden = !protocol;
-    $('speechAccuracyTitle').hidden = !protocol;
     const scoreOption=Array.from(controls.sort.options || []).find(option=>option.value==='score');
     if (scoreOption) scoreOption.textContent=protocol ? 'Best accuracy first' : 'Highest cross-family index';
     for (const option of controls.sort.options || []) if (option.value.startsWith('wer:')) {option.hidden=protocol;option.disabled=protocol;}
     if (protocol && controls.sort.value.startsWith('wer:')) controls.sort.value='score';
     controls.min.hidden = protocol;
     $('speechComparability').hidden = protocol;
-    $('speechProtocolControls').hidden = !protocol;
     const options = {cutoff,view,test:controls.test.value,query:controls.query.value,sort:controls.sort.value,
       maxDownload:controls.maxDownload.value,maxParams:controls.maxParams.value,access:controls.access.value,min:controls.min.value,
       extra:controls.extra.checked,compact:!controls.extra.checked,rankMetric:controls.rankMetric.value};
@@ -43,7 +41,6 @@
       $('speechUnscoredSummary').textContent=`${result.unscoredRows.length} configurations without a matched score — not ranked`;
       $('speechUnscoredList').innerHTML=BenchmarkSpeech.renderUnscored(result,data);
       const isEnglish=result.test.id===data.config.default_test && !result.rankMetric;
-      $('speechAccuracyTitle').textContent=isEnglish ? 'English accuracy — seven-set mean WER' : `${result.test.label} — ${result.rankMetric?.label || 'benchmark accuracy'}`;
       $('speechBenchmarkNote').textContent=(!['score','mean'].includes(controls.sort.value)) ? 'Sorted by your selected field. Accuracy ranks still use only error scores.' : isEnglish ? 'English accuracy. Lower word error is better.' : 'Benchmark accuracy. Lower word error is better.';
     }
     $('speechProtocolNote').textContent = protocol ? result.test.note : view === 'small'
