@@ -13,8 +13,18 @@
     community:'Community record', author_reported:'Author run', vendor_comparison:'Competitor run', secondary:'Quoted leaderboard row'})[record.evidence] || 'Qualified evidence';
 
   function selectSize(data, model) {
-    return data.sizes.filter(record => record.model === model && observed(record))
-      .slice().sort((a,b) => (a.selection_priority || 0) - (b.selection_priority || 0) || b.as_of.localeCompare(a.as_of))[0] || null;
+    const records = data.sizes.filter(record => record.model === model && observed(record))
+      .slice().sort((a,b) => (a.selection_priority || 0) - (b.selection_priority || 0) || b.as_of.localeCompare(a.as_of));
+    if (!records.length) return null;
+    // A source may report only one quantity. Select each independently without
+    // making the other disappear, and keep its own source and precision.
+    const field_records = Object.fromEntries(['download_mb','parameters_million'].map(field =>
+      [field, records.find(record => finite(record[field])) || null]));
+    return {...records[0],
+      download_mb:field_records.download_mb?.download_mb,
+      download_bytes:field_records.download_mb?.download_bytes,
+      parameters_million:field_records.parameters_million?.parameters_million,
+      field_records};
   }
 
   function available(model, cutoff, snapshot) {
@@ -80,8 +90,9 @@
   function renderSizeCells(size, data) {
     return ['download_mb','parameters_million'].map(field => {
       const value = size?.[field];
-      const label = finite(value) ? value.toLocaleString('en-US',{maximumFractionDigits:1}) : '—';
-      return `<td>${finite(value) ? link(data.sources[size.source_id], label, size.note) : label}</td>`;
+      const record = size?.field_records?.[field] || size;
+      const label = finite(value) ? value.toLocaleString('en-US',{maximumFractionDigits:field === 'parameters_million' ? 0 : 1}) : '—';
+      return `<td>${finite(value) ? link(data.sources[record.source_id], label, record.note) : label}</td>`;
     }).join('');
   }
 
@@ -137,7 +148,8 @@
         + (row.provenance ? `<p>Exact source row: ${esc(row.provenance.source_model)}. Measurement operator: ${esc(row.provenance.measurement_operator)}. ${esc(row.provenance.note)}</p>` : '')
         + `<p>${esc(result.test.note)}</p>`
         + (source ? `<p>${link(source, source.title)}. ${esc(source.note)}</p>` : '')
-        + (row.size ? `<p>${link(data.sources[row.size.source_id], 'Size source')}: ${esc(row.size.note)}</p>` : '')
+        + (row.size ? [...new Set(Object.values(row.size.field_records || {size:row.size}).filter(Boolean))]
+          .map(record => `<p>${link(data.sources[record.source_id], 'Size source')}: ${esc(record.note)}</p>`).join('') : '')
         + '</div>';
       const cells = result.columns.map(metric => {
         const record = row.scores[metric.id];

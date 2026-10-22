@@ -1,0 +1,104 @@
+{
+  "checked_on": "2026-10-22",
+  "scope": "Missing Download (MB) and Parameters (M), including default matrix. This is a scoped negative finding, not proof no disclosure exists elsewhere. Hosted service values remain absent rather than zero. No accuracy/ranking observations were backfilled.",
+  "unresolved_default_rows": [
+    {
+      "models": [
+        "stt-assemblyai-universal-3-pro",
+        "stt-assemblyai-universal-3-5-pro"
+      ],
+      "sources_checked": [
+        "https://www.assemblyai.com/blog/introducing-universal-3-pro",
+        "https://www.assemblyai.com/changelog"
+      ],
+      "finding": "No parameter total or public weight artifact size found in checked product documentation. Generations are distinct."
+    },
+    {
+      "models": [
+        "stt-elevenlabs-scribe-v2"
+      ],
+      "sources_checked": [
+        "https://elevenlabs.io/docs/help-center/product/core-capabilities/speech-to-text/what-is-speech-to-text"
+      ],
+      "finding": "Website/API product; no parameter total or weight artifact size found."
+    },
+    {
+      "models": [
+        "stt-speechmatics-enhanced"
+      ],
+      "sources_checked": [
+        "https://www.speechmatics.com/pricing",
+        "https://legacy.docs.speechmatics.com/en/batch-container/release-notes/v8.2.0/"
+      ],
+      "finding": "Enterprise containers/language packs exist; no exact matched generation count or artifact size verified. Not labeled API-only."
+    },
+    {
+      "models": [
+        "stt-openai-gpt-transcribe"
+      ],
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/models/gpt-transcribe"
+      ],
+      "finding": "Exact API model documented; no parameter total or public weight artifact size found. Not substituted with GPT-4o Transcribe."
+    },
+    {
+      "models": [
+        "stt-reson8-resonant-1",
+        "stt-reson8-resonant-1-flash"
+      ],
+      "sources_checked": [
+        "https://www.reson8.dev/blog/benchmarks",
+        "https://www.reson8.dev/wiki/eu-data-residency"
+      ],
+      "finding": "Enterprise on-premise/customer-VPC options exist; no parameter total or artifact size found for either generation."
+    },
+    {
+      "models": [
+        "stt-microsoft-azure-speech-06-2026",
+        "stt-microsoft-azure-speech-07-2026"
+      ],
+      "sources_checked": [
+        "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/releasenotes"
+      ],
+      "finding": "Service-managed model updates. July generation confirmed; exact June label not established. No count or downloadable weight artifact verified."
+    },
+    {
+      "models": [
+        "stt-sprag-symphony"
+      ],
+      "sources_checked": [
+        "https://sprag.ai/docs/stt/models"
+      ],
+      "finding": "Symphony service confirmed; no parameter total or weight artifact size found. Other Sprag models are not substituted."
+    },
+    {
+      "models": [
+        "stt-meta-muse-voice-transcribe"
+      ],
+      "sources_checked": [
+        "https://research.meta.ai/blog/introducing-muse-voice-transcribe",
+        "https://dev.meta.ai/models/muse-voice-transcribe"
+      ],
+      "finding": "Muse Voice Transcribe service confirmed; no parameter total or public weight artifact size found."
+    },
+    {
+      "models": [
+        "stt-modulate-multilingual"
+      ],
+      "sources_checked": [
+        "https://platform.modulate.ai/pricing",
+        "https://www.modulate.ai/api-overview"
+      ],
+      "finding": "Multilingual service confirmed; current v3 internals are not assigned to an unversioned benchmark row."
+    },
+    {
+      "models": [
+        "stt-nvidia-parakeet-tdt-0-6b-v3-fast-gpu-asr"
+      ],
+      "sources_checked": [
+        "https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results/blob/e85ed601d17ab0e008721a19fc9cba36b4ee9c9c/english_short_latest.csv"
+      ],
+      "finding": "Separate runtime configuration; no exact runtime artifact metadata verified. Upstream counts and downloads not silently inherited."
+    }
+  ]
+}

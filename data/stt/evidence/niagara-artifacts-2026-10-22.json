@@ -1,0 +1,62 @@
+[
+  {
+    "model": "niagara-9m-batch-en",
+    "repository": "abr-ai/niagara-9m-batch.en",
+    "revision": "1521edf95a146d06e3c7c1ad18a7209a899bc570",
+    "file": {
+      "rfilename": "niagara-9m-batch.en-cpu.pt2",
+      "blobId": "11b6b82007c675deb6c353d05f4163a89120bf23",
+      "size": 139580920,
+      "lfs": {
+        "sha256": "993519e0913fea2fdd49c50915fb0473a1a87ebacd794fa1f4b0d186b2f3dd0b",
+        "size": 139580920,
+        "pointerSize": 134
+      }
+    }
+  },
+  {
+    "model": "niagara-19m-batch-en",
+    "repository": "abr-ai/niagara-19m-batch.en",
+    "revision": "d0276b85317389bc679d0206f60d88779cfbd15a",
+    "file": {
+      "rfilename": "niagara-19m-batch.en-cpu.pt2",
+      "blobId": "6bbb1c5b0e62f514fb8feb89b3938a69ca894f01",
+      "size": 264910718,
+      "lfs": {
+        "sha256": "6bc8489a82b88bceef9296ee3270d112d19ade22a5d097e61f923851fa137d89",
+        "size": 264910718,
+        "pointerSize": 134
+      }
+    }
+  },
+  {
+    "model": "niagara-38m-batch-en",
+    "repository": "abr-ai/niagara-38m-batch.en",
+    "revision": "7bfe48fb7fb065484419b1860c6b3d4e4f817c0c",
+    "file": {
+      "rfilename": "niagara-38m-batch.en-cpu.pt2",
+      "blobId": "ae7096cabc063ff8ae9ed84406cd59e6a6ec58ca",
+      "size": 437661326,
+      "lfs": {
+        "sha256": "766f86113486317f7ca56add7a72dcfc517dd1a92b0fb4a0be2c63ae77c6d843",
+        "size": 437661326,
+        "pointerSize": 134
+      }
+    }
+  },
+  {
+    "model": "niagara-84m-batch-en",
+    "repository": "abr-ai/niagara-84m-batch.en",
+    "revision": "ed93390475b146ad5412c668f680609a3ffca1b0",
+    "file": {
+      "rfilename": "niagara-84m-batch.en-cpu.pt2",
+      "blobId": "6ad6d78feb0bfb9216f123f76fc14c52cd47f026",
+      "size": 871939280,
+      "lfs": {
+        "sha256": "08a5a9e34afdacc9a5b6ae73ea132adb64bb08956e0865397c33cf3b0142b1fa",
+        "size": 871939280,
+        "pointerSize": 134
+      }
+    }
+  }
+]

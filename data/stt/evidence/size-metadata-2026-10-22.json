@@ -1,0 +1,1844 @@
+{
+  "verified_on": "2026-10-22",
+  "selection": "One pinned weight artifact format per configuration; safetensors model/index when present, otherwise a single NeMo archive. Existing reported quantities are preserved. Runtime conversions never inherit upstream metadata.",
+  "models": [
+    {
+      "model": "granite-speech-5-0-470m-turboctc",
+      "repository": "ibm-granite/granite-speech-5.0-470m-turboctc",
+      "revision": "1dd23f46f6d4e6eae2531982ba2e33220086dd97",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-speech-5.0-470m-turboctc/revision/1dd23f46f6d4e6eae2531982ba2e33220086dd97?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 131072,
+          "BF16": 472862720
+        },
+        "total": 472993792
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 946311576,
+          "lfs": {
+            "sha256": "5b569c3744c42a9172ac976881539926b66176d03fbaaa3c51b5d2960067f6fc",
+            "size": 946311576,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "nemotron-3-5-asr-streaming-0-6b",
+      "repository": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+      "revision": "ea30d66debe3740a08b573244286791d423d6b3e",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/nemotron-3.5-asr-streaming-0.6b/revision/ea30d66debe3740a08b573244286791d423d6b3e?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 637997088
+        },
+        "total": 637997088
+      },
+      "selected_files": [],
+      "index_weight_files": null
+    },
+    {
+      "model": "parakeet-tdt-0-6b-v3",
+      "repository": "nvidia/parakeet-tdt-0.6b-v3",
+      "revision": "541d1f99c6b0c3cd0b11a95167540bb8edefd82b",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-tdt-0.6b-v3/revision/541d1f99c6b0c3cd0b11a95167540bb8edefd82b?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 627057286
+        },
+        "total": 627057286
+      },
+      "selected_files": [],
+      "index_weight_files": null
+    },
+    {
+      "model": "qwen3-asr-0-6b-hf",
+      "repository": "Qwen/Qwen3-ASR-0.6B-hf",
+      "revision": "7f1569a48a89f3e3f4dc3a5c9d28bddd903bc76c",
+      "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen3-ASR-0.6B-hf/revision/7f1569a48a89f3e3f4dc3a5c9d28bddd903bc76c?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 782426112
+        },
+        "total": 782426112
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 1564928088,
+          "lfs": {
+            "sha256": "d3f212dd20abecd315d830bc54ae3865e56ebfc3276484e57b771288ba27fd35",
+            "size": 1564928088,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "qwen3-asr-1-7b-hf",
+      "repository": "Qwen/Qwen3-ASR-1.7B-hf",
+      "revision": "bcd2b5b7f32b480ab5790554cfa8347f246a14f3",
+      "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen3-ASR-1.7B-hf/revision/bcd2b5b7f32b480ab5790554cfa8347f246a14f3?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2038052480
+        },
+        "total": 2038052480
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 4076193080,
+          "lfs": {
+            "sha256": "2db53c7d81bd9b8cbc6a074e89be2c968a0d373fb4ee68bb1b1e14f7042dfee1",
+            "size": 4076193080,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-bosonai-higgs-audio-v3-stt",
+      "repository": "bosonai/higgs-audio-v3-stt",
+      "revision": "2ffd1aa39f5a1266931e405cba12e404a9f994b2",
+      "metadata_url": "https://huggingface.co/api/models/bosonai/higgs-audio-v3-stt/revision/2ffd1aa39f5a1266931e405cba12e404a9f994b2?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2675546112
+        },
+        "total": 2675546112
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00002.safetensors",
+          "size": 4728828400,
+          "lfs": {
+            "sha256": "ee2160c035cef428edd4a0dca35fef31cb49531776677f0b597c0fc859599580",
+            "size": 4728828400,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00002.safetensors",
+          "size": 622354784,
+          "lfs": {
+            "sha256": "ad37c68f8dd3f97d32027b54b1ba7f10428ac2dcd0e675ee7bcafd3ef68ba7c3",
+            "size": 622354784,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors"
+      ]
+    },
+    {
+      "model": "stt-coherelabs-cohere-transcribe-03-2026",
+      "repository": "CohereLabs/cohere-transcribe-03-2026",
+      "revision": "d552dadc2922ba6f6c1f994f8db904d52dcaf942",
+      "metadata_url": "https://huggingface.co/api/models/CohereLabs/cohere-transcribe-03-2026/revision/d552dadc2922ba6f6c1f994f8db904d52dcaf942?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2065804048
+        },
+        "total": 2065804048
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 4131862976,
+          "lfs": {
+            "sha256": "987bd3e141c7bfdb5a78f5db11397ee7737308357e6cc0a3f36a4979b158137a",
+            "size": 4131862976,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-distil-whisper-distil-large-v3-5",
+      "repository": "distil-whisper/distil-large-v3.5",
+      "revision": "728a7691f3ff1d3d971528d3203a6e9559165d41",
+      "metadata_url": "https://huggingface.co/api/models/distil-whisper/distil-large-v3.5/revision/728a7691f3ff1d3d971528d3203a6e9559165d41?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 756405760
+        },
+        "total": 756405760
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 3025686376,
+          "lfs": {
+            "sha256": "76ec9f754fc4b4810845dc36b71d1897c1342e702810c179e1569690084cfb0c",
+            "size": 3025686376,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-edge0-ark-asr-0-6b",
+      "repository": "Edge0/ARK-ASR-0.6B",
+      "revision": "45776b56d58cdfb2e2eb632f7e110f38684633e0",
+      "metadata_url": "https://huggingface.co/api/models/Edge0/ARK-ASR-0.6B/revision/45776b56d58cdfb2e2eb632f7e110f38684633e0?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 1299463168
+        },
+        "total": 1299463168
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 2599020680,
+          "lfs": {
+            "sha256": "57a86ce1c2f2c2d6ebb7ad9642c9e951a5109625122b48c9180126a28787673d",
+            "size": 2599020680,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-edge0-ark-asr-3b",
+      "repository": "Edge0/ARK-ASR-3B",
+      "revision": "1e28271b79edc97635783bea65abc89195a09ed3",
+      "metadata_url": "https://huggingface.co/api/models/Edge0/ARK-ASR-3B/revision/1e28271b79edc97635783bea65abc89195a09ed3?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 4063438848
+        },
+        "total": 4063438848
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00002.safetensors",
+          "size": 4996098432,
+          "lfs": {
+            "sha256": "b0f93d36c42c3487d95532c7d54952c7810bf629ee2a2265ed4e2f9e988e5342",
+            "size": 4996098432,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00002.safetensors",
+          "size": 3130890232,
+          "lfs": {
+            "sha256": "db6d540d2b230e322efc17176d7f67ae44a25705bd85c5caccdf5d8c426c072c",
+            "size": 3130890232,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors"
+      ]
+    },
+    {
+      "model": "stt-edge0-audio8-asr-0-1b",
+      "repository": "Edge0/Audio8-ASR-0.1B",
+      "revision": "8487da63d581fa4fc9b5c60444cb57c3a523d7aa",
+      "metadata_url": "https://huggingface.co/api/models/Edge0/Audio8-ASR-0.1B/revision/8487da63d581fa4fc9b5c60444cb57c3a523d7aa?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 323990528
+        },
+        "total": 323990528
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 648031000,
+          "lfs": {
+            "sha256": "971d17f64ef5f193fca567fa3e9dc063c4eede97faabb11c0c6abf0b92b23ca4",
+            "size": 648031000,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-facebook-seamless-m4t-v2-large",
+      "repository": "facebook/seamless-m4t-v2-large",
+      "revision": "5f8cc790b19fc3f67a61c105133b20b34e3dcb76",
+      "metadata_url": "https://huggingface.co/api/models/facebook/seamless-m4t-v2-large/revision/5f8cc790b19fc3f67a61c105133b20b34e3dcb76?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 2309249669
+        },
+        "total": 2309249669
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00002.safetensors",
+          "size": 4999163080,
+          "lfs": {
+            "sha256": "85cab984fbc111f8713827c440499453b9e66f262862866eeed8725c302ba2ac",
+            "size": 4999163080,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00002.safetensors",
+          "size": 4238114628,
+          "lfs": {
+            "sha256": "9536dc05892a6ca8410bcfea763dde422e2430c3cc1f3acd26c55182c8989017",
+            "size": 4238114628,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors"
+      ]
+    },
+    {
+      "model": "stt-funaudiollm-fun-asr-nano-2512-hf",
+      "repository": "FunAudioLLM/Fun-ASR-Nano-2512-hf",
+      "revision": "7ef6cafdc445b5beff0b730cbeb51952c793ca6e",
+      "metadata_url": "https://huggingface.co/api/models/FunAudioLLM/Fun-ASR-Nano-2512-hf/revision/7ef6cafdc445b5beff0b730cbeb51952c793ca6e?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 829791840
+        },
+        "total": 829791840
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 1659773320,
+          "lfs": {
+            "sha256": "1bbb6dcc5d8b75084a399d48c4d4b0f3aa1d3f09f2616ae40ed2c4fba03d89c9",
+            "size": 1659773320,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-google-gemma-4-12b-it",
+      "repository": "google/gemma-4-12B-it",
+      "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+      "metadata_url": "https://huggingface.co/api/models/google/gemma-4-12B-it/revision/707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 11959730224
+        },
+        "total": 11959730224
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 23919549408,
+          "lfs": {
+            "sha256": "5a84cb313260ac447237b890387116dfa8682e49a6b44bc585ae8353abbff18d",
+            "size": 23919549408,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-google-gemma-4-e2b-it",
+      "repository": "google/gemma-4-E2B-it",
+      "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+      "metadata_url": "https://huggingface.co/api/models/google/gemma-4-E2B-it/revision/3e22461f65e89153144f8adb70e3b8c2cc9845a7?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 5123178051
+        },
+        "total": 5123178051
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 10246621918,
+          "lfs": {
+            "sha256": "2db5482b20d746879bb3ef79b5203e9075a2e2b98f54ec7c2f281c1477ddc550",
+            "size": 10246621918,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-google-gemma-4-e4b-it",
+      "repository": "google/gemma-4-E4B-it",
+      "revision": "ee0ef6023621cff504d758262d4e04895a5af4a2",
+      "metadata_url": "https://huggingface.co/api/models/google/gemma-4-E4B-it/revision/ee0ef6023621cff504d758262d4e04895a5af4a2?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 7996156490
+        },
+        "total": 7996156490
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 15992595884,
+          "lfs": {
+            "sha256": "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503",
+            "size": 15992595884,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-ibm-granite-granite-4-0-1b-speech",
+      "repository": "ibm-granite/granite-4.0-1b-speech",
+      "revision": "bd87ab862416353633ea431fe49b1614003623c5",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-4.0-1b-speech/revision/bd87ab862416353633ea431fe49b1614003623c5?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2313207132
+        },
+        "total": 2313207132
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00003.safetensors",
+          "size": 2143518808,
+          "lfs": {
+            "sha256": "2ed1c8a94a3ea0bebc3faa93490cc1b5543ed0d33e345c26f4b0ca878ad12f8e",
+            "size": 2143518808,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00003.safetensors",
+          "size": 2143963456,
+          "lfs": {
+            "sha256": "cbc16c9712d1174fa77dcfba36b6bfa32961ec6c713d9494fce8d61b657809be",
+            "size": 2143963456,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00003.safetensors",
+          "size": 339045512,
+          "lfs": {
+            "sha256": "1f9ea0edb2847633edcdf257c8d5d3cd8be751cab2cefb039452ec689fe7f6fc",
+            "size": 339045512,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00003.safetensors",
+        "model-00002-of-00003.safetensors",
+        "model-00003-of-00003.safetensors"
+      ]
+    },
+    {
+      "model": "stt-ibm-granite-granite-speech-3-3-2b",
+      "repository": "ibm-granite/granite-speech-3.3-2b",
+      "revision": "4ac2f02f413c6169ae8c0ccc217115a366e552d7",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-speech-3.3-2b/revision/4ac2f02f413c6169ae8c0ccc217115a366e552d7?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 3009285376
+        },
+        "total": 3009285376
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00004.safetensors",
+          "size": 1992459128,
+          "lfs": {
+            "sha256": "bd355249426713a1628972b46d82d4cc1e5efc5af62b77884410d4d2b42004c7",
+            "size": 1992459128,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00004.safetensors",
+          "size": 1992453224,
+          "lfs": {
+            "sha256": "a6fb9326afc6776e711662437ae38957b898b38716772ad24f6ef0a3c3e06694",
+            "size": 1992453224,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00004.safetensors",
+          "size": 1998075896,
+          "lfs": {
+            "sha256": "9aa9c5af42824c1b0b928b98b5526fd745448a2e57a31d261753a7770b489143",
+            "size": 1998075896,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00004-of-00004.safetensors",
+          "size": 35696040,
+          "lfs": {
+            "sha256": "102d069fe3ff523609ca1e535fb494e0987e69f571438ab3c67e3dcd8f3cecb0",
+            "size": 35696040,
+            "pointerSize": 133
+          }
+        },
+        {
+          "rfilename": "adapter_model.safetensors",
+          "size": 68178600,
+          "lfs": {
+            "sha256": "30de576bc1338e63d49d9bd74930aaeb0695745efe5cfd09bc62c8416c2db567",
+            "size": 68178600,
+            "pointerSize": 133
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00004.safetensors",
+        "model-00002-of-00004.safetensors",
+        "model-00003-of-00004.safetensors",
+        "model-00004-of-00004.safetensors"
+      ],
+      "additional_required_weight_files": [
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "model": "stt-ibm-granite-granite-speech-3-3-8b",
+      "repository": "ibm-granite/granite-speech-3.3-8b",
+      "revision": "5670dcfae4a296e6993ac53eb25f638c6aaa54d0",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-speech-3.3-8b/revision/5670dcfae4a296e6993ac53eb25f638c6aaa54d0?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 8648711424
+        },
+        "total": 8648711424
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00009.safetensors",
+          "size": 1996624616,
+          "lfs": {
+            "sha256": "1276f820dab1cc88a244cd1a93483f5756a60d3bb6df1ae3b7ec16e7f6487815",
+            "size": 1996624616,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00009.safetensors",
+          "size": 1992382192,
+          "lfs": {
+            "sha256": "fd092699e0c2af5f0c0c8fb01116273b7a78b6646e15981710bd3b69fe789da4",
+            "size": 1992382192,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00009.safetensors",
+          "size": 1992382224,
+          "lfs": {
+            "sha256": "8b2850cb530272425b09bee47e4e37d4b611c1bd8b3646e64e1103f69b997b60",
+            "size": 1992382224,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00004-of-00009.safetensors",
+          "size": 1992382232,
+          "lfs": {
+            "sha256": "7e75f3e50455db95d0458beeccdc0fc9cfe833123f60be5685d39d30eb6f3c24",
+            "size": 1992382232,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00005-of-00009.safetensors",
+          "size": 1992382232,
+          "lfs": {
+            "sha256": "70797e51dfe00e67e67a571931fb947423a25e847d8a183ef6548218c9ebc190",
+            "size": 1992382232,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00006-of-00009.safetensors",
+          "size": 1992382232,
+          "lfs": {
+            "sha256": "fe96bdc622693137d757441ed071255443ba3798700cb67bc0f2965409e5c60e",
+            "size": 1992382232,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00007-of-00009.safetensors",
+          "size": 1992382232,
+          "lfs": {
+            "sha256": "af874ec068bff1fd53ebd19424955a5793f04c0951ac234740df2444a1f6b4ae",
+            "size": 1992382232,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00008-of-00009.safetensors",
+          "size": 1992382232,
+          "lfs": {
+            "sha256": "bbc716fbbff32e943a982c4f46ac1221325dc1aa8d3d5d9c7f270d5b8cdc48b3",
+            "size": 1992382232,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00009-of-00009.safetensors",
+          "size": 1354236592,
+          "lfs": {
+            "sha256": "6fcdf24f4c53d42a9c562db81d58b2d4c9cddef74e405bed6f9cf622a2e23451",
+            "size": 1354236592,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "adapter_model.safetensors",
+          "size": 136336192,
+          "lfs": {
+            "sha256": "0b6b83dd573f82ddd3221c9634c155abe36e27f9db2004c570b9e68ea338fbab",
+            "size": 136336192,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00009.safetensors",
+        "model-00002-of-00009.safetensors",
+        "model-00003-of-00009.safetensors",
+        "model-00004-of-00009.safetensors",
+        "model-00005-of-00009.safetensors",
+        "model-00006-of-00009.safetensors",
+        "model-00007-of-00009.safetensors",
+        "model-00008-of-00009.safetensors",
+        "model-00009-of-00009.safetensors"
+      ],
+      "additional_required_weight_files": [
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "model": "stt-ibm-granite-granite-speech-4-1-2b-nar",
+      "repository": "ibm-granite/granite-speech-4.1-2b-nar",
+      "revision": "a1e3416e25ce29ab3852778e54fa8b3bd59c4bf2",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-speech-4.1-2b-nar/revision/a1e3416e25ce29ab3852778e54fa8b3bd59c4bf2?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2254635356
+        },
+        "total": 2254635356
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 4509382472,
+          "lfs": {
+            "sha256": "a187681b05e9598028b6177bba4588a27a76b97ab6840870877d69e1770a5094",
+            "size": 4509382472,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-ibm-granite-granite-speech-4-1-2b",
+      "repository": "ibm-granite/granite-speech-4.1-2b",
+      "revision": "de575db64086f84fdc79da4932d1076e965bc546",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-speech-4.1-2b/revision/de575db64086f84fdc79da4932d1076e965bc546?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2313207132
+        },
+        "total": 2313207132
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00003.safetensors",
+          "size": 2143518808,
+          "lfs": {
+            "sha256": "3c987fdc29940c49d2498ea5925e8d57f88661af3ef30f73e56e2434ded3e42f",
+            "size": 2143518808,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00003.safetensors",
+          "size": 2143963456,
+          "lfs": {
+            "sha256": "8e18d6d3fbe009a95a4cf305e31c2aab4a3484eccbce29aa1aa1454fc8c046ee",
+            "size": 2143963456,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00003.safetensors",
+          "size": 339045512,
+          "lfs": {
+            "sha256": "32f823497bc179f6f346efdd46984ab60e44b3d443bf40a18d757ddce626a2d2",
+            "size": 339045512,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00003.safetensors",
+        "model-00002-of-00003.safetensors",
+        "model-00003-of-00003.safetensors"
+      ]
+    },
+    {
+      "model": "stt-ibm-granite-granite-speech-5-0-470m-turboctc-nc",
+      "repository": "ibm-granite/granite-speech-5.0-470m-turboctc-nc",
+      "revision": "af0a8e8663defc902944ebdae0d29a5219be11a3",
+      "metadata_url": "https://huggingface.co/api/models/ibm-granite/granite-speech-5.0-470m-turboctc-nc/revision/af0a8e8663defc902944ebdae0d29a5219be11a3?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 65536,
+          "BF16": 472928256
+        },
+        "total": 472993792
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 946180704,
+          "lfs": {
+            "sha256": "e78ded1c2b62a95969abc140f60ae76eb2a869858a1e8174247225304d7fc31b",
+            "size": 946180704,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-microsoft-phi-4-multimodal-instruct",
+      "repository": "microsoft/Phi-4-multimodal-instruct",
+      "revision": "93f923e1a7727d1c4f446756212d9d3e8fcc5d81",
+      "metadata_url": "https://huggingface.co/api/models/microsoft/Phi-4-multimodal-instruct/revision/93f923e1a7727d1c4f446756212d9d3e8fcc5d81?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 5574460384
+        },
+        "total": 5574460384
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00003.safetensors",
+          "size": 4997504848,
+          "lfs": {
+            "sha256": "c46bb03332d82f6a3eaf85bd20af388dd4d4d68b198c2203c965c7381a466094",
+            "size": 4997504848,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00003.safetensors",
+          "size": 4952333128,
+          "lfs": {
+            "sha256": "b3e812c0c8acef4e7f5e34d6c9f77a7640ee4a2b93ea351921365ac62f19918d",
+            "size": 4952333128,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00003.safetensors",
+          "size": 1199389232,
+          "lfs": {
+            "sha256": "7be96b7339303752634b202d3f377bcf312a03046586eca6cea23347ace1e65a",
+            "size": 1199389232,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00003.safetensors",
+        "model-00002-of-00003.safetensors",
+        "model-00003-of-00003.safetensors"
+      ]
+    },
+    {
+      "model": "stt-microsoft-vibevoice-asr-hf",
+      "repository": "microsoft/VibeVoice-ASR-HF",
+      "revision": "f22241c2062b3b25272bf117397e03d73381037a",
+      "metadata_url": "https://huggingface.co/api/models/microsoft/VibeVoice-ASR-HF/revision/f22241c2062b3b25272bf117397e03d73381037a?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 8330325888
+        },
+        "total": 8330325888
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00008.safetensors",
+          "size": 2488346304,
+          "lfs": {
+            "sha256": "580189757a1c737ecc6fad16e633b922bc73220268356e31362c24365f081095",
+            "size": 2488346304,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00008.safetensors",
+          "size": 2389316008,
+          "lfs": {
+            "sha256": "65e419d28fc8c87d6938ec611c7b425b38e391c80a2df59c2b4935f6fd65c7c2",
+            "size": 2389316008,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00008.safetensors",
+          "size": 2466376400,
+          "lfs": {
+            "sha256": "30f574c764550d26c654cc3f5dd000b90b0c3305db955267c577001c1013fdf7",
+            "size": 2466376400,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00004-of-00008.safetensors",
+          "size": 2466376432,
+          "lfs": {
+            "sha256": "8fa3d9350f0a8cc97524617ff582e451159bfdba2ef0b2e372a627518ef681b1",
+            "size": 2466376432,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00005-of-00008.safetensors",
+          "size": 2499431160,
+          "lfs": {
+            "sha256": "5015ecacc86d897d20d5e42ba52ef83355d42f587d3b158ff897ec94847bd083",
+            "size": 2499431160,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00006-of-00008.safetensors",
+          "size": 1831435704,
+          "lfs": {
+            "sha256": "7463d75607185c118925cea6a60a5698aaa6f428e626bcee774572bdc28ef55d",
+            "size": 1831435704,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00007-of-00008.safetensors",
+          "size": 2482226384,
+          "lfs": {
+            "sha256": "b52aa2fab9640bcac5201a278f540b018c439ed4e99516d9ff30ea1ae399525e",
+            "size": 2482226384,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00008-of-00008.safetensors",
+          "size": 37262376,
+          "lfs": {
+            "sha256": "a66ced85b619507e1970dc51be45786ff55803ccc63658765e412ea23d9a8ace",
+            "size": 37262376,
+            "pointerSize": 133
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00008.safetensors",
+        "model-00002-of-00008.safetensors",
+        "model-00003-of-00008.safetensors",
+        "model-00004-of-00008.safetensors",
+        "model-00005-of-00008.safetensors",
+        "model-00006-of-00008.safetensors",
+        "model-00007-of-00008.safetensors",
+        "model-00008-of-00008.safetensors"
+      ]
+    },
+    {
+      "model": "stt-mistralai-voxtral-mini-3b-2507",
+      "repository": "mistralai/Voxtral-Mini-3B-2507",
+      "revision": "3060fe34b35ba5d44202ce9ff3c097642914f8f3",
+      "metadata_url": "https://huggingface.co/api/models/mistralai/Voxtral-Mini-3B-2507/revision/3060fe34b35ba5d44202ce9ff3c097642914f8f3?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 1920000,
+          "BF16": 4674351104
+        },
+        "total": 4676271104
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00002.safetensors",
+          "size": 4977385976,
+          "lfs": {
+            "sha256": "1facdc4c5a0e84f2881a59c4756441b7030a1f1036b2124c117540408d0e5fe9",
+            "size": 4977385976,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00002.safetensors",
+          "size": 4379088336,
+          "lfs": {
+            "sha256": "0a103ba715bc0d656e94bf79d637d4f8f0f4fe6d76fb1d4db7ee46c6b940f631",
+            "size": 4379088336,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors"
+      ]
+    },
+    {
+      "model": "stt-mistralai-voxtral-small-24b-2507",
+      "repository": "mistralai/Voxtral-Small-24B-2507",
+      "revision": "da5b42409f279fdd92febee0511a6c32828569c1",
+      "metadata_url": "https://huggingface.co/api/models/mistralai/Voxtral-Small-24B-2507/revision/da5b42409f279fdd92febee0511a6c32828569c1?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 1920000,
+          "BF16": 24259880960
+        },
+        "total": 24261800960
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00001-of-00011.safetensors",
+          "size": 4947893992,
+          "lfs": {
+            "sha256": "9e4c3fde4ef4a1141b4b06f2125c63bb2032f71a7985fafb4b3ae8243ca17be2",
+            "size": 4947893992,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00002-of-00011.safetensors",
+          "size": 4781593336,
+          "lfs": {
+            "sha256": "6998429899fc08e533b7ef0bb65a66d0c744a490c31b5210ea5f61e62e8fb997",
+            "size": 4781593336,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00003-of-00011.safetensors",
+          "size": 4781593344,
+          "lfs": {
+            "sha256": "b692e60c5d9acfd5b6e7fd2c0337349a421bb687c8cef14627469f744efa83df",
+            "size": 4781593344,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00004-of-00011.safetensors",
+          "size": 4886472248,
+          "lfs": {
+            "sha256": "0c34b0b04a59f62c3d1f320803f421c45d51dbf917f4e3f90eda957640ae85da",
+            "size": 4886472248,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00005-of-00011.safetensors",
+          "size": 4781593376,
+          "lfs": {
+            "sha256": "bcea8514dd1330b2478deeff5b48b6788c1e6fbd1c6d5034faeeee5c066b6288",
+            "size": 4781593376,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00006-of-00011.safetensors",
+          "size": 4781593368,
+          "lfs": {
+            "sha256": "3e415b6a5cc6f266acdd8aeba526288abd8345ebaa4022ab0e26ea30eaaffa91",
+            "size": 4781593368,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00007-of-00011.safetensors",
+          "size": 4886472248,
+          "lfs": {
+            "sha256": "720bbe6314e0b69b97fd13e07ffdef4953dc5aec3b4b91c15a9c1d40d7b1c7fc",
+            "size": 4886472248,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00008-of-00011.safetensors",
+          "size": 4781593376,
+          "lfs": {
+            "sha256": "85c590b7d4d6c843dc083b3048f5b00cda7ee7ddfeb18a3732ff2db65926a6eb",
+            "size": 4781593376,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00009-of-00011.safetensors",
+          "size": 4781593368,
+          "lfs": {
+            "sha256": "fc973532e7f8faea778ed22aac9867b84e1d4bb4ad9c9a50744fc1eeeb6c9115",
+            "size": 4781593368,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00010-of-00011.safetensors",
+          "size": 3670112232,
+          "lfs": {
+            "sha256": "365913969c7a5c93cc2d9e19b6f9d4128e675db8a1941c2436f0a2a2c64870e2",
+            "size": 3670112232,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model-00011-of-00011.safetensors",
+          "size": 1447035256,
+          "lfs": {
+            "sha256": "2515d18911999b503000115208d6c5ae46777223227c18a170cbff3095aaf697",
+            "size": 1447035256,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00001-of-00011.safetensors",
+        "model-00002-of-00011.safetensors",
+        "model-00003-of-00011.safetensors",
+        "model-00004-of-00011.safetensors",
+        "model-00005-of-00011.safetensors",
+        "model-00006-of-00011.safetensors",
+        "model-00007-of-00011.safetensors",
+        "model-00008-of-00011.safetensors",
+        "model-00009-of-00011.safetensors",
+        "model-00010-of-00011.safetensors",
+        "model-00011-of-00011.safetensors"
+      ]
+    },
+    {
+      "model": "stt-nvidia-canary-1b-v2",
+      "repository": "nvidia/canary-1b-v2",
+      "revision": "d455706339a6b32e1aa40f82c713a482a0c938e2",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/canary-1b-v2/revision/d455706339a6b32e1aa40f82c713a482a0c938e2?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 978998272
+        },
+        "total": 978998272
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 3916173816,
+          "lfs": {
+            "sha256": "4f6d381f6a939b95e9f8516212148b701e9b3805d26462c4c3e9e34f3d89b6f8",
+            "size": 3916173816,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-canary-qwen-2-5b",
+      "repository": "nvidia/canary-qwen-2.5b",
+      "revision": "b1469e1bba1cfe140205529c79c434ca47180960",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/canary-qwen-2.5b/revision/b1469e1bba1cfe140205529c79c434ca47180960?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2559447568
+        },
+        "total": 2559447568
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 5119120624,
+          "lfs": {
+            "sha256": "800cb0d099cf655a8887d8b741c3a4afa9891e2b2949870251c4d58c72b59175",
+            "size": 5119120624,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-nemotron-speech-streaming-en-0-6b",
+      "repository": "nvidia/nemotron-speech-streaming-en-0.6b",
+      "revision": "ebe59e5a817142986528bbbee5dba8db7b38ed50",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/nemotron-speech-streaming-en-0.6b/revision/ebe59e5a817142986528bbbee5dba8db7b38ed50?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 618084865
+        },
+        "total": 618084865
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 2472413604,
+          "lfs": {
+            "sha256": "bddd8a7300826efd19cf7e01f1c7db8402bed6786fc4c7739632894f69c71473",
+            "size": 2472413604,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-parakeet-ctc-0-6b",
+      "repository": "nvidia/parakeet-ctc-0.6b",
+      "revision": "ad09ba1cc62743fbc9814de5d2016fca9096485a",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-ctc-0.6b/revision/ad09ba1cc62743fbc9814de5d2016fca9096485a?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 608848897
+        },
+        "total": 608848897
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 2435506188,
+          "lfs": {
+            "sha256": "a1f5b1d2bc66d4a812a1c8ea48a9aa8678f863e1bd3ecbec3c75abd720897fda",
+            "size": 2435506188,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-parakeet-ctc-1-1b",
+      "repository": "nvidia/parakeet-ctc-1.1b",
+      "revision": "20e63a0fed6aedba145b74b826dbd41df0941730",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-ctc-1.1b/revision/20e63a0fed6aedba145b74b826dbd41df0941730?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 1062626305
+        },
+        "total": 1062626305
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 4250698604,
+          "lfs": {
+            "sha256": "57e0bc26772f3360b7ae0c087f184364179906674d08fc8b71d48a54d4f52145",
+            "size": 4250698604,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-parakeet-rnnt-0-6b",
+      "repository": "nvidia/parakeet-rnnt-0.6b",
+      "revision": "1b6b548f70b93d2410c3d13cc0654cab300f06ef",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-rnnt-0.6b/revision/1b6b548f70b93d2410c3d13cc0654cab300f06ef?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 616741377
+        },
+        "total": 616741377
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 2467077452,
+          "lfs": {
+            "sha256": "d1f2147f87016f16557bd2bdba5644a756f008468260752cbf281cc719a2a551",
+            "size": 2467077452,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-parakeet-rnnt-1-1b",
+      "repository": "nvidia/parakeet-rnnt-1.1b",
+      "revision": "2acc4c61eede2f52ddefe74935de1930a9064d4a",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-rnnt-1.1b/revision/2acc4c61eede2f52ddefe74935de1930a9064d4a?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 1070518785
+        },
+        "total": 1070518785
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 4282269868,
+          "lfs": {
+            "sha256": "09ae8537c649f096be2ffc6ec466e4e813c5e319da7430bdb0304bc5817ff7ac",
+            "size": 4282269868,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-parakeet-tdt-0-6b-v2",
+      "repository": "nvidia/parakeet-tdt-0.6b-v2",
+      "revision": "ae9ad07059c7c739ffaf932226a8fe64ae2620b0",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-tdt-0.6b-v2/revision/ae9ad07059c7c739ffaf932226a8fe64ae2620b0?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "parakeet-tdt-0.6b-v2.nemo",
+          "size": 2472222720,
+          "lfs": {
+            "sha256": "d99e39955c9d3d0350d8fb7c75e40c64a2b2eaeb003883d7c941fd2e8747b28c",
+            "size": 2472222720,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-parakeet-tdt-1-1b",
+      "repository": "nvidia/parakeet-tdt-1.1b",
+      "revision": "53276c6469d1f17a1352e30c4d11be3d0d7e9575",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/parakeet-tdt-1.1b/revision/53276c6469d1f17a1352e30c4d11be3d0d7e9575?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "parakeet-tdt-1.1b.nemo",
+          "size": 4283136000,
+          "lfs": {
+            "sha256": "9c563d52bdffeacbac0c5b894fdea9be82fea3a6bd8bb8018ff57888e2b5d988",
+            "size": 4283136000,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-stt-en-conformer-ctc-large",
+      "repository": "nvidia/stt_en_conformer_ctc_large",
+      "revision": "5f18b90411b9fdfc9b52b8caf636f204491afb01",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/stt_en_conformer_ctc_large/revision/5f18b90411b9fdfc9b52b8caf636f204491afb01?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "stt_en_conformer_ctc_large.nemo",
+          "size": 451486220,
+          "lfs": {
+            "sha256": "08d7664d657fea7d3475e35696e20fefc658c0342b0c5d440609cde78113011c",
+            "size": 451486220,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-stt-en-conformer-ctc-small",
+      "repository": "nvidia/stt_en_conformer_ctc_small",
+      "revision": "e5b9941cc1b0b8a08c29b31a111c674f3040a80f",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/stt_en_conformer_ctc_small/revision/e5b9941cc1b0b8a08c29b31a111c674f3040a80f?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "stt_en_conformer_ctc_small.nemo",
+          "size": 49088734,
+          "lfs": {
+            "sha256": "f9af79844c7160b3668f373cd62dbf28b69df0e2e441c3b5e0f20159dd8c7088",
+            "size": 49088734,
+            "pointerSize": 133
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-stt-en-conformer-transducer-large",
+      "repository": "nvidia/stt_en_conformer_transducer_large",
+      "revision": "a40623d1796368b64a9433bce3bcd75fce379a7b",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/stt_en_conformer_transducer_large/revision/a40623d1796368b64a9433bce3bcd75fce379a7b?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "stt_en_conformer_transducer_large.nemo",
+          "size": 482508800,
+          "lfs": {
+            "sha256": "d0002cc612e7046664dbe2f8b7e3b31af0a725aad11200309381ca65dac55674",
+            "size": 482508800,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-stt-en-fastconformer-ctc-large",
+      "repository": "nvidia/stt_en_fastconformer_ctc_large",
+      "revision": "5a84a7a3bee8d9bd414c6719ddfea7bc723e3961",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/stt_en_fastconformer_ctc_large/revision/5a84a7a3bee8d9bd414c6719ddfea7bc723e3961?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "stt_en_fastconformer_ctc_large.nemo",
+          "size": 463155200,
+          "lfs": {
+            "sha256": "1f2c819d9d418466525b45a8d5d5b1d48509ed3c1af2a63d25e35154052adf5f",
+            "size": 463155200,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-stt-en-fastconformer-transducer-large",
+      "repository": "nvidia/stt_en_fastconformer_transducer_large",
+      "revision": "24a0e16aa9ebfb00b61300514c89cd84a4950021",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/stt_en_fastconformer_transducer_large/revision/24a0e16aa9ebfb00b61300514c89cd84a4950021?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "stt_en_fastconformer_transducer_large.nemo",
+          "size": 457103360,
+          "lfs": {
+            "sha256": "859fcd9d4d2e995b459f06e33fbf41d2feccc150029980f72bd0b9c7d41bca63",
+            "size": 457103360,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-nvidia-stt-hy-fastconformer-hybrid-large-pc",
+      "repository": "nvidia/stt_hy_fastconformer_hybrid_large_pc",
+      "revision": "353b40909f02cf5b74a577294822d8c73fbb1ca1",
+      "metadata_url": "https://huggingface.co/api/models/nvidia/stt_hy_fastconformer_hybrid_large_pc/revision/353b40909f02cf5b74a577294822d8c73fbb1ca1?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "stt_hy_fastconformer_hybrid_large_pc.nemo",
+          "size": 459243520,
+          "lfs": {
+            "sha256": "30fac7407cbdff02f77564c11139dd861e933364850d8c60a27c2843d119fdf7",
+            "size": 459243520,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-base-en",
+      "repository": "openai/whisper-base.en",
+      "revision": "911407f4214e0e1d82085af863093ec0b66f9cd6",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-base.en/revision/911407f4214e0e1d82085af863093ec0b66f9cd6?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 72593408
+        },
+        "total": 72593408
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 290401888,
+          "lfs": {
+            "sha256": "d4dd5542fd6a1d35639e21384238f3bfe6c557c849d392b5905d33ee29e71db5",
+            "size": 290401888,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-base",
+      "repository": "openai/whisper-base",
+      "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-base/revision/e37978b90ca9030d5170a5c07aadb050351a65bb?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 72593920
+        },
+        "total": 72593920
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 290403936,
+          "lfs": {
+            "sha256": "07cadb9f25677c8d50df603e66a98fbd842cce45047139baeb16e6219a1e807b",
+            "size": 290403936,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-large-v2",
+      "repository": "openai/whisper-large-v2",
+      "revision": "ae4642769ce2ad8fc292556ccea8e901f1530655",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-large-v2/revision/ae4642769ce2ad8fc292556ccea8e901f1530655?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 1543304960
+        },
+        "total": 1543304960
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 6173370152,
+          "lfs": {
+            "sha256": "57a1ba2a82c093cabff2541409ae778c97145378b9ddfa722763cb1cb8f9020b",
+            "size": 6173370152,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-large-v3",
+      "repository": "openai/whisper-large-v3",
+      "revision": "06f233fe06e710322aca913c1bc4249a0d71fce1",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-large-v3/revision/06f233fe06e710322aca913c1bc4249a0d71fce1?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F16": 1543490560
+        },
+        "total": 1543490560
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 3087130976,
+          "lfs": {
+            "sha256": "a8e94b85976e5864ba3e9525c7e6c83b2a1eca42d4b797a0c7c24d778e40fd95",
+            "size": 3087130976,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-medium",
+      "repository": "openai/whisper-medium",
+      "revision": "abdf7c39ab9d0397620ccaea8974cc764cd0953e",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-medium/revision/abdf7c39ab9d0397620ccaea8974cc764cd0953e?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 763857920
+        },
+        "total": 763857920
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 3055544304,
+          "lfs": {
+            "sha256": "62f73550fa6db24b0c6f6c5962bd0dae80fa644e93cde9cd9c3792971b47fd28",
+            "size": 3055544304,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-small-en",
+      "repository": "openai/whisper-small.en",
+      "revision": "e8727524f962ee844a7319d92be39ac1bd25655a",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-small.en/revision/e8727524f962ee844a7319d92be39ac1bd25655a?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 241734144
+        },
+        "total": 241734144
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 966992008,
+          "lfs": {
+            "sha256": "6014ac49b506df900f66f4aca6b0801eed7245594ace97bcaf73e0ae5b863066",
+            "size": 966992008,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-small",
+      "repository": "openai/whisper-small",
+      "revision": "973afd24965f72e36ca33b3055d56a652f456b4d",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-small/revision/973afd24965f72e36ca33b3055d56a652f456b4d?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 241734912
+        },
+        "total": 241734912
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 966995080,
+          "lfs": {
+            "sha256": "1d7734884874f1a1513ed9aa760a4f8e97aaa02fd6d93a3a85d27b2ae9ca596b",
+            "size": 966995080,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-tiny-en",
+      "repository": "openai/whisper-tiny.en",
+      "revision": "87c7102498dcde7456f24cfd30239ca606ed9063",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-tiny.en/revision/87c7102498dcde7456f24cfd30239ca606ed9063?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 37760256
+        },
+        "total": 37760256
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 151060136,
+          "lfs": {
+            "sha256": "db59695928ded6043adaef491a53ef4e12da9611184d77c53baa691a60b958ad",
+            "size": 151060136,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openai-whisper-tiny",
+      "repository": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-tiny/revision/169d4a4341b33bc18d8881c4b69c2e104e1cc0af?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 37760640
+        },
+        "total": 37760640
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 151061672,
+          "lfs": {
+            "sha256": "7ebd0e69e78190ffe1438491fa05cc1f5c1aa3a4c4db3bc1723adbb551ea2395",
+            "size": 151061672,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-openmoss-team-moss-transcribe-diarize",
+      "repository": "OpenMOSS-Team/MOSS-Transcribe-Diarize",
+      "revision": "704aa4a9c304e8520be88901e0d1960158ef5b15",
+      "metadata_url": "https://huggingface.co/api/models/OpenMOSS-Team/MOSS-Transcribe-Diarize/revision/704aa4a9c304e8520be88901e0d1960158ef5b15?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 908513280
+        },
+        "total": 908513280
+      },
+      "selected_files": [
+        {
+          "rfilename": "model-00000-of-00001.safetensors",
+          "size": 1817113576,
+          "lfs": {
+            "sha256": "9a0ceb4ab7330357db3ff583dba8d83625d5b733b00e1d55d6970e11b07026c4",
+            "size": 1817113576,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": [
+        "model-00000-of-00001.safetensors"
+      ]
+    },
+    {
+      "model": "stt-thestageai-thewhisper-large-v3-turbo",
+      "repository": "TheStageAI/thewhisper-large-v3-turbo",
+      "revision": "4ff34efcbdc13581fdcbc55b8a0b3e598bb941e4",
+      "metadata_url": "https://huggingface.co/api/models/TheStageAI/thewhisper-large-v3-turbo/revision/4ff34efcbdc13581fdcbc55b8a0b3e598bb941e4?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 808878080
+        },
+        "total": 808878080
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 3235581408,
+          "lfs": {
+            "sha256": "1d47f7ce51fb4c897639225ef268b8f0946862a82e59360b55d1bac70574fe4c",
+            "size": 3235581408,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-usefulsensors-moonshine-base",
+      "repository": "moonshine-ai/moonshine-base",
+      "revision": "7a73d8d55ac0ba2ef3ae761593f6784b51f96dcf",
+      "metadata_url": "https://huggingface.co/api/models/moonshine-ai/moonshine-base/revision/7a73d8d55ac0ba2ef3ae761593f6784b51f96dcf?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 61513920
+        },
+        "total": 61513920
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 246079928,
+          "lfs": {
+            "sha256": "e020c79d0a979a7ec099f718ff1cd2f19e92aead230d69654bca5975a8e1b862",
+            "size": 246079928,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-usefulsensors-moonshine-streaming-medium",
+      "repository": "moonshine-ai/moonshine-streaming-medium",
+      "revision": "57b843633a8c183cadf6699ffa761377a933a866",
+      "metadata_url": "https://huggingface.co/api/models/moonshine-ai/moonshine-streaming-medium/revision/57b843633a8c183cadf6699ffa761377a933a866?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 265898112
+        },
+        "total": 265898112
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 1063634564,
+          "lfs": {
+            "sha256": "1b431906c919f373c671ffe8516a0125a4e3ffca4a69255c7fd05782abf6a103",
+            "size": 1063634564,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-usefulsensors-moonshine-streaming-small",
+      "repository": "moonshine-ai/moonshine-streaming-small",
+      "revision": "2c036506f23a09c18df5a50057599ba6d9280999",
+      "metadata_url": "https://huggingface.co/api/models/moonshine-ai/moonshine-streaming-small/revision/2c036506f23a09c18df5a50057599ba6d9280999?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 140135224
+        },
+        "total": 140135224
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 560571228,
+          "lfs": {
+            "sha256": "003635df57b9a47771fd94a6290ab517d7487d0026c165ca9f2ac90411802646",
+            "size": 560571228,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-usefulsensors-moonshine-streaming-tiny",
+      "repository": "moonshine-ai/moonshine-streaming-tiny",
+      "revision": "f8e9dfd8c562c257c151a907b7b7f2fe8ff8511a",
+      "metadata_url": "https://huggingface.co/api/models/moonshine-ai/moonshine-streaming-tiny/revision/f8e9dfd8c562c257c151a907b7b7f2fe8ff8511a?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 44054720
+        },
+        "total": 44054720
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 176237308,
+          "lfs": {
+            "sha256": "0ab3443dabd95a4afb35f0a26155428c03b7c3c450fa6923ffdac4510ba3d040",
+            "size": 176237308,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-usefulsensors-moonshine-tiny",
+      "repository": "moonshine-ai/moonshine-tiny",
+      "revision": "390624ed33d594443aa4aa221f5b9f283b545b5a",
+      "metadata_url": "https://huggingface.co/api/models/moonshine-ai/moonshine-tiny/revision/390624ed33d594443aa4aa221f5b9f283b545b5a?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F32": 27092736
+        },
+        "total": 27092736
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 108389192,
+          "lfs": {
+            "sha256": "867cd2215804859c55aa972d740bd5002be149b4e7526328c895d2408848c736",
+            "size": 108389192,
+            "pointerSize": 134
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "voxtral-mini-4b-realtime-2602",
+      "repository": "mistralai/Voxtral-Mini-4B-Realtime-2602",
+      "revision": "2769294da9567371363522aac9bbcfdd19447add",
+      "metadata_url": "https://huggingface.co/api/models/mistralai/Voxtral-Mini-4B-Realtime-2602/revision/2769294da9567371363522aac9bbcfdd19447add?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "BF16": 4429679360
+        },
+        "total": 4429679360
+      },
+      "selected_files": [
+        {
+          "rfilename": "model.safetensors",
+          "size": 8859446848,
+          "lfs": {
+            "sha256": "e745e4902df6a4c48f29f2f8dc1f6d0fb4cc73c7156bc45923451a5bcdfcd1d6",
+            "size": 8859446848,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null
+    },
+    {
+      "model": "whisper-large-v3-turbo",
+      "repository": "openai/whisper-large-v3-turbo",
+      "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+      "metadata_url": "https://huggingface.co/api/models/openai/whisper-large-v3-turbo/revision/41f01f3fe87f28c78e2fbf8b568835947dd65ed9?blobs=true",
+      "safetensors": {
+        "parameters": {
+          "F16": 808878080
+        },
+        "total": 808878080
+      },
+      "selected_files": [],
+      "index_weight_files": null
+    },
+    {
+      "model": "stt-espnet-owsm-ctc-v4-1b",
+      "repository": "espnet/owsm_ctc_v4_1B",
+      "revision": "8ab32d9d5a1dd84087ebf6e0ea17f38c92eddee0",
+      "metadata_url": "https://huggingface.co/api/models/espnet/owsm_ctc_v4_1B/revision/8ab32d9d5a1dd84087ebf6e0ea17f38c92eddee0?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "exp/s2t_train_owsmctc_ebf27_conv2d8_size1024_mel128_bs320_raw_bpe50000/valid.total_count.ave_5best.till70epoch.pth",
+          "size": 4045987222,
+          "lfs": {
+            "sha256": "10f28cd40ee38582f68131f6502f306762183bf0e85fdc238ea401bd0e863ae4",
+            "size": 4045987222,
+            "pointerSize": 135
+          }
+        }
+      ],
+      "index_weight_files": null,
+      "artifact_mapping_source": "https://huggingface.co/espnet/owsm_ctc_v4_1B/blob/8ab32d9d5a1dd84087ebf6e0ea17f38c92eddee0/meta.yaml"
+    },
+    {
+      "model": "stt-hojoai-hojo-asr-v1",
+      "repository": "HojoAI/Hojo-ASR-V1",
+      "revision": "a22c381896ce5f4b70038982bfb888fe9969ed99",
+      "metadata_url": "https://huggingface.co/api/models/HojoAI/Hojo-ASR-V1/revision/a22c381896ce5f4b70038982bfb888fe9969ed99?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "merged_full_model.safetensors",
+          "size": 11956909856,
+          "lfs": {
+            "sha256": "fba06d4e76f3ad45e8b61cd309cb90c8be117bbe5b8bd0ca1f35bcaf6b12c400",
+            "size": 11956909856,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "index_weight_files": null,
+      "artifact_mapping_source": "https://github.com/HojoAI/Hojo-ASR/blob/ba2fbb658c5ccfcec858044de9ff717dd4ebd06f/hojo_asr/hf_hub_loader.py"
+    },
+    {
+      "model": "stt-hojoai-hojo-asr-multi-v1",
+      "repository": "HojoAI/Hojo-ASR-Multi-V1",
+      "revision": "aa1d0dfc369deb3b3235572fa151acd7b498481f",
+      "metadata_url": "https://huggingface.co/api/models/HojoAI/Hojo-ASR-Multi-V1/revision/aa1d0dfc369deb3b3235572fa151acd7b498481f?blobs=true",
+      "safetensors": null,
+      "selected_files": [
+        {
+          "rfilename": "merged_full_model.safetensors",
+          "size": 11956909856,
+          "lfs": {
+            "sha256": "c046a5a26c142f5aded7331d36892293a025f579e342a27861e80509afaca88d",
+            "size": 11956909856,
+            "pointerSize": 136
+          }
+        }
+      ],
+      "index_weight_files": null,
+      "artifact_mapping_source": "https://github.com/HojoAI/Hojo-ASR/blob/ba2fbb658c5ccfcec858044de9ff717dd4ebd06f/hojo_asr/hf_hub_loader.py"
+    }
+  ]
+}

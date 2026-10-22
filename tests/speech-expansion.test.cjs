@@ -221,3 +221,34 @@ test('size sorting and filters compare only their own unit and put unknowns last
    }
  }
 });
+
+test('size quantities select independent sources while retaining priority and precision',()=>{
+ const altered=structuredClone(data);
+ altered.sizes=[
+   {model:'phonon-2',parameters_million:42.9,source_id:'params-new',as_of:'2026-10-22',note:'New count'},
+   {model:'phonon-2',parameters_million:33.57,source_id:'params-preferred',selection_priority:-1,as_of:'2026-10-20',note:'Preferred count'},
+   {model:'phonon-2',download_mb:164.25,download_bytes:164250000,source_id:'download',as_of:'2026-10-21',note:'Artifact bytes'},
+   {model:'phonon-2',download_mb:1,parameters_million:1,source_id:'assumed',selection_priority:-2,status:'assumed',as_of:'2026-10-22'},
+   {model:'phonon-1',parameters_million:33.56,source_id:'other',as_of:'2026-10-22'}
+ ];
+ for (const id of ['params-new','params-preferred','download','other']) altered.sources[id]={url:`https://example.com/${id}`};
+ const selected=Speech.selectSize(altered,'phonon-2');
+ assert.equal(selected.download_mb,164.25);
+ assert.equal(selected.download_bytes,164250000);
+ assert.equal(selected.parameters_million,33.57);
+ assert.equal(selected.field_records.parameters_million.source_id,'params-preferred');
+ assert.equal(selected.field_records.download_mb.source_id,'download');
+ const html=Speech.renderSizeCells(selected,altered);
+ assert.match(html,/href="https:\/\/example.com\/download"[^>]*title="Artifact bytes"[^>]*>164.3<\/a>/);
+ assert.match(html,/href="https:\/\/example.com\/params-preferred"[^>]*title="Preferred count"[^>]*>34<\/a>/);
+ assert.doesNotMatch(html,/33.6|params-new/);
+ for (const renderer of [Speech,Matrix]) {
+   const result=renderer.build(altered,{sort:'params',min:0,missing:true,query:'Phonon-'});
+   assert.equal(result.rows[0].id,'phonon-1');
+   assert.equal(result.rows[1].id,'phonon-2');
+   assert.equal(result.rows[1].size.parameters_million,33.57);
+   const filtered=renderer.build(altered,{maxParams:33.56,min:0,missing:true,query:'Phonon-'});
+   assert.deepEqual(filtered.rows.map(row=>row.id),['phonon-1']);
+ }
+ assert.equal(altered.sizes[1].parameters_million,33.57);
+});

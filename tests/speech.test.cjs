@@ -92,14 +92,14 @@ test('adding noise/accent columns and filtering models cannot change the fixed s
 });
 
 test('size budgets use observed download MB, leaving parameters, estimates and RAM distinct', () => {
-  assert.deepEqual(Speech.build(data, {maxDownload:200}).rows.map(row => row.id), ['phonon-2']);
+  assert.deepEqual(Speech.build(data, {maxDownload:200}).rows.map(row => row.id), ['phonon-2','niagara-9m-batch-en']);
   assert.deepEqual(Speech.build(data, {test:launch, maxDownload:200}).rows.map(row => row.id), ['phonon-2','parakeet-redux']);
   assert.equal(Speech.selectSize(data, 'niagara-9m-batch-en').parameters_million, 9);
-  assert.equal(Speech.selectSize(data, 'niagara-9m-batch-en').download_mb, undefined);
-  assert.equal(Speech.selectSize(data, 'voxtral-mini-4b-realtime-2602'), null);
+  assert.equal(Speech.selectSize(data, 'niagara-9m-batch-en').download_mb, 139.58092);
+  assert.equal(Speech.selectSize(data, 'voxtral-mini-4b-realtime-2602').parameters_million, 4429.67936);
   const altered = structuredClone(data);
   altered.sizes.push({model:'qwen3-asr-0-6b-hf', download_mb:1, status:'assumed', as_of:'2026-10-19'});
-  assert.equal(Speech.selectSize(altered, 'qwen3-asr-0-6b-hf'), null);
+  assert.equal(Speech.selectSize(altered, 'qwen3-asr-0-6b-hf').download_mb, 1564.928088);
   assert.equal(row(Speech.build(altered, {maxDownload:200}), 'qwen3-asr-0-6b-hf'), undefined);
 });
 
