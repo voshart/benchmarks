@@ -91,7 +91,7 @@
     return ['download_mb','parameters_million'].map(field => {
       const value = size?.[field];
       const record = size?.field_records?.[field] || size;
-      const label = finite(value) ? value.toLocaleString('en-US',{maximumFractionDigits:field === 'parameters_million' ? 0 : 1}) : '—';
+      const label = finite(value) ? value.toLocaleString('en-US',{maximumFractionDigits:0}) : '—';
       return `<td>${finite(value) ? link(data.sources[record.source_id], label, record.note) : label}</td>`;
     }).join('');
   }

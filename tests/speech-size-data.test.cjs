@@ -56,3 +56,30 @@ test('Niagara CPU exports and Omni v2 checkpoints retain their own measured byte
    assert.equal(size.parameters_million,item.parameters/1e6);
  }
 });
+
+test('download MB renders as whole numbers in server and browser without changing precise data',()=>{
+ const vm=require('node:vm');
+ const context={};
+ vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech.js'),'utf8'),context);
+ const size={download_mb:1234.56789,parameters_million:9.8,source_id:'size-source',note:'Exact artifact: 1234.56789 MB'};
+ const sourceData={sources:{'size-source':{url:'https://example.com/artifact'}}};
+ for(const api of [Speech,context.BenchmarkSpeech]) {
+  const html=api.renderSizeCells(size,sourceData);
+  assert.match(html,/>1,235<\/a>/);
+  assert.match(html,/>10<\/a>/);
+  assert.match(html,/Exact artifact: 1234.56789 MB/);
+  assert.equal(size.download_mb,1234.56789);
+  assert.match(api.renderSizeCells(null,sourceData),/^<td>—<\/td><td>—<\/td>$/);
+ }
+ const Matrix=require('../src/assets/js/speech-matrix.js');
+ const model='stt-facebook-omniasr-llm-7b-v2';
+ const precise=Speech.selectSize(data,model).download_mb;
+ assert.notEqual(precise,Math.round(precise));
+ for(const api of [Speech,Matrix]) {
+  assert.ok(!api.build(data,{min:0,maxDownload:Math.floor(precise)}).rows.some(row=>row.id===model));
+  assert.ok(api.build(data,{min:0,maxDownload:Math.ceil(precise)}).rows.some(row=>row.id===model));
+  const sorted=api.build(data,{min:0,sort:'download'}).rows.filter(row=>Number.isFinite(row.size?.download_mb));
+  for(let i=1;i<sorted.length;i++) assert.ok(sorted[i-1].size.download_mb<=sorted[i].size.download_mb);
+ }
+ assert.equal(Speech.selectSize(data,model).download_mb,precise);
+});

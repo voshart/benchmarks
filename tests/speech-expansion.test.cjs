@@ -239,7 +239,7 @@ test('size quantities select independent sources while retaining priority and pr
  assert.equal(selected.field_records.parameters_million.source_id,'params-preferred');
  assert.equal(selected.field_records.download_mb.source_id,'download');
  const html=Speech.renderSizeCells(selected,altered);
- assert.match(html,/href="https:\/\/example.com\/download"[^>]*title="Artifact bytes"[^>]*>164.3<\/a>/);
+ assert.match(html,/href="https:\/\/example.com\/download"[^>]*title="Artifact bytes"[^>]*>164<\/a>/);
  assert.match(html,/href="https:\/\/example.com\/params-preferred"[^>]*title="Preferred count"[^>]*>34<\/a>/);
  assert.doesNotMatch(html,/33.6|params-new/);
  for (const renderer of [Speech,Matrix]) {
