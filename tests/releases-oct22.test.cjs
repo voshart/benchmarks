@@ -16,6 +16,8 @@ test('October release audit adds bounded identities without mixing task catalogs
   const m=data.models.find(x=>x.id===id);assert.ok(m,id);assert.ok(data.sources[m.source_id]);assert.ok(!other.models.some(x=>x.id===id));
  }
  assert.ok(stt.config.accuracy_tests.includes('ibm-granite-plus-v2610-author-2026-10'));
+ assert.equal(stt.accuracyTests.find(t=>t.id==='ibm-granite-plus-v2610-author-2026-10').summary_label,'LibriSpeech clean');
+ assert.match(fs.readFileSync('src/stt/index.njk','utf8'),/test.summary_label/);
  assert.equal(stt.config.snapshot_date,'2026-10-22');assert.equal(ocr.config.snapshot_date,'2026-10-22');
 });
 

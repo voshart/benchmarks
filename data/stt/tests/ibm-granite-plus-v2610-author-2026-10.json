@@ -1,7 +1,7 @@
 {
   "id": "ibm-granite-plus-v2610-author-2026-10",
   "label": "IBM Plus v2610 · author panel (headline: LibriSpeech clean)",
-  "short": "Granite Plus · author9sets",
+  "short": "Granite Plus · author panel",
   "task": "transcription",
   "family": "open-asr-english",
   "core": false,
@@ -147,5 +147,6 @@
   ],
   "note": "IBM author-reported nine-set evaluation of v2610. Exact AA chunk/session protocol is not established; kept separate from the matched core panel. Default shows LibriSpeech test-clean; no invented nine-set average.",
   "mean_metrics": [],
-  "summary_metric": "ls_clean"
+  "summary_metric": "ls_clean",
+  "summary_label": "LibriSpeech clean"
 }

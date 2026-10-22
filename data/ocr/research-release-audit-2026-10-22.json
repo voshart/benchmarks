@@ -14,7 +14,7 @@
   "scope": "Official source leaderboards and selected task-specific author releases; not a claim to exhaustively enumerate every fine-tune. Existing comparable ranking policy preserved.",
   "covered": {
     "specialists": {
-      "scope": "Read-only author release audit; no repository edits or benchmark execution. Three missing specialists selected; no general-VLM expansion.",
+      "scope": "Primary author release cards and source leaderboards for OCR-specific models; existing general-VLM entries checked, without a full new general-VLM sweep.",
       "covered_existing_families": [
         "PaddleOCR-VL1.6",
         "DeepSeek-OCR2",
@@ -29,8 +29,8 @@
       ],
       "exclusions": [
         "No newer releases found for audited major specialist families; updated timestamps alone do not establish new generations.",
-        "PP-OCRv6 and SarvamVision2.1 delegated to other researcher, not duplicated here.",
-        "TyphoonOCR1.5-2B is an older omitted language-specialist but excluded from bounded three-model refresh; no core score validated.",
+        "PP-OCRv6 and Sarvam Vision 2.1 are included through the regional release review.",
+        "TyphoonOCR1.5-2B is an older language-specialist omission; no comparable core score was validated in this audit.",
         "Nanonets-OCR3 exists in registry, but official nanonets Hub inventory checked only exposesOCR-s/OCR2 variants; no newly invented successor added.",
         "Qwen3.5-OCR appears as comparator in Ovis card; exact official checkpoint identity not verified, do not add from name alone.",
         "No private In-house KIE scores or invented aggregate metrics imported."
