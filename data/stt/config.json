@@ -17,7 +17,8 @@
     "handy-librispeech-clean",
     "moonshine-v2-paper",
     "phonon-2-launch-english",
-    "moonshine-v1-paper"
+    "moonshine-v1-paper",
+    "ibm-granite-plus-v2610-author-2026-10"
   ],
   "focus_model": "phonon-2",
   "ranking": "speech-distinct-corpora-v1",

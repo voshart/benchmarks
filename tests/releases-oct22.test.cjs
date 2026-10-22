@@ -15,6 +15,7 @@ test('October release audit adds bounded identities without mixing task catalogs
  for(const [data,audit,other] of [[stt,speechAudit,ocr],[ocr,ocrAudit,stt]]) for(const id of audit.added_models){
   const m=data.models.find(x=>x.id===id);assert.ok(m,id);assert.ok(data.sources[m.source_id]);assert.ok(!other.models.some(x=>x.id===id));
  }
+ assert.ok(stt.config.accuracy_tests.includes('ibm-granite-plus-v2610-author-2026-10'));
  assert.equal(stt.config.snapshot_date,'2026-10-22');assert.equal(ocr.config.snapshot_date,'2026-10-22');
 });
 
