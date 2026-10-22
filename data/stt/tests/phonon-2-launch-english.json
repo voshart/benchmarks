@@ -2,6 +2,7 @@
   "id": "phonon-2-launch-english",
   "label": "Fermion launch comparison · version unspecified",
   "task": "transcription",
+  "direction": "lower",
   "family": "open-asr-english",
   "core": false,
   "source": "fermion-phonon-2-launch",

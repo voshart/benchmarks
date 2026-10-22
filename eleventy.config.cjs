@@ -1,4 +1,6 @@
 module.exports=function(config){
+ const fs=require('node:fs'),crypto=require('node:crypto');
+ config.addFilter('assetUrl',url=>url+'?v='+crypto.createHash('sha256').update(fs.readFileSync('src'+url)).digest('hex').slice(0,12));
  config.addPassthroughCopy({'src/assets':'assets'});
  const rankUI=require('./src/assets/js/rank-ui.js');
  const speech=require('./src/assets/js/speech.js');

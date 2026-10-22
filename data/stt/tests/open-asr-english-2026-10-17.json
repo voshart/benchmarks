@@ -2,6 +2,7 @@
   "id": "open-asr-english-2026-10-17",
   "label": "Open ASR · October 17, 2026",
   "task": "transcription",
+  "direction": "lower",
   "family": "open-asr-english",
   "core": true,
   "source": "open-asr-2026-10-17",

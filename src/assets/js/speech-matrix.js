@@ -108,7 +108,7 @@
           ...(observation.provisional_reasons || [])].filter(Boolean).join(' · ');
         return `<td class="score" style="--shade:${Math.max(0,Math.min(30,shade)).toFixed(1)}%">${link(data.sources[observation.source_id],observation.value.toFixed(2),tooltip)}${Rank.qualification(observation) ? '<sup title="Qualified evidence; see source and rank explanation">†</sup>' : ''}</td>`;
       }).join('');
-      return `<tr><th scope="row">${link(data.sources[row.model.source_id],row.name,modelNote)}</th><td class="index">${RankUI.renderRank(rankRow,data.sources)}</td>${cells}`
+      return `<tr><th scope="row">${link(data.sources[row.model.source_id],row.name,modelNote)}</th><td class="index">${RankUI.renderRank(rankRow,data.sources)}<small class="rank-coverage" title="${esc((row.rankContributions || []).map(item => item.label).join(', ') || 'No contributing core families')}">${row.coreCount}/${result.coreTotal} families</small></td>${cells}`
         + Speech.renderSizeCells(row.size, data)
         + `<td class="price" title="${esc(row.priceInfo.note)}">${row.priceInfo.source_id ? link(data.sources[row.priceInfo.source_id],row.priceInfo.label) : esc(row.priceInfo.label)}</td></tr>`;
     }).join('');

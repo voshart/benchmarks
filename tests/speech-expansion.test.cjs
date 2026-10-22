@@ -252,3 +252,49 @@ test('size quantities select independent sources while retaining priority and pr
  }
  assert.equal(altered.sizes[1].parameters_million,33.57);
 });
+
+test('all transcription summary directions are explicit and validation rejects inversions',()=>{
+ for (const protocol of data.accuracyTests) {
+  assert.equal(protocol.direction,'lower',protocol.id);
+  for (const direction of [undefined,'higher']) {
+   const altered=structuredClone(data);
+   altered.tests.find(test=>test.id===protocol.id).direction=direction;
+   assert.throws(()=>validateSTT(altered),/speech transcription summaries must rank lower error as better/);
+  }
+ }
+});
+
+test('every core speech percentile rewards lower WER, not higher WER',()=>{
+ const prepared=Matrix.rankingData(data);
+ for (const protocol of data.accuracyTests.filter(test=>test.core)) {
+  const cohort=Rank.scored(prepared,data.config.snapshot_date,protocol);
+  const percentiles=Rank.pctRanks(cohort,protocol);
+  const ordered=cohort.slice().sort((a,b)=>a.obs.value-b.obs.value);
+  assert.ok(percentiles.get(ordered[0].model.id)>percentiles.get(ordered.at(-1).model.id),protocol.id);
+  for(let i=1;i<ordered.length;i++) assert.ok(percentiles.get(ordered[i-1].model.id)>=percentiles.get(ordered[i].model.id),protocol.id);
+ }
+});
+
+test('Universal models retain their distinct baskets and expose coverage without changing policy',()=>{
+ const result=Matrix.build(data);
+ const older=getRow(result,'stt-assemblyai-universal-3-pro');
+ const newer=getRow(result,'stt-assemblyai-universal-3-5-pro');
+ assert.ok(Math.abs(newer.rank-85.11261261261261)<1e-9);
+ assert.ok(Math.abs(older.rank-85.24324324324324)<1e-9);
+ assert.deepEqual(older.rankContributions.map(item=>item.family).sort(),['coraal','multilingual']);
+ assert.deepEqual(newer.rankContributions.map(item=>item.family).sort(),['multilingual','open-asr-english']);
+ assert.match(Matrix.renderRows({...result,rows:[older,newer]},data),/2\/3 families/);
+ assert.match(fs.readFileSync('src/stt/index.njk','utf8'),/indices from different benchmark families are not directly comparable/);
+});
+
+test('speech assets have content-derived versions and interactive data is revalidated',()=>{
+ const filters={};
+ require('../eleventy.config.cjs')({addFilter:(name,fn)=>filters[name]=fn,addPassthroughCopy(){},addWatchTarget(){}});
+ const crypto=require('node:crypto');
+ for (const path of ['/assets/css/benchmark.css','/assets/js/ranking.js','/assets/js/rank-ui.js','/assets/js/speech.js','/assets/js/speech-matrix.js','/assets/js/speech-page.js']) {
+  const hash=crypto.createHash('sha256').update(fs.readFileSync('src'+path)).digest('hex').slice(0,12);
+  assert.equal(filters.assetUrl(path),path+'?v='+hash);
+  assert.ok(fs.readFileSync('src/stt/index.njk','utf8').includes(`{{ "${path}" | assetUrl }}`));
+ }
+ assert.match(fs.readFileSync('src/assets/js/speech-page.js','utf8'),/fetch\('\/stt\/data.json',\{cache:'no-cache'\}\)/);
+});

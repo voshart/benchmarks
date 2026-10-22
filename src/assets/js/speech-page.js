@@ -16,6 +16,7 @@
     $('historyDate').textContent = cutoff;
     const protocol = Boolean(protocolViews[view]);
     controls.min.hidden = protocol;
+    $('speechComparability').hidden = protocol;
     $('speechProtocolControls').hidden = !protocol;
     const options = {cutoff,view,test:controls.test.value,query:controls.query.value,sort:controls.sort.value,
       maxDownload:controls.maxDownload.value,maxParams:controls.maxParams.value,access:controls.access.value,min:controls.min.value,
@@ -71,7 +72,7 @@
     const root=document.documentElement; root.dataset.theme=root.dataset.theme === 'dark' ? 'light' : 'dark';
     try {localStorage.setItem('bench-theme',root.dataset.theme);} catch (_) {}
   });
-  fetch('/stt/data.json').then(response => {if (!response.ok) throw Error('HTTP '+response.status);return response.json();})
+  fetch('/stt/data.json',{cache:'no-cache'}).then(response => {if (!response.ok) throw Error('HTTP '+response.status);return response.json();})
     .then(result => {data=result;render();}).catch(error => {
       $('speechStatus').textContent='Static snapshot available · interactive filters unavailable';
       for (const control of Object.values(controls)) control.disabled=true;

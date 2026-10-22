@@ -6,7 +6,7 @@ permalink: /stt/index.html
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ stt.config.title }}</title>
 <meta name="description" content="Compare speech-to-text accuracy, model downloads, parameter counts and API rates.">
-<link rel="stylesheet" href="/assets/css/benchmark.css">
+<link rel="stylesheet" href="{{ "/assets/css/benchmark.css" | assetUrl }}">
 <script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('bench-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})();</script>
 </head><body><main>
 <header class="hero"><div><small class="eyebrow"><a href="/">Voshart / Benchmarks</a> · <a href="/ocr/">OCR</a></small><h1>{{ stt.config.title }}</h1><p>{{ stt.config.description }}</p></div><button class="quiet" id="themeToggle" type="button" aria-label="Toggle light and dark mode">Theme</button></header>
@@ -32,7 +32,9 @@ permalink: /stt/index.html
 <label><input type="checkbox" id="speechMissing"> Include models without a matched result</label><label><input type="checkbox" id="speechExtra"> Additional datasets / languages</label>
 </div>
 <details class="comparison-note"><summary>About this comparison</summary><p class="key" id="speechProtocolNote">Rank uses distinct English short-form, CORAAL and five-language FLEURS families. WER columns are lower-is-better; the percentile index is higher-is-better. Two mature families permit a provisional index.</p></details>
+<p class="key" id="speechComparability">Coverage differs: indices from different benchmark families are not directly comparable. Compare shared WER columns.</p>
 <p class="key" id="speechStatus" role="status">{{ stt.initial.rows.length }} models · {{ stt.initial.matureCount }} mature core families · default coverage: 2+ primary families</p>
+<p class="key">Scroll the table sideways for download size, parameters and pricing.</p>
 <div class="table-scroll"><table><thead><tr id="speechHead">{{ stt.initial | speechMatrixHead | safe }}</tr></thead><tbody id="speechBody">{{ stt.initial | speechMatrixRows(stt) | safe }}</tbody></table></div>
 <p class="key">Download is in MB; parameters are rounded to whole millions (M). Neither is runtime RAM. — means no matched data; size filters exclude unknowns.<br>◊ provisional index (click for details) · † qualified evidence / current service rate.</p>
 <noscript><p>The current matrix and source documentation are available without JavaScript. JavaScript enables release replay, detailed protocol views and filters.</p></noscript>
@@ -71,4 +73,4 @@ permalink: /stt/index.html
 <div class="source-grid">{% for id, source in stt.sources %}<p id="source-{{ id }}"><a href="{{ source.url }}" target="_blank" rel="noreferrer">{{ source.title }}</a><br><small>Publication: {{ source.publication_operator }} · execution: {{ source.measurement_operator }} · checked {{ source.verified_on }}. {{ source.note }}</small></p>{% endfor %}</div>
 </details>
 <footer>Evidence checked {{ stt.config.snapshot_date }} · {{ stt.counts.models }} configurations · <a href="/ocr/">OCR evidence benchmark</a></footer>
-</main><script src="/assets/js/ranking.js"></script><script src="/assets/js/rank-ui.js"></script><script src="/assets/js/speech.js?v=2c6d8f4006af"></script><script src="/assets/js/speech-matrix.js"></script><script src="/assets/js/speech-page.js"></script></body></html>
+</main><script src="{{ "/assets/js/ranking.js" | assetUrl }}"></script><script src="{{ "/assets/js/rank-ui.js" | assetUrl }}"></script><script src="{{ "/assets/js/speech.js" | assetUrl }}"></script><script src="{{ "/assets/js/speech-matrix.js" | assetUrl }}"></script><script src="{{ "/assets/js/speech-page.js" | assetUrl }}"></script></body></html>
