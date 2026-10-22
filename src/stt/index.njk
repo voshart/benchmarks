@@ -25,7 +25,7 @@ permalink: /stt/index.html
 
 
 </details>
-<div class="speech-summary"><p class="key" id="speechStatus" role="status">{{ stt.protocolInitial.benchmarkCount }} ranked · best accuracy first</p><button type="button" class="quiet" id="speechReset">Reset</button></div>
+<div class="speech-summary"><p class="key" id="speechStatus" role="status">{{ stt.protocolInitial.benchmarkCount }} ranked · best accuracy first · {{ stt.protocolInitial.speedCount }} speed results · {{ stt.protocolInitial.priceCount }} USD rates</p><button type="button" class="quiet" id="speechReset">Reset</button></div>
 <p class="speech-context" id="speechSpeedNote">Speed: M5, 20 dictations, vendor-run. Price: published USD/audio-hour; mode and tier in Details.</p>
 <section id="speechMatrixPanel" aria-label="Speech accuracy leaderboard">
 <div class="table-scroll"><table id="speechTable" class="speech-table compact"><thead><tr id="speechHead">{{ stt.protocolInitial | speechHead | safe }}</tr></thead><tbody id="speechBody">{{ stt.protocolInitial | speechRows(stt) | safe }}</tbody></table></div>

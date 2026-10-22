@@ -183,7 +183,7 @@ test('speech UI switches its single benchmark selector and applies a download bu
   vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech-page.js'), 'utf8'), context);
   await new Promise(resolve => setImmediate(resolve));
   assert.match(element('speechStatus').textContent, /64 ranked/);
-  assert.equal((element('speechHead').innerHTML.match(/<th /g)||[]).length,6);
+  assert.equal((element('speechHead').innerHTML.match(/<th /g)||[]).length,5);
   assert.match(element('speechHead').innerHTML,/Rank/);
   assert.match(element('speechHead').innerHTML, /Error %/);
   assert.match(element('speechBody').innerHTML, /e85ed601d17ab0e008721a19fc9cba36b4ee9c9c/);

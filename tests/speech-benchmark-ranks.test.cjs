@@ -177,13 +177,13 @@ test('server template starts in English accuracy, including without JavaScript',
  assert.doesNotMatch(template,/id="speechMissing"/);
 });
 
-test('compact leaderboard preserves ranks and evidence with only six visible columns',()=>{
+test('compact leaderboard preserves ranks and evidence with only five visible columns',()=>{
  const compact=Speech.build(data,{compact:true});
  const full=Speech.build(data);
  assert.deepEqual(compact.rows.map(row=>[row.id,row.benchmarkRank,row.benchmarkValue]),full.rows.map(row=>[row.id,row.benchmarkRank,row.benchmarkValue]));
  assert.equal(compact.columns.length,0);
  const head=Speech.renderHead(compact),body=Speech.renderRows(compact,data);
- assert.equal((head.match(/<th /g)||[]).length,6);
+ assert.equal((head.match(/<th /g)||[]).length,5);
  assert.match(head,/data-sort-key="rank"/);
  assert.ok(head.indexOf('data-sort-key="rank"')<head.indexOf('data-sort-key="name"'));
  assert.match(body,/LibriSpeech test.clean/);
@@ -222,7 +222,7 @@ test('main numeric headers sort in both directions with unknowns last and fixed 
    previous=current;
   }
   const head=Speech.renderHead(result);
-  assert.equal((head.match(/<th /g)||[]).length,6);
+  assert.equal((head.match(/<th /g)||[]).length,5);
   assert.match(head,new RegExp('aria-sort="'+(sortDirection==='asc'?'ascending':'descending')+'"'));
  }
  for(const sortDirection of ['asc','desc']) {

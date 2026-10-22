@@ -134,14 +134,14 @@
       return (finite(av) ? direction*(av-bv) : 0) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id);
     };
     rows.sort(compare);unscoredRows.sort(compare);
-    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,compact:Boolean(options.compact),benchmarkCount:cohort.length,sort,sortDirection,speedLabel,speedNote};
+    return {test, columns, rows, unscoredRows, mode:'protocol',rankMetric,compact:Boolean(options.compact),benchmarkCount:cohort.length,sort,sortDirection,speedLabel,speedNote,speedCount:rows.filter(row=>finite(row.benchmarkValue)&&finite(row.speed?.rtfx)).length,priceCount:rows.filter(row=>finite(row.benchmarkValue)&&row.price?.currency==='USD'&&row.price?.unit==='currency_per_audio_hour').length};
   }
 
   function renderHead(result) {
     const compactMetric=result.rankMetric || result.test.metrics.find(metric=>metric.id === (result.test.summary_metric || result.test.published_mean_metric));
     if(result.compact) {
-      const header=(key,label,title='')=>`<th scope="col" aria-sort="${result.sort===key ? (result.sortDirection==='desc' ? 'descending' : 'ascending') : 'none'}"><button type="button" class="column-sort" data-sort-key="${key}" title="${esc(title || 'Sort by '+label)}">${esc(label)}${result.sort===key ? (result.sortDirection==='desc' ? ' ↓' : ' ↑') : ' ↕'}</button></th>`;
-      return header('rank','Rank','Quality rank; unaffected by metadata sorting')+header('name','Model')+header('score',compactMetric?.unit==='oiwer_percent' ? 'OI-WER %' : 'Error %','Lower error is better')+header('speed',result.speedLabel,result.speedNote+' Higher is faster.')+header('price','$/audio hr','Verified USD audio-hour tariff only. Local compute is not free; unlike token/currency rates are not numerically compared.')+'<th scope="col">Details</th>';
+      const header=(key,label,title='',narrow=label)=>`<th scope="col" aria-sort="${result.sort===key ? (result.sortDirection==='desc' ? 'descending' : 'ascending') : 'none'}"><button type="button" class="column-sort" data-sort-key="${key}" title="${esc(title || 'Sort by '+label)}"><span class="header-label-wide">${esc(label)}</span><span class="header-label-narrow">${esc(narrow)}</span>${result.sort===key ? (result.sortDirection==='desc' ? ' ↓' : ' ↑') : ' ↕'}</button></th>`;
+      return header('rank','Rank','Quality rank; unaffected by metadata sorting')+header('name','Model')+header('score',compactMetric?.unit==='oiwer_percent' ? 'OI-WER %' : 'Error %','Lower error is better')+header('speed',result.speedLabel,result.speedNote+' Higher is faster.',result.speedLabel.replace(' speed',''))+header('price','$/audio hr','Verified USD audio-hour tariff only. Local compute is not free; unlike token/currency rates are not numerically compared.','$/hr');
     }
     return (result.compact ? '<th scope="col">Rank</th><th scope="col">Model</th><th scope="col">' : '<th scope="col">Model</th><th scope="col">Accuracy rank</th><th scope="col">')
       + (result.compact ? (compactMetric?.unit === 'oiwer_percent' ? 'OI-WER % ↓' : 'WER % ↓') : result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
@@ -152,7 +152,7 @@
 
   function renderRows(result, data, unscored=false) {
     const rankedRows=unscored ? result.unscoredRows : result.rows.filter(row=>finite(row.benchmarkValue));
-    if (!rankedRows.length) return `<tr><td colspan="${result.columns.length + 6}">No models match these filters.</td></tr>`;
+    if (!rankedRows.length) return `<tr><td colspan="${result.columns.length + (result.compact ? 5 : 6)}">No models match these filters.</td></tr>`;
     return rankedRows.map(row => {
       const source = data.sources[row.provenance?.source_id];
       const infoId = 'speech-evidence-' + result.test.id + '-' + row.id;
@@ -186,12 +186,13 @@
           record.note, alternatives.length ? 'Other observations: ' + alternatives.join('; ') : ''].filter(Boolean).join(' · ');
         return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
       }).join('');
-      const modelCell=`<th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}${result.compact ? `<small class="model-vendor">${esc(row.model.organization)}</small>` : ''}</th>`;
+      const detailsButton=`<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">Details</button>`;
+      const modelCell=`<th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}${result.compact ? `<div class="model-subline"><small class="model-vendor">${esc(row.model.organization)}</small>${detailsButton}</div>${details}` : ''}</th>`;
       const rankCell=`<td class="index" title="${row.benchmarkRank == null ? 'No matched accuracy rank' : 'Rank '+row.benchmarkRank+' of '+result.benchmarkCount+' configurations on this benchmark before filters; ties share a rank'}">${row.benchmarkRank == null ? '—' : result.compact ? row.benchmarkRank : '#'+row.benchmarkRank+' / '+result.benchmarkCount}</td>`;
       return '<tr>'+(result.compact ? rankCell+modelCell : modelCell+rankCell)
         + `<td class="index" title="${esc(meanTitle)}">${finite(row.benchmarkValue) ? row.benchmarkValue.toFixed(2) : '—'}</td>`
         + (result.compact ? `<td title="${esc(result.speedNote)}">${row.speed ? link(data.sources[row.speed.source_id],row.speed.rtfx.toLocaleString('en-US',{maximumFractionDigits:2})+'×',row.speed.runtime) : '—'}</td><td>${row.price?.currency==='USD' && row.price?.unit==='currency_per_audio_hour' ? link(data.sources[row.price.source_id],'$'+row.price.amount.toLocaleString('en-US',{maximumFractionDigits:4}),[row.price.mode,row.price.tier,row.price.as_of,row.price.note].join(' · ')) : row.model.access==='open' ? '<span title="Self-hosted compute cost varies; not free">Local</span>' : row.price ? esc(row.price.currency)+' rate' : (data.tokenPricing || []).some(record=>record.model===row.id) ? 'Token rate' : '—'}</td>` : renderSizeCells(row.size, data)) + cells
-        + `<td>${result.compact ? '' : esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">${result.compact ? 'Details' : '†'}</button>${details}</td></tr>`;
+        + (result.compact ? '' : `<td>${result.compact ? '' : esc(evidenceLabel(row.provenance))}<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" title="${esc(source?.note || modelNote)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">${result.compact ? 'Details' : '†'}</button>${details}</td>`)+'</tr>';
     }).join('');
   }
 

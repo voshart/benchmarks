@@ -21,7 +21,7 @@
     $('speechProtocolNote').textContent=result.test.note;
     $('speechSpeedNote').textContent=(result.speedLabel.startsWith('M4') ? 'Speed: M4 Max, JFK clip, community-run.' : 'Speed: M5, 20 dictations, vendor-run.')+' Price: published USD/audio-hour; mode and tier in Details.';
     const labels={rank:'quality rank',score:'error',name:'model name',speed:result.speedLabel,price:'USD/audio hour'};
-    $('speechStatus').textContent=`${result.rows.filter(row=>row.benchmarkRank).length} ranked · ${sort==='score' && sortDirection==='asc' ? 'best accuracy first' : labels[sort]+' '+(sortDirection==='asc' ? '↑' : '↓')}`;
+    $('speechStatus').textContent=`${result.rows.filter(row=>row.benchmarkRank).length} ranked · ${sort==='score' && sortDirection==='asc' ? 'best accuracy first' : labels[sort]+' '+(sortDirection==='asc' ? '↑' : '↓')} · ${result.speedCount} speed results · ${result.priceCount} USD rates`;
     $('historyDate').textContent=cutoff;
     const undated=data.models.filter(model=>!model.release_date).length;
     $('historyStatus').textContent=cutoff===end ? `${undated} undated configurations included only in the current snapshot` : `${undated} undated configurations excluded · availability cutoff, not evaluation date`;
