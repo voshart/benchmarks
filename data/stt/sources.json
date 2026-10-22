@@ -3161,5 +3161,45 @@
     "revision": "arXiv:2410.15608v2",
     "quote": "We use greedy decoding",
     "note": "Section 4 and Tables 2–3 identify original Moonshine Base/Tiny versus Whisper base.en/tiny.en, using greedy decoding with a six-output-token-per-second heuristic. Eight dataset WERs and their published averages are preserved. The paper does not pin exact model commits or dataset/reference revisions; these are a separate secondary protocol, not the current cleaned English panel. Moonshine results are author evidence and Whisper results are competitor evidence."
+  },
+  "elevenlabs-scribe-v2-pricing": {
+    "kind": "vendor",
+    "publication_operator": "vendor",
+    "measurement_operator": "not_applicable",
+    "verified_on": "2026-10-22",
+    "title": "ElevenLabs Scribe v2 official API pricing",
+    "url": "https://elevenlabs.io/pricing/api?price.section=speech_to_text",
+    "quote": "Scribe v2 Speech to Text $0.22 Price per hour",
+    "note": "Pay-as-you-go Scribe v2 batch transcription. Realtime is a separate model and price; optional entity detection and keyterm prompting charges excluded. Does not apply to Zoom Scribe configurations."
+  },
+  "openai-gpt-transcribe-pricing": {
+    "kind": "vendor",
+    "publication_operator": "vendor",
+    "measurement_operator": "not_applicable",
+    "verified_on": "2026-10-22",
+    "title": "OpenAI GPT-Transcribe model pricing",
+    "url": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+    "quote": "Transcription audio duration Per minute Price $0.0045",
+    "note": "Exact gpt-transcribe model card specifies duration-based billing. USD 0.0045 per audio minute becomes USD 0.27 per audio hour; no audio-token conversion. Not the older gpt-4o-transcribe token tariff or Whisper service."
+  },
+  "modulate-multilingual-pricing": {
+    "kind": "vendor",
+    "publication_operator": "vendor",
+    "measurement_operator": "not_applicable",
+    "verified_on": "2026-10-22",
+    "title": "Modulate official usage-based API pricing",
+    "url": "https://www.modulate.ai/api-pricing",
+    "quote": "Multilingual Speech-to-Text Leading multilingual transcription $0.03 $0.06",
+    "note": "Self-serve pay-as-you-go rates per audio hour: Multilingual Speech-to-Text batch USD 0.03, streaming USD 0.06. English Fast and Multilingual Fast are separate products. Optional emotion, accent and PII/PHI tagging charges excluded."
+  },
+  "smallest-pulse-pricing": {
+    "kind": "vendor",
+    "publication_operator": "vendor",
+    "measurement_operator": "not_applicable",
+    "verified_on": "2026-10-22",
+    "title": "Smallest AI Pulse official model pricing",
+    "url": "https://smallest.ai/pricing/models",
+    "quote": "Pulse (Pre-Recorded) ~$0.003/minute Pulse (Realtime) ~$0.004/minute",
+    "note": "Pay-as-you-go table explicitly marks these Pulse rates approximate. Multiply minutes by 60 while preserving the approximation; Pulse Pro is a separate product. Negotiated enterprise and add-on charges excluded."
   }
 }

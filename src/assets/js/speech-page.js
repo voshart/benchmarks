@@ -17,7 +17,7 @@
     $('speechBody').innerHTML=BenchmarkSpeech.renderRows(result,data);
     $('speechUnscoredList').innerHTML=BenchmarkSpeech.renderUnscored(result,data);
     $('speechUnscoredSummary').textContent=`${result.unscoredRows.length} configurations without a matched accuracy score`;
-    $('speechBenchmarkNote').textContent='Lower error is better. Compare speed and cost to suit your use.';
+    $('speechBenchmarkNote').textContent='Lower error and price. Higher speed.';
     $('speechProtocolNote').textContent=result.test.note;
     $('speechSpeedNote').textContent=(result.speedLabel.startsWith('M4') ? 'Speed: M4 Max, JFK clip, community-run.' : 'Speed: M5, 20 dictations, vendor-run.')+' Price: published USD/audio-hour; mode and tier in Details.';
     const labels={rank:'quality rank',score:'error',name:'model name',speed:result.speedLabel,price:'USD/audio hour'};
