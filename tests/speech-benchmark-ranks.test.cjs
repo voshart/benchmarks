@@ -248,21 +248,21 @@ test('compact Details rounds size labels only and preserves precise size metadat
  assert.equal(row.size.parameters_million,9.8);
 });
 
-test('M4 speed spans distinguish twenty exact-upstream English proxies from measured Q8 configurations',()=>{
+test('M4 speed spans distinguish exact-upstream and reviewed-lineage English proxies from measured Q8 configurations',()=>{
  const english=Speech.build(data,{compact:true});
  assert.equal(english.speedLabel,'M4 speed ×');
  const proxies=english.rows.filter(row=>row.deployment?.speed);
- assert.equal(proxies.length,20);
+ assert.equal(proxies.length,23);
  for(const row of proxies) {
   const speed=row.deployment.speed;
   assert.equal(speed.proxy,true);assert.equal(speed.status,'assumed');
   const conversion=data.models.find(model=>model.id===speed.model);
-  assert.equal(conversion.upstream_hub_id.toLowerCase(),row.model.hub_id.toLowerCase());
+  assert.equal(conversion.upstream_hub_id.toLowerCase(),(speed.lineage?.upstream_hub_id || row.model.hub_id).toLowerCase());
   assert.equal(speed.hardware,'m4-max');assert.equal(speed.batch_size,1);
   assert.equal(speed.runtime,'transcribe.cpp metal / Q8_0');
   assert.deepEqual(speed.records.map(record=>record.sample).sort(),['dots','jfk']);
  }
- for(const id of ['qwen3-asr-0-6b-hf','qwen3-asr-1-7b-hf','stt-thestageai-thewhisper-large-v3-turbo'])
+ for(const id of ['niagara-9m-batch-en','stt-google-gemma-4-e4b-it','stt-thestageai-thewhisper-large-v3-turbo'])
   assert.equal(find(english,id)?.deployment?.speed ?? null,null,id);
  const handy=Speech.build(data,{test:'handy-fleurs-en',compact:true});
  const measured=handy.rows.filter(row=>row.deployment?.speed && !row.deployment.speed.proxy);

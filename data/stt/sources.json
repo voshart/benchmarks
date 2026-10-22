@@ -3201,5 +3201,65 @@
     "url": "https://smallest.ai/pricing/models",
     "quote": "Pulse (Pre-Recorded) ~$0.003/minute Pulse (Realtime) ~$0.004/minute",
     "note": "Pay-as-you-go table explicitly marks these Pulse rates approximate. Multiply minutes by 60 while preserving the approximation; Pulse Pro is a separate product. Negotiated enterprise and add-on charges excluded."
+  },
+  "stt-speechmatics-enhanced-price-2026-10-22": {
+    "title": "Speechmatics official model pricing and access",
+    "url": "https://www.speechmatics.com/pricing",
+    "kind": "official",
+    "publication_operator": "vendor",
+    "measurement_operator": "vendor",
+    "verified_on": "2026-10-22",
+    "quote": "Enhanced",
+    "note": "Exact identity bridge: current batch API model='enhanced'; operating_point is its deprecated compatibility field. Official pricing UI checked in cloud browser with BOTH model-training and volume discount switches OFF: Enhanced pre-recorded USD0.75/hr, real-time USD0.80/hr. Default crawler-visible USD0.38 includes training opt-in and top volume discount and must NOT be used as undiscounted PAYG. Excludes add-ons; hosted current model/service may differ from benchmark revision."
+  },
+  "stt-revai-machine-price-2026-10-22": {
+    "title": "Rev AI official model pricing and access",
+    "url": "https://www.rev.ai/pricing",
+    "kind": "official",
+    "publication_operator": "vendor",
+    "measurement_operator": "vendor",
+    "verified_on": "2026-10-22",
+    "quote": "Reverb",
+    "note": "Official transcription-options documentation explicitly maps transcriber='machine' or omitted transcriber to Reverb ASR. Current rate card lists English Reverb Transcription at USD0.20/hr, rounded up to nearest second with 15-second minimum. Non-English requests ignore this transcriber selection and have a separate tariff, so do not apply English rate to foreign-language transcription. Current service rate; benchmark endpoint revision unspecified."
+  },
+  "stt-sprag-symphony-price-2026-10-22": {
+    "title": "Sprag official model pricing and access",
+    "url": "https://sprag.ai/pricing",
+    "kind": "official",
+    "publication_operator": "vendor",
+    "measurement_operator": "vendor",
+    "verified_on": "2026-10-22",
+    "quote": "Symphony",
+    "note": "Exact symphony model supports the speech-to-text endpoint. Batch STT costs $0.09/audio-hour; WebSocket realtime adds 25% ($0.1125/hour). This is the dedicated transcription rate, not multimodal chat input/output billing. Current service price; benchmark endpoint revision unspecified."
+  },
+  "stt-google-chirp-price-2026-10-22": {
+    "title": "Google official model pricing and access",
+    "url": "https://cloud.google.com/speech-to-text/pricing",
+    "kind": "official",
+    "publication_operator": "vendor",
+    "measurement_operator": "vendor",
+    "verified_on": "2026-10-22",
+    "quote": "chirp",
+    "note": "Google explicitly includes chirp in Standard Speech-to-Text V2 pricing. Base tier $0.016/minute for first 500000 monthly minutes = $0.96/hour; no commitment discount. Requests round to seconds. Optional slower dynamic batch is separately $0.003/minute ($0.18/hour), not the selected standard rate. Current service price, benchmark configuration/version unspecified."
+  },
+  "stt-microsoft-azure-speech-07-2026-price-2026-10-22": {
+    "title": "Microsoft official model pricing and access",
+    "url": "https://azure.microsoft.com/en-us/pricing/details/speech/",
+    "kind": "official",
+    "publication_operator": "vendor",
+    "measurement_operator": "vendor",
+    "verified_on": "2026-10-22",
+    "quote": "Fast Transcription",
+    "note": "Official July 2026 Azure LLM Speech release maps to Fast Transcription; pricing footnote 9 assigns the same SKU. Current US East standard consumption price is $0.36/audio-hour, retail meter e366297b-9194-5c2f-91f9-2b6472d890b3. Promotional $0.10 SKU, free quotas and commitments excluded. Service-managed updates mean the current endpoint is not a frozen benchmark backend. Region/currency may change price."
+  },
+  "stt-meta-muse-voice-transcribe-price-2026-10-22": {
+    "title": "Meta official model pricing and access",
+    "url": "https://dev.meta.ai/models/muse-voice-transcribe",
+    "kind": "official",
+    "publication_operator": "vendor",
+    "measurement_operator": "vendor",
+    "verified_on": "2026-10-22",
+    "quote": "muse-voice-transcribe-1.0",
+    "note": "Official Muse Voice Transcribe product lists current model muse-voice-transcribe-1.0 at $3/1000 audio minutes = $0.18/audio-hour for streaming. Benchmark uses the unversioned product name; exact benchmark endpoint revision is unspecified. Current service tariff, not historical run billing."
   }
 }

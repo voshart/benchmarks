@@ -11,6 +11,25 @@
   const reference = Object.freeze({hardware:'m4-max', runtime:'transcribe.cpp metal / Q8_0', batch_size:1});
   const whisperSource = 'https://github.com/openai/whisper#available-models-and-languages';
 
+  // Reviewed format conversions only; never strip suffixes or infer family identity.
+  const reviewedLineages = {
+    'qwen/qwen3-asr-0.6b-hf': {
+      model:'qwen3-asr-0-6b-hf', upstream_hub_id:'Qwen/Qwen3-ASR-0.6B', verified_on:'2026-10-22',
+      sources:['https://huggingface.co/Qwen/Qwen3-ASR-0.6B-hf','https://github.com/huggingface/transformers/blob/main/src/transformers/models/qwen3_asr/convert_qwen3_asr_to_hf.py'],
+      note:'Official Transformers-native conversion of the original Qwen3-ASR-0.6B release. Alternate original-checkpoint Q8 deployment, not measured HF speed. Exact evaluated revision/tensor identity is unverified; precision, engine and prompts differ.'
+    },
+    'qwen/qwen3-asr-1.7b-hf': {
+      model:'qwen3-asr-1-7b-hf', upstream_hub_id:'Qwen/Qwen3-ASR-1.7B', verified_on:'2026-10-22',
+      sources:['https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf','https://github.com/huggingface/transformers/blob/main/src/transformers/models/qwen3_asr/convert_qwen3_asr_to_hf.py'],
+      note:'Official Transformers-native conversion of the original Qwen3-ASR-1.7B release. Alternate original-checkpoint Q8 deployment, not measured HF speed. Exact evaluated revision/tensor identity is unverified; precision, engine and prompts differ.'
+    },
+    'funaudiollm/fun-asr-nano-2512-hf': {
+      model:'stt-funaudiollm-fun-asr-nano-2512-hf', upstream_hub_id:'FunAudioLLM/Fun-ASR-Nano-2512', verified_on:'2026-10-22',
+      sources:['https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-2512-hf','https://github.com/huggingface/transformers/blob/main/src/transformers/models/fun_asr_nano/convert_fun_asr_nano_to_hf.py','https://github.com/handy-computer/transcribe.cpp/blob/9f102d1ab18d01c0e21f9b3465531360c888251d/docs/porting/families/funasr_nano.md'],
+      note:'Official HF conversion of Fun-ASR-Nano-2512. Both this HF export and the measured Q8 port omit auxiliary CTC inference and generate transcription through the LLM. Alternate deployment only: exact evaluated revision/tensor identity is unverified; precision, engine and prompts differ. Not an estimate for CTC timestamps or diarization.'
+    }
+  };
+
   function documentedVram(model) {
     // Exact upstream models only. Not distillations, conversions, fine-tunes,
     // hosted APIs or alternative engines whose allocation may differ.
@@ -45,13 +64,17 @@
     let speed = clipSpan(data, model);
     if (speed) speed = {...speed, status:'observed', proxy:false};
     else if (model.configuration_kind !== 'runtime_conversion' && hub(model.hub_id)) {
+      const reviewed=reviewedLineages[hub(model.hub_id)];
+      const lineage=reviewed?.model===model.id ? reviewed : null;
+      const upstream=hub(lineage?.upstream_hub_id || model.hub_id);
       const candidates = (data.models || []).filter(m => m.access === 'open' &&
-        m.configuration_kind === 'runtime_conversion' && hub(m.upstream_hub_id) === hub(model.hub_id));
+        m.configuration_kind === 'runtime_conversion' && hub(m.upstream_hub_id) === upstream);
       if (candidates.length === 1) {
         const span = clipSpan(data, candidates[0]);
         if (span) speed = {...span, status:'assumed', proxy:true,
           upstream_hub_id:candidates[0].upstream_hub_id,
           upstream_commit:candidates[0].upstream_commit || null,
+          lineage:lineage ? {...lineage,sources:lineage.sources.slice()} : null,
           note:'Alternate Q8 deployment proxy, not the accuracy-tested configuration. Two short-clip span, not a confidence interval.'};
       }
     }

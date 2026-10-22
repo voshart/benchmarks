@@ -38,7 +38,7 @@ test('same exact Q8 model is observed span, with only cost/memory assumed', () =
 test('closed API, unknown model and fuzzy HF aliases do not receive speed proxies', () => {
   assert.equal(Estimates.getDeployment(data,{...model,access:'closed'},size),null);
   assert.equal(Estimates.getDeployment(data,'absent',size),null);
-  for (const id of ['qwen3-asr-0-6b-hf','qwen3-asr-1-7b-hf','stt-funaudiollm-fun-asr-nano-2512-hf','stt-thestageai-thewhisper-large-v3-turbo']) {
+  for (const id of ['niagara-9m-batch-en','stt-google-gemma-4-e4b-it','stt-thestageai-thewhisper-large-v3-turbo']) {
     const result = Estimates.getDeployment(data,id,Speech.selectSize(data,id));
     assert.equal(result?.speed ?? null,null,id);
   }
@@ -73,5 +73,27 @@ test('browser UMD export matches CommonJS and default English proxy coverage is 
   vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech-estimates.js'),'utf8'),context);
   assert.equal(typeof context.BenchmarkSpeechEstimates.getDeployment,'function');
   const ids = data.rawRecords.filter(r => r.benchmark === 'open-asr-english-2026-10-17').map(r => r.model);
-  assert.equal(ids.filter(id => Estimates.getDeployment(data,id,Speech.selectSize(data,id))?.speed).length,20);
+  assert.equal(ids.filter(id => Estimates.getDeployment(data,id,Speech.selectSize(data,id))?.speed).length,23);
+});
+
+
+test('three reviewed HF lineages add alternate deployments, never measured HF speed',()=>{
+ const cases=[['qwen3-asr-0-6b-hf',61.54,72.46],['qwen3-asr-1-7b-hf',36.16,44.31],['stt-funaudiollm-fun-asr-nano-2512-hf',72.05,79.98]];
+ const before=JSON.stringify(data);
+ for(const [id,low,high] of cases) {
+  const m=data.models.find(m=>m.id===id),result=Estimates.getDeployment(data,m,Speech.selectSize(data,id));
+  assert.equal(result.speed.status,'assumed');assert.equal(result.speed.proxy,true);
+  assert.deepEqual([result.speed.low,result.speed.high],[low,high]);
+  assert.ok(result.speed.lineage.sources.length>=2);assert.match(result.speed.lineage.note,/unverified/);
+  assert.equal(result.cost.high,1/low);assert.equal(result.speed.records.length,2);
+  const html=Speech.renderRows({...Speech.build(data,{compact:true}),rows:Speech.build(data).rows.filter(r=>r.id===id)},data);
+  assert.match(html,/Deployment lineage/);assert.match(html,/Official model card/);
+  assert.equal(Estimates.getDeployment(data,{...m,id:'unreviewed-copy'},null),null);
+  assert.equal(Estimates.getDeployment(data,{...m,hub_id:m.hub_id+'-fine-tuned'},null),null);
+ }
+ assert.equal(JSON.stringify(data),before);
+ const noLineages=structuredClone(data);
+ for(const m of noLineages.models) if(cases.some(([id])=>id===m.id)) m.hub_id+='-unreviewed';
+ const rank=r=>r.rows.map(x=>[x.id,x.benchmarkRank,x.benchmarkValue]);
+ assert.deepEqual(rank(Speech.build(data)),rank(Speech.build(noLineages)));
 });

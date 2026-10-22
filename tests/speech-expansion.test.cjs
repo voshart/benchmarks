@@ -166,7 +166,7 @@ test('timing remains separate from accuracy and matches exact sample, engine and
 });
 
 test('price units, currencies, current endpoints and token meters cannot be substituted',()=>{
- assert.equal(data.pricing.length,15);assert.equal(data.tokenPricing.length,2);
+ assert.equal(data.pricing.length,21);assert.equal(data.tokenPricing.length,2);
  const gladia=data.pricing.find(row=>row.provider==='Gladia'&&row.mode==='async');
  assert.equal(gladia.currency,'EUR');assert.equal(gladia.amount,0.16);
  const deepgram=data.pricing.find(row=>row.provider==='Deepgram'&&row.mode==='pre-recorded'&&row.model.includes('monolingual'));

@@ -1,0 +1,204 @@
+[
+  {
+    "model": "stt-soniox-stt-async-v5",
+    "status": "token_priced",
+    "label": "Token estimate",
+    "note": "Official model list names stt-async-v5 as active async model. Pricing bills tokens, not a flat hourly tariff: async input audio USD1.50/1M tokens; input text and output text USD3.50/1M each. Provider's approximately USD0.10/audio-hour illustration assumes ~30k audio-input and ~15k output-text tokens per hour; context/translation/output change cost. Keep vendor estimate as context, not an exact duration-billed price. Current service pricing is not necessarily benchmark-date pricing.",
+    "source_urls": [
+      "https://soniox.com/docs/stt/models",
+      "https://soniox.com/pricing"
+    ],
+    "verified_on": "2026-10-22",
+    "hourly_estimate": {
+      "usd": 0.1,
+      "basis": "vendor_estimate",
+      "note": "Official model list names stt-async-v5 as active async model. Pricing bills tokens, not a flat hourly tariff: async input audio USD1.50/1M tokens; input text and output text USD3.50/1M each. Provider's approximately USD0.10/audio-hour illustration assumes ~30k audio-input and ~15k output-text tokens per hour; context/translation/output change cost. Keep vendor estimate as context, not an exact duration-billed price. Current service pricing is not necessarily benchmark-date pricing."
+    }
+  },
+  {
+    "model": "stt-speechmatics-enhanced",
+    "status": "published_price",
+    "label": "$0.75/hr \u00b7 pre-recorded PAYG",
+    "note": "Exact identity bridge: current batch API model='enhanced'; operating_point is its deprecated compatibility field. Official pricing UI checked in cloud browser with BOTH model-training and volume discount switches OFF: Enhanced pre-recorded USD0.75/hr, real-time USD0.80/hr. Default crawler-visible USD0.38 includes training opt-in and top volume discount and must NOT be used as undiscounted PAYG. Excludes add-ons; hosted current model/service may differ from benchmark revision.",
+    "source_urls": [
+      "https://www.speechmatics.com/pricing",
+      "https://docs.speechmatics.com/api-ref/batch/create-a-new-job"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-revai-machine",
+    "status": "published_price",
+    "label": "$0.20/hr \u00b7 English PAYG",
+    "note": "Official transcription-options documentation explicitly maps transcriber='machine' or omitted transcriber to Reverb ASR. Current rate card lists English Reverb Transcription at USD0.20/hr, rounded up to nearest second with 15-second minimum. Non-English requests ignore this transcriber selection and have a separate tariff, so do not apply English rate to foreign-language transcription. Current service rate; benchmark endpoint revision unspecified.",
+    "source_urls": [
+      "https://docs.rev.ai/api/asynchronous/transcribers",
+      "https://www.rev.ai/pricing"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-revai-fusion",
+    "status": "deprecated_unpriced",
+    "label": "Deprecated",
+    "note": "RevAI changelog explicitly deprecated transcriber='fusion' on 2026-08-20, to be removed in a future release; recommends default transcriber. Do not call fully retired without stronger evidence. Current public rate card omits Whisper Fusion. It still lists Whisper Large at USD0.005/min, but that is a DIFFERENT transcriber and cannot establish Fusion's current tariff. Historical third-party Fusion USD0.005/min sightings are not current primary evidence and should not become numeric current prices.",
+    "source_urls": [
+      "https://docs.rev.ai/changelog",
+      "https://www.rev.ai/pricing"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-assemblyai-universal-3-pro",
+    "status": "retired",
+    "label": "Retired",
+    "note": "Official updated migration announcement rescheduled retirement to 2026-09-02; requests explicitly pinned to universal-3-pro now return an error instead of automatic rerouting. Vendor-maintained skill confirms model removal. Historical launch USD0.21/hr is not a currently purchasable Universal-3 tariff; Universal-3.5's current USD0.21/hr must not be inherited onto this benchmark row.",
+    "source_urls": [
+      "https://www.assemblyai.com/changelog",
+      "https://github.com/AssemblyAI/assemblyai-skill/blob/main/skills/assemblyai/SKILL.md",
+      "https://www.assemblyai.com/blog/introducing-universal-3-pro"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-sprag-symphony",
+    "status": "published_price",
+    "label": "API rate",
+    "note": "Exact symphony model supports the speech-to-text endpoint. Batch STT costs $0.09/audio-hour; WebSocket realtime adds 25% ($0.1125/hour). This is the dedicated transcription rate, not multimodal chat input/output billing. Current service price; benchmark endpoint revision unspecified.",
+    "source_urls": [
+      "https://sprag.ai/pricing",
+      "https://sprag.ai/docs/stt/models"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-otterai-speech-v3-1",
+    "status": "subscription_version_unverified",
+    "label": "Subscription",
+    "note": "Otter is publicly sold, but no public tariff or model-selection bridge for benchmark speech-v3.1 was found. The API is an Enterprise feature with custom pricing, not a published per-hour rate. Product context only: Business costs $30/user/month monthly or $19.99/user/month billed annually, includes 6000 imported minutes (100 hours) monthly with no rollover, unlimited imports and a 4-hour conversation limit. At 100% import-quota utilization this is $0.30/hour monthly or $0.1999/hour annual-plan equivalent; less use costs more per hour. Unlimited live recordings are separate. These subscription equivalents are NOT API prices or proven speech-v3.1 prices; promotions/tax excluded.",
+    "source_urls": [
+      "https://otter.ai/pricing",
+      "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+      "https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results/blob/e85ed601d17ab0e008721a19fc9cba36b4ee9c9c/english_short_latest.csv"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-zoom-scribe-v1",
+    "status": "api_version_unverified",
+    "label": "API available",
+    "note": "Current Zoom standard Scribe API is publicly priced at $0.15 batch / $0.20 fast / $0.25 live per audio hour. Public endpoint model ID zoom-scribe-en; an explicit mapping to this benchmark version was not found, so these are product prices, not a verified rate for the benchmark configuration. Optional diarization and language detection each add $0.048/hour; text polishing adds $0.102/hour. Pro requires premium access.",
+    "source_urls": [
+      "https://www.zoom.com/en/products/ai-services/scribe-api/",
+      "https://developers.zoom.us/docs/ai-services/scribe/speech-understanding/"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-zoom-scribe-v2-pro",
+    "status": "api_version_unverified",
+    "label": "API available",
+    "note": "Current Zoom Pro Scribe API is publicly priced at $0.30 batch / $0.35 fast / $0.40 live per audio hour. Public endpoint model ID zoom-scribe-en-pro; an explicit mapping to this benchmark version was not found, so these are product prices, not a verified rate for the benchmark configuration. Optional diarization and language detection each add $0.048/hour; text polishing adds $0.102/hour. Pro requires premium access.",
+    "source_urls": [
+      "https://www.zoom.com/en/products/ai-services/scribe-api/",
+      "https://developers.zoom.us/docs/ai-services/scribe/speech-understanding/"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-reson8-resonant-1",
+    "status": "subscription_version_unverified",
+    "label": "Subscription",
+    "note": "Current Reson8 API pricing is public, but requests use an automatically updated pipeline without a public resonant-1/flash version selector; exact benchmark-version mapping remains unverified. Product context: Pro \u20ac20/month includes 100 batch hours; Growth \u20ac100/month includes 500. Fully used quotas equal \u20ac0.20/batch-hour. Batch overage is \u20ac0.36/hour Pro or \u20ac0.24/hour Growth. Streaming uses twice the credits. Not converted to USD and not asserted as a frozen benchmark-model tariff.",
+    "source_urls": [
+      "https://www.reson8.dev/#pricing",
+      "https://docs.reson8.dev/versioning/",
+      "https://docs.reson8.dev/api/speech-to-text/prerecorded/"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-reson8-resonant-1-flash",
+    "status": "subscription_version_unverified",
+    "label": "Subscription",
+    "note": "Current Reson8 API pricing is public, but requests use an automatically updated pipeline without a public resonant-1/flash version selector; exact benchmark-version mapping remains unverified. Product context: Pro \u20ac20/month includes 100 batch hours; Growth \u20ac100/month includes 500. Fully used quotas equal \u20ac0.20/batch-hour. Batch overage is \u20ac0.36/hour Pro or \u20ac0.24/hour Growth. Streaming uses twice the credits. Not converted to USD and not asserted as a frozen benchmark-model tariff.",
+    "source_urls": [
+      "https://www.reson8.dev/#pricing",
+      "https://docs.reson8.dev/versioning/",
+      "https://docs.reson8.dev/api/speech-to-text/prerecorded/"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-sophea-asr-k1-preview",
+    "status": "access_on_request",
+    "label": "Request access",
+    "note": "The official ASR K1 preview model page offers API access on request. No public model-specific tariff found in model page, developer documentation or author availability statement. Sophea Meet subscription pricing is a different product and is not an ASR K1 API quote.",
+    "source_urls": [
+      "https://sophea.ai/products/models",
+      "https://sophea.ai/developers",
+      "https://arxiv.org/html/2609.13498v1#S10"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-google-chirp",
+    "status": "published_price",
+    "label": "API rate",
+    "note": "Google explicitly includes chirp in Standard Speech-to-Text V2 pricing. Base tier $0.016/minute for first 500000 monthly minutes = $0.96/hour; no commitment discount. Requests round to seconds. Optional slower dynamic batch is separately $0.003/minute ($0.18/hour), not the selected standard rate. Current service price, benchmark configuration/version unspecified.",
+    "source_urls": [
+      "https://cloud.google.com/speech-to-text/pricing"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-microsoft-azure-speech-07-2026",
+    "status": "published_price",
+    "label": "API rate",
+    "note": "Official July 2026 Azure LLM Speech release maps to Fast Transcription; pricing footnote 9 assigns the same SKU. Current US East standard consumption price is $0.36/audio-hour, retail meter e366297b-9194-5c2f-91f9-2b6472d890b3. Promotional $0.10 SKU, free quotas and commitments excluded. Service-managed updates mean the current endpoint is not a frozen benchmark backend. Region/currency may change price.",
+    "source_urls": [
+      "https://devblogs.microsoft.com/foundry/announcing-azure-ai-speech-llm-2607/",
+      "https://azure.microsoft.com/en-us/pricing/details/speech/",
+      "https://prices.azure.com/api/retail/prices?$filter=armRegionName%20eq%20%27eastus%27%20and%20contains(meterName,%20%27Fast%20Transcription%27)"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-microsoft-azure-speech-06-2026",
+    "status": "api_version_unverified",
+    "label": "Version unclear",
+    "note": "Current Azure LLM Speech/Fast Transcription product price is $0.36/audio-hour (US East standard consumption), but no explicit June 2026 model mapping was found in official release notes or model announcement. Do not attach the July model tariff as verified June benchmark-version pricing. Promotional prices/free quotas excluded.",
+    "source_urls": [
+      "https://devblogs.microsoft.com/foundry/announcing-azure-ai-speech-llm-2607/",
+      "https://azure.microsoft.com/en-us/pricing/details/speech/",
+      "https://prices.azure.com/api/retail/prices?$filter=armRegionName%20eq%20%27eastus%27%20and%20contains(meterName,%20%27Fast%20Transcription%27)",
+      "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/releasenotes"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-meta-muse-voice-transcribe",
+    "status": "published_price",
+    "label": "API rate",
+    "note": "Official Muse Voice Transcribe product lists current model muse-voice-transcribe-1.0 at $3/1000 audio minutes = $0.18/audio-hour for streaming. Benchmark uses the unversioned product name; exact benchmark endpoint revision is unspecified. Current service tariff, not historical run billing.",
+    "source_urls": [
+      "https://dev.meta.ai/models/muse-voice-transcribe"
+    ],
+    "verified_on": "2026-10-22"
+  },
+  {
+    "model": "stt-gemini-gemini-3-5-transcribe",
+    "status": "token_priced",
+    "label": "Token estimate",
+    "note": "Exact gemini-3.5-transcribe is billed $2/million audio input tokens and $12/million output text tokens, not per hour. Google publishes an approximate $0.005/minute (~$0.30/hour) illustration using 25 audio tokens/sec and 175 output text tokens/minute; those assumptions calculate $0.306/hour before rounding. Actual speech/output/context changes the bill. This cell is the rounded vendor estimate, not a guaranteed flat tariff.",
+    "source_urls": [
+      "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.5-transcribe"
+    ],
+    "verified_on": "2026-10-22",
+    "hourly_estimate": {
+      "usd": 0.3,
+      "basis": "vendor_estimate",
+      "note": "Exact gemini-3.5-transcribe is billed $2/million audio input tokens and $12/million output text tokens, not per hour. Google publishes an approximate $0.005/minute (~$0.30/hour) illustration using 25 audio tokens/sec and 175 output text tokens/minute; those assumptions calculate $0.306/hour before rounding. Actual speech/output/context changes the bill. This cell is the rounded vendor estimate, not a guaranteed flat tariff."
+    }
+  }
+]
