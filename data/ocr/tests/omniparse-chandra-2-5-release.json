@@ -1,0 +1,13 @@
+{
+  "id": "omniparse-chandra-2-5-release",
+  "short": "OmniParse accurate",
+  "label": "OmniParse · Chandra2.5 release, accurate mode",
+  "source": "chandra-2-5-release",
+  "primary_metric": "accurate",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "omniparse",
+  "note": "Version-specific vendor release cohort, secondary only; not pooled into aggregate ranking."
+}

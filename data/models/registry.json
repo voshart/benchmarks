@@ -4647,5 +4647,16 @@
         "heading_teds": 62.33
       }
     ]
+  },
+  {
+    "id": "chandra-2-5-api",
+    "name": "Chandra 2.5 API",
+    "release_date": "2026-10-14",
+    "release_provenance": "verified",
+    "release_source_id": "chandra-2-5-release",
+    "access": "closed",
+    "organization": "Datalab",
+    "source_id": "chandra-2-5-release",
+    "evidence_note": "Hosted generation, not Chandra 2 open weights. OmniParse: accurate 92.7, balanced 91.6 (release cohort). olmOCR excludes headers/footers: raw85.4, own postprocessing86.9, PP3 87.4; API mode unspecified. No comparable full-set aggregate rank. Parameters and weights undisclosed. Current base Convert: fast/balanced $4, accurate $10 per1,000pages; default cost is accurate."
   }
 ]

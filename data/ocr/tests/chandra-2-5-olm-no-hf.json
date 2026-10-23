@@ -1,0 +1,13 @@
+{
+  "id": "chandra-2-5-olm-no-hf",
+  "short": "olm no H/F",
+  "label": "olmOCR · Chandra2.5 release, no headers/footers",
+  "source": "chandra-2-5-release",
+  "primary_metric": "own_postprocessing",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "olmocr",
+  "note": "Version-specific vendor release cohort, secondary only; not pooled into aggregate ranking."
+}

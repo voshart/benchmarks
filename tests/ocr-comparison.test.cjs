@@ -106,7 +106,7 @@ test('OCR ranges sort by geometric midpoint with true ties and unknowns last in 
 test('OCR real modeled evidence is visible, sourced and isolated from accuracy',()=>{
  const data=loadOCR(),result=build(data,data.config.snapshot_date,{min:0});const d=OCR.deployment(data,data.models.find(m=>m.id==='teleocr'));
  assert.equal(data.throughputEstimates.length,18);assert.equal(data.models.filter(m=>OCR.deployment(data,m).estimate&&!OCR.deployment(data,m).speed).length,17);
- assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,67);
+ assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,68);
  assert.equal(d.speed,null);assert.equal(d.estimate.low,.2);assert.equal(d.estimate.high,4);assert.match(d.cost.label,/≈\$0.03–\$1.39/);
  const tele=result.rows.find(r=>r.id==='teleocr'),html=OCR.renderRows({...result,rows:[tele]},data);
  assert.match(html,/≈0.2–9.2/);assert.match(html,/Common reference: H100 80GB/);assert.match(html,/Low-confidence modeled speed/);assert.match(html,/NOT a measurement, guarantee or statistical confidence interval/);assert.match(html,/popovertarget="ocr-details-teleocr"/);assert.match(html,/geometric midpoint/);
@@ -144,4 +144,15 @@ test('OCR reference validation rejects unsupported speed and preserves quality i
  for(const bad of [{status:'observed'},{profile:'a100'},{confidence:'high'},{low:0},{high:Infinity},{source_ids:['missing']},{status:'too-large'}]){const d=loadOCR();Object.assign(d.ocrReference.models.find(r=>r.status==='estimated'),bad);assert.throws(()=>validateData(d));}
  const data=loadOCR(),original=JSON.stringify(data.rawRecords),before=build(data,data.config.snapshot_date,{min:0});
  const noReference=build({...data,ocrReference:null},data.config.snapshot_date,{min:0});assert.deepEqual(before,noReference);OCR.enrich(before,data,{hourlyRate:100});assert.equal(JSON.stringify(data.rawRecords),original);
+});
+
+test('Chandra 2.5 preserves hosted modes and excludes incompatible scores from ranking',()=>{
+ const data=loadOCR(),m=data.models.find(m=>m.id==='chandra-2-5-api'),d=OCR.deployment(data,m);
+ assert.equal(m.release_date,'2026-10-14');assert.equal(m.access,'closed');assert.equal(d.speed,null);assert.equal(d.estimate,null);assert.equal(d.cost.value,10);
+ assert.match(d.cost.note,/balanced \$4/);assert.equal(d.records.length,3);assert.ok(d.records.every(r=>!r.cost_eligible&&!r.comparison_default&&r.unit==='median_seconds_per_page'));
+ const result=build(data,data.config.snapshot_date,{min:0}),row=result.rows.find(r=>r.id===m.id);
+ assert.equal(row.rank,null);assert.equal(row.coreCount,0);assert.equal(row.scores.olmocr,null);
+ assert.equal(row.scores['chandra-2-5-olm-no-hf'].value,86.9);assert.equal(row.scores['omniparse-chandra-2-5-release'].value,92.7);
+ assert.equal(data.resultsByKey[m.id+'|omniparse-indra-1-1'],undefined);
+ assert.match(OCR.renderRows({...result,rows:[row]},data),/balanced 91.6/);
 });

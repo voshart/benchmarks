@@ -1164,5 +1164,17 @@
     "kind": "author_reported",
     "verified_on": "2026-10-22",
     "note": "Public ungated weights and BF16 local CUDA instructions verified. Existing exact-model single-GPU evidence supports bounded fit, not arbitrary resolution/batch or exact SXM board match."
+  },
+  "chandra-2-5-release": {
+    "title": "Datalab Chandra 2.5 release · October14,2026",
+    "url": "https://www.datalab.to/blog/chandra-2-5",
+    "kind": "author_reported",
+    "note": "Hosted2.5 in fast/balanced/accurate. Version-specific vendor measurements; olmOCR excludes headers/footers. OmniParse release cohort separate from later revisions."
+  },
+  "chandra-2-5-pricing": {
+    "title": "Datalab Convert API rate card · verified October23,2026",
+    "url": "https://www.datalab.to/pricing",
+    "kind": "official",
+    "note": "Base Convert fast/balanced $4 and accurate $10 per1,000pages. Add-ons extra; EU+25%. Release confirms2.5 in these modes."
   }
 }

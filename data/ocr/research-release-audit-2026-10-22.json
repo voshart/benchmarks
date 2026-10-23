@@ -76,5 +76,11 @@
     "Metadata-only claims never create core coverage or artificial matched scores.",
     "No model code or remote custom inference code executed.",
     "Hosted demos are not downloadable weights or priced production APIs."
-  ]
+  ],
+  "chandra_2_5_followup": {
+    "verified_on": "2026-10-23",
+    "release_date": "2026-10-14",
+    "url": "https://www.datalab.to/blog/chandra-2-5",
+    "finding": "Missed hosted2.5, replacing2.4. Added one generation row with mode-specific evidence, base API prices and latency. No2.4 row: release date/standalone benchmark evidence not established in this bounded followup. No public2.5 weights/size or hardware disclosed; do not transfer4B/H100 from open2."
+  }
 }
