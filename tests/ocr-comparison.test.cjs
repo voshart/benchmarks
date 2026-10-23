@@ -106,7 +106,7 @@ test('OCR ranges sort by geometric midpoint with true ties and unknowns last in 
 test('OCR real modeled evidence is visible, sourced and isolated from accuracy',()=>{
  const data=loadOCR(),result=build(data,data.config.snapshot_date,{min:0});const d=OCR.deployment(data,data.models.find(m=>m.id==='teleocr'));
  assert.equal(data.throughputEstimates.length,18);assert.equal(data.models.filter(m=>OCR.deployment(data,m).estimate&&!OCR.deployment(data,m).speed).length,17);
- assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,76);
+ assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,79);
  assert.equal(d.speed,null);assert.equal(d.estimate.low,.2);assert.equal(d.estimate.high,4);assert.match(d.cost.label,/≈\$0.03–\$1.39/);
  const tele=result.rows.find(r=>r.id==='teleocr'),html=OCR.renderRows({...result,rows:[tele]},data);
  assert.match(html,/≈0.2–9.2/);assert.match(html,/Common reference: H100 80GB/);assert.match(html,/Low-confidence modeled speed/);assert.match(html,/NOT a measurement, guarantee or statistical confidence interval/);assert.match(html,/popovertarget="ocr-details-teleocr"/);assert.match(html,/geometric midpoint/);
@@ -123,7 +123,7 @@ test('OCR estimate schema rejects fabricated status, missing context and invalid
 
 test('OCR common-card estimates replace mixed hardware in sorting and all local compute costs',()=>{
  const data=loadOCR(),get=id=>OCR.deployment(data,data.models.find(m=>m.id===id));
- assert.equal(data.ocrReference.models.length,86);assert.equal(data.ocrReference.models.filter(r=>r.status==='estimated').length,44);
+ assert.equal(data.ocrReference.models.length,89);assert.equal(data.ocrReference.models.filter(r=>r.status==='estimated').length,47);
  for(const e of data.ocrReference.models){
   const d=get(e.model);assert.equal(e.profile,'h100-80gb-v1');
   if(e.status==='estimated'){

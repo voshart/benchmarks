@@ -1247,6 +1247,54 @@
       "fit": "630.8M storedF32 tensorcount, released runtimeBF16, exact oneH10080GB full2078page run;FA3+MTP1 explicit, not plainAR.",
       "basis": "Match triple-pass quality with triple-pass timing. Existing project nativeH1000.4–2x workload envelope rounded outward. Do not pair15.42pps single-pass with75.20 triple-pass quality. Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile. Source uses 2,078 prepared pages and concurrency 128; excludes initial page encoding, startup/warmup and final rendering/writes. Throughput counts all responses including token-limited outputs; not single-request latency. Native vLLM 0.26.0 BF16, FA3 and MTP1 retained as model-specific runtime; triple-pass pipeline only. 40/2,078 outputs token-limited; source complete-output rate 10.414 pages/s. No extra speculative multiplier.",
       "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "infinity-parser2-flash",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 1.2,
+      "high": 7,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-specialist-nemotron-matched-timing",
+        "infinity-parser2-flash-checkpoint"
+      ],
+      "fit": "Exact checkpoint measured on one H100 80GB; source-native runtime and prepared pages.",
+      "basis": "Native reported 3.059 pages/s; existing project 0.4–2x workload envelope rounded outward, not a confidence interval or standardized experiment. Source: 2,078 prepared ParseBench pages, concurrency 64; target profile up to 16 queued pages, about 1,000–3,000 total output tokens. Excludes preparation/startup/warmup/final writes; includes token-limited responses. Lower concurrency and page complexity can fall outside the band; no additional speculative GPU multiplier.",
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "mineru2-5-pro-2605",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 1.6,
+      "high": 9,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-specialist-nemotron-matched-timing",
+        "mineru2-5-pro-2605-checkpoint"
+      ],
+      "fit": "Exact checkpoint measured on one H100 80GB; source-native runtime and prepared pages.",
+      "basis": "Native reported 4.133 pages/s; existing project 0.4–2x workload envelope rounded outward, not a confidence interval or standardized experiment. Source: 2,078 prepared ParseBench pages, concurrency 32; target profile up to 16 queued pages, about 1,000–3,000 total output tokens. Excludes preparation/startup/warmup/final writes; includes token-limited responses. Lower concurrency and page complexity can fall outside the band; no additional speculative GPU multiplier.",
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "kdl-frontier-parser-nano",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 1.1,
+      "high": 6,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-specialist-nemotron-matched-timing",
+        "kdl-frontier-parser-nano-checkpoint"
+      ],
+      "fit": "Exact checkpoint measured on one H100 80GB; source-native runtime and prepared pages.",
+      "basis": "Native reported 2.980 pages/s; existing project 0.4–2x workload envelope rounded outward, not a confidence interval or standardized experiment. Source: 2,078 prepared ParseBench pages, concurrency 64; target profile up to 16 queued pages, about 1,000–3,000 total output tokens. Excludes preparation/startup/warmup/final writes; includes token-limited responses. Lower concurrency and page complexity can fall outside the band; no additional speculative GPU multiplier.",
+      "fit_class": "reported_single_gpu_configuration"
     }
   ]
 }

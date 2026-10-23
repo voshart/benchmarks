@@ -4736,5 +4736,47 @@
     "parameters_million": 630.800502,
     "configuration": "Triple-pass quality and speed; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
     "evidence_note": "Public weights verified October23; exact first public release date not established. Stored F32 tensors about2.52GB, not peakVRAM. Author ParseBench75.20 on2,078pages with pinned scorer; separate from other ParseBench versions. 40timing outputs token-limited; no single-pass speed attached to triple-pass quality."
+  },
+  {
+    "id": "infinity-parser2-flash",
+    "name": "Infinity-Parser2-Flash",
+    "organization": "Infly",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "infinity-parser2-flash-checkpoint",
+    "configuration": "Exact checkpoint cfddc4106b0abc4706f05575a164f7dd35d09c46",
+    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment."
+  },
+  {
+    "id": "mineru2-5-pro-2605",
+    "name": "MinerU2.5-Pro-2605-1.2B",
+    "organization": "OpenDataLab",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "mineru2-5-pro-2605-checkpoint",
+    "configuration": "Exact checkpoint 08aaea840498d49ce16247b6263196cf02814885",
+    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment."
+  },
+  {
+    "id": "kdl-frontier-parser-nano",
+    "name": "KDL Frontier Parser nano",
+    "organization": "KDLAI",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "kdl-frontier-parser-nano-checkpoint",
+    "configuration": "Exact checkpoint a6cb7d2a9ac5fd13f527764f5411c9ec3ad2c4ec",
+    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment."
   }
 ]

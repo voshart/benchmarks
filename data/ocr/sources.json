@@ -1276,5 +1276,61 @@
     "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/validation/accuracy_restoration.json",
     "kind": "author_reported",
     "verified_on": "2026-10-23"
+  },
+  "infinity-parser2-flash-checkpoint": {
+    "title": "Infinity-Parser2-Flash pinned public checkpoint",
+    "url": "https://huggingface.co/infly/Infinity-Parser2-Flash/tree/cfddc4106b0abc4706f05575a164f7dd35d09c46",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Exact public weights matched by NVIDIA competitor timing manifest. First release date not established."
+  },
+  "mineru2-5-pro-2605-checkpoint": {
+    "title": "MinerU2.5-Pro-2605-1.2B pinned public checkpoint",
+    "url": "https://huggingface.co/opendatalab/MinerU2.5-Pro-2605-1.2B/tree/08aaea840498d49ce16247b6263196cf02814885",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Exact public weights matched by NVIDIA competitor timing manifest. First release date not established."
+  },
+  "kdl-frontier-parser-nano-checkpoint": {
+    "title": "KDL Frontier Parser nano pinned public checkpoint",
+    "url": "https://huggingface.co/KDLAI/KDL-Frontier-Parser-nano/tree/a6cb7d2a9ac5fd13f527764f5411c9ec3ad2c4ec",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Exact public weights matched by NVIDIA competitor timing manifest. First release date not established."
+  },
+  "surya2-pinned-card": {
+    "title": "Surya 2 pinned model card",
+    "url": "https://huggingface.co/datalab-to/surya-ocr-2/blob/3b3d4cdf88d6928b0acdc75181b13206ea67c4a3/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Own Surya evaluation; competitor figures explicitly copied from olmOCR dataset card, not independent reruns."
+  },
+  "marker2-release": {
+    "title": "Marker 2 PDF pipeline comparison",
+    "url": "https://www.datalab.to/blog/marker-2",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Datalab native-PDF pipeline comparison; embedded text available, package versions/modes partly unspecified. Separate from image-only core rankings."
+  },
+  "parsebench-upstream-9af4102": {
+    "title": "ParseBench pinned published leaderboard (9af4102)",
+    "url": "https://github.com/run-llama/ParseBench/blob/9af4102e26b51f234ab5f037e19fec05c0696ec6/leaderboard.csv",
+    "kind": "official",
+    "verified_on": "2026-10-23",
+    "note": "Published five-category snapshot; model HF identities explicit. Separate from NVIDIA matched timing and reproduced quality. Row-specific original measurement operator not established."
+  },
+  "lighton3-pinned-olm-reproduction": {
+    "title": "LightOnOCR pinned olmOCR reproduction CSV",
+    "url": "https://github.com/lightonai/LightOnOCR/blob/36755d461be079737860a5f03ae0c803501269e9/benchmarks/results/olmocr-bench.csv",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Full eight-category reproduced score, not headers-excluded alternate or blog headline. Model-specific pipelines retained."
+  },
+  "jina-quoted-omnidoc16": {
+    "title": "Jina OCR Table 6 · quoted OmniDocBench v1.6 results",
+    "url": "https://arxiv.org/html/2609.03181v1#S6.SS2",
+    "kind": "secondary",
+    "verified_on": "2026-10-23",
+    "note": "Quoted published results, not Jina reruns. Hunyuan1.5 attributed to its own technical report; preserve secondary provenance."
   }
 }

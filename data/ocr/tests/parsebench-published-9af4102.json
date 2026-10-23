@@ -1,0 +1,13 @@
+{
+  "id": "parsebench-published-9af4102",
+  "label": "ParseBench · published snapshot 9af4102",
+  "short": "Parse published",
+  "source": "parsebench-upstream-9af4102",
+  "family": "parsebench",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "Five-category upstream published panel; visual grounding is not reproduced EPR. Not quality measured in NVIDIA timing run; no core aggregate vote."
+}

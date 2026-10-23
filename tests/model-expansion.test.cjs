@@ -9,7 +9,7 @@ test('every requested addition is discoverable without inventing core coverage',
  const catalog=build(data,data.config.snapshot_date,{min:0});
  for(const id of additions){const model=data.models.find(m=>m.id===id),row=catalog.rows.find(r=>r.id===id);assert.ok(model&&row,id);assert.ok(data.sources[row.modelSourceId],id);assert.ok(row.modelNote,id);}
  for(const id of ['docling-pipeline','amazon-textract','google-docai-ocr','tesseract']){
-  const row=catalog.rows.find(r=>r.id===id);assert.equal(row.count,0);assert.equal(row.rank,null);assert.equal(data.records.some(r=>r.model===id),false);
+  const row=catalog.rows.find(r=>r.id===id);assert.equal(row.count,0);assert.equal(row.rank,null);assert.equal(data.records.some(r=>r.model===id && data.tests.find(t=>t.id===r.benchmark).core),false);
  }
 });
 test('Jina qualifies provisionally while LightOn task tests never manufacture rank families',()=>{
