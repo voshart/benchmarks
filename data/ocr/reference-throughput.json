@@ -4,7 +4,7 @@
     "label": "H100 80GB",
     "hardware": "1 NVIDIA H100 80GB, SXM-class planning reference; no CPU offload or multi-GPU sharding",
     "host": "Assumed 16 x86 vCPUs, 64GB host RAM, local warm page images. CPU-only paths use stated worker counts; the GPU gives them no speedup.",
-    "precision": "BF16/FP16 for GPU generative models where supported; native standard precision for classical/text and CPU paths (including Indra), not an implied BF16 CPU run. No speculative decoding or quantization assumed. Quality scores may use other settings.",
+    "precision": "BF16/FP16 for GPU generative models where supported; native standard precision for classical/text and CPU paths (including Indra), not an implied BF16 CPU run. No quantization or additional speculative speedup assumed. Source-native decoding optimizations, when retained, are identified in row Details. Quality scores may use other settings.",
     "workload": "Typical document pages up to about2048px long edge; approximately1000–3000 total output tokens/page across all calls, or corresponding text-only output. Dense tables, SVG, long/thinking outputs and high-resolution pages are outside this scenario.",
     "batch": "Warm throughput with queued pages and memory-fitting batching, up to16 concurrent page requests; not single-request latency. Internal crop batches remain model-specific.",
     "method": "Every displayed local speed is an assumed planning range on this reference, including models with native H100 reports. Native-H100 ranges allow workload/runtime variation; A100 transfers use class-specific paired evidence; consumer/H20 gaps use explicit family scenarios. These are not a controlled benchmark, fitted confidence intervals, or universal FLOPS scaling.",
@@ -268,14 +268,20 @@
     {
       "model": "jina-ocr-v1",
       "profile": "h100-80gb-v1",
-      "status": "unresolved",
-      "as_of": "2026-10-22",
+      "status": "estimated",
+      "as_of": "2026-10-23",
       "source_ids": [
-        "jina-ocr-v1-release"
+        "small-specialist-jina-throughput",
+        "small-specialist-jina-card",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
       ],
-      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
-      "basis": "Original observations and configuration notes remain in Details.",
-      "fit_class": "runtime_fit_unverified"
+      "fit": "Reported exact-model oneA10040GB workload supports conditional oneH10080GB feasibility; changed page budgets/concurrency can alter memory.",
+      "basis": "Use existing project judgmental A100-to-H100 pipeline factor1–2.3 and workload factor0.5–1.5; rounded outward. This is an assumed sensitivity envelope, not a measured ratio or confidence interval. No extra2x FastMTP gain. Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile. Source uses A100 SXM4 40GB and 1,403 olmOCR pages, concurrency 32. Serving backend not fully pinned; no extra FastMTP gain. Surya checkpoint revision is not pinned in the comparison.",
+      "fit_class": "reported_single_gpu_configuration",
+      "confidence": "low",
+      "low": 1.3,
+      "high": 9
     },
     {
       "model": "lightonocr-3-0.8b",
@@ -496,16 +502,18 @@
     {
       "model": "nemotron-parse-2",
       "profile": "h100-80gb-v1",
-      "status": "unresolved",
-      "as_of": "2026-10-22",
+      "status": "estimated",
+      "as_of": "2026-10-23",
       "source_ids": [
-        "nemotron-parse-2-card",
-        "hf:nvidia/NVIDIA-Nemotron-Parse-2.0@4e021c03edc92e715d5d788921a927d0cbb4b4d1"
+        "small-specialist-nemotron-matched-timing"
       ],
-      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈3.612GB decimal, not peak VRAM.",
-      "basis": "Original observations and configuration notes remain in Details.",
-      "fit_class": "small_pinned_weights_runtime_conditional",
-      "checkpoint_bytes": 3612196912
+      "fit": "Exact-model oneH10080GB run, concurrency128; native model stage. Do not treat3.95pps as single-page reciprocal latency.",
+      "basis": "Exact-model nativeH100 anchor; retain project assumed0.4–2x workload/board/batching envelope, rounded outward. Rate counts all responses, including token-limited pages. Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile. Source uses 2,078 prepared pages and concurrency 128; excludes initial page encoding, startup/warmup and final rendering/writes. Throughput counts all responses including token-limited outputs; not single-request latency. 143/2,078 outputs token-limited.",
+      "fit_class": "reported_single_gpu_configuration",
+      "checkpoint_bytes": 3612196912,
+      "confidence": "low",
+      "low": 1.5,
+      "high": 8
     },
     {
       "model": "olmocr",
@@ -916,12 +924,19 @@
     {
       "model": "surya-ocr-2",
       "profile": "h100-80gb-v1",
-      "status": "unresolved",
-      "as_of": "2026-10-22",
-      "source_ids": [],
-      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
-      "basis": "Original observations and configuration notes remain in Details.",
-      "fit_class": "runtime_fit_unverified"
+      "status": "estimated",
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-specialist-jina-throughput",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Reported exact-model oneA10040GB workload supports conditional oneH10080GB feasibility; changed page budgets/concurrency can alter memory.",
+      "basis": "Use existing project judgmental A100-to-H100 pipeline factor1–2.3 and workload factor0.5–1.5; rounded outward. This is an assumed sensitivity envelope, not a measured ratio or confidence interval. No extra2x FastMTP gain. Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile. Source uses A100 SXM4 40GB and 1,403 olmOCR pages, concurrency 32. Serving backend not fully pinned; no extra FastMTP gain. Surya checkpoint revision is not pinned in the comparison.",
+      "fit_class": "reported_single_gpu_configuration",
+      "confidence": "low",
+      "low": 0.5,
+      "high": 3.7
     },
     {
       "model": "teleocr",
@@ -1158,6 +1173,80 @@
       "checkpoint_bytes": 6672212480,
       "fit": "Public ungated weights and BF16 local CUDA instructions verified. Existing exact-model single-GPU evidence supports bounded fit, not arbitrary resolution/batch or exact SXM board match. Weight storage is not peak VRAM.",
       "basis": "H100 whole-page AR family scenario. Exact model has single-H20 baseline0.255pages/s; unknown-count H100 timing is not normalized as oneGPU. The0.2–3range includes uncertain warm batching, encoder/output work and H100-class peer evidence, not a universal H20 multiplier."
+    },
+    {
+      "model": "pp-ocrv5-server",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 0.7,
+      "high": 15,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-pp-performance_and_internal_quality",
+        "small-pp-detector_size_and_component_timing",
+        "small-pp-recognizer_size_and_component_timing",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Stored detector + recognizer weights 165.3 MB; comfortably plausible on 80GB but runtime/peak VRAM not measured. Native Paddle GPU precision; no specific FP16/TRT speed guarantee. Class of model fits80GB plausibly; no measured peak VRAM claimed.",
+      "basis": "Warm queued upright text-only pages <=2048px long edge, assumed50 text lines/page; detector+recognizer only, no tables/layout/formulas/LLM postprocessing. Source image corpus line counts unknown. Inverse source A100 seconds/image, multiplied by explicitly assumed0.25–2x document complexity/workload allowance and1–2.3x H100 pipeline allowance; rounded outward. This is a judgmental planning range, not a measured page benchmark or statistical interval. Original A100 whole-image runtime 0.32 s includes I/O, pre/post and inference on 200 mixed images. up to16 queued pages subject to memory; crop batching runtime-specific, no16x throughput multiplier Not crop/s; no structured-page accuracy claim.",
+      "fit_class": "small_pipeline_whole_image_anchor"
+    },
+    {
+      "model": "pp-ocrv5-mobile",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 1,
+      "high": 19,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-pp-performance_and_internal_quality",
+        "small-pp-detector_size_and_component_timing",
+        "small-pp-recognizer_size_and_component_timing",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Stored detector + recognizer weights 20.7 MB; comfortably plausible on 80GB but runtime/peak VRAM not measured. Native Paddle GPU precision; no specific FP16/TRT speed guarantee. Class of model fits80GB plausibly; no measured peak VRAM claimed.",
+      "basis": "Warm queued upright text-only pages <=2048px long edge, assumed50 text lines/page; detector+recognizer only, no tables/layout/formulas/LLM postprocessing. Source image corpus line counts unknown. Inverse source A100 seconds/image, multiplied by explicitly assumed0.25–2x document complexity/workload allowance and1–2.3x H100 pipeline allowance; rounded outward. This is a judgmental planning range, not a measured page benchmark or statistical interval. Original A100 whole-image runtime 0.25 s includes I/O, pre/post and inference on 200 mixed images. up to16 queued pages subject to memory; crop batching runtime-specific, no16x throughput multiplier Not crop/s; no structured-page accuracy claim.",
+      "fit_class": "small_pipeline_whole_image_anchor"
+    },
+    {
+      "model": "pp-ocrv4-mobile",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 1.7,
+      "high": 33,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-pp-performance_and_internal_quality",
+        "small-pp-detector_size_and_component_timing",
+        "small-pp-recognizer_size_and_component_timing",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Stored detector + recognizer weights 15.2 MB; comfortably plausible on 80GB but runtime/peak VRAM not measured. Native Paddle GPU precision; no specific FP16/TRT speed guarantee. Class of model fits80GB plausibly; no measured peak VRAM claimed.",
+      "basis": "Warm queued upright text-only pages <=2048px long edge, assumed50 text lines/page; detector+recognizer only, no tables/layout/formulas/LLM postprocessing. Source image corpus line counts unknown. Inverse source A100 seconds/image, multiplied by explicitly assumed0.25–2x document complexity/workload allowance and1–2.3x H100 pipeline allowance; rounded outward. This is a judgmental planning range, not a measured page benchmark or statistical interval. Original A100 whole-image runtime 0.14 s includes I/O, pre/post and inference on 200 mixed images. up to16 queued pages subject to memory; crop batching runtime-specific, no16x throughput multiplier Not crop/s; no structured-page accuracy claim.",
+      "fit_class": "small_pipeline_whole_image_anchor"
+    },
+    {
+      "model": "nemotron-3-5-parse",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 4,
+      "high": 22,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "small-specialist-nemotron35-card",
+        "small-specialist-nemotron-profile-timing",
+        "small-specialist-nemotron-quality"
+      ],
+      "fit": "630.8M storedF32 tensorcount, released runtimeBF16, exact oneH10080GB full2078page run;FA3+MTP1 explicit, not plainAR.",
+      "basis": "Match triple-pass quality with triple-pass timing. Existing project nativeH1000.4–2x workload envelope rounded outward. Do not pair15.42pps single-pass with75.20 triple-pass quality. Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile. Source uses 2,078 prepared pages and concurrency 128; excludes initial page encoding, startup/warmup and final rendering/writes. Throughput counts all responses including token-limited outputs; not single-request latency. Native vLLM 0.26.0 BF16, FA3 and MTP1 retained as model-specific runtime; triple-pass pipeline only. 40/2,078 outputs token-limited; source complete-output rate 10.414 pages/s. No extra speculative multiplier.",
+      "fit_class": "reported_single_gpu_configuration"
     }
   ]
 }

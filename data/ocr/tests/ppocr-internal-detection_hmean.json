@@ -1,0 +1,13 @@
+{
+  "id": "ppocr-internal-detection_hmean",
+  "short": "PP detection",
+  "label": "PP internal text detection Hmean",
+  "source": "small-pp-performance_and_internal_quality",
+  "primary_metric": "detection_hmean",
+  "direction": "higher",
+  "unit": "percent",
+  "family": "ppocr-components",
+  "core": false,
+  "primary": false,
+  "note": "Vendor-internal component test, not joint full-page quality; excluded from aggregate."
+}

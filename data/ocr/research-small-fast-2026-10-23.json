@@ -1,0 +1,163 @@
+{
+  "as_of": "2026-10-23",
+  "recommendation": "Three exact public text-only pipelines; same official full-image performance panel, no parameter regression. Existing Tesseract nonnumeric CPU-only remains unchanged.",
+  "models": [
+    {
+      "model": "pp-ocrv5-server",
+      "name": "PP-OCRv5 server",
+      "new_registry_entry": true,
+      "access": "open",
+      "license": "Apache-2.0",
+      "release_date": "2025-05-20",
+      "size_mb": 165.3,
+      "size_note": "Sum of official detector and recognizer stored model sizes, not peak RAM/VRAM; optional orientation/classification modules excluded.",
+      "published_pipeline_observation": {
+        "seconds_per_image": 0.32,
+        "hardware": "NVIDIA A100",
+        "backend": "PaddlePaddle",
+        "corpus": "200 mixed general-scene and document images",
+        "includes": "I/O, preprocessing, postprocessing, inference",
+        "precision": "not specified",
+        "batch": "not specified",
+        "source_url": "https://github.com/PaddlePaddle/PaddleOCR/blob/b03f46425e8ff4442b268ce449e3eef758146cd4/docs/version3.x/algorithm/PP-OCRv6/PP-OCRv6.en.md"
+      },
+      "proposed_reference": {
+        "low": 0.7,
+        "high": 15,
+        "unit": "pages/s",
+        "confidence": "low",
+        "status": "estimated",
+        "hardware": "1 H10080GB +16x86vCPU64GB host",
+        "workload": "Warm queued upright text-only pages <=2048px long edge, assumed50 text lines/page; detector+recognizer only, no tables/layout/formulas/LLM postprocessing. Source image corpus line counts unknown.",
+        "method": "Inverse source A100 seconds/image, multiplied by explicitly assumed0.25–2x document complexity/workload allowance and1–2.3x H100 pipeline allowance; rounded outward. This is a judgmental planning range, not a measured page benchmark or statistical interval.",
+        "precision": "Native Paddle GPU precision; no specific FP16/TRT speed guarantee. Class of model fits80GB plausibly; no measured peak VRAM claimed.",
+        "batch": "up to16 queued pages subject to memory; crop batching runtime-specific, no16x throughput multiplier"
+      },
+      "component_crosscheck": {
+        "hardware": "T4, standard FP32 PaddleInference",
+        "detection_ms": 89.55,
+        "recognition_crop_ms": 8.46,
+        "assumed_crops": 50,
+        "inference_only_serial_ms": 512.55,
+        "assumed_additional_prepost_ms": [
+          50,
+          300
+        ],
+        "warning": "Not a second measurement. Crop timings exclude pre/post; this merely checks whole-page order of magnitude. Never report crop/s as page/s."
+      },
+      "secondary_component_quality": {
+        "detection_hmean": 81.6,
+        "recognition_accuracy": 78.1
+      },
+      "quality_note": "Internal16-category detection Hmean and15-category recognition average are separate tasks; no joint end-to-end quality score. Do not merge recognition accuracy into full-page OCR core quality. v4 absent from this evaluation."
+    },
+    {
+      "model": "pp-ocrv5-mobile",
+      "name": "PP-OCRv5 mobile",
+      "new_registry_entry": true,
+      "access": "open",
+      "license": "Apache-2.0",
+      "release_date": "2025-05-20",
+      "size_mb": 20.7,
+      "size_note": "Sum of official detector and recognizer stored model sizes, not peak RAM/VRAM; optional orientation/classification modules excluded.",
+      "published_pipeline_observation": {
+        "seconds_per_image": 0.25,
+        "hardware": "NVIDIA A100",
+        "backend": "PaddlePaddle",
+        "corpus": "200 mixed general-scene and document images",
+        "includes": "I/O, preprocessing, postprocessing, inference",
+        "precision": "not specified",
+        "batch": "not specified",
+        "source_url": "https://github.com/PaddlePaddle/PaddleOCR/blob/b03f46425e8ff4442b268ce449e3eef758146cd4/docs/version3.x/algorithm/PP-OCRv6/PP-OCRv6.en.md"
+      },
+      "proposed_reference": {
+        "low": 1,
+        "high": 19,
+        "unit": "pages/s",
+        "confidence": "low",
+        "status": "estimated",
+        "hardware": "1 H10080GB +16x86vCPU64GB host",
+        "workload": "Warm queued upright text-only pages <=2048px long edge, assumed50 text lines/page; detector+recognizer only, no tables/layout/formulas/LLM postprocessing. Source image corpus line counts unknown.",
+        "method": "Inverse source A100 seconds/image, multiplied by explicitly assumed0.25–2x document complexity/workload allowance and1–2.3x H100 pipeline allowance; rounded outward. This is a judgmental planning range, not a measured page benchmark or statistical interval.",
+        "precision": "Native Paddle GPU precision; no specific FP16/TRT speed guarantee. Class of model fits80GB plausibly; no measured peak VRAM claimed.",
+        "batch": "up to16 queued pages subject to memory; crop batching runtime-specific, no16x throughput multiplier"
+      },
+      "component_crosscheck": {
+        "hardware": "T4, standard FP32 PaddleInference",
+        "detection_ms": 10.67,
+        "recognition_crop_ms": 5.43,
+        "assumed_crops": 50,
+        "inference_only_serial_ms": 282.17,
+        "assumed_additional_prepost_ms": [
+          50,
+          300
+        ],
+        "warning": "Not a second measurement. Crop timings exclude pre/post; this merely checks whole-page order of magnitude. Never report crop/s as page/s."
+      },
+      "secondary_component_quality": {
+        "detection_hmean": 75.2,
+        "recognition_accuracy": 73.7
+      },
+      "quality_note": "Internal16-category detection Hmean and15-category recognition average are separate tasks; no joint end-to-end quality score. Do not merge recognition accuracy into full-page OCR core quality. v4 absent from this evaluation."
+    },
+    {
+      "model": "pp-ocrv4-mobile",
+      "name": "PP-OCRv4 mobile",
+      "new_registry_entry": true,
+      "access": "open",
+      "license": "Apache-2.0",
+      "release_date": "2023-08-07",
+      "size_mb": 15.2,
+      "size_note": "Sum of official detector and recognizer stored model sizes, not peak RAM/VRAM; optional orientation/classification modules excluded.",
+      "published_pipeline_observation": {
+        "seconds_per_image": 0.14,
+        "hardware": "NVIDIA A100",
+        "backend": "PaddlePaddle",
+        "corpus": "200 mixed general-scene and document images",
+        "includes": "I/O, preprocessing, postprocessing, inference",
+        "precision": "not specified",
+        "batch": "not specified",
+        "source_url": "https://github.com/PaddlePaddle/PaddleOCR/blob/b03f46425e8ff4442b268ce449e3eef758146cd4/docs/version3.x/algorithm/PP-OCRv6/PP-OCRv6.en.md"
+      },
+      "proposed_reference": {
+        "low": 1.7,
+        "high": 33,
+        "unit": "pages/s",
+        "confidence": "low",
+        "status": "estimated",
+        "hardware": "1 H10080GB +16x86vCPU64GB host",
+        "workload": "Warm queued upright text-only pages <=2048px long edge, assumed50 text lines/page; detector+recognizer only, no tables/layout/formulas/LLM postprocessing. Source image corpus line counts unknown.",
+        "method": "Inverse source A100 seconds/image, multiplied by explicitly assumed0.25–2x document complexity/workload allowance and1–2.3x H100 pipeline allowance; rounded outward. This is a judgmental planning range, not a measured page benchmark or statistical interval.",
+        "precision": "Native Paddle GPU precision; no specific FP16/TRT speed guarantee. Class of model fits80GB plausibly; no measured peak VRAM claimed.",
+        "batch": "up to16 queued pages subject to memory; crop batching runtime-specific, no16x throughput multiplier"
+      },
+      "component_crosscheck": {
+        "hardware": "T4, standard FP32 PaddleInference",
+        "detection_ms": 9.87,
+        "recognition_crop_ms": 5.26,
+        "assumed_crops": 50,
+        "inference_only_serial_ms": 272.87,
+        "assumed_additional_prepost_ms": [
+          50,
+          300
+        ],
+        "warning": "Not a second measurement. Crop timings exclude pre/post; this merely checks whole-page order of magnitude. Never report crop/s as page/s."
+      },
+      "secondary_component_quality": null,
+      "quality_note": "Internal16-category detection Hmean and15-category recognition average are separate tasks; no joint end-to-end quality score. Do not merge recognition accuracy into full-page OCR core quality. v4 absent from this evaluation."
+    }
+  ],
+  "sources": {
+    "performance_and_internal_quality": "https://github.com/PaddlePaddle/PaddleOCR/blob/b03f46425e8ff4442b268ce449e3eef758146cd4/docs/version3.x/algorithm/PP-OCRv6/PP-OCRv6.en.md",
+    "detector_size_and_component_timing": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/docs/version3.x/module_usage/text_detection.en.md",
+    "recognizer_size_and_component_timing": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/docs/version3.x/module_usage/text_recognition.en.md",
+    "v5_release": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/docs/update/update.en.md",
+    "v4_release": "https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/README_en.md",
+    "license": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/LICENSE"
+  },
+  "excluded": {
+    "EasyOCR": "Official API supports GPU and batching, but no sufficiently specific author whole-page baseline found in bounded pass. Would require a weaker architecture-only heuristic; prefer three Paddle additions.",
+    "RapidOCR": "Toolkit with multiple model/backends, not a distinct fixed checkpoint. Adding generic RapidOCR would duplicate Paddle weights with ambiguous runtime.",
+    "Tesseract": "Current reference entry correctlyCPU-only nonnumeric. Official docs recommend one single-thread process/core forqueued jobs; no exact current whole-page host anchor verified here."
+  }
+}

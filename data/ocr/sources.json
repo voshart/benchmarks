@@ -1204,5 +1204,77 @@
     "url": "https://www.inksight-app.com/fr/handwriting-ocr-benchmark",
     "kind": "third_party",
     "note": "133public pages across7datasets, equal dataset weights; not the full205page public/private aggregate. Normalized cappedCER/WER lowerbetter."
+  },
+  "small-pp-performance_and_internal_quality": {
+    "title": "Paddle small OCR pipelines · performance and internal quality",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/b03f46425e8ff4442b268ce449e3eef758146cd4/docs/version3.x/algorithm/PP-OCRv6/PP-OCRv6.en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-pp-detector_size_and_component_timing": {
+    "title": "Paddle small OCR pipelines · detector size and component timing",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/docs/version3.x/module_usage/text_detection.en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-pp-recognizer_size_and_component_timing": {
+    "title": "Paddle small OCR pipelines · recognizer size and component timing",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/docs/version3.x/module_usage/text_recognition.en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-pp-v5_release": {
+    "title": "Paddle small OCR pipelines · v5 release",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/docs/update/update.en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-pp-v4_release": {
+    "title": "Paddle small OCR pipelines · v4 release",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/README_en.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-pp-license": {
+    "title": "Paddle small OCR pipelines · license",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/LICENSE",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-specialist-jina-throughput": {
+    "title": "Compact OCR source · jina-throughput",
+    "url": "https://arxiv.org/html/2609.03181v1#S6.SS3",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-specialist-jina-card": {
+    "title": "Compact OCR source · jina-card",
+    "url": "https://huggingface.co/jinaai/jina-ocr-v1/blob/904f815deed0fbeab02d82d4648b70106272ffe3/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-specialist-nemotron35-card": {
+    "title": "Compact OCR source · nemotron35-card",
+    "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-specialist-nemotron-matched-timing": {
+    "title": "Compact OCR source · nemotron-matched-timing",
+    "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/parsebench/comparisons/matched_inference_timing.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-specialist-nemotron-profile-timing": {
+    "title": "Compact OCR source · nemotron-profile-timing",
+    "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/validation/inference_benchmarks.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
+  },
+  "small-specialist-nemotron-quality": {
+    "title": "Compact OCR source · nemotron-quality",
+    "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/validation/accuracy_restoration.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23"
   }
 }

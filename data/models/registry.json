@@ -4670,5 +4670,71 @@
     "organization": "Google",
     "configuration": "Stable Gemini API endpoint gemini-4-argon; text/image/PDF input, text output",
     "evidence_note": "September30 limited rollout; publicly available API verified October23. Roboflow image OCR: high88.0%, low85.7%, preliminary single-run tasks, not full-page parsing. Hosted hardware/parameter count undisclosed; no H100 estimate. Token cost is an adjustable scenario, not measured pages. Inksight public handwriting: normalized CER8.7%, WER19.5% on133pages/7datasets, lower better."
+  },
+  {
+    "id": "pp-ocrv5-server",
+    "name": "PP-OCRv5 server (text only)",
+    "organization": "PaddlePaddle",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "license": "Apache-2.0",
+    "release_date": "2025-05-20",
+    "release_provenance": "release_announcement",
+    "release_source_id": "small-pp-v5_release",
+    "source_id": "small-pp-v5_release",
+    "download_mb": 165.3,
+    "configuration": "Detector + recognizer pipeline; stored weights 165.3 MB, not VRAM. Optional orientation modules excluded.",
+    "evidence_note": "Text boxes and transcripts only, not layout/table/formula parsing. H100 range assumes upright pages with about 50 text lines; component quality cannot establish full-document accuracy."
+  },
+  {
+    "id": "pp-ocrv5-mobile",
+    "name": "PP-OCRv5 mobile (text only)",
+    "organization": "PaddlePaddle",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "license": "Apache-2.0",
+    "release_date": "2025-05-20",
+    "release_provenance": "release_announcement",
+    "release_source_id": "small-pp-v5_release",
+    "source_id": "small-pp-v5_release",
+    "download_mb": 20.7,
+    "configuration": "Detector + recognizer pipeline; stored weights 20.7 MB, not VRAM. Optional orientation modules excluded.",
+    "evidence_note": "Text boxes and transcripts only, not layout/table/formula parsing. H100 range assumes upright pages with about 50 text lines; component quality cannot establish full-document accuracy."
+  },
+  {
+    "id": "pp-ocrv4-mobile",
+    "name": "PP-OCRv4 mobile (text only)",
+    "organization": "PaddlePaddle",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "license": "Apache-2.0",
+    "release_date": "2023-08-07",
+    "release_provenance": "release_announcement",
+    "release_source_id": "small-pp-v4_release",
+    "source_id": "small-pp-v4_release",
+    "download_mb": 15.2,
+    "configuration": "Detector + recognizer pipeline; stored weights 15.2 MB, not VRAM. Optional orientation modules excluded.",
+    "evidence_note": "Text boxes and transcripts only, not layout/table/formula parsing. H100 range assumes upright pages with about 50 text lines; component quality cannot establish full-document accuracy."
+  },
+  {
+    "id": "nemotron-3-5-parse",
+    "name": "Nemotron 3.5 Parse (triple-pass)",
+    "organization": "NVIDIA",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "small-specialist-nemotron35-card",
+    "parameters_million": 630.800502,
+    "configuration": "Triple-pass quality and speed; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
+    "evidence_note": "Public weights verified October23; exact first public release date not established. Stored F32 tensors about2.52GB, not peakVRAM. Author ParseBench75.20 on2,078pages with pinned scorer; separate from other ParseBench versions. 40timing outputs token-limited; no single-pass speed attached to triple-pass quality."
   }
 ]

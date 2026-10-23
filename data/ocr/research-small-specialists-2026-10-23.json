@@ -1,0 +1,248 @@
+{
+  "as_of": "2026-10-22",
+  "scope": "4 concrete compact-model additions, no repo edits",
+  "sources": {
+    "jina-throughput": {
+      "url": "https://arxiv.org/html/2609.03181v1#S6.SS3",
+      "operator": "Jina AI",
+      "dataset": "1403 olmOCR-Bench pages",
+      "hardware": "1 NVIDIA A100 SXM4 40GB",
+      "concurrency": 32,
+      "precision": "Not specified in Table7; Jina downloadable weights BF16",
+      "runtime": "Table7 serving backend/version/speculative setting not fully stated; do not silently assign Table8 L4 vLLM0.20.1 configuration.",
+      "quote": "Serving efficiency of OCR models on olmOCR-Bench (1,403 pages, one A100 SXM4 40 GB, concurrency 32)."
+    },
+    "jina-card": {
+      "url": "https://huggingface.co/jinaai/jina-ocr-v1/blob/904f815deed0fbeab02d82d4648b70106272ffe3/README.md",
+      "revision": "904f815deed0fbeab02d82d4648b70106272ffe3",
+      "license": "CC-BY-NC-4.0",
+      "total_bf16_parameters": 3372238080,
+      "weights_bytes_derived": 6744476160,
+      "architecture": "DeepEncoder plus 3B MoE decoder, ~570M active. FastMTP auxiliary head. Active parameters are not resident parameter count."
+    },
+    "nemotron35-card": {
+      "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/README.md",
+      "revision": "62cb1e4ba153d113ff64aaf2be6e068c377cf53c",
+      "stored_F32_parameters": 630800502,
+      "stored_I64_parameters": 2,
+      "stored_tensor_bytes_derived": 2523202024,
+      "runtime_precision": "BF16",
+      "release_date": null,
+      "release_date_note": "First public release date not established. HF repository created2026-09-03 is not proof of public release. Verified public checkpoint by as-ofOct22; current pin lastmodifiedOct21; card states released-checkpoint regression refreshedOct18."
+    },
+    "nemotron-matched-timing": {
+      "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/parsebench/comparisons/matched_inference_timing.json",
+      "operator": "NVIDIA model publisher",
+      "hardware": "one NVIDIA H100 80GB per model",
+      "dataset": "2078 identical prepared ParseBench page images",
+      "timing": {
+        "clock": "wall span from first model call through final response; do not sum concurrent calls",
+        "includes": [
+          "all native learned model stages",
+          "queueing and response transfer",
+          "dependent region crop preparation and dispatch gaps"
+        ],
+        "excludes": [
+          "initial prepared-page loading/encoding",
+          "server startup",
+          "untimed warmup",
+          "final document rendering",
+          "output writes"
+        ]
+      },
+      "source_images_sha256": "4d11fadd8e1be0efaa2ad504315d9ce5fc06e8852918f4b288e97ec2c428e450"
+    },
+    "nemotron-profile-timing": {
+      "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/validation/inference_benchmarks.json",
+      "hardware": "one H100 80GB",
+      "runtime": "FA3, MTP1, max_model_len=16384, max_num_seqs=192, max_num_batched_tokens=16384",
+      "vllm": "0.26.0",
+      "server_backend": "uni",
+      "weight_sha256": "81dd7609c589f3694ce75520c25af5010953231358de6aec4d03e8c6aac787e9",
+      "actual_gpu_string": "NVIDIA H100 80GB HBM3"
+    },
+    "nemotron-quality": {
+      "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/validation/accuracy_restoration.json",
+      "comparison_notes_url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/parsebench/comparisons/README.md",
+      "results_url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/parsebench/comparisons/results.json",
+      "warning": "Own author-reported full2078page triple-pass score; other published comparison scores may use different scorer snapshots. Integrator must match existing ParseBench test contract; do not put into unrelated OmniDocBench/olmOCR tests."
+    }
+  },
+  "candidates": [
+    {
+      "model": "jina-ocr-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "reference": "h100-80gb-v1",
+      "suggested_low": 1.3,
+      "suggested_high": 9,
+      "observed": {
+        "pages_per_second": 2.57,
+        "output_tokens_per_page": 1085,
+        "output_tokens_per_second": 2792,
+        "source": "jina-throughput",
+        "evidence": "author_reported"
+      },
+      "sources": [
+        "jina-throughput",
+        "jina-card"
+      ],
+      "basis": "Use existing project judgmental A100-to-H100 pipeline factor1–2.3 and workload factor0.5–1.5; rounded outward. This is an assumed sensitivity envelope, not a measured ratio or confidence interval. No extra2x FastMTP gain.",
+      "fit": "Reported exact-model oneA10040GB workload supports conditional oneH10080GB feasibility; changed page budgets/concurrency can alter memory.",
+      "identity_note": "SuryaOCR2 is a page-model observation from Jina; obtain exact Surya checkpoint revision before claiming pinned artifact equivalence.",
+      "reference_workload": "Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile."
+    },
+    {
+      "model": "surya-ocr-2",
+      "status": "estimated",
+      "confidence": "low",
+      "reference": "h100-80gb-v1",
+      "suggested_low": 0.5,
+      "suggested_high": 3.7,
+      "observed": {
+        "pages_per_second": 1.05,
+        "output_tokens_per_page": 3568,
+        "output_tokens_per_second": 3760,
+        "source": "jina-throughput",
+        "evidence": "vendor_comparison"
+      },
+      "sources": [
+        "jina-throughput"
+      ],
+      "basis": "Use existing project judgmental A100-to-H100 pipeline factor1–2.3 and workload factor0.5–1.5; rounded outward. This is an assumed sensitivity envelope, not a measured ratio or confidence interval. No extra2x FastMTP gain.",
+      "fit": "Reported exact-model oneA10040GB workload supports conditional oneH10080GB feasibility; changed page budgets/concurrency can alter memory.",
+      "identity_note": "SuryaOCR2 is a page-model observation from Jina; obtain exact Surya checkpoint revision before claiming pinned artifact equivalence.",
+      "reference_workload": "Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile."
+    },
+    {
+      "model": "nemotron-parse-2",
+      "status": "estimated",
+      "confidence": "low",
+      "reference": "h100-80gb-v1",
+      "suggested_low": 1.5,
+      "suggested_high": 8,
+      "sources": [
+        "nemotron-matched-timing"
+      ],
+      "observed": {
+        "pages_per_second": 3.950693792035446,
+        "concurrency": 128,
+        "processed_pages": 2078,
+        "token_limited_pages": 143,
+        "evidence": "author_reported",
+        "receipt_sha256": "da614959b546d29b3e498d5c5efd2af3450c9f5d24616f59d9694fab33a6ad9c"
+      },
+      "basis": "Exact-model nativeH100 anchor; retain project assumed0.4–2x workload/board/batching envelope, rounded outward. Rate counts all responses, including token-limited pages.",
+      "fit": "Exact-model oneH10080GB run, concurrency128; native model stage. Do not treat3.95pps as single-page reciprocal latency.",
+      "reference_workload": "Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile."
+    },
+    {
+      "model": "nemotron-3-5-parse",
+      "new_registry_candidate": true,
+      "display_name": "Nemotron 3.5 Parse (triple-pass)",
+      "status": "estimated",
+      "confidence": "low",
+      "reference": "h100-80gb-v1",
+      "suggested_low": 4,
+      "suggested_high": 22,
+      "sources": [
+        "nemotron35-card",
+        "nemotron-profile-timing",
+        "nemotron-quality"
+      ],
+      "observed": {
+        "pages_per_second": 10.618347849609256,
+        "complete_pages_per_second": 10.4139523183367,
+        "processed_pages": 2078,
+        "complete_pages": 2038,
+        "concurrency": 128,
+        "mode": "triple",
+        "package": "3.5.0.post5",
+        "runtime_profile": "FA3, MTP1, max_model_len=16384, max_num_seqs=192, max_num_batched_tokens=16384",
+        "evidence": "author_reported"
+      },
+      "quality_candidate": {
+        "benchmark": "ParseBench",
+        "overall_0_100": 75.20375371099965,
+        "configuration": "triple-pass; retain alternative fullpage/crop outputs; chart rules enabled",
+        "scored_prediction_sha256": "9054b3394522f17bd61d5c590b22fc724c8f4bafff41e56d5cc2fa25c76c9714",
+        "eligibility": "author-reported full-set; confirm exact scorer contract against destination test; not an independent leaderboard reproduction",
+        "complete": true,
+        "pages": 2078,
+        "fresh_page_evaluations": 2078,
+        "reused_page_scores": 0,
+        "official_errors": 0,
+        "scores": {
+          "charts": 0.644222532162673,
+          "visual_grounding": 0.7063564534037403,
+          "tables": 0.8486113628424757,
+          "content_faithfulness": 0.879958241822568,
+          "semantic_formatting": 0.6810390953185258,
+          "overall": 0.7520375371099965
+        },
+        "independent_scores": {
+          "tables": 0.8486113628424757,
+          "charts": 0.644222532162673,
+          "content_faithfulness": 0.879958241822568,
+          "semantic_formatting": 0.6810390953185258,
+          "visual_grounding": 0.7063564534037403,
+          "overall": 0.7520375371099965
+        },
+        "denominators": {
+          "tables": 503,
+          "charts": 568,
+          "content_faithfulness": 506,
+          "semantic_formatting": 456,
+          "visual_grounding": 500
+        },
+        "scorer_revision": "9af4102e26b51f234ab5f037e19fec05c0696ec6",
+        "verified_source_files": 241,
+        "prediction_sha256": "9054b3394522f17bd61d5c590b22fc724c8f4bafff41e56d5cc2fa25c76c9714",
+        "seconds": 117.99897802388296,
+        "errors": [],
+        "runtime_sampling": {
+          "seed": 20261012,
+          "top_k": 50,
+          "top_p": 1.0,
+          "fullpage": {
+            "temperature": 0.2,
+            "repetition_penalty": 1.05,
+            "max_tokens": 8744
+          },
+          "detection": {
+            "temperature": 0.2,
+            "repetition_penalty": 1.05,
+            "max_tokens": 4096
+          },
+          "crop": {
+            "temperature": 0.1,
+            "repetition_penalty": 1.0,
+            "max_tokens": 8744
+          }
+        },
+        "note": "Author receipt claims official scorer revision9af4102e26b51f234ab5f037e19fec05c0696ec6,2078fresh page evaluations,zeroerrors; metadata auditable but not independently executed."
+      },
+      "basis": "Match triple-pass quality with triple-pass timing. Existing project nativeH1000.4–2x workload envelope rounded outward. Do not pair15.42pps single-pass with75.20 triple-pass quality.",
+      "fit": "630.8M storedF32 tensorcount, released runtimeBF16, exact oneH10080GB full2078page run;FA3+MTP1 explicit, not plainAR.",
+      "release_date": null,
+      "reference_workload": "Warm prepared pages up to2048px,1000–3000 totaloutputtokens,up16pageconcurrency. Source runs use32 or128 concurrency; proposed bands are judgments, not guaranteed bounds for this lower-concurrency profile."
+    }
+  ],
+  "excluded_this_pass": [
+    {
+      "model": "hiro-moss-ocr-0-3b",
+      "reason": "58.77QPS4090 measures blockrecognition, not wholepages. Any page model needs explicit layout/crop counts, cannot copyQPS.",
+      "source": "https://huggingface.co/PatSnap/Hiro-MOSS-OCR-0.3B"
+    },
+    {
+      "model": "dolphin / dolphin-1-5 / dolphin-v2",
+      "reason": "Official versions and stage architecture verified, but bounded search did not establish actual page/s hardware anchor.1.0/1.5 are0.3B;v2 is3B, so do not transfer by name.",
+      "source": "https://github.com/bytedance/Dolphin"
+    },
+    {
+      "model": "got-ocr",
+      "reason": "Catalog missing reference row; no strong official wholepage timing found this bounded pass."
+    }
+  ],
+  "important_ui_note": "Fast/cheap estimates reflect assumed warm batched typical-page serving, not interactive page latency; include preparation exclusions and truncation caveat in Details."
+}

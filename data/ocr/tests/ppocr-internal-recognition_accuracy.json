@@ -1,0 +1,13 @@
+{
+  "id": "ppocr-internal-recognition_accuracy",
+  "short": "PP recognition",
+  "label": "PP internal crop recognition accuracy",
+  "source": "small-pp-performance_and_internal_quality",
+  "primary_metric": "recognition_accuracy",
+  "direction": "higher",
+  "unit": "percent",
+  "family": "ppocr-components",
+  "core": false,
+  "primary": false,
+  "note": "Vendor-internal component test, not joint full-page quality; excluded from aggregate."
+}
