@@ -19,5 +19,5 @@ test('Datalab current service and provider-run aliases do not inherit unverified
  assert.equal(data.resultsByKey['datalab-accurate-20261020|omniparse-datalab-overall-20261023'][0].value,93.5);
  assert.equal(data.resultsByKey['azure-document-intelligence|omniparse-datalab-overall-20261023'],undefined);
  for(const [id,price] of [['datalab-accurate-20261020',10],['datalab-balanced-omniparse-20261008',4]]){const d=OCR.deployment(data,data.models.find(m=>m.id===id));assert.equal(d.cost.value,price);assert.equal(d.speed,null);assert.equal(d.reference?.status,undefined);}
- const chandra=rows.find(r=>r.id==='datalab-accurate-20261020');const html=OCR.renderRows({rows:[chandra],columns:[],ranges:{}},data);assert.match(html,/Reported results/);assert.match(html,/93.5/);assert.match(html,/95.2/);assert.match(html,/94.2/);
+ const chandra=rows.find(r=>r.id==='datalab-accurate-20261020');const html=OCR.renderRows({rows:[chandra],columns:[],ranges:{}},data);assert.match(html,/Reported benchmark results/);assert.match(html,/93.5/);assert.match(html,/95.2/);assert.match(html,/94.2/);
 });
