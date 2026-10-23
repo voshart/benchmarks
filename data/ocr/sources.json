@@ -1388,5 +1388,36 @@
     "kind": "author_reported",
     "verified_on": "2026-10-23",
     "note": "Separate AR/DFlash concurrency sweep. Higher-concurrency hardware/corpus not restated; do not inherit H20/930-page details from separate concurrency1 run. Context only."
+  },
+  "datalab-scoreboard-overall-20261023": {
+    "title": "Datalab OmniParseBench Overall scoreboard · checked October23",
+    "url": "https://www.datalab.to/benchmarks/overall",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Datalab operator. Accurate row is current October20; all other rows use October8 leaderboard runs. Website footer still says October8; do not erase this mixed run-date distinction. Headline/tag score averages text, tables and layout family pass rates, not raw pooled test accuracy. Gemini3.8Flash and ClaudeSonnet5.5 helped create/verify some tests.",
+    "scoreboard_sha256": "27a2336aff3f07d526dfb42a12daa7806957ccb481b9fde9ca9a8c98ef3f430a"
+  },
+  "datalab-scoreboard-tables-20261023": {
+    "title": "Datalab OmniParseBench Table-tag slice scoreboard · checked October23",
+    "url": "https://www.datalab.to/benchmarks/tables",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Datalab operator. Accurate row is current October20; all other rows use October8 leaderboard runs. Website footer still says October8; do not erase this mixed run-date distinction. Headline/tag score averages text, tables and layout family pass rates, not raw pooled test accuracy. Gemini3.8Flash and ClaudeSonnet5.5 helped create/verify some tests.",
+    "scoreboard_sha256": "27a2336aff3f07d526dfb42a12daa7806957ccb481b9fde9ca9a8c98ef3f430a"
+  },
+  "datalab-scoreboard-multi-column-20261023": {
+    "title": "Datalab OmniParseBench Multi-column-tag slice scoreboard · checked October23",
+    "url": "https://www.datalab.to/benchmarks/multi-column",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Datalab operator. Accurate row is current October20; all other rows use October8 leaderboard runs. Website footer still says October8; do not erase this mixed run-date distinction. Headline/tag score averages text, tables and layout family pass rates, not raw pooled test accuracy. Gemini3.8Flash and ClaudeSonnet5.5 helped create/verify some tests.",
+    "scoreboard_sha256": "27a2336aff3f07d526dfb42a12daa7806957ccb481b9fde9ca9a8c98ef3f430a"
+  },
+  "datalab-convert-mode-pricing-20261023": {
+    "title": "Datalab current Convert mode rate card",
+    "url": "https://www.datalab.to/pricing",
+    "kind": "official",
+    "verified_on": "2026-10-23",
+    "note": "US list rates per1000pages: accurate10, fast/balanced4. Current service rates, not claimed historic benchmark invoice; add-ons/EU/discounts excluded."
   }
 }

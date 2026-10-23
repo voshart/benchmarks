@@ -1,0 +1,14 @@
+{
+  "id": "omniparse-datalab-overall-20261023",
+  "short": "OP Datalab",
+  "label": "OmniParse · Datalab Overall (Oct8/20)",
+  "source": "datalab-scoreboard-overall-20261023",
+  "family": "omniparse",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "scope": "16288 tests / 2343 documents",
+  "note": "Datalab operator. Accurate row is current October20; all other rows use October8 leaderboard runs. Website footer still says October8; do not erase this mixed run-date distinction. Headline/tag score averages text, tables and layout family pass rates, not raw pooled test accuracy. Gemini3.8Flash and ClaudeSonnet5.5 helped create/verify some tests. Separate secondary source cohort; tag slices do not create extra aggregate votes."
+}

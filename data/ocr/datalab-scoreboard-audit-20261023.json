@@ -1,0 +1,308 @@
+{
+  "checked_on": "2026-10-23",
+  "source": "https://www.datalab.to/benchmarks",
+  "source_observations": 33,
+  "previously_captured": 4,
+  "missing_displayed_observations": 29,
+  "added_source_observations": 30,
+  "note": "Balanced overall already existed as a Chandra release metric; also included in this complete source-scoped panel, not a new independent run. Three exact olmOCR observations not duplicated. Current accurate93.5 is not the older Chandra2.5 accurate92.7 or later repo92.9. All new tests secondary.",
+  "rows": [
+    {
+      "board": "overall",
+      "source_label": "Datalab accurate\ncurrent model, Oct 20",
+      "score": 93.5,
+      "model": "datalab-accurate-20261020",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "Gemini 3.8 Flash*",
+      "score": 92.9,
+      "model": "gemini-3-8-flash",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "Datalab balanced",
+      "score": 91.6,
+      "model": "datalab-balanced-omniparse-20261008",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": true
+    },
+    {
+      "board": "overall",
+      "source_label": "Reducto",
+      "score": 90.8,
+      "model": "reducto-omniparse-20261008",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "LlamaParse",
+      "score": 90.4,
+      "model": "llamaparse-omniparse-20261008",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "Mistral OCR",
+      "score": 89.5,
+      "model": "mistral-ocr-omniparse-20261008",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "Claude Sonnet 5.5*",
+      "score": 88.7,
+      "model": "claude-sonnet-5-5",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "GPT-5.6 Sol",
+      "score": 87.8,
+      "model": "gpt-5-6-sol",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "Extend",
+      "score": 83.3,
+      "model": "extend-omniparse-20261008",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "overall",
+      "source_label": "Azure",
+      "score": 83.0,
+      "model": "azure-content-understanding-omniparse-20261008",
+      "test": "omniparse-datalab-overall-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Datalab accurate\ncurrent model, Oct 20",
+      "score": 95.2,
+      "model": "datalab-accurate-20261020",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Extend",
+      "score": 94.7,
+      "model": "extend-omniparse-20261008",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Gemini 3.8 Flash*",
+      "score": 93.8,
+      "model": "gemini-3-8-flash",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "LlamaParse",
+      "score": 93.7,
+      "model": "llamaparse-omniparse-20261008",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Reducto",
+      "score": 92.7,
+      "model": "reducto-omniparse-20261008",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Datalab balanced",
+      "score": 92.5,
+      "model": "datalab-balanced-omniparse-20261008",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Claude Sonnet 5.5*",
+      "score": 92.0,
+      "model": "claude-sonnet-5-5",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "GPT-5.6 Sol",
+      "score": 91.6,
+      "model": "gpt-5-6-sol",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Mistral OCR",
+      "score": 91.5,
+      "model": "mistral-ocr-omniparse-20261008",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "tables",
+      "source_label": "Azure",
+      "score": 86.1,
+      "model": "azure-content-understanding-omniparse-20261008",
+      "test": "omniparse-datalab-tables-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Datalab accurate\ncurrent model, Oct 20",
+      "score": 94.2,
+      "model": "datalab-accurate-20261020",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Gemini 3.8 Flash*",
+      "score": 92.3,
+      "model": "gemini-3-8-flash",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Datalab balanced",
+      "score": 91.9,
+      "model": "datalab-balanced-omniparse-20261008",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "LlamaParse",
+      "score": 91.4,
+      "model": "llamaparse-omniparse-20261008",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Reducto",
+      "score": 91.3,
+      "model": "reducto-omniparse-20261008",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Mistral OCR",
+      "score": 89.6,
+      "model": "mistral-ocr-omniparse-20261008",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Extend",
+      "score": 88.3,
+      "model": "extend-omniparse-20261008",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "GPT-5.6 Sol",
+      "score": 87.4,
+      "model": "gpt-5-6-sol",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Claude Sonnet 5.5*",
+      "score": 86.5,
+      "model": "claude-sonnet-5-5",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "multi-column",
+      "source_label": "Azure",
+      "score": 83.8,
+      "model": "azure-content-understanding-omniparse-20261008",
+      "test": "omniparse-datalab-multi-column-20261023",
+      "status": "added_source_observation",
+      "previously_captured_value": false
+    },
+    {
+      "board": "olmocr-bench",
+      "source_label": "Chandra 2.5\nDatalab API",
+      "score": 86.9,
+      "model": "chandra-2-5-api",
+      "test": "chandra-2-5-olm-no-hf",
+      "metric": "own_postprocessing",
+      "status": "already_exact_do_not_duplicate"
+    },
+    {
+      "board": "olmocr-bench",
+      "source_label": "Chandra OCR 2\nopen source",
+      "score": 85.8,
+      "model": "chandra-2-open",
+      "test": "chandra-2-5-olm-no-hf",
+      "metric": "own_postprocessing",
+      "status": "already_exact_do_not_duplicate"
+    },
+    {
+      "board": "olmocr-bench",
+      "source_label": "LightOnOCR-3-4B\nour reproduction",
+      "score": 85.4,
+      "model": "lightonocr-3-4b",
+      "test": "chandra-2-5-olm-no-hf",
+      "metric": "own_postprocessing",
+      "status": "already_exact_do_not_duplicate"
+    }
+  ]
+}

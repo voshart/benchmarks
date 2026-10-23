@@ -4817,5 +4817,117 @@
     "configuration": "double-pass; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
     "evidence_note": "Exact mode-specific quality and timing; not triple-pass accuracy paired with faster single-pass speed. 35/2078 timing responses token-limited.",
     "release_source_id": "small-specialist-nemotron35-card"
+  },
+  {
+    "id": "datalab-accurate-20261020",
+    "name": "Datalab accurate (Oct 20 snapshot)",
+    "organization": "Datalab",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Current accurate service, October20 override; underlying model identity not published. Not asserted to be Chandra2.5.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "datalab-balanced-omniparse-20261008",
+    "name": "Datalab balanced (OmniParse run)",
+    "organization": "Datalab",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Balanced hosted mode in October8 report; do not pair with accurate-mode quality or cost.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "gemini-3-8-flash",
+    "name": "Gemini 3.8 Flash",
+    "organization": "Google",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Exact named hosted model in Datalab report; execution settings not independently pinned. Used in creating/verifying some tests.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "reducto-omniparse-20261008",
+    "name": "Reducto (OmniParse run)",
+    "organization": "Reducto",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Source-run service identity. Initial public adapter defaults to r-1, but actual historic run overrides are unverified; no canonical-generation scores inherited.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "llamaparse-omniparse-20261008",
+    "name": "LlamaParse (OmniParse run)",
+    "organization": "LlamaIndex",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Source-run service identity. Initial adapter defaults to agentic_plus/latest, but historic run overrides/endpoint revision are unverified.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "mistral-ocr-omniparse-20261008",
+    "name": "Mistral OCR (OmniParse run)",
+    "organization": "Mistral",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Source-run service identity. Initial adapter defaults to mistral-ocr-4-1, but historic run overrides are unverified; not automatically pooled with canonical4.1.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "extend-omniparse-20261008",
+    "name": "Extend (OmniParse run)",
+    "organization": "Extend",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Source-run service identity. Initial adapter uses parse_performance with agentic text/tables enabled; not assumed to be Extend AIv1.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "azure-content-understanding-omniparse-20261008",
+    "name": "Azure Content Understanding (OmniParse run)",
+    "organization": "Microsoft",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-scoreboard-overall-20261023",
+    "configuration": "Source-run service identity. Initial adapter uses Content Understanding prebuilt-layout API2025-11-01; NOT Azure Document Intelligence.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
   }
 ]
