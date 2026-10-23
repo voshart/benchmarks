@@ -16,3 +16,15 @@ test('default catalog exposes secondary-only models without inventing aggregate 
  for(const row of filtered.rows){const same=all.rows.find(r=>r.id===row.id);assert.equal(same.rank,row.rank);assert.deepEqual(same.rankContributions,row.rankContributions);}
  const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');assert.match(template,/value="0"\{% if ocr.config.default_families == 0 %\} selected/);
 });
+
+test('unranked rank cells stay compact with accessible explanation in Details',()=>{
+ const data=loadOCR(),all=build(data);
+ for(const row of all.rows.filter(r=>r.rank==null)){
+  const html=OCR.renderRows({...all,rows:[row]},data);
+  const cell=html.match(/<td class="index">(.*?)<\/td>/s)[1];
+  assert.match(cell,/aria-label="Unranked: no comparable overall index. See Details.">—<\/span>/);
+  assert.doesNotMatch(cell,/<small>|>Unranked</);
+  assert.match(html,/<strong>No comparable overall index.<\/strong>/);
+  assert.match(html,/>Details<\/button>/);
+ }
+});
