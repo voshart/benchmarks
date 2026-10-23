@@ -1,8 +1,8 @@
 # Top-five OCR detail and visibility audit — 2026-10-23
 
-The scope is the five leading models in the default OCR matrix at repository commit `b713c8f17e7a98ee1100e2147305f6568a4651ae`. This is the repository's evidence-relative rank index, not an accuracy percentage. Each of these models currently has one contributing benchmark family, so every index remains provisional.
+The scope is the five leading models in the default OCR matrix at repository commit `b713c8f17e7a98ee1100e2147305f6568a4651ae`. This is the repository's evidence-relative rank index, not an accuracy percentage. Each originally had one contributing benchmark family. The initial detail and presentation work preserved those indices; the later completeness audit below adds a verified GLM OpenOCR observation and therefore changes its index under the existing policy.
 
-| Model | Rank index before and after | Added numerical detail |
+| Model | Index after initial detail pass | Numerical detail in initial pass |
 | --- | ---: | --- |
 | GLM-5.3-Flash | 99.13793103448276 | 12 PureDoc track components and 25 Real5 scenario/component values |
 | Gemini 3 Pro preview | 98.4375 | MDP public Latin/non-Latin means and 17 public language scores |
@@ -10,11 +10,13 @@ The scope is the five leading models in the default OCR matrix at repository com
 | Sarvam Vision 2.1 | 95.28301886792453 | Eight full-set olmOCR components; six values in a separate split-unspecified OmniDoc report; 23 values in a separate Indic recognition report |
 | Chandra 2.5 (accurate) | 95 | Verified corpus sizes, scoring method, snapshot date and model-identity limits for its three existing OmniParse panels |
 
-This adds **112 numeric fields**, including two new context observations. Existing numeric observations are preserved. The catalog has 205 registered OCR models, 202 default-view model rows, 550 observations and 50 exact test protocols. Neither the ranking calculation nor any existing model's numeric index or contributing protocols changed.
+The initial pass added **112 numeric fields**, including two new context observations, without changing any existing headline or index. The follow-up adds **150 PureDoc domain values** and **one OpenOCR observation with eight numeric metrics**. The catalog now has 205 registered OCR models, 202 default-view model rows, 551 observations and 50 exact test protocols. Existing headline values and the ranking formula are preserved; the new eligible observation changes eight indices through the normal comparison-cohort calculation.
 
 ## GLM-5.3-Flash
 
 PureDoc's [pinned component CSV](https://github.com/zhihengli-casia/PureDocBench/blob/fdae62435871eb7ba058a804574ad1a9d2fd6cf1/results/components.csv) supplies text edit, formula CDM, table TEDS and reading-order edit for each of the clean, digital-degradation and real-degradation tracks. The original clean **83.04**, digital **81.03**, real **74.99** and Avg₃ **79.69** remain unchanged. The [result documentation at the same revision](https://github.com/zhihengli-casia/PureDocBench/blob/fdae62435871eb7ba058a804574ad1a9d2fd6cf1/results/README.md) explains the released summaries and missing historical run hashes. The corpus has 1,475 source pages in three matched tracks, or 4,425 images. Reading-order edit is a separate metric, not another contribution to the headline.
+
+The completeness follow-up adds all **150 values** in the same revision's [category component CSV](https://github.com/zhihengli-casia/PureDocBench/blob/fdae62435871eb7ba058a804574ad1a9d2fd6cf1/results/category_components.csv): ten document domains × three tracks × five metrics. All 150 source numeric tokens retain their precision. Three collapsible tables in the existing popover show ten domains and five metric columns per track. Text and reading-order distances remain 0–1, lower is better; Overall, CDM and TEDS remain 0–100, higher is better. Domain summaries create no additional ranking votes, and their unweighted mean must not replace the source's global result.
 
 The [pinned Real5 dataset card](https://huggingface.co/datasets/PaddlePaddle/Real5-OmniDocBench/blob/495570bdb69e09e4aaf38eb61c12a4e06bc65fa4/README.md) supplies five scenario overalls and four components per scenario. The source re-creates 1,355 OmniDocBench v1.5 pages in five physical conditions. The existing **90.76** overall is preserved. Text and reading-order edit use 0–1 distances with lower values better; CDM and TEDS retain their 0–100 scale.
 
@@ -28,6 +30,18 @@ Four printed Real5 scenario overalls do not reconstruct from the printed compone
 | Skew | 90.76 | 86.0200 |
 
 The original execution operator and immutable inference settings are not separately established for these maintainer-published GLM observations. The PureDoc observation includes an explicit provisional reason. Verifying a publication is not a new evaluation run.
+
+### Additional OpenOCR observation and ranking effect
+
+[OpenOCR's dedicated GLM report](https://open-ocr.com/rankings/z-ai/glm-5.3-flash) publishes **55.00 ±7.96** on **20 pages / 141 rule tests**, with old scans **61.5**, scanned math **0.0**, tables **68.0**, and multi-column **90.5**. The observed zero is retained, as are a **100/100** blank-page result and **0.0** penalty. The dataset is `olmocr-hard-20/v2`; the scorer is `olmocr-bench-harness/2026-07 + openocr four-category mean (in-repo v3)`. Both identifiers match the [current Mistral OCR 4.1 report](https://open-ocr.com/rankings/mistralai/mistral-ocr-4-1), an already imported member of this protocol. The [methodology](https://open-ocr.com/benchmark) separates the hard corpus from the eleven everyday images and excludes incomplete or older-version runs from the hard leaderboard.
+
+The source names GLM-5.3-Flash via OpenRouter, but does not pin an immutable backend revision or full inference settings. Its **2026-08-29** run date precedes the registry's unverified, legacy-import **2026-08-31** release date. Both dates and the unresolved discrepancy are retained. This is a qualified reported result, not an independent rerun performed for this repository, and it is not a full-set olmOCR observation.
+
+The existing policy already makes `openocr-hard` aggregate-eligible. GLM now contributes one PureDoc percentile (**99.137931**) and one OpenOCR percentile (**18.75**), producing **58.943966** instead of **99.137931**. Its index remains provisional. This changes its displayed position from 1 to 60 at this snapshot; no weights or selection priorities were changed to create or avoid that result.
+
+**Cohort completeness matters:** OpenOCR's full source leaderboard lists GLM 33rd among 97 models, whereas this repository currently records eight of those models. The repository's percentile is relative to those eight imported identities, not the complete source leaderboard. The small document corpus and incomplete imported comparison cohort limit any interpretation of the index as a broad model-quality ordering. The original seven OpenOCR participants also change numeric indices because their comparison cohort grows from seven to eight; all other numeric indices are unchanged. The current leading five become Gemini 3 Pro preview, Kimi K3, Sarvam Vision 2.1, Chandra 2.5 (accurate), and TeleOCR. The first four still contribute one eligible family each; TeleOCR contributes four.
+
+Other checked OpenOCR leads are not substituted: Gemini 3 Pro preview has no published hard-corpus result; Kimi K3's separate eleven-image report says only four of eleven scores reproduce; the generic Datalab Convert accurate run is not tied to the Chandra 2.5 October 20 snapshot; no exact Sarvam Vision 2.1 result was established. Kimi's model card also reports an OmniDoc result without enough version/split information to assign it to a comparable protocol. These are documented evidence gaps rather than invented scores.
 
 ## Gemini 3 Pro preview and Kimi K3
 
@@ -68,6 +82,16 @@ The default matrix renders every selected protocol's headline score once in its 
 
 Model names wrap without ellipsis or line clamps; each benchmark result occupies a compact numeric line. Popovers have readable component tables, a close button, and keyboard/outside-click dismissal. Percent-scale values display up to two decimal places and ratios up to four, while stored source precision is preserved. Unknown speed and cost values display as an em dash, with their status retained in model details. Source links prefer pinned observation URLs when available. Snapshot dates are metadata rather than title suffixes, including the source date formerly displayed in the ChatGPT 5.2 name; formal checkpoint version identifiers are preserved. Header sorting still uses the named primary protocol; additional protocol displays do not alter sort values or ranking.
 
+The follow-up fixes two separate UI defects. Specialized tabs now render only the exact protocol named by each column, preventing a public MDP result from filling a private MDP cell or a whole-document result from filling a component-protocol cell. The default family matrix still groups all recorded protocols, now exposing 480 headline scores. Other is a plain, non-sortable header because it contains heterogeneous protocols without a shared sorting value. PureDoc domain tables remain collapsed within popovers, with accessible table headings and a keyboard-focusable horizontal scroll region on narrow screens.
+
+Official [GLM](https://huggingface.co/zai-org/GLM-5.3-Flash) and [Kimi](https://huggingface.co/moonshotai/Kimi-K3) model cards establish current open-weight availability; Kimi's organization is now recorded as Moonshot AI. These registry corrections do not establish the exact hosted/local benchmark backend or resolve unknown release dates.
+
+## USD pricing
+
+The follow-up user instruction retains the ranking method and standardizes all displayed prices to USD. [ECB reference rates dated October 23, 2026](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) provide EUR1 = USD1.1193 = INR106.2720. The rate inputs and date are stored in `data/exchange-rates.json`; USD conversion uses the full cross-rate before display rounding. Sarvam's native INR500/1,000-page service context displays as approximately $5.27. Its original INR0.50/page tariff and contextual status remain recorded. Gladia's two EUR/audio-hour tariffs and Reson8's EUR subscription details are converted by the same shared helper on the speech page. Native tariffs, rate dates, and source links stay in details; USD cells contain only compact prices and qualification markers. Currency conversion changes neither benchmark observations nor ranking policy.
+
+## Validation
+
 Validation covers source references, data schemas, all recorded default-view protocol headline scores, accessible per-result popovers, component scales, null versus zero, HTML escaping, pinned source links and ranking invariance. The repository's validation, test and build gates are run before publication. Browser checks verify compact rows and that expanded popovers remain readable beyond their table cells. No model inference or independent benchmark reproduction is claimed.
 
 ## Benchmark column order
@@ -81,3 +105,5 @@ The column order is a fixed editorial choice, separate from the model-ranking ca
 [Real5](https://arxiv.org/html/2603.04205v1), created by the PaddlePaddle/Baidu team with HKUST, and [Wild-OmniDoc](https://arxiv.org/html/2603.23885v2), introduced with DocHumming, occupy the later research positions. The final four named columns are commercial teams' own comparisons: [Datalab OmniParse](https://www.datalab.to/blog/omni-parse-bench), [SoMarkAI DocParsingBench](https://github.com/SoMarkAI/DocParsingBench), [Nanonets IDP Core](https://benchmarking.nanonets.com/benchmarks/idp), and [Nace's aggregate](https://www.nace.ai/blog/document-intelligence-launch). NDI is last because it is a vendor-designed composite that also overlaps public benchmark families and incorporates internal evaluations.
 
 Benchmark ownership and the operator of a particular run are separate facts. DrDoc and Wild are not reclassified as TeleOCR-created benchmarks merely because TeleOCR supplies the repository's comparison rows. Likewise, industry coauthors do not by themselves turn a standalone research benchmark into a proprietary product evaluation. Existing per-observation provenance and all rank-eligibility rules remain intact. `column_family_order` sorts only the display list, consistently across OCR tabs; tests compare unchanged rows, selected scores, rank contributions and within-cell protocol membership with and without that configuration.
+
+This is curated source coverage, not an exhaustive census of available OCR evaluations or a measured ranking of universal reputation. The mixed Other column includes both research and vendor-associated protocols; its position is not a declaration of independence. Every selected protocol currently recorded is displayed, with its scope and provenance in its popover. Missing matching-version results, private breakdowns and immutable execution receipts remain explicit limits; no model inference was run as part of this work.

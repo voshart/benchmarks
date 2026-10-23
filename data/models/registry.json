@@ -401,8 +401,10 @@
     "name": "GLM-5.3-Flash",
     "release_date": "2026-08-31",
     "release_provenance": "legacy_import",
-    "access": "unknown",
-    "organization": "Z.ai"
+    "access": "open",
+    "organization": "Z.ai",
+    "source_id": "glm-5-3-flash-model-card",
+    "evidence_note": "Publicly downloadable weights are available from the official Z.ai model card. Availability verification does not establish whether the historical benchmark used hosted or local weights, nor its exact checkpoint or inference settings. The imported release date remains unverified."
   },
   {
     "id": "glm-ocr",
@@ -618,8 +620,10 @@
     "name": "Kimi K3",
     "release_date": null,
     "release_provenance": "unknown",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": "Moonshot AI",
+    "source_id": "kimi-k3-model-card",
+    "evidence_note": "The official Moonshot AI model card releases full Kimi K3 weights under the Kimi K3 License. Open access does not establish unrestricted reuse. Availability verification does not pin the hosted/local backend or checkpoint of the published benchmark run. Release date remains unknown."
   },
   {
     "id": "lightonocr-2-1b",
@@ -4423,18 +4427,30 @@
     "release_provenance": "release_announcement",
     "source_id": "sarvam-vision-21-release",
     "release_source_id": "sarvam-vision-21-release",
-    "configuration": "Hosted document digitisation with semantic layout parser and reading-order network; current INR service pricing is contextual, not a frozen benchmark endpoint tariff.",
+    "configuration": "Hosted document digitisation with semantic layout parser and reading-order network; current service pricing is contextual, not a frozen benchmark endpoint tariff.",
     "evidence_note": "Author-operated official/full olmOCR evidence. Parameters unknown; original Vision 3B is not proof for 2.1.",
     "topics": [
       "ocr"
     ],
     "price_context": {
-      "label": "Service ₹500†",
+      "label": "Service tariff",
       "source_id": "sarvam-document-ai-pricing",
       "verified_on": "2026-10-22",
       "currency": "INR",
       "amount_per_1000_pages": 500,
-      "note": "Current Digitisation API ₹0.50/page = ₹500/1000 pages, checked2026-10-22. INR only; no FX conversion or USD sorting. Ratecard does not freeze benchmark revision. Extract API is a separate service."
+      "note": "Current Digitisation API tariff; the source bills per page. The rate card does not freeze the benchmark revision. Extraction API is a separate service.",
+      "amount": 500,
+      "unit": "currency_per_1000_pages",
+      "published_amount": 0.5,
+      "published_unit": "currency_per_page",
+      "provider": "Sarvam AI",
+      "mode": "Digitisation API",
+      "tier": "Pay As You Go",
+      "basis": "vendor_list",
+      "as_of": "2026-10-22",
+      "version_scope": "current_service",
+      "verification_status": "verified",
+      "comparison_default": false
     }
   },
   {

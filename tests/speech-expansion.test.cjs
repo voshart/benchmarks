@@ -168,7 +168,9 @@ test('timing remains separate from accuracy and matches exact sample, engine and
 test('price units, currencies, current endpoints and token meters cannot be substituted',()=>{
  assert.equal(data.pricing.length,21);assert.equal(data.tokenPricing.length,2);
  const gladia=data.pricing.find(row=>row.provider==='Gladia'&&row.mode==='async');
- assert.equal(gladia.currency,'EUR');assert.equal(gladia.amount,0.16);
+ assert.equal(gladia.currency,'USD');assert.equal(gladia.amount,0.16*gladia.fx.rate);
+ assert.equal(gladia.original_currency,'EUR');assert.equal(gladia.original_amount,0.16);
+ assert.equal(gladia.published_currency,'EUR');assert.equal(gladia.published_amount,0.16);
  const deepgram=data.pricing.find(row=>row.provider==='Deepgram'&&row.mode==='pre-recorded'&&row.model.includes('monolingual'));
  assert.equal(deepgram.published_amount,0.0043);assert.ok(Math.abs(deepgram.amount-0.258)<1e-10);
  assert.equal(data.pricing.some(row=>row.provider==='Soniox'),false);

@@ -2151,7 +2151,7 @@
     "measurement_operator": "not_applicable",
     "verified_on": "2026-10-19",
     "quote": "Solaria-3",
-    "note": "Self-serve async Solaria-3, 0–100 hours/month, is EUR 0.16 per hour. Live service is EUR 0.68 per hour. Currency stays EUR; no USD exchange-rate assumption."
+    "note": "Self-serve async Solaria-3, 0–100 hours/month, and live service tariffs are retained in their published currency and billing unit. USD display uses separately dated exchange-rate metadata; the original vendor rates and tariff verification date remain unchanged."
   },
   "mistral-transcribe-pricing": {
     "title": "Mistral Voxtral Mini Transcribe 2602 official model pricing",

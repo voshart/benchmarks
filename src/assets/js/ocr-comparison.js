@@ -52,17 +52,37 @@
   return rows.map((row,i)=>({row,i})).sort((a,b)=>{const x=value(a.row,key),y=value(b.row,key);if(x==null||y==null)return x==null&&y==null?a.i-b.i:x==null?1:-1;const delta=typeof x==='string'?x.localeCompare(y):x-y;return (direction==='asc'?delta:-delta)||a.i-b.i;}).map(x=>x.row);
  }
  function defaultDirection(key,result){return key==='model'||key==='price'||result.columns.find(t=>t.id===key)?.direction==='lower'?'asc':'desc';}
- function renderHead(result,options={}){const key=options.sortKey||'rank',dir=options.sortDirection||'desc';return [{id:'model',short:'Model',label:'Model name'},{id:'rank',short:'Rank index',label:'Quality only; speed and cost never affect this index'},{id:'speed',short:'H100 pages/s',label:'Estimated 1 × H100 80GB reference throughput; not a controlled benchmark. Range sorting uses geometric midpoint; originals remain in Details'},{id:'price',short:'$/1k pages',label:'API tariffs, benchmark estimates, or explicitly assumed token/local costs'},...result.columns].map(t=>`<th scope="col" aria-sort="${t.id===key?(dir==='asc'?'ascending':'descending'):'none'}"><button type="button" class="column-sort" data-ocr-sort="${esc(t.id)}" title="${esc(t.label)}${t.primary_metric?' · '+(t.direction==='lower'?'Lower':'Higher')+' is better. Sorts the named primary protocol only; additional protocols below do not change the sort value.':''}">${esc(t.short)} ${t.id===key?(dir==='asc'?'↑':'↓'):'↕'}</button></th>`).join('');}
+ function renderHead(result,options={}){
+  const key=options.sortKey||'rank',dir=options.sortDirection||'desc';
+  return [{id:'model',short:'Model',label:'Model name'},{id:'rank',short:'Rank index',label:'Quality only; speed and cost never affect this index'},{id:'speed',short:'H100 pages/s',label:'Estimated 1 × H100 80GB reference throughput; not a controlled benchmark. Range sorting uses geometric midpoint; originals remain in Details'},{id:'price',short:'$/1k pages',label:'API tariffs, benchmark estimates, or explicitly assumed token/local costs'},...result.columns].map(t=>{
+   if(t.id==='reported-other')return `<th scope="col" title="Mixed protocols have no shared sortable score; open a result's details for its exact protocol.">${esc(t.short)}</th>`;
+   return `<th scope="col" aria-sort="${t.id===key?(dir==='asc'?'ascending':'descending'):'none'}"><button type="button" class="column-sort" data-ocr-sort="${esc(t.id)}" title="${esc(t.label)}${t.primary_metric?' · '+(t.direction==='lower'?'Lower':'Higher')+' is better. Sorts the named primary protocol only; additional protocols below do not change the sort value.':''}">${esc(t.short)} ${t.id===key?(dir==='asc'?'↑':'↓'):'↕'}</button></th>`;
+  }).join('');
+ }
  const metricNames={avg3:'Average of 3 splits',clean:'Clean',digital:'Digital',real:'Real',public:'Public',private:'Private',photo:'Photo',non_latin:'Non-Latin',arxiv:'arXiv',base:'Base',headers_footers:'Headers / footers',long_tiny_text:'Long / tiny text',multi_column:'Multi-column',old_scans:'Old scans',old_scans_math:'Old scans + math',text_edit:'Text edit distance',reading_order_edit:'Reading-order edit distance',read_order_edit:'Reading-order edit distance',order_edit:'Reading-order edit distance',formula_cdm:'Formula CDM',table_teds:'Table TEDS',table_teds_s:'Table TEDS-S',table_teds_structure:'Table structure TEDS',teds_content:'Content TEDS',teds_structure:'Structure TEDS',cer:'CER',wer:'WER',ci95:'95% CI ±',reported_uncertainty:'Reported uncertainty ±',kie:'KIE',ocr:'OCR',vqa:'VQA',pp3:'PP3',own_postprocessing:'Own postprocessing'};
  const metricLabel=(test,key)=>test.metric_labels?.[key]||metricNames[key]||key.replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
  const metricDirection=(test,key)=>test.metric_directions?.[key]==='lower'?' ↓':test.metric_directions?.[key]==='higher'?' ↑':'';
  const metricUnit=(test,key)=>test.metric_units?.[key]==='percent'?'%':test.metric_units?.[key]==='ratio'?' ratio':'';
+ function metricTables(observation,test,data){
+  return (test.metric_tables||[]).map(table=>{
+   const rows=table.rows.filter(row=>row.metric_keys.some(key=>finite(observation.metrics?.[key])));
+   if(!rows.length)return '';
+   const headings=table.columns.map(column=>{
+    const direction=column.direction==='lower'?' ↓':column.direction==='higher'?' ↑':'',unit=column.unit==='percent'?'%':column.unit==='ratio'?'ratio':'';
+    return `<th scope="col">${esc(column.label+direction+(unit?' ('+unit+')':''))}</th>`;
+   }).join('');
+   const body=rows.map(row=>`<tr><th scope="row">${esc(row.label)}</th>${row.metric_keys.map((key,index)=>{const value=observation.metrics?.[key];return `<td data-metric="${esc(key)}">${finite(value)?esc(scoreFmt(value,table.columns[index].unit)):'—'}</td>`;}).join('')}</tr>`).join('');
+   const source=table.source_url||table.source_id?observationLink(data,{source_url:table.source_url,source_id:table.source_id},'Source ↗'):'';
+   return `<details class="score-metric-group"><summary>${esc(table.label)} (${rows.length})</summary><div class="score-metric-table-scroll" role="region" aria-label="${esc(table.label)}" tabindex="0"><table class="score-metric-table" aria-label="${esc(table.label)}"><thead><tr><th scope="col">${esc(table.row_header||'Category')}</th>${headings}</tr></thead><tbody>${body}</tbody></table></div>${source||table.note?`<p class="score-metric-source">${source}${source&&table.note?' · ':''}${esc(table.note||'')}</p>`:''}</details>`;
+  }).join('');
+ }
  function metricBreakdown(observation,test,data){
-  const metrics=Object.entries(observation.metrics||{}).filter(([key,value])=>key!==test.primary_metric&&finite(value));
-  if(!metrics.length)return '';
+  const groupedKeys=new Set((test.metric_tables||[]).flatMap(table=>table.rows.flatMap(row=>row.metric_keys)));
+  const metrics=Object.entries(observation.metrics||{}).filter(([key,value])=>key!==test.primary_metric&&!groupedKeys.has(key)&&finite(value)),tables=metricTables(observation,test,data);
+  if(!metrics.length&&!tables)return '';
   const items=metrics.map(([key,value])=>`<dt>${esc(metricLabel(test,key)+metricDirection(test,key))}</dt><dd data-metric="${esc(key)}">${esc(scoreFmt(value,test.metric_units?.[key]))}${esc(metricUnit(test,key))}</dd>`).join('');
   const componentSource=observation.component_source_url?`<small class="score-context">${observationLink(data,{source_url:observation.component_source_url,source_id:observation.component_source_id||observation.source_id},'Breakdown source ↗')}</small>`:observation.component_source_id&&observation.component_source_id!==observation.source_id?`<small class="score-context">${link(data,observation.component_source_id,'Breakdown source ↗')}</small>`:'';
-  return `<dl class="score-metrics">${items}</dl>${componentSource}`;
+  return `${metrics.length?`<dl class="score-metrics">${items}</dl>`:''}${componentSource}${tables}`;
  }
  const evidenceLabel=observation=>({official:'benchmark publication',third_party:'third-party report',community:'community report',author_reported:'author-reported',vendor_comparison:'vendor comparison',vendor:'vendor-operated',mixed:'mixed evidence',imported:'imported',secondary:'secondary report',research:'reported; operator unverified',vendor_internal:'vendor-internal'})[observation.evidence]||'reported';
  function visibleContext(observation,test){
@@ -77,7 +97,7 @@
   const reported=data.tests.filter(t=>row.scores[t.id]?.value!=null);
   if(reported.length)content+='<p><strong>Reported benchmark results</strong> · Separate protocols, not a combined score.</p><ul>'+reported.flatMap(t=>{const selected=row.scores[t.id],alternatives=(data.resultsByKey?.[row.id+'|'+t.id]||[]).filter(o=>finite(o.value)&&o.status!=='assumed'&&o.evidence!=='assumed'&&(o.source_id!==selected.source_id||o.value!==selected.value));return [selected,...alternatives].map((o,index)=>`<li><strong>${esc(t.label)}: ${esc(scoreFmt(o.value,t.unit))}</strong>${index?' · alternate source':''} · ${esc(o.evidence||'reported')}. ${esc(o.configuration||'')} ${esc(o.note||data.sources[o.source_id]?.note||'')} ${observationLink(data,o,'Source ↗')}${metricBreakdown(o,t,data)}${visibleContext(o,t)}</li>`);}).join('')+'</ul>';
   else content+='<p>No benchmark results recorded for this model.</p>';
-  content+=`<p><strong>Cost:</strong> ${esc(d.cost.label)} /1,000 pages · ${esc(d.cost.kind)}. ${esc(d.cost.note)} ${d.cost.source_id?link(data,d.cost.source_id,'Source ↗'):''}</p>`;
+  content+=`<p><strong>Cost:</strong> ${esc(d.cost.label)} /1,000 pages · ${esc(d.cost.kind)}. ${esc(d.cost.note)} ${d.cost.source_id?link(data,d.cost.source_id,'Source ↗'):''}${d.cost.fx?` · <a href="${esc(d.cost.fx.source_url)}" target="_blank" rel="noreferrer">Exchange rate ↗</a>`:''}</p>`;
   if(d.referenceMode){const p=data.ocrReference.profile,e=d.reference;content+=`<p><strong>Common reference: ${esc(p.label)}</strong>. ${esc(p.hardware)}. ${esc(p.host)}</p><p>${esc(p.precision)} ${esc(p.workload)} ${esc(p.batch)}</p>`;
    if(e?.status==='estimated')content+=`<p><strong>Low-confidence H100 estimate:</strong> ≈${esc(rangeFmt(e.low))}–${esc(rangeFmt(e.high))} pages/s. NOT a measurement or statistical confidence interval. ${esc(e.basis)}</p>`;
    content+=`<p><strong>Fit:</strong> ${esc(e?.fit||'No verified local reference scenario for this hosted or unresolved configuration.')} ${esc(p.fit_note)}</p><p>${esc(p.method)} ${esc(p.sorting)} Quality scores are unchanged and were not remeasured at this resolution, precision or batch. ${(e?.source_ids||[]).map(id=>link(data,id,'Evidence ↗')).join(' · ')}</p>`;
@@ -90,6 +110,8 @@
  }
  function cellObservation(row,test,data,columns){
   if(row.scores[test.id]?.value!=null)return {observation:row.scores[test.id],test,variant:false};
+  // Specialized views name exact protocols; never borrow another split or component.
+  if(!columns.some(t=>t.id==='reported-other'))return null;
   const shownFamilies=new Set(columns.map(t=>t.family));
   const candidates=data.tests.filter(t=>row.scores[t.id]?.value!=null&&(test.id==='reported-other'?!shownFamilies.has(t.family):t.family===test.family));
   candidates.sort((a,b)=>(a.matrix_order??100)-(b.matrix_order??100));
@@ -123,7 +145,7 @@
  }
  function compactPriceLabel(cost){
   const label=String(cost.label||'').replace(/^Service\s+/,'');
-  return finite(cost.value)||/^(?:≈)?[$₹€£¥]\d[\d.,]*(?:–[$₹€£¥]?\d[\d.,]*)?[†‡*]?$/.test(label)?label:'—';
+  return finite(cost.value)||/^(?:≈)?\$\d[\d.,]*(?:–\$?\d[\d.,]*)?[†‡*]?$/.test(label)?label:'—';
  }
  function renderRows(result,data,options={}){const enriched=enrich(result,data,options);return sortRows(enriched.rows,options.sortKey||'rank',options.sortDirection||'desc').map(r=>{
   const d=r.deployment,s=d.speed,e=d.estimate,c=d.cost,ref=d.reference;

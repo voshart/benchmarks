@@ -514,7 +514,7 @@
     "url": "https://www.sarvam.ai/api-pricing",
     "kind": "vendor",
     "verified_on": "2026-10-22",
-    "note": "Current service rates INR; not a USD price or frozen benchmark-generation price."
+    "note": "Source-native current service tariffs are retained with their original billing units. USD display uses separately dated exchange-rate metadata. The rate card does not establish a frozen benchmark-generation price."
   },
   "ovisocr3-release": {
     "title": "OvisOCR3 release and evaluation",
@@ -1450,6 +1450,27 @@
     "kind": "third_party",
     "verified_on": "2026-10-23",
     "note": "133public pages/7equal-weight datasets; exclude inksight_* private groups, cap each normalized error at1 before averaging. Fetched data reserialized with Python json.dumps defaults, sha256 fced75df8192adf8e673ae9c0be03cc3005ef4fa6c59d34e2b4a10e1a9556b9d"
+  },
+  "openocr-glm-5-3-flash": {
+    "title": "OpenOCR GLM-5.3-Flash hard-document measurement",
+    "url": "https://open-ocr.com/rankings/z-ai/glm-5.3-flash",
+    "kind": "third_party",
+    "verified_on": "2026-10-23",
+    "note": "OpenOCR-operated GLM-5.3-Flash via OpenRouter: 55.00 ±7.96 on olmocr-hard-20/v2, 20 pages and 141 rule tests. Same corpus/scorer as its Mistral OCR 4.1 report. Exact backend and inference configuration are unpinned; reported run predates the registry's unverified imported release date by two days."
+  },
+  "glm-5-3-flash-model-card": {
+    "title": "GLM-5.3-Flash official model card",
+    "url": "https://huggingface.co/zai-org/GLM-5.3-Flash",
+    "kind": "official",
+    "verified_on": "2026-10-23",
+    "note": "Z.ai publishes downloadable GLM-5.3-Flash weights and local deployment instructions. Establishes current open-weight availability and organization, not the immutable checkpoint or inference settings of third-party benchmark runs."
+  },
+  "kimi-k3-model-card": {
+    "title": "Kimi K3 official model card",
+    "url": "https://huggingface.co/moonshotai/Kimi-K3",
+    "kind": "official",
+    "verified_on": "2026-10-23",
+    "note": "Moonshot AI explicitly publishes Kimi K3 as an open-weight model under the Kimi K3 License. Establishes current availability and organization; does not establish an exact release date or the immutable configuration of benchmark runs."
   },
   "sarvam-indic-ocr-dataset": {
     "title": "Sarvam Indic OCR Bench · official dataset card and metric definition",
