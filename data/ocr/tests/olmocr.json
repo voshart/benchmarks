@@ -9,5 +9,35 @@
   "core": true,
   "family": "olmocr",
   "min_models": 6,
-  "min_organizations": 3
+  "min_organizations": 3,
+  "metric_labels": {
+    "arxiv": "arXiv math",
+    "base": "Base",
+    "headers_footers": "Headers / footers",
+    "long_tiny_text": "Long / tiny text",
+    "multi_column": "Multi-column",
+    "old_scans": "Old scans",
+    "old_scans_math": "Old-scan math",
+    "tables": "Tables"
+  },
+  "metric_units": {
+    "arxiv": "percent",
+    "base": "percent",
+    "headers_footers": "percent",
+    "long_tiny_text": "percent",
+    "multi_column": "percent",
+    "old_scans": "percent",
+    "old_scans_math": "percent",
+    "tables": "percent"
+  },
+  "metric_directions": {
+    "arxiv": "higher",
+    "base": "higher",
+    "headers_footers": "higher",
+    "long_tiny_text": "higher",
+    "multi_column": "higher",
+    "old_scans": "higher",
+    "old_scans_math": "higher",
+    "tables": "higher"
+  }
 }

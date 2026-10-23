@@ -485,8 +485,8 @@
     "title": "Sarvam Vision 2.1 release and author/competitor evaluations",
     "url": "https://www.sarvam.ai/blogs/sarvam-vision-2-1",
     "kind": "author_reported",
-    "verified_on": "2026-10-22",
-    "note": "September 24, 2026 public API release. Explicit official/full olmOCR set; all systems evaluated by Sarvam. OmniDoc v1.6 full-vs-English split unresolved."
+    "verified_on": "2026-10-23",
+    "note": "September 24, 2026 public API release. Author-operated full olmOCR (eight categories), OmniDoc v1.6 (full-versus-English split unresolved), and public Indic text-block recognition. Sarvam explicitly says systems were evaluated by its team. Unknown splits/denominators remain disclosed; verification is not independent reproduction."
   },
   "bodhan-indic-ocr-card": {
     "title": "Bodhan IndicOCR pinned model card",
@@ -1443,5 +1443,12 @@
     "kind": "third_party",
     "verified_on": "2026-10-23",
     "note": "133public pages/7equal-weight datasets; exclude inksight_* private groups, cap each normalized error at1 before averaging. Fetched data reserialized with Python json.dumps defaults, sha256 fced75df8192adf8e673ae9c0be03cc3005ef4fa6c59d34e2b4a10e1a9556b9d"
+  },
+  "sarvam-indic-ocr-dataset": {
+    "title": "Sarvam Indic OCR Bench · official dataset card and metric definition",
+    "url": "https://huggingface.co/datasets/sarvamai/indic-ocr-bench",
+    "kind": "official",
+    "verified_on": "2026-10-23",
+    "note": "Public text-block recognition dataset: 6,909 test blocks across 22 Indic languages plus English; 1,173 representative subset blocks. Word accuracy = 100 × (1 − WER). Normalization and loop filtering are documented; publication does not establish which denominator the release table used."
   }
 }

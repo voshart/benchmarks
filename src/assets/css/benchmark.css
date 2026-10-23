@@ -40,6 +40,21 @@ html[data-theme=dark]{color-scheme:dark;--paper:oklch(.18 0 0);--paper2:oklch(.2
 .ocr-estimate-link{appearance:none;border:0;padding:0;background:none;color:inherit;font:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
 .ocr-estimate-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-/* Reported scores belong in benchmark cells, never in model-name lists. */
-.ocr-page .table-scroll{max-height:none;overflow-x:auto}.ocr-page #matrixTable th:first-child{white-space:normal;text-overflow:clip;overflow:visible;min-width:160px;max-width:190px}.ocr-page #matrixTable tbody th>a{white-space:normal;overflow-wrap:anywhere}.ocr-page .protocol-label{display:block;white-space:normal;max-width:90px;font:normal .6rem/1.25 var(--sans);color:var(--muted)}
+/* Keep protocols and component scores expanded in their benchmark columns. */
+.ocr-page .table-scroll{max-height:none;overflow-x:auto}.ocr-page #matrixTable th:first-child{white-space:normal;text-overflow:clip;overflow:visible;min-width:160px;max-width:190px}.ocr-page #matrixTable tbody th>a{white-space:normal;overflow-wrap:anywhere}
 @media(max-width:700px){.ocr-page #matrixTable th:first-child{min-width:110px;width:120px;max-width:120px}}
+
+.ocr-page #matrixPanel>.table-scroll{max-height:min(75vh,60rem);overflow:auto;scrollbar-gutter:stable}
+.ocr-page #matrixTable th,.ocr-page #matrixTable td{vertical-align:top}
+.ocr-page #matrixTable .column-sort{white-space:normal}
+.ocr-page #matrixTable .column-protocol{display:block;max-width:13rem;margin-top:.25rem;white-space:normal;font:normal .65rem/1.35 var(--sans);color:var(--muted)}
+.ocr-page #matrixTable td.score{width:12rem;min-width:11rem;max-width:14rem;white-space:normal;overflow:visible;text-overflow:clip}
+.ocr-result{font-weight:400;white-space:normal;overflow-wrap:anywhere}
+.ocr-result+.ocr-result{margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--rule)}
+.score-value{font-weight:650}.score-unit{margin-left:.2rem;font-weight:400;font-size:.7rem}
+.ocr-page .protocol-label,.ocr-page .score-context{display:block;max-width:none;margin-top:.2rem;white-space:normal;overflow-wrap:anywhere;font:normal .68rem/1.35 var(--sans);color:var(--muted)}
+.ocr-page .protocol-label{color:var(--ink)}
+.score-metrics{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.18rem .5rem;margin:.5rem 0;font:normal .7rem/1.4 var(--sans);text-align:left;white-space:normal}
+.score-metrics dt{min-width:0;overflow-wrap:anywhere}.score-metrics dd{margin:0;text-align:right;max-width:8rem;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.ocr-table-hint{font:normal .75rem/1.45 var(--sans);margin:.6rem 0;color:var(--muted)}
+@media(max-width:700px){.ocr-page #matrixTable td.score{width:11rem;min-width:10rem;max-width:12rem}.ocr-page .protocol-label,.ocr-page .score-context{font-size:.65rem}.score-metrics{font-size:.68rem;gap:.2rem .4rem}}
