@@ -121,7 +121,7 @@
         rankContributions:contributions.map(({cohort,...item}) => item), price:data.pricingByModel[model.id]?.usd_per_1000_pages ?? null, scores};
     }).filter(row => (view==='new' ? show.some(test => (data.resultsByKey[row.id+'|'+test.id] || []).some(obs=>obs.evidence==='author_reported'))
       : ['recognition','understanding','secondary'].includes(view) ? show.some(test=>observed(row.scores[test.id])) : row.count>=minimum)
-      && (!query || row.name.toLowerCase().includes(query)) && (access==='all' || row.access===access));
+      && (!query || row.name.toLowerCase().includes(query) || ((query.replace(/[^a-z0-9]/g,'').length>0) && (row.name+' '+row.id).toLowerCase().replace(/[^a-z0-9]/g,'').includes(query.replace(/[^a-z0-9]/g,'')))) && (access==='all' || row.access===access));
     rows.sort((a,b) => (b.rank ?? -1)-(a.rank ?? -1) || b.coreCount-a.coreCount || b.count-a.count || a.name.localeCompare(b.name));
     const ranges = Object.fromEntries(show.map(test => {
       const values = rows.map(row=>row.scores[test.id]?.value).filter(valid);

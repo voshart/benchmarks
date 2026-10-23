@@ -45,7 +45,7 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
  assert.equal(requestOptions.cache,'no-cache');
  const ids=()=>[...element('matrixBody').innerHTML.matchAll(/<tr data-model="([^"]+)"/g)].map(m=>m[1]);
  const result=BenchmarkRank.build(data,data.config.snapshot_date,{min:data.config.default_families,access:'all',query:'',view:'all'});
- const expected=OCRComparison.enrich(result,data);const original=ids();
+ const expected=OCRComparison.enrich(result,data);const original=ids();assert.equal(data.config.default_families,0);assert.ok(original.includes('chandra-2-5-api'));assert.ok(original.includes('gemini-4-argon'));
  for(const key of ['model','speed','price',...result.columns.map(c=>c.id),'rank']){
   const direction=OCRComparison.defaultDirection(key,result);
   element('matrixHead').handlers.click({target:{closest:()=>({dataset:{ocrSort:key}})}});
@@ -56,7 +56,12 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
  }
  element('ocrInputTokens').value='300000';element('ocrInputTokens').handlers.input();assert.equal(element('ocrInputTokens').value,200000);
  element('ocrHourlyRate').value='2';element('ocrHourlyRate').handlers.input();assert.match(element('matrixBody').innerHTML,/\$2\.00\/complete H10080GB setup-hour/);
- element('coverage').value='0';element('coverage').handlers.change();assert.ok(ids().length>original.length);
+ element('coverage').value='2';element('coverage').handlers.change();assert.ok(ids().length<original.length);
+ assert.equal(ids().includes('chandra-2-5-api'),false);
+ element('modelSearch').value='Chandra 2.5';element('modelSearch').handlers.input();await new Promise(resolve=>setTimeout(resolve,130));
+ assert.equal(element('coverage').value,'0');assert.deepEqual(ids(),['chandra-2-5-api']);
+ assert.match(element('matrixBody').innerHTML,/Reported results/);assert.match(element('matrixBody').innerHTML,/86.9/);assert.match(element('matrixBody').innerHTML,/92.7/);
+ element('ocrReset').handlers.click();assert.deepEqual(ids(),original);
  element('access').value='open';element('access').handlers.change();assert.ok(ids().every(id=>data.models.find(m=>m.id===id).access==='open'));
  element('historyRange').value='0';element('historyRange').handlers.input();assert.equal(element('historyDate').textContent,data.config.release_start);
  buttons.find(b=>b.dataset.view==='price').handlers.click();assert.equal(element('matrixPanel').hidden,true);

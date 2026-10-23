@@ -25,7 +25,7 @@
  function snap(){if(!data)return;const dates=[0,Number(UI.range.max),...data.models.map(m=>m.release_date?isoDay(m.release_date):null).filter(x=>x!=null&&x>=0&&x<=Number(UI.range.max))];const current=Number(UI.range.value);UI.range.value=dates.reduce((a,b)=>Math.abs(current-a)<=Math.abs(current-b)?a:b,dates[0]);render();}
  $('themeToggle').addEventListener('click',()=>{const d=document.documentElement;d.dataset.theme=d.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('bench-theme',d.dataset.theme)}catch(e){}});
  document.querySelectorAll('.views button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
- [UI.coverage,UI.access].forEach(el=>el.addEventListener('change',render));UI.search.addEventListener('input',()=>{clearTimeout(changeTimer);changeTimer=setTimeout(render,100)});
+ [UI.coverage,UI.access].forEach(el=>el.addEventListener('change',render));UI.search.addEventListener('input',()=>{if(UI.search.value.trim())UI.coverage.value='0';clearTimeout(changeTimer);changeTimer=setTimeout(render,100)});
  UI.range.max=isoDay(end);UI.range.value=UI.range.max;$('rangeStart').textContent=start;$('rangeEnd').textContent=end;
  UI.range.addEventListener('input',render);UI.range.addEventListener('change',snap);
  $('historyLatest').addEventListener('click',()=>{UI.range.value=UI.range.max;render()});
