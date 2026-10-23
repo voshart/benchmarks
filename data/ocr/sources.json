@@ -1389,6 +1389,13 @@
     "verified_on": "2026-10-23",
     "note": "Separate AR/DFlash concurrency sweep. Higher-concurrency hardware/corpus not restated; do not inherit H20/930-page details from separate concurrency1 run. Context only."
   },
+  "datalab-convert-chandra-2-5": {
+    "title": "Datalab Convert · Chandra 2.5",
+    "url": "https://www.datalab.to/platform/processors/convert",
+    "kind": "official",
+    "verified_on": "2026-10-23",
+    "note": "The current Convert page identifies Chandra 2.5 and reports accurate-mode OmniParse overall 93.5 and table-tag 95.2, matching the October 20 scoreboard. This verifies the product generation, not an immutable backend revision or the exact run configuration. Earlier release-evaluation scores remain separate."
+  },
   "datalab-scoreboard-overall-20261023": {
     "title": "Datalab OmniParseBench Overall scoreboard · checked October23",
     "url": "https://www.datalab.to/benchmarks/overall",

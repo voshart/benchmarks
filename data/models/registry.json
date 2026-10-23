@@ -81,7 +81,8 @@
   },
   {
     "id": "chatgpt-5-2-2025-12-11",
-    "name": "ChatGPT-5.2-2025-12-11",
+    "name": "ChatGPT 5.2",
+    "configuration": "Source model label: ChatGPT-5.2-2025-12-11. The date suffix is retained as source metadata; its model-release date remains unverified.",
     "release_date": null,
     "release_provenance": "unknown",
     "access": "closed",
@@ -4823,7 +4824,7 @@
   },
   {
     "id": "datalab-accurate-20261020",
-    "name": "Datalab accurate (Oct 20 snapshot)",
+    "name": "Chandra 2.5 (accurate)",
     "organization": "Datalab",
     "access": "closed",
     "topics": [
@@ -4831,9 +4832,9 @@
     ],
     "release_date": null,
     "release_provenance": "unknown",
-    "source_id": "datalab-scoreboard-overall-20261023",
-    "configuration": "Current accurate service, October20 override; underlying model identity not published. Not asserted to be Chandra2.5.",
-    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+    "source_id": "datalab-convert-chandra-2-5",
+    "configuration": "Chandra 2.5 accurate service, October 20 scoreboard snapshot. Datalab identifies the product generation on its current Convert page; the exact backend revision and run configuration remain unpinned.",
+    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. The run date is not a verified release date for this service revision. The October 20 scores remain separate from Chandra 2.5 API release-evaluation results; neither snapshot inherits the other's measurements."
   },
   {
     "id": "datalab-balanced-omniparse-20261008",
