@@ -4,6 +4,9 @@ const fs=require('node:fs');
 const {loadOCR}=require('../lib/load.cjs');
 const {build}=require('../lib/ranking.cjs');
 const OCR=require('../src/assets/js/ocr-comparison.js');
+const resultPopovers=html=>[...html.matchAll(/<section id="([^"]+)" class="rank-note ocr-result-details"[^>]*>[\s\S]*?<\/section>/g)].map(match=>({id:match[1],html:match[0]}));
+const compactCells=html=>html.replace(/<section id="[^"]+" class="rank-note ocr-result-details"[^>]*>[\s\S]*?<\/section>/g,'');
+
 test('default catalog exposes secondary-only models without inventing aggregate scores',()=>{
  const data=loadOCR(),all=build(data),filtered=build(data,data.config.snapshot_date,{min:2});
  for(const id of ['chandra-2-5-api','gemini-4-argon']){
@@ -42,7 +45,7 @@ test('compact original matrix shows family results without duplicating model-nam
  }
  const chandra=all.rows.find(r=>r.id==='chandra-2-5-api');
  const html=OCR.renderRows({...all,rows:[chandra]},data).split('</th>')[1];
- assert.match(html,/>92\.7<\/a>/);assert.match(html,/>86\.9<\/a>/);assert.match(html,/<small class="protocol-label">olmOCR · Chandra2.5 release, no headers\/footers<\/small>/);
+ assert.match(html,/>92\.7<\/a>/);assert.match(html,/>86\.9<\/a>/);assert.match(html,/<small class="protocol-label" title="olmOCR · Chandra2.5 release, no headers\/footers">olm no H\/F<\/small>/);
  const gemini=all.rows.find(r=>r.id==='gemini-3-8-flash');assert.match(OCR.renderRows({...all,rows:[gemini]},data).split('</th>')[1],/>92\.9<\/a>/);
  const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');assert.doesNotMatch(template,/id="ocrBenchmark"/);
 });
@@ -61,7 +64,8 @@ test('default family cells expose every recorded protocol once outside model det
   const cells=all.columns.flatMap(column=>OCR.cellObservations(row,column,data,all.columns));
   const expected=data.tests.filter(t=>row.scores[t.id]?.value!=null).map(t=>t.id).sort();
   assert.deepEqual(cells.map(cell=>cell.test.id).sort(),expected,row.id);
-  const html=OCR.renderRows({...all,rows:[row]},data).split('</th>')[1];
+  const html=compactCells(OCR.renderRows({...all,rows:[row]},data).split('</th>')[1]);
+  assert.doesNotMatch(html,/<dl class="score-metrics"|class="score-context"/,'component tables and provenance stay out of compact cells');
   const visibleProtocols=[...html.matchAll(/class="ocr-result" data-protocol="([^"]+)"/g)].map(m=>m[1]).sort();
   assert.deepEqual(visibleProtocols,expected,row.id);
   for(const cell of cells){
@@ -71,28 +75,50 @@ test('default family cells expose every recorded protocol once outside model det
  }
  assert.equal(JSON.stringify(all),before,'rendering does not alter ranking inputs or selected values');
  const datalab=all.rows.find(r=>r.id==='datalab-accurate-20261020');
- assert.equal(OCR.cellObservations(datalab,all.columns[0],data,all.columns).length,3,'overall and both tag slices stay expanded together');
+ assert.equal(OCR.cellObservations(datalab,all.columns[0],data,all.columns).length,3,'overall and both tag slice headlines stay visible together');
  const gemini=all.rows.find(r=>r.id==='gemini-3-pro-preview'),column=all.columns.find(t=>t.id==='mdp-private');
  assert.ok(OCR.cellObservations(gemini,column,data,all.columns).some(c=>c.test.id==='mdp-public'),'public split is visible beside private');
 });
 
-test('component scores preserve precision, mixed scales and scope outside popovers',()=>{
+test('compact cells keep headline scores while accessible result popovers retain components and scope',()=>{
  const data=loadOCR(),all=build(data),row=all.rows.find(r=>r.id==='glm-5-3-flash');
  const column=data.tests.find(t=>t.id==='puredoc');
  Object.assign(column,{metric_labels:{precise:'Text <edit>',zero:'Zero score'},metric_units:{precise:'ratio',zero:'percent'},metric_directions:{precise:'lower',zero:'higher'}});
- row.scores.puredoc={...row.scores.puredoc,metrics:{avg3:79.69,precise:0.0289,zero:0,unknown:null},visible_context:'Public split <only>; 20 pages.',measurement_operator:'Example & operator',comparable:false};
+ row.scores.puredoc={...row.scores.puredoc,metrics:{avg3:79.69,precise:0.0289,zero:0,unknown:null},visible_context:'Public split <only>; 20 pages.',dataset_version:'Pinned benchmark v1.5 / clean split',measurement_operator:'Example & operator',comparable:false};
  const html=OCR.renderRows({...all,rows:[row]},data).split('</th>')[1];
- const scores=html.slice(html.indexOf('<td class="score"'));
+ const scores=compactCells(html.slice(html.indexOf('<td class="score"')));
+ const popup=resultPopovers(html).find(p=>p.id.endsWith('--puredoc--puredoc'));
+ assert.ok(popup);
  assert.match(scores,/>79\.69<\/a>/);
- assert.match(scores,/<dt>Text &lt;edit&gt; ↓<\/dt><dd data-metric="precise">0\.0289 ratio<\/dd>/);
- assert.match(scores,/<dt>Zero score ↑<\/dt><dd data-metric="zero">0%<\/dd>/);
- assert.doesNotMatch(scores,/data-metric="unknown"/);
- assert.match(scores,/<small class="score-context">Public split &lt;only&gt;; 20 pages\.<\/small>/);
- assert.match(scores,/Operator: Example &amp; operator/);
- assert.match(scores,/Context only · not comparable for ranking/);
- assert.doesNotMatch(scores,/<details|popover| hidden/,'visible data must not require opening a disclosure');
+ assert.match(scores,/>PureDoc Avg₃<\/small>/);
+ assert.match(scores,/<small class="score-context-tag">Context<\/small>/);
+ assert.match(scores,/class="ocr-result-details-button"[^>]*aria-haspopup="dialog"[^>]*>Details<\/button>/);
+ assert.doesNotMatch(scores,/score-metrics|Public split|Operator:|data-metric=/,'cells contain no metric tables or provenance paragraphs');
+ assert.match(popup.html,/<dt>Text &lt;edit&gt; ↓<\/dt><dd data-metric="precise">0\.0289 ratio<\/dd>/);
+ assert.match(popup.html,/<dt>Zero score ↑<\/dt><dd data-metric="zero">0%<\/dd>/);
+ assert.doesNotMatch(popup.html,/data-metric="unknown"/);
+ assert.match(popup.html,/<small class="score-context">Public split &lt;only&gt;; 20 pages\.<\/small>/);
+ assert.match(popup.html,/Operator: Example &amp; operator/);
+ assert.match(popup.html,/<strong>Dataset:<\/strong> Pinned benchmark v1\.5 \/ clean split/);
+ assert.match(popup.html,/Context only · not comparable for ranking/);
+ assert.match(popup.html,/popover="auto" role="dialog" aria-labelledby=/,'native popover renders in the top layer, outside scroll-container clipping');
  const head=OCR.renderHead(all);
  assert.match(head,/Sorts the named primary protocol only/);
+});
+
+test('every result has a unique named native popover with keyboard and close controls',()=>{
+ const data=loadOCR();
+ for(const view of ['all','secondary']){
+  const result=build(data,data.config.snapshot_date,{view}),html=OCR.renderRows(result,data),popovers=resultPopovers(html);
+  assert.ok(popovers.length);
+  assert.equal(new Set(popovers.map(p=>p.id)).size,popovers.length,'one unique id per model, column and protocol');
+  for(const popup of popovers){
+   assert.ok(html.includes('class="ocr-result-details-button" popovertarget="'+popup.id+'" aria-controls="'+popup.id+'" aria-haspopup="dialog" aria-label="Details for '));
+   assert.ok(popup.html.includes('popover="auto" role="dialog" aria-labelledby="'+popup.id+'-title"'));
+   assert.ok(popup.html.includes('<h3 id="'+popup.id+'-title">'));
+   assert.ok(popup.html.includes('popovertarget="'+popup.id+'" popovertargetaction="hide" aria-label="Close benchmark details" autofocus'));
+  }
+ }
 });
 
 
@@ -101,16 +127,18 @@ test('score links use exact observation sources and long decimals round only for
  test.metric_units={ratio:'ratio',percent:'percent'};
  const observation=row.scores.puredoc={...row.scores.puredoc,source_url:'https://example.com/pinned.csv?rev=abc&split=clean',value:79.69,metrics:{avg3:79.69,ratio:0.02891234567891234,percent:98.12345678912345,unspecified:12.12345678912345}};
  const before=JSON.stringify(observation);
- const html=OCR.renderRows({...all,rows:[row]},data),visible=html.split('</th>')[1];
+ const html=OCR.renderRows({...all,rows:[row]},data),visible=compactCells(html.split('</th>')[1]);
+ const popup=resultPopovers(html).find(p=>p.id.endsWith('--puredoc--puredoc')).html;
  assert.match(visible,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">79\.69<\/a>/);
  assert.match(html,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">Source ↗<\/a>/);
- assert.match(visible,/<dd data-metric="ratio">0\.0289 ratio<\/dd>/);
- assert.match(visible,/<dd data-metric="percent">98\.12%<\/dd>/);
- assert.match(visible,/<dd data-metric="unspecified">12\.1235<\/dd>/);
+ assert.match(popup,/<dd data-metric="ratio">0\.0289 ratio<\/dd>/);
+ assert.match(popup,/<dd data-metric="percent">98\.12%<\/dd>/);
+ assert.match(popup,/<dd data-metric="unspecified">12\.1235<\/dd>/);
  assert.equal(JSON.stringify(observation),before,'display rounding never changes stored evidence');
  delete observation.source_url;
  const fallback=OCR.renderRows({...all,rows:[row]},data).split('</th>')[1];
  assert.ok(fallback.includes('href="'+data.sources[observation.source_id].url+'"'),'registered source URL remains the fallback');
  const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');
- assert.match(template,/Component values rounded for display; source data retains full precision/);
+ assert.match(popup,/Component values rounded for display; source data retains full precision/);
+ assert.match(template,/Each score has Details for components, scope and sources/);
 });
