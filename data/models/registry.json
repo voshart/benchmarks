@@ -4730,12 +4730,13 @@
     "topics": [
       "ocr"
     ],
-    "release_date": null,
-    "release_provenance": "unknown",
+    "release_date": "2026-10-17",
+    "release_provenance": "release_announcement",
     "source_id": "small-specialist-nemotron35-card",
     "parameters_million": 630.800502,
     "configuration": "Triple-pass quality and speed; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
-    "evidence_note": "Public weights verified October23; exact first public release date not established. Stored F32 tensors about2.52GB, not peakVRAM. Author ParseBench75.20 on2,078pages with pinned scorer; separate from other ParseBench versions. 40timing outputs token-limited; no single-pass speed attached to triple-pass quality."
+    "evidence_note": "Pinned official card states release October17,2026. Stored F32 tensors about2.52GB, not peakVRAM. Author ParseBench75.20 on2,078pages with pinned scorer; separate from other ParseBench versions. 40timing outputs token-limited; no single-pass speed attached to triple-pass quality.",
+    "release_source_id": "small-specialist-nemotron35-card"
   },
   {
     "id": "infinity-parser2-flash",
@@ -4748,8 +4749,10 @@
     "release_date": null,
     "release_provenance": "unknown",
     "source_id": "infinity-parser2-flash-checkpoint",
-    "configuration": "Exact checkpoint cfddc4106b0abc4706f05575a164f7dd35d09c46",
-    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment."
+    "configuration": "Exact checkpoint cfddc4106b0abc4706f05575a164f7dd35d09c46; BF16 stored weights; serialized download size excludes tokenizer/config and is not peak VRAM.",
+    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment.",
+    "parameters_million": 2213.241664,
+    "download_mb": 4426.558832
   },
   {
     "id": "mineru2-5-pro-2605",
@@ -4762,8 +4765,10 @@
     "release_date": null,
     "release_provenance": "unknown",
     "source_id": "mineru2-5-pro-2605-checkpoint",
-    "configuration": "Exact checkpoint 08aaea840498d49ce16247b6263196cf02814885",
-    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment."
+    "configuration": "Exact checkpoint 08aaea840498d49ce16247b6263196cf02814885; BF16 stored weights; serialized download size excludes tokenizer/config and is not peak VRAM.",
+    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment.",
+    "parameters_million": 1156.026624,
+    "download_mb": 2312.12664
   },
   {
     "id": "kdl-frontier-parser-nano",
@@ -4776,7 +4781,41 @@
     "release_date": null,
     "release_provenance": "unknown",
     "source_id": "kdl-frontier-parser-nano-checkpoint",
-    "configuration": "Exact checkpoint a6cb7d2a9ac5fd13f527764f5411c9ec3ad2c4ec",
-    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment."
+    "configuration": "Exact checkpoint a6cb7d2a9ac5fd13f527764f5411c9ec3ad2c4ec; BF16 stored weights; serialized download size excludes tokenizer/config and is not peak VRAM.",
+    "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment.",
+    "parameters_million": 1156.026624,
+    "download_mb": 2312.128984
+  },
+  {
+    "id": "nemotron-3-5-parse-single",
+    "name": "Nemotron 3.5 Parse (single-pass)",
+    "organization": "NVIDIA",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": "2026-10-17",
+    "release_provenance": "release_announcement",
+    "source_id": "small-specialist-nemotron35-card",
+    "parameters_million": 630.800502,
+    "configuration": "single-pass; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
+    "evidence_note": "Exact mode-specific quality and timing; not triple-pass accuracy paired with faster single-pass speed. 33/2078 timing responses token-limited.",
+    "release_source_id": "small-specialist-nemotron35-card"
+  },
+  {
+    "id": "nemotron-3-5-parse-double",
+    "name": "Nemotron 3.5 Parse (double-pass)",
+    "organization": "NVIDIA",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": "2026-10-17",
+    "release_provenance": "release_announcement",
+    "source_id": "small-specialist-nemotron35-card",
+    "parameters_million": 630.800502,
+    "configuration": "double-pass; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
+    "evidence_note": "Exact mode-specific quality and timing; not triple-pass accuracy paired with faster single-pass speed. 35/2078 timing responses token-limited.",
+    "release_source_id": "small-specialist-nemotron35-card"
   }
 ]

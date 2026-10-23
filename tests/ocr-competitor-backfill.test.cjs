@@ -29,3 +29,21 @@ test('exact checkpoint competitor speeds never become measurements of normalized
  const pairs=data.throughput.map(r=>r.model+'|'+r.source_id);
  for(const source of ['small-specialist-jina-throughput','small-specialist-nemotron-matched-timing']){const subset=pairs.filter(p=>p.endsWith('|'+source));assert.equal(subset.length,new Set(subset).size);}
 });
+test('second source sweep preserves versions, derived means and uncertain timing context',()=>{
+ const glm=data.tests.find(t=>t.id==='omnidoc-v15-glm-report');assert.equal(glm.core,false);assert.equal(glm.primary,false);
+ const pure=data.records.filter(r=>r.source_id==='teleocr-card-70a19'&&r.benchmark==='puredoc');assert.equal(pure.length,17);
+ for(const r of pure){assert.equal(r.metrics.avg3,Math.round((r.metrics.clean+r.metrics.digital+r.metrics.real)/3*100)/100);assert.match(r.note,/computed|derived/i);}
+ const sweep=data.throughput.filter(r=>r.source_id==='hunyuan15-paper-table6');assert.equal(sweep.length,12);assert.ok(sweep.every(r=>!r.hardware_known&&!r.cost_eligible&&!r.comparison_default));
+ const financial=data.throughput.filter(r=>r.source_id==='infinity-report-v1');assert.equal(financial.length,11);assert.ok(financial.every(r=>r.unit==='seconds_per_image'&&!r.cost_eligible&&!r.comparison_default));
+ const more=data.resultsByKey['hunyuanocr-1-5|more'].find(r=>r.source_id==='hunyuan15-paper-table10');assert.equal(more.metrics.overall,91.9);
+});
+test('Nemotron mode-specific quality and speed stay paired, multilingual soup stays separate',()=>{
+ for(const [mode,quality] of [['single',72.73584672666817],['double',74.92348404837536]]){
+  const id='nemotron-3-5-parse-'+mode,m=data.models.find(m=>m.id===id),d=OCR.deployment(data,m);
+  assert.equal(m.release_date,'2026-10-17');assert.ok(Math.abs(data.resultsByKey[id+'|parsebench-nemotron35-triple'][0].metrics.overall-quality)<1e-10);
+  assert.match(d.speed.pipeline,new RegExp(mode+'-pass'));assert.equal(d.reference.status,'estimated');assert.equal(d.cost.high,1000/(d.reference.low*3600));
+ }
+ const old=data.resultsByKey['nemotron-parse-2|moscar-nemotron'][0];assert.equal(old.metrics.boc_f1,.9102);
+ const recent=data.resultsByKey['nemotron-parse-2|moscar-nvidia-released-checkpoints-202610'][0];assert.equal(recent.metrics.overall,97.44);
+ assert.equal(data.tests.find(t=>t.id==='moscar-nvidia-released-checkpoints-202610').core,false);
+});

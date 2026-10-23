@@ -1,7 +1,7 @@
 {
   "id": "parsebench-nemotron35-triple",
   "short": "Parse N3.5",
-  "label": "ParseBench · Nemotron3.5 triple, pinned scorer",
+  "label": "ParseBench · Nemotron3.5 modes, pinned scorer",
   "source": "small-specialist-nemotron-quality",
   "family": "parsebench",
   "primary_metric": "overall",
@@ -9,5 +9,5 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "note": "Author2078-page run, scorer9af4102e26b51f234ab5f037e19fec05c0696ec6. Separate from differently pinned ParseBench runs."
+  "note": "Author2078-page run, scorer9af4102e26b51f234ab5f037e19fec05c0696ec6. Separate from differently pinned ParseBench runs. Mode is explicit per model/record; legacy test ID retained."
 }

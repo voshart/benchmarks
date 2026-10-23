@@ -1,0 +1,13 @@
+{
+  "id": "omnidoc-v15-glm-report",
+  "family": "omnidoc",
+  "primary_metric": "overall",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "Reported v1.5 cohort; correlated with otherOmniDoc versions, noextraaggregatevote.",
+  "label": "OmniDocBench v1.5 \u00b7 GLM report",
+  "short": "OmniDoc v1.5 report",
+  "unit": "percent",
+  "source": "glm-report-v2-omnidoc15"
+}

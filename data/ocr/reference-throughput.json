@@ -1295,6 +1295,38 @@
       "fit": "Exact checkpoint measured on one H100 80GB; source-native runtime and prepared pages.",
       "basis": "Native reported 2.980 pages/s; existing project 0.4–2x workload envelope rounded outward, not a confidence interval or standardized experiment. Source: 2,078 prepared ParseBench pages, concurrency 64; target profile up to 16 queued pages, about 1,000–3,000 total output tokens. Excludes preparation/startup/warmup/final writes; includes token-limited responses. Lower concurrency and page complexity can fall outside the band; no additional speculative GPU multiplier.",
       "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "nemotron-3-5-parse-single",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 6,
+      "high": 31,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "nemotron35-published-comparison",
+        "small-specialist-nemotron35-card"
+      ],
+      "fit": "Released BF16 runtime measured on one H10080GB; native single-pass configuration.",
+      "basis": "Existing project0.4–2x workload envelope rounded outward, not statistical bounds. Source2078preparedpages,concurrency256 versus targetup16queuedpages/1000–3000totaloutputtokens. Excludes preparation/startup/warmup/finalwrites; includes 33 token-limited responses. Do not use triple-pass quality with this mode speed.",
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "nemotron-3-5-parse-double",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "low": 4,
+      "high": 24,
+      "as_of": "2026-10-23",
+      "source_ids": [
+        "nemotron35-published-comparison",
+        "small-specialist-nemotron35-card"
+      ],
+      "fit": "Released BF16 runtime measured on one H10080GB; native double-pass configuration.",
+      "basis": "Existing project0.4–2x workload envelope rounded outward, not statistical bounds. Source2078preparedpages,concurrency256 versus targetup16queuedpages/1000–3000totaloutputtokens. Excludes preparation/startup/warmup/finalwrites; includes 35 token-limited responses. Do not use triple-pass quality with this mode speed.",
+      "fit_class": "reported_single_gpu_configuration"
     }
   ]
 }

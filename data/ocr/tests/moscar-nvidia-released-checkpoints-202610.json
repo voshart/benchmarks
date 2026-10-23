@@ -1,0 +1,13 @@
+{
+  "id": "moscar-nvidia-released-checkpoints-202610",
+  "short": "MOSCAR released",
+  "label": "MOSCAR · NVIDIA released checkpoints",
+  "source": "small-specialist-nemotron35-card",
+  "family": "moscar",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "Exact released Parse2 and current Parse3.5 weights, identical pages and same scorer within this new panel. Greedy decoding, each default task prompt, include token-limited outputs. DO NOT overwrite old checkpoint-soup Parse2 result. MOSCAR synthetic character overlap ignores ordering; overall CER microaggregates characters, not mean script CER. Default text-only task, not full-document triple-pass."
+}

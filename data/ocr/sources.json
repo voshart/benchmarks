@@ -1332,5 +1332,61 @@
     "kind": "secondary",
     "verified_on": "2026-10-23",
     "note": "Quoted published results, not Jina reruns. Hunyuan1.5 attributed to its own technical report; preserve secondary provenance."
+  },
+  "nemotron35-published-comparison": {
+    "title": "Nemotron3.5 exact pipeline quality and timing receipts",
+    "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/62cb1e4ba153d113ff64aaf2be6e068c377cf53c/reference/parsebench/comparisons/results.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Native single/double/triple pipeline modes; quality prediction identities match timed own-model runs. Competitor quality separately published."
+  },
+  "teleocr-card-70a19": {
+    "title": "TeleOCR pinned model card comparisons",
+    "url": "https://huggingface.co/XingChen-AGI/TeleOCR/blob/70a19ec6a3b036311af19ae5e762e650f41a5980/README.md",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Model-author comparison; quoted competitor results are not automatically independent reruns. Conditions and component units retained."
+  },
+  "paddle16-paper-table3": {
+    "title": "PaddleOCR-VL1.6 Table3 Real5 comparison",
+    "url": "https://arxiv.org/html/2606.03264v1#S5.T3",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Paper comparison; competitor per-row execution versus quotation not always established. Preserve published category breakdowns and conflicting prior observations."
+  },
+  "hunyuan15-paper-table10": {
+    "title": "HunyuanOCR1.5 Table10 MORE comparison",
+    "url": "https://arxiv.org/html/2607.04884v1#S7.T10",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "Paper comparison, not an independent benchmark; original competitor operators not always established."
+  },
+  "hunyuan15-paper-table12": {
+    "title": "HunyuanOCR1.5 Table12 OmniDocBench v1.6",
+    "url": "https://arxiv.org/html/2607.04884v1#S7.T12",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Primary author report for Hunyuan1.5; distinct from secondary quotations."
+  },
+  "glm-report-v2-omnidoc15": {
+    "title": "GLM-OCR v2 Table4 reported OmniDocBench v1.5",
+    "url": "https://arxiv.org/html/2603.10910v2#S3.T4",
+    "kind": "secondary",
+    "verified_on": "2026-10-23",
+    "note": "GLM own model author-run; baseline citations do not establish per-row rerun. Exact v1.5; separate from v1.6 core."
+  },
+  "infinity-report-v1": {
+    "title": "Infinity Parser2 report · financial-document timing panel",
+    "url": "https://arxiv.org/html/2607.07836v1#S5.SS6",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-23",
+    "note": "In-house business-financial documents, unspecified corpus size. Native tensor parallelism and concurrency vary. Published seconds/page can be amortized at concurrency8, not request latency or standardized H100 speed."
+  },
+  "hunyuan15-paper-table6": {
+    "title": "HunyuanOCR1.5 AR/DFlash concurrency timing",
+    "url": "https://arxiv.org/html/2607.04884v1#S7.T6",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Separate AR/DFlash concurrency sweep. Higher-concurrency hardware/corpus not restated; do not inherit H20/930-page details from separate concurrency1 run. Context only."
   }
 }
