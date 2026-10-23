@@ -57,7 +57,7 @@ test('OCR real evidence includes20 speed defaults, explicit Gemini3.6 tariff and
  for(const [id,value] of [['lightonocr-3-0.8b',3.32],['lightonocr-3-1b',3.52],['lightonocr-3-4b',2.03],['chandra-2-open',1.68],['lightonocr-2-1b',5.71]])assert.equal(rows.find(r=>r.model.id===id).speed.pages_per_second,value,id);
  const tariff=data.tokenPricing.find(p=>p.model==='gemini-3-6-flash');assert.equal(tariff.api_model,'gemini-3.6-flash');assert.equal(tariff.input_usd_per_million_tokens,.75);assert.equal(tariff.output_usd_per_million_tokens,3.75);assert.equal(tariff.verification_status,'verified');assert.match(tariff.note,/2026-12-31/);
  const gemini=rows.find(r=>r.model.id==='gemini-3-6-flash');assert.equal(gemini.cost.kind,'token scenario');assert.equal(gemini.cost.value,4.5);
- const indra=rows.find(r=>r.model.id==='indra-ocr-1-1');assert.equal(indra.speed,null,'median latency and OCR-only alternate are not auto throughput');assert.equal(indra.cost.kind,'modeled compute');assert.equal(indra.estimate.low,.5);
+ const indra=rows.find(r=>r.model.id==='indra-ocr-1-1');assert.equal(indra.speed,null,'median latency and OCR-only alternate are not auto throughput');assert.equal(indra.cost.kind,'H100 scenario');assert.equal(indra.estimate.low,.5);
  const service=rows.find(r=>r.model.id==='datalab-convert-accurate');assert.equal(service.cost.kind,'current service');assert.equal(service.cost.value,10);assert.match(service.cost.label,/^Service \$/);
  const context=rows.find(r=>r.model.id==='chandra-2-1-api');assert.equal(context.cost.value,null);
 });
@@ -106,11 +106,11 @@ test('OCR ranges sort by geometric midpoint with true ties and unknowns last in 
 test('OCR real modeled evidence is visible, sourced and isolated from accuracy',()=>{
  const data=loadOCR(),result=build(data,data.config.snapshot_date,{min:0});const d=OCR.deployment(data,data.models.find(m=>m.id==='teleocr'));
  assert.equal(data.throughputEstimates.length,18);assert.equal(data.models.filter(m=>OCR.deployment(data,m).estimate&&!OCR.deployment(data,m).speed).length,17);
- assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,62);
- assert.equal(d.speed,null);assert.equal(d.estimate.low,.2);assert.equal(d.estimate.high,4);assert.match(d.cost.label,/≈\$0.07–\$1.39/);
+ assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,67);
+ assert.equal(d.speed,null);assert.equal(d.estimate.low,.2);assert.equal(d.estimate.high,4);assert.match(d.cost.label,/≈\$0.03–\$1.39/);
  const tele=result.rows.find(r=>r.id==='teleocr'),html=OCR.renderRows({...result,rows:[tele]},data);
- assert.match(html,/≈0.2–4/);assert.match(html,/A100 · batch · modeled/);assert.match(html,/Low-confidence modeled speed/);assert.match(html,/NOT a measurement, guarantee or statistical confidence interval/);assert.match(html,/popovertarget="ocr-details-teleocr"/);assert.match(html,/geometric midpoint/);
- const paddle=OCR.deployment(data,data.models.find(m=>m.id==='paddleocr-vl-1-6'));assert.equal(paddle.speed.pages_per_second,.562);assert.equal(paddle.speed.hardware_short,'H20 · 930p');assert.equal(paddle.cost.kind,'local compute');
+ assert.match(html,/≈0.2–9.2/);assert.match(html,/Common reference: H100 80GB/);assert.match(html,/Low-confidence modeled speed/);assert.match(html,/NOT a measurement, guarantee or statistical confidence interval/);assert.match(html,/popovertarget="ocr-details-teleocr"/);assert.match(html,/geometric midpoint/);
+ const paddle=OCR.deployment(data,data.models.find(m=>m.id==='paddleocr-vl-1-6'));assert.equal(paddle.speed.pages_per_second,.562);assert.equal(paddle.speed.hardware_short,'H20 · 930p');assert.equal(paddle.cost.kind,'H100 scenario');
  for(const id of ['hunyuanocr-1-5','glm-ocr','deepseek-ocr-2'])assert.equal(OCR.deployment(data,data.models.find(m=>m.id===id)).speed.source_id,'ocr-speed-hunyuan15-h20-930-ar');
  const without=build({...data,throughput:[],throughputEstimates:[]},data.config.snapshot_date,{min:0});assert.deepEqual(result.rows,without.rows);
 });
@@ -119,4 +119,29 @@ test('OCR estimate schema rejects fabricated status, missing context and invalid
  const {validateData}=require('../lib/validate.cjs');
  for(const bad of [{model:'missing'},{status:'observed'},{confidence:'high'},{source_ids:['missing']},{low:0},{high:-1},{low:NaN},{high:Infinity},{hardware:''},{workload:''},{basis:''},{limitations:''}]){const data=loadOCR();Object.assign(data.throughputEstimates[0],bad);assert.throws(()=>validateData(data));}
  const data=loadOCR();data.throughputEstimates.push({...data.throughputEstimates[0]});assert.throws(()=>validateData(data),/duplicate speed estimate/);
+});
+
+test('OCR common-card estimates replace mixed hardware in sorting and all local compute costs',()=>{
+ const data=loadOCR(),get=id=>OCR.deployment(data,data.models.find(m=>m.id===id));
+ assert.equal(data.ocrReference.models.length,82);assert.equal(data.ocrReference.models.filter(r=>r.status==='estimated').length,37);
+ for(const e of data.ocrReference.models){
+  const d=get(e.model);assert.equal(e.profile,'h100-80gb-v1');
+  if(e.status==='estimated'){
+   assert.equal(d.cost.kind,'H100 scenario');assert.equal(d.cost.low,1000/(e.high*3600));assert.equal(d.cost.high,1000/(e.low*3600));
+   const two=OCR.deployment(data,data.models.find(m=>m.id===e.model),{hourlyRate:2});assert.equal(two.cost.low,2*d.cost.low);assert.equal(two.cost.high,2*d.cost.high);assert.deepEqual(two.reference,d.reference);
+  }else if(['too-large','tight-fit'].includes(e.status)){assert.equal(d.cost.value,null);assert.equal(e.low,undefined);}
+ }
+ const p=get('paddleocr-vl-1-6');assert.equal(p.speed.pages_per_second,.562,'original H20 evidence retained');assert.equal(p.reference.low,.5);assert.equal(p.reference.high,3.2);
+ const a=get('teleocr'),b=get('xiaomi-ocr-0');assert.match(a.reference.basis,/A100/);assert.match(b.reference.basis,/not a measured hardware ratio/);
+ assert.equal(get('indra-ocr-1-1').reference.path,'cpu');assert.match(get('indra-ocr-1-1').reference.fit,/GPU unused/);
+ assert.equal(get('qwen3-vl-plus').reference.status,'hosted');assert.equal(get('gemini-3-6-flash').cost.kind,'token scenario');
+ const rows=[{id:'missing',deployment:get('qwen3-5-397b-a17b')},{id:'paddle',deployment:p},{id:'xiaomi',deployment:b}];
+ assert.deepEqual(OCR.sortRows(rows,'speed','asc').map(r=>r.id),['xiaomi','paddle','missing']);assert.deepEqual(OCR.sortRows(rows,'speed','desc').map(r=>r.id),['paddle','xiaomi','missing']);
+});
+
+test('OCR reference validation rejects unsupported speed and preserves quality inputs',()=>{
+ const {validateData}=require('../lib/validate.cjs');
+ for(const bad of [{status:'observed'},{profile:'a100'},{confidence:'high'},{low:0},{high:Infinity},{source_ids:['missing']},{status:'too-large'}]){const d=loadOCR();Object.assign(d.ocrReference.models.find(r=>r.status==='estimated'),bad);assert.throws(()=>validateData(d));}
+ const data=loadOCR(),original=JSON.stringify(data.rawRecords),before=build(data,data.config.snapshot_date,{min:0});
+ const noReference=build({...data,ocrReference:null},data.config.snapshot_date,{min:0});assert.deepEqual(before,noReference);OCR.enrich(before,data,{hourlyRate:100});assert.equal(JSON.stringify(data.rawRecords),original);
 });

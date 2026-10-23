@@ -933,5 +933,236 @@
     "kind": "author_reported",
     "verified_on": "2026-10-22",
     "note": "Table13:1.75s/page onOmniDocBench1.5; hardware unspecified, no hardware-normalized inference."
+  },
+  "ocr-ref-typhoon": {
+    "url": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+    "title": "Typhoon paired A100/H100 runtime measurements",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Paired runtime evidence supports broad class-specific hardware assumptions, not universal conversion or identical page workloads. Request/token ratios can differ with output length."
+  },
+  "ocr-ref-olm": {
+    "url": "https://arxiv.org/html/2502.18443v1#S4.T3",
+    "title": "olmOCR author hardware throughput comparison",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Paired runtime evidence supports broad class-specific hardware assumptions, not universal conversion or identical page workloads. Request/token ratios can differ with output length."
+  },
+  "ocr-ref-nvidia": {
+    "url": "https://docs.nvidia.com/nim/ingestion/image-ocr/latest/performance.html",
+    "title": "NVIDIA OCR performance by hardware and batch",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Paired runtime evidence supports broad class-specific hardware assumptions, not universal conversion or identical page workloads. Request/token ratios can differ with output length."
+  },
+  "hf:acvlab/ABot-OCR@6cb6799e7fa42258d0d568e4c7367dbc30781e39": {
+    "title": "Pinned model fit evidence · acvlab/ABot-OCR",
+    "url": "https://huggingface.co/acvlab/ABot-OCR/blob/6cb6799e7fa42258d0d568e4c7367dbc30781e39/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:ibm-granite/granite-docling-258M@982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe": {
+    "title": "Pinned model fit evidence · ibm-granite/granite-docling-258M",
+    "url": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:PatSnap/Hiro-MOSS-OCR-0.3B@f833fe46fac16d19855670e83f1010dff7758688": {
+    "title": "Pinned model fit evidence · PatSnap/Hiro-MOSS-OCR-0.3B",
+    "url": "https://huggingface.co/PatSnap/Hiro-MOSS-OCR-0.3B/blob/f833fe46fac16d19855670e83f1010dff7758688/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:nvidia/NVIDIA-Nemotron-Parse-2.0@4e021c03edc92e715d5d788921a927d0cbb4b4d1": {
+    "title": "Pinned model fit evidence · nvidia/NVIDIA-Nemotron-Parse-2.0",
+    "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0/blob/4e021c03edc92e715d5d788921a927d0cbb4b4d1/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.5-122B-A10B@dc4d348443bc740c68e2d77492492c11606384d5": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.5-122B-A10B",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-122B-A10B/blob/dc4d348443bc740c68e2d77492492c11606384d5/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.5-27B@fc05daec18b0a78c049392ed2e771dde82bdf654": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.5-27B",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-27B/blob/fc05daec18b0a78c049392ed2e771dde82bdf654/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.5-35B-A3B@59d61f3ce65a6d9863b86d2e96597125219dc754": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.5-35B-A3B",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B/blob/59d61f3ce65a6d9863b86d2e96597125219dc754/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.5-397B-A17B@8472618112abcbd45acbcdc58436aff4233c23f7": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.5-397B-A17B",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/8472618112abcbd45acbcdc58436aff4233c23f7/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.6-27B",
+    "url": "https://huggingface.co/Qwen/Qwen3.6-27B/blob/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.6-35B-A3B@995ad96eacd98c81ed38be0c5b274b04031597b0": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.6-35B-A3B",
+    "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/995ad96eacd98c81ed38be0c5b274b04031597b0/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.8-27B@1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.8-27B",
+    "url": "https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3.8-Flash-Next@de4b8e4d43b917e7706784d8bb445c9af86a3540": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3.8-Flash-Next",
+    "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen3-VL-235B-A22B-Instruct@710c13861be6c466e66de3f484069440b8f31389": {
+    "title": "Pinned model fit evidence · Qwen/Qwen3-VL-235B-A22B-Instruct",
+    "url": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct/blob/710c13861be6c466e66de3f484069440b8f31389/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:docling-project/SmolDocling-256M-preview@ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8": {
+    "title": "Pinned model fit evidence · docling-project/SmolDocling-256M-preview",
+    "url": "https://huggingface.co/docling-project/SmolDocling-256M-preview/blob/ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:XingChen-AGI/TeleOCR@70a19ec6a3b036311af19ae5e762e650f41a5980": {
+    "title": "Pinned model fit evidence · XingChen-AGI/TeleOCR",
+    "url": "https://huggingface.co/XingChen-AGI/TeleOCR/blob/70a19ec6a3b036311af19ae5e762e650f41a5980/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:SeerRay-Lab/Xiaomi-OCR-0@ff990be318c4c68f7e621dd690231200f47e48c4": {
+    "title": "Pinned model fit evidence · SeerRay-Lab/Xiaomi-OCR-0",
+    "url": "https://huggingface.co/SeerRay-Lab/Xiaomi-OCR-0/blob/ff990be318c4c68f7e621dd690231200f47e48c4/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:tencent/Youtu-Parsing@b82ee76cca8aa94ffd6451de38cd72aa8362f3c2": {
+    "title": "Pinned model fit evidence · tencent/Youtu-Parsing",
+    "url": "https://huggingface.co/tencent/Youtu-Parsing/blob/b82ee76cca8aa94ffd6451de38cd72aa8362f3c2/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:bodhan-ai/indic-ocr@cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25": {
+    "title": "Pinned model fit evidence · bodhan-ai/indic-ocr",
+    "url": "https://huggingface.co/bodhan-ai/indic-ocr/blob/cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:ATH-MaaS/OvisOCR3@5f6ce6932efee9ec10c30746db55bd780214b7fd": {
+    "title": "Pinned model fit evidence · ATH-MaaS/OvisOCR3",
+    "url": "https://huggingface.co/ATH-MaaS/OvisOCR3/blob/5f6ce6932efee9ec10c30746db55bd780214b7fd/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Logics-MLLM/Logics-Parsing-V3@e6d324e30e0f64f1a0dfb652efcb83a4b244591e": {
+    "title": "Pinned model fit evidence · Logics-MLLM/Logics-Parsing-V3",
+    "url": "https://huggingface.co/Logics-MLLM/Logics-Parsing-V3/blob/e6d324e30e0f64f1a0dfb652efcb83a4b244591e/config.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:Qwen/Qwen2.5-VL-72B-Instruct@89c86200743eec961a297729e7990e8f2ddbc4c5": {
+    "title": "Pinned model fit evidence · Qwen/Qwen2.5-VL-72B-Instruct",
+    "url": "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct/blob/89c86200743eec961a297729e7990e8f2ddbc4c5/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:OpenGVLab/InternVL3_5-241B-A28B@8e5cfda1dabab9bdc76a3931bf77ecae150a33c8": {
+    "title": "Pinned model fit evidence · OpenGVLab/InternVL3_5-241B-A28B",
+    "url": "https://huggingface.co/OpenGVLab/InternVL3_5-241B-A28B/blob/8e5cfda1dabab9bdc76a3931bf77ecae150a33c8/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:moonshotai/Kimi-K2.5@4d01dfe0332d63057c186e0b262165819efb6611": {
+    "title": "Pinned model fit evidence · moonshotai/Kimi-K2.5",
+    "url": "https://huggingface.co/moonshotai/Kimi-K2.5/blob/4d01dfe0332d63057c186e0b262165819efb6611/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:moonshotai/Kimi-K2.6@7eb5002f6aadc958aed6a9177b7ed26bb94011bb": {
+    "title": "Pinned model fit evidence · moonshotai/Kimi-K2.6",
+    "url": "https://huggingface.co/moonshotai/Kimi-K2.6/blob/7eb5002f6aadc958aed6a9177b7ed26bb94011bb/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:stepfun-ai/step3@e2d67fc936dc60f8f606f2429728f1dea503e10d": {
+    "title": "Pinned model fit evidence · stepfun-ai/step3",
+    "url": "https://huggingface.co/stepfun-ai/step3/blob/e2d67fc936dc60f8f606f2429728f1dea503e10d/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:mistralai/Mistral-Small-4-119B-2603@a11f36bebf709121056b1dbcc943d1c6afbe494d": {
+    "title": "Pinned model fit evidence · mistralai/Mistral-Small-4-119B-2603",
+    "url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/blob/a11f36bebf709121056b1dbcc943d1c6afbe494d/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "hf:ATH-MaaS/Ovis2.6-30B-A3B@44beb8e150b28c7ca537a1673582c64f57d342e3": {
+    "title": "Pinned model fit evidence · ATH-MaaS/Ovis2.6-30B-A3B",
+    "url": "https://huggingface.co/ATH-MaaS/Ovis2.6-30B-A3B/blob/44beb8e150b28c7ca537a1673582c64f57d342e3/model.safetensors.index.json",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+  },
+  "ocr-ref-h100-spec": {
+    "title": "NVIDIA H100 SXM reference specifications",
+    "url": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+    "kind": "vendor",
+    "verified_on": "2026-10-22",
+    "note": "80GB HBM3 and3.35TB/s. Capacity is not a guarantee of model runtime fit."
+  },
+  "ocr-ref-fit-lightonocr-2-1b": {
+    "title": "Public checkpoint and fit · lightonocr-2-1b",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-2-1B/blob/be7c41313c30e940fe5571de59e5fabc779e00c8/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Public ungated weights and BF16 local CUDA instructions verified. Existing exact-model single-GPU evidence supports bounded fit, not arbitrary resolution/batch or exact SXM board match."
+  },
+  "ocr-ref-fit-unlimited-ocr": {
+    "title": "Public checkpoint and fit · unlimited-ocr",
+    "url": "https://huggingface.co/baidu/Unlimited-OCR/blob/8249d20b2822a7d8a4c22c8d8c9069b5ac36bda3/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-22",
+    "note": "Public ungated weights and BF16 local CUDA instructions verified. Existing exact-model single-GPU evidence supports bounded fit, not arbitrary resolution/batch or exact SXM board match."
   }
 }

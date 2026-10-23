@@ -1,0 +1,254 @@
+{
+  "verified_on": "2026-10-22",
+  "reference_recommendation": {
+    "gpu": "1 NVIDIA H10080GB HBM3/SXM-class",
+    "host": "Explicit fixed assumed host CPU/memory/I-O setup; e.g16vCPU/64GBRAM/local warm image inputs. Host choice is an assumption, not the cited measurements.",
+    "precision": "BF16 when available; explicitly separate quantization-dependent models. No offload, no speculative/MTP unless source/row explicitly says.",
+    "why": "H100 has direct whole-page panels for LightOn families/olmOCR/Chandra/dots and paired author measurements againstA100. ChoosingA100 also viable but would convert more currentVLManchors.80GB keeps mostspecialists resident; fit audit remainsrequired.",
+    "deployment_mode": "Throughput-oriented warmqueued pages, model-specific sensiblebatching. Do not mix single-request and saturated throughput as if fixedconcurrency.",
+    "display": "Estimated H100 scenario, not normalized benchmark. Original measured hardware/results remainDetails. Every nonH100transfer is markedassumed; nativeH100observations on different pagecorpora still retain workloaduncertainty."
+  },
+  "primary_cross_hardware_anchors": [
+    {
+      "model": "Typhoon OCR1.5 2B",
+      "concurrency": 1,
+      "a100": 0.69,
+      "h100": 0.92,
+      "ratio_h100_over_a100": 1.3333333333333335,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 154.06,
+      "h100_tokens_per_second": 206.26,
+      "token_ratio": 1.3388290276515642
+    },
+    {
+      "model": "Typhoon OCR1.5 2B",
+      "concurrency": 17,
+      "a100": 4.63,
+      "h100": 7.68,
+      "ratio_h100_over_a100": 1.6587473002159827,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 1032.01,
+      "h100_tokens_per_second": 1713.36,
+      "token_ratio": 1.660216470770632
+    },
+    {
+      "model": "Typhoon OCR1.5 2B",
+      "concurrency": 32,
+      "a100": 5.53,
+      "h100": 9.42,
+      "ratio_h100_over_a100": 1.7034358047016274,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 1232.65,
+      "h100_tokens_per_second": 2099.99,
+      "token_ratio": 1.703638502413499
+    },
+    {
+      "model": "Typhoon OCR7B",
+      "concurrency": 1,
+      "a100": 0.14,
+      "h100": 0.23,
+      "ratio_h100_over_a100": 1.6428571428571428,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 66.7,
+      "h100_tokens_per_second": 109.7,
+      "token_ratio": 1.6446776611694152
+    },
+    {
+      "model": "Typhoon OCR7B",
+      "concurrency": 16,
+      "a100": 1.98,
+      "h100": 3.32,
+      "ratio_h100_over_a100": 1.6767676767676767,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 917.9,
+      "h100_tokens_per_second": 1571.4,
+      "token_ratio": 1.7119511929404077
+    },
+    {
+      "model": "Typhoon OCR7B",
+      "concurrency": 32,
+      "a100": 3.82,
+      "h100": 5.92,
+      "ratio_h100_over_a100": 1.549738219895288,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 1327.5,
+      "h100_tokens_per_second": 2702.1,
+      "token_ratio": 2.0354802259887004
+    },
+    {
+      "model": "Typhoon OCR7B",
+      "concurrency": 64,
+      "a100": 4.31,
+      "h100": 7.24,
+      "ratio_h100_over_a100": 1.6798143851508123,
+      "metric": "requests/sec",
+      "source": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "a100_tokens_per_second": 1848,
+      "h100_tokens_per_second": 3370.1,
+      "token_ratio": 1.8236471861471861
+    },
+    {
+      "model": "olmOCR original0225",
+      "concurrency": null,
+      "a100": 1487,
+      "h100": 3050,
+      "ratio_h100_over_a100": 2.051109616677875,
+      "metric": "tokens/sec",
+      "source": "https://arxiv.org/html/2502.18443v1#S4.T3",
+      "note": "SGLang batched pipeline,around500page work items; exacttimingcorpus/precision/concurrency notspecified in table."
+    },
+    {
+      "model": "NeMo Retriever OCRv2 English",
+      "concurrency": 8,
+      "a100": 67.7,
+      "h100": 127.8,
+      "ratio_h100_over_a100": 1.8877400295420974,
+      "metric": "images/sec",
+      "source": "https://docs.nvidia.com/nim/ingestion/image-ocr/latest/performance.html",
+      "image_batch": 16
+    },
+    {
+      "model": "NeMo Retriever OCRv2 Multilingual",
+      "concurrency": 8,
+      "a100": 52.9,
+      "h100": 102.1,
+      "ratio_h100_over_a100": 1.9300567107750473,
+      "metric": "images/sec",
+      "source": "https://docs.nvidia.com/nim/ingestion/image-ocr/latest/performance.html",
+      "image_batch": 16
+    },
+    {
+      "model": "NeMo Retriever OCRv2 English",
+      "concurrency": 1,
+      "a100": 0.053475935828877004,
+      "h100": 0.08064516129032258,
+      "ratio_h100_over_a100": 1.5080645161290323,
+      "metric": "inverse median milliseconds",
+      "source": "https://docs.nvidia.com/nim/ingestion/image-ocr/latest/performance.html",
+      "image_batch": 1,
+      "a100_median_ms": 18.7,
+      "h100_median_ms": 12.4
+    },
+    {
+      "model": "NeMo Retriever OCRv2 Multilingual",
+      "concurrency": 1,
+      "a100": 0.04807692307692307,
+      "h100": 0.07462686567164178,
+      "ratio_h100_over_a100": 1.5522388059701493,
+      "metric": "inverse median milliseconds",
+      "source": "https://docs.nvidia.com/nim/ingestion/image-ocr/latest/performance.html",
+      "image_batch": 1,
+      "a100_median_ms": 20.8,
+      "h100_median_ms": 13.4
+    }
+  ],
+  "source_details": [
+    {
+      "url": "https://docs.opentyphoon.ai/en/deploy-hardware/",
+      "source_date": "2025-11-14",
+      "runtime": "vLLM0.10.1.1",
+      "protocol": "One input image; nominal~512outputtokens. Same model and matchedreportedconcurrency acrossGPUtables. Exactimagecorpus,resolution andprecision notreported.",
+      "source_repo": "https://github.com/scb-10x/all-in-one-pref-benchmark/tree/7eddfd23b1622082503356bfb5f4c1a779cd2750",
+      "cautions": "Use detailed tables, not inconsistentbestcase summary. ReportedOCR2B tokens/request~223 ratherthan nominal512. OCR7B requests/sec andtokens/sec ratios differ at32/64; generatedlength/workload variation prevents strict hardware-only causalinterpretation. Two sizes samevendor/familyare not independentcrossfamilyvalidation."
+    },
+    {
+      "url": "https://arxiv.org/html/2502.18443v1#S4.T3",
+      "source_date": "2025-02-25",
+      "runtime": "SGLang",
+      "cautions": "OldolmOCR checkpoint, notolmOCR2. No H100/A100 universalpage conversion; token throughput ratio anchors denseARbatch hardwareeffect only."
+    },
+    {
+      "url": "https://docs.nvidia.com/nim/ingestion/image-ocr/latest/performance.html",
+      "source_date": "2026-10-20",
+      "runtime": "NVIDIA NIM; GenAI-Perf0.0.11 examples/Triton SDK25.02",
+      "protocol": "Latencybatch1/concurrency1; throughputbatch16/concurrency8; performancemode1,twoOCRengines bydefault. Same English/multilingualpipeline configurations perSKU.",
+      "cautions": "Publishedcorpus/image-resolution notgiven. ClassicalOCRservice notautoregressivewholepageOCR. Samecorpus identity not independentlyverified fromrawrunfiles. Do notapply1.9 factor directlytoTeleOCR orCPUboundpipeline."
+    }
+  ],
+  "ratios_summary": {
+    "typhoon_2b_request_ratio_range": [
+      1.3333333333333335,
+      1.7034358047016274
+    ],
+    "typhoon_7b_request_ratio_range": [
+      1.549738219895288,
+      1.6798143851508123
+    ],
+    "olmocr_batch_token_ratio": 2.051109616677875,
+    "nvidia_ocr_batch_ratio_range": [
+      1.8877400295420974,
+      1.9300567107750473
+    ],
+    "nvidia_ocr_latency_speedup_range": [
+      1.5080645161290323,
+      1.5522388059701493
+    ]
+  },
+  "proposed_transfer_bands": [
+    {
+      "class": "dense autoregressive OCR, batched, A10080GB toH10080GB",
+      "ratio_range": [
+        1.2,
+        2.5
+      ],
+      "status": "expertselected low-confidence planningband",
+      "evidence": "Typhoonmatchedconcurrency roughly1.55\u20131.70 requestratio; oldolmOCR2.05tokenratio. Widened forencoder/backend/lengthdifferences; not fitted orCI.",
+      "formula": "nativeA100 low\u00d71.2, nativeA100 high\u00d72.5, preservingoriginalworkloadrange"
+    },
+    {
+      "class": "single-request denseAR OCR, A10080GB toH10080GB",
+      "ratio_range": [
+        1.1,
+        1.9
+      ],
+      "status": "expertselected low-confidence planningband",
+      "evidence": "Typhoon1request ratios1.33/1.64; notsaturatedthroughput.",
+      "formula": "Scale only single-requestnativeworkloadscenario, do not labelaspeakbatch."
+    },
+    {
+      "class": "GPU-accelerated layout/text detector/recognizer pipeline withunknownCPUfraction",
+      "ratio_range": [
+        1,
+        2.3
+      ],
+      "status": "expertselected low-confidence planningband",
+      "evidence": "NVIDIA classicalOCR1.5\u00d7latency /1.9\u00d7throughput;wholepipelineCPU/I-O canremovegain.",
+      "formula": "Amdahl time ratio = (1-f)+f/r_GPU; throughputspeedup reciprocal. Withf unknown[0,1],rGPU roughly[1.3,2.3], use[1,2.3]. NoGPUfraction inferredfromparameters."
+    },
+    {
+      "class": "CPU-only Indra auto on referencehost",
+      "ratio_range": [
+        1,
+        1
+      ],
+      "status": "noGPU speedup; hostscenario only",
+      "evidence": "GPU substitution doesnotaccelerateCPU-onlycode. Keep0.5\u20135pps only if explicitreferencehost comparable4vCPUassumption;otherwise hostscenarioneedsrevision."
+    }
+  ],
+  "not_supported_as_hardware_calibration": [
+    {
+      "pair": "LightOn2 H100 vs Paddleauthor A100 forPaddleOCRVL/dots",
+      "reason": "1403olmOCR pages vsOmniDocBench1.0 workload; runtime/batching differ. Rawratio2.14/1.3453=1.59 or.88/.3522=2.50 is corpus+runtime+hardware confounded."
+    },
+    {
+      "pair": "H20 Hunyuanpanel vs H100Logics/LightOnpanels",
+      "reason": "930page single-request vsMPDocBatch1/olmOCRbatched; nomatchedhardwareanchor. Re-anchorclassH100scenario ratherthan multiplybyFLOPSratio."
+    },
+    {
+      "pair": "ConsumerGPU/CPU token microbenchmarks toH100",
+      "reason": "No matchedsamepipeline workload evidence incurrentdata. Retain nativecontext and selectdocumentedH100analogueclassrange; do notphysicalspecnormalize."
+    },
+    {
+      "pair": "PPStructure A100 vsH20",
+      "reason": "CPU8350C vs8563C changesalongsideGPU;1.38vs1.36s onlywhole-system observation, notGPUratio."
+    }
+  ],
+  "bounded_implementation": "ChooseH100reference; build separateassumed normalizedscenario record for every transformedrow. NativeH100records keepreportedvalues but broadenpageworkloadranges ifpresentedalongsideplanningestimates. A100rows canuseclassbandsabove; H20/consumer/unknownGPUcount rows needcuratedH100classenvelopes instead ofmultiplyingunmatchedspeeds. CPU-only rowsnamehostnot pretendGPU. Do notalteraccuracyranks. Costusesoneexplicitreferencewhole-setup$/hourand inversebounds. Pricing is a userassumption, notmarketquote.",
+  "holdout_status": "No adequate independentpairedOCRfamilies/corpora for calibratedcoverage validation. Twovendorfamilies plusoneoldVLM provide qualitative empiricalbracketing, not universalcoefficient. Concurrencyrowsarenotrepeatedindependentsamples."
+}

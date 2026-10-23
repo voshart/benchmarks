@@ -1,0 +1,1163 @@
+{
+  "profile": {
+    "id": "h100-80gb-v1",
+    "label": "H100 80GB",
+    "hardware": "1 NVIDIA H100 80GB, SXM-class planning reference; no CPU offload or multi-GPU sharding",
+    "host": "Assumed 16 x86 vCPUs, 64GB host RAM, local warm page images. CPU-only paths use stated worker counts; the GPU gives them no speedup.",
+    "precision": "BF16/FP16 for GPU generative models where supported; native standard precision for classical/text and CPU paths (including Indra), not an implied BF16 CPU run. No speculative decoding or quantization assumed. Quality scores may use other settings.",
+    "workload": "Typical document pages up to about2048px long edge; approximately1000–3000 total output tokens/page across all calls, or corresponding text-only output. Dense tables, SVG, long/thinking outputs and high-resolution pages are outside this scenario.",
+    "batch": "Warm throughput with queued pages and memory-fitting batching, up to16 concurrent page requests; not single-request latency. Internal crop batches remain model-specific.",
+    "method": "Every displayed local speed is an assumed planning range on this reference, including models with native H100 reports. Native-H100 ranges allow workload/runtime variation; A100 transfers use class-specific paired evidence; consumer/H20 gaps use explicit family scenarios. These are not a controlled benchmark, fitted confidence intervals, or universal FLOPS scaling.",
+    "sorting": "Geometric midpoint is only a navigation aid; overlapping intervals do not establish a winner.",
+    "cost": "Illustrative price for the complete H100 reference setup-hour at100% utilization, not a market quote. Cost endpoints invert speed endpoints. Actual hosted API prices stay distinct.",
+    "fit_note": "Not the weakest possible card and not a universal fit.80GB covers many specialists and some medium models; oversized weights, borderline35B configurations and unresolved identities remain explicit exceptions.",
+    "source_ids": [
+      "ocr-ref-h100-spec",
+      "ocr-ref-typhoon",
+      "ocr-ref-olm",
+      "ocr-ref-nvidia"
+    ]
+  },
+  "models": [
+    {
+      "model": "abot-ocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-abot-ocr",
+        "ocr-plan-abot-ocr-config",
+        "ocr-speed-lighton2-1403-h100",
+        "hf:acvlab/ABot-OCR@6cb6799e7fa42258d0d568e4c7367dbc30781e39"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈4.255GB decimal, not peak VRAM.",
+      "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Qwen3VLForConditionalGeneration;2B class;28-layer2048-wide decoder. Full-page image to Markdown, not layout/crop pipeline. Full-page dense autoregressive vision-to-Markdown class; OCR fine-tuning/output lengths change performance. No same-checkpoint measurement. H100 full-page reference models: dots.ocr0.88,Chandra1.7,olmOCR2.54 pages/s. The broad range is a subjective pipeline-class allowance, NOT a parametric fit or same-architecture transfer.",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 4.0,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 4255064064
+    },
+    {
+      "model": "chandra-1-open",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports1.7pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 0.68,
+      "high": 3.4,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "chandra-2-open",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-lighton3-512-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports1.68pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 0.67,
+      "high": 3.4,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "deepseek-ocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports2.36pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 0.94,
+      "high": 4.7,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "deepseek-ocr-2",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-hunyuan15-h20-930-ar",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 4.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "docling-pipeline",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "docling-project"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "dolphin",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "dolphin-1-5",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "dolphin-v2",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "dots-mocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-dots-mocr",
+        "ocr-plan-dots-mocr-config",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Pinned dots.mocr and dots.ocr config JSON is identical (28-layer1536-wide decoder,42-layer1536-wide vision encoder). LightOn authors measured original dots.ocr0.88pages/s on1H10080GB BF16 over1403olmOCR-Bench pages. Apply a judgmental roughly quarter-to-double allowance for changed weights/output lengths/rendering, rounded to0.2–1.8. No same-checkpoint measurement.",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 1.8,
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "dots-ocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports0.88pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 0.35,
+      "high": 1.8,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "dots-ocr-1-5",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "glm-ocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-hunyuan15-h20-930-ar",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
+      "confidence": "low",
+      "low": 0.4,
+      "high": 5.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "granite-docling-258m",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "granite-docling-card",
+        "granite-community4090",
+        "ocr-speed-lighton2-1403-h100",
+        "hf:ibm-granite/granite-docling-258M@982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈0.515GB decimal, not peak VRAM.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
+      "confidence": "low",
+      "low": 0.1,
+      "high": 3.0,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 515034240
+    },
+    {
+      "model": "hiro-moss-ocr-0-3b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hiro-moss-card",
+        "hf:PatSnap/Hiro-MOSS-OCR-0.3B@f833fe46fac16d19855670e83f1010dff7758688"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈1.346GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 1345617920
+    },
+    {
+      "model": "hunyuanocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-hunyuan15-h20-930-ar",
+        "ocr-plan-hunyuan-family",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Official HunyuanOCR 1.0 runtime documentation states 20GB vLLM requirement; not an H100 measured peak or arbitrary-resolution guarantee.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 3.0,
+      "fit_class": "documented_runtime_memory_requirement"
+    },
+    {
+      "model": "hunyuanocr-1-5",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-hunyuan15-h20-930-ar",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
+      "confidence": "low",
+      "low": 0.3,
+      "high": 4.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "jina-ocr-v1",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "jina-ocr-v1-release"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "lightonocr-3-0.8b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "lightonocr-3-0.8b-card",
+        "ocr-speed-lighton3-512-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports3.32pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 1.3,
+      "high": 6.6,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "lightonocr-3-1b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "lightonocr-3-1b-card",
+        "ocr-speed-lighton3-512-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports3.52pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 1.4,
+      "high": 7.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "lightonocr-3-4b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "lightonocr-3-4b-card",
+        "ocr-speed-lighton3-512-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports2.03pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 0.81,
+      "high": 4.1,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "mineru-2-5-4",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "mineru-2-5-pipeline",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "mineru-2-5-vlm",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "mineru-pipeline",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "mineru2-5",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-paddlevl-v4",
+        "ocr-ref-typhoon",
+        "ocr-ref-olm"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "A100 full-page source1.0574pages/s; assumed H100 pipeline factor1–2.3 and0.5–1.5 workload/batching allowance. Paired model/runtime results support a broad class band, not this exact model ratio. Fixed CPU/crop work and output lengths remain uncertain.",
+      "confidence": "low",
+      "low": 0.53,
+      "high": 3.6,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "mineru2-5-pro",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-logics3-mpdoc-h100",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 3.0,
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "mineru2-vlm",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "monkeyocr-3b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "monkeyocr-pro-1-2b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-paddlevl-v4",
+        "ocr-ref-typhoon",
+        "ocr-ref-olm"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "A100 full-page source0.673pages/s; assumed H100 pipeline factor1–2.3 and0.5–1.5 workload/batching allowance. Paired model/runtime results support a broad class band, not this exact model ratio. Fixed CPU/crop work and output lengths remain uncertain.",
+      "confidence": "low",
+      "low": 0.34,
+      "high": 2.3,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "monkeyocr-pro-3b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "monkeyocrv1-5",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "monkeyocrv2-b-parsing",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-monkeyocrv2-b-parsing",
+        "ocr-plan-monkeyocrv2-b-parsing-config",
+        "ocr-speed-paddlevl-v4",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Qwen3-0.6B decoder with a new vision encoder; autoregressive layout followed by parallel crop recognition. Older MonkeyOCR-pro1.2B measured0.673pages/s on oneA100 usingvLLM0.10.2 and512OmniDocBench1.0 PDFs. Judgmental0.15–3× allowance gives approximately0.1–2pages/s. Different architecture, not inherited checkpoint speed. No B-versus-S ordering is inferred.",
+      "confidence": "low",
+      "low": 0.1,
+      "high": 4.6,
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "monkeyocrv2-s-parsing",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-monkeyocrv2-s-parsing",
+        "ocr-plan-monkeyocrv2-s-parsing-config",
+        "ocr-speed-paddlevl-v4",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Qwen3-0.6B decoder with a new vision encoder; autoregressive layout followed by parallel crop recognition. Older MonkeyOCR-pro1.2B measured0.673pages/s on oneA100 usingvLLM0.10.2 and512OmniDocBench1.0 PDFs. Judgmental0.15–3× allowance gives approximately0.1–2pages/s. Different architecture, not inherited checkpoint speed. No B-versus-S ordering is inferred.",
+      "confidence": "low",
+      "low": 0.1,
+      "high": 4.6,
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "nemotron-parse-2",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "nemotron-parse-2-card",
+        "hf:nvidia/NVIDIA-Nemotron-Parse-2.0@4e021c03edc92e715d5d788921a927d0cbb4b4d1"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈3.612GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 3612196912
+    },
+    {
+      "model": "olmocr",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "olmocr-2-7b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "olmocr-7b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "olmocr-v0-4-0",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "olmocr2",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports2.54pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 1.0,
+      "high": 5.1,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "ovisocr2",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-logics3-mpdoc-h100",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 3.0,
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "paddleocr-1-5",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "paddleocr-vl",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Native H100 source reports2.14pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
+      "confidence": "low",
+      "low": 0.86,
+      "high": 4.3,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "paddleocr-vl-1-5",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-paddleocr-vl-1-6",
+        "ocr-plan-paddleocr-vl-1-6-config",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Paddle1.6 report states PP-DocLayoutV3 and0.9B recognizer architecture unchanged from1.5. Older PaddleOCR-VL measured2.14pages/s on1H10080GB BF16 over1403olmOCR-Bench pages. A judgmental roughly quarter-to1.5× older-series allowance gives0.5–3.2. Unknown-hardware1.5 measurements are context, not H100 calibration.",
+      "confidence": "low",
+      "low": 0.5,
+      "high": 3.2,
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "paddleocr-vl-1-6",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-paddleocr-vl-1-6",
+        "ocr-plan-paddleocr-vl-1-6-config",
+        "ocr-speed-lighton2-1403-h100",
+        "ocr-speed-hunyuan15-h20-930-ar"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Paddle1.6 report states PP-DocLayoutV3 and0.9B recognizer architecture unchanged from1.5. Older PaddleOCR-VL measured2.14pages/s on1H10080GB BF16 over1403olmOCR-Bench pages. A judgmental roughly quarter-to1.5× older-series allowance gives0.5–3.2. Unknown-hardware1.5 measurements are context, not H100 calibration.",
+      "confidence": "low",
+      "low": 0.5,
+      "high": 3.2,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "pp-structurev3",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-speed-ppstructure",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact default pipeline reports1.38s/image on280mixed document images. Reciprocal0.725images/s × judgmental0.25–2× page-complexity allowance, rounded to0.18–1.5 pages/s.",
+      "confidence": "low",
+      "low": 0.18,
+      "high": 3.4,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "qwen3-5-0-8b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-5-122b-a10b",
+      "profile": "h100-80gb-v1",
+      "status": "too-large",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.5-122B-A10B@dc4d348443bc740c68e2d77492492c11606384d5"
+      ],
+      "fit": "Native checkpoint tensors occupy about250GB before KV cache/vision/workspace: beyond80GB. Active MoE parameters do not reduce resident weights. Quantized/offloaded alternatives are not silently substituted. Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights. Native tensor storage≈250.173GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 250173007840,
+      "fit_class": "native_checkpoint_exceeds_reference"
+    },
+    {
+      "model": "qwen3-5-27b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.5-27B@fc05daec18b0a78c049392ed2e771dde82bdf654"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. About 55.56 decimal GB of BF16 weights supports cautious planning on 80GB with reserved workspace; no observed H100 memory peak. Explicitly bound image tokens, output length and batch. Native tensor storage≈55.563GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "plausible_27b_bounded_bf16",
+      "checkpoint_bytes": 55562872800
+    },
+    {
+      "model": "qwen3-5-2b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-5-35b-a3b",
+      "profile": "h100-80gb-v1",
+      "status": "tight-fit",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.5-35B-A3B@59d61f3ce65a6d9863b86d2e96597125219dc754"
+      ],
+      "fit": "About71.9GB checkpoint tensors leave limited80GB headroom for vision/KV/workspace. No guaranteed batched fit; a tested lower-precision or restricted-context setup is required before a numeric reference estimate. About 71.9 decimal GB of weights; runtime, vision activations, KV cache and graphs may exhaust remaining space. Batch 1 and bounded visual/context budgets are necessary but not sufficient proof. Native tensor storage≈71.904GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 71903655008,
+      "fit_class": "borderline_35b_bf16"
+    },
+    {
+      "model": "qwen3-5-397b-a17b",
+      "profile": "h100-80gb-v1",
+      "status": "too-large",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.5-397B-A17B@8472618112abcbd45acbcdc58436aff4233c23f7"
+      ],
+      "fit": "Native checkpoint tensors occupy about807GB before KV cache/vision/workspace: beyond80GB. Active MoE parameters do not reduce resident weights. Quantized/offloaded alternatives are not silently substituted. Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights. Native tensor storage≈806.796GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 806795875168,
+      "fit_class": "native_checkpoint_exceeds_reference"
+    },
+    {
+      "model": "qwen3-5-4b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-5-9b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-qwen3-5-9b",
+        "ocr-plan-qwen3-5-9b-config",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Qwen3_5ForConditionalGeneration;9B language decoder,32layers;3GatedDeltaNet blocks per full-attention block; vision encoder.9B checkpoint is not MoE despite broad family marketing. Full-page multimodal generation class; hybridDeltaNet mismatch explicitly prevents close-family claim. Nonthinking OCR, optimized serving. Text runtime evidence is context only. H100 full-page reference models: dots.ocr0.88,Chandra1.7,olmOCR2.54 pages/s. The broad range is a subjective pipeline-class allowance, NOT a parametric fit or same-architecture transfer.",
+      "confidence": "low",
+      "low": 0.1,
+      "high": 4.0,
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-5-instruct-9b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-6-27b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. About 55.56 decimal GB of BF16 weights supports cautious planning on 80GB with reserved workspace; no observed H100 memory peak. Explicitly bound image tokens, output length and batch. Native tensor storage≈55.563GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "plausible_27b_bounded_bf16",
+      "checkpoint_bytes": 55562855904
+    },
+    {
+      "model": "qwen3-6-35b-a3b",
+      "profile": "h100-80gb-v1",
+      "status": "tight-fit",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.6-35B-A3B@995ad96eacd98c81ed38be0c5b274b04031597b0"
+      ],
+      "fit": "About71.9GB checkpoint tensors leave limited80GB headroom for vision/KV/workspace. No guaranteed batched fit; a tested lower-precision or restricted-context setup is required before a numeric reference estimate. About 71.9 decimal GB of weights; runtime, vision activations, KV cache and graphs may exhaust remaining space. Batch 1 and bounded visual/context budgets are necessary but not sufficient proof. Native tensor storage≈71.904GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 71903645408.0,
+      "fit_class": "borderline_35b_bf16"
+    },
+    {
+      "model": "qwen3-8-27b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.8-27B@1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. About 55.56 decimal GB of BF16 weights supports cautious planning on 80GB with reserved workspace; no observed H100 memory peak. Explicitly bound image tokens, output length and batch. Native tensor storage≈55.563GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "plausible_27b_bounded_bf16",
+      "checkpoint_bytes": 55562855904
+    },
+    {
+      "model": "qwen3-8-flash-next",
+      "profile": "h100-80gb-v1",
+      "status": "too-large",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3.8-Flash-Next@de4b8e4d43b917e7706784d8bb445c9af86a3540"
+      ],
+      "fit": "Native checkpoint tensors occupy about360GB before KV cache/vision/workspace: beyond80GB. Active MoE parameters do not reduce resident weights. Quantized/offloaded alternatives are not silently substituted. Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights. Native tensor storage≈360.0GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 359999963128.0,
+      "fit_class": "native_checkpoint_exceeds_reference"
+    },
+    {
+      "model": "qwen3-vl-235b",
+      "profile": "h100-80gb-v1",
+      "status": "too-large",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3-VL-235B-A22B-Instruct@710c13861be6c466e66de3f484069440b8f31389"
+      ],
+      "fit": "Native checkpoint tensors occupy about471GB before KV cache/vision/workspace: beyond80GB. Active MoE parameters do not reduce resident weights. Quantized/offloaded alternatives are not silently substituted. Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights. Native tensor storage≈471.34GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 471340045792,
+      "fit_class": "native_checkpoint_exceeds_reference"
+    },
+    {
+      "model": "qwen3-vl-235b-instruct",
+      "profile": "h100-80gb-v1",
+      "status": "too-large",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "hf:Qwen/Qwen3-VL-235B-A22B-Instruct@710c13861be6c466e66de3f484069440b8f31389"
+      ],
+      "fit": "Native checkpoint tensors occupy about471GB before KV cache/vision/workspace: beyond80GB. Active MoE parameters do not reduce resident weights. Quantized/offloaded alternatives are not silently substituted. Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights. Native tensor storage≈471.34GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "checkpoint_bytes": 471340045792,
+      "fit_class": "native_checkpoint_exceeds_reference"
+    },
+    {
+      "model": "qwen3-vl-2b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-vl-4b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-vl-8b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-vl-instruct-8b",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_named_checkpoint_unpinned"
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "profile": "h100-80gb-v1",
+      "status": "hosted",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "Alibaba hosted API alias; no verified exact public checkpoint to run on this card. Official Model Studio hosted API alias; no exact downloadable checkpoint established. Do not normalize API service speed to local H100.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "hosted_alias_no_verified_local_checkpoint"
+    },
+    {
+      "model": "smoldocling-256m-preview",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "smoldocling-card",
+        "granite-community4090",
+        "granite-architecture",
+        "smol-architecture",
+        "ocr-speed-lighton2-1403-h100",
+        "hf:docling-project/SmolDocling-256M-preview@ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈0.513GB decimal, not peak VRAM.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
+      "confidence": "low",
+      "low": 0.05,
+      "high": 3.0,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 512969856
+    },
+    {
+      "model": "surya-ocr-2",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified"
+    },
+    {
+      "model": "teleocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-tele_official",
+        "ocr-plan-tele_repo",
+        "ocr-plan-tele_community",
+        "ocr-speed-paddlevl-v4",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia",
+        "hf:XingChen-AGI/TeleOCR@70a19ec6a3b036311af19ae5e762e650f41a5980"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈2.83GB decimal, not peak VRAM.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Pipeline-class planning envelope, not parameter scaling. Paddle authors measured MonkeyOCR-pro1.2B at0.673 and PaddleOCR-VL at1.3453 pages/s on one A100, vLLM0.10.2,512PDF paths, OmniDocBench1.0. TeleOCR also splits layout and region recognition. Approximately one-third of the slower anchor to three times the faster anchor, rounded to0.2–4. Multipliers are explicitly judgmental, not fitted.",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 9.2,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 2830145536
+    },
+    {
+      "model": "teleocr-ovisocr2-paddleocr-vl",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Multiple-model pipeline, not a single checkpoint. Need stage scheduling, simultaneous residency and whole-pipeline timings.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "ensemble_residency_unresolved"
+    },
+    {
+      "model": "tesseract",
+      "profile": "h100-80gb-v1",
+      "status": "cpu-only",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "tesseract-project"
+      ],
+      "fit": "CPU-oriented engine; an H100 alone does not define its performance. No verified common-host throughput scenario in this pass. Existing evidence is CPU-oriented; retain CPU context instead of manufacturing GPU speed. GPU backend compatibility not established.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "cpu_or_gpu_backend_unverified"
+    },
+    {
+      "model": "xiaomi-ocr-0",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-xiaomi_official",
+        "ocr-plan-xiaomi_community",
+        "ocr-speed-lighton2-1403-h100",
+        "hf:SeerRay-Lab/Xiaomi-OCR-0@ff990be318c4c68f7e621dd690231200f47e48c4"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈1.747GB decimal, not peak VRAM.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
+      "confidence": "low",
+      "low": 0.1,
+      "high": 3.0,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 1746877568
+    },
+    {
+      "model": "youtu-parsing",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ocr-plan-youtu-parsing",
+        "ocr-plan-youtu-parsing-config",
+        "ocr-speed-paddlevl-v4",
+        "ocr-plan-youtu-license",
+        "ocr-plan-youtu-latency",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia",
+        "hf:tencent/Youtu-Parsing@b82ee76cca8aa94ffd6451de38cd72aa8362f3c2"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈5.032GB decimal, not peak VRAM.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Decoupled shared vision +parallel region/query decoding supports pipeline-class similarity. Unknown-hardware1.75s/page is separate context, not A100 calibration. Anchors0.673 and1.3453 pages/s; roughly one-third of slower to three times faster, rounded. Multipliers are judgmental, not calibrated.",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 9.2,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 5031968480
+    },
+    {
+      "model": "bodhan-indic-ocr",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "bodhan-indic-ocr-card",
+        "hf:bodhan-ai/indic-ocr@cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size. Native tensor storage≈NoneGB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "runtime_fit_unverified",
+      "checkpoint_bytes": null
+    },
+    {
+      "model": "pp-ocrv6-tiny",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "pp-ocrv6-release",
+        "ocr-speed-ppocr6",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact model source reports0.13s/image on200mixed text images. Start with reciprocal7.692images/s, then apply a judgmental0.25–2× allowance for page complexity and round outward. This does not reclassify the image test as measured document throughput.",
+      "confidence": "low",
+      "low": 1.9,
+      "high": 37.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "pp-ocrv6-small",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "pp-ocrv6-release",
+        "ocr-speed-ppocr6",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact model source reports0.25s/image on200mixed text images. Start with reciprocal4images/s, then apply a judgmental0.25–2× allowance for page complexity and round outward. This does not reclassify the image test as measured document throughput.",
+      "confidence": "low",
+      "low": 1.0,
+      "high": 18.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "pp-ocrv6-medium",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "pp-ocrv6-release",
+        "ocr-speed-ppocr6",
+        "ocr-ref-typhoon",
+        "ocr-ref-nvidia"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact model source reports0.29s/image on200mixed text images. Start with reciprocal3.448images/s, then apply a judgmental0.25–2× allowance for page complexity and round outward. This does not reclassify the image test as measured document throughput.",
+      "confidence": "low",
+      "low": 0.8,
+      "high": 16.0,
+      "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "ovisocr3",
+      "profile": "h100-80gb-v1",
+      "status": "unresolved",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "ovisocr3-release",
+        "hf:ATH-MaaS/OvisOCR3@5f6ce6932efee9ec10c30746db55bd780214b7fd"
+      ],
+      "fit": "No verified exact single-card runtime/identity basis in this bounded pass. No numerical speed is manufactured. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈1.706GB decimal, not peak VRAM.",
+      "basis": "Original observations and configuration notes remain in Details.",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 1705971840
+    },
+    {
+      "model": "indra-ocr-1-1",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "indra-ocr-1-1-release",
+        "ocr-speed-indra11-auto-latency"
+      ],
+      "fit": "CPU pipeline; GPU unused. Reference cost still charges the allocated whole H100 setup, not the cheaper optimal CPU-only deployment. Existing evidence is CPU-oriented; retain CPU context instead of manufacturing GPU speed. GPU backend compatibility not established.",
+      "basis": "CPU-only auto path,4vCPUs of the reference host; no GPU speedup. Exact-mode author median is0.212s/page on2937pages, varying about15% across runs. A planning mean-latency scenario of0.2–2s/page yields0.5–5pages/s. The upper latency allowance is a judgment for long tails, NOT an inferred mean or confidence interval.",
+      "confidence": "low",
+      "path": "cpu",
+      "low": 0.5,
+      "high": 5.0,
+      "fit_class": "cpu_or_gpu_backend_unverified"
+    },
+    {
+      "model": "logics-parsing-v3",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-22",
+      "source_ids": [
+        "logics-parsing-v3-release",
+        "ocr-speed-logics3-mpdoc-h100",
+        "ocr-speed-lighton2-1403-h100",
+        "hf:Logics-MLLM/Logics-Parsing-V3@e6d324e30e0f64f1a0dfb652efcb83a4b244591e"
+      ],
+      "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings. Native tensor storage≈1.706GB decimal, not peak VRAM.",
+      "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
+      "confidence": "low",
+      "low": 0.2,
+      "high": 3.0,
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "checkpoint_bytes": 1705971840
+    },
+    {
+      "model": "lightonocr-2-1b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "as_of": "2026-10-22",
+      "low": 2.3,
+      "high": 11,
+      "source_ids": [
+        "ocr-ref-fit-lightonocr-2-1b",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "checkpoint_bytes": 2011295744,
+      "fit": "Public ungated weights and BF16 local CUDA instructions verified. Existing exact-model single-GPU evidence supports bounded fit, not arbitrary resolution/batch or exact SXM board match. Weight storage is not peak VRAM.",
+      "basis": "Native H1005.71pages/s with judgmental0.4–2× common-workload allowance, rounded; not the same controlled experiment."
+    },
+    {
+      "model": "unlimited-ocr",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "as_of": "2026-10-22",
+      "low": 0.2,
+      "high": 3,
+      "source_ids": [
+        "ocr-ref-fit-unlimited-ocr",
+        "ocr-speed-hunyuan15-h20-930-ar"
+      ],
+      "checkpoint_bytes": 6672212480,
+      "fit": "Public ungated weights and BF16 local CUDA instructions verified. Existing exact-model single-GPU evidence supports bounded fit, not arbitrary resolution/batch or exact SXM board match. Weight storage is not peak VRAM.",
+      "basis": "H100 whole-page AR family scenario. Exact model has single-H20 baseline0.255pages/s; unknown-count H100 timing is not normalized as oneGPU. The0.2–3range includes uncertain warm batching, encoder/output work and H100-class peer evidence, not a universal H20 multiplier."
+    }
+  ]
+}

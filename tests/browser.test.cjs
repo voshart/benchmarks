@@ -55,7 +55,7 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
   assert.deepEqual(ids(),OCRComparison.sortRows(expected.rows,key,direction==='asc'?'desc':'asc').map(r=>r.id));
  }
  element('ocrInputTokens').value='300000';element('ocrInputTokens').handlers.input();assert.equal(element('ocrInputTokens').value,200000);
- element('ocrHourlyRate').value='2';element('ocrHourlyRate').handlers.input();assert.match(element('matrixBody').innerHTML,/\$2\.00\/reported setup-hour/);
+ element('ocrHourlyRate').value='2';element('ocrHourlyRate').handlers.input();assert.match(element('matrixBody').innerHTML,/\$2\.00\/complete H10080GB setup-hour/);
  element('coverage').value='0';element('coverage').handlers.change();assert.ok(ids().length>original.length);
  element('access').value='open';element('access').handlers.change();assert.ok(ids().every(id=>data.models.find(m=>m.id===id).access==='open'));
  element('historyRange').value='0';element('historyRange').handlers.input();assert.equal(element('historyDate').textContent,data.config.release_start);

@@ -1,0 +1,1916 @@
+{
+  "audit_as_of": "2026-10-22",
+  "artifact_created_utc": "2026-10-23T00:07:00Z",
+  "repository_snapshot": "74d6435",
+  "scope": "All 80 access=open rows in the loaded 186-model OCR catalog; additional known large open checkpoints checked despite legacy access=unknown. No model execution or repo changes.",
+  "catalog_counts": {
+    "open": 80,
+    "closed": 48,
+    "unknown": 55,
+    "unreleased": 3
+  },
+  "reference_profile": {
+    "hardware": "1 NVIDIA H100 SXM 80GB",
+    "status": "declared modeling reference, not an observed uniform benchmark",
+    "vendor_url": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory-h100-h200-b200/latest/components.html",
+    "vendor_spec": "H100 SXM: 80GB HBM3, 3.35 TB/s bandwidth",
+    "rationale": "Practical widely reported high-memory reference for dedicated OCR; not the weakest possible GPU and not a card that fits every model. H100-unspecified observations must retain board-variant uncertainty.",
+    "memory_policy": "Preserve published supported precision; no silent quantization. Batch/image/context/output limits and runtime workspace must be explicit. GB/GiB and allocator reservations must not be conflated."
+  },
+  "normalization_policy": [
+    "Fit is not speed; no parameter/FLOPS-only performance regression or universal GPU scaling factor.",
+    "Label H100-normalized values modeled unless source reports the exact H100 SXM profile. Retain source hardware and measured pipeline in Details.",
+    "Separate warm single-page latency from peak batched throughput. Preserve input raster size, image token count, output token budget and stage/window exclusions.",
+    "Memory includes weights, vision activations, workspace, KV cache, CUDA graphs and runtime allocations; there is no universal 2x weight multiplier.",
+    "Do not auto-inherit benchmark accuracy after quantization, resizing, output truncation, CPU offload or changing model alias.",
+    "For hard exclusions show Requires multi-GPU / offload / separate quantized checkpoint, not zero pages/s."
+  ],
+  "runtime_sources": [
+    {
+      "url": "https://docs.vllm.ai/en/latest/configuration/conserving_memory/",
+      "finding": "Context, concurrent sequences, CUDA graphs and multimodal input budgets change memory. Profiling image hints do not resize actual images."
+    },
+    {
+      "url": "https://github.com/Tencent-Hunyuan/HunyuanOCR/blob/main/HunyuanOCR_v1.0/README_zh_v1.0.md",
+      "finding": "Official v1.0 vLLM deployment documentation gives 20GB memory requirement; not universal image-resolution fit."
+    },
+    {
+      "url": "https://github.com/Tencent-Hunyuan/HunyuanOCR/issues/114",
+      "finding": "Community operator reported HunyuanOCR1.5 Transformers eager path at ~33k image tokens exhausting even H200; capped image succeeds. Anecdotal runtime-specific warning, not an official universal memory requirement."
+    },
+    {
+      "url": "https://help.aliyun.com/en/model-studio/model-pricing",
+      "finding": "qwen3-vl-plus is listed as a hosted service alias; local checkpoint identity unverified."
+    }
+  ],
+  "fit_class_counts": {
+    "small_pinned_weights_runtime_conditional": 10,
+    "reported_single_gpu_configuration": 19,
+    "runtime_fit_unverified": 27,
+    "documented_runtime_memory_requirement": 1,
+    "small_named_checkpoint_unpinned": 9,
+    "native_checkpoint_exceeds_reference": 5,
+    "plausible_27b_bounded_bf16": 3,
+    "borderline_35b_bf16": 2,
+    "hosted_alias_no_verified_local_checkpoint": 1,
+    "ensemble_residency_unresolved": 1,
+    "cpu_or_gpu_backend_unverified": 2
+  },
+  "models": [
+    {
+      "model_id": "abot-ocr",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:acvlab/ABot-OCR@6cb6799e7fa42258d0d568e4c7367dbc30781e39",
+        "tensor_storage_bytes": 4255064064,
+        "tensor_storage_GB_decimal": 4.255,
+        "tensor_storage_GiB": 3.963,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "chandra-1-open",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-009",
+          "source_id": "ocr-speed-lighton2-1403-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "BF16",
+          "pipeline": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "chandra-2-open",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-004",
+          "source_id": "ocr-speed-lighton3-512-h100",
+          "hardware": "1 NVIDIA H100 per model",
+          "precision": "not specified in speed table",
+          "pipeline": "vLLM 0.30.0; guidellm 0.8; identical server flags",
+          "rendering": "300DPI, at most6.3MP;579-token prompt"
+        },
+        {
+          "record_id": "ocr-throughput-012",
+          "source_id": "ocr-speed-chandra2-author-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "Precision unspecified",
+          "pipeline": "vLLM;96 concurrent sequences",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "deepseek-ocr",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-007",
+          "source_id": "ocr-speed-lighton2-1403-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "BF16",
+          "pipeline": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-067",
+          "source_id": "ocr-speed-deepseek-v1",
+          "hardware": "single NVIDIA A100 40GB",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "deepseek-ocr-2",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-063",
+          "source_id": "ocr-speed-glm-v2",
+          "hardware": "Hardware unspecified",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-080",
+          "source_id": "ocr-speed-hunyuan15-h20-930-ar",
+          "hardware": "1 NVIDIA H20 80GB per server",
+          "precision": "Not specified in benchmark source",
+          "pipeline": "DeepSeek-OCR-2 autoregressive with grounding",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "docling-pipeline",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "dolphin",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "dolphin-1-5",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "dolphin-v2",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "dots-mocr",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "dots-ocr",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-010",
+          "source_id": "ocr-speed-lighton2-1403-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "BF16",
+          "pipeline": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-054",
+          "source_id": "ocr-speed-paddlevl-v4",
+          "hardware": "single NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "vLLM0.10.2",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-066",
+          "source_id": "ocr-speed-glm-v2",
+          "hardware": "Hardware unspecified",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-081",
+          "source_id": "ocr-speed-hunyuan15-h20-930-ar",
+          "hardware": "1 NVIDIA H20 80GB per server",
+          "precision": "Not specified in benchmark source",
+          "pipeline": "dots.ocr autoregressive",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "dots-ocr-1-5",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "glm-ocr",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-059",
+          "source_id": "ocr-speed-glm-v2",
+          "hardware": "Hardware unspecified",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-060",
+          "source_id": "ocr-speed-glm-v2",
+          "hardware": "Hardware unspecified",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-077",
+          "source_id": "ocr-speed-hunyuan15-h20-930-ar",
+          "hardware": "1 NVIDIA H20 80GB per server",
+          "precision": "Not specified in benchmark source",
+          "pipeline": "GLM-OCR SDK full-page pipeline: layout, concurrent region OCR, merging",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "granite-docling-258m",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:ibm-granite/granite-docling-258M@982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe",
+        "tensor_storage_bytes": 515034240,
+        "tensor_storage_GB_decimal": 0.515,
+        "tensor_storage_GiB": 0.48,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "hiro-moss-ocr-0-3b",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:PatSnap/Hiro-MOSS-OCR-0.3B@f833fe46fac16d19855670e83f1010dff7758688",
+        "tensor_storage_bytes": 1345617920,
+        "tensor_storage_GB_decimal": 1.346,
+        "tensor_storage_GiB": 1.253,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "F32"
+        ]
+      }
+    },
+    {
+      "model_id": "hunyuanocr",
+      "registry_access": "open",
+      "fit_class": "documented_runtime_memory_requirement",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Official HunyuanOCR 1.0 runtime documentation states 20GB vLLM requirement; not an H100 measured peak or arbitrary-resolution guarantee."
+    },
+    {
+      "model_id": "hunyuanocr-1-5",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-076",
+          "source_id": "ocr-speed-hunyuan15-h20-930-ar",
+          "hardware": "1 NVIDIA H20 80GB per server",
+          "precision": "Not specified in benchmark source",
+          "pipeline": "HunyuanOCR-1.5 vLLM autoregressive; no DFlash",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-082",
+          "source_id": "ocr-speed-hunyuan15-h20-930-ar",
+          "hardware": "1 NVIDIA H20 80GB",
+          "precision": "Not specified in benchmark source",
+          "pipeline": "DFlash 14.7k-packs finetuned draft",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "jina-ocr-v1",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "lightonocr-3-0.8b",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-001",
+          "source_id": "ocr-speed-lighton3-512-h100",
+          "hardware": "1 NVIDIA H100 per model",
+          "precision": "not specified in speed table",
+          "pipeline": "vLLM 0.30.0; guidellm 0.8; identical server flags",
+          "rendering": "400 DPI, at most 5MP"
+        }
+      ]
+    },
+    {
+      "model_id": "lightonocr-3-1b",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-002",
+          "source_id": "ocr-speed-lighton3-512-h100",
+          "hardware": "1 NVIDIA H100 per model",
+          "precision": "not specified in speed table",
+          "pipeline": "vLLM 0.30.0; guidellm 0.8; identical server flags",
+          "rendering": "long side 2048px resized to 1540px"
+        }
+      ]
+    },
+    {
+      "model_id": "lightonocr-3-4b",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-003",
+          "source_id": "ocr-speed-lighton3-512-h100",
+          "hardware": "1 NVIDIA H100 per model",
+          "precision": "not specified in speed table",
+          "pipeline": "vLLM 0.30.0; guidellm 0.8; identical server flags",
+          "rendering": "400 DPI, at most5MP"
+        }
+      ]
+    },
+    {
+      "model_id": "mineru-2-5-4",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "mineru-2-5-pipeline",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "mineru-2-5-vlm",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "mineru-pipeline",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "mineru2-5",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-055",
+          "source_id": "ocr-speed-paddlevl-v4",
+          "hardware": "single NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "vLLM0.10.2",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-064",
+          "source_id": "ocr-speed-glm-v2",
+          "hardware": "Hardware unspecified",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-065",
+          "source_id": "ocr-speed-glm-v2",
+          "hardware": "Hardware unspecified",
+          "precision": "Unspecified",
+          "pipeline": "Backend unspecified",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "mineru2-5-pro",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "mineru2-vlm",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "monkeyocr-3b",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "monkeyocr-pro-1-2b",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-053",
+          "source_id": "ocr-speed-paddlevl-v4",
+          "hardware": "single NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "vLLM0.10.2",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "monkeyocr-pro-3b",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "monkeyocrv1-5",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "monkeyocrv2-b-parsing",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "monkeyocrv2-s-parsing",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "nemotron-parse-2",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:nvidia/NVIDIA-Nemotron-Parse-2.0@4e021c03edc92e715d5d788921a927d0cbb4b4d1",
+        "tensor_storage_bytes": 3612196912,
+        "tensor_storage_GB_decimal": 3.612,
+        "tensor_storage_GiB": 3.364,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "I64",
+          "F32"
+        ]
+      }
+    },
+    {
+      "model_id": "olmocr",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "olmocr-2-7b",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "olmocr-7b",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "olmocr-v0-4-0",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "olmocr2",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-006",
+          "source_id": "ocr-speed-lighton2-1403-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "BF16",
+          "pipeline": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-011",
+          "source_id": "ocr-speed-lighton2-1403-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "FP8",
+          "pipeline": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "ovisocr2",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "paddleocr-1-5",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "paddleocr-vl",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-008",
+          "source_id": "ocr-speed-lighton2-1403-h100",
+          "hardware": "1 NVIDIA H100 80GB",
+          "precision": "BF16",
+          "pipeline": "Each model uses its official library and author-recommended inference parameters; versions and batch unspecified.",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-056",
+          "source_id": "ocr-speed-paddlevl-v4",
+          "hardware": "single NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "SGLang0.5.2",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-057",
+          "source_id": "ocr-speed-paddlevl-v4",
+          "hardware": "single NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "vLLM0.10.2",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-058",
+          "source_id": "ocr-speed-paddlevl-v4",
+          "hardware": "single NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "FastDeploy2.3",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "paddleocr-vl-1-5",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "paddleocr-vl-1-6",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-078",
+          "source_id": "ocr-speed-hunyuan15-h20-930-ar",
+          "hardware": "1 NVIDIA H20 80GB per server",
+          "precision": "Not specified in benchmark source",
+          "pipeline": "PaddleOCR-VL-1.6 two-stage layout + VLM recognition + merging",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "pp-structurev3",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-068",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 8350C +A100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-069",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 6271C +V100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-070",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 8563C +H20",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-071",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 8350C +A10",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-072",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 6271C +T4",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-073",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 8350C",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-074",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-075",
+          "source_id": "ocr-speed-ppstructure",
+          "hardware": "Intel 8350C +A100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle 3.1.0 / PaddleX develop",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "qwen3-5-0-8b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-5-122b-a10b",
+      "registry_access": "open",
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.5-122B-A10B@dc4d348443bc740c68e2d77492492c11606384d5",
+        "tensor_storage_bytes": 250173007840,
+        "tensor_storage_GB_decimal": 250.173,
+        "tensor_storage_GiB": 232.992,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16",
+          "F32"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-5-27b",
+      "registry_access": "open",
+      "fit_class": "plausible_27b_bounded_bf16",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "About 55.56 decimal GB of BF16 weights supports cautious planning on 80GB with reserved workspace; no observed H100 memory peak. Explicitly bound image tokens, output length and batch.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.5-27B@fc05daec18b0a78c049392ed2e771dde82bdf654",
+        "tensor_storage_bytes": 55562872800,
+        "tensor_storage_GB_decimal": 55.563,
+        "tensor_storage_GiB": 51.747,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16",
+          "F32"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-5-2b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-5-35b-a3b",
+      "registry_access": "open",
+      "fit_class": "borderline_35b_bf16",
+      "reference_speed_eligible": "requires_bounded_runtime_validation",
+      "guaranteed_fit": false,
+      "note": "About 71.9 decimal GB of weights; runtime, vision activations, KV cache and graphs may exhaust remaining space. Batch 1 and bounded visual/context budgets are necessary but not sufficient proof.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.5-35B-A3B@59d61f3ce65a6d9863b86d2e96597125219dc754",
+        "tensor_storage_bytes": 71903655008,
+        "tensor_storage_GB_decimal": 71.904,
+        "tensor_storage_GiB": 66.965,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16",
+          "F32"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-5-397b-a17b",
+      "registry_access": "open",
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.5-397B-A17B@8472618112abcbd45acbcdc58436aff4233c23f7",
+        "tensor_storage_bytes": 806795875168,
+        "tensor_storage_GB_decimal": 806.796,
+        "tensor_storage_GiB": 751.387,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16",
+          "F32"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-5-4b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-5-9b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-5-instruct-9b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-6-27b",
+      "registry_access": "open",
+      "fit_class": "plausible_27b_bounded_bf16",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "About 55.56 decimal GB of BF16 weights supports cautious planning on 80GB with reserved workspace; no observed H100 memory peak. Explicitly bound image tokens, output length and batch.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+        "tensor_storage_bytes": 55562855904,
+        "tensor_storage_GB_decimal": 55.563,
+        "tensor_storage_GiB": 51.747,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-6-35b-a3b",
+      "registry_access": "open",
+      "fit_class": "borderline_35b_bf16",
+      "reference_speed_eligible": "requires_bounded_runtime_validation",
+      "guaranteed_fit": false,
+      "note": "About 71.9 decimal GB of weights; runtime, vision activations, KV cache and graphs may exhaust remaining space. Batch 1 and bounded visual/context budgets are necessary but not sufficient proof.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.6-35B-A3B@995ad96eacd98c81ed38be0c5b274b04031597b0",
+        "tensor_storage_bytes": 71903645408.0,
+        "tensor_storage_GB_decimal": 71.904,
+        "tensor_storage_GiB": 66.965,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-8-27b",
+      "registry_access": "open",
+      "fit_class": "plausible_27b_bounded_bf16",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "About 55.56 decimal GB of BF16 weights supports cautious planning on 80GB with reserved workspace; no observed H100 memory peak. Explicitly bound image tokens, output length and batch.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.8-27B@1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "tensor_storage_bytes": 55562855904,
+        "tensor_storage_GB_decimal": 55.563,
+        "tensor_storage_GiB": 51.747,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-8-flash-next",
+      "registry_access": "open",
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3.8-Flash-Next@de4b8e4d43b917e7706784d8bb445c9af86a3540",
+        "tensor_storage_bytes": 359999963128.0,
+        "tensor_storage_GB_decimal": 360.0,
+        "tensor_storage_GiB": 335.276,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16",
+          "I64"
+        ]
+      },
+      "offload_note": "Official architecture includes 125B core +51B n-gram embeddings +4B MTP; n-gram CPU offload is a distinct host-dependent scenario, not fully resident H100 baseline."
+    },
+    {
+      "model_id": "qwen3-vl-235b",
+      "registry_access": "open",
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3-VL-235B-A22B-Instruct@710c13861be6c466e66de3f484069440b8f31389",
+        "tensor_storage_bytes": 471340045792,
+        "tensor_storage_GB_decimal": 471.34,
+        "tensor_storage_GiB": 438.97,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      },
+      "mapping_caveat": "Canonical Instruct checkpoint is relevant family evidence; exact unspecified catalog alias must be confirmed before inheriting checkpoint identity."
+    },
+    {
+      "model_id": "qwen3-vl-235b-instruct",
+      "registry_access": "open",
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights.",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen3-VL-235B-A22B-Instruct@710c13861be6c466e66de3f484069440b8f31389",
+        "tensor_storage_bytes": 471340045792,
+        "tensor_storage_GB_decimal": 471.34,
+        "tensor_storage_GiB": 438.97,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "qwen3-vl-2b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-vl-4b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-vl-8b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-vl-instruct-8b",
+      "registry_access": "open",
+      "fit_class": "small_named_checkpoint_unpinned",
+      "reference_speed_eligible": "conditional_after_checkpoint_identity",
+      "guaranteed_fit": false,
+      "note": "Catalog variant name suggests <=9B; exact checkpoint/precision and runtime not pinned in this bounded audit. Do not label verified fit."
+    },
+    {
+      "model_id": "qwen3-vl-plus",
+      "registry_access": "open",
+      "fit_class": "hosted_alias_no_verified_local_checkpoint",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Official Model Studio hosted API alias; no exact downloadable checkpoint established. Do not normalize API service speed to local H100."
+    },
+    {
+      "model_id": "smoldocling-256m-preview",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:docling-project/SmolDocling-256M-preview@ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8",
+        "tensor_storage_bytes": 512969856,
+        "tensor_storage_GB_decimal": 0.513,
+        "tensor_storage_GiB": 0.478,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "surya-ocr-2",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size."
+    },
+    {
+      "model_id": "teleocr",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:XingChen-AGI/TeleOCR@70a19ec6a3b036311af19ae5e762e650f41a5980",
+        "tensor_storage_bytes": 2830145536,
+        "tensor_storage_GB_decimal": 2.83,
+        "tensor_storage_GiB": 2.636,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "teleocr-ovisocr2-paddleocr-vl",
+      "registry_access": "open",
+      "fit_class": "ensemble_residency_unresolved",
+      "reference_speed_eligible": "requires_pipeline_definition",
+      "guaranteed_fit": false,
+      "note": "Multiple-model pipeline, not a single checkpoint. Need stage scheduling, simultaneous residency and whole-pipeline timings."
+    },
+    {
+      "model_id": "tesseract",
+      "registry_access": "open",
+      "fit_class": "cpu_or_gpu_backend_unverified",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Existing evidence is CPU-oriented; retain CPU context instead of manufacturing GPU speed. GPU backend compatibility not established."
+    },
+    {
+      "model_id": "xiaomi-ocr-0",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:SeerRay-Lab/Xiaomi-OCR-0@ff990be318c4c68f7e621dd690231200f47e48c4",
+        "tensor_storage_bytes": 1746877568,
+        "tensor_storage_GB_decimal": 1.747,
+        "tensor_storage_GiB": 1.627,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "youtu-parsing",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:tencent/Youtu-Parsing@b82ee76cca8aa94ffd6451de38cd72aa8362f3c2",
+        "tensor_storage_bytes": 5031968480,
+        "tensor_storage_GB_decimal": 5.032,
+        "tensor_storage_GiB": 4.686,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "bodhan-indic-ocr",
+      "registry_access": "open",
+      "fit_class": "runtime_fit_unverified",
+      "reference_speed_eligible": "modeled_only_if_model_specific_evidence_added",
+      "guaranteed_fit": false,
+      "note": "No exact bounded-runtime memory proof collected; do not infer fit or speed solely from model size.",
+      "weights": {
+        "source_id": "hf:bodhan-ai/indic-ocr@cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25",
+        "tensor_storage_bytes": null,
+        "tensor_storage_GB_decimal": null,
+        "tensor_storage_GiB": null,
+        "byte_evidence_kind": "unavailable",
+        "published_tensor_dtypes": []
+      }
+    },
+    {
+      "model_id": "pp-ocrv6-tiny",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-026",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-028",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "TensorRT",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-031",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-034",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-037",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "TensorRT",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-040",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-043",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "OpenVINO",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-046",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-049",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-052",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "pp-ocrv6-small",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-025",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-027",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "TensorRT",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-030",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-033",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-036",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "TensorRT",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-039",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-042",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "OpenVINO",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-045",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-048",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-051",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "pp-ocrv6-medium",
+      "registry_access": "open",
+      "fit_class": "reported_single_gpu_configuration",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
+      "existing_throughput_evidence": [
+        {
+          "record_id": "ocr-throughput-024",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA A100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-029",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-032",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-035",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "NVIDIA V100",
+          "precision": "Unspecified",
+          "pipeline": "TensorRT",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-038",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-041",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "OpenVINO",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-044",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Intel Xeon8350C",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-047",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "PaddlePaddle",
+          "rendering": null
+        },
+        {
+          "record_id": "ocr-throughput-050",
+          "source_id": "ocr-speed-ppocr6",
+          "hardware": "Apple M4",
+          "precision": "Unspecified",
+          "pipeline": "ONNX Runtime",
+          "rendering": null
+        }
+      ]
+    },
+    {
+      "model_id": "ovisocr3",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:ATH-MaaS/OvisOCR3@5f6ce6932efee9ec10c30746db55bd780214b7fd",
+        "tensor_storage_bytes": 1705971840,
+        "tensor_storage_GB_decimal": 1.706,
+        "tensor_storage_GiB": 1.589,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    },
+    {
+      "model_id": "indra-ocr-1-1",
+      "registry_access": "open",
+      "fit_class": "cpu_or_gpu_backend_unverified",
+      "reference_speed_eligible": "excluded",
+      "guaranteed_fit": false,
+      "note": "Existing evidence is CPU-oriented; retain CPU context instead of manufacturing GPU speed. GPU backend compatibility not established."
+    },
+    {
+      "model_id": "logics-parsing-v3",
+      "registry_access": "open",
+      "fit_class": "small_pinned_weights_runtime_conditional",
+      "reference_speed_eligible": "conditional_modeled",
+      "guaranteed_fit": false,
+      "note": "Pinned small weight footprint makes 80GB planning plausible, not guaranteed. Preserve native published dtype and establish compatible runtime and bounded visual/context/batch settings.",
+      "weights": {
+        "source_id": "hf:Logics-MLLM/Logics-Parsing-V3@e6d324e30e0f64f1a0dfb652efcb83a4b244591e",
+        "tensor_storage_bytes": 1705971840,
+        "tensor_storage_GB_decimal": 1.706,
+        "tensor_storage_GiB": 1.589,
+        "byte_evidence_kind": "derived_dtype_tensor_bytes",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      }
+    }
+  ],
+  "additional_catalog_checkpoints": [
+    {
+      "hub_id": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "weights": {
+        "source_id": "hf:Qwen/Qwen2.5-VL-72B-Instruct@89c86200743eec961a297729e7990e8f2ddbc4c5",
+        "tensor_storage_bytes": 146821554688,
+        "tensor_storage_GB_decimal": 146.822,
+        "tensor_storage_GiB": 136.738,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      },
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    },
+    {
+      "hub_id": "OpenGVLab/InternVL3_5-241B-A28B",
+      "weights": {
+        "source_id": "hf:OpenGVLab/InternVL3_5-241B-A28B@8e5cfda1dabab9bdc76a3931bf77ecae150a33c8",
+        "tensor_storage_bytes": 481398740736,
+        "tensor_storage_GB_decimal": 481.399,
+        "tensor_storage_GiB": 448.338,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      },
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    },
+    {
+      "hub_id": "moonshotai/Kimi-K2.5",
+      "weights": {
+        "source_id": "hf:moonshotai/Kimi-K2.5@4d01dfe0332d63057c186e0b262165819efb6611",
+        "tensor_storage_bytes": 595148192736,
+        "tensor_storage_GB_decimal": 595.148,
+        "tensor_storage_GiB": 554.275,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "F32",
+          "I32",
+          "BF16"
+        ]
+      },
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    },
+    {
+      "hub_id": "moonshotai/Kimi-K2.6",
+      "weights": {
+        "source_id": "hf:moonshotai/Kimi-K2.6@7eb5002f6aadc958aed6a9177b7ed26bb94011bb",
+        "tensor_storage_bytes": 595148192736,
+        "tensor_storage_GB_decimal": 595.148,
+        "tensor_storage_GiB": 554.275,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "F32",
+          "I32",
+          "BF16"
+        ]
+      },
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    },
+    {
+      "hub_id": "stepfun-ai/step3",
+      "weights": {
+        "source_id": "hf:stepfun-ai/step3@e2d67fc936dc60f8f606f2429728f1dea503e10d",
+        "tensor_storage_bytes": 641945818112,
+        "tensor_storage_GB_decimal": 641.946,
+        "tensor_storage_GiB": 597.859,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      },
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    },
+    {
+      "hub_id": "mistralai/Mistral-Small-4-119B-2603",
+      "weights": {
+        "source_id": "hf:mistralai/Mistral-Small-4-119B-2603@a11f36bebf709121056b1dbcc943d1c6afbe494d",
+        "tensor_storage_bytes": 120922770560,
+        "tensor_storage_GB_decimal": 120.923,
+        "tensor_storage_GiB": 112.618,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16",
+          "F8_E4M3"
+        ]
+      },
+      "fit_class": "native_checkpoint_exceeds_reference",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    },
+    {
+      "hub_id": "ATH-MaaS/Ovis2.6-30B-A3B",
+      "weights": {
+        "source_id": "hf:ATH-MaaS/Ovis2.6-30B-A3B@44beb8e150b28c7ca537a1673582c64f57d342e3",
+        "tensor_storage_bytes": 62763954640,
+        "tensor_storage_GB_decimal": 62.764,
+        "tensor_storage_GiB": 58.453,
+        "byte_evidence_kind": "checkpoint_index_total_size",
+        "published_tensor_dtypes": [
+          "BF16"
+        ]
+      },
+      "fit_class": "plausible_bounded_runtime_unverified",
+      "note": "Additional catalog family, outside registry-open 80 count; preserve alias mapping uncertainty. Mistral native FP8 still exceeds reference; separately published NVFP4 is a different artifact."
+    }
+  ],
+  "pinned_sources": {
+    "hf:acvlab/ABot-OCR@6cb6799e7fa42258d0d568e4c7367dbc30781e39": {
+      "hub_id": "acvlab/ABot-OCR",
+      "revision": "6cb6799e7fa42258d0d568e4c7367dbc30781e39",
+      "card_url": "https://huggingface.co/acvlab/ABot-OCR/blob/6cb6799e7fa42258d0d568e4c7367dbc30781e39/README.md",
+      "config_url": "https://huggingface.co/acvlab/ABot-OCR/blob/6cb6799e7fa42258d0d568e4c7367dbc30781e39/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 2127532032
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:ibm-granite/granite-docling-258M@982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe": {
+      "hub_id": "ibm-granite/granite-docling-258M",
+      "revision": "982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe",
+      "card_url": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/README.md",
+      "config_url": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 257517120
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:PatSnap/Hiro-MOSS-OCR-0.3B@f833fe46fac16d19855670e83f1010dff7758688": {
+      "hub_id": "PatSnap/Hiro-MOSS-OCR-0.3B",
+      "revision": "f833fe46fac16d19855670e83f1010dff7758688",
+      "card_url": "https://huggingface.co/PatSnap/Hiro-MOSS-OCR-0.3B/blob/f833fe46fac16d19855670e83f1010dff7758688/README.md",
+      "config_url": "https://huggingface.co/PatSnap/Hiro-MOSS-OCR-0.3B/blob/f833fe46fac16d19855670e83f1010dff7758688/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "F32": 336404480
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:nvidia/NVIDIA-Nemotron-Parse-2.0@4e021c03edc92e715d5d788921a927d0cbb4b4d1": {
+      "hub_id": "nvidia/NVIDIA-Nemotron-Parse-2.0",
+      "revision": "4e021c03edc92e715d5d788921a927d0cbb4b4d1",
+      "card_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0/blob/4e021c03edc92e715d5d788921a927d0cbb4b4d1/README.md",
+      "config_url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0/blob/4e021c03edc92e715d5d788921a927d0cbb4b4d1/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "I64": 3,
+        "F32": 903049222
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.5-122B-A10B@dc4d348443bc740c68e2d77492492c11606384d5": {
+      "hub_id": "Qwen/Qwen3.5-122B-A10B",
+      "revision": "dc4d348443bc740c68e2d77492492c11606384d5",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.5-122B-A10B/blob/dc4d348443bc740c68e2d77492492c11606384d5/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-122B-A10B/blob/dc4d348443bc740c68e2d77492492c11606384d5/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.5-122B-A10B/blob/dc4d348443bc740c68e2d77492492c11606384d5/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 125086490096,
+        "F32": 6912
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.5-27B@fc05daec18b0a78c049392ed2e771dde82bdf654": {
+      "hub_id": "Qwen/Qwen3.5-27B",
+      "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.5-27B/blob/fc05daec18b0a78c049392ed2e771dde82bdf654/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-27B/blob/fc05daec18b0a78c049392ed2e771dde82bdf654/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.5-27B/blob/fc05daec18b0a78c049392ed2e771dde82bdf654/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 27781419504,
+        "F32": 8448
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.5-35B-A3B@59d61f3ce65a6d9863b86d2e96597125219dc754": {
+      "hub_id": "Qwen/Qwen3.5-35B-A3B",
+      "revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B/blob/59d61f3ce65a6d9863b86d2e96597125219dc754/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B/blob/59d61f3ce65a6d9863b86d2e96597125219dc754/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B/blob/59d61f3ce65a6d9863b86d2e96597125219dc754/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 35951817904,
+        "F32": 4800
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.5-397B-A17B@8472618112abcbd45acbcdc58436aff4233c23f7": {
+      "hub_id": "Qwen/Qwen3.5-397B-A17B",
+      "revision": "8472618112abcbd45acbcdc58436aff4233c23f7",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/8472618112abcbd45acbcdc58436aff4233c23f7/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/8472618112abcbd45acbcdc58436aff4233c23f7/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/8472618112abcbd45acbcdc58436aff4233c23f7/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 403397920304,
+        "F32": 8640
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9": {
+      "hub_id": "Qwen/Qwen3.6-27B",
+      "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.6-27B/blob/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.6-27B/blob/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.6-27B/blob/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 27781427952
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.6-35B-A3B@995ad96eacd98c81ed38be0c5b274b04031597b0": {
+      "hub_id": "Qwen/Qwen3.6-35B-A3B",
+      "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/995ad96eacd98c81ed38be0c5b274b04031597b0/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/995ad96eacd98c81ed38be0c5b274b04031597b0/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/995ad96eacd98c81ed38be0c5b274b04031597b0/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 35951822704
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.8-27B@1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0": {
+      "hub_id": "Qwen/Qwen3.8-27B",
+      "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 27781427952
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3.8-Flash-Next@de4b8e4d43b917e7706784d8bb445c9af86a3540": {
+      "hub_id": "Qwen/Qwen3.8-Flash-Next",
+      "revision": "de4b8e4d43b917e7706784d8bb445c9af86a3540",
+      "card_url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 179999981424,
+        "I64": 35
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen3-VL-235B-A22B-Instruct@710c13861be6c466e66de3f484069440b8f31389": {
+      "hub_id": "Qwen/Qwen3-VL-235B-A22B-Instruct",
+      "revision": "710c13861be6c466e66de3f484069440b8f31389",
+      "card_url": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct/blob/710c13861be6c466e66de3f484069440b8f31389/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct/blob/710c13861be6c466e66de3f484069440b8f31389/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct/blob/710c13861be6c466e66de3f484069440b8f31389/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 235670022896
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:docling-project/SmolDocling-256M-preview@ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8": {
+      "hub_id": "docling-project/SmolDocling-256M-preview",
+      "revision": "ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8",
+      "card_url": "https://huggingface.co/docling-project/SmolDocling-256M-preview/blob/ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8/README.md",
+      "config_url": "https://huggingface.co/docling-project/SmolDocling-256M-preview/blob/ce51f56c4ebe36e0b1c3a55f67b261ba22a50bf8/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 256484928
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:XingChen-AGI/TeleOCR@70a19ec6a3b036311af19ae5e762e650f41a5980": {
+      "hub_id": "XingChen-AGI/TeleOCR",
+      "revision": "70a19ec6a3b036311af19ae5e762e650f41a5980",
+      "card_url": "https://huggingface.co/XingChen-AGI/TeleOCR/blob/70a19ec6a3b036311af19ae5e762e650f41a5980/README.md",
+      "config_url": "https://huggingface.co/XingChen-AGI/TeleOCR/blob/70a19ec6a3b036311af19ae5e762e650f41a5980/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 1415072768
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:SeerRay-Lab/Xiaomi-OCR-0@ff990be318c4c68f7e621dd690231200f47e48c4": {
+      "hub_id": "SeerRay-Lab/Xiaomi-OCR-0",
+      "revision": "ff990be318c4c68f7e621dd690231200f47e48c4",
+      "card_url": "https://huggingface.co/SeerRay-Lab/Xiaomi-OCR-0/blob/ff990be318c4c68f7e621dd690231200f47e48c4/README.md",
+      "config_url": "https://huggingface.co/SeerRay-Lab/Xiaomi-OCR-0/blob/ff990be318c4c68f7e621dd690231200f47e48c4/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 873438784
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:tencent/Youtu-Parsing@b82ee76cca8aa94ffd6451de38cd72aa8362f3c2": {
+      "hub_id": "tencent/Youtu-Parsing",
+      "revision": "b82ee76cca8aa94ffd6451de38cd72aa8362f3c2",
+      "card_url": "https://huggingface.co/tencent/Youtu-Parsing/blob/b82ee76cca8aa94ffd6451de38cd72aa8362f3c2/README.md",
+      "config_url": "https://huggingface.co/tencent/Youtu-Parsing/blob/b82ee76cca8aa94ffd6451de38cd72aa8362f3c2/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 2515984240
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:bodhan-ai/indic-ocr@cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25": {
+      "hub_id": "bodhan-ai/indic-ocr",
+      "revision": "cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25",
+      "card_url": "https://huggingface.co/bodhan-ai/indic-ocr/blob/cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25/README.md",
+      "config_url": "https://huggingface.co/bodhan-ai/indic-ocr/blob/cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25/config.json",
+      "tensor_index_url": "https://huggingface.co/bodhan-ai/indic-ocr/blob/cd50d301d0e17e8ecb32fc49c8ccbd7914dcfc25/model.safetensors.index.json",
+      "dtype_tensor_counts": {},
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:ATH-MaaS/OvisOCR3@5f6ce6932efee9ec10c30746db55bd780214b7fd": {
+      "hub_id": "ATH-MaaS/OvisOCR3",
+      "revision": "5f6ce6932efee9ec10c30746db55bd780214b7fd",
+      "card_url": "https://huggingface.co/ATH-MaaS/OvisOCR3/blob/5f6ce6932efee9ec10c30746db55bd780214b7fd/README.md",
+      "config_url": "https://huggingface.co/ATH-MaaS/OvisOCR3/blob/5f6ce6932efee9ec10c30746db55bd780214b7fd/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 852985920
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Logics-MLLM/Logics-Parsing-V3@e6d324e30e0f64f1a0dfb652efcb83a4b244591e": {
+      "hub_id": "Logics-MLLM/Logics-Parsing-V3",
+      "revision": "e6d324e30e0f64f1a0dfb652efcb83a4b244591e",
+      "card_url": "https://huggingface.co/Logics-MLLM/Logics-Parsing-V3/blob/e6d324e30e0f64f1a0dfb652efcb83a4b244591e/README.md",
+      "config_url": "https://huggingface.co/Logics-MLLM/Logics-Parsing-V3/blob/e6d324e30e0f64f1a0dfb652efcb83a4b244591e/config.json",
+      "tensor_index_url": null,
+      "dtype_tensor_counts": {
+        "BF16": 852985920
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:Qwen/Qwen2.5-VL-72B-Instruct@89c86200743eec961a297729e7990e8f2ddbc4c5": {
+      "hub_id": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "revision": "89c86200743eec961a297729e7990e8f2ddbc4c5",
+      "card_url": "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct/blob/89c86200743eec961a297729e7990e8f2ddbc4c5/README.md",
+      "config_url": "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct/blob/89c86200743eec961a297729e7990e8f2ddbc4c5/config.json",
+      "tensor_index_url": "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct/blob/89c86200743eec961a297729e7990e8f2ddbc4c5/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 73410777344
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:OpenGVLab/InternVL3_5-241B-A28B@8e5cfda1dabab9bdc76a3931bf77ecae150a33c8": {
+      "hub_id": "OpenGVLab/InternVL3_5-241B-A28B",
+      "revision": "8e5cfda1dabab9bdc76a3931bf77ecae150a33c8",
+      "card_url": "https://huggingface.co/OpenGVLab/InternVL3_5-241B-A28B/blob/8e5cfda1dabab9bdc76a3931bf77ecae150a33c8/README.md",
+      "config_url": "https://huggingface.co/OpenGVLab/InternVL3_5-241B-A28B/blob/8e5cfda1dabab9bdc76a3931bf77ecae150a33c8/config.json",
+      "tensor_index_url": "https://huggingface.co/OpenGVLab/InternVL3_5-241B-A28B/blob/8e5cfda1dabab9bdc76a3931bf77ecae150a33c8/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 240699370368
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:moonshotai/Kimi-K2.5@4d01dfe0332d63057c186e0b262165819efb6611": {
+      "hub_id": "moonshotai/Kimi-K2.5",
+      "revision": "4d01dfe0332d63057c186e0b262165819efb6611",
+      "card_url": "https://huggingface.co/moonshotai/Kimi-K2.5/blob/4d01dfe0332d63057c186e0b262165819efb6611/README.md",
+      "config_url": "https://huggingface.co/moonshotai/Kimi-K2.5/blob/4d01dfe0332d63057c186e0b262165819efb6611/config.json",
+      "tensor_index_url": "https://huggingface.co/moonshotai/Kimi-K2.5/blob/4d01dfe0332d63057c186e0b262165819efb6611/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "F32": 23040,
+        "I32": 1014686023680,
+        "BF16": 12193329648
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:moonshotai/Kimi-K2.6@7eb5002f6aadc958aed6a9177b7ed26bb94011bb": {
+      "hub_id": "moonshotai/Kimi-K2.6",
+      "revision": "7eb5002f6aadc958aed6a9177b7ed26bb94011bb",
+      "card_url": "https://huggingface.co/moonshotai/Kimi-K2.6/blob/7eb5002f6aadc958aed6a9177b7ed26bb94011bb/README.md",
+      "config_url": "https://huggingface.co/moonshotai/Kimi-K2.6/blob/7eb5002f6aadc958aed6a9177b7ed26bb94011bb/config.json",
+      "tensor_index_url": "https://huggingface.co/moonshotai/Kimi-K2.6/blob/7eb5002f6aadc958aed6a9177b7ed26bb94011bb/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "F32": 23040,
+        "I32": 1014686023680,
+        "BF16": 12193329648
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:stepfun-ai/step3@e2d67fc936dc60f8f606f2429728f1dea503e10d": {
+      "hub_id": "stepfun-ai/step3",
+      "revision": "e2d67fc936dc60f8f606f2429728f1dea503e10d",
+      "card_url": "https://huggingface.co/stepfun-ai/step3/blob/e2d67fc936dc60f8f606f2429728f1dea503e10d/README.md",
+      "config_url": "https://huggingface.co/stepfun-ai/step3/blob/e2d67fc936dc60f8f606f2429728f1dea503e10d/config.json",
+      "tensor_index_url": "https://huggingface.co/stepfun-ai/step3/blob/e2d67fc936dc60f8f606f2429728f1dea503e10d/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 320969912832
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:mistralai/Mistral-Small-4-119B-2603@a11f36bebf709121056b1dbcc943d1c6afbe494d": {
+      "hub_id": "mistralai/Mistral-Small-4-119B-2603",
+      "revision": "a11f36bebf709121056b1dbcc943d1c6afbe494d",
+      "card_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/blob/a11f36bebf709121056b1dbcc943d1c6afbe494d/README.md",
+      "config_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/blob/a11f36bebf709121056b1dbcc943d1c6afbe494d/config.json",
+      "tensor_index_url": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/blob/a11f36bebf709121056b1dbcc943d1c6afbe494d/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 1521452032,
+        "F8_E4M3": 117879865344
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    },
+    "hf:ATH-MaaS/Ovis2.6-30B-A3B@44beb8e150b28c7ca537a1673582c64f57d342e3": {
+      "hub_id": "ATH-MaaS/Ovis2.6-30B-A3B",
+      "revision": "44beb8e150b28c7ca537a1673582c64f57d342e3",
+      "card_url": "https://huggingface.co/ATH-MaaS/Ovis2.6-30B-A3B/blob/44beb8e150b28c7ca537a1673582c64f57d342e3/README.md",
+      "config_url": "https://huggingface.co/ATH-MaaS/Ovis2.6-30B-A3B/blob/44beb8e150b28c7ca537a1673582c64f57d342e3/config.json",
+      "tensor_index_url": "https://huggingface.co/ATH-MaaS/Ovis2.6-30B-A3B/blob/44beb8e150b28c7ca537a1673582c64f57d342e3/model.safetensors.index.json",
+      "dtype_tensor_counts": {
+        "BF16": 31381977320
+      },
+      "note": "Tensor storage is not peak VRAM; counts for packed quantized tensors are not logical parameter counts."
+    }
+  },
+  "limitations": [
+    "Read-only primary metadata audit, not execution validation.",
+    "Existing throughput records are source-linked reported evidence and may be author-run or third-party-run, not independently reproduced.",
+    "Missing exact checkpoint evidence is explicitly unverified, not evidence that a model cannot run."
+  ]
+}
