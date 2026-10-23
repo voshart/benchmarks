@@ -9,5 +9,23 @@
   "core": true,
   "family": "mdp",
   "min_models": 6,
-  "min_organizations": 3
+  "min_organizations": 3,
+  "metric_labels": {
+    "public": "Public overall",
+    "digital": "Public digital",
+    "photo": "Public photographed",
+    "private": "Held-out private"
+  },
+  "metric_units": {
+    "public": "percent",
+    "digital": "percent",
+    "photo": "percent",
+    "private": "percent"
+  },
+  "metric_directions": {
+    "public": "higher",
+    "digital": "higher",
+    "photo": "higher",
+    "private": "higher"
+  }
 }

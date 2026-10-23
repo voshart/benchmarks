@@ -1,0 +1,40 @@
+{
+  "id": "omnidoc-v16-sarvam-unspecified",
+  "short": "OD1.6 split?",
+  "label": "OmniDoc v1.6 · Sarvam report (split unspecified)",
+  "source": "sarvam-vision-21-release",
+  "family": "omnidoc",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": false,
+  "scope": "OmniDocBench v1.6; full-versus-English split and sample count not identified by the source",
+  "note": "Context only: the source names v1.6 but does not establish full-set versus English-only evaluation. Separate from both registered canonical protocols. Component ratios retain their original scales and directions. Author-operated, not independently reproduced. This row is not eligible for aggregate rank.",
+  "metric_labels": {
+    "overall": "Overall",
+    "text_edit": "Text edit distance",
+    "formula_cdm": "Formula CDM",
+    "table_teds": "Table TEDS",
+    "table_teds_structure": "Table TEDS structure",
+    "reading_order": "Reading-order edit distance"
+  },
+  "metric_units": {
+    "overall": "percent",
+    "text_edit": "ratio",
+    "formula_cdm": "ratio",
+    "table_teds": "ratio",
+    "table_teds_structure": "ratio",
+    "reading_order": "ratio"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "text_edit": "lower",
+    "formula_cdm": "higher",
+    "table_teds": "higher",
+    "table_teds_structure": "higher",
+    "reading_order": "lower"
+  },
+  "matrix_order": 120
+}

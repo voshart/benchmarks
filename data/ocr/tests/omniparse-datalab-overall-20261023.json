@@ -9,7 +9,7 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "scope": "16288 tests / 2343 documents",
+  "scope": "16,288 tests / 2,937 pages / 2,343 documents / 92 languages",
   "note": "Datalab operator. Accurate row is current October20; all other rows use October8 leaderboard runs. Website footer still says October8; do not erase this mixed run-date distinction. Headline/tag score averages text, tables and layout family pass rates, not raw pooled test accuracy. Gemini3.8Flash and ClaudeSonnet5.5 helped create/verify some tests. Separate secondary source cohort; tag slices do not create extra aggregate votes.",
   "matrix_order": 0,
   "aggregate_eligible": true,
