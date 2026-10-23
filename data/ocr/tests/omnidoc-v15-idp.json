@@ -12,5 +12,8 @@
   "min_models": 6,
   "min_organizations": 3,
   "dataset_version": "v1.5",
-  "note": "Separate vendor-operated v1.5 run, excluded from aggregate to avoid mixing dataset versions."
+  "note": "Separate vendor-operated v1.5 run, excluded from aggregate to avoid mixing dataset versions.",
+  "aggregate_eligible": true,
+  "aggregate_priority": 106,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

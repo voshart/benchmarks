@@ -52,7 +52,7 @@ test('exact Hub deployment transfer requires matching revision when pinned',()=>
 
 test('new OCR author panels remain separate and INR context never becomes USD price',()=>{
  const rows=Rank.build(ocr,undefined,{min:0}).rows;
- for(const id of ['ovisocr3','indra-ocr-1-1','logics-parsing-v3','sarvam-vision-2-1','bodhan-indic-ocr'])assert.equal(rows.find(r=>r.id===id).rank,null,id);
+ for(const id of ['ovisocr3','indra-ocr-1-1'])assert.equal(rows.find(r=>r.id===id).rank,null,id);for(const id of ['logics-parsing-v3','sarvam-vision-2-1','bodhan-indic-ocr'])assert.equal(rows.find(r=>r.id===id).rankStatus,'provisional',id);
  for(const id of ['omnidoc-ovis3-reported','omniparse-indra-1-1','mpdoc-logics-v3']){const protocol=ocr.tests.find(x=>x.id===id);assert.equal(protocol.core,false);assert.equal(protocol.primary,false);}
  assert.equal(rows.find(r=>r.id==='sarvam-vision-2-1').scores.olmocr.value,87.3);
  assert.equal(rows.find(r=>r.id==='logics-parsing-v3').scores['omnidoc-v16'].value,95.58);

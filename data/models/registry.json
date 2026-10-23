@@ -4657,7 +4657,7 @@
     "access": "closed",
     "organization": "Datalab",
     "source_id": "chandra-2-5-release",
-    "evidence_note": "Hosted generation, not Chandra 2 open weights. OmniParse: accurate 92.7, balanced 91.6 (release cohort). olmOCR excludes headers/footers: raw85.4, own postprocessing86.9, PP3 87.4; API mode unspecified. No comparable full-set aggregate rank. Parameters and weights undisclosed. Current base Convert: fast/balanced $4, accurate $10 per1,000pages; default cost is accurate."
+    "evidence_note": "Hosted generation, not Chandra 2 open weights. OmniParse: accurate 92.7, balanced 91.6 (release cohort). olmOCR excludes headers/footers: raw85.4, own postprocessing86.9, PP3 87.4; API mode unspecified. No full-set olmOCR score; the separate no-header/footer panel can support a qualified index. Parameters and weights undisclosed. Current base Convert: fast/balanced $4, accurate $10 per1,000pages; default cost is accurate."
   },
   {
     "id": "gemini-4-argon",
@@ -4736,7 +4736,8 @@
     "parameters_million": 630.800502,
     "configuration": "Triple-pass quality and speed; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
     "evidence_note": "Pinned official card states release October17,2026. Stored F32 tensors about2.52GB, not peakVRAM. Author ParseBench75.20 on2,078pages with pinned scorer; separate from other ParseBench versions. 40timing outputs token-limited; no single-pass speed attached to triple-pass quality.",
-    "release_source_id": "small-specialist-nemotron35-card"
+    "release_source_id": "small-specialist-nemotron35-card",
+    "ranking_identity": "nemotron-3-5-parse"
   },
   {
     "id": "infinity-parser2-flash",
@@ -4800,7 +4801,8 @@
     "parameters_million": 630.800502,
     "configuration": "single-pass; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
     "evidence_note": "Exact mode-specific quality and timing; not triple-pass accuracy paired with faster single-pass speed. 33/2078 timing responses token-limited.",
-    "release_source_id": "small-specialist-nemotron35-card"
+    "release_source_id": "small-specialist-nemotron35-card",
+    "ranking_identity": "nemotron-3-5-parse"
   },
   {
     "id": "nemotron-3-5-parse-double",
@@ -4816,7 +4818,8 @@
     "parameters_million": 630.800502,
     "configuration": "double-pass; public checkpoint62cb1e4ba153d113ff64aaf2be6e068c377cf53c; BF16 runtime, FA3+MTP1",
     "evidence_note": "Exact mode-specific quality and timing; not triple-pass accuracy paired with faster single-pass speed. 35/2078 timing responses token-limited.",
-    "release_source_id": "small-specialist-nemotron35-card"
+    "release_source_id": "small-specialist-nemotron35-card",
+    "ranking_identity": "nemotron-3-5-parse"
   },
   {
     "id": "datalab-accurate-20261020",

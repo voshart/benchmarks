@@ -9,5 +9,8 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "note": "2937pages, dataset961c0f89, harness1.0.0rc1. Auto PDF-text-assisted; separate from image-only benchmarks."
+  "note": "2937pages, dataset961c0f89, harness1.0.0rc1. Auto PDF-text-assisted; separate from image-only benchmarks.",
+  "aggregate_eligible": true,
+  "aggregate_priority": 103,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

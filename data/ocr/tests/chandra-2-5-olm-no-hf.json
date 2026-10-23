@@ -1,7 +1,7 @@
 {
   "id": "chandra-2-5-olm-no-hf",
   "short": "olm no H/F",
-  "label": "olmOCR \u00b7 Chandra2.5 release, no headers/footers",
+  "label": "olmOCR · Chandra2.5 release, no headers/footers",
   "source": "chandra-2-5-release",
   "primary_metric": "own_postprocessing",
   "unit": "percent",
@@ -9,6 +9,9 @@
   "core": false,
   "primary": false,
   "family": "olmocr",
-  "note": "Version-specific vendor release cohort, secondary only; not pooled into aggregate ranking.",
-  "matrix_order": 2
+  "note": "Version-specific vendor release cohort, a distinct protocol; eligible only through its own comparative cohort.",
+  "matrix_order": 2,
+  "aggregate_eligible": true,
+  "aggregate_priority": 100,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

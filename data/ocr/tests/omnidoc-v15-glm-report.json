@@ -6,8 +6,11 @@
   "core": false,
   "primary": false,
   "note": "Reported v1.5 cohort; correlated with otherOmniDoc versions, noextraaggregatevote.",
-  "label": "OmniDocBench v1.5 \u00b7 GLM report",
+  "label": "OmniDocBench v1.5 · GLM report",
   "short": "OmniDoc v1.5 report",
   "unit": "percent",
-  "source": "glm-report-v2-omnidoc15"
+  "source": "glm-report-v2-omnidoc15",
+  "aggregate_eligible": true,
+  "aggregate_priority": 105,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

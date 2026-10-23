@@ -151,7 +151,7 @@ test('Chandra 2.5 preserves hosted modes and excludes incompatible scores from r
  assert.equal(m.release_date,'2026-10-14');assert.equal(m.access,'closed');assert.equal(d.speed,null);assert.equal(d.estimate,null);assert.equal(d.cost.value,10);
  assert.match(d.cost.note,/balanced \$4/);assert.equal(d.records.length,3);assert.ok(d.records.every(r=>!r.cost_eligible&&!r.comparison_default&&r.unit==='median_seconds_per_page'));
  const result=build(data,data.config.snapshot_date,{min:0}),row=result.rows.find(r=>r.id===m.id);
- assert.equal(row.rank,null);assert.equal(row.coreCount,0);assert.equal(row.scores.olmocr,null);
+ assert.ok(Math.abs(row.rank-83.33333333333333)<1e-9);assert.equal(row.coreCount,1);assert.equal(row.scores.olmocr,null);
  assert.equal(row.scores['chandra-2-5-olm-no-hf'].value,86.9);assert.equal(row.scores['omniparse-chandra-2-5-release'].value,92.7);
  assert.equal(data.resultsByKey[m.id+'|omniparse-indra-1-1'],undefined);
  assert.match(OCR.renderRows({...result,rows:[row]},data),/balanced 91.6/);

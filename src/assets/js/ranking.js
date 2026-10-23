@@ -39,14 +39,14 @@
       active:rows.length >= (test.min_models || 6) && organizations.size >= (test.min_organizations || 3)};
   }
 
-  function pctRanks(rows, test) {
+  function pctRanks(rows, test, finiteCohort=false) {
     const ordered = [...rows].sort((a,b) => test.direction === 'lower' ? a.obs.value-b.obs.value : b.obs.value-a.obs.value);
     const result = new Map(), n = ordered.length;
     for (let i=0; i<n;) {
       let j=i+1;
       while (j<n && ordered[j].obs.value === ordered[i].obs.value) j++;
       const middle = ((i+1)+j)/2;
-      for (let k=i; k<j; k++) result.set(ordered[k].model.id, n <= 1 ? 100 : 100*(n-middle)/(n-1));
+      for (let k=i; k<j; k++) result.set(ordered[k].model.id, finiteCohort ? 100*(n-middle+0.5)/n : n <= 1 ? 100 : 100*(n-middle)/(n-1));
       i=j;
     }
     return result;
@@ -64,15 +64,18 @@
     const minimum = Number(opts.min ?? data.config.default_families), view = opts.view || 'all';
     const access = opts.access || 'all', query = (opts.query || '').trim().toLowerCase();
     const models = latestByLine(releases(data.models, cutoff, data.config.snapshot_date));
-    const core = data.tests.filter(test => test.core);
+    const expanded = data.config.reported_index === true;
+    const core = data.tests.filter(test => test.core || (expanded && test.aggregate_eligible));
     // Select one mature variant for each family, globally, before applying UI filters.
     const candidates = core.map(test => {
       const cohort = scored(data, cutoff, test), state = maturity(cohort, test);
-      return {test, cohort, ...state, ranks:state.active ? pctRanks(cohort, test) : new Map()};
-    }).filter(item => item.active).sort((a,b) => (a.test.rank_priority || 0)-(b.test.rank_priority || 0) || a.test.id.localeCompare(b.test.id));
+      const identities=new Set(cohort.map(row=>row.model.ranking_identity||row.model.id)).size;
+      const active=expanded?identities>=2:state.active;
+      return {test, cohort, ...state, active, identities, ranks:active ? pctRanks(cohort, test, expanded) : new Map()};
+    }).filter(item => item.active).sort((a,b) => (expanded?(a.test.aggregate_priority??(a.test.core?0:1000)):(a.test.rank_priority||0))-(expanded?(b.test.aggregate_priority??(b.test.core?0:1000)):(b.test.rank_priority||0)) || a.test.id.localeCompare(b.test.id));
     const byFamily = new Map();
     for (const item of candidates) if (!byFamily.has(item.test.family)) byFamily.set(item.test.family, item);
-    const eligible = [...byFamily.values()];
+    const eligible = expanded ? candidates : [...byFamily.values()];
     const groups = {structure:['omnidoc-v16','puredoc','docparsing'], robust:['wild','real5','drdoc'],
       multilingual:['mdp-private','mdp-public','more'], production:['ndi','idp'],
       recognition:['omnidoc-v10-formula','omnidoc-v15-gt-layout-moss','omnidoc-v16-gt-layout-moss','fintabnet-docling-150dpi','omnidoc-notes-nemotron','pubtabnet-xiaomi','unimer-test-xiaomi','chronicles-mature-xiaomi'], understanding:['ocr-vqa-xiaomi'],
@@ -87,15 +90,21 @@
     const rows = models.map(model => {
       const scores = Object.fromEntries(data.tests.map(test => [test.id,choose(data,model.id,test.id)]));
       const count = new Set((data.coverageTests || data.primaryTests).filter(test => observed(scores[test.id])).map(test => test.family)).size;
-      const contributions = eligible.filter(item => item.ranks.has(model.id)).map(item => ({
+      const selected=new Map();
+      for(const item of eligible)if(item.ranks.has(model.id)&&!selected.has(item.test.family))selected.set(item.test.family,item);
+      const contributions = [...selected.values()].map(item => ({
         benchmark:item.test.id, label:item.test.label, family:item.test.family, percentile:item.ranks.get(model.id),
-        observation:scores[item.test.id], cohort:item.cohort
+        observation:scores[item.test.id], cohort:item.cohort, cohortSize:item.cohort.length, variant:!item.test.core
       }));
       const reasons = [];
       const rank = contributions.length >= provisionalMinimum
         ? contributions.reduce((total,item) => total+item.percentile,0)/contributions.length : null;
       if (rank !== null) {
-        if (contributions.length < fullMinimum) reasons.push(`Limited coverage: ${contributions.length} mature core families; ${fullMinimum} required for full coverage.`);
+        if (contributions.length < fullMinimum) reasons.push(`Limited coverage: ${contributions.length} ${expanded?'benchmark':'mature core'} families; ${fullMinimum} required for full coverage.`);
+        if(expanded)for(const item of contributions){
+          if(item.cohortSize<6)reasons.push(`Small comparison cohort: ${item.label} has ${item.cohortSize} scored configurations; finite-cohort percentile, not population confidence.`);
+          if(item.variant)reasons.push(`Qualified protocol variant: ${item.label}; normalized only within its own panel, one vote for ${item.family}.`);
+        }
         const own = new Map(), cohort = new Map();
         for (const item of contributions) {
           const type = qualification(item.observation);
@@ -116,8 +125,8 @@
       }
       const rankStatus = rank === null ? 'unranked' : reasons.length ? 'provisional' : 'supported';
       const rankExplanation = rank === null
-        ? `No aggregate index: ${contributions.length} mature core families with comparable measured results; at least ${provisionalMinimum} required. Assumed scores, internal tests and overlapping secondary variants are excluded.`
-        : [`Mean percentile across ${contributions.length} mature core families: ${contributions.map(item=>item.label).join(', ')}.`, ...reasons].join('\n');
+        ? expanded?`No aggregate index: no eligible comparative panel with at least two distinct model identities. Singleton, assumed, private internal and component-only results remain visible but do not create a percentile.`:`No aggregate index: ${contributions.length} mature core families with comparable measured results; at least ${provisionalMinimum} required. Assumed scores, internal tests and overlapping secondary variants are excluded.`
+        : [`Mean ${expanded?'finite-cohort within-panel ':''}percentile across ${contributions.length} ${expanded?'benchmark':'mature core'} families: ${contributions.map(item=>item.label).join(', ')}.`, ...reasons].join('\n');
       return {id:model.id, name:model.name, access:model.access, release_date:model.release_date, modelSourceId:model.source_id || model.release_source_id, modelNote:[model.configuration,model.evidence_note].filter(Boolean).join(' · '), count, coreCount:contributions.length,
         rank, rankStatus, provisionalReasons:reasons, rankExplanation,
         rankContributions:contributions.map(({cohort,...item}) => item), price:data.pricingByModel[model.id]?.usd_per_1000_pages ?? null, scores};
@@ -129,7 +138,7 @@
       const values = rows.map(row=>row.scores[test.id]?.value).filter(valid);
       return [test.id,values.length ? [Math.min(...values),Math.max(...values)] : [null,null]];
     }));
-    return {rows,columns:show,ranges,matureCount:eligible.length,coreTotal:new Set(core.map(test=>test.family)).size};
+    return {rows,columns:show,ranges,matureCount:new Set(eligible.map(item=>item.test.family)).size,coreTotal:new Set(core.map(test=>test.family)).size};
   }
   return {build,scored,maturity,pctRanks,choose,latestByLine,rankable,qualification};
 });

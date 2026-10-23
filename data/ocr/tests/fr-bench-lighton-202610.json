@@ -11,5 +11,8 @@
   "primary": false,
   "scope": "Eight document categories; corpus revision not pinned",
   "configuration": "Author release evaluation/postprocessing",
-  "note": "Secondary only; no aggregate rank or primary coverage vote."
+  "note": "Qualified whole-document panel; fixed-priority per-family contribution when comparative evidence is available.",
+  "aggregate_eligible": true,
+  "aggregate_priority": 112,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

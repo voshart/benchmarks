@@ -1,7 +1,7 @@
 {
   "id": "omniparse-chandra-2-5-release",
   "short": "OmniParse accurate",
-  "label": "OmniParse \u00b7 Chandra2.5 release, accurate mode",
+  "label": "OmniParse · Chandra2.5 release, accurate mode",
   "source": "chandra-2-5-release",
   "primary_metric": "accurate",
   "unit": "percent",
@@ -9,6 +9,9 @@
   "core": false,
   "primary": false,
   "family": "omniparse",
-  "note": "Version-specific vendor release cohort, secondary only; not pooled into aggregate ranking.",
-  "matrix_order": 1
+  "note": "Version-specific vendor release cohort, a distinct protocol; eligible only through its own comparative cohort.",
+  "matrix_order": 1,
+  "aggregate_eligible": true,
+  "aggregate_priority": 101,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

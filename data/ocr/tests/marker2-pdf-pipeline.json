@@ -1,7 +1,7 @@
 {
   "id": "marker2-pdf-pipeline",
   "short": "Marker2 PDF",
-  "label": "olmOCR \u00b7 Marker 2 native-PDF pipeline comparison",
+  "label": "olmOCR · Marker 2 native-PDF pipeline comparison",
   "source": "marker2-release",
   "family": "olmocr",
   "primary_metric": "overall",
@@ -9,5 +9,8 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "note": "Datalab release comparison: 1,403 native PDFs, official checker, macro-average over 8 categories. Pipelines can read PDF text layers and OCR selectively. Digital-only excludes old_scans and old_scans_math. Package/model revisions and API modes are not fully pinned; secondary context only, not a new ranking family."
+  "note": "Datalab release comparison: 1,403 native PDFs, official checker, macro-average over 8 categories. Pipelines can read PDF text layers and OCR selectively. Digital-only excludes old_scans and old_scans_math. Package/model revisions and API modes are not fully pinned; qualified protocol variant, not an additional ranking family.",
+  "aggregate_eligible": true,
+  "aggregate_priority": 104,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

@@ -9,5 +9,9 @@
   "core": false,
   "family": "omnidoc",
   "min_models": 6,
-  "min_organizations": 3
+  "min_organizations": 3,
+  "aggregate_eligible": true,
+  "aggregate_priority": 107,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required.",
+  "note": ""
 }

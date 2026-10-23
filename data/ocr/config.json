@@ -6,8 +6,9 @@
   "default_families": 0,
   "min_core_for_rank": 3,
   "accent": "#637fa4",
-  "provisional_note": "Comparable measured public-benchmark results can contribute regardless of operator. Two mature core families permit a provisional index; three or more remove only the coverage qualification. Qualified own/cohort evidence remains provisional. Assumed scores and internal/overlapping/task-only tests never contribute.",
+  "provisional_note": "Published whole-document comparisons can contribute regardless of operator. One eligible family permits a provisional index. Each exact panel needs at least two distinct model identities; finite-cohort midrank percentiles and fixed per-model/family priorities prevent singleton perfect scores and duplicate-family votes. Small cohorts, limited coverage and source qualifications are disclosed.",
   "path": "/ocr/",
-  "min_core_for_provisional": 2,
-  "rank_policy_version": 2
+  "min_core_for_provisional": 1,
+  "rank_policy_version": 3,
+  "reported_index": true
 }

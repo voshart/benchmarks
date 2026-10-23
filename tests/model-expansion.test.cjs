@@ -9,13 +9,13 @@ test('every requested addition is discoverable without inventing core coverage',
  const catalog=build(data,data.config.snapshot_date,{min:0});
  for(const id of additions){const model=data.models.find(m=>m.id===id),row=catalog.rows.find(r=>r.id===id);assert.ok(model&&row,id);assert.ok(data.sources[row.modelSourceId],id);assert.ok(row.modelNote,id);}
  for(const id of ['docling-pipeline','amazon-textract','google-docai-ocr','tesseract']){
-  const row=catalog.rows.find(r=>r.id===id);assert.equal(row.count,0);assert.equal(row.rank,null);assert.equal(data.records.some(r=>r.model===id && data.tests.find(t=>t.id===r.benchmark).core),false);
+  const row=catalog.rows.find(r=>r.id===id);assert.equal(row.count,0);if(id==='docling-pipeline')assert.ok(Number.isFinite(row.rank));else assert.equal(row.rank,null);assert.equal(data.records.some(r=>r.model===id && data.tests.find(t=>t.id===r.benchmark).core),false);
  }
 });
 test('Jina qualifies provisionally while LightOn task tests never manufacture rank families',()=>{
  const rows=build(data,data.config.snapshot_date,{min:0}).rows;
- const jina=rows.find(r=>r.id==='jina-ocr-v1');assert.equal(jina.coreCount,2);assert.equal(jina.rankStatus,'provisional');assert.ok(jina.provisionalReasons.some(r=>r.includes('author-reported')));
- for(const size of ['0.8','1','4']){const row=rows.find(r=>r.id==='lightonocr-3-'+size+'b');assert.equal(row.coreCount,1);assert.equal(row.rank,null);assert.equal(row.count,1);}
+ const jina=rows.find(r=>r.id==='jina-ocr-v1');assert.equal(jina.coreCount,4);assert.equal(jina.rankStatus,'provisional');assert.ok(jina.provisionalReasons.some(r=>r.includes('author-reported')));
+ for(const size of ['0.8','1','4']){const row=rows.find(r=>r.id==='lightonocr-3-'+size+'b');assert.equal(row.coreCount,3);assert.ok(Number.isFinite(row.rank));assert.equal(row.count,1);assert.ok(row.rankContributions.every(c=>!c.benchmark.includes('gt-layout')));}
  const research=build(data,data.config.snapshot_date,{view:'new'});
  for(const id of ['jina-ocr-v1','lightonocr-3-4b','nemotron-parse-2','hiro-moss-ocr-0-3b'])assert.ok(research.rows.some(r=>r.id===id),id);
 });

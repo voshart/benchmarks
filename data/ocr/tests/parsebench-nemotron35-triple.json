@@ -9,5 +9,8 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "note": "Author2078-page run, scorer9af4102e26b51f234ab5f037e19fec05c0696ec6. Separate from differently pinned ParseBench runs. Mode is explicit per model/record; legacy test ID retained."
+  "note": "Author2078-page run, scorer9af4102e26b51f234ab5f037e19fec05c0696ec6. Separate from differently pinned ParseBench runs. Mode is explicit per model/record; legacy test ID retained.",
+  "aggregate_eligible": true,
+  "aggregate_priority": 111,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

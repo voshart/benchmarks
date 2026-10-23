@@ -13,7 +13,7 @@
  function render(){if(!data)return;const date=dayIso(Number(UI.range.value));const result=BenchmarkRank.build(data,date,{min:UI.coverage.value,access:UI.access.value,query:UI.search.value,view});
   if(!['model','rank','speed','price'].includes(sortKey)&&!result.columns.some(t=>t.id===sortKey)){sortKey='rank';sortDirection='desc';}
   currentResult=result;
-  UI.date.textContent=date;UI.status.textContent=`${result.rows.length} models · ${result.matureCount} mature benchmark families`;
+  UI.date.textContent=date;UI.status.textContent=`${result.rows.length} models · ${result.matureCount} comparison benchmark families`;
   const options={...assumptions(),sortKey,sortDirection};
   UI.head.innerHTML=OCRComparison.renderHead(result,options);
   UI.body.innerHTML=OCRComparison.renderRows(result,data,options);

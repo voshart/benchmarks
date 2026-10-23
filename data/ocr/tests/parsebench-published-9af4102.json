@@ -9,5 +9,8 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "note": "Five-category upstream published panel; visual grounding is not reproduced EPR. Not quality measured in NVIDIA timing run; no core aggregate vote."
+  "note": "Five-category upstream published panel; visual grounding is not reproduced EPR. Not quality measured in NVIDIA timing run; no core aggregate vote.",
+  "aggregate_eligible": true,
+  "aggregate_priority": 108,
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
 }

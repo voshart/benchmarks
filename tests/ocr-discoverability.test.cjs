@@ -7,8 +7,8 @@ const OCR=require('../src/assets/js/ocr-comparison.js');
 test('default catalog exposes secondary-only models without inventing aggregate scores',()=>{
  const data=loadOCR(),all=build(data),filtered=build(data,data.config.snapshot_date,{min:2});
  for(const id of ['chandra-2-5-api','gemini-4-argon']){
-  const row=all.rows.find(r=>r.id===id);assert.ok(row,id);assert.equal(row.rank,null);assert.equal(row.coreCount,0);
-  const html=OCR.renderRows({...all,rows:[row]},data);assert.doesNotMatch(html,/>Reported results</);assert.match(html,/No comparable overall index/);assert.match(html,/Reported benchmark results/);assert.doesNotMatch(html,/No benchmark results recorded/);
+  const row=all.rows.find(r=>r.id===id);assert.ok(row,id);if(id==='chandra-2-5-api'){assert.ok(Number.isFinite(row.rank));assert.equal(row.coreCount,1);}else{assert.equal(row.rank,null);assert.equal(row.coreCount,0);}
+  const html=OCR.renderRows({...all,rows:[row]},data);assert.doesNotMatch(html,/>Reported results</);if(row.rank==null)assert.match(html,/No comparable overall index/);assert.match(html,/Reported benchmark results/);assert.doesNotMatch(html,/No benchmark results recorded/);
  }
  for(const query of ['Chandra 2.5','chandra2.5','chandra-2-5-api'])assert.ok(build(data,data.config.snapshot_date,{query}).rows.some(r=>r.id==='chandra-2-5-api'));
  const chandra=all.rows.find(r=>r.id==='chandra-2-5-api'),html=OCR.renderRows({...all,rows:[chandra]},data);
@@ -49,7 +49,7 @@ test('compact original matrix shows family results without duplicating model-nam
 
 test('variant fallback never becomes a main-protocol sorting value or aggregate vote',()=>{
  const data=loadOCR(),all=build(data),row=all.rows.find(r=>r.id==='chandra-2-5-api');
- assert.equal(row.scores.olmocr,null);assert.equal(row.rank,null);
+ assert.equal(row.scores.olmocr,null);assert.equal(row.rankContributions[0].benchmark,'chandra-2-5-olm-no-hf');
  const cell=OCR.cellObservation(row,data.tests.find(t=>t.id==='olmocr'),data,all.columns);
  assert.equal(cell.observation.value,86.9);assert.equal(cell.variant,true);
 });

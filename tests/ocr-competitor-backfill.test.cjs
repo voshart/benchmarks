@@ -8,9 +8,9 @@ test('competitor panels preserve full, subset and PDF-text-assisted protocols',(
  const rows=build(data,data.config.snapshot_date,{min:0}).rows;
  const get=id=>rows.find(r=>r.id===id);
  assert.equal(data.resultsByKey['lightonocr-3-4b|chandra-2-5-olm-no-hf'][0].metrics.pp3,86);
- assert.equal(get('lightonocr-3-4b').coreCount,1);
+ assert.equal(get('lightonocr-3-4b').coreCount,3);
  for(const id of ['marker2-pdf-pipeline','parsebench-published-9af4102']){const t=data.tests.find(t=>t.id===id);assert.equal(t.core,false);assert.equal(t.primary,false);}
- assert.equal(get('docling-pipeline').rank,null);
+ assert.ok(Number.isFinite(get('docling-pipeline').rank));
  assert.equal(get('docling-pipeline').scores['marker2-pdf-pipeline'].value,50.3);
  assert.equal(data.resultsByKey['ovisocr2|olmocr'].find(r=>r.source_id==='lighton3-pinned-olm-reproduction').metrics.overall,70.5);
  assert.equal(data.resultsByKey['hunyuanocr-1-5|omnidoc-v16'].find(r=>r.source_id==='jina-quoted-omnidoc16').evidence,'secondary');
@@ -22,7 +22,7 @@ test('exact checkpoint competitor speeds never become measurements of normalized
   assert.equal(model.release_date,null);assert.equal(d.reference.status,'estimated');assert.equal(d.reference.confidence,'low');
   assert.equal(d.cost.kind,'H100 scenario');assert.equal(d.cost.low,1000/(3600*d.reference.high));
   assert.ok(d.records.some(r=>r.source_id==='small-specialist-nemotron-matched-timing'&&!r.comparison_default));
-  assert.equal(build(data,data.config.snapshot_date,{min:0}).rows.find(r=>r.id===id).rank,null);
+  assert.equal(build(data,data.config.snapshot_date,{min:0}).rows.find(r=>r.id===id).rankStatus,'provisional');
  }
  assert.ok(data.throughput.some(r=>r.model==='dots-mocr'&&r.pages_per_second===.55));
  assert.ok(data.throughput.some(r=>r.model==='infinity-parser-7b'&&r.pages_per_second===.64));
