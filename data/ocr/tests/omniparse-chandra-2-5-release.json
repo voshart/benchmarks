@@ -1,7 +1,7 @@
 {
   "id": "omniparse-chandra-2-5-release",
   "short": "OmniParse accurate",
-  "label": "OmniParse · Chandra2.5 release, accurate mode",
+  "label": "OmniParse \u00b7 Chandra2.5 release, accurate mode",
   "source": "chandra-2-5-release",
   "primary_metric": "accurate",
   "unit": "percent",
@@ -9,5 +9,6 @@
   "core": false,
   "primary": false,
   "family": "omniparse",
-  "note": "Version-specific vendor release cohort, secondary only; not pooled into aggregate ranking."
+  "note": "Version-specific vendor release cohort, secondary only; not pooled into aggregate ranking.",
+  "matrix_order": 1
 }

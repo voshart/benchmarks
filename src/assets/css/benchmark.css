@@ -39,3 +39,7 @@ html[data-theme=dark]{color-scheme:dark;--paper:oklch(.18 0 0);--paper2:oklch(.2
 /* Modeled ranges open the same row details; they are not measured source links. */
 .ocr-estimate-link{appearance:none;border:0;padding:0;background:none;color:inherit;font:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
 .ocr-estimate-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Keep reported quality visible even when a protocol is not a matrix column. */
+.ocr-inline-scores{font:normal .7rem/1.45 var(--sans);margin:.25rem 0;white-space:normal;overflow-wrap:anywhere}.ocr-inline-scores sup{color:var(--accent)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

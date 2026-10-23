@@ -79,7 +79,8 @@
       new:['omnidoc-v16','olmocr','wild','real5','mdp-public','parsebench-lighton-202610','fr-bench-lighton-202610','omnidoc-v15-gt-layout-moss','omnidoc-v16-gt-layout-moss','parsebench-nemotron-202608','indicvision-nemotron','moscar-nemotron','omnidoc-notes-nemotron','fintabnet-docling-150dpi','pubtabnet-xiaomi','unimer-test-xiaomi','chronicles-mature-xiaomi','ocr-vqa-xiaomi']};
     const ids = groups[view];
     const show = data.tests.filter(test => view === 'secondary' ? !data.primaryTests.some(p => p.id === test.id)
-      : view === 'all' ? data.primaryTests.some(p => p.id === test.id) : ids ? ids.includes(test.id) : test.family === view);
+      : view === 'all' ? true : ids ? ids.includes(test.id) : test.family === view);
+    if (view === 'all') show.sort((a,b)=>(a.matrix_order ?? 100)-(b.matrix_order ?? 100));
     const fullMinimum = data.config.min_core_for_rank;
     const provisionalMinimum = data.config.min_core_for_provisional ?? 2;
     const rows = models.map(model => {
@@ -127,7 +128,8 @@
       const values = rows.map(row=>row.scores[test.id]?.value).filter(valid);
       return [test.id,values.length ? [Math.min(...values),Math.max(...values)] : [null,null]];
     }));
-    return {rows,columns:show,ranges,matureCount:eligible.length,coreTotal:new Set(core.map(test=>test.family)).size};
+    const columns = view === 'all' ? show.filter(test=>rows.some(row=>valid(row.scores[test.id]?.value))).sort((a,b)=>(a.matrix_order??100)-(b.matrix_order??100)||rows.filter(r=>valid(r.scores[b.id]?.value)).length-rows.filter(r=>valid(r.scores[a.id]?.value)).length) : show;
+    return {rows,columns,ranges,matureCount:eligible.length,coreTotal:new Set(core.map(test=>test.family)).size};
   }
   return {build,scored,maturity,pctRanks,choose,latestByLine,rankable,qualification};
 });
