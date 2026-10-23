@@ -42,4 +42,5 @@ test('all current models use unique family contributions; Chandra and Gemini rec
  assert.ok(Math.abs(c.rank-83.33333333333333)<1e-10);assert.equal(c.rankStatus,'provisional');assert.deepEqual(c.rankContributions.map(x=>x.benchmark),['chandra-2-5-olm-no-hf']);
  assert.equal(g.rank,85);assert.equal(g.rankStatus,'provisional');assert.deepEqual(g.rankContributions.map(x=>x.benchmark),['omniparse-datalab-overall-20261023']);
  assert.ok(!r.rows.some(x=>x.rankContributions.some(c=>c.benchmark==='omniparse-chandra-2-5-release')));
+ for(const row of r.rows.filter(x=>x.rankContributions.some(c=>c.benchmark==='openocr-hard')))assert.match(row.rankExplanation,/20 pages/);
 });

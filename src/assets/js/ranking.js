@@ -94,7 +94,7 @@
       for(const item of eligible)if(item.ranks.has(model.id)&&!selected.has(item.test.family))selected.set(item.test.family,item);
       const contributions = [...selected.values()].map(item => ({
         benchmark:item.test.id, label:item.test.label, family:item.test.family, percentile:item.ranks.get(model.id),
-        observation:scores[item.test.id], cohort:item.cohort, cohortSize:item.cohort.length, variant:!item.test.core
+        observation:scores[item.test.id], cohort:item.cohort, cohortSize:item.cohort.length, variant:!item.test.core, panelCaveat:item.test.aggregate_caveat||null
       }));
       const reasons = [];
       const rank = contributions.length >= provisionalMinimum
@@ -102,6 +102,7 @@
       if (rank !== null) {
         if (contributions.length < fullMinimum) reasons.push(`Limited coverage: ${contributions.length} ${expanded?'benchmark':'mature core'} families; ${fullMinimum} required for full coverage.`);
         if(expanded)for(const item of contributions){
+          if(item.panelCaveat)reasons.push(item.panelCaveat);
           if(item.cohortSize<6)reasons.push(`Small comparison cohort: ${item.label} has ${item.cohortSize} scored configurations; finite-cohort percentile, not population confidence.`);
           if(item.variant)reasons.push(`Qualified protocol variant: ${item.label}; normalized only within its own panel, one vote for ${item.family}.`);
         }

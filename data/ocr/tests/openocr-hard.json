@@ -13,5 +13,6 @@
   "aggregate_eligible": true,
   "aggregate_priority": 113,
   "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required.",
-  "note": ""
+  "note": "",
+  "aggregate_caveat": "Tiny evaluation corpus: OpenOCR uses only 20 pages; the comparative model count does not establish broad document coverage."
 }
