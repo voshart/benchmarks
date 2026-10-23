@@ -190,7 +190,7 @@ test('compact leaderboard preserves ranks and evidence with only five visible co
  assert.ok(head.indexOf('data-sort-key="rank"')<head.indexOf('data-sort-key="name"'));
  assert.match(body,/LibriSpeech test.clean/);
  assert.match(body,/aria-label="Evidence and qualifications for Phonon-2"/);
- assert.match(body,/>Details<\/button>/);
+ assert.match(body,/aria-label="Evidence and qualifications for [^"]+"[^>]*>ⓘ<\/button>/);
  assert.match(body,/<small class="model-vendor">OtterAI<\/small>/);
  const template=require('node:fs').readFileSync('src/stt/index.njk','utf8');
  assert.doesNotMatch(template,/<nav class="views"/);
@@ -242,7 +242,7 @@ test('compact Details rounds size labels only and preserves precise size metadat
  const row={...original,size:{...original.size,download_mb:1234.56789,parameters_million:9.8}};
  const html=Speech.renderRows({...result,rows:[row]},data);
  assert.match(html,/<strong>Size:<\/strong> 1,235 MB download · 10 M parameters/);
- assert.match(html,/popovertarget="[^"]+"[^>]*>Details<\/button>/);
+ assert.match(html,/popovertarget="[^"]+"[^>]*aria-label="Evidence and qualifications for [^"]+"[^>]*>ⓘ<\/button>/);
  assert.doesNotMatch(Speech.renderHead(result),/Download \(MB\)|Parameters \(M\)/);
  assert.equal(row.size.download_mb,1234.56789);
  assert.equal(row.size.parameters_million,9.8);

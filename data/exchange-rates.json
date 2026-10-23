@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-10-23",
+  "verified_on": "2026-10-23",
+  "base_currency": "EUR",
+  "rates": {
+    "EUR": 1,
+    "USD": 1.1193,
+    "INR": 106.2720
+  },
+  "source_id": "ecb-reference-rates-20261023",
+  "source_label": "European Central Bank reference rates",
+  "source_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+  "source_document_url": "https://www.ecb.europa.eu/stats/shared/pdf/eurofxref.pdf",
+  "note": "Published 23 October 2026. All source rates quote currency units per euro. USD per source-currency unit = USD-per-EUR divided by source-currency-per-EUR. These dated reference conversions are display estimates, not transaction quotes or historical tariff-date exchange rates. Keep source tariffs and their own verification dates unchanged."
+}

@@ -25,7 +25,157 @@
     "real_text_edit": "Real text edit",
     "real_formula_cdm": "Real formula CDM",
     "real_table_teds": "Real table TEDS",
-    "real_reading_edit": "Real reading-order edit"
+    "real_reading_edit": "Real reading-order edit",
+    "domain_academic_clean_overall": "Academic · Clean · Overall",
+    "domain_academic_clean_text_edit": "Academic · Clean · Text edit",
+    "domain_academic_clean_formula_cdm": "Academic · Clean · Formula CDM",
+    "domain_academic_clean_table_teds": "Academic · Clean · Table TEDS",
+    "domain_academic_clean_reading_edit": "Academic · Clean · Reading-order edit",
+    "domain_academic_digital_overall": "Academic · Digital degradation · Overall",
+    "domain_academic_digital_text_edit": "Academic · Digital degradation · Text edit",
+    "domain_academic_digital_formula_cdm": "Academic · Digital degradation · Formula CDM",
+    "domain_academic_digital_table_teds": "Academic · Digital degradation · Table TEDS",
+    "domain_academic_digital_reading_edit": "Academic · Digital degradation · Reading-order edit",
+    "domain_academic_real_overall": "Academic · Real degradation · Overall",
+    "domain_academic_real_text_edit": "Academic · Real degradation · Text edit",
+    "domain_academic_real_formula_cdm": "Academic · Real degradation · Formula CDM",
+    "domain_academic_real_table_teds": "Academic · Real degradation · Table TEDS",
+    "domain_academic_real_reading_edit": "Academic · Real degradation · Reading-order edit",
+    "domain_education_clean_overall": "Education · Clean · Overall",
+    "domain_education_clean_text_edit": "Education · Clean · Text edit",
+    "domain_education_clean_formula_cdm": "Education · Clean · Formula CDM",
+    "domain_education_clean_table_teds": "Education · Clean · Table TEDS",
+    "domain_education_clean_reading_edit": "Education · Clean · Reading-order edit",
+    "domain_education_digital_overall": "Education · Digital degradation · Overall",
+    "domain_education_digital_text_edit": "Education · Digital degradation · Text edit",
+    "domain_education_digital_formula_cdm": "Education · Digital degradation · Formula CDM",
+    "domain_education_digital_table_teds": "Education · Digital degradation · Table TEDS",
+    "domain_education_digital_reading_edit": "Education · Digital degradation · Reading-order edit",
+    "domain_education_real_overall": "Education · Real degradation · Overall",
+    "domain_education_real_text_edit": "Education · Real degradation · Text edit",
+    "domain_education_real_formula_cdm": "Education · Real degradation · Formula CDM",
+    "domain_education_real_table_teds": "Education · Real degradation · Table TEDS",
+    "domain_education_real_reading_edit": "Education · Real degradation · Reading-order edit",
+    "domain_legal_gov_clean_overall": "Legal / government · Clean · Overall",
+    "domain_legal_gov_clean_text_edit": "Legal / government · Clean · Text edit",
+    "domain_legal_gov_clean_formula_cdm": "Legal / government · Clean · Formula CDM",
+    "domain_legal_gov_clean_table_teds": "Legal / government · Clean · Table TEDS",
+    "domain_legal_gov_clean_reading_edit": "Legal / government · Clean · Reading-order edit",
+    "domain_legal_gov_digital_overall": "Legal / government · Digital degradation · Overall",
+    "domain_legal_gov_digital_text_edit": "Legal / government · Digital degradation · Text edit",
+    "domain_legal_gov_digital_formula_cdm": "Legal / government · Digital degradation · Formula CDM",
+    "domain_legal_gov_digital_table_teds": "Legal / government · Digital degradation · Table TEDS",
+    "domain_legal_gov_digital_reading_edit": "Legal / government · Digital degradation · Reading-order edit",
+    "domain_legal_gov_real_overall": "Legal / government · Real degradation · Overall",
+    "domain_legal_gov_real_text_edit": "Legal / government · Real degradation · Text edit",
+    "domain_legal_gov_real_formula_cdm": "Legal / government · Real degradation · Formula CDM",
+    "domain_legal_gov_real_table_teds": "Legal / government · Real degradation · Table TEDS",
+    "domain_legal_gov_real_reading_edit": "Legal / government · Real degradation · Reading-order edit",
+    "domain_business_clean_overall": "Business · Clean · Overall",
+    "domain_business_clean_text_edit": "Business · Clean · Text edit",
+    "domain_business_clean_formula_cdm": "Business · Clean · Formula CDM",
+    "domain_business_clean_table_teds": "Business · Clean · Table TEDS",
+    "domain_business_clean_reading_edit": "Business · Clean · Reading-order edit",
+    "domain_business_digital_overall": "Business · Digital degradation · Overall",
+    "domain_business_digital_text_edit": "Business · Digital degradation · Text edit",
+    "domain_business_digital_formula_cdm": "Business · Digital degradation · Formula CDM",
+    "domain_business_digital_table_teds": "Business · Digital degradation · Table TEDS",
+    "domain_business_digital_reading_edit": "Business · Digital degradation · Reading-order edit",
+    "domain_business_real_overall": "Business · Real degradation · Overall",
+    "domain_business_real_text_edit": "Business · Real degradation · Text edit",
+    "domain_business_real_formula_cdm": "Business · Real degradation · Formula CDM",
+    "domain_business_real_table_teds": "Business · Real degradation · Table TEDS",
+    "domain_business_real_reading_edit": "Business · Real degradation · Reading-order edit",
+    "domain_finance_clean_overall": "Finance · Clean · Overall",
+    "domain_finance_clean_text_edit": "Finance · Clean · Text edit",
+    "domain_finance_clean_formula_cdm": "Finance · Clean · Formula CDM",
+    "domain_finance_clean_table_teds": "Finance · Clean · Table TEDS",
+    "domain_finance_clean_reading_edit": "Finance · Clean · Reading-order edit",
+    "domain_finance_digital_overall": "Finance · Digital degradation · Overall",
+    "domain_finance_digital_text_edit": "Finance · Digital degradation · Text edit",
+    "domain_finance_digital_formula_cdm": "Finance · Digital degradation · Formula CDM",
+    "domain_finance_digital_table_teds": "Finance · Digital degradation · Table TEDS",
+    "domain_finance_digital_reading_edit": "Finance · Digital degradation · Reading-order edit",
+    "domain_finance_real_overall": "Finance · Real degradation · Overall",
+    "domain_finance_real_text_edit": "Finance · Real degradation · Text edit",
+    "domain_finance_real_formula_cdm": "Finance · Real degradation · Formula CDM",
+    "domain_finance_real_table_teds": "Finance · Real degradation · Table TEDS",
+    "domain_finance_real_reading_edit": "Finance · Real degradation · Reading-order edit",
+    "domain_medical_clean_overall": "Medical · Clean · Overall",
+    "domain_medical_clean_text_edit": "Medical · Clean · Text edit",
+    "domain_medical_clean_formula_cdm": "Medical · Clean · Formula CDM",
+    "domain_medical_clean_table_teds": "Medical · Clean · Table TEDS",
+    "domain_medical_clean_reading_edit": "Medical · Clean · Reading-order edit",
+    "domain_medical_digital_overall": "Medical · Digital degradation · Overall",
+    "domain_medical_digital_text_edit": "Medical · Digital degradation · Text edit",
+    "domain_medical_digital_formula_cdm": "Medical · Digital degradation · Formula CDM",
+    "domain_medical_digital_table_teds": "Medical · Digital degradation · Table TEDS",
+    "domain_medical_digital_reading_edit": "Medical · Digital degradation · Reading-order edit",
+    "domain_medical_real_overall": "Medical · Real degradation · Overall",
+    "domain_medical_real_text_edit": "Medical · Real degradation · Text edit",
+    "domain_medical_real_formula_cdm": "Medical · Real degradation · Formula CDM",
+    "domain_medical_real_table_teds": "Medical · Real degradation · Table TEDS",
+    "domain_medical_real_reading_edit": "Medical · Real degradation · Reading-order edit",
+    "domain_publishing_clean_overall": "Publishing · Clean · Overall",
+    "domain_publishing_clean_text_edit": "Publishing · Clean · Text edit",
+    "domain_publishing_clean_formula_cdm": "Publishing · Clean · Formula CDM",
+    "domain_publishing_clean_table_teds": "Publishing · Clean · Table TEDS",
+    "domain_publishing_clean_reading_edit": "Publishing · Clean · Reading-order edit",
+    "domain_publishing_digital_overall": "Publishing · Digital degradation · Overall",
+    "domain_publishing_digital_text_edit": "Publishing · Digital degradation · Text edit",
+    "domain_publishing_digital_formula_cdm": "Publishing · Digital degradation · Formula CDM",
+    "domain_publishing_digital_table_teds": "Publishing · Digital degradation · Table TEDS",
+    "domain_publishing_digital_reading_edit": "Publishing · Digital degradation · Reading-order edit",
+    "domain_publishing_real_overall": "Publishing · Real degradation · Overall",
+    "domain_publishing_real_text_edit": "Publishing · Real degradation · Text edit",
+    "domain_publishing_real_formula_cdm": "Publishing · Real degradation · Formula CDM",
+    "domain_publishing_real_table_teds": "Publishing · Real degradation · Table TEDS",
+    "domain_publishing_real_reading_edit": "Publishing · Real degradation · Reading-order edit",
+    "domain_technical_clean_overall": "Technical · Clean · Overall",
+    "domain_technical_clean_text_edit": "Technical · Clean · Text edit",
+    "domain_technical_clean_formula_cdm": "Technical · Clean · Formula CDM",
+    "domain_technical_clean_table_teds": "Technical · Clean · Table TEDS",
+    "domain_technical_clean_reading_edit": "Technical · Clean · Reading-order edit",
+    "domain_technical_digital_overall": "Technical · Digital degradation · Overall",
+    "domain_technical_digital_text_edit": "Technical · Digital degradation · Text edit",
+    "domain_technical_digital_formula_cdm": "Technical · Digital degradation · Formula CDM",
+    "domain_technical_digital_table_teds": "Technical · Digital degradation · Table TEDS",
+    "domain_technical_digital_reading_edit": "Technical · Digital degradation · Reading-order edit",
+    "domain_technical_real_overall": "Technical · Real degradation · Overall",
+    "domain_technical_real_text_edit": "Technical · Real degradation · Text edit",
+    "domain_technical_real_formula_cdm": "Technical · Real degradation · Formula CDM",
+    "domain_technical_real_table_teds": "Technical · Real degradation · Table TEDS",
+    "domain_technical_real_reading_edit": "Technical · Real degradation · Reading-order edit",
+    "domain_logistics_clean_overall": "Logistics · Clean · Overall",
+    "domain_logistics_clean_text_edit": "Logistics · Clean · Text edit",
+    "domain_logistics_clean_formula_cdm": "Logistics · Clean · Formula CDM",
+    "domain_logistics_clean_table_teds": "Logistics · Clean · Table TEDS",
+    "domain_logistics_clean_reading_edit": "Logistics · Clean · Reading-order edit",
+    "domain_logistics_digital_overall": "Logistics · Digital degradation · Overall",
+    "domain_logistics_digital_text_edit": "Logistics · Digital degradation · Text edit",
+    "domain_logistics_digital_formula_cdm": "Logistics · Digital degradation · Formula CDM",
+    "domain_logistics_digital_table_teds": "Logistics · Digital degradation · Table TEDS",
+    "domain_logistics_digital_reading_edit": "Logistics · Digital degradation · Reading-order edit",
+    "domain_logistics_real_overall": "Logistics · Real degradation · Overall",
+    "domain_logistics_real_text_edit": "Logistics · Real degradation · Text edit",
+    "domain_logistics_real_formula_cdm": "Logistics · Real degradation · Formula CDM",
+    "domain_logistics_real_table_teds": "Logistics · Real degradation · Table TEDS",
+    "domain_logistics_real_reading_edit": "Logistics · Real degradation · Reading-order edit",
+    "domain_certificate_clean_overall": "Certificates · Clean · Overall",
+    "domain_certificate_clean_text_edit": "Certificates · Clean · Text edit",
+    "domain_certificate_clean_formula_cdm": "Certificates · Clean · Formula CDM",
+    "domain_certificate_clean_table_teds": "Certificates · Clean · Table TEDS",
+    "domain_certificate_clean_reading_edit": "Certificates · Clean · Reading-order edit",
+    "domain_certificate_digital_overall": "Certificates · Digital degradation · Overall",
+    "domain_certificate_digital_text_edit": "Certificates · Digital degradation · Text edit",
+    "domain_certificate_digital_formula_cdm": "Certificates · Digital degradation · Formula CDM",
+    "domain_certificate_digital_table_teds": "Certificates · Digital degradation · Table TEDS",
+    "domain_certificate_digital_reading_edit": "Certificates · Digital degradation · Reading-order edit",
+    "domain_certificate_real_overall": "Certificates · Real degradation · Overall",
+    "domain_certificate_real_text_edit": "Certificates · Real degradation · Text edit",
+    "domain_certificate_real_formula_cdm": "Certificates · Real degradation · Formula CDM",
+    "domain_certificate_real_table_teds": "Certificates · Real degradation · Table TEDS",
+    "domain_certificate_real_reading_edit": "Certificates · Real degradation · Reading-order edit"
   },
   "metric_units": {
     "clean": "percent",
@@ -42,7 +192,157 @@
     "real_text_edit": "ratio",
     "real_formula_cdm": "percent",
     "real_table_teds": "percent",
-    "real_reading_edit": "ratio"
+    "real_reading_edit": "ratio",
+    "domain_academic_clean_overall": "percent",
+    "domain_academic_clean_text_edit": "ratio",
+    "domain_academic_clean_formula_cdm": "percent",
+    "domain_academic_clean_table_teds": "percent",
+    "domain_academic_clean_reading_edit": "ratio",
+    "domain_academic_digital_overall": "percent",
+    "domain_academic_digital_text_edit": "ratio",
+    "domain_academic_digital_formula_cdm": "percent",
+    "domain_academic_digital_table_teds": "percent",
+    "domain_academic_digital_reading_edit": "ratio",
+    "domain_academic_real_overall": "percent",
+    "domain_academic_real_text_edit": "ratio",
+    "domain_academic_real_formula_cdm": "percent",
+    "domain_academic_real_table_teds": "percent",
+    "domain_academic_real_reading_edit": "ratio",
+    "domain_education_clean_overall": "percent",
+    "domain_education_clean_text_edit": "ratio",
+    "domain_education_clean_formula_cdm": "percent",
+    "domain_education_clean_table_teds": "percent",
+    "domain_education_clean_reading_edit": "ratio",
+    "domain_education_digital_overall": "percent",
+    "domain_education_digital_text_edit": "ratio",
+    "domain_education_digital_formula_cdm": "percent",
+    "domain_education_digital_table_teds": "percent",
+    "domain_education_digital_reading_edit": "ratio",
+    "domain_education_real_overall": "percent",
+    "domain_education_real_text_edit": "ratio",
+    "domain_education_real_formula_cdm": "percent",
+    "domain_education_real_table_teds": "percent",
+    "domain_education_real_reading_edit": "ratio",
+    "domain_legal_gov_clean_overall": "percent",
+    "domain_legal_gov_clean_text_edit": "ratio",
+    "domain_legal_gov_clean_formula_cdm": "percent",
+    "domain_legal_gov_clean_table_teds": "percent",
+    "domain_legal_gov_clean_reading_edit": "ratio",
+    "domain_legal_gov_digital_overall": "percent",
+    "domain_legal_gov_digital_text_edit": "ratio",
+    "domain_legal_gov_digital_formula_cdm": "percent",
+    "domain_legal_gov_digital_table_teds": "percent",
+    "domain_legal_gov_digital_reading_edit": "ratio",
+    "domain_legal_gov_real_overall": "percent",
+    "domain_legal_gov_real_text_edit": "ratio",
+    "domain_legal_gov_real_formula_cdm": "percent",
+    "domain_legal_gov_real_table_teds": "percent",
+    "domain_legal_gov_real_reading_edit": "ratio",
+    "domain_business_clean_overall": "percent",
+    "domain_business_clean_text_edit": "ratio",
+    "domain_business_clean_formula_cdm": "percent",
+    "domain_business_clean_table_teds": "percent",
+    "domain_business_clean_reading_edit": "ratio",
+    "domain_business_digital_overall": "percent",
+    "domain_business_digital_text_edit": "ratio",
+    "domain_business_digital_formula_cdm": "percent",
+    "domain_business_digital_table_teds": "percent",
+    "domain_business_digital_reading_edit": "ratio",
+    "domain_business_real_overall": "percent",
+    "domain_business_real_text_edit": "ratio",
+    "domain_business_real_formula_cdm": "percent",
+    "domain_business_real_table_teds": "percent",
+    "domain_business_real_reading_edit": "ratio",
+    "domain_finance_clean_overall": "percent",
+    "domain_finance_clean_text_edit": "ratio",
+    "domain_finance_clean_formula_cdm": "percent",
+    "domain_finance_clean_table_teds": "percent",
+    "domain_finance_clean_reading_edit": "ratio",
+    "domain_finance_digital_overall": "percent",
+    "domain_finance_digital_text_edit": "ratio",
+    "domain_finance_digital_formula_cdm": "percent",
+    "domain_finance_digital_table_teds": "percent",
+    "domain_finance_digital_reading_edit": "ratio",
+    "domain_finance_real_overall": "percent",
+    "domain_finance_real_text_edit": "ratio",
+    "domain_finance_real_formula_cdm": "percent",
+    "domain_finance_real_table_teds": "percent",
+    "domain_finance_real_reading_edit": "ratio",
+    "domain_medical_clean_overall": "percent",
+    "domain_medical_clean_text_edit": "ratio",
+    "domain_medical_clean_formula_cdm": "percent",
+    "domain_medical_clean_table_teds": "percent",
+    "domain_medical_clean_reading_edit": "ratio",
+    "domain_medical_digital_overall": "percent",
+    "domain_medical_digital_text_edit": "ratio",
+    "domain_medical_digital_formula_cdm": "percent",
+    "domain_medical_digital_table_teds": "percent",
+    "domain_medical_digital_reading_edit": "ratio",
+    "domain_medical_real_overall": "percent",
+    "domain_medical_real_text_edit": "ratio",
+    "domain_medical_real_formula_cdm": "percent",
+    "domain_medical_real_table_teds": "percent",
+    "domain_medical_real_reading_edit": "ratio",
+    "domain_publishing_clean_overall": "percent",
+    "domain_publishing_clean_text_edit": "ratio",
+    "domain_publishing_clean_formula_cdm": "percent",
+    "domain_publishing_clean_table_teds": "percent",
+    "domain_publishing_clean_reading_edit": "ratio",
+    "domain_publishing_digital_overall": "percent",
+    "domain_publishing_digital_text_edit": "ratio",
+    "domain_publishing_digital_formula_cdm": "percent",
+    "domain_publishing_digital_table_teds": "percent",
+    "domain_publishing_digital_reading_edit": "ratio",
+    "domain_publishing_real_overall": "percent",
+    "domain_publishing_real_text_edit": "ratio",
+    "domain_publishing_real_formula_cdm": "percent",
+    "domain_publishing_real_table_teds": "percent",
+    "domain_publishing_real_reading_edit": "ratio",
+    "domain_technical_clean_overall": "percent",
+    "domain_technical_clean_text_edit": "ratio",
+    "domain_technical_clean_formula_cdm": "percent",
+    "domain_technical_clean_table_teds": "percent",
+    "domain_technical_clean_reading_edit": "ratio",
+    "domain_technical_digital_overall": "percent",
+    "domain_technical_digital_text_edit": "ratio",
+    "domain_technical_digital_formula_cdm": "percent",
+    "domain_technical_digital_table_teds": "percent",
+    "domain_technical_digital_reading_edit": "ratio",
+    "domain_technical_real_overall": "percent",
+    "domain_technical_real_text_edit": "ratio",
+    "domain_technical_real_formula_cdm": "percent",
+    "domain_technical_real_table_teds": "percent",
+    "domain_technical_real_reading_edit": "ratio",
+    "domain_logistics_clean_overall": "percent",
+    "domain_logistics_clean_text_edit": "ratio",
+    "domain_logistics_clean_formula_cdm": "percent",
+    "domain_logistics_clean_table_teds": "percent",
+    "domain_logistics_clean_reading_edit": "ratio",
+    "domain_logistics_digital_overall": "percent",
+    "domain_logistics_digital_text_edit": "ratio",
+    "domain_logistics_digital_formula_cdm": "percent",
+    "domain_logistics_digital_table_teds": "percent",
+    "domain_logistics_digital_reading_edit": "ratio",
+    "domain_logistics_real_overall": "percent",
+    "domain_logistics_real_text_edit": "ratio",
+    "domain_logistics_real_formula_cdm": "percent",
+    "domain_logistics_real_table_teds": "percent",
+    "domain_logistics_real_reading_edit": "ratio",
+    "domain_certificate_clean_overall": "percent",
+    "domain_certificate_clean_text_edit": "ratio",
+    "domain_certificate_clean_formula_cdm": "percent",
+    "domain_certificate_clean_table_teds": "percent",
+    "domain_certificate_clean_reading_edit": "ratio",
+    "domain_certificate_digital_overall": "percent",
+    "domain_certificate_digital_text_edit": "ratio",
+    "domain_certificate_digital_formula_cdm": "percent",
+    "domain_certificate_digital_table_teds": "percent",
+    "domain_certificate_digital_reading_edit": "ratio",
+    "domain_certificate_real_overall": "percent",
+    "domain_certificate_real_text_edit": "ratio",
+    "domain_certificate_real_formula_cdm": "percent",
+    "domain_certificate_real_table_teds": "percent",
+    "domain_certificate_real_reading_edit": "ratio"
   },
   "metric_directions": {
     "clean": "higher",
@@ -59,6 +359,581 @@
     "real_text_edit": "lower",
     "real_formula_cdm": "higher",
     "real_table_teds": "higher",
-    "real_reading_edit": "lower"
-  }
+    "real_reading_edit": "lower",
+    "domain_academic_clean_overall": "higher",
+    "domain_academic_clean_text_edit": "lower",
+    "domain_academic_clean_formula_cdm": "higher",
+    "domain_academic_clean_table_teds": "higher",
+    "domain_academic_clean_reading_edit": "lower",
+    "domain_academic_digital_overall": "higher",
+    "domain_academic_digital_text_edit": "lower",
+    "domain_academic_digital_formula_cdm": "higher",
+    "domain_academic_digital_table_teds": "higher",
+    "domain_academic_digital_reading_edit": "lower",
+    "domain_academic_real_overall": "higher",
+    "domain_academic_real_text_edit": "lower",
+    "domain_academic_real_formula_cdm": "higher",
+    "domain_academic_real_table_teds": "higher",
+    "domain_academic_real_reading_edit": "lower",
+    "domain_education_clean_overall": "higher",
+    "domain_education_clean_text_edit": "lower",
+    "domain_education_clean_formula_cdm": "higher",
+    "domain_education_clean_table_teds": "higher",
+    "domain_education_clean_reading_edit": "lower",
+    "domain_education_digital_overall": "higher",
+    "domain_education_digital_text_edit": "lower",
+    "domain_education_digital_formula_cdm": "higher",
+    "domain_education_digital_table_teds": "higher",
+    "domain_education_digital_reading_edit": "lower",
+    "domain_education_real_overall": "higher",
+    "domain_education_real_text_edit": "lower",
+    "domain_education_real_formula_cdm": "higher",
+    "domain_education_real_table_teds": "higher",
+    "domain_education_real_reading_edit": "lower",
+    "domain_legal_gov_clean_overall": "higher",
+    "domain_legal_gov_clean_text_edit": "lower",
+    "domain_legal_gov_clean_formula_cdm": "higher",
+    "domain_legal_gov_clean_table_teds": "higher",
+    "domain_legal_gov_clean_reading_edit": "lower",
+    "domain_legal_gov_digital_overall": "higher",
+    "domain_legal_gov_digital_text_edit": "lower",
+    "domain_legal_gov_digital_formula_cdm": "higher",
+    "domain_legal_gov_digital_table_teds": "higher",
+    "domain_legal_gov_digital_reading_edit": "lower",
+    "domain_legal_gov_real_overall": "higher",
+    "domain_legal_gov_real_text_edit": "lower",
+    "domain_legal_gov_real_formula_cdm": "higher",
+    "domain_legal_gov_real_table_teds": "higher",
+    "domain_legal_gov_real_reading_edit": "lower",
+    "domain_business_clean_overall": "higher",
+    "domain_business_clean_text_edit": "lower",
+    "domain_business_clean_formula_cdm": "higher",
+    "domain_business_clean_table_teds": "higher",
+    "domain_business_clean_reading_edit": "lower",
+    "domain_business_digital_overall": "higher",
+    "domain_business_digital_text_edit": "lower",
+    "domain_business_digital_formula_cdm": "higher",
+    "domain_business_digital_table_teds": "higher",
+    "domain_business_digital_reading_edit": "lower",
+    "domain_business_real_overall": "higher",
+    "domain_business_real_text_edit": "lower",
+    "domain_business_real_formula_cdm": "higher",
+    "domain_business_real_table_teds": "higher",
+    "domain_business_real_reading_edit": "lower",
+    "domain_finance_clean_overall": "higher",
+    "domain_finance_clean_text_edit": "lower",
+    "domain_finance_clean_formula_cdm": "higher",
+    "domain_finance_clean_table_teds": "higher",
+    "domain_finance_clean_reading_edit": "lower",
+    "domain_finance_digital_overall": "higher",
+    "domain_finance_digital_text_edit": "lower",
+    "domain_finance_digital_formula_cdm": "higher",
+    "domain_finance_digital_table_teds": "higher",
+    "domain_finance_digital_reading_edit": "lower",
+    "domain_finance_real_overall": "higher",
+    "domain_finance_real_text_edit": "lower",
+    "domain_finance_real_formula_cdm": "higher",
+    "domain_finance_real_table_teds": "higher",
+    "domain_finance_real_reading_edit": "lower",
+    "domain_medical_clean_overall": "higher",
+    "domain_medical_clean_text_edit": "lower",
+    "domain_medical_clean_formula_cdm": "higher",
+    "domain_medical_clean_table_teds": "higher",
+    "domain_medical_clean_reading_edit": "lower",
+    "domain_medical_digital_overall": "higher",
+    "domain_medical_digital_text_edit": "lower",
+    "domain_medical_digital_formula_cdm": "higher",
+    "domain_medical_digital_table_teds": "higher",
+    "domain_medical_digital_reading_edit": "lower",
+    "domain_medical_real_overall": "higher",
+    "domain_medical_real_text_edit": "lower",
+    "domain_medical_real_formula_cdm": "higher",
+    "domain_medical_real_table_teds": "higher",
+    "domain_medical_real_reading_edit": "lower",
+    "domain_publishing_clean_overall": "higher",
+    "domain_publishing_clean_text_edit": "lower",
+    "domain_publishing_clean_formula_cdm": "higher",
+    "domain_publishing_clean_table_teds": "higher",
+    "domain_publishing_clean_reading_edit": "lower",
+    "domain_publishing_digital_overall": "higher",
+    "domain_publishing_digital_text_edit": "lower",
+    "domain_publishing_digital_formula_cdm": "higher",
+    "domain_publishing_digital_table_teds": "higher",
+    "domain_publishing_digital_reading_edit": "lower",
+    "domain_publishing_real_overall": "higher",
+    "domain_publishing_real_text_edit": "lower",
+    "domain_publishing_real_formula_cdm": "higher",
+    "domain_publishing_real_table_teds": "higher",
+    "domain_publishing_real_reading_edit": "lower",
+    "domain_technical_clean_overall": "higher",
+    "domain_technical_clean_text_edit": "lower",
+    "domain_technical_clean_formula_cdm": "higher",
+    "domain_technical_clean_table_teds": "higher",
+    "domain_technical_clean_reading_edit": "lower",
+    "domain_technical_digital_overall": "higher",
+    "domain_technical_digital_text_edit": "lower",
+    "domain_technical_digital_formula_cdm": "higher",
+    "domain_technical_digital_table_teds": "higher",
+    "domain_technical_digital_reading_edit": "lower",
+    "domain_technical_real_overall": "higher",
+    "domain_technical_real_text_edit": "lower",
+    "domain_technical_real_formula_cdm": "higher",
+    "domain_technical_real_table_teds": "higher",
+    "domain_technical_real_reading_edit": "lower",
+    "domain_logistics_clean_overall": "higher",
+    "domain_logistics_clean_text_edit": "lower",
+    "domain_logistics_clean_formula_cdm": "higher",
+    "domain_logistics_clean_table_teds": "higher",
+    "domain_logistics_clean_reading_edit": "lower",
+    "domain_logistics_digital_overall": "higher",
+    "domain_logistics_digital_text_edit": "lower",
+    "domain_logistics_digital_formula_cdm": "higher",
+    "domain_logistics_digital_table_teds": "higher",
+    "domain_logistics_digital_reading_edit": "lower",
+    "domain_logistics_real_overall": "higher",
+    "domain_logistics_real_text_edit": "lower",
+    "domain_logistics_real_formula_cdm": "higher",
+    "domain_logistics_real_table_teds": "higher",
+    "domain_logistics_real_reading_edit": "lower",
+    "domain_certificate_clean_overall": "higher",
+    "domain_certificate_clean_text_edit": "lower",
+    "domain_certificate_clean_formula_cdm": "higher",
+    "domain_certificate_clean_table_teds": "higher",
+    "domain_certificate_clean_reading_edit": "lower",
+    "domain_certificate_digital_overall": "higher",
+    "domain_certificate_digital_text_edit": "lower",
+    "domain_certificate_digital_formula_cdm": "higher",
+    "domain_certificate_digital_table_teds": "higher",
+    "domain_certificate_digital_reading_edit": "lower",
+    "domain_certificate_real_overall": "higher",
+    "domain_certificate_real_text_edit": "lower",
+    "domain_certificate_real_formula_cdm": "higher",
+    "domain_certificate_real_table_teds": "higher",
+    "domain_certificate_real_reading_edit": "lower"
+  },
+  "metric_tables": [
+    {
+      "id": "domains-clean",
+      "label": "Clean · document domains",
+      "row_header": "Document domain",
+      "source_url": "https://github.com/zhihengli-casia/PureDocBench/blob/fdae62435871eb7ba058a804574ad1a9d2fd6cf1/results/category_components.csv",
+      "note": "Ten document domains × three matched tracks. These published category summaries do not replace the global track Overall or Avg₃.",
+      "columns": [
+        {
+          "id": "overall",
+          "label": "Overall",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "text_edit",
+          "label": "Text edit",
+          "unit": "ratio",
+          "direction": "lower"
+        },
+        {
+          "id": "formula_cdm",
+          "label": "Formula CDM",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "table_teds",
+          "label": "Table TEDS",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "reading_edit",
+          "label": "Reading-order edit",
+          "unit": "ratio",
+          "direction": "lower"
+        }
+      ],
+      "rows": [
+        {
+          "label": "Academic",
+          "metric_keys": [
+            "domain_academic_clean_overall",
+            "domain_academic_clean_text_edit",
+            "domain_academic_clean_formula_cdm",
+            "domain_academic_clean_table_teds",
+            "domain_academic_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Education",
+          "metric_keys": [
+            "domain_education_clean_overall",
+            "domain_education_clean_text_edit",
+            "domain_education_clean_formula_cdm",
+            "domain_education_clean_table_teds",
+            "domain_education_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Legal / government",
+          "metric_keys": [
+            "domain_legal_gov_clean_overall",
+            "domain_legal_gov_clean_text_edit",
+            "domain_legal_gov_clean_formula_cdm",
+            "domain_legal_gov_clean_table_teds",
+            "domain_legal_gov_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Business",
+          "metric_keys": [
+            "domain_business_clean_overall",
+            "domain_business_clean_text_edit",
+            "domain_business_clean_formula_cdm",
+            "domain_business_clean_table_teds",
+            "domain_business_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Finance",
+          "metric_keys": [
+            "domain_finance_clean_overall",
+            "domain_finance_clean_text_edit",
+            "domain_finance_clean_formula_cdm",
+            "domain_finance_clean_table_teds",
+            "domain_finance_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Medical",
+          "metric_keys": [
+            "domain_medical_clean_overall",
+            "domain_medical_clean_text_edit",
+            "domain_medical_clean_formula_cdm",
+            "domain_medical_clean_table_teds",
+            "domain_medical_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Publishing",
+          "metric_keys": [
+            "domain_publishing_clean_overall",
+            "domain_publishing_clean_text_edit",
+            "domain_publishing_clean_formula_cdm",
+            "domain_publishing_clean_table_teds",
+            "domain_publishing_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Technical",
+          "metric_keys": [
+            "domain_technical_clean_overall",
+            "domain_technical_clean_text_edit",
+            "domain_technical_clean_formula_cdm",
+            "domain_technical_clean_table_teds",
+            "domain_technical_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Logistics",
+          "metric_keys": [
+            "domain_logistics_clean_overall",
+            "domain_logistics_clean_text_edit",
+            "domain_logistics_clean_formula_cdm",
+            "domain_logistics_clean_table_teds",
+            "domain_logistics_clean_reading_edit"
+          ]
+        },
+        {
+          "label": "Certificates",
+          "metric_keys": [
+            "domain_certificate_clean_overall",
+            "domain_certificate_clean_text_edit",
+            "domain_certificate_clean_formula_cdm",
+            "domain_certificate_clean_table_teds",
+            "domain_certificate_clean_reading_edit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "domains-digital",
+      "label": "Digital degradation · document domains",
+      "row_header": "Document domain",
+      "source_url": "https://github.com/zhihengli-casia/PureDocBench/blob/fdae62435871eb7ba058a804574ad1a9d2fd6cf1/results/category_components.csv",
+      "note": "Ten document domains × three matched tracks. These published category summaries do not replace the global track Overall or Avg₃.",
+      "columns": [
+        {
+          "id": "overall",
+          "label": "Overall",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "text_edit",
+          "label": "Text edit",
+          "unit": "ratio",
+          "direction": "lower"
+        },
+        {
+          "id": "formula_cdm",
+          "label": "Formula CDM",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "table_teds",
+          "label": "Table TEDS",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "reading_edit",
+          "label": "Reading-order edit",
+          "unit": "ratio",
+          "direction": "lower"
+        }
+      ],
+      "rows": [
+        {
+          "label": "Academic",
+          "metric_keys": [
+            "domain_academic_digital_overall",
+            "domain_academic_digital_text_edit",
+            "domain_academic_digital_formula_cdm",
+            "domain_academic_digital_table_teds",
+            "domain_academic_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Education",
+          "metric_keys": [
+            "domain_education_digital_overall",
+            "domain_education_digital_text_edit",
+            "domain_education_digital_formula_cdm",
+            "domain_education_digital_table_teds",
+            "domain_education_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Legal / government",
+          "metric_keys": [
+            "domain_legal_gov_digital_overall",
+            "domain_legal_gov_digital_text_edit",
+            "domain_legal_gov_digital_formula_cdm",
+            "domain_legal_gov_digital_table_teds",
+            "domain_legal_gov_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Business",
+          "metric_keys": [
+            "domain_business_digital_overall",
+            "domain_business_digital_text_edit",
+            "domain_business_digital_formula_cdm",
+            "domain_business_digital_table_teds",
+            "domain_business_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Finance",
+          "metric_keys": [
+            "domain_finance_digital_overall",
+            "domain_finance_digital_text_edit",
+            "domain_finance_digital_formula_cdm",
+            "domain_finance_digital_table_teds",
+            "domain_finance_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Medical",
+          "metric_keys": [
+            "domain_medical_digital_overall",
+            "domain_medical_digital_text_edit",
+            "domain_medical_digital_formula_cdm",
+            "domain_medical_digital_table_teds",
+            "domain_medical_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Publishing",
+          "metric_keys": [
+            "domain_publishing_digital_overall",
+            "domain_publishing_digital_text_edit",
+            "domain_publishing_digital_formula_cdm",
+            "domain_publishing_digital_table_teds",
+            "domain_publishing_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Technical",
+          "metric_keys": [
+            "domain_technical_digital_overall",
+            "domain_technical_digital_text_edit",
+            "domain_technical_digital_formula_cdm",
+            "domain_technical_digital_table_teds",
+            "domain_technical_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Logistics",
+          "metric_keys": [
+            "domain_logistics_digital_overall",
+            "domain_logistics_digital_text_edit",
+            "domain_logistics_digital_formula_cdm",
+            "domain_logistics_digital_table_teds",
+            "domain_logistics_digital_reading_edit"
+          ]
+        },
+        {
+          "label": "Certificates",
+          "metric_keys": [
+            "domain_certificate_digital_overall",
+            "domain_certificate_digital_text_edit",
+            "domain_certificate_digital_formula_cdm",
+            "domain_certificate_digital_table_teds",
+            "domain_certificate_digital_reading_edit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "domains-real",
+      "label": "Real degradation · document domains",
+      "row_header": "Document domain",
+      "source_url": "https://github.com/zhihengli-casia/PureDocBench/blob/fdae62435871eb7ba058a804574ad1a9d2fd6cf1/results/category_components.csv",
+      "note": "Ten document domains × three matched tracks. These published category summaries do not replace the global track Overall or Avg₃.",
+      "columns": [
+        {
+          "id": "overall",
+          "label": "Overall",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "text_edit",
+          "label": "Text edit",
+          "unit": "ratio",
+          "direction": "lower"
+        },
+        {
+          "id": "formula_cdm",
+          "label": "Formula CDM",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "table_teds",
+          "label": "Table TEDS",
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "reading_edit",
+          "label": "Reading-order edit",
+          "unit": "ratio",
+          "direction": "lower"
+        }
+      ],
+      "rows": [
+        {
+          "label": "Academic",
+          "metric_keys": [
+            "domain_academic_real_overall",
+            "domain_academic_real_text_edit",
+            "domain_academic_real_formula_cdm",
+            "domain_academic_real_table_teds",
+            "domain_academic_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Education",
+          "metric_keys": [
+            "domain_education_real_overall",
+            "domain_education_real_text_edit",
+            "domain_education_real_formula_cdm",
+            "domain_education_real_table_teds",
+            "domain_education_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Legal / government",
+          "metric_keys": [
+            "domain_legal_gov_real_overall",
+            "domain_legal_gov_real_text_edit",
+            "domain_legal_gov_real_formula_cdm",
+            "domain_legal_gov_real_table_teds",
+            "domain_legal_gov_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Business",
+          "metric_keys": [
+            "domain_business_real_overall",
+            "domain_business_real_text_edit",
+            "domain_business_real_formula_cdm",
+            "domain_business_real_table_teds",
+            "domain_business_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Finance",
+          "metric_keys": [
+            "domain_finance_real_overall",
+            "domain_finance_real_text_edit",
+            "domain_finance_real_formula_cdm",
+            "domain_finance_real_table_teds",
+            "domain_finance_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Medical",
+          "metric_keys": [
+            "domain_medical_real_overall",
+            "domain_medical_real_text_edit",
+            "domain_medical_real_formula_cdm",
+            "domain_medical_real_table_teds",
+            "domain_medical_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Publishing",
+          "metric_keys": [
+            "domain_publishing_real_overall",
+            "domain_publishing_real_text_edit",
+            "domain_publishing_real_formula_cdm",
+            "domain_publishing_real_table_teds",
+            "domain_publishing_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Technical",
+          "metric_keys": [
+            "domain_technical_real_overall",
+            "domain_technical_real_text_edit",
+            "domain_technical_real_formula_cdm",
+            "domain_technical_real_table_teds",
+            "domain_technical_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Logistics",
+          "metric_keys": [
+            "domain_logistics_real_overall",
+            "domain_logistics_real_text_edit",
+            "domain_logistics_real_formula_cdm",
+            "domain_logistics_real_table_teds",
+            "domain_logistics_real_reading_edit"
+          ]
+        },
+        {
+          "label": "Certificates",
+          "metric_keys": [
+            "domain_certificate_real_overall",
+            "domain_certificate_real_text_edit",
+            "domain_certificate_real_formula_cdm",
+            "domain_certificate_real_table_teds",
+            "domain_certificate_real_reading_edit"
+          ]
+        }
+      ]
+    }
+  ]
 }

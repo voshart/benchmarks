@@ -89,7 +89,7 @@
   function renderHead(result) {
     return '<th scope="col">Model / configuration</th><th scope="col">Rank index</th>'
       + result.columns.map(test => `<th scope="col" title="${esc(test.note)}">${esc(test.short || test.label)} ↓</th>`).join('')
-      + '<th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">API / audio hour</th>';
+      + '<th scope="col" title="Reported model artifact size, not runtime RAM">Download (MB)</th><th scope="col" title="Reported parameter count in millions, not bytes">Parameters (M)</th><th scope="col">API USD / audio hour</th>';
   }
 
   function renderRows(result, data) {
@@ -117,9 +117,13 @@
           ...(observation.provisional_reasons || [])].filter(Boolean).join(' · ');
         return `<td class="score" style="--shade:${Math.max(0,Math.min(30,shade)).toFixed(1)}%">${link(data.sources[observation.source_id],observation.value.toFixed(2),tooltip)}${Rank.qualification(observation) ? '<sup title="Qualified evidence; see source and rank explanation">†</sup>' : ''}</td>`;
       }).join('');
+      const priceContext = (data.pricingContexts || []).find(record=>record.model===row.id);
+      const priceId = 'speech-price-'+row.id;
+      const priceDetails = row.priceInfo.record?.fx || priceContext?.fx
+        ? `<button type="button" class="rank-marker" popovertarget="${esc(priceId)}" title="USD prices and source tariffs" aria-label="Price details for ${esc(row.name)}">ⓘ</button><div id="${esc(priceId)}" class="rank-note" popover="auto" role="dialog" aria-labelledby="${esc(priceId)}-title"><button type="button" class="rank-note-close" popovertarget="${esc(priceId)}" popovertargetaction="hide" aria-label="Close price details" autofocus>×</button><strong id="${esc(priceId)}-title">${esc(row.name)} · USD prices</strong>${Speech.renderPriceDetails(row.id,data)}</div>` : '';
       return `<tr><th scope="row">${link(data.sources[row.model.source_id],row.name,modelNote)}</th><td class="index">${index}<small class="rank-coverage" title="${esc((row.rankContributions || []).map(item => item.label).join(', ') || 'No contributing core families')}">${row.coreCount}/${result.coreTotal} families</small></td>${cells}`
         + Speech.renderSizeCells(row.size, data)
-        + `<td class="price" title="${esc(row.priceInfo.note)}">${row.priceInfo.source_id ? link(data.sources[row.priceInfo.source_id],row.priceInfo.label) : esc(row.priceInfo.label)}</td></tr>`;
+        + `<td class="price" title="${esc(row.priceInfo.note)}">${row.priceInfo.source_id ? link(data.sources[row.priceInfo.source_id],row.priceInfo.label) : esc(row.priceInfo.label)}${priceDetails}</td></tr>`;
     }).join('');
   }
 

@@ -50,13 +50,14 @@ test('exact Hub deployment transfer requires matching revision when pinned',()=>
  assert.equal(Estimates.getDeployment(scenario(null),model,null),null);
 });
 
-test('new OCR author panels remain separate and INR context never becomes USD price',()=>{
+test('new OCR author panels remain separate and currency conversion preserves contextual tariff status',()=>{
  const rows=Rank.build(ocr,undefined,{min:0}).rows;
  for(const id of ['ovisocr3','indra-ocr-1-1'])assert.equal(rows.find(r=>r.id===id).rank,null,id);for(const id of ['logics-parsing-v3','sarvam-vision-2-1','bodhan-indic-ocr'])assert.equal(rows.find(r=>r.id===id).rankStatus,'provisional',id);
  for(const id of ['omnidoc-ovis3-reported','omniparse-indra-1-1','mpdoc-logics-v3']){const protocol=ocr.tests.find(x=>x.id===id);assert.equal(protocol.core,false);assert.equal(protocol.primary,false);}
  assert.equal(rows.find(r=>r.id==='sarvam-vision-2-1').scores.olmocr.value,87.3);
  assert.equal(rows.find(r=>r.id==='logics-parsing-v3').scores['omnidoc-v16'].value,95.58);
- assert.match(ocr.priceInfoByModel['sarvam-vision-2-1'].label,/₹500/);
+ assert.match(ocr.priceInfoByModel['sarvam-vision-2-1'].label,/≈\$5\.27†/);
+ assert.match(ocr.priceInfoByModel['sarvam-vision-2-1'].note,/Original tariff: INR 500/);
  assert.match(ocr.priceInfoByModel['falcon-ocr-arabic'].label,/Demo only/);
  assert.equal(ocr.pricingByModel['sarvam-vision-2-1'],undefined);
 });

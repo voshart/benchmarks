@@ -9,6 +9,7 @@
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const link = (source, label, title='') => source && /^https?:\/\//.test(source.url)
     ? `<a href="${esc(source.url)}" target="_blank" rel="noreferrer"${title ? ` title="${esc(title)}"` : ''}>${esc(label)}</a>` : esc(label);
+  const priceAmount = value => value.toLocaleString('en-US',{maximumFractionDigits:4});
   const evidenceLabel = record => !record ? 'No matched result' : ({official:'Maintainer publication', third_party:'Third-party run',
     community:'Community record', author_reported:'Author run', vendor_comparison:'Competitor run', secondary:'Quoted leaderboard row'})[record.evidence] || 'Qualified evidence';
 
@@ -77,8 +78,8 @@
 
   function priceInfo(data, model) {
     const selected = selectPrice(data, model.id);
-    if (selected) return {record:selected, label:(selected.currency === 'USD' ? '$' : selected.currency === 'EUR' ? '€' : selected.currency+' ')
-      + selected.amount.toFixed(3).replace(/0+$/,'').replace(/\.$/,'') + '†', source_id:selected.source_id,
+    if (selected) return {record:selected, label:selected.currency === 'USD' ? (selected.approximate ? '≈$' : '$')
+      + priceAmount(selected.amount) + '†' : '—', source_id:selected.source_id,
       note:[selected.provider,selected.mode,selected.tier,'as of '+selected.as_of,selected.note].join(' · ')};
     const context = (data.pricingContexts || []).find(record => record.model === model.id);
     if (context) return {label:context.label, note:context.note};
@@ -86,6 +87,14 @@
     if (tokens) return {label:'Token-priced†',source_id:tokens.source_id,note:'Current service token tariff; see Pricing. No audio-hour workload cost is inferred.'};
     return {label:model.access === 'open' ? 'Self-hosted' : '—', note:model.access === 'open'
       ? 'Compute cost depends on hardware and workload. Open weights do not imply zero processing cost.' : 'No matched hourly rate verified.'};
+  }
+
+  function renderPriceDetails(model, data) {
+    const fxSource = record => record.fx ? ' '+link({url:record.fx.source_url},record.fx.source_label+' FX · '+record.fx.as_of)+'.' : '';
+    const context = (data.pricingContexts || []).find(record => record.model === model);
+    return (context ? `<p><strong>Price &amp; access · checked ${esc(context.verified_on)}:</strong> ${esc(context.note)} ${context.source_urls.map((url,i)=>link({url},'Source '+(i+1))).join(' · ')}.${fxSource(context)}</p>` : '')
+      + (data.pricing || []).filter(record=>record.model===model).map(record=>`<p>${link(data.sources[record.source_id],(record.approximate ? '≈' : '')+'USD '+priceAmount(record.amount)+' / audio hour')} · ${esc(record.mode)} · ${esc(record.tier)} · ${esc(record.as_of)}. ${esc(record.note)}${fxSource(record)}</p>`).join('')
+      + (data.tokenPricing || []).filter(record=>record.model===model).map(record=>`<p>${link(data.sources[record.source_id],'Token pricing')}: USD per million input audio ${esc(record.input_audio_usd_per_million_tokens)}, input text ${esc(record.input_text_usd_per_million_tokens)}, output text ${esc(record.output_text_usd_per_million_tokens)} · ${esc(record.as_of)}. Not converted to a flat hourly rate.</p>`).join('');
   }
 
   // Keep the two quantities in separate columns; never substitute one for the other.
@@ -114,7 +123,7 @@
   function renderDecisionCells(row,data,result) {
     const speed=row.deployment?.speed,cost=row.deployment?.cost;
     const speedCell=speed ? link(data.sources[speed.records[0].source_id],(speed.proxy ? '≈' : '')+speedNumber(speed.low)+'–'+speedNumber(speed.high)+'×',result.speedNote)+`<small class="metric-kind">${speed.proxy ? 'est. Q8' : 'measured Q8'}</small>` : '—';
-    const priceCell=usdPrice(row) ? link(data.sources[row.price.source_id],(row.price.approximate ? '≈$' : '$')+row.price.amount.toLocaleString('en-US',{maximumFractionDigits:4}),[row.price.mode,row.price.tier,row.price.as_of,row.price.note].join(' · '))+'<small class="metric-kind">API'+(row.price.language ? ' · '+esc(row.price.language.toUpperCase()) : '')+'</small>' : cost ? `<span class="cost-range" title="Illustrative local compute at $${esc(cost.hourlyRate)}/device-hour and 100% utilization; not an API price"><span>≈$${dollars(cost.low)}–</span><wbr><span>$${dollars(cost.high)}</span></span><small class="metric-kind">est. local</small>` : row.model.access==='open' ? '<span title="No supported compute-cost estimate">Local —</span>' : row.price ? link(data.sources[row.price.source_id],(row.price.currency==='EUR' ? '€' : esc(row.price.currency)+' ')+number(row.price.amount),row.price.note)+'<small class="metric-kind">API / hr</small>' : row.priceContext?.hourly_estimate ? `<span title="${esc(row.priceContext.hourly_estimate.note)}">≈$${dollars(row.priceContext.hourly_estimate.usd)}</span><small class="metric-kind">token est.</small>` : row.priceContext ? `<span title="${esc(row.priceContext.note)}">${esc(row.priceContext.label)}</span>` : (data.tokenPricing || []).some(record=>record.model===row.id) ? 'Token rate' : 'Unverified';
+    const priceCell=usdPrice(row) ? link(data.sources[row.price.source_id],(row.price.approximate ? '≈$' : '$')+priceAmount(row.price.amount),[row.price.mode,row.price.tier,row.price.as_of,row.price.note].join(' · '))+'<small class="metric-kind">API'+(row.price.language ? ' · '+esc(row.price.language.toUpperCase()) : '')+'</small>' : cost ? `<span class="cost-range" title="Illustrative local compute at $${esc(cost.hourlyRate)}/device-hour and 100% utilization; not an API price"><span>≈$${dollars(cost.low)}–</span><wbr><span>$${dollars(cost.high)}</span></span><small class="metric-kind">est. local</small>` : row.model.access==='open' ? '<span title="No supported compute-cost estimate">Local —</span>' : row.priceContext?.hourly_estimate ? `<span title="${esc(row.priceContext.hourly_estimate.note)}">≈$${dollars(row.priceContext.hourly_estimate.usd)}</span><small class="metric-kind">token est.</small>` : row.priceContext ? `<span title="${esc(row.priceContext.note)}">${esc(row.priceContext.label)}</span>` : (data.tokenPricing || []).some(record=>record.model===row.id) ? 'Token rate' : 'Unverified';
     return `<td class="deployment-speed" title="${esc(result.speedNote)}">${speedCell}</td><td class="deployment-cost">${priceCell}</td>`;
   }
 
@@ -164,7 +173,7 @@
     const compactMetric=result.rankMetric || result.test.metrics.find(metric=>metric.id === (result.test.summary_metric || result.test.published_mean_metric));
     if(result.compact) {
       const header=(key,label,title='',narrow=label)=>`<th scope="col" aria-sort="${result.sort===key ? (result.sortDirection==='desc' ? 'descending' : 'ascending') : 'none'}"><button type="button" class="column-sort" data-sort-key="${key}" title="${esc(title || 'Sort by '+label)}"><span class="header-label-wide">${esc(label)}</span><span class="header-label-narrow">${esc(narrow)}</span>${result.sort===key ? (result.sortDirection==='desc' ? ' ↓' : ' ↑') : ' ↕'}</button></th>`;
-      return header('rank','Rank','Quality rank; unaffected by metadata sorting')+header('name','Model')+header('score',compactMetric?.unit==='oiwer_percent' ? 'OI-WER %' : 'Error %','Lower error is better')+header('speed',result.speedLabel,result.speedNote+' Sorts by the lower throughput in the span; higher is faster.',result.speedLabel.replace(' speed',''))+header('price','$/audio hr','USD API tariffs, vendor token-cost estimates, or estimated local compute. Non-USD rates and unknown/version-unverified prices stay last. Ranges sort by the higher cost (slower clip); not a confidence bound.','$/hr');
+      return header('rank','Rank','Quality rank; unaffected by metadata sorting')+header('name','Model')+header('score',compactMetric?.unit==='oiwer_percent' ? 'OI-WER %' : 'Error %','Lower error is better')+header('speed',result.speedLabel,result.speedNote+' Sorts by the lower throughput in the span; higher is faster.',result.speedLabel.replace(' speed',''))+header('price','$/audio hr','USD API tariffs, vendor token-cost estimates, or estimated local compute. Converted tariffs use the dated FX rate in Details; sorting uses unrounded USD. Unknown/version-unverified prices stay last. Ranges sort by the higher cost (slower clip); not a confidence bound.','$/hr');
     }
     return (result.compact ? '<th scope="col">Rank</th><th scope="col">Model</th><th scope="col">' : '<th scope="col">Model</th><th scope="col">Accuracy rank</th><th scope="col">')
       + (result.compact ? (compactMetric?.unit === 'oiwer_percent' ? 'OI-WER % ↓' : 'WER % ↓') : result.rankMetric ? esc(result.rankMetric.short)+' '+(result.rankMetric.unit === 'oiwer_percent' ? 'OI-WER' : 'WER')+' ↓' : result.test.summary_metric ? esc(result.test.metrics.find(metric => metric.id === result.test.summary_metric).short)+(result.test.metrics.find(metric => metric.id === result.test.summary_metric).unit === 'oiwer_percent' ? ' ↓' : ' WER ↓')
@@ -190,12 +199,10 @@
         + (source ? `<p>${link(source, source.title)}. ${esc(source.note)}</p>` : '')
         + `<p><strong>Size:</strong> ${finite(row.size?.download_mb) ? row.size.download_mb.toLocaleString('en-US',{maximumFractionDigits:0})+' MB download' : 'Download not reported'} · ${finite(row.size?.parameters_million) ? row.size.parameters_million.toLocaleString('en-US',{maximumFractionDigits:0})+' M parameters' : 'Parameters not reported'}. Metadata only, never accuracy weights.</p>`
         + deploymentDetails(row,data,result)
-        + (row.priceContext ? `<p><strong>Price &amp; access · checked ${esc(row.priceContext.verified_on)}:</strong> ${esc(row.priceContext.note)} ${row.priceContext.source_urls.map((url,i)=>link({url},'Source '+(i+1))).join(' · ')}</p>` : '')
         + ((data.throughput || []).some(record=>record.model===row.id) ? '<details><summary>All reported speed measurements</summary><ul>'+(data.throughput || []).filter(record=>record.model===row.id).map(record=>`<li>${link(data.sources[record.source_id],String(record.rtfx)+'× realtime')}: ${esc(record.hardware)} · ${esc(record.runtime)} · ${esc(record.test_id)} ${esc(record.sample || '')} · batch ${esc(record.batch_size)} · ${esc(record.note)}</li>`).join('')+'</ul></details>' : '')
         + ((data.latency || []).filter(record=>record.model===row.id).map(record=>`<p>Response latency: ${link(data.sources[record.source_id],record.milliseconds+' ms')} · ${esc(record.hardware)} · ${esc(record.statistic)}. ${esc(record.note)}</p>`).join(''))
         + `<p><strong>Cost:</strong> ${row.model.access==='open' ? 'Self-hosted compute cost depends on deployment; not zero.' : 'Rates depend on service, mode and tier; not a claim about the benchmark endpoint.'}</p>`
-        + (data.pricing || []).filter(record=>record.model===row.id).map(record=>`<p>${link(data.sources[record.source_id],record.currency+' '+record.amount+' / audio hour')} · ${esc(record.mode)} · ${esc(record.tier)} · ${esc(record.as_of)}. ${esc(record.note)}</p>`).join('')
-        + (data.tokenPricing || []).filter(record=>record.model===row.id).map(record=>`<p>${link(data.sources[record.source_id],'Token pricing')}: USD per million input audio ${esc(record.input_audio_usd_per_million_tokens)}, input text ${esc(record.input_text_usd_per_million_tokens)}, output text ${esc(record.output_text_usd_per_million_tokens)} · ${esc(record.as_of)}. Not converted to a flat hourly rate.</p>`).join('')
+        + renderPriceDetails(row.id,data)
         + (unscored ? availableBenchmark(row,result,data) : '')
         + (row.size ? [...new Set(Object.values(row.size.field_records || {size:row.size}).filter(Boolean))]
           .map(record => `<p>${link(data.sources[record.source_id], 'Size source')}: ${esc(record.note)}</p>`).join('') : '')
@@ -210,7 +217,7 @@
           record.note, alternatives.length ? 'Other observations: ' + alternatives.join('; ') : ''].filter(Boolean).join(' · ');
         return `<td class="score">${link(data.sources[record.source_id], record.value.toFixed(2), tooltip)}</td>`;
       }).join('');
-      const detailsButton=`<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">Details</button>`;
+      const detailsButton=`<button type="button" class="rank-marker speech-details" popovertarget="${esc(infoId)}" title="Evidence, prices and qualifications" aria-label="Evidence and qualifications for ${esc(row.name)}" aria-describedby="${esc(infoId)}">ⓘ</button>`;
       const memory=row.deployment?.memory;
       const memoryLine=memory ? `<small class="model-memory" title="FP16 weights-only floor, not total VRAM or RAM. Runtime requires additional memory; see Details.">FP16 weights ≈${number(memory.fp16_weights_gb)} GB + runtime</small>` : '';
       const modelCell=`<th scope="row">${link(data.sources[row.model.source_id], row.name, modelNote)}${result.compact ? `<div class="model-subline"><small class="model-vendor">${esc(row.model.organization)}</small>${detailsButton}</div>${memoryLine}${details}` : ''}</th>`;
@@ -233,5 +240,5 @@
   }
   function renderUnscored(result,data) {return renderRows(result,data,true);}
 
-  return {build, costSortValue, renderUnscored, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
+  return {build, costSortValue, renderUnscored, summarize, available, selectSize, renderSizeCells, selectPrice, priceInfo, renderPriceDetails, renderHead, renderRows, evidenceLabel, escape:esc, sourceLink:link};
 });

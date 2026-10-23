@@ -13,6 +13,36 @@
   "aggregate_eligible": true,
   "aggregate_priority": 113,
   "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required.",
-  "note": "",
+  "note": "OpenOCR's 20-page hard corpus is separate from full olmOCR-Bench and from its 11-image everyday test. Each popover retains the exact source, run scope and any backend/version limitations.",
+  "metric_labels": {
+    "quality": "Quality",
+    "ci95": "95% confidence interval ±",
+    "reported_uncertainty": "Reported uncertainty ±",
+    "degraded": "Old scans",
+    "math": "Scanned math",
+    "tables": "Tables",
+    "columns": "Multi-column",
+    "blank_page": "Blank-page score",
+    "blank_penalty": "Blank-page penalty (points)"
+  },
+  "metric_units": {
+    "quality": "percent",
+    "ci95": "percent",
+    "reported_uncertainty": "percent",
+    "degraded": "percent",
+    "math": "percent",
+    "tables": "percent",
+    "columns": "percent",
+    "blank_page": "percent"
+  },
+  "metric_directions": {
+    "quality": "higher",
+    "degraded": "higher",
+    "math": "higher",
+    "tables": "higher",
+    "columns": "higher",
+    "blank_page": "higher",
+    "blank_penalty": "lower"
+  },
   "aggregate_caveat": "Tiny evaluation corpus: OpenOCR uses only 20 pages; the comparative model count does not establish broad document coverage."
 }
