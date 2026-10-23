@@ -1442,6 +1442,6 @@
     "url": "https://www.inksight-app.com/handwriting-ocr-benchmark/results.json",
     "kind": "third_party",
     "verified_on": "2026-10-23",
-    "note": "133public pages/7equal-weight datasets; exclude inksight_* private groups, cap each normalized error at1 before averaging. Frozen source JSON sha256 fced75df8192adf8e673ae9c0be03cc3005ef4fa6c59d34e2b4a10e1a9556b9d"
+    "note": "133public pages/7equal-weight datasets; exclude inksight_* private groups, cap each normalized error at1 before averaging. Fetched data reserialized with Python json.dumps defaults, sha256 fced75df8192adf8e673ae9c0be03cc3005ef4fa6c59d34e2b4a10e1a9556b9d"
   }
 }
