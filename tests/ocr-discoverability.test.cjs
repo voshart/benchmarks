@@ -82,3 +82,34 @@ test('every recorded score can receive a benchmark-specific rank, stable through
  const g=all.rows.find(r=>r.id==='gemini-3-8-flash');const gh=OCR.renderRows({...all,rows:[g]},data);
  assert.match(gh,/>2<small>of 10<\/small>/);assert.match(gh,/OP Datalab: 92.9%/);
 });
+
+test('every current model and selected observation is visible and rankable without Details',()=>{
+ const data=loadOCR(),all=build(data);
+ for(const row of all.rows){
+  const html=OCR.renderRows({...all,rows:[row]},data);
+  const cells=[...html.matchAll(/<td class="score"[^>]*>([\s\S]*?)<\/td>/g)].map(m=>m[1]);
+  assert.equal(cells.length,all.columns.length,row.id);
+  const inline=html.split('<div class="ocr-inline-scores"')[1]?.split('<button')[0]||'';
+  for(const [i,t] of all.columns.entries()){
+   const score=row.scores[t.id];
+   if(score?.value==null){assert.equal(cells[i],'—',row.id+' '+t.id);continue;}
+   const formatted=t.unit==='ratio'?score.value.toFixed(3):score.value.toFixed(1);
+   assert.ok(cells[i].includes('>'+formatted+'</a>')||cells[i].includes(formatted),row.id+' cell '+t.id);
+   assert.ok(inline.includes(formatted),row.id+' mobile '+t.id);
+   assert.ok(all.benchmarkRanks[t.id].ranks[row.id]>0,row.id+' rank '+t.id);
+   const selected=OCR.renderRows({...all,rows:[row]},data,{rankBenchmark:t.id,sortKey:t.id});
+   const rankCell=selected.match(/<td class="index">([\s\S]*?)<\/td>/)[1];
+   assert.ok(rankCell.includes('>'+all.benchmarkRanks[t.id].ranks[row.id]+'<small>'),row.id+' selected rank '+t.id);
+  }
+ }
+});
+
+test('superseded scored versions remain visible and rankable at their release cutoff',()=>{
+ const data=loadOCR(),current=build(data),ids=new Set(current.rows.map(r=>r.id));
+ for(const model of data.models.filter(m=>!ids.has(m.id)&&m.release_date)){
+  const historical=build(data,model.release_date),row=historical.rows.find(r=>r.id===model.id);
+  assert.ok(row,model.id);
+  const html=OCR.renderRows({...historical,rows:[row]},data);
+  for(const t of historical.columns){const o=row.scores[t.id];if(o?.value==null)continue;assert.ok(historical.benchmarkRanks[t.id].ranks[row.id]);assert.ok(html.includes(t.unit==='ratio'?o.value.toFixed(3):o.value.toFixed(1)));}
+ }
+});
