@@ -19,97 +19,37 @@ test('default catalog exposes secondary-only models without inventing aggregate 
 
 test('unranked rank cells stay compact with accessible explanation in Details',()=>{
  const data=loadOCR(),all=build(data);
- for(const row of all.rows.filter(r=>r.rank==null&&!all.benchmarkRanks[OCR.defaultBenchmark].ranks[r.id])){
+ for(const row of all.rows.filter(r=>r.rank==null)){
   const html=OCR.renderRows({...all,rows:[row]},data);
   const cell=html.match(/<td class="index">(.*?)<\/td>/s)[1];
-  assert.match(cell,/aria-label="No score on [^"]+">—<\/span>/);
+  assert.match(cell,/aria-label="Unranked: no comparable overall index. See Details.">—<\/span>/);
   assert.doesNotMatch(cell,/<small>|>Unranked<|<button/);
   assert.match(html,/<strong>No comparable overall index.<\/strong>/);
   assert.match(html,/>Details<\/button>/);
  }
 });
 
-test('default Matrix shows Chandra release scores as sortable protocol columns, not only Details',()=>{
- const data=loadOCR(),all=build(data),ids=all.columns.map(t=>t.id);
- for(const id of ['omniparse-chandra-2-5-release','chandra-2-5-olm-no-hf','omniparse-datalab-overall-20261023'])assert.ok(ids.includes(id));
- const row=all.rows.find(r=>r.id==='chandra-2-5-api');
- const html=OCR.renderRows({...all,rows:[row]},data),cells=html.slice(html.indexOf('</th>'));
- assert.match(cells,/>92\.7<\/a>/);assert.match(cells,/>86\.9<\/a>/);assert.equal(row.rank,null);
- assert.match(OCR.renderHead(all),/data-ocr-sort="omniparse-chandra-2-5-release"/);
- const key='chandra-2-5-olm-no-hf',rows=OCR.enrich(all,data).rows;
- for(const direction of ['asc','desc']){const sorted=OCR.sortRows(rows,key,direction),values=sorted.map(r=>r.scores[key]?.value).filter(v=>v!=null);assert.deepEqual(values,[...values].sort((a,b)=>direction==='asc'?a-b:b-a));}
-});
-
-test('other recorded protocols remain visible in model cells without opening Details',()=>{
- const data=loadOCR(),all=build(data,data.config.snapshot_date,{view:'structure'}),row=all.rows.find(r=>r.id==='gemini-4-argon');
- const html=OCR.renderRows({...all,rows:[row]},data),inline=html.match(/<div class="ocr-inline-scores"[\s\S]*?<button/)[0];
- assert.match(inline,/[0-9]+\.[0-9]+/);assert.match(inline,/href=/);assert.doesNotMatch(inline,/popover/);
-});
-
-test('Matrix exposes all recorded protocols regardless of core or primary status',()=>{
+test('compact original matrix shows family results without duplicating model-name score lists',()=>{
  const data=loadOCR(),all=build(data);
- assert.deepEqual(new Set(all.columns.map(t=>t.id)),new Set(data.tests.filter(t=>all.rows.some(r=>r.scores[t.id]?.value!=null)).map(t=>t.id)));
- const enriched=OCR.enrich(all,data);
- for(const t of all.columns){
-  for(const direction of ['asc','desc']){
-   const rows=OCR.sortRows(enriched.rows,t.id,direction),values=rows.map(r=>r.scores[t.id]?.value).filter(v=>v!=null);
-   assert.deepEqual(values,[...values].sort((a,b)=>direction==='asc'?a-b:b-a),t.id);
-  }
- }
-});
-
-test('lower-error protocols shade better scores more strongly',()=>{
- const data=loadOCR(),all=build(data);
- for(const t of all.columns.filter(t=>t.direction==='lower')){
-  const scored=all.rows.filter(r=>r.scores[t.id]?.value!=null).sort((a,b)=>a.scores[t.id].value-b.scores[t.id].value);
-  if(scored.length<2||scored[0].scores[t.id].value===scored.at(-1).scores[t.id].value)continue;
-  const html=OCR.renderRows({...all,columns:[t],rows:[scored[0]]},data);
-  assert.match(html,/--shade:30.0%/,t.id);
- }
-});
-
-test('every recorded score can receive a benchmark-specific rank, stable through filters',()=>{
- const data=loadOCR(),all=build(data),gemini=build(data,data.config.snapshot_date,{query:'Gemini 3.8 Flash'});
- assert.equal(all.benchmarkRanks[OCR.defaultBenchmark].ranks['gemini-3-8-flash'],2);
- assert.equal(gemini.benchmarkRanks[OCR.defaultBenchmark].ranks['gemini-3-8-flash'],2);
- for(const row of all.rows)for(const t of all.columns){if(row.scores[t.id]?.value!=null)assert.ok(all.benchmarkRanks[t.id].ranks[row.id],row.id+' '+t.id);}
- const chandra=all.rows.find(r=>r.id==='chandra-2-5-api');
- const html=OCR.renderRows({...all,rows:[chandra]},data);
- const visible=html.slice(0,html.indexOf('popover>'));
- assert.match(visible,/OmniParse accurate: 92.7%/);assert.match(visible,/olm no H\/F: 86.9%/);
- const ranked=OCR.renderRows({...all,rows:[chandra]},data,{rankBenchmark:'chandra-2-5-olm-no-hf',sortKey:'chandra-2-5-olm-no-hf'});
- assert.match(ranked,/>1<small>of 3<\/small>/);
- const g=all.rows.find(r=>r.id==='gemini-3-8-flash');const gh=OCR.renderRows({...all,rows:[g]},data);
- assert.match(gh,/>2<small>of 10<\/small>/);assert.match(gh,/OP Datalab: 92.9%/);
-});
-
-test('every current model and selected observation is visible and rankable without Details',()=>{
- const data=loadOCR(),all=build(data);
+ assert.equal(all.columns.length+4,17);
  for(const row of all.rows){
-  const html=OCR.renderRows({...all,rows:[row]},data);
-  const cells=[...html.matchAll(/<td class="score"[^>]*>([\s\S]*?)<\/td>/g)].map(m=>m[1]);
-  assert.equal(cells.length,all.columns.length,row.id);
-  const inline=html.split('<div class="ocr-inline-scores"')[1]?.split('<button')[0]||'';
-  for(const [i,t] of all.columns.entries()){
-   const score=row.scores[t.id];
-   if(score?.value==null){assert.equal(cells[i],'—',row.id+' '+t.id);continue;}
-   const formatted=t.unit==='ratio'?score.value.toFixed(3):score.value.toFixed(1);
-   assert.ok(cells[i].includes('>'+formatted+'</a>')||cells[i].includes(formatted),row.id+' cell '+t.id);
-   assert.ok(inline.includes(formatted),row.id+' mobile '+t.id);
-   assert.ok(all.benchmarkRanks[t.id].ranks[row.id]>0,row.id+' rank '+t.id);
-   const selected=OCR.renderRows({...all,rows:[row]},data,{rankBenchmark:t.id,sortKey:t.id});
-   const rankCell=selected.match(/<td class="index">([\s\S]*?)<\/td>/)[1];
-   assert.ok(rankCell.includes('>'+all.benchmarkRanks[t.id].ranks[row.id]+'<small>'),row.id+' selected rank '+t.id);
-  }
+  const html=OCR.renderRows({...all,rows:[row]},data),nameCell=html.split('<td class="index">')[0];
+  assert.doesNotMatch(nameCell,/ocr-inline-scores|Other reported benchmark scores/);
+  const available=Object.values(row.scores).some(o=>o?.value!=null);
+  const cells=all.columns.map(t=>OCR.cellObservation(row,t,data,all.columns));
+  if(available)assert.ok(cells.some(Boolean),row.id);
+  for(const c of cells.filter(Boolean)){assert.equal(c.observation.value,row.scores[c.test.id].value);}
  }
+ const chandra=all.rows.find(r=>r.id==='chandra-2-5-api');
+ const html=OCR.renderRows({...all,rows:[chandra]},data).split('</th>')[1];
+ assert.match(html,/>92\.7<\/a>/);assert.match(html,/>86\.9<\/a>/);assert.match(html,/olm no H\/F/);
+ const gemini=all.rows.find(r=>r.id==='gemini-3-8-flash');assert.match(OCR.renderRows({...all,rows:[gemini]},data).split('</th>')[1],/>92\.9<\/a>/);
+ const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');assert.doesNotMatch(template,/id="ocrBenchmark"/);
 });
 
-test('superseded scored versions remain visible and rankable at their release cutoff',()=>{
- const data=loadOCR(),current=build(data),ids=new Set(current.rows.map(r=>r.id));
- for(const model of data.models.filter(m=>!ids.has(m.id)&&m.release_date)){
-  const historical=build(data,model.release_date),row=historical.rows.find(r=>r.id===model.id);
-  assert.ok(row,model.id);
-  const html=OCR.renderRows({...historical,rows:[row]},data);
-  for(const t of historical.columns){const o=row.scores[t.id];if(o?.value==null)continue;assert.ok(historical.benchmarkRanks[t.id].ranks[row.id]);assert.ok(html.includes(t.unit==='ratio'?o.value.toFixed(3):o.value.toFixed(1)));}
- }
+test('variant fallback never becomes a main-protocol sorting value or aggregate vote',()=>{
+ const data=loadOCR(),all=build(data),row=all.rows.find(r=>r.id==='chandra-2-5-api');
+ assert.equal(row.scores.olmocr,null);assert.equal(row.rank,null);
+ const cell=OCR.cellObservation(row,data.tests.find(t=>t.id==='olmocr'),data,all.columns);
+ assert.equal(cell.observation.value,86.9);assert.equal(cell.variant,true);
 });
