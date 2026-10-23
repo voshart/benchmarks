@@ -40,7 +40,7 @@ test('all current models use unique family contributions; Chandra and Gemini rec
  for(const row of r.rows){assert.equal(new Set(row.rankContributions.map(c=>c.family)).size,row.rankContributions.length);for(const c of row.rankContributions){assert.ok(c.cohortSize>=2);assert.ok(c.percentile>0&&c.percentile<100);}}
  const c=r.rows.find(x=>x.id==='chandra-2-5-api'),g=r.rows.find(x=>x.id==='gemini-3-8-flash');
  assert.ok(Math.abs(c.rank-83.33333333333333)<1e-10);assert.equal(c.rankStatus,'provisional');assert.deepEqual(c.rankContributions.map(x=>x.benchmark),['chandra-2-5-olm-no-hf']);
- assert.equal(g.rank,85);assert.equal(g.rankStatus,'provisional');assert.deepEqual(g.rankContributions.map(x=>x.benchmark),['omniparse-datalab-overall-20261023']);
+ assert.equal(g.rank,60);assert.equal(g.rankStatus,'provisional');assert.deepEqual(g.rankContributions.map(x=>x.benchmark),['omniparse-datalab-overall-20261023','parsebench-published-9af4102']);
  assert.ok(!r.rows.some(x=>x.rankContributions.some(c=>c.benchmark==='omniparse-chandra-2-5-release')));
  for(const row of r.rows.filter(x=>x.rankContributions.some(c=>c.benchmark==='openocr-hard')))assert.match(row.rankExplanation,/20 pages/);
 });

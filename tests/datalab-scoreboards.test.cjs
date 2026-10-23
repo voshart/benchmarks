@@ -13,7 +13,7 @@ test('all33 Datalab scoreboard observations are represented with exact protocol 
 test('Datalab current service and provider-run aliases do not inherit unverified generations or measurements',()=>{
  const rows=build(data).rows;
  for(const id of ['datalab-accurate-20261020','datalab-balanced-omniparse-20261008','gemini-3-8-flash','reducto-omniparse-20261008','llamaparse-omniparse-20261008','mistral-ocr-omniparse-20261008','extend-omniparse-20261008','azure-content-understanding-omniparse-20261008']){
-  const row=rows.find(r=>r.id===id);assert.ok(row,id);assert.ok(Number.isFinite(row.rank));assert.equal(row.coreCount,1);assert.equal(row.rankStatus,'provisional');assert.equal(data.models.find(m=>m.id===id).release_date,null);
+  const row=rows.find(r=>r.id===id);assert.ok(row,id);assert.ok(Number.isFinite(row.rank));assert.equal(row.coreCount,id==='gemini-3-8-flash'?2:1);assert.equal(row.rankStatus,'provisional');assert.equal(data.models.find(m=>m.id===id).release_date,null);
  }
  assert.equal(data.resultsByKey['chandra-2-5-api|omniparse-chandra-2-5-release'][0].metrics.accurate,92.7);
  assert.equal(data.resultsByKey['datalab-accurate-20261020|omniparse-datalab-overall-20261023'][0].value,93.5);

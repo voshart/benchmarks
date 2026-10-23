@@ -4859,9 +4859,9 @@
     ],
     "release_date": null,
     "release_provenance": "unknown",
-    "source_id": "datalab-scoreboard-overall-20261023",
-    "configuration": "Exact named hosted model in Datalab report; execution settings not independently pinned. Used in creating/verifying some tests.",
-    "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+    "source_id": "google-gemini38-model",
+    "configuration": "Stable Google API model gemini-3.8-flash. Individual benchmark effort and run settings remain source-specific.",
+    "evidence_note": "Official model identity verified. Datalab competitor-reported document parsing and Roboflow third-party image OCR are separate protocols; no generation aliases or transferred scores."
   },
   {
     "id": "reducto-omniparse-20261008",

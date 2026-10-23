@@ -167,7 +167,7 @@ test('throughput retains workload, runtime and batch distinctions and never supp
 test('new speech identities remain outside OCR cohorts and unknown release dates remain null', () => {
   const ocr = loadOCR();
   assert.equal(ocr.models.length, 205);
-  assert.equal(ocr.records.length, 545);
+  assert.equal(ocr.records.length, 548);
   assert.equal(ocr.models.some(model => model.topics?.includes('stt')), false);
   assert.equal(BenchmarkRank.build(ocr, ocr.config.snapshot_date, {min:0}).rows.some(row => row.id === 'phonon-2'), false);
   assert.equal(data.models.find(model => model.id === 'phonon-2').release_date, '2026-09-29');
