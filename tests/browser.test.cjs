@@ -24,7 +24,7 @@ test('browser renders updated snapshot dates, source links, contextual prices an
   assert.match(element('matrixBody').innerHTML, /https:\/\/app\.datalab\.to\/pricing/);
   buttons.find(b => b.dataset.view==='new').handlers.click();
   assert.match(element('matrixBody').innerHTML, /Xiaomi-OCR-0/);
-  assert.match(element('matrixBody').innerHTML, /popovertarget="rank-note-xiaomi-ocr-0"/);
+  assert.match(element('matrixBody').innerHTML, /popovertarget="ocr-details-xiaomi-ocr-0"/);
   assert.match(element('matrixBody').innerHTML, /Limited coverage/);
   assert.match(element('matrixBody').innerHTML, /author-reported/);
   assert.match(element('matrixBody').innerHTML, /arxiv\.org\/html\/2609\.36136/);
@@ -46,7 +46,7 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
  const ids=()=>[...element('matrixBody').innerHTML.matchAll(/<tr data-model="([^"]+)"/g)].map(m=>m[1]);
  const result=BenchmarkRank.build(data,data.config.snapshot_date,{min:data.config.default_families,access:'all',query:'',view:'all'});
  const expected=OCRComparison.enrich(result,data);const original=ids();assert.equal(data.config.default_families,0);assert.ok(original.includes('chandra-2-5-api'));assert.ok(original.includes('gemini-4-argon'));
- for(const key of ['model','speed','price',...result.columns.map(c=>c.id),'rank']){
+ for(const key of ['model','speed','price',...result.columns.map(c=>c.id)]){
   const direction=OCRComparison.defaultDirection(key,result);
   element('matrixHead').handlers.click({target:{closest:()=>({dataset:{ocrSort:key}})}});
   assert.deepEqual(ids(),OCRComparison.sortRows(expected.rows,key,direction).map(r=>r.id));

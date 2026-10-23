@@ -73,7 +73,7 @@ test('OCR speed details retain input, configuration and concurrency, with access
  const data=loadOCR(),result=build(data,data.config.snapshot_date,{min:0});const sample=result.rows[0];
  const scoped={...data,throughput:[speed({model:sample.id,source_id:Object.keys(data.sources)[0],input_type:'PDF raster',configuration:'layout <strict>',concurrency:512,pipeline:'vLLM',dataset:'512 pages',hardware_short:'H100'})]};
  const html=OCR.renderRows({...result,rows:[sample]},scoped);assert.match(html,/input: PDF raster/);assert.match(html,/configuration: layout &lt;strict&gt;/);assert.match(html,/concurrency: 512/);
- const head=OCR.renderHead(result,{sortKey:'speed',sortDirection:'desc'});assert.match(head,/aria-sort="descending"/);assert.match(head,/<button type="button" class="column-sort" data-ocr-sort="speed"/);assert.match(head,/Quality only; speed and cost never affect this index/);
+ const head=OCR.renderHead(result,{sortKey:'speed',sortDirection:'desc'});assert.match(head,/aria-sort="descending"/);assert.match(head,/<button type="button" class="column-sort" data-ocr-sort="speed"/);assert.match(head,/ties share rank; full current cohort before filters/);
 });
 
 test('OCR throughput validation rejects source/identity/unit/eligibility mistakes',()=>{

@@ -19,10 +19,10 @@ test('default catalog exposes secondary-only models without inventing aggregate 
 
 test('unranked rank cells stay compact with accessible explanation in Details',()=>{
  const data=loadOCR(),all=build(data);
- for(const row of all.rows.filter(r=>r.rank==null)){
+ for(const row of all.rows.filter(r=>r.rank==null&&!all.benchmarkRanks[OCR.defaultBenchmark].ranks[r.id])){
   const html=OCR.renderRows({...all,rows:[row]},data);
   const cell=html.match(/<td class="index">(.*?)<\/td>/s)[1];
-  assert.match(cell,/aria-label="Unranked: no comparable overall index. See Details.">—<\/span>/);
+  assert.match(cell,/aria-label="No score on [^"]+">—<\/span>/);
   assert.doesNotMatch(cell,/<small>|>Unranked<|<button/);
   assert.match(html,/<strong>No comparable overall index.<\/strong>/);
   assert.match(html,/>Details<\/button>/);
@@ -56,4 +56,29 @@ test('Matrix exposes all recorded protocols regardless of core or primary status
    assert.deepEqual(values,[...values].sort((a,b)=>direction==='asc'?a-b:b-a),t.id);
   }
  }
+});
+
+test('lower-error protocols shade better scores more strongly',()=>{
+ const data=loadOCR(),all=build(data);
+ for(const t of all.columns.filter(t=>t.direction==='lower')){
+  const scored=all.rows.filter(r=>r.scores[t.id]?.value!=null).sort((a,b)=>a.scores[t.id].value-b.scores[t.id].value);
+  if(scored.length<2||scored[0].scores[t.id].value===scored.at(-1).scores[t.id].value)continue;
+  const html=OCR.renderRows({...all,columns:[t],rows:[scored[0]]},data);
+  assert.match(html,/--shade:30.0%/,t.id);
+ }
+});
+
+test('every recorded score can receive a benchmark-specific rank, stable through filters',()=>{
+ const data=loadOCR(),all=build(data),gemini=build(data,data.config.snapshot_date,{query:'Gemini 3.8 Flash'});
+ assert.equal(all.benchmarkRanks[OCR.defaultBenchmark].ranks['gemini-3-8-flash'],2);
+ assert.equal(gemini.benchmarkRanks[OCR.defaultBenchmark].ranks['gemini-3-8-flash'],2);
+ for(const row of all.rows)for(const t of all.columns){if(row.scores[t.id]?.value!=null)assert.ok(all.benchmarkRanks[t.id].ranks[row.id],row.id+' '+t.id);}
+ const chandra=all.rows.find(r=>r.id==='chandra-2-5-api');
+ const html=OCR.renderRows({...all,rows:[chandra]},data);
+ const visible=html.slice(0,html.indexOf('popover>'));
+ assert.match(visible,/OmniParse accurate: 92.7%/);assert.match(visible,/olm no H\/F: 86.9%/);
+ const ranked=OCR.renderRows({...all,rows:[chandra]},data,{rankBenchmark:'chandra-2-5-olm-no-hf',sortKey:'chandra-2-5-olm-no-hf'});
+ assert.match(ranked,/>1<small>of 3<\/small>/);
+ const g=all.rows.find(r=>r.id==='gemini-3-8-flash');const gh=OCR.renderRows({...all,rows:[g]},data);
+ assert.match(gh,/>2<small>of 10<\/small>/);assert.match(gh,/OP Datalab: 92.9%/);
 });

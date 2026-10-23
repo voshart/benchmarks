@@ -129,7 +129,12 @@
       return [test.id,values.length ? [Math.min(...values),Math.max(...values)] : [null,null]];
     }));
     const columns = view === 'all' ? show.filter(test=>rows.some(row=>valid(row.scores[test.id]?.value))).sort((a,b)=>(a.matrix_order??100)-(b.matrix_order??100)||rows.filter(r=>valid(r.scores[b.id]?.value)).length-rows.filter(r=>valid(r.scores[a.id]?.value)).length) : show;
-    return {rows,columns,ranges,matureCount:eligible.length,coreTotal:new Set(core.map(test=>test.family)).size};
+    const benchmarkRanks=Object.fromEntries(data.tests.map(test=>{
+      const values=models.map(model=>({id:model.id,obs:choose(data,model.id,test.id)})).filter(x=>observed(x.obs)).sort((a,b)=>test.direction==='lower'?a.obs.value-b.obs.value:b.obs.value-a.obs.value);
+      let rank=0,previous;
+      return [test.id,{total:values.length,ranks:Object.fromEntries(values.map((x,i)=>{if(i===0||x.obs.value!==previous)rank=i+1;previous=x.obs.value;return [x.id,rank];}))}];
+    }));
+    return {rows,columns,ranges,benchmarkRanks,matureCount:eligible.length,coreTotal:new Set(core.map(test=>test.family)).size};
   }
   return {build,scored,maturity,pctRanks,choose,latestByLine,rankable,qualification};
 });
