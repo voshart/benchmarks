@@ -11,7 +11,7 @@
  const assumptions=()=>{const ids={hourlyRate:'ocrHourlyRate',inputTokens:'ocrInputTokens',outputTokens:'ocrOutputTokens'};const raw=Object.fromEntries(Object.entries(ids).map(([k,id])=>[k,Number($(id).value)]));const normalized=OCRComparison.assumptions(raw);for(const [k,id] of Object.entries(ids))if($(id).value!==''&&raw[k]!==normalized[k])$(id).value=normalized[k];return normalized;};
  let currentResult=null;
  function render(){if(!data)return;const date=dayIso(Number(UI.range.value));const result=BenchmarkRank.build(data,date,{min:UI.coverage.value,access:UI.access.value,query:UI.search.value,view});
-  if(!['model','rank','speed','price'].includes(sortKey)&&!result.columns.some(t=>t.id===sortKey)){sortKey=rankBenchmark;sortDirection='desc';}
+  if(!['model','rank','speed','price'].includes(sortKey)&&sortKey!==rankBenchmark&&!result.columns.some(t=>t.id===sortKey)){sortKey=rankBenchmark;sortDirection=OCRComparison.defaultDirection(rankBenchmark,{columns:data.tests});}
   const selected=data.tests.find(t=>t.id===rankBenchmark);
   if(selected&&!result.columns.some(t=>t.id===rankBenchmark))result.columns.unshift(selected);
   result.columns.sort((a,b)=>(a.id===rankBenchmark?-1:b.id===rankBenchmark?1:0));

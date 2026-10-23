@@ -54,6 +54,10 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
   element('matrixHead').handlers.click({target:{closest:()=>({dataset:{ocrSort:key}})}});
   assert.deepEqual(ids(),OCRComparison.sortRows(expected.rows,key,direction==='asc'?'desc':'asc').map(r=>r.id));
  }
+ element('ocrBenchmark').value='omnidoc-notes-nemotron';element('ocrBenchmark').handlers.change();
+ element('modelSearch').value='no-such-model';element('modelSearch').handlers.input();await new Promise(resolve=>setTimeout(resolve,130));
+ element('modelSearch').value='';element('modelSearch').handlers.input();await new Promise(resolve=>setTimeout(resolve,130));
+ assert.match(element('matrixHead').innerHTML,/aria-sort="ascending"[^]*?data-ocr-sort="omnidoc-notes-nemotron"/);
  element('ocrInputTokens').value='300000';element('ocrInputTokens').handlers.input();assert.equal(element('ocrInputTokens').value,200000);
  element('ocrHourlyRate').value='2';element('ocrHourlyRate').handlers.input();assert.match(element('matrixBody').innerHTML,/\$2\.00\/complete H10080GB setup-hour/);
  element('coverage').value='2';element('coverage').handlers.change();assert.ok(ids().length<original.length);
