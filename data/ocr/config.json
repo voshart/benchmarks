@@ -10,5 +10,20 @@
   "path": "/ocr/",
   "min_core_for_provisional": 1,
   "rank_policy_version": 3,
-  "reported_index": true
+  "reported_index": true,
+  "column_family_order": [
+    "omnidoc",
+    "olmocr",
+    "mdp",
+    "puredoc",
+    "more",
+    "drdoc",
+    "reported-other",
+    "real5",
+    "wild",
+    "omniparse",
+    "docparsing",
+    "idp",
+    "ndi"
+  ]
 }

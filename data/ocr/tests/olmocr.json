@@ -1,6 +1,6 @@
 {
   "id": "olmocr",
-  "short": "olm",
+  "short": "olmOCR",
   "label": "olmOCR",
   "source": "olm-mixed",
   "primary_metric": "overall",

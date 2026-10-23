@@ -83,8 +83,17 @@
     const ids = groups[view];
     const show = data.tests.filter(test => view === 'secondary' ? !data.primaryTests.some(p => p.id === test.id)
       : view === 'all' ? data.primaryTests.some(p => p.id === test.id) : ids ? ids.includes(test.id) : test.family === view);
-    if(view==='all'&&data.tests.some(t=>t.id==='omniparse-datalab-overall-20261023'))show.unshift(data.tests.find(t=>t.id==='omniparse-datalab-overall-20261023'));
+    const familyOrder = data.config.column_family_order;
+    if(view==='all'&&data.tests.some(t=>t.id==='omniparse-datalab-overall-20261023')){
+      const extra = data.tests.find(t=>t.id==='omniparse-datalab-overall-20261023');
+      if(Array.isArray(familyOrder))show.push(extra);else show.unshift(extra);
+    }
     if(view==='all'&&data.config.path==='/ocr/')show.push({id:'reported-other',short:'Other',label:'Other reported benchmark; exact protocol labeled',family:'reported-other'});
+    // Presentation only: preserve protocol selection and all ranking priorities.
+    if(Array.isArray(familyOrder)){
+      const positions = new Map(familyOrder.map((family,index)=>[family,index]));
+      show.sort((a,b)=>(positions.get(a.family)??familyOrder.length)-(positions.get(b.family)??familyOrder.length));
+    }
     const fullMinimum = data.config.min_core_for_rank;
     const provisionalMinimum = data.config.min_core_for_provisional ?? 2;
     const rows = models.map(model => {

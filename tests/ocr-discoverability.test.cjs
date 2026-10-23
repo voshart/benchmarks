@@ -77,7 +77,7 @@ test('default family cells expose every recorded protocol once outside model det
  }
  assert.equal(JSON.stringify(all),before,'rendering does not alter ranking inputs or selected values');
  const datalab=all.rows.find(r=>r.id==='datalab-accurate-20261020');
- assert.equal(OCR.cellObservations(datalab,all.columns[0],data,all.columns).length,3,'overall and both tag slice headlines stay visible together');
+ assert.equal(OCR.cellObservations(datalab,all.columns.find(t=>t.id==='omniparse-datalab-overall-20261023'),data,all.columns).length,3,'overall and both tag slice headlines stay visible together');
  const gemini=all.rows.find(r=>r.id==='gemini-3-pro-preview'),column=all.columns.find(t=>t.id==='mdp-private');
  assert.ok(OCR.cellObservations(gemini,column,data,all.columns).some(c=>c.test.id==='mdp-public'),'public split is visible beside private');
 });
@@ -164,4 +164,29 @@ test('numeric columns omit repeated words and retain prices under changed assump
  assert.match(cells,/<td class="ocr-speed"[^>]*>—<\/td>/,'unknown hosted reference speed uses an em dash');
  assert.match(cells,/aria-label="Context-only result; excluded from ranking"[^>]*>‡<\/sup>/);
  assert.match(html,/Context only · not comparable for ranking/,'qualification remains accessible in the popover');
+});
+
+
+test('configured family order changes only column presentation across views',()=>{
+ const data=loadOCR(),legacy={...data,config:{...data.config}};
+ delete legacy.config.column_family_order;
+ const inputs=JSON.stringify([data.tests,data.primaryTests,data.rawRecords]),order=data.config.column_family_order;
+ const cellProtocols=(result,source)=>result.rows.map(row=>[row.id,result.columns.slice().sort((a,b)=>a.id.localeCompare(b.id)).map(column=>[column.id,OCR.cellObservations(row,column,source,result.columns).map(cell=>[cell.test.id,cell.observation,cell.variant])])]);
+ for(const view of ['all','structure','robust','multilingual','production','secondary','new','recognition','understanding']){
+  const before=build(legacy,legacy.config.snapshot_date,{view}),after=build(data,data.config.snapshot_date,{view});
+  assert.deepEqual(after.rows,before.rows,view+' preserves row order, ranks, selected scores and qualifications');
+  assert.deepEqual(after.ranges,before.ranges,view+' preserves score scales');
+  assert.deepEqual(after.columns.map(t=>t.id).sort(),before.columns.map(t=>t.id).sort(),view+' preserves column membership');
+  assert.deepEqual(cellProtocols(after,data),cellProtocols(before,legacy),view+' preserves per-cell protocol variants and values');
+  const listed=after.columns.filter(t=>order.includes(t.family)),unknown=after.columns.filter(t=>!order.includes(t.family));
+  assert.deepEqual(after.columns,[...listed,...unknown],view+' puts unlisted families after configured ones');
+  assert.deepEqual(listed.map(t=>order.indexOf(t.family)),listed.map(t=>order.indexOf(t.family)).sort((a,b)=>a-b),view+' follows configured family order');
+  assert.deepEqual(unknown.map(t=>t.id),before.columns.filter(t=>!order.includes(t.family)).map(t=>t.id),view+' retains unlisted relative order');
+ }
+ assert.deepEqual(build(data).columns.map(t=>t.family),order,'default matrix follows the full editorial order, including Other');
+ assert.equal(build(legacy).columns[0].id,'omniparse-datalab-overall-20261023','absent configuration retains legacy order');
+ assert.equal(JSON.stringify([data.tests,data.primaryTests,data.rawRecords]),inputs,'display sorting does not mutate source or selection arrays');
+ const speech=require('../src/assets/js/speech-matrix.js'),stt=require('../lib/load-stt.cjs').loadSTT(),prepared=speech.rankingData(stt);
+ assert.equal(stt.config.column_family_order,undefined);
+ assert.deepEqual(build(prepared).columns.map(t=>t.id),prepared.primaryTests.map(t=>t.id),'speech without this configuration keeps its selected column order');
 });
