@@ -1,7 +1,7 @@
 {
   "id": "omniparse-datalab-tables-20261023",
   "short": "OP tables",
-  "label": "OmniParse · Datalab Table-tag slice (Oct8/20)",
+  "label": "OmniParse · Datalab Table-tag slice",
   "source": "datalab-scoreboard-tables-20261023",
   "family": "omniparse",
   "primary_metric": "overall",

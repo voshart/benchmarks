@@ -6,6 +6,8 @@ const {build}=require('../lib/ranking.cjs');
 const OCR=require('../src/assets/js/ocr-comparison.js');
 const resultPopovers=html=>[...html.matchAll(/<section id="([^"]+)" class="rank-note ocr-result-details"[^>]*>[\s\S]*?<\/section>/g)].map(match=>({id:match[1],html:match[0]}));
 const compactCells=html=>html.replace(/<section id="[^"]+" class="rank-note ocr-result-details"[^>]*>[\s\S]*?<\/section>/g,'');
+const numericCells=html=>compactCells(html.split('</th>')[1]).replace(/<div id="rank-note-[^"]+" class="rank-note" popover>[\s\S]*?<\/div>/g,'');
+const textContent=html=>html.replace(/<[^>]*>/g,'');
 
 test('default catalog exposes secondary-only models without inventing aggregate scores',()=>{
  const data=loadOCR(),all=build(data),filtered=build(data,data.config.snapshot_date,{min:2});
@@ -28,7 +30,7 @@ test('unranked rank cells stay compact with accessible explanation in Details',(
   assert.match(cell,/aria-label="Unranked: no comparable overall index. See Details.">—<\/span>/);
   assert.doesNotMatch(cell,/<small>|>Unranked<|<button/);
   assert.match(html,/<strong>No comparable overall index.<\/strong>/);
-  assert.match(html,/>Details<\/button>/);
+  assert.match(html,/<button type="button" class="ocr-details-button"[^>]*aria-label="Benchmark, speed and cost details for [^"]+"[^>]*><span aria-hidden="true">ⓘ<\/span><\/button>/);
  }
 });
 
@@ -45,7 +47,7 @@ test('compact original matrix shows family results without duplicating model-nam
  }
  const chandra=all.rows.find(r=>r.id==='chandra-2-5-api');
  const html=OCR.renderRows({...all,rows:[chandra]},data).split('</th>')[1];
- assert.match(html,/>92\.7<\/a>/);assert.match(html,/>86\.9<\/a>/);assert.match(html,/<small class="protocol-label" title="olmOCR · Chandra2.5 release, no headers\/footers">olm no H\/F<\/small>/);
+ assert.match(html,/>92\.7<\/a>/);assert.match(html,/>86\.9<\/a>/);assert.match(html,/aria-label="olmOCR · Chandra2.5 release, no headers\/footers: 86\.9%"/);assert.doesNotMatch(compactCells(html),/class="protocol-label"/);
  const gemini=all.rows.find(r=>r.id==='gemini-3-8-flash');assert.match(OCR.renderRows({...all,rows:[gemini]},data).split('</th>')[1],/>92\.9<\/a>/);
  const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');assert.doesNotMatch(template,/id="ocrBenchmark"/);
 });
@@ -90,9 +92,10 @@ test('compact cells keep headline scores while accessible result popovers retain
  const popup=resultPopovers(html).find(p=>p.id.endsWith('--puredoc--puredoc'));
  assert.ok(popup);
  assert.match(scores,/>79\.69<\/a>/);
- assert.match(scores,/>PureDoc Avg₃<\/small>/);
- assert.match(scores,/<small class="score-context-tag">Context<\/small>/);
- assert.match(scores,/class="ocr-result-details-button"[^>]*aria-haspopup="dialog"[^>]*>Details<\/button>/);
+ assert.match(scores,/aria-label="PureDoc Avg₃: 79\.69%"/);
+ assert.match(scores,/<sup class="score-context-mark" role="img" aria-label="Context-only result; excluded from ranking"[^>]*>‡<\/sup>/);
+ assert.match(scores,/class="ocr-result-details-button"[^>]*aria-haspopup="dialog"[^>]*title="PureDoc Avg₃ · benchmark details"><span aria-hidden="true">ⓘ<\/span><\/button>/);
+ assert.doesNotMatch(textContent(scores),/[A-Za-z]/,'score cells contain values, symbols and info controls only');
  assert.doesNotMatch(scores,/score-metrics|Public split|Operator:|data-metric=/,'cells contain no metric tables or provenance paragraphs');
  assert.match(popup.html,/<dt>Text &lt;edit&gt; ↓<\/dt><dd data-metric="precise">0\.0289 ratio<\/dd>/);
  assert.match(popup.html,/<dt>Zero score ↑<\/dt><dd data-metric="zero">0%<\/dd>/);
@@ -104,6 +107,7 @@ test('compact cells keep headline scores while accessible result popovers retain
  assert.match(popup.html,/popover="auto" role="dialog" aria-labelledby=/,'native popover renders in the top layer, outside scroll-container clipping');
  const head=OCR.renderHead(all);
  assert.match(head,/Sorts the named primary protocol only/);
+ assert.doesNotMatch(textContent(head),/higher is better|lower is better/i,'directions belong in header help, not repeated subtitles');
 });
 
 test('every result has a unique named native popover with keyboard and close controls',()=>{
@@ -140,5 +144,24 @@ test('score links use exact observation sources and long decimals round only for
  assert.ok(fallback.includes('href="'+data.sources[observation.source_id].url+'"'),'registered source URL remains the fallback');
  const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');
  assert.match(popup,/Component values rounded for display; source data retains full precision/);
- assert.match(template,/Each score has Details for components, scope and sources/);
+ assert.match(template,/Use ⓘ for benchmark details/);
+});
+
+
+test('numeric columns omit repeated words and retain prices under changed assumptions',()=>{
+ const data=loadOCR(),all=build(data);
+ for(const options of [{},{hourlyRate:0,inputTokens:0,outputTokens:0},{hourlyRate:1e7,inputTokens:200000,outputTokens:200000}]){
+  for(const row of all.rows){
+   const html=OCR.renderRows({...all,rows:[row]},data,options),cells=numericCells(html);
+   assert.doesNotMatch(textContent(cells),/[A-Za-z]/,row.id+' has no numeric-cell prose');
+   const cost=OCR.deployment(data,data.models.find(m=>m.id===row.id),options).cost;
+   const price=textContent(cells.match(/<td class="price"[^>]*>([\s\S]*?)<\/td>/)[1]);
+   if(Number.isFinite(cost.value))assert.equal(price,cost.label.replace(/^Service\s+/,''),row.id+' keeps its finite price');
+  }
+ }
+ const sarvam=all.rows.find(r=>r.id==='sarvam-vision-2-1'),html=OCR.renderRows({...all,rows:[sarvam]},data),cells=numericCells(html);
+ assert.match(cells,/>₹500†<\/a>/,'contextual rupee price retains its currency and amount');
+ assert.match(cells,/<td class="ocr-speed"[^>]*>—<\/td>/,'unknown hosted reference speed uses an em dash');
+ assert.match(cells,/aria-label="Context-only result; excluded from ranking"[^>]*>‡<\/sup>/);
+ assert.match(html,/Context only · not comparable for ranking/,'qualification remains accessible in the popover');
 });

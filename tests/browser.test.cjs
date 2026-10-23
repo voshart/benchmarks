@@ -59,8 +59,8 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
  element('coverage').value='2';element('coverage').handlers.change();assert.ok(ids().length<original.length);
  assert.equal(ids().includes('chandra-2-5-api'),false);
  element('modelSearch').value='Chandra 2.5';element('modelSearch').handlers.input();await new Promise(resolve=>setTimeout(resolve,130));
- assert.equal(element('coverage').value,'0');assert.deepEqual(ids(),['chandra-2-5-api']);
- assert.match(element('matrixBody').innerHTML,/Reported benchmark results/);assert.match(element('matrixBody').innerHTML,/86.9/);assert.match(element('matrixBody').innerHTML,/92.7/);
+ assert.equal(element('coverage').value,'0');assert.deepEqual(ids(),['chandra-2-5-api','datalab-accurate-20261020']);
+ assert.match(element('matrixBody').innerHTML,/Reported benchmark results/);assert.match(element('matrixBody').innerHTML,/86.9/);assert.match(element('matrixBody').innerHTML,/92.7/);assert.match(element('matrixBody').innerHTML,/93.5/);
  element('ocrReset').handlers.click();assert.deepEqual(ids(),original);
  element('access').value='open';element('access').handlers.change();assert.ok(ids().every(id=>data.models.find(m=>m.id===id).access==='open'));
  element('historyRange').value='0';element('historyRange').handlers.input();assert.equal(element('historyDate').textContent,data.config.release_start);

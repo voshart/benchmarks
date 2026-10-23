@@ -1,7 +1,7 @@
 {
   "id": "omniparse-datalab-multi-column-20261023",
   "short": "OP columns",
-  "label": "OmniParse · Datalab Multi-column-tag slice (Oct8/20)",
+  "label": "OmniParse · Datalab Multi-column-tag slice",
   "source": "datalab-scoreboard-multi-column-20261023",
   "family": "omniparse",
   "primary_metric": "overall",

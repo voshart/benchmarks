@@ -1,7 +1,7 @@
 {
   "id": "omniparse-datalab-overall-20261023",
   "short": "OP Datalab",
-  "label": "OmniParse · Datalab Overall (Oct8/20)",
+  "label": "OmniParse · Datalab Overall",
   "source": "datalab-scoreboard-overall-20261023",
   "family": "omniparse",
   "primary_metric": "overall",

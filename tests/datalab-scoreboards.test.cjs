@@ -10,8 +10,10 @@ test('all33 Datalab scoreboard observations are represented with exact protocol 
  for(const entry of ledger.rows){const matches=data.resultsByKey[entry.model+'|'+entry.test]||[];assert.ok(matches.some(r=>r.metrics[entry.metric||'overall']===entry.score),entry.source_label+' '+entry.board);}
  for(const board of ['overall','tables','multi-column']){const id='omniparse-datalab-'+board+'-20261023',test=data.tests.find(t=>t.id===id);assert.equal(test.core,false);assert.equal(test.primary,false);assert.equal(data.records.filter(r=>r.benchmark===id).length,10);}
 });
-test('Datalab current service and provider-run aliases do not inherit unverified generations or measurements',()=>{
+test('verified Chandra service identity preserves distinct run measurements and unknown revision dates',()=>{
  const rows=build(data).rows;
+ const accurate=data.models.find(m=>m.id==='datalab-accurate-20261020');assert.equal(accurate.name,'Chandra 2.5 (accurate)');assert.equal(accurate.source_id,'datalab-convert-chandra-2-5');assert.equal(data.sources[accurate.source_id].url,'https://www.datalab.to/platform/processors/convert');
+ for(const board of ['overall','tables','multi-column']){const id='omniparse-datalab-'+board+'-20261023',observation=data.resultsByKey[accurate.id+'|'+id][0];assert.equal(observation.run_date,'2026-10-20');assert.match(observation.configuration,/Chandra 2\.5 accurate/);assert.doesNotMatch(data.tests.find(t=>t.id===id).label,/Oct8\/20/);}
  for(const id of ['datalab-accurate-20261020','datalab-balanced-omniparse-20261008','gemini-3-8-flash','reducto-omniparse-20261008','llamaparse-omniparse-20261008','mistral-ocr-omniparse-20261008','extend-omniparse-20261008','azure-content-understanding-omniparse-20261008']){
   const row=rows.find(r=>r.id===id);assert.ok(row,id);assert.ok(Number.isFinite(row.rank));assert.equal(row.coreCount,id==='gemini-3-8-flash'?2:1);assert.equal(row.rankStatus,'provisional');assert.equal(data.models.find(m=>m.id===id).release_date,null);
  }
