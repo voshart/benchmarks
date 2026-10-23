@@ -4658,5 +4658,17 @@
     "organization": "Datalab",
     "source_id": "chandra-2-5-release",
     "evidence_note": "Hosted generation, not Chandra 2 open weights. OmniParse: accurate 92.7, balanced 91.6 (release cohort). olmOCR excludes headers/footers: raw85.4, own postprocessing86.9, PP3 87.4; API mode unspecified. No comparable full-set aggregate rank. Parameters and weights undisclosed. Current base Convert: fast/balanced $4, accurate $10 per1,000pages; default cost is accurate."
+  },
+  {
+    "id": "gemini-4-argon",
+    "name": "Gemini 4 Argon",
+    "release_date": "2026-09-30",
+    "release_provenance": "verified",
+    "release_source_id": "google-argon-announcement",
+    "source_id": "google-argon-model",
+    "access": "closed",
+    "organization": "Google",
+    "configuration": "Stable Gemini API endpoint gemini-4-argon; text/image/PDF input, text output",
+    "evidence_note": "September30 limited rollout; publicly available API verified October23. Roboflow image OCR: high88.0%, low85.7%, preliminary single-run tasks, not full-page parsing. Hosted hardware/parameter count undisclosed; no H100 estimate. Token cost is an adjustable scenario, not measured pages. Inksight public handwriting: normalized CER8.7%, WER19.5% on133pages/7datasets, lower better."
   }
 ]

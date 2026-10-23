@@ -106,7 +106,7 @@ test('OCR ranges sort by geometric midpoint with true ties and unknowns last in 
 test('OCR real modeled evidence is visible, sourced and isolated from accuracy',()=>{
  const data=loadOCR(),result=build(data,data.config.snapshot_date,{min:0});const d=OCR.deployment(data,data.models.find(m=>m.id==='teleocr'));
  assert.equal(data.throughputEstimates.length,18);assert.equal(data.models.filter(m=>OCR.deployment(data,m).estimate&&!OCR.deployment(data,m).speed).length,17);
- assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,68);
+ assert.equal(data.models.filter(m=>OCR.deployment(data,m).cost.value!=null).length,69);
  assert.equal(d.speed,null);assert.equal(d.estimate.low,.2);assert.equal(d.estimate.high,4);assert.match(d.cost.label,/≈\$0.03–\$1.39/);
  const tele=result.rows.find(r=>r.id==='teleocr'),html=OCR.renderRows({...result,rows:[tele]},data);
  assert.match(html,/≈0.2–9.2/);assert.match(html,/Common reference: H100 80GB/);assert.match(html,/Low-confidence modeled speed/);assert.match(html,/NOT a measurement, guarantee or statistical confidence interval/);assert.match(html,/popovertarget="ocr-details-teleocr"/);assert.match(html,/geometric midpoint/);
@@ -155,4 +155,14 @@ test('Chandra 2.5 preserves hosted modes and excludes incompatible scores from r
  assert.equal(row.scores['chandra-2-5-olm-no-hf'].value,86.9);assert.equal(row.scores['omniparse-chandra-2-5-release'].value,92.7);
  assert.equal(data.resultsByKey[m.id+'|omniparse-indra-1-1'],undefined);
  assert.match(OCR.renderRows({...result,rows:[row]},data),/balanced 91.6/);
+});
+
+test('Gemini 4 Argon keeps exact identity, OCR task protocols and token scenario separate',()=>{
+ const data=loadOCR(),m=data.models.find(m=>m.id==='gemini-4-argon'),d=OCR.deployment(data,m);
+ assert.equal(m.access,'closed');assert.equal(d.speed,null);assert.equal(d.estimate,null);assert.equal(d.cost.kind,'token scenario');assert.equal(d.cost.value,12);
+ assert.match(d.cost.note,/2026-11-30/);assert.match(d.cost.note,/2026-12-01/);
+ const result=build(data,data.config.snapshot_date,{min:0}),row=result.rows.find(r=>r.id===m.id);
+ assert.equal(row.rank,null);assert.equal(row.coreCount,0);assert.equal(row.scores.olmocr,null);assert.equal(row.scores['roboflow-ocr-202610'].value,88);assert.equal(row.scores['inksight-public-handwriting-202610'].value,8.7);
+ assert.equal(data.tests.find(t=>t.id==='inksight-public-handwriting-202610').direction,'lower');
+ assert.ok(d.records.every(r=>!r.comparison_default&&!r.cost_eligible));assert.equal(OCR.deployment(data,m,{inputTokens:2000,outputTokens:1000}).cost.value,14);
 });

@@ -82,5 +82,14 @@
     "release_date": "2026-10-14",
     "url": "https://www.datalab.to/blog/chandra-2-5",
     "finding": "Missed hosted2.5, replacing2.4. Added one generation row with mode-specific evidence, base API prices and latency. No2.4 row: release date/standalone benchmark evidence not established in this bounded followup. No public2.5 weights/size or hardware disclosed; do not transfer4B/H100 from open2."
+  },
+  "gemini_4_argon_followup": {
+    "verified_on": "2026-10-23",
+    "identity": "Official stable gemini-4-argon, September30 limited rollout; publicAPI current documentation",
+    "official_model": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+    "ocr_source": "https://playground.roboflow.com/evals/ocr",
+    "scope": "Exactmodel only; imageOCR task remains secondary. No transfer from earlierGemini versions, no hostedH100 estimate.",
+    "additional_source": "https://www.inksight-app.com/fr/handwriting-ocr-benchmark",
+    "bounded_exclusions": "No exactmodel main OmniDoc/olmOCR/MDP result found. ParseBench78.4 pointer is separate Kaggleharness, not canonical leaderboard; excluded. Inksight added only133publicpage7datasetCER/WER;205pageprivate-inclusive score not substituted."
   }
 }

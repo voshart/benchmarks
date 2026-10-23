@@ -1,0 +1,13 @@
+{
+  "id": "inksight-public-handwriting-202610",
+  "short": "Handwriting CER",
+  "label": "Inksight public handwriting \u00b7 CER lower better",
+  "source": "inksight-public-handwriting-202610",
+  "family": "inksight-handwriting",
+  "primary_metric": "cer",
+  "unit": "percent",
+  "direction": "lower",
+  "core": false,
+  "primary": false,
+  "note": "Seven public datasets/133pages, equal dataset weights, normalized/capped character error. Separate task protocol, not a full-layout parsing aggregate."
+}

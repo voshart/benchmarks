@@ -1,0 +1,13 @@
+{
+  "id": "roboflow-ocr-202610",
+  "short": "RF OCR high",
+  "label": "Roboflow image OCR · high effort",
+  "source": "roboflow-ocr-argon-202610",
+  "family": "roboflow-ocr",
+  "primary_metric": "high",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "note": "Single preliminary image-question run; not document parsing. Effort tiers retained separately, no aggregate vote."
+}

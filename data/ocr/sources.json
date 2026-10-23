@@ -1176,5 +1176,33 @@
     "url": "https://www.datalab.to/pricing",
     "kind": "official",
     "note": "Base Convert fast/balanced $4 and accurate $10 per1,000pages. Add-ons extra; EU+25%. Release confirms2.5 in these modes."
+  },
+  "google-argon-announcement": {
+    "title": "Google Gemini4Argon announcement · September30,2026",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+    "kind": "official"
+  },
+  "google-argon-model": {
+    "title": "Google Gemini4Argon stable model documentation",
+    "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+    "kind": "official"
+  },
+  "google-argon-price": {
+    "title": "Google Gemini4Argon standard token tariff · verified October23,2026",
+    "url": "https://ai.google.dev/gemini-api/docs/pricing#gemini-4-argon",
+    "kind": "official",
+    "note": "Introductory2input/10output/.10cached per million tokens throughNovember30;4/20/.20 fromDecember1. Output includes thinking."
+  },
+  "roboflow-ocr-argon-202610": {
+    "title": "Roboflow OCR Vision Evals · October13,2026 evaluations",
+    "url": "https://playground.roboflow.com/evals/ocr",
+    "kind": "third_party",
+    "note": "Roboflow-operated image questions, deterministic scoring; one preliminary run per effort. Per-sample costs and latency are not full-page API tariffs or throughput."
+  },
+  "inksight-public-handwriting-202610": {
+    "title": "Inksight seven-public-dataset handwriting benchmark · October2026",
+    "url": "https://www.inksight-app.com/fr/handwriting-ocr-benchmark",
+    "kind": "third_party",
+    "note": "133public pages across7datasets, equal dataset weights; not the full205page public/private aggregate. Normalized cappedCER/WER lowerbetter."
   }
 }
