@@ -968,8 +968,10 @@
     "name": "Nanonets-OCR-s",
     "release_date": null,
     "release_provenance": "unknown",
-    "access": "unknown",
-    "organization": "Nanonets"
+    "access": "open",
+    "organization": "Nanonets",
+    "source_id": "nanonets-ocr-s-card",
+    "evidence_note": "Verified public BF16 Qwen2.5-VL-3B-derived checkpoint. Separate from OCR2-3B and hosted OCR-3/OCR2+. Exact release remains unverified."
   },
   {
     "id": "nanonets-ocr2-3b",

@@ -1663,5 +1663,27 @@
     "verified_on": "2026-10-24",
     "note": "Table 8 and Section 5.1.1 replace arXiv Math and Old Scans Math scoring with CDM ExpRate. The complete 75.2 vector is later quoted by AllenAI with an author-report asterisk. This is not a standard-scoring reproduction.",
     "revision": "arXiv:2509.22186v1"
+  },
+  "nanonets-ocr3-architecture": {
+    "title": "Nanonets OCR-3 official architecture and API announcement",
+    "url": "https://nanonets.com/research/nanonets-ocr-3",
+    "kind": "vendor",
+    "verified_on": "2026-10-24",
+    "quote": "our new model is bigger (35B parameters)",
+    "note": "Official description: 35B-parameter MoE, 1280 image-token cap and integrated OCR engines. Active parameter count, served hardware, precision and throughput are unspecified. Supports a conditional planning scenario, not measured H100 or API speed."
+  },
+  "nanonets-ocr2-3b-card": {
+    "title": "Nanonets-OCR2-3B official model card",
+    "url": "https://huggingface.co/nanonets/Nanonets-OCR2-3B",
+    "kind": "vendor",
+    "verified_on": "2026-10-24",
+    "note": "Public BF16 checkpoint; model tree identifies Qwen2.5-VL-3B-Instruct base (Hub reports approximately 4B stored parameters including vision components). Local inference instructions support feasibility. No matched H100 throughput measurement collected. No release date inferred."
+  },
+  "nanonets-ocr-s-card": {
+    "title": "Nanonets-OCR-s official model card",
+    "url": "https://huggingface.co/nanonets/Nanonets-OCR-s",
+    "kind": "vendor",
+    "verified_on": "2026-10-24",
+    "note": "Public BF16 checkpoint; model tree identifies Qwen2.5-VL-3B-Instruct base (Hub reports approximately 4B stored parameters including vision components). Local inference instructions support feasibility. No matched H100 throughput measurement collected. No release date inferred."
   }
 }

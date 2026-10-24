@@ -1347,6 +1347,74 @@
       "source_measurement_pages_per_second": 0.990373,
       "anchor_model": "paddleocr-vl-1-6",
       "anchor_measurement_pages_per_second": 0.690952
+    },
+    {
+      "model": "nanonets-ocr2-3b",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "as_of": "2026-10-24",
+      "low": 0.3,
+      "high": 3,
+      "source_ids": [
+        "nanonets-ocr2-3b-card",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "hypothetical": false,
+      "fit_class": "architecture_based_planning",
+      "fit": "Public BF16 approximately 4B stored-parameter checkpoint; roughly 8GB weight storage leaves substantial nominal headroom on 80GB. Resident execution is an engineering assumption, not measured peak VRAM; reduce batching for large images/outputs.",
+      "basis": "Qwen2.5-VL-3B-derived image-to-markdown model: use a conservative 0.3–3 pages/s small-VLM envelope spanning near-serial to modest batched operation. Semantic image descriptions and markup can increase generated length. Judgmental planning range, not measured throughput or a statistical confidence interval. Anchors are published H100 whole-page peer rates (dots.ocr 0.88, Chandra 1.7, olmOCR2 2.54, LightOn2 5.71 pages/s), not a parameter-count or FLOPS conversion. Assumes the shared warm 2048px / 1000–3000 total output-token workload with memory-fitting batching up to 16. Output expansion, page complexity, CPU work and runtime may put actual performance outside this range."
+    },
+    {
+      "model": "nanonets-ocr-s",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "as_of": "2026-10-24",
+      "low": 0.3,
+      "high": 3,
+      "source_ids": [
+        "nanonets-ocr-s-card",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "hypothetical": false,
+      "fit_class": "architecture_based_planning",
+      "fit": "Public BF16 approximately 4B stored-parameter checkpoint; roughly 8GB weight storage. Conditional resident execution on 80GB with workload-dependent batching; no measured peak-VRAM certification.",
+      "basis": "Same broad 0.3–3 pages/s small-VLM class envelope as OCR2-3B, based on the verified shared base architecture. This is an independent scenario, not copied measured speed or an assertion of equal performance. Judgmental planning range, not measured throughput or a statistical confidence interval. Anchors are published H100 whole-page peer rates (dots.ocr 0.88, Chandra 1.7, olmOCR2 2.54, LightOn2 5.71 pages/s), not a parameter-count or FLOPS conversion. Assumes the shared warm 2048px / 1000–3000 total output-token workload with memory-fitting batching up to 16. Output expansion, page complexity, CPU work and runtime may put actual performance outside this range."
+    },
+    {
+      "model": "nanonets-ocr-3",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "as_of": "2026-10-24",
+      "low": 0.1,
+      "high": 2,
+      "source_ids": [
+        "nanonets-ocr3-architecture",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "hypothetical": true,
+      "fit_class": "conditional_hosted_equivalent",
+      "fit": "Hypothetical equivalent only: 35B BF16 weights alone are roughly 70GB decimal, so a single 80GB H100 is tight. Assume low-concurrency execution fits the remaining memory; this is conditional, not certified. No quantization, offload or sharding is assumed. A backend requiring more memory invalidates this single-card scenario.",
+      "basis": "Conditional 0.1–2 pages/s equivalent for the reported 35B MoE with up to 1280 image tokens. Unknown active parameters, KV cache, auxiliary OCR and serving implementation warrant a broad range. Do not apply the vendor 2x inference claim as a measured H100 multiplier. This is not hosted API latency, capacity or evidence of available weights. Judgmental planning range, not measured throughput or a statistical confidence interval. Anchors are published H100 whole-page peer rates (dots.ocr 0.88, Chandra 1.7, olmOCR2 2.54, LightOn2 5.71 pages/s), not a parameter-count or FLOPS conversion. Assumes the shared warm 2048px / 1000–3000 total output-token workload with memory-fitting batching up to 16. Output expansion, page complexity, CPU work and runtime may put actual performance outside this range."
+    },
+    {
+      "model": "nanonets-ocr2-plus",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "confidence": "low",
+      "as_of": "2026-10-24",
+      "low": 0.1,
+      "high": 3,
+      "source_ids": [
+        "nanonets-ocr2-family-release",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "hypothetical": true,
+      "fit_class": "conditional_hosted_equivalent",
+      "fit": "Hypothetical equivalent only. Plus is hosted; its architecture, parameter count and memory are not pinned. Assume an equivalent pipeline fits one 80GB H100; this condition is unverified. No claim of local weight availability or certified fit.",
+      "basis": "Very broad 0.1–3 pages/s hosted-document-pipeline class scenario. Plus is distinct from the open 3B model; its speed is not inherited from that checkpoint. Architecture and auxiliary processing are unknown. Range is conditional on single-card fit, not a hardware normalization of an API measurement. Judgmental planning range, not measured throughput or a statistical confidence interval. Anchors are published H100 whole-page peer rates (dots.ocr 0.88, Chandra 1.7, olmOCR2 2.54, LightOn2 5.71 pages/s), not a parameter-count or FLOPS conversion. Assumes the shared warm 2048px / 1000–3000 total output-token workload with memory-fitting batching up to 16. Output expansion, page complexity, CPU work and runtime may put actual performance outside this range."
     }
   ]
 }

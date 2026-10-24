@@ -439,16 +439,16 @@ test('OCR common-card estimates replace mixed hardware in sorting and all local 
     const d = get(e.model);
     assert.equal(e.profile, 'h100-80gb-v1');
     if (e.status === 'estimated') {
-      assert.equal(d.cost.kind, 'H100 scenario');
-      assert.equal(d.cost.low, 1000 / (e.high * 3600));
-      assert.equal(d.cost.high, 1000 / (e.low * 3600));
+      assert.equal(d.referenceCost.kind, 'H100 scenario');
+      assert.equal(d.referenceCost.low, 1000 / (e.high * 3600));
+      assert.equal(d.referenceCost.high, 1000 / (e.low * 3600));
       const two = OCR.deployment(
         data,
         data.models.find((m) => m.id === e.model),
         { hourlyRate: 2 }
       );
-      assert.equal(two.cost.low, 2 * d.cost.low);
-      assert.equal(two.cost.high, 2 * d.cost.high);
+      assert.equal(two.referenceCost.low, 2 * d.referenceCost.low);
+      assert.equal(two.referenceCost.high, 2 * d.referenceCost.high);
       assert.deepEqual(two.reference, d.reference);
     } else if (['too-large', 'tight-fit'].includes(e.status)) {
       assert.equal(d.cost.value, null);
@@ -605,4 +605,25 @@ test('small OCR additions separate page scenarios, text-only components and matc
     build(data, '2026-10-01', { min: 0 }).rows.some((r) => r.id === m.id),
     false
   );
+});
+
+test('hypothetical hosted H100 equivalents preserve service prices and quality ranks', () => {
+  const data = loadOCR();
+  const before = build(data, undefined, { min: 0 });
+  for (const id of ['nanonets-ocr-3', 'nanonets-ocr2-plus']) {
+    const model = data.models.find((m) => m.id === id);
+    const result = OCR.deployment(data, model);
+    assert.equal(result.reference.hypothetical, true);
+    assert.equal(result.reference.confidence, 'low');
+    assert.ok(result.referenceCost.low > 0);
+    assert.notEqual(result.cost.kind, 'H100 scenario');
+    const without = OCR.deployment({ ...data, ocrReference: null }, model);
+    assert.deepEqual(result.cost, without.cost);
+    const row = before.rows.find((r) => r.id === id);
+    const html = OCR.renderRows({ ...before, rows: [row] }, data);
+    assert.match(html, /Hypothetical H100 equivalent/);
+    assert.match(html, /separate from the hosted price/);
+  }
+  const without = build({ ...data, ocrReference: null }, undefined, { min: 0 });
+  assert.deepEqual(before.rows, without.rows);
 });

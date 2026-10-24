@@ -165,10 +165,11 @@
     const referenceMode = !!data.ocrReference,
       reference = data.ocrReference?.models.find((r) => r.model === model.id) || null;
     const publishedCost = page || token || service ? cost : null;
+    let referenceCost = null;
     if (referenceMode && validReference(reference)) {
       const low = (a.hourlyRate * 1000) / (reference.high * 3600),
         high = (a.hourlyRate * 1000) / (reference.low * 3600);
-      cost = {
+      referenceCost = {
         value: midpoint({ low, high }),
         low,
         high,
@@ -177,6 +178,7 @@
         estimated: true,
         note: `Low-confidence reference compute: ${money(a.hourlyRate)}/complete H10080GB setup-hour at100% utilization. Range inverts ${reference.low}–${reference.high} pages/sec; excludes idle/loading, storage, licenses and rental minimums. Not a hardware market quote or API tariff. CPU-only paths still charge the allocated whole reference setup.`
       };
+      if (!reference.hypothetical) cost = referenceCost;
     } else if (referenceMode && model.access === 'open' && reference?.status !== 'hosted') {
       cost = {
         value: null,
@@ -196,6 +198,7 @@
       records,
       cost,
       publishedCost,
+      referenceCost,
       referenceMode,
       reference,
       assumptions: a

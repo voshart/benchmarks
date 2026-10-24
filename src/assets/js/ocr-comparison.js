@@ -293,6 +293,8 @@
       content += `<p><strong>Common reference: ${esc(p.label)}</strong>. ${esc(p.hardware)}. ${esc(p.host)}</p><p>${esc(p.precision)} ${esc(p.workload)} ${esc(p.batch)}</p>`;
       if (e?.status === 'estimated')
         content += `<p><strong>Low-confidence H100 estimate:</strong> ≈${esc(rangeFmt(e.low))}–${esc(rangeFmt(e.high))} pages/s. NOT a measurement or statistical confidence interval. ${esc(e.basis)}</p>`;
+      if (e?.hypothetical)
+        content += `<p><strong>Hypothetical H100 equivalent:</strong> conditional engineering estimate, not a measurement of the hosted API or a claim that its weights can be downloaded. ${esc(e.fit)}</p><p><strong>Hypothetical local compute:</strong> ${esc(d.referenceCost?.label || '—')} /1,000 pages at the selected setup-hour rate. This is separate from the hosted price shown in the table.</p>`;
       content += `<p><strong>Fit:</strong> ${esc(e?.fit || 'No verified local reference scenario for this hosted or unresolved configuration.')} ${esc(p.fit_note)}</p><p>${esc(p.method)} ${esc(p.sorting)} Quality scores are unchanged and were not remeasured at this resolution, precision or batch. ${(e?.source_ids || []).map((id) => link(data, id, 'Evidence ↗')).join(' · ')}</p>`;
       if (d.publishedCost && d.publishedCost !== d.cost)
         content += `<p><strong>Published/alternate price context:</strong> ${esc(d.publishedCost.label)} · ${esc(d.publishedCost.kind)}. ${esc(d.publishedCost.note)} ${link(data, d.publishedCost.source_id, 'Source ↗')}</p>`;
@@ -431,9 +433,11 @@
           c = d.cost,
           ref = d.reference;
         const referenceLabel = validReference(ref)
-          ? ref.path === 'cpu'
-            ? 'Estimated CPU path on reference setup'
-            : 'Estimated H100 reference speed'
+          ? ref.hypothetical
+            ? 'Hypothetical H100 equivalent; not hosted API speed'
+            : ref.path === 'cpu'
+              ? 'Estimated CPU path on reference setup'
+              : 'Estimated H100 reference speed'
           : ref?.status === 'too-large'
             ? '>80GB'
             : ref?.status === 'tight-fit'
