@@ -1,85 +1,135 @@
-const {test}=require('node:test');
-const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const {loadSTT}=require('../lib/load-stt.cjs');
-const Speech=require('../src/assets/js/speech.js');
-const data=loadSTT();
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const { loadSTT } = require('../lib/load-stt.cjs');
+const Speech = require('../src/assets/js/speech.js');
+const data = loadSTT();
 
-test('backfilled artifact sizes match pinned file metadata, not parameter-to-byte estimates',()=>{
- const snapshot=JSON.parse(fs.readFileSync(require.resolve('../data/stt/evidence/size-metadata-2026-10-22.json'),'utf8'));
- for (const item of snapshot.models) {
-   const record=data.sizes.find(row=>row.model===item.model&&row.source_id==='artifact-2026-10-22-'+item.model);
-   assert.ok(record);
-   assert.match(item.revision,/^[a-f0-9]{40}$/);
-   if (record.download_mb!=null) {
-     assert.ok(item.selected_files.length>0);
-     assert.equal(record.download_bytes,item.selected_files.reduce((sum,file)=>sum+file.size,0));
-     assert.equal(record.download_mb,record.download_bytes/1e6);
-     if(item.index_weight_files)assert.deepEqual(item.selected_files.map(file=>file.rfilename).sort(),[...item.index_weight_files,...(item.additional_required_weight_files||[])].sort());
-   }
-   if (record.parameters_million!=null)assert.equal(record.parameters_million,item.safetensors.total/1e6);
- }
+test('backfilled artifact sizes match pinned file metadata, not parameter-to-byte estimates', () => {
+  const snapshot = JSON.parse(
+    fs.readFileSync(require.resolve('../data/stt/evidence/size-metadata-2026-10-22.json'), 'utf8')
+  );
+  for (const item of snapshot.models) {
+    const record = data.sizes.find(
+      (row) => row.model === item.model && row.source_id === 'artifact-2026-10-22-' + item.model
+    );
+    assert.ok(record);
+    assert.match(item.revision, /^[a-f0-9]{40}$/);
+    if (record.download_mb != null) {
+      assert.ok(item.selected_files.length > 0);
+      assert.equal(
+        record.download_bytes,
+        item.selected_files.reduce((sum, file) => sum + file.size, 0)
+      );
+      assert.equal(record.download_mb, record.download_bytes / 1e6);
+      if (item.index_weight_files)
+        assert.deepEqual(
+          item.selected_files.map((file) => file.rfilename).sort(),
+          [...item.index_weight_files, ...(item.additional_required_weight_files || [])].sort()
+        );
+    }
+    if (record.parameters_million != null)
+      assert.equal(record.parameters_million, item.safetensors.total / 1e6);
+  }
 });
 
-test('size backfill preserves original configurations and leaves unverified hosted quantities missing',()=>{
- assert.equal(Speech.selectSize(data,'phonon-2').download_mb,164);
- assert.equal(Speech.selectSize(data,'phonon-2').parameters_million,600);
- assert.equal(Speech.selectSize(data,'stt-handy-phonon-2-q8-0').download_bytes,739508608);
- assert.equal(Speech.selectSize(data,'canary-180m-flash').parameters_million,182);
- const omni=Speech.selectSize(data,'stt-facebook-omniasr-llm-7b-v2');
- assert.equal(omni.parameters_million,7801.041536);
- assert.equal(omni.download_bytes,31220488063);
- assert.notEqual(omni.field_records.download_mb.source_id,omni.field_records.parameters_million.source_id);
- for (const id of ['stt-assemblyai-universal-3-pro','stt-elevenlabs-scribe-v2','stt-openai-gpt-transcribe','stt-nvidia-parakeet-tdt-0-6b-v3-fast-gpu-asr'])assert.equal(Speech.selectSize(data,id),null);
+test('size backfill preserves original configurations and leaves unverified hosted quantities missing', () => {
+  assert.equal(Speech.selectSize(data, 'phonon-2').download_mb, 164);
+  assert.equal(Speech.selectSize(data, 'phonon-2').parameters_million, 600);
+  assert.equal(Speech.selectSize(data, 'stt-handy-phonon-2-q8-0').download_bytes, 739508608);
+  assert.equal(Speech.selectSize(data, 'canary-180m-flash').parameters_million, 182);
+  const omni = Speech.selectSize(data, 'stt-facebook-omniasr-llm-7b-v2');
+  assert.equal(omni.parameters_million, 7801.041536);
+  assert.equal(omni.download_bytes, 31220488063);
+  assert.notEqual(
+    omni.field_records.download_mb.source_id,
+    omni.field_records.parameters_million.source_id
+  );
+  for (const id of [
+    'stt-assemblyai-universal-3-pro',
+    'stt-elevenlabs-scribe-v2',
+    'stt-openai-gpt-transcribe',
+    'stt-nvidia-parakeet-tdt-0-6b-v3-fast-gpu-asr'
+  ])
+    assert.equal(Speech.selectSize(data, id), null);
 });
 
-test('artifact byte validation rejects unit mismatches',()=>{
- const {validateSTT}=require('../lib/validate-stt.cjs');
- const changed=structuredClone(data);
- changed.sizes.find(row=>row.download_bytes!=null).download_mb=1;
- assert.throws(()=>validateSTT(changed),/speech artifact MB must use decimal bytes/);
+test('artifact byte validation rejects unit mismatches', () => {
+  const { validateSTT } = require('../lib/validate-stt.cjs');
+  const changed = structuredClone(data);
+  changed.sizes.find((row) => row.download_bytes != null).download_mb = 1;
+  assert.throws(() => validateSTT(changed), /speech artifact MB must use decimal bytes/);
 });
 
-test('Niagara CPU exports and Omni v2 checkpoints retain their own measured bytes',()=>{
- const niagara=JSON.parse(fs.readFileSync(require.resolve('../data/stt/evidence/niagara-artifacts-2026-10-22.json'),'utf8'));
- for (const item of niagara) {
-   const size=Speech.selectSize(data,item.model);
-   assert.match(item.file.rfilename,/-cpu\.pt2$/);
-   assert.equal(size.download_bytes,item.file.size);
-   assert.equal(size.download_mb,item.file.size/1e6);
- }
- const omni=JSON.parse(fs.readFileSync(require.resolve('../data/stt/evidence/omni-v2-metadata-2026-10-22.json'),'utf8'));
- for(const item of omni.models){
-   const size=Speech.selectSize(data,item.model);
-   assert.match(item.checkpoint,/-v2\.pt$/);
-   assert.equal(size.download_bytes,item.download_bytes);
-   assert.equal(size.parameters_million,item.parameters/1e6);
- }
+test('Niagara CPU exports and Omni v2 checkpoints retain their own measured bytes', () => {
+  const niagara = JSON.parse(
+    fs.readFileSync(
+      require.resolve('../data/stt/evidence/niagara-artifacts-2026-10-22.json'),
+      'utf8'
+    )
+  );
+  for (const item of niagara) {
+    const size = Speech.selectSize(data, item.model);
+    assert.match(item.file.rfilename, /-cpu\.pt2$/);
+    assert.equal(size.download_bytes, item.file.size);
+    assert.equal(size.download_mb, item.file.size / 1e6);
+  }
+  const omni = JSON.parse(
+    fs.readFileSync(
+      require.resolve('../data/stt/evidence/omni-v2-metadata-2026-10-22.json'),
+      'utf8'
+    )
+  );
+  for (const item of omni.models) {
+    const size = Speech.selectSize(data, item.model);
+    assert.match(item.checkpoint, /-v2\.pt$/);
+    assert.equal(size.download_bytes, item.download_bytes);
+    assert.equal(size.parameters_million, item.parameters / 1e6);
+  }
 });
 
-test('download MB renders as whole numbers in server and browser without changing precise data',()=>{
- const vm=require('node:vm');
- const context={};
- vm.runInNewContext(fs.readFileSync(require.resolve('../src/assets/js/speech.js'),'utf8'),context);
- const size={download_mb:1234.56789,parameters_million:9.8,source_id:'size-source',note:'Exact artifact: 1234.56789 MB'};
- const sourceData={sources:{'size-source':{url:'https://example.com/artifact'}}};
- for(const api of [Speech,context.BenchmarkSpeech]) {
-  const html=api.renderSizeCells(size,sourceData);
-  assert.match(html,/>1,235<\/a>/);
-  assert.match(html,/>10<\/a>/);
-  assert.match(html,/Exact artifact: 1234.56789 MB/);
-  assert.equal(size.download_mb,1234.56789);
-  assert.match(api.renderSizeCells(null,sourceData),/^<td>—<\/td><td>—<\/td>$/);
- }
- const Matrix=require('../src/assets/js/speech-matrix.js');
- const model='stt-facebook-omniasr-llm-7b-v2';
- const precise=Speech.selectSize(data,model).download_mb;
- assert.notEqual(precise,Math.round(precise));
- for(const api of [Speech,Matrix]) {
-  assert.ok(!api.build(data,{min:0,maxDownload:Math.floor(precise)}).rows.some(row=>row.id===model));
-  assert.ok(api.build(data,{min:0,maxDownload:Math.ceil(precise)}).rows.some(row=>row.id===model));
-  const sorted=api.build(data,{min:0,sort:'download'}).rows.filter(row=>Number.isFinite(row.size?.download_mb));
-  for(let i=1;i<sorted.length;i++) assert.ok(sorted[i-1].size.download_mb<=sorted[i].size.download_mb);
- }
- assert.equal(Speech.selectSize(data,model).download_mb,precise);
+test('download MB renders as whole numbers in server and browser without changing precise data', () => {
+  const vm = require('node:vm');
+  const context = {};
+  vm.runInNewContext(
+    fs.readFileSync(require.resolve('../src/assets/js/speech.js'), 'utf8'),
+    context
+  );
+  const size = {
+    download_mb: 1234.56789,
+    parameters_million: 9.8,
+    source_id: 'size-source',
+    note: 'Exact artifact: 1234.56789 MB'
+  };
+  const sourceData = { sources: { 'size-source': { url: 'https://example.com/artifact' } } };
+  for (const api of [Speech, context.BenchmarkSpeech]) {
+    const html = api.renderSizeCells(size, sourceData);
+    assert.match(html, />1,235<\/a>/);
+    assert.match(html, />10<\/a>/);
+    assert.match(html, /Exact artifact: 1234.56789 MB/);
+    assert.equal(size.download_mb, 1234.56789);
+    assert.match(api.renderSizeCells(null, sourceData), /^<td>—<\/td><td>—<\/td>$/);
+  }
+  const Matrix = require('../src/assets/js/speech-matrix.js');
+  const model = 'stt-facebook-omniasr-llm-7b-v2';
+  const precise = Speech.selectSize(data, model).download_mb;
+  assert.notEqual(precise, Math.round(precise));
+  for (const api of [Speech, Matrix]) {
+    assert.ok(
+      !api
+        .build(data, { min: 0, maxDownload: Math.floor(precise) })
+        .rows.some((row) => row.id === model)
+    );
+    assert.ok(
+      api
+        .build(data, { min: 0, maxDownload: Math.ceil(precise) })
+        .rows.some((row) => row.id === model)
+    );
+    const sorted = api
+      .build(data, { min: 0, sort: 'download' })
+      .rows.filter((row) => Number.isFinite(row.size?.download_mb));
+    for (let i = 1; i < sorted.length; i++)
+      assert.ok(sorted[i - 1].size.download_mb <= sorted[i].size.download_mb);
+  }
+  assert.equal(Speech.selectSize(data, model).download_mb, precise);
 });

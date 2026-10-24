@@ -1,36 +1,335 @@
 ---
 permalink: /ocr/index.html
 ---
+
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{ ocr.config.title }}</title>
-<meta name="description" content="Documented cross-benchmark OCR scores, pricing and historical release cohorts.">
-<link rel="stylesheet" href="{{ "/assets/css/benchmark.css" | assetUrl }}">
-<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem('bench-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}})();</script>
-</head><body class="ocr-page"><main>
-<header class="hero"><div><small class="eyebrow">Voshart / Benchmarks</small><h1>{{ ocr.config.title }}</h1><p>{{ ocr.config.description }}</p></div><button class="quiet" id="themeToggle" type="button" aria-label="Toggle light and dark mode">Theme</button></header>
-<section class="history-bar" data-release-start="{{ ocr.config.release_start }}" data-snapshot-date="{{ ocr.config.snapshot_date }}" aria-label="Historical model release cutoff"><div class="hist-head"><span>Model cutoff <strong id="historyDate">{{ ocr.config.snapshot_date }}</strong></span><button type="button" class="quiet" id="historyLatest">Latest</button></div><input type="range" id="historyRange" min="0" max="365" step="1" value="365" aria-label="Release date cutoff"><div class="axis"><span id="rangeStart">2025</span><span id="rangeEnd">{{ ocr.config.snapshot_date }}</span></div><small id="historyStatus">Current model cohort</small></section>
-<nav class="views" aria-label="Matrix views"><button type="button" data-view="all" class="active">Matrix</button><button type="button" data-view="structure">Structure</button><button type="button" data-view="robust">Robustness</button><button type="button" data-view="multilingual">Multilingual</button><button type="button" data-view="production">Production</button><button type="button" data-view="secondary">Secondary</button><button type="button" data-view="new">New research</button><button type="button" data-view="recognition">Recognition</button><button type="button" data-view="understanding">Understanding</button><button type="button" data-view="price">Pricing</button></nav>
-<section id="matrixPanel"><div class="controls"><input id="modelSearch" type="search" placeholder="Search models…" aria-label="Search models"><select id="coverage" aria-label="Benchmark coverage filter"><option value="0"{% if ocr.config.default_families == 0 %} selected{% endif %}>All registered models</option>{% for minimum in [1,2,3,4,5] %}<option value="{{ minimum }}"{% if minimum == ocr.config.default_families %} selected{% endif %}>{{ minimum }}+ primary benchmark families</option>{% endfor %}</select><select id="access"><option value="all">All models</option><option value="open">Open weights</option><option value="closed">Closed / hosted</option><option value="unreleased">Unreleased weights</option><option value="unknown">Unknown access</option></select><button type="button" id="ocrReset" class="quiet">Reset</button></div>
-<details class="ocr-assumptions"><summary>Cost assumptions</summary><div class="controls"><label>$/H100 setup-hour <input id="ocrHourlyRate" type="number" min="0" step="0.1" value="1"></label><label>Input tokens/page <input id="ocrInputTokens" type="number" min="0" max="200000" step="100" value="1000"></label><label>Output tokens/page <input id="ocrOutputTokens" type="number" min="0" max="200000" step="100" value="1000"></label></div><p class="key">Illustrative, not measured page usage or hardware market prices. Tokens include billed image/reasoning tokens. Scenario: one page per request; budgets capped at 200,000 tokens to stay within the listed input-price bands (not a context-limit guarantee). Local cost assumes the complete H100 80GB reference setup at 100% utilization. Modeled speed workloads are fixed scenarios in row Details; token inputs here affect API costs only. Reference speed ranges account roughly for hardware and workload differences; they are not measured head-to-head results.</p></details>
-<p id="ocrTableHint" class="ocr-table-hint">ⓘ Source details · Prices in USD</p>
-<div class="table-scroll" role="region" aria-label="OCR benchmark results" aria-describedby="ocrTableHint" tabindex="0"><table id="matrixTable"><thead><tr id="matrixHead">{{ ocr.initial | ocrHead | safe }}</tr></thead><tbody id="matrixBody">{{ ocr.initial | ocrRows(ocr) | safe }}</tbody></table></div><p class="key">H100 pages/s: rough estimates on one 80GB H100 setup, not a controlled benchmark. ≈ ranges sort by midpoint; overlap is not a proven winner. Hosted APIs are not GPU-normalized. Original runs, workload and fit exceptions are in Details. ◊ provisional rank: hover or click for reasons · * qualified reported score · † contextual price · ‡ context-only score · — no comparable result. Unranked means no comparable overall index, not necessarily no benchmarks. Every recorded protocol keeps its score in the columns; unlike protocols do not share ranks. Each ⓘ opens the exact protocol, component scores and source notes. Model Details retains alternate observations. Speed and prices retain their source date in historical views.</p>
-</section>
-<section id="pricingPanel" hidden>
-<h2>Page rates & workload estimates</h2>
-<p class="key">Vendor rates, evaluated offerings and benchmark cost estimates are different bases. Compare the provider and mode as well as the number. Current service rates do not guarantee the model generation used in an older benchmark.</p>
-<div class="table-scroll"><table class="pricing-table"><thead><tr><th scope="col">Model / service</th><th scope="col">USD / 1,000 pages</th><th scope="col">Provider & mode</th><th scope="col">Basis / verified</th><th scope="col">Scope & source</th></tr></thead><tbody>
-{% for p in ocr.publishedPrices %}<tr><th scope="row">{{ ocr.modelNameById[p.model] }}</th><td>${{ p.usd_per_1000_pages | money }}</td><td>{{ p.provider or 'Not specified' }}<br><small>{{ p.mode }}</small></td><td>{{ p.basis }}<br><small>{{ p.verified_on }}</small></td><td class="pricing-note">{{ p.note or ocr.sources[p.source_id].note }} <a href="{{ ocr.sources[p.source_id].url }}" target="_blank" rel="noreferrer">Source ↗</a></td></tr>{% endfor %}
-</tbody></table></div>
-<h2>API token rates</h2>
-<p class="key">USD per million tokens. The main table can calculate an explicitly assumed token-budget scenario, not a measured page cost. Input images, page size, reasoning, output length, caching and service tier affect the bill.</p>
-<div class="table-scroll"><table class="pricing-table"><thead><tr><th scope="col">Model</th><th scope="col">Input / 1M</th><th scope="col">Cached input / 1M</th><th scope="col">Output / 1M</th><th scope="col">Provider & mode</th><th scope="col">Scope & source</th></tr></thead><tbody>
-{% for p in ocr.tokenPricing %}<tr><th scope="row">{{ ocr.modelNameById[p.model] }}</th><td>${{ p.input_usd_per_million_tokens | money }}</td><td>{% if p.cached_input_usd_per_million_tokens != null %}${{ p.cached_input_usd_per_million_tokens | money }}{% else %}—{% endif %}</td><td>${{ p.output_usd_per_million_tokens | money }}</td><td>{{ p.provider }}<br><small>{{ p.mode }} · {{ p.verified_on }}</small></td><td class="pricing-note">{{ p.note }} <a href="{{ ocr.sources[p.source_id].url }}" target="_blank" rel="noreferrer">{{ p.api_model }} ↗</a></td></tr>{% endfor %}
-</tbody></table></div>
-<details class="method"><summary>Imported prices awaiting source verification</summary><p>These prior observations are preserved as historical context. Their source is the imported snapshot; they are not current verified vendor offers.</p><div class="table-scroll"><table class="pricing-table"><thead><tr><th>Model</th><th>USD / 1,000 pages</th><th>Imported basis</th><th>As of</th><th>Notes</th></tr></thead><tbody>{% for p in ocr.importedPrices %}<tr><th scope="row">{{ ocr.modelNameById[p.model] }}</th><td>${{ p.usd_per_1000_pages | money }}</td><td>{{ p.basis }}</td><td>{{ p.as_of }}</td><td class="pricing-note">{{ p.note }}</td></tr>{% endfor %}</tbody></table></div></details>
-<details class="method"><summary>Self-hosted models & unknown page costs</summary><p>Open weights do not mean zero processing cost. Hardware, throughput, electricity, hosting and licenses vary. Where sourced throughput exists, the main table offers an explicit assumed setup-hour compute scenario; it is not an API tariff.</p><p>{% for m in ocr.selfHostedModels %}{{ m.name }}{% if not loop.last %} · {% endif %}{% endfor %}</p></details>
-</section>
-<details class="method"><summary>Methodology, provenance & sources</summary><p>The overall index is the equal-weight mean of one within-panel percentile per benchmark family. Published whole-document panels can contribute regardless of self/vendor/competitor reporting. One family permits a provisional index; fewer than three families, small cohorts and qualified evidence remain marked ◊. Each panel needs at least two distinct model identities. A singleton score stays visible but cannot rank itself.</p><p>Percentile = 100 × (N − average rank + 0.5) / N, with lower-error directions respected and ties averaged. Small panels therefore do not give an automatic100. Each model uses its canonical eligible panel when available, otherwise the first fixed-priority eligible variant—not its best score. Different protocols are normalized separately and repeated variants never add extra family votes. Coverage is unequal: this is an evidence-relative index, not a prediction of universal quality. Assumed values, private internal tests and component-only tasks are excluded; original observations and disagreements are retained.</p><p>Some older records were migrated from an existing research snapshot; their source links are preserved, but they have not all been independently re-run. Missing model releases are omitted from historic cohorts until the current snapshot.</p><div class="source-grid">{% for id, source in ocr.sources %}<p><a href="{{ source.url }}" target="_blank" rel="noreferrer">{{ source.title }}</a> <small>— {{ source.note }}</small></p>{% endfor %}</div></details>
-<footer><a href="/">All benchmarks</a> · <a href="https://github.com/voshart/benchmarks">Source repository</a> · Research snapshot {{ ocr.config.snapshot_date }}</footer>
-</main><script defer src="{{ "/assets/js/ranking.js" | assetUrl }}"></script><script defer src="{{ "/assets/js/rank-ui.js" | assetUrl }}"></script><script defer src="{{ "/assets/js/ocr-comparison.js" | assetUrl }}"></script><script defer src="{{ "/assets/js/bench.js" | assetUrl }}"></script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ ocr.config.title }}</title>
+    <meta
+      name="description"
+      content="Documented cross-benchmark OCR scores, pricing and historical release cohorts."
+    />
+    <link rel="stylesheet" href="{{ '/assets/css/benchmark.css' | assetUrl }}" />
+    <script>
+      (function () {
+        try {
+          document.documentElement.dataset.theme =
+            localStorage.getItem('bench-theme') ||
+            (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="ocr-page">
+    <main>
+      <header class="hero">
+        <div>
+          <small class="eyebrow">Voshart / Benchmarks</small>
+          <h1>{{ ocr.config.title }}</h1>
+          <p>{{ ocr.config.description }}</p>
+        </div>
+        <button
+          class="quiet"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle light and dark mode"
+        >
+          Theme
+        </button>
+      </header>
+      <section
+        class="history-bar"
+        data-release-start="{{ ocr.config.release_start }}"
+        data-snapshot-date="{{ ocr.config.snapshot_date }}"
+        aria-label="Historical model release cutoff"
+      >
+        <div class="hist-head">
+          <span>Model cutoff <strong id="historyDate">{{ ocr.config.snapshot_date }}</strong></span
+          ><button type="button" class="quiet" id="historyLatest">Latest</button>
+        </div>
+        <input
+          type="range"
+          id="historyRange"
+          min="0"
+          max="365"
+          step="1"
+          value="365"
+          aria-label="Release date cutoff"
+        />
+        <div class="axis">
+          <span id="rangeStart">2025</span><span id="rangeEnd">{{ ocr.config.snapshot_date }}</span>
+        </div>
+        <small id="historyStatus">Current model cohort</small>
+      </section>
+      <nav class="views" aria-label="Matrix views">
+        <button type="button" data-view="all" class="active">Matrix</button
+        ><button type="button" data-view="structure">Structure</button
+        ><button type="button" data-view="robust">Robustness</button
+        ><button type="button" data-view="multilingual">Multilingual</button
+        ><button type="button" data-view="production">Production</button
+        ><button type="button" data-view="secondary">Secondary</button
+        ><button type="button" data-view="new">New research</button
+        ><button type="button" data-view="recognition">Recognition</button
+        ><button type="button" data-view="understanding">Understanding</button
+        ><button type="button" data-view="price">Pricing</button>
+      </nav>
+      <section id="matrixPanel">
+        <div class="controls">
+          <input
+            id="modelSearch"
+            type="search"
+            placeholder="Search models…"
+            aria-label="Search models"
+          /><select id="coverage" aria-label="Benchmark coverage filter">
+            <option value="0" {% if ocr.config.default_families == 0 %}selected{% endif %}>
+              All registered models
+            </option>
+            {% for minimum in [1,2,3,4,5] %}
+              <option
+                value="{{ minimum }}"
+                {% if minimum == ocr.config.default_families %}selected{% endif %}
+              >
+                {{ minimum }}+ primary benchmark families
+              </option>
+            {% endfor %}</select
+          ><select id="access">
+            <option value="all">All models</option>
+            <option value="open">Open weights</option>
+            <option value="closed">Closed / hosted</option>
+            <option value="unreleased">Unreleased weights</option>
+            <option value="unknown">Unknown access</option></select
+          ><button type="button" id="ocrReset" class="quiet">Reset</button>
+        </div>
+        <details class="ocr-assumptions">
+          <summary>Cost assumptions</summary>
+          <div class="controls">
+            <label
+              >$/H100 setup-hour
+              <input id="ocrHourlyRate" type="number" min="0" step="0.1" value="1" /></label
+            ><label
+              >Input tokens/page
+              <input
+                id="ocrInputTokens"
+                type="number"
+                min="0"
+                max="200000"
+                step="100"
+                value="1000" /></label
+            ><label
+              >Output tokens/page
+              <input
+                id="ocrOutputTokens"
+                type="number"
+                min="0"
+                max="200000"
+                step="100"
+                value="1000"
+            /></label>
+          </div>
+          <p class="key">
+            Illustrative, not measured page usage or hardware market prices. Tokens include billed
+            image/reasoning tokens. Scenario: one page per request; budgets capped at 200,000 tokens
+            to stay within the listed input-price bands (not a context-limit guarantee). Local cost
+            assumes the complete H100 80GB reference setup at 100% utilization. Modeled speed
+            workloads are fixed scenarios in row Details; token inputs here affect API costs only.
+            Reference speed ranges account roughly for hardware and workload differences; they are
+            not measured head-to-head results.
+          </p>
+        </details>
+        <p id="ocrTableHint" class="ocr-table-hint">ⓘ Source details · Prices in USD</p>
+        <div
+          class="table-scroll"
+          role="region"
+          aria-label="OCR benchmark results"
+          aria-describedby="ocrTableHint"
+          tabindex="0"
+        >
+          <table id="matrixTable">
+            <thead>
+              <tr id="matrixHead">
+                {{ ocr.initial | ocrHead | safe }}
+              </tr>
+            </thead>
+            <tbody id="matrixBody">
+              {{ ocr.initial | ocrRows(ocr) | safe }}
+            </tbody>
+          </table>
+        </div>
+        <p class="key">
+          H100 pages/s: rough estimates on one 80GB H100 setup, not a controlled benchmark. ≈ ranges
+          sort by midpoint; overlap is not a proven winner. Hosted APIs are not GPU-normalized.
+          Original runs, workload and fit exceptions are in Details. ◊ provisional rank: hover or
+          click for reasons · * qualified reported score · † contextual price · ‡ context-only score
+          · — no comparable result. Unranked means no comparable overall index, not necessarily no
+          benchmarks. Every recorded protocol keeps its score in the columns; unlike protocols do
+          not share ranks. Each ⓘ opens the exact protocol, component scores and source notes. Model
+          Details retains alternate observations. Speed and prices retain their source date in
+          historical views.
+        </p>
+      </section>
+      <section id="pricingPanel" hidden>
+        <h2>Page rates & workload estimates</h2>
+        <p class="key">
+          Vendor rates, evaluated offerings and benchmark cost estimates are different bases.
+          Compare the provider and mode as well as the number. Current service rates do not
+          guarantee the model generation used in an older benchmark.
+        </p>
+        <div class="table-scroll">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th scope="col">Model / service</th>
+                <th scope="col">USD / 1,000 pages</th>
+                <th scope="col">Provider & mode</th>
+                <th scope="col">Basis / verified</th>
+                <th scope="col">Scope & source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in ocr.publishedPrices %}
+                <tr>
+                  <th scope="row">{{ ocr.modelNameById[p.model] }}</th>
+                  <td>${{ p.usd_per_1000_pages | money }}</td>
+                  <td>{{ p.provider or 'Not specified' }}<br /><small>{{ p.mode }}</small></td>
+                  <td>{{ p.basis }}<br /><small>{{ p.verified_on }}</small></td>
+                  <td class="pricing-note">
+                    {{ p.note or ocr.sources[p.source_id].note }}
+                    <a href="{{ ocr.sources[p.source_id].url }}" target="_blank" rel="noreferrer"
+                      >Source ↗</a
+                    >
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <h2>API token rates</h2>
+        <p class="key">
+          USD per million tokens. The main table can calculate an explicitly assumed token-budget
+          scenario, not a measured page cost. Input images, page size, reasoning, output length,
+          caching and service tier affect the bill.
+        </p>
+        <div class="table-scroll">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Input / 1M</th>
+                <th scope="col">Cached input / 1M</th>
+                <th scope="col">Output / 1M</th>
+                <th scope="col">Provider & mode</th>
+                <th scope="col">Scope & source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in ocr.tokenPricing %}
+                <tr>
+                  <th scope="row">{{ ocr.modelNameById[p.model] }}</th>
+                  <td>${{ p.input_usd_per_million_tokens | money }}</td>
+                  <td>
+                    {% if p.cached_input_usd_per_million_tokens != null %}${{ p.cached_input_usd_per_million_tokens | money }}{% else %}—{% endif %}
+                  </td>
+                  <td>${{ p.output_usd_per_million_tokens | money }}</td>
+                  <td>{{ p.provider }}<br /><small>{{ p.mode }} · {{ p.verified_on }}</small></td>
+                  <td class="pricing-note">
+                    {{ p.note }}
+                    <a href="{{ ocr.sources[p.source_id].url }}" target="_blank" rel="noreferrer"
+                      >{{ p.api_model }} ↗</a
+                    >
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <details class="method">
+          <summary>Imported prices awaiting source verification</summary>
+          <p>
+            These prior observations are preserved as historical context. Their source is the
+            imported snapshot; they are not current verified vendor offers.
+          </p>
+          <div class="table-scroll">
+            <table class="pricing-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>USD / 1,000 pages</th>
+                  <th>Imported basis</th>
+                  <th>As of</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in ocr.importedPrices %}
+                  <tr>
+                    <th scope="row">{{ ocr.modelNameById[p.model] }}</th>
+                    <td>${{ p.usd_per_1000_pages | money }}</td>
+                    <td>{{ p.basis }}</td>
+                    <td>{{ p.as_of }}</td>
+                    <td class="pricing-note">{{ p.note }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details class="method">
+          <summary>Self-hosted models & unknown page costs</summary>
+          <p>
+            Open weights do not mean zero processing cost. Hardware, throughput, electricity,
+            hosting and licenses vary. Where sourced throughput exists, the main table offers an
+            explicit assumed setup-hour compute scenario; it is not an API tariff.
+          </p>
+          <p>
+            {% for m in ocr.selfHostedModels %}{{ m.name }}{% if not loop.last %}·{% endif %}{% endfor %}
+          </p>
+        </details>
+      </section>
+      <details class="method">
+        <summary>Methodology, provenance & sources</summary>
+        <p>
+          The overall index is the equal-weight mean of one within-panel percentile per benchmark
+          family. Published whole-document panels can contribute regardless of
+          self/vendor/competitor reporting. One family permits a provisional index; fewer than three
+          families, small cohorts and qualified evidence remain marked ◊. Each panel needs at least
+          two distinct model identities. A singleton score stays visible but cannot rank itself.
+        </p>
+        <p>
+          Percentile = 100 × (N − average rank + 0.5) / N, with lower-error directions respected and
+          ties averaged. Small panels therefore do not give an automatic100. Each model uses its
+          canonical eligible panel when available, otherwise the first fixed-priority eligible
+          variant—not its best score. Different protocols are normalized separately and repeated
+          variants never add extra family votes. Coverage is unequal: this is an evidence-relative
+          index, not a prediction of universal quality. Assumed values, private internal tests and
+          component-only tasks are excluded; original observations and disagreements are retained.
+        </p>
+        <p>
+          Some older records were migrated from an existing research snapshot; their source links
+          are preserved, but they have not all been independently re-run. Missing model releases are
+          omitted from historic cohorts until the current snapshot.
+        </p>
+        <div class="source-grid">
+          {% for id, source in ocr.sources %}
+            <p>
+              <a href="{{ source.url }}" target="_blank" rel="noreferrer">{{ source.title }}</a>
+              <small>— {{ source.note }}</small>
+            </p>
+          {% endfor %}
+        </div>
+      </details>
+      <footer>
+        <a href="/">All benchmarks</a> ·
+        <a href="https://github.com/voshart/benchmarks">Source repository</a> · Research snapshot
+        {{ ocr.config.snapshot_date }}
+      </footer>
+    </main>
+    <script defer src="{{ '/assets/js/ranking.js' | assetUrl }}"></script>
+    <script defer src="{{ '/assets/js/rank-ui.js' | assetUrl }}"></script>
+    <script defer src="{{ '/assets/js/ocr-deployment.js' | assetUrl }}"></script>
+    <script defer src="{{ '/assets/js/ocr-comparison.js' | assetUrl }}"></script>
+    <script defer src="{{ '/assets/js/bench.js' | assetUrl }}"></script>
+  </body>
+</html>

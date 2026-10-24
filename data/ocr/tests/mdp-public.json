@@ -84,5 +84,6 @@
     "public_th": "higher",
     "public_zh": "higher",
     "public_zh_t": "higher"
-  }
+  },
+  "primary": false
 }

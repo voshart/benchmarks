@@ -1,12 +1,20 @@
-const {loadOCR} = require('../lib/load.cjs');
-const {validateData} = require('../lib/validate.cjs');
-const {loadSTT} = require('../lib/load-stt.cjs');
-const {validateSTT} = require('../lib/validate-stt.cjs');
+const { loadOCR } = require('../lib/load.cjs');
+const { validateData } = require('../lib/validate.cjs');
+const { loadSTT } = require('../lib/load-stt.cjs');
+const { validateSTT } = require('../lib/validate-stt.cjs');
 const registry = require('../data/models/registry.json');
-require('node:assert/strict').equal(new Set(registry.map(model => model.id)).size, registry.length, 'duplicate global model ID');
+require('node:assert/strict').equal(
+  new Set(registry.map((model) => model.id)).size,
+  registry.length,
+  'duplicate global model ID'
+);
 const data = loadOCR();
 validateData(data);
-console.log(`Validated ${data.models.length} models, ${data.records.length} observations, ${data.pricing.length} page prices, ${data.tokenPricing.length} token prices.`);
+console.log(
+  `Validated ${data.models.length} models, ${data.records.length} observations, ${data.pricing.length} page prices, ${data.tokenPricing.length} token prices.`
+);
 const speech = loadSTT();
 validateSTT(speech);
-console.log(`Validated ${speech.models.length} speech models, ${speech.rawRecords.length} accuracy observations and ${speech.throughput.length} throughput observations.`);
+console.log(
+  `Validated ${speech.models.length} speech models, ${speech.rawRecords.length} accuracy observations and ${speech.throughput.length} throughput observations.`
+);

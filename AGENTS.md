@@ -1,18 +1,31 @@
 # Instructions for LLM contributors
 
-**Preserve evidence provenance.** Editing this repository is primarily a data task. Prefer small changes to `data/`; do not modify visual code unless asked.
+## Read and choose the edit path
 
-1. Before adding a score, open the linked source. Quote the exact model generation, dataset version or split, metric, and measurement operator (benchmark maintainer / independent / competitor / author / vendor internal).
-2. Add one observation per source in the correct `data/ocr/results/<benchmark-id>.jsonl`. Never overwrite an official value with a cross-version rerun. For conflicting observations, keep both and document provenance; do not average them.
-3. All observation `model` values must match `data/models/registry.json`; test IDs and source IDs must exist. Verify release date rather than guessing one from paper publication. Preserve unknown dates as null.
-4. Missing is `null` or absent—not zero. Never fill a private score using a public score. Inferences, floors or extrapolations need explicit `assumed` status and must not appear in observed source data, source selection, coverage, maturity cohorts or rank calculations. Never substitute open-weight scores for a hosted generation.
-5. Keep author-reported, vendor/competitor, community, independent and official observations distinct. Comparable measured results on an eligible standardized benchmark can contribute regardless of operator, with the same provisional rules for every model. Vendor-internal/private corpora remain excluded. OpenOCR uses a 20-page corpus; do not merge it into olmOCR full-set scores.
-6. Pricing must keep **per 1000 pages** distinct from **USD per million input/output tokens**. Rates should include provider, tier/configuration, as-of date and direct pricing source. For NDI, identify benchmark-estimated rather than vendor price.
-7. The default UI shows models with at least two primary benchmark families, as requested by the user. Reset restores this display filter; search and the All registered models option can expose the full catalog. Overall ranking remains an equal-weight mean of family percentiles, with OCR policy v3: core or explicitly aggregate_eligible whole-document panels, at least two distinct model identities per exact protocol, provisional from one family. Percentiles use finite-cohort midrank plotting positions. Select canonical-first fixed priority per model/family, never best observed percentile. Self/vendor/competitor reports are allowed with provenance qualifications. Singleton/private/component tests do not create ranks. Preserve compact columns and never add inline score lists or change the default view without a new instruction.
-8. Keep CSS in the CSS file, data operations and historical ranking in JS, semantic controls in HTML. Use system fonts and one Voshart-inspired accent color. Do not reintroduce boxes-within-boxes or marketing prose into matrix cells.
-9. Run `npm run validate`, `npm test`, and `npm run build` before submitting. The build will fail when validation/tests fail. Document any unverified claim in the PR rather than representing it as fact.
-10. Never edit `_site/`, which is generated.
-11. A numeric rank is provisional if coverage is below 3 benchmark families, a contributing observation is author/vendor/competitor/mixed/imported/secondary/unclear-operator evidence, a reference cohort uses such evidence, contributing observations disagree, or model availability is undated/unreleased. Emit explicit reasons; show ◊ beside the number with hover text and a clickable/keyboard-accessible explanation. Propagate cohort qualifications to every dependent index. Source verification is not independent reproduction. A lone eligible comparative family receives a provisional index; singleton panels with fewer than two distinct model identities do not.
-12. Prefer official benchmark publications, then independent third-party and community records, over author and vendor comparisons when selecting a cell. Preserve every conflicting observation. A maintainer publication does not establish who executed a run unless the source says so. Do not label copied model cards as independent evaluations.
+This is a small static evidence index. Read [the maintenance guide](docs/maintenance.md), then the relevant topic's current schema and methodology: [OCR](data/ocr/README.md) or [speech](data/stt/README.md). Those topic documents and their validated configuration describe the active policies. `docs/archive/` contains historical records, not current instructions.
 
-When creating a PR, summarize new scores, exact source links, split/version caveats, pricing assumptions, and expected leaderboard effect.
+Most updates belong in `data/`. Follow the file map instead of changing rendering code to accommodate one model. Benchmark identity, eligibility, coverage and display membership belong in definitions/configuration. Keep topic-specific methodology separate; OCR and speech have different ranking requirements.
+
+## Evidence invariants
+
+1. Open the primary source before adding a claim. Record the exact model/configuration, dataset version or split, metric, source URL and measurement operator. Publication by a maintainer does not establish independent execution. Keep source quotes short and exact.
+2. Preserve one observation per model/protocol/source. Retain conflicting sources and their caveats; never replace them with an average. Select sources by the documented priority, not by the best score.
+3. Match every model, protocol and source ID. Hosted services, exact checkpoints, pipeline variants and quantized conversions stay separate unless equivalence is verified. Preserve unknown release dates as `null`; paper dates and repository creation dates do not establish model availability.
+4. Missing values are `null` or absent, never zero. Preserve genuine measured zeros. Never infer a private score from a public score or borrow an open checkpoint's result for a hosted generation.
+5. Assumptions, floors and extrapolations stay explicitly assumed and cannot enter observed source selection, accuracy coverage, reference cohorts or quality ranks. Preserve author, vendor/competitor, community, independent and maintainer attribution. Private internal corpora and incompatible tasks do not create quality votes.
+6. Keep pricing units, currencies, service modes, tiers, verification dates and direct sources. Token tariffs, page rates, audio-hour rates and workload estimates have different meanings. Preserve original currencies and dated FX provenance. Self-hosting is not a zero cost.
+7. Preserve confidence explanations and propagate cohort qualifications. Source verification is not independent reproduction. Apply the same policy to every model; never introduce a model-specific ranking exception.
+
+## Implementation and checks
+
+- Preserve the requested default views, filters, compact numeric cells, keyboard-accessible details and missing-values-last sorting. Changes to these behaviors need a task that requests them.
+- Use plain JavaScript, semantic templates, system fonts and the existing shared CSS. Prefer a direct function or data field over a new framework. Keep calculations pure and reusable by Eleventy and the browser.
+- Use the checked-in formatter: `npm run format`. `npm run build` then checks formatting, validates both topics, runs all tests and builds the site. Resolve failures before shipping. Run narrower commands only to diagnose a failure.
+- Test algorithms with small fixtures and imports against their pinned sources. Do not freeze growing global catalog totals, exact current aggregate ranks or incidental source formatting. Preserve meaningful evidence-completeness checks.
+- Never edit generated `_site/` or commit `node_modules/`. Do not edit historical audits to make current tests pass. Do not change measurements during a structural refactor.
+
+## Publish requested work
+
+The owner authorizes contributors to commit, merge into `main` and publish requested updates without separate merge or deployment confirmation. Direct commits are welcome for small changes. If using a PR, merge after required checks pass; do not leave completed work awaiting another approval. A push to `main` triggers Cloudflare Pages.
+
+Describe the resulting behavior, validation and any unresolved evidence gaps. For data changes include source links, split/version caveats, pricing assumptions and expected ranking impact. Verify the deployed commit and live pages after publishing.
