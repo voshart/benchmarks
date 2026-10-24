@@ -9,5 +9,29 @@
   "core": true,
   "family": "omnidoc",
   "min_models": 6,
-  "min_organizations": 3
+  "min_organizations": 3,
+  "metric_labels": {
+    "overall": "Overall",
+    "text_edit": "Text edit distance",
+    "formula": "Formula CDM",
+    "tables": "Table TEDS",
+    "table_structure": "Table TEDS-S",
+    "reading_order_edit": "Reading-order edit distance"
+  },
+  "metric_units": {
+    "overall": "percent",
+    "text_edit": "ratio",
+    "formula": "percent",
+    "tables": "percent",
+    "table_structure": "percent",
+    "reading_order_edit": "ratio"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "text_edit": "lower",
+    "formula": "higher",
+    "tables": "higher",
+    "table_structure": "higher",
+    "reading_order_edit": "lower"
+  }
 }
