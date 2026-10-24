@@ -34,7 +34,7 @@ test('GLM PureDoc retains all published domain scopes, source precision and mixe
 
 test('domain component detail changes neither selected overall values nor aggregate contributions',()=>{
  const data=loadOCR();
- const ranking=()=>build(data).rows.map(row=>({
+ const ranking=()=>build(data,undefined,{min:0}).rows.map(row=>({
   id:row.id,rank:row.rank,coreCount:row.coreCount,
   contributions:row.rankContributions.map(c=>({benchmark:c.benchmark,family:c.family,percentile:c.percentile,cohortSize:c.cohortSize,source:c.observation.source_id,value:c.observation.value}))
  }));

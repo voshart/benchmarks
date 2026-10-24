@@ -33,7 +33,7 @@ test('Sarvam displays USD while preserving contextual scope and original INR evi
  assert.equal(context.label,'≈$5.27†');assert.match(context.note,/Original tariff: INR 500\/1,000 pages/);
  const cost=OCR.deployment(data,model).cost;assert.equal(cost.value,null);assert.equal(cost.kind,'context');
  assert.equal(data.pricingByModel[model.id],undefined,'conversion does not establish a frozen benchmark tariff');
- const result=build(data),row=result.rows.find(r=>r.id===model.id),html=OCR.renderRows({...result,rows:[row]},data);
+ const result=build(data,undefined,{min:0}),row=result.rows.find(r=>r.id===model.id),html=OCR.renderRows({...result,rows:[row]},data);
  assert.match(html,/>≈\$5\.27†<\/a>/);assert.match(html,/Exchange rate ↗/);
  assert.ok(html.includes(context.fx.source_url));
 });

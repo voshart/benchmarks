@@ -10,21 +10,25 @@ const afterModelCell=html=>html.slice(html.indexOf('<td class="index">'));
 const numericCells=html=>compactCells(afterModelCell(html)).replace(/<div id="rank-note-[^"]+" class="rank-note" popover>[\s\S]*?<\/div>/g,'');
 const textContent=html=>html.replace(/<[^>]*>/g,'');
 
-test('default catalog exposes secondary-only models without inventing aggregate scores',()=>{
- const data=loadOCR(),all=build(data),filtered=build(data,data.config.snapshot_date,{min:2});
+test('default uses two primary families while All registered preserves secondary-only evidence',()=>{
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0}),filtered=build(data);
+ assert.equal(data.config.default_families,2);
+ assert.ok(filtered.rows.length>0&&filtered.rows.length<all.rows.length);
+ assert.deepEqual(filtered.rows,all.rows.filter(row=>row.count>=2),'default only filters visibility; survivor ranks, contributions and scores stay unchanged');
+ assert.deepEqual(require('../src/_data/ocr.cjs')().initial.rows,filtered.rows,'static initial rows use the same default');
  for(const id of ['chandra-2-5-api','gemini-4-argon']){
   const row=all.rows.find(r=>r.id===id);assert.ok(row,id);if(id==='chandra-2-5-api'){assert.ok(Number.isFinite(row.rank));assert.equal(row.coreCount,1);}else{assert.equal(row.rank,null);assert.equal(row.coreCount,0);}
   const html=OCR.renderRows({...all,rows:[row]},data);assert.doesNotMatch(html,/>Reported results</);if(row.rank==null)assert.match(html,/No comparable overall index/);assert.match(html,/Reported benchmark results/);assert.doesNotMatch(html,/No benchmark results recorded/);
  }
- for(const query of ['Chandra 2.5','chandra2.5','chandra-2-5-api'])assert.ok(build(data,data.config.snapshot_date,{query}).rows.some(r=>r.id==='chandra-2-5-api'));
+ for(const query of ['Chandra 2.5','chandra2.5','chandra-2-5-api'])assert.ok(build(data,data.config.snapshot_date,{query,min:0}).rows.some(r=>r.id==='chandra-2-5-api'));
  const chandra=all.rows.find(r=>r.id==='chandra-2-5-api'),html=OCR.renderRows({...all,rows:[chandra]},data);
  assert.match(html,/86.9/);assert.match(html,/92.7/);assert.match(html,/headers\/footers/);assert.match(html,/https:\/\/www.datalab.to\/blog\/chandra-2-5/);
  for(const row of filtered.rows){const same=all.rows.find(r=>r.id===row.id);assert.equal(same.rank,row.rank);assert.deepEqual(same.rankContributions,row.rankContributions);}
- const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');assert.match(template,/value="0"\{% if ocr.config.default_families == 0 %\} selected/);
+ const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');assert.match(template,/value="\{\{ minimum \}\}"\{% if minimum == ocr.config.default_families %\} selected/);
 });
 
 test('unranked rank cells stay compact with accessible explanation in Details',()=>{
- const data=loadOCR(),all=build(data);
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0});
  for(const row of all.rows.filter(r=>r.rank==null)){
   const html=OCR.renderRows({...all,rows:[row]},data);
   const cell=html.match(/<td class="index">(.*?)<\/td>/s)[1];
@@ -36,7 +40,7 @@ test('unranked rank cells stay compact with accessible explanation in Details',(
 });
 
 test('compact original matrix shows family results without duplicating model-name score lists',()=>{
- const data=loadOCR(),all=build(data);
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0});
  assert.equal(all.columns.length+4,17);
  for(const row of all.rows){
   const html=OCR.renderRows({...all,rows:[row]},data),nameCell=html.split('<td class="index">')[0];
@@ -54,7 +58,7 @@ test('compact original matrix shows family results without duplicating model-nam
 });
 
 test('variant fallback never becomes a main-protocol sorting value or aggregate vote',()=>{
- const data=loadOCR(),all=build(data),row=all.rows.find(r=>r.id==='chandra-2-5-api');
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0}),row=all.rows.find(r=>r.id==='chandra-2-5-api');
  assert.equal(row.scores.olmocr,null);assert.equal(row.rankContributions[0].benchmark,'chandra-2-5-olm-no-hf');
  const cell=OCR.cellObservation(row,data.tests.find(t=>t.id==='olmocr'),data,all.columns);
  assert.equal(cell.observation.value,86.9);assert.equal(cell.variant,true);
@@ -62,7 +66,7 @@ test('variant fallback never becomes a main-protocol sorting value or aggregate 
 
 
 test('default family cells expose every recorded protocol once outside model details',()=>{
- const data=loadOCR(),all=build(data),before=JSON.stringify(all);
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0}),before=JSON.stringify(all);
  for(const row of all.rows){
   const cells=all.columns.flatMap(column=>OCR.cellObservations(row,column,data,all.columns));
   const expected=data.tests.filter(t=>row.scores[t.id]?.value!=null).map(t=>t.id).sort();
@@ -84,7 +88,7 @@ test('default family cells expose every recorded protocol once outside model det
 });
 
 test('compact cells keep headline scores while accessible result popovers retain components and scope',()=>{
- const data=loadOCR(),all=build(data),row=all.rows.find(r=>r.id==='glm-5-3-flash');
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0}),row=all.rows.find(r=>r.id==='glm-5-3-flash');
  const column=data.tests.find(t=>t.id==='puredoc');
  Object.assign(column,{metric_labels:{precise:'Text <edit>',zero:'Zero score'},metric_units:{precise:'ratio',zero:'percent'},metric_directions:{precise:'lower',zero:'higher'}});
  row.scores.puredoc={...row.scores.puredoc,metrics:{avg3:79.69,precise:0.0289,zero:0,unknown:null},visible_context:'Public split <only>; 20 pages.',dataset_version:'Pinned benchmark v1.5 / clean split',measurement_operator:'Example & operator',comparable:false};
@@ -114,7 +118,7 @@ test('compact cells keep headline scores while accessible result popovers retain
 test('every result has a unique named native popover with keyboard and close controls',()=>{
  const data=loadOCR();
  for(const view of ['all','secondary']){
-  const result=build(data,data.config.snapshot_date,{view}),html=OCR.renderRows(result,data),popovers=resultPopovers(html);
+  const result=build(data,data.config.snapshot_date,{view,min:0}),html=OCR.renderRows(result,data),popovers=resultPopovers(html);
   assert.ok(popovers.length);
   assert.equal(new Set(popovers.map(p=>p.id)).size,popovers.length,'one unique id per model, column and protocol');
   for(const popup of popovers){
@@ -128,7 +132,7 @@ test('every result has a unique named native popover with keyboard and close con
 
 
 test('score links use exact observation sources and long decimals round only for display',()=>{
- const data=loadOCR(),all=build(data),row=all.rows.find(r=>r.id==='glm-5-3-flash'),test=data.tests.find(t=>t.id==='puredoc');
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0}),row=all.rows.find(r=>r.id==='glm-5-3-flash'),test=data.tests.find(t=>t.id==='puredoc');
  test.metric_units={ratio:'ratio',percent:'percent'};
  const observation=row.scores.puredoc={...row.scores.puredoc,source_url:'https://example.com/pinned.csv?rev=abc&split=clean',value:79.69,metrics:{avg3:79.69,ratio:0.02891234567891234,percent:98.12345678912345,unspecified:12.12345678912345}};
  const before=JSON.stringify(observation);
@@ -150,7 +154,7 @@ test('score links use exact observation sources and long decimals round only for
 
 
 test('numeric columns omit repeated words and retain prices under changed assumptions',()=>{
- const data=loadOCR(),all=build(data);
+ const data=loadOCR(),all=build(data,data.config.snapshot_date,{min:0});
  for(const options of [{},{hourlyRate:0,inputTokens:0,outputTokens:0},{hourlyRate:1e7,inputTokens:200000,outputTokens:200000}]){
   for(const row of all.rows){
    const html=OCR.renderRows({...all,rows:[row]},data,options),cells=numericCells(html);
@@ -175,7 +179,7 @@ test('configured family order changes only column presentation across views',()=
  const inputs=JSON.stringify([data.tests,data.primaryTests,data.rawRecords]),order=data.config.column_family_order;
  const cellProtocols=(result,source)=>result.rows.map(row=>[row.id,result.columns.slice().sort((a,b)=>a.id.localeCompare(b.id)).map(column=>[column.id,OCR.cellObservations(row,column,source,result.columns).map(cell=>[cell.test.id,cell.observation,cell.variant])])]);
  for(const view of ['all','structure','robust','multilingual','production','secondary','new','recognition','understanding']){
-  const before=build(legacy,legacy.config.snapshot_date,{view}),after=build(data,data.config.snapshot_date,{view});
+  const before=build(legacy,legacy.config.snapshot_date,{view,min:0}),after=build(data,data.config.snapshot_date,{view,min:0});
   assert.deepEqual(after.rows,before.rows,view+' preserves row order, ranks, selected scores and qualifications');
   assert.deepEqual(after.ranges,before.ranges,view+' preserves score scales');
   assert.deepEqual(after.columns.map(t=>t.id).sort(),before.columns.map(t=>t.id).sort(),view+' preserves column membership');
@@ -197,19 +201,19 @@ test('configured family order changes only column presentation across views',()=
 test('specialized columns show only their exact protocol without cross-split or component fallback',()=>{
  const data=loadOCR();
  for(const view of ['structure','robust','multilingual','production','secondary','new','recognition','understanding']){
-  const result=build(data,data.config.snapshot_date,{view});
+  const result=build(data,data.config.snapshot_date,{view,min:0});
   for(const row of result.rows)for(const column of result.columns){
    const cells=OCR.cellObservations(row,column,data,result.columns),expected=row.scores[column.id];
    assert.equal(cells.length,expected?.value!=null?1:0,view+'/'+row.id+'/'+column.id);
    for(const cell of cells){assert.equal(cell.test.id,column.id);assert.equal(cell.variant,false);assert.equal(cell.observation,expected);}
   }
  }
- const multilingual=build(data,data.config.snapshot_date,{view:'multilingual'}),poly=multilingual.rows.find(r=>r.id==='polyocr-2-7b');
+ const multilingual=build(data,data.config.snapshot_date,{view:'multilingual',min:0}),poly=multilingual.rows.find(r=>r.id==='polyocr-2-7b');
  assert.deepEqual(OCR.cellObservations(poly,multilingual.columns.find(t=>t.id==='mdp-private'),data,multilingual.columns),[],'public87 cannot populate the private split');
  assert.equal(OCR.cellObservations(poly,multilingual.columns.find(t=>t.id==='mdp-public'),data,multilingual.columns)[0].observation.value,87);
- const recognition=build(data,data.config.snapshot_date,{view:'recognition'}),xiaomi=recognition.rows.find(r=>r.id==='xiaomi-ocr-0');
+ const recognition=build(data,data.config.snapshot_date,{view:'recognition',min:0}),xiaomi=recognition.rows.find(r=>r.id==='xiaomi-ocr-0');
  assert.deepEqual(OCR.cellObservations(xiaomi,recognition.columns.find(t=>t.id==='omnidoc-v10-formula'),data,recognition.columns),[],'full-document96.83 cannot populate a formula subset');
- const all=build(data),row=all.rows.find(r=>r.id==='polyocr-2-7b'),cells=OCR.cellObservations(row,all.columns.find(t=>t.id==='mdp-private'),data,all.columns);
+ const all=build(data,data.config.snapshot_date,{min:0}),row=all.rows.find(r=>r.id==='polyocr-2-7b'),cells=OCR.cellObservations(row,all.columns.find(t=>t.id==='mdp-private'),data,all.columns);
  assert.deepEqual(cells.map(c=>[c.test.id,c.observation.value]),[['mdp-public',87]],'default family matrix still retains the public result');
 });
 
@@ -226,7 +230,7 @@ test('heterogeneous Other column has no misleading sort control or sorted state'
 
 
 test('PureDoc domain metrics use compact track tables inside popovers with native source precision',()=>{
- const data=loadOCR(),result=build(data),row=result.rows.find(r=>r.id==='glm-5-3-flash'),observation=row.scores.puredoc;
+ const data=loadOCR(),result=build(data,data.config.snapshot_date,{min:0}),row=result.rows.find(r=>r.id==='glm-5-3-flash'),observation=row.scores.puredoc;
  const before=JSON.stringify(observation),html=OCR.renderRows({...result,rows:[row]},data);
  const popup=resultPopovers(html).find(p=>p.id.endsWith('--puredoc--puredoc')).html;
  const groups=[...popup.matchAll(/<details class="score-metric-group">[\s\S]*?<\/details>/g)].map(m=>m[0]);
