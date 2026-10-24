@@ -141,7 +141,7 @@ test('score links use exact observation sources and long decimals round only for
  assert.match(visible,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">79\.7<\/a>/);
  assert.match(html,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">Source ↗<\/a>/);
  assert.match(popup,/<dd data-metric="ratio">0\.0289 ratio<\/dd>/);
- assert.match(popup,/<dd data-metric="percent">98\.12%<\/dd>/);
+ assert.match(popup,/<dd data-metric="percent">98\.1%<\/dd>/);
  assert.match(popup,/<dd data-metric="unspecified">12\.1235<\/dd>/);
  assert.equal(JSON.stringify(observation),before,'display rounding never changes stored evidence');
  delete observation.source_url;
