@@ -19,7 +19,8 @@ test('competitor panels preserve full, subset and PDF-text-assisted protocols',(
 test('exact checkpoint competitor speeds never become measurements of normalized estimates',()=>{
  for(const id of ['infinity-parser2-flash','kdl-frontier-parser-nano','mineru2-5-pro-2605']){
   const model=data.models.find(m=>m.id===id),d=OCR.deployment(data,model);
-  assert.equal(model.release_date,null);assert.equal(d.reference.status,'estimated');assert.equal(d.reference.confidence,'low');
+  const releaseDates={'infinity-parser2-flash':'2026-05-11','kdl-frontier-parser-nano':null,'mineru2-5-pro-2605':'2026-05-21'};
+  assert.equal(model.release_date,releaseDates[id]);if(model.release_date)assert.ok(data.sources[model.release_source_id]);assert.equal(d.reference.status,'estimated');assert.equal(d.reference.confidence,'low');
   assert.equal(d.cost.kind,'H100 scenario');assert.equal(d.cost.low,1000/(3600*d.reference.high));
   assert.ok(d.records.some(r=>r.source_id==='small-specialist-nemotron-matched-timing'&&!r.comparison_default));
   assert.equal(build(data,data.config.snapshot_date,{min:0}).rows.find(r=>r.id===id).rankStatus,'provisional');

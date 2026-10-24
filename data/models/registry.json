@@ -566,9 +566,12 @@
     "id": "infinity-parser2-pro",
     "name": "Infinity-Parser2-Pro",
     "release_date": "2026-05-11",
-    "release_provenance": "legacy_import",
-    "access": "unknown",
-    "organization": null
+    "release_provenance": "verified",
+    "access": "open",
+    "organization": "Infly",
+    "release_source_id": "infinity-parser2-release",
+    "source_id": "infinity-parser2-release",
+    "evidence_note": "Public Apache-2.0 weights. Author-reported benchmark scores and vendor comparisons retain separate provenance; source verification is not independent reproduction."
   },
   {
     "id": "internvl-3-5-8b",
@@ -934,18 +937,20 @@
   {
     "id": "monkeyocrv2-b-parsing",
     "name": "MonkeyOCRv2-B-Parsing",
-    "release_date": null,
-    "release_provenance": "unknown",
+    "release_date": "2026-07-14",
+    "release_provenance": "verified",
     "access": "open",
-    "organization": null
+    "organization": "Huazhong University of Science and Technology / Kingsoft Office",
+    "release_source_id": "monkeyocrv2-release"
   },
   {
     "id": "monkeyocrv2-s-parsing",
     "name": "MonkeyOCRv2-S-Parsing",
-    "release_date": null,
-    "release_provenance": "unknown",
+    "release_date": "2026-07-14",
+    "release_provenance": "verified",
     "access": "open",
-    "organization": null
+    "organization": "Huazhong University of Science and Technology / Kingsoft Office",
+    "release_source_id": "monkeyocrv2-release"
   },
   {
     "id": "nanonets-ocr-3",
@@ -964,20 +969,14 @@
     "organization": "Nanonets"
   },
   {
-    "id": "nanonets-ocr2",
-    "name": "Nanonets-OCR2",
-    "release_date": null,
-    "release_provenance": "unknown",
-    "access": "unknown",
-    "organization": "Nanonets"
-  },
-  {
     "id": "nanonets-ocr2-3b",
     "name": "Nanonets-ocr2-3B",
     "release_date": null,
     "release_provenance": "unknown",
-    "access": "unknown",
-    "organization": "Nanonets"
+    "access": "open",
+    "organization": "Nanonets",
+    "source_id": "nanonets-ocr2-family-release",
+    "evidence_note": "Public 3B weights; distinct from hosted OCR2+. PureDoc source-scoped identity is established by the pinned model link and matching configuration. Exact release date remains unverified."
   },
   {
     "id": "ndi-ocr-high",
@@ -1463,16 +1462,20 @@
     "name": "WeVisDoc-2B",
     "release_date": "2026-09-30",
     "release_provenance": "legacy_import",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": "Tencent",
+    "source_id": "wevisdoc-paper-v1",
+    "evidence_note": "Public Apache-2.0 weights. Author-report and maintainer results remain distinct. The inherited September 30 release date is not newly verified; the paper date is not substituted for weights availability."
   },
   {
     "id": "wevisdoc-4b",
     "name": "WeVisDoc-4B",
     "release_date": "2026-09-30",
     "release_provenance": "legacy_import",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": "Tencent",
+    "source_id": "wevisdoc-paper-v1",
+    "evidence_note": "Public Apache-2.0 weights. Author-report and maintainer results remain distinct. The inherited September 30 release date is not newly verified; the paper date is not substituted for weights availability."
   },
   {
     "id": "xiaomi-ocr-0",
@@ -4764,13 +4767,14 @@
     "topics": [
       "ocr"
     ],
-    "release_date": null,
-    "release_provenance": "unknown",
+    "release_date": "2026-05-11",
+    "release_provenance": "verified",
     "source_id": "infinity-parser2-flash-checkpoint",
     "configuration": "Exact checkpoint cfddc4106b0abc4706f05575a164f7dd35d09c46; BF16 stored weights; serialized download size excludes tokenizer/config and is not peak VRAM.",
     "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment.",
     "parameters_million": 2213.241664,
-    "download_mb": 4426.558832
+    "download_mb": 4426.558832,
+    "release_source_id": "infinity-parser2-release"
   },
   {
     "id": "mineru2-5-pro-2605",
@@ -4780,13 +4784,14 @@
     "topics": [
       "ocr"
     ],
-    "release_date": null,
-    "release_provenance": "unknown",
+    "release_date": "2026-05-21",
+    "release_provenance": "verified",
     "source_id": "mineru2-5-pro-2605-checkpoint",
     "configuration": "Exact checkpoint 08aaea840498d49ce16247b6263196cf02814885; BF16 stored weights; serialized download size excludes tokenizer/config and is not peak VRAM.",
     "evidence_note": "Public weights verified October 23. Competitor-reported timing and separately published upstream quality; these are not a single matched quality/speed experiment.",
     "parameters_million": 1156.026624,
-    "download_mb": 2312.12664
+    "download_mb": 2312.12664,
+    "release_source_id": "mineru25-pro-2605-author-card"
   },
   {
     "id": "kdl-frontier-parser-nano",
@@ -4949,5 +4954,71 @@
     "source_id": "datalab-scoreboard-overall-20261023",
     "configuration": "Source-run service identity. Initial adapter uses Content Understanding prebuilt-layout API2025-11-01; NOT Azure Document Intelligence.",
     "evidence_note": "Datalab-reported benchmark evidence, not an independent reproduction. Snapshot/run date is not a verified model-release date. Source-scoped identities do not inherit other model generations or aggregate scores."
+  },
+  {
+    "id": "nanonets-ocr2-plus",
+    "name": "Nanonets OCR2+",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "access": "closed",
+    "organization": "Nanonets",
+    "source_id": "nanonets-ocr2-family-release",
+    "evidence_note": "Hosted Plus identity, explicitly distinguished from the open 3B and 1.5B models in the official family announcement. Release date and exact benchmark backend revision remain unpinned."
+  },
+  {
+    "id": "oxr-1-0",
+    "name": "OXR-1.0",
+    "organization": "SoMark",
+    "topics": [
+      "ocr"
+    ],
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "oxr-1-0-model",
+    "configuration": "OXR-1.0 with bundled layout analysis and model-generated reading order; exact evaluation checkpoint is unpinned.",
+    "evidence_note": "Public weights under the custom OXR Open Source License. Scores are author-reported; SoMark also publishes DocParsingBench. Accuracy snapshot date does not establish model release date. No paid production tariff or reference GPU cost is inferred from the free testing API."
+  },
+  {
+    "id": "rakedoc-nano",
+    "name": "Rakedoc Nano",
+    "organization": "CloudRaker",
+    "topics": [
+      "ocr"
+    ],
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "rakedoc-nano-author-card",
+    "configuration": "1.2B Qwen2-VL architecture; merged Florin/KDL-derived weights in the KDL parsing pipeline. Exact evaluation weights revision unpinned.",
+    "evidence_note": "AGPL-3.0 open weights. The pinned ParseBench row is an author-run submitted result, not independent reproduction. Published pipeline/scorer context is retained per observation; no second family or release date inferred."
+  },
+  {
+    "id": "aeddix-alpine-ocr-v0-1-kdl",
+    "name": "Aeddix Alpine OCR v0.1 (KDL)",
+    "organization": "Aeddix Labs",
+    "topics": [
+      "ocr"
+    ],
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "aeddix-alpine-ocr-v01-author-card",
+    "configuration": "Weights tag v0.1, author-reported short commit 7fa09b7, served through ParseBench's unchanged kdl_frontier_nano provider. Distinct from the author's mineru2605pro page server.",
+    "evidence_note": "Apache-2.0 open weights, derived from MinerU2.5-Pro-2605. Single-benchmark tuning and author-run measurement disclosed. 76.77 applies to the KDL pipeline; 75.15 belongs to a separate own-server configuration. First public release date unknown."
+  },
+  {
+    "id": "florin-parser-nano-v2",
+    "name": "Florin Parser Nano v2",
+    "organization": "Florin",
+    "topics": [
+      "ocr"
+    ],
+    "access": "open",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "florin-parser-nano-v2-author-card",
+    "configuration": "Historical corrected v2 run represented by the 76.69 row in pinned ParseBench 9af4102. KDL-derived parser with v2 Markdown-emission fixes; exact old weights, provider and scorer revisions unpinned.",
+    "evidence_note": "AGPL-3.0 open-weight lineage. The author explicitly labels 76.69 as v2 and the later 77.50 weight update as v3. Current HF main is not asserted to be this historical evaluation checkpoint. Do not attach v3 scores or derive release date from the correction date."
   }
 ]

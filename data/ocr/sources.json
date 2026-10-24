@@ -37,9 +37,9 @@
   },
   "dp-community": {
     "title": "DocParsingBench",
-    "url": "https://github.com/SoMarkAI/DocParsingBench",
+    "url": "https://github.com/SoMarkAI/DocParsingBench/blob/63d80f96a89e2f2514daac703238d6f12a2873e9/README.md",
     "kind": "community",
-    "note": "Community document-parsing aggregate."
+    "note": "Historical nine-model DocParsingBench leaderboard. Publication is pinned; individual execution operator is not established. Preserve its observations alongside the separately sourced current leaderboard."
   },
   "idp-secondary": {
     "title": "Nanonets IDP benchmarking",
@@ -1478,5 +1478,104 @@
     "kind": "official",
     "verified_on": "2026-10-23",
     "note": "Public text-block recognition dataset: 6,909 test blocks across 22 Indic languages plus English; 1,173 representative subset blocks. Word accuracy = 100 × (1 − WER). Normalization and loop filtering are documented; publication does not establish which denominator the release table used."
+  },
+  "idp-nanonets-ocr2-plus": {
+    "title": "IDP Leaderboard: Nanonets OCR2+",
+    "url": "https://benchmarking.nanonets.com/models/nanonets-ocr2-plus",
+    "kind": "vendor",
+    "verified_on": "2026-10-23",
+    "note": "Nanonets-operated hosted OCR2+ comparisons on separately named benchmarks. Exact deployed backend revision is unpublished. OmniDoc v1.5 headline/component inconsistency is preserved and qualified per observation."
+  },
+  "nanonets-ocr2-family-release": {
+    "title": "Nanonets OCR2 family announcement: Plus, 3B and 1.5B",
+    "url": "https://benchmarks.nanonets.com/",
+    "kind": "vendor",
+    "verified_on": "2026-10-23",
+    "note": "Official family announcement distinguishes hosted OCR2-Plus from open OCR2-3B and OCR2-1.5B-exp. Do not use current benchmark-page dates to establish original release or run dates."
+  },
+  "docparsing-maintainer-20261005": {
+    "title": "DocParsingBench maintainer leaderboard · generated 2026-10-05",
+    "url": "https://github.com/SoMarkAI/DocParsingBench/blob/90bf1fbccc6d9967a9f9981bd5589eb5a8d9d6cd/assets/leaderboard.html",
+    "kind": "official",
+    "note": "Benchmark-maintainer publication, not proof of independent execution. SoMark also develops OXR-1.0. Use per-observation execution qualifications; pin the historical dp-community source separately.",
+    "verified_on": "2026-10-23"
+  },
+  "wevisdoc-paper-v1": {
+    "title": "WeVisDoc technical report · v1",
+    "url": "https://arxiv.org/html/2609.20423v1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Tables 2–3: own-model means of three inference runs and explicitly starred competitor reruns. OmniDoc v1.6 full and PureDoc full tracks remain separate protocols. Exact evaluation checkpoint/scorer revisions are not published.",
+    "context_url": "https://github.com/Tencent/WeVisDoc/blob/bcbc0eacb976ecb8d69675fe6bcee123f5640777/README.md"
+  },
+  "infinity-parser2-quality-v1": {
+    "title": "Infinity-Parser2 technical report · quality evaluation",
+    "url": "https://arxiv.org/html/2607.07836v1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Table 2 reports OmniDocBench v1.6, olmOCR-Bench and a separate ParseBench evaluation. The paper describes the standard roughly 1,400-page olmOCR benchmark and states no reduced subset; exact per-model scored-page counts are not published. Do not substitute the differently sourced ParseBench numbers for the upstream snapshot or mix v1.5/v1.0 component tables with v1.6 overall."
+  },
+  "infinity-parser2-release": {
+    "title": "Infinity-Parser2 Pro and Flash release",
+    "url": "https://github.com/infly-ai/INF-MLLM/blob/011866e93026290ba39f05b796c92d58dd0ce40c/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Dated May 11, 2026 release of the Pro and Flash models. Public Apache-2.0 model cards. Source revision pins documentation, not the evaluation checkpoint."
+  },
+  "monkeyocrv2-paper-v1": {
+    "title": "MonkeyOCRv2 technical report · v1",
+    "url": "https://arxiv.org/html/2607.11562v1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Table 7 and Section 4.6: separate S-Parsing and B-Parsing models predict layout, then recognize predicted crops and assemble reading order. No ground-truth layout. Exact per-run scorer/checkpoint hashes are undisclosed."
+  },
+  "monkeyocrv2-release": {
+    "title": "MonkeyOCRv2 parsing models · release evidence",
+    "url": "https://github.com/Yuliang-Liu/MonkeyOCRv2/blob/e05067cd37ac6fba472784f348a113d217da4443/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "July 14, 2026 release commit contains the exact S-Parsing and B-Parsing model links and download commands; current project news explicitly dates the parsing release. The July 13 paper date is not used as model release evidence."
+  },
+  "mineru25-pro-2605-author-card": {
+    "title": "MinerU2.5-Pro-2605 · exact-generation model card",
+    "url": "https://huggingface.co/opendatalab/MinerU2.5-Pro-2605-1.2B",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "May 21 exact 2605 release announcement and 2605-versus-2604 OmniDocBench v1.6_full table. Keep generic Pro and 2604 observations on their own identities; evaluation weight revision is not pinned."
+  },
+  "oxr-1-0-author-benchmarks": {
+    "title": "OXR-1.0 · author benchmark report",
+    "url": "https://github.com/SoMarkAI/OXR/blob/62fbca8ef6c7c63b75b799fc8081f3eb6e667553/docs/benchmark.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "October 5 accuracy snapshot: full eight-category olmOCR and 1,651-page OmniDoc results. Other models’ quality rows are quotations, not new reproductions. SoMark also maintains DocParsingBench. Separate 100-page speed subset is not the accuracy corpus."
+  },
+  "oxr-1-0-model": {
+    "title": "OXR-1.0 · official model and license",
+    "url": "https://huggingface.co/SoMarkAI/OXR-1.0",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Public weights and bundled layout model. Custom OXR Open Source License with additional terms; not plain Apache-2.0. First public weights release date and evaluation checkpoint hash are not established."
+  },
+  "rakedoc-nano-author-card": {
+    "title": "Rakedoc Nano · official model card",
+    "url": "https://huggingface.co/cloudraker/rakedoc-nano",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "CloudRaker's open 1.2B Florin/KDL derivative, AGPL-3.0. Card identifies 77.23 as mean of three author runs and documents submitted pipeline/setup. Used for identity and operator context; quality values come from the pinned ParseBench CSV. Exact release date and evaluation weights SHA are unknown."
+  },
+  "aeddix-alpine-ocr-v01-author-card": {
+    "title": "Aeddix Alpine OCR v0.1 · official model card",
+    "url": "https://huggingface.co/aeddix-labs/aeddix-alpine-ocr",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Apache-2.0 MinerU2.5-Pro-2605 derivative. The author ties 76.77 to tag v0.1 (reported short commit 7fa09b7), unchanged kdl_frontier_nano provider and three full author runs. Own page-server 75.15 is a distinct configuration. Exact release date unknown; benchmark-specific tuning disclosed."
+  },
+  "florin-parser-nano-v2-author-card": {
+    "title": "Florin Parser Nano v2 · historical identity evidence",
+    "url": "https://huggingface.co/florin-inc/florin-parser-nano",
+    "kind": "author_reported",
+    "verified_on": "2026-10-23",
+    "note": "Author changelog explicitly identifies August 21 v2 emission corrections, 76.92→76.69, and September 4 v3 updated weights, 76.69→77.50; prior weights remain in history. The pinned 76.69 observation belongs to v2. Current card/weights include v3 and must not be substituted. Historical exact weights/scorer SHA and first public release date remain unknown."
   }
 }

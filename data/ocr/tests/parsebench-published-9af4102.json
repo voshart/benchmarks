@@ -9,9 +9,33 @@
   "direction": "higher",
   "core": false,
   "primary": false,
-  "note": "Five-category upstream published panel; visual grounding is not reproduced EPR. Not quality measured in NVIDIA timing run; no core aggregate vote.",
+  "note": "Five-category upstream published panel; visual grounding is not reproduced EPR. Separate from NVIDIA timing-run quality. Eligible for one qualified ParseBench family contribution under the existing aggregate policy.",
   "aggregate_eligible": true,
   "aggregate_priority": 108,
   "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required.",
-  "matrix_order": 10
+  "matrix_order": 10,
+  "metric_labels": {
+    "overall": "Overall",
+    "table": "Tables",
+    "chart": "Charts",
+    "text_content": "Content faithfulness",
+    "text_formatting": "Semantic formatting",
+    "layout": "Visual grounding"
+  },
+  "metric_units": {
+    "overall": "percent",
+    "table": "percent",
+    "chart": "percent",
+    "text_content": "percent",
+    "text_formatting": "percent",
+    "layout": "percent"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "table": "higher",
+    "chart": "higher",
+    "text_content": "higher",
+    "text_formatting": "higher",
+    "layout": "higher"
+  }
 }

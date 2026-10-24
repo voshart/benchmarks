@@ -9,5 +9,24 @@
   "core": true,
   "family": "docparsing",
   "min_models": 6,
-  "min_organizations": 3
+  "min_organizations": 3,
+  "metric_labels": {
+    "overall": "DPB",
+    "text": "Text",
+    "formula": "Formula",
+    "tables": "Table"
+  },
+  "metric_units": {
+    "overall": "ratio",
+    "text": "ratio",
+    "formula": "ratio",
+    "tables": "ratio"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "text": "higher",
+    "formula": "higher",
+    "tables": "higher"
+  },
+  "note": "Preserve separately sourced historical and current leaderboard observations. Both use the same DPB evaluator/config snapshot; model prediction pipelines and individual run settings are not fully pinned."
 }
