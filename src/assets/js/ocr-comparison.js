@@ -15,7 +15,7 @@
  const link=(data,id,label)=>data.sources[id]?`<a href="${esc(data.sources[id].url)}" target="_blank" rel="noreferrer">${esc(label)}</a>`:esc(label);
 
  const observationLink=(data,observation,label)=>/^https?:\/\//.test(observation.source_url||'')?`<a href="${esc(observation.source_url)}" target="_blank" rel="noreferrer">${esc(label)}</a>`:link(data,observation.source_id,label);
- const scoreFmt=(value,unit)=>String(Number(value.toFixed(unit==='percent'?2:4)));
+ const scoreFmt=(value,unit)=>String(Number(value.toFixed(unit==='percent'?1:4)));
 
  function assumptions(options={}){return Object.fromEntries(Object.entries(defaults).map(([k,v])=>[k,finite(options[k])?Math.max(0,Math.min(k==='hourlyRate'?1e7:200000,options[k])):v]));}
  function deployment(data,model,options={}){
