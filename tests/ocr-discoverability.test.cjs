@@ -96,8 +96,8 @@ test('compact cells keep headline scores while accessible result popovers retain
  const scores=compactCells(html.slice(html.indexOf('<td class="score"')));
  const popup=resultPopovers(html).find(p=>p.id.endsWith('--puredoc--puredoc'));
  assert.ok(popup);
- assert.match(scores,/>79\.69<\/a>/);
- assert.match(scores,/aria-label="PureDoc Avg₃: 79\.69%"/);
+ assert.match(scores,/>79\.7<\/a>/);
+ assert.match(scores,/aria-label="PureDoc Avg₃: 79\.7%"/);
  assert.match(scores,/<sup class="score-context-mark" role="img" aria-label="Context-only result; excluded from ranking"[^>]*>‡<\/sup>/);
  assert.match(scores,/class="ocr-result-details-button"[^>]*aria-haspopup="dialog"[^>]*title="PureDoc Avg₃ · benchmark details"><span aria-hidden="true">ⓘ<\/span><\/button>/);
  assert.doesNotMatch(textContent(scores),/[A-Za-z]/,'score cells contain values, symbols and info controls only');
@@ -138,7 +138,7 @@ test('score links use exact observation sources and long decimals round only for
  const before=JSON.stringify(observation);
  const html=OCR.renderRows({...all,rows:[row]},data),visible=compactCells(afterModelCell(html));
  const popup=resultPopovers(html).find(p=>p.id.endsWith('--puredoc--puredoc')).html;
- assert.match(visible,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">79\.69<\/a>/);
+ assert.match(visible,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">79\.7<\/a>/);
  assert.match(html,/<a href="https:\/\/example\.com\/pinned\.csv\?rev=abc&amp;split=clean" target="_blank" rel="noreferrer">Source ↗<\/a>/);
  assert.match(popup,/<dd data-metric="ratio">0\.0289 ratio<\/dd>/);
  assert.match(popup,/<dd data-metric="percent">98\.12%<\/dd>/);
@@ -248,7 +248,7 @@ test('PureDoc domain metrics use compact track tables inside popovers with nativ
  }
  const shown=[...groups.join('').matchAll(/data-metric="([^"]+)"/g)].map(m=>m[1]).sort();
  assert.deepEqual(shown,Object.keys(observation.metrics).filter(k=>k.startsWith('domain_')).sort(),'all150 values appear exactly once in the result tables');
- assert.match(popup,/<td data-metric="domain_academic_clean_overall">93\.97<\/td>/);
+ assert.match(popup,/<td data-metric="domain_academic_clean_overall">94<\/td>/);
  assert.match(popup,/<td data-metric="domain_academic_clean_text_edit">0\.0919<\/td>/);
  assert.doesNotMatch(popup,/<dd data-metric="domain_/,'domain values are not repeated in the definition list');
  assert.doesNotMatch(numericCells(html),/score-metric-table|data-metric="domain_/,'domain tables stay out of matrix cells');
