@@ -1,26 +1,58 @@
-module.exports=function(config){
- const fs=require('node:fs'),crypto=require('node:crypto');
- config.addFilter('assetUrl',url=>url+'?v='+crypto.createHash('sha256').update(fs.readFileSync('src'+url)).digest('hex').slice(0,12));
- config.addPassthroughCopy({'src/assets':'assets'});
- const ocrComparison=require('./src/assets/js/ocr-comparison.js');
- config.addFilter('ocrHead',ocrComparison.renderHead);
- config.addFilter('ocrRows',ocrComparison.renderRows);
- const rankUI=require('./src/assets/js/rank-ui.js');
- const speech=require('./src/assets/js/speech.js');
- const speechMatrix=require('./src/assets/js/speech-matrix.js');
- config.addFilter('speechHead',speech.renderHead);
- config.addFilter('speechRows',speech.renderRows);
- config.addFilter('speechUnscored',speech.renderUnscored);
- config.addFilter('speechMatrixHead',speechMatrix.renderHead);
- config.addFilter('speechMatrixRows',speechMatrix.renderRows);
- config.addFilter('speechTiming',speechMatrix.renderTiming);
- config.addFilter('rate',value=>typeof value==='number'&&Number.isFinite(value)?value.toFixed(6).replace(/0+$/,'').replace(/\.$/,''):'—');
- config.addFilter('rankCell',rankUI.renderRank);
- config.addFilter('scoreTooltip',rankUI.scoreTooltip);
- config.addWatchTarget('data/');
- config.addWatchTarget('lib/');
- config.addFilter('money',v=>typeof v==='number'&&Number.isFinite(v)?v.toFixed(3).replace(/0+$/,'').replace(/\.$/,''):'—');
- config.addFilter('value', (v,unit)=> typeof v==='number'?(unit==='ratio'?v.toFixed(3):v.toFixed(1)):'—');
- config.addFilter('shade',(v,pair)=>!Number.isFinite(v)||!pair||pair[0]===null?'0%':pair[0]===pair[1]?'30%':String((30*Math.max(0,Math.min(1,(v-pair[0])/(pair[1]-pair[0])))).toFixed(1))+'%');
- return {dir:{input:'src',output:'_site',includes:'_includes',data:'_data'},htmlTemplateEngine:'njk',dataTemplateEngine:'njk'};
+module.exports = function (config) {
+  const fs = require('node:fs'),
+    crypto = require('node:crypto');
+  config.addFilter(
+    'assetUrl',
+    (url) =>
+      url +
+      '?v=' +
+      crypto
+        .createHash('sha256')
+        .update(fs.readFileSync('src' + url))
+        .digest('hex')
+        .slice(0, 12)
+  );
+  config.addPassthroughCopy({ 'src/assets': 'assets' });
+  const ocrComparison = require('./src/assets/js/ocr-comparison.js');
+  config.addFilter('ocrHead', ocrComparison.renderHead);
+  config.addFilter('ocrRows', ocrComparison.renderRows);
+  const rankUI = require('./src/assets/js/rank-ui.js');
+  const speech = require('./src/assets/js/speech.js');
+  const speechMatrix = require('./src/assets/js/speech-matrix.js');
+  config.addFilter('speechHead', speech.renderHead);
+  config.addFilter('speechRows', speech.renderRows);
+  config.addFilter('speechUnscored', speech.renderUnscored);
+  config.addFilter('speechMatrixHead', speechMatrix.renderHead);
+  config.addFilter('speechMatrixRows', speechMatrix.renderRows);
+  config.addFilter('speechTiming', speechMatrix.renderTiming);
+  config.addFilter('rate', (value) =>
+    typeof value === 'number' && Number.isFinite(value)
+      ? value.toFixed(6).replace(/0+$/, '').replace(/\.$/, '')
+      : '—'
+  );
+  config.addFilter('rankCell', rankUI.renderRank);
+  config.addFilter('scoreTooltip', rankUI.scoreTooltip);
+  config.addWatchTarget('data/');
+  config.addWatchTarget('lib/');
+  config.addFilter('money', (v) =>
+    typeof v === 'number' && Number.isFinite(v)
+      ? v.toFixed(3).replace(/0+$/, '').replace(/\.$/, '')
+      : '—'
+  );
+  config.addFilter('value', (v, unit) =>
+    typeof v === 'number' ? (unit === 'ratio' ? v.toFixed(3) : v.toFixed(1)) : '—'
+  );
+  config.addFilter('shade', (v, pair) =>
+    !Number.isFinite(v) || !pair || pair[0] === null
+      ? '0%'
+      : pair[0] === pair[1]
+        ? '30%'
+        : String((30 * Math.max(0, Math.min(1, (v - pair[0]) / (pair[1] - pair[0])))).toFixed(1)) +
+          '%'
+  );
+  return {
+    dir: { input: 'src', output: '_site', includes: '_includes', data: '_data' },
+    htmlTemplateEngine: 'njk',
+    dataTemplateEngine: 'njk'
+  };
 };

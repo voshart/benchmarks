@@ -9,5 +9,6 @@
   "core": false,
   "family": "chandra",
   "min_models": 6,
-  "min_organizations": 3
+  "min_organizations": 3,
+  "primary": false
 }

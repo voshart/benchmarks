@@ -44,5 +44,6 @@
     "blank_page": "higher",
     "blank_penalty": "lower"
   },
-  "aggregate_caveat": "Tiny evaluation corpus: OpenOCR uses only 20 pages; the comparative model count does not establish broad document coverage."
+  "aggregate_caveat": "Tiny evaluation corpus: OpenOCR uses only 20 pages; the comparative model count does not establish broad document coverage.",
+  "primary": false
 }

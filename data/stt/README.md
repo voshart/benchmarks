@@ -1,8 +1,8 @@
 # Speech-to-text evidence
 
-The expanded `/stt/` index contains 172 model configurations, 975 accuracy source rows in 11 protocols, 464 hardware/runtime throughput observations, nine response-latency measurements, 21 hourly tariff records and two token-rate configurations. It indexes published evidence; no transcription model was executed locally.
+This is the current speech schema and `speech-distinct-corpora-v1` ranking policy. Common evidence rules live in [AGENTS.md](../../AGENTS.md); the [maintenance guide](../../docs/maintenance.md) gives the update workflow. Run `npm run summary` for current counts. The index contains published evidence; no transcription model is executed by this repository.
 
-The page mirrors OCR's matrix, family coverage, source qualifications, release replay and filters. English, Long-form, Multilingual, Noise & accent, Small models, New research, Secondary, Local speed, Latency and Pricing expose the underlying observations. The default requires two primary families. Small models shows configurations with a reported download ≤1,000 MB or ≤1B parameters, including models without enough coverage for an index.
+The current page opens on English accuracy: the complete fixed seven-set WER panel, sorted by unrounded error with shared ranks for ties. One selector exposes complete protocols and individual datasets/languages. Models without a complete matched score appear in a separate expandable list, not as zero or last-place numeric ranks. Search, access, artifact-size and parameter filters, verified-release replay and deployment scenarios operate in the browser; initial English rows are rendered statically. Aggregate matrix calculations remain available in the shared adapter and tests, but do not order this landing table.
 
 ## Files and identity
 
@@ -22,7 +22,7 @@ The page mirrors OCR's matrix, family coverage, source qualifications, release r
 
 All model IDs match the shared `data/models/registry.json` with `topics: ["stt"]`. OCR excludes those identities from its catalog and reference cohorts. The exact Qwen `-hf` checkpoint, upstream model, hosted API and quantized runtime conversion are separate generations/configurations; missing evidence is not copied between them.
 
-## Core evidence and index
+## Aggregate adapter: core evidence and index
 
 The selected core families use disjoint speech corpora:
 
@@ -34,11 +34,11 @@ The selected core families use disjoint speech corpora:
 
 Every named mean component must be present, comparable and observed. The English panel requires one matched source; the FLEURS panel explicitly names each component's pinned language source. Missing languages cannot be filled from another corpus, an alternative protocol or an average over fewer languages. Extra columns leave the fixed means unchanged. Means are computed in JavaScript and never written into observed data. Reported launch/paper means remain exactly as published.
 
-Index is the unweighted mean of within-family percentile ranks, with midranks for ties. A mature family requires six scored configurations from three organizations. Runtime alternatives for the same weights identity cannot multiply a reference cohort. One selected variant per family contributes. Two mature families permit a provisional number; three remove only the coverage qualification; one remains unranked. The default display requires two primary families, independently of the reference cohorts.
+Index is the unweighted mean of within-family percentile ranks, with midranks for ties. A mature family requires six scored configurations from three organizations. Runtime alternatives for the same weights identity cannot multiply a reference cohort. One selected variant per family contributes. Two mature families permit a provisional number; three remove only the coverage qualification; one remains unranked. The aggregate matrix adapter defaults to two primary families, independently of the reference cohorts. The current page instead ranks the selected protocol or dataset and does not require aggregate coverage.
 
 Author, competitor, community, secondary and unclear-operator evidence qualifies the affected index and every dependent comparison cohort. Conflicting observations retain source preference and explicit reasons; they are never averaged. Undated availability qualifies current indices and is excluded at historical cutoffs. The accessible ◊ popover lists the actual reasons and every contributing language/component source. Assumed, incompatible and private/vendor-internal values cannot create coverage, maturity or rank. Search/access/size filters do not recalculate reference cohorts.
 
-The speech adaptation does not change OCR's thresholds, family eligibility, data or ranking behavior. The shared percentile functions are reused; speech defines its corpus selection and extra cohort qualifications separately.
+Speech and OCR have distinct thresholds and eligibility policies; follow the [current OCR methodology](../ocr/README.md) for OCR changes. The shared percentile functions are reused; speech defines its corpus selection and extra cohort qualifications separately.
 
 ## Exact sources and protocol limits
 
@@ -58,7 +58,7 @@ Private FFASR documentation was inspected; its public config exposed no scored r
 
 Download/artifact bytes, model parameters, installed package size and runtime RAM are distinct. Hub stored-tensor totals can differ from author architecture totals; source observations remain separate. No peak RAM or hardware cost is inferred.
 
-The 464 throughput observations keep hardware, backend, engine revision and exact sample/workload. Wall-time and compute-only RTFx remain distinct; model load is excluded from warm inference and shown separately when reported. H100 batch 128 is not a Mac single-stream comparison. Nine Moonshine paper observations measure end-of-utterance response latency on a MacBook M3 with an unspecified statistic; they do not establish p50/p95 or TTFT.
+Throughput observations keep hardware, backend, engine revision and exact sample/workload. Wall-time and compute-only RTFx remain distinct; model load is excluded from warm inference and shown separately when reported. H100 batch 128 is not a Mac single-stream comparison. Moonshine paper observations measure end-of-utterance response latency on a MacBook M3 with an unspecified statistic; they do not establish p50/p95 or TTFT.
 
 Official rates come from [Deepgram](https://deepgram.com/pricing), [AssemblyAI](https://www.assemblyai.com/pricing), [Gladia](https://www.gladia.io/pricing), [Mistral](https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02) and [Soniox](https://soniox.com/pricing). Every displayed price and numeric price sort uses USD. The [ECB reference rate](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) dated 2026-10-23 is EUR 1 = USD 1.1193: Gladia's EUR 0.16/hour async and EUR 0.68/hour real-time source tariffs display as approximately $0.1791 and $0.7611 per audio hour. Sorting retains the full conversion precision. Source tariffs, original amounts, tariff dates and the linked FX date remain in Details and data; payment-provider rates and fees may differ.
 
@@ -68,4 +68,16 @@ Release replay uses explicit availability statements, not paper dates, result da
 
 Remaining gaps include matched diarization and silence/hallucination tests, streaming latency distributions and peak RAM. Local reruns should pin model/data/scorer revisions and preserve raw predictions, uncertainty, timing boundaries and workload costs.
 
-Run `npm run validate`, `npm test` and `npm run build`. Never edit `_site/` directly.
+Run `npm run format` and `npm run build`; the build checks formatting, validates both topics and runs all tests. Never edit `_site/` directly.
+
+## Minimal observation and new protocols
+
+```json
+{"model":"existing-exact-stt-model-id","source_id":"verified-publication-id","metrics":{"wer":5.49},"evidence":"author_reported","status":"observed","verified_on":"2026-10-24","measurement_operator":"Model authors","source_model":"Exact published model label"}
+```
+
+These IDs and the value are illustrative. The `metrics` keys must be declared by the exact protocol (or its published mean field); retain nulls, uncertainty and source-native values. WER can exceed 100 because insertions count as errors. `evidence` and `status` are explicit; the source record requires a direct HTTPS URL, verification date, publication operator, measurement operator and a short supporting quote.
+
+Definitions in `tests/<id>.json` require a matching filename ID and source. Accuracy definitions use `task: "transcription"`, `direction: "lower"`, metric objects with exact dataset/split/source-column metadata, and a fixed `mean_metrics` list (or a declared summary/published mean). Timing definitions use `task: "throughput"` or `"latency"` and `core: false`; they have no accuracy result file.
+
+Add accuracy protocols to `config.accuracy_tests` and any appropriate matrix/small/secondary lists. New core membership requires explicit review of overlapping corpora and complete fixed panels; it is not an automatic consequence of adding observations. Accuracy, timing and deployment metadata cannot supply each other's missing values.
