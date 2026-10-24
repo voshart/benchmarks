@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const data=require('../lib/load.cjs').loadOCR(),Rank=require('../lib/ranking.cjs'),OCR=require('../src/assets/js/ocr-comparison.js');
 test('Gemini3.8 exact protocols and tariff retain their cells under configured column order',()=>{
- const result=Rank.build(data),row=result.rows.find(r=>r.id==='gemini-3-8-flash');assert.equal(result.columns.length,13);
+ const result=Rank.build(data,undefined,{min:0}),row=result.rows.find(r=>r.id==='gemini-3-8-flash');assert.equal(result.columns.length,13);
  assert.equal(row.scores['omniparse-datalab-overall-20261023'].value,92.9);
  const parse=row.scores['parsebench-published-9af4102'];assert.equal(parse.value,70.7);assert.equal(parse.metrics.high_overall,72.08);assert.equal(parse.metrics.low_overall,70.15);assert.match(parse.configuration,/Medium.*API-default/);
  const rf=row.scores['roboflow-ocr-202610'];assert.equal(rf.value,78.7);assert.equal(rf.metrics.low,72.8);

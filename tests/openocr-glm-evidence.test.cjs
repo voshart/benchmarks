@@ -27,7 +27,7 @@ test('new GLM observation changes only its eligible OpenOCR cohort through exist
  const keep=r=>!(r.model==='glm-5-3-flash'&&r.benchmark==='openocr-hard');
  without.records=without.records.filter(keep);without.rawRecords=without.rawRecords.filter(keep);
  delete without.resultsByKey['glm-5-3-flash|openocr-hard'];
- const before=build(without),after=build(data),prior=new Map(before.rows.map(r=>[r.id,r]));
+ const before=build(without,undefined,{min:0}),after=build(data,undefined,{min:0}),prior=new Map(before.rows.map(r=>[r.id,r]));
  const cohort=new Set(data.records.filter(r=>r.benchmark==='openocr-hard').map(r=>r.model));
  const changed=after.rows.filter(r=>r.rank!==prior.get(r.id).rank).map(r=>r.id).sort();
  assert.deepEqual(changed,[...cohort].sort(),'only the existing OpenOCR participants and GLM change numeric indices');

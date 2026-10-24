@@ -3,7 +3,7 @@
   "description": "Cross-benchmark scores, historical cohorts and documented prices.",
   "snapshot_date": "2026-10-22",
   "release_start": "2025-10-13",
-  "default_families": 0,
+  "default_families": 2,
   "min_core_for_rank": 3,
   "accent": "#637fa4",
   "provisional_note": "Published whole-document comparisons can contribute regardless of operator. One eligible family permits a provisional index. Each exact panel needs at least two distinct model identities; finite-cohort midrank percentiles and fixed per-model/family priorities prevent singleton perfect scores and duplicate-family votes. Small cohorts, limited coverage and source qualifications are disclosed.",
