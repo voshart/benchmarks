@@ -14,5 +14,6 @@
   "matrix_order": 0,
   "aggregate_eligible": true,
   "aggregate_priority": 102,
-  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required."
+  "aggregate_note": "Qualified whole-document comparison; normalized within its own protocol, at most one contribution per family. At least two distinct model identities required.",
+  "matrix_extra": true
 }

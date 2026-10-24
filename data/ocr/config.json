@@ -25,5 +25,87 @@
     "docparsing",
     "idp",
     "ndi"
-  ]
+  ],
+  "views": {
+    "structure": {
+      "tests": [
+        "omnidoc-v16",
+        "puredoc",
+        "docparsing"
+      ]
+    },
+    "robust": {
+      "tests": [
+        "wild",
+        "real5",
+        "drdoc"
+      ]
+    },
+    "multilingual": {
+      "tests": [
+        "mdp-private",
+        "mdp-public",
+        "more"
+      ]
+    },
+    "production": {
+      "tests": [
+        "ndi",
+        "idp"
+      ]
+    },
+    "recognition": {
+      "tests": [
+        "omnidoc-v10-formula",
+        "omnidoc-v15-gt-layout-moss",
+        "omnidoc-v16-gt-layout-moss",
+        "fintabnet-docling-150dpi",
+        "omnidoc-notes-nemotron",
+        "pubtabnet-xiaomi",
+        "unimer-test-xiaomi",
+        "chronicles-mature-xiaomi"
+      ],
+      "filter": "scored"
+    },
+    "understanding": {
+      "tests": [
+        "ocr-vqa-xiaomi"
+      ],
+      "filter": "scored"
+    },
+    "new": {
+      "tests": [
+        "omnidoc-v16",
+        "olmocr",
+        "wild",
+        "real5",
+        "mdp-public",
+        "parsebench-lighton-202610",
+        "fr-bench-lighton-202610",
+        "omnidoc-v15-gt-layout-moss",
+        "omnidoc-v16-gt-layout-moss",
+        "parsebench-nemotron-202608",
+        "indicvision-nemotron",
+        "moscar-nemotron",
+        "omnidoc-notes-nemotron",
+        "fintabnet-docling-150dpi",
+        "pubtabnet-xiaomi",
+        "unimer-test-xiaomi",
+        "chronicles-mature-xiaomi",
+        "ocr-vqa-xiaomi"
+      ],
+      "filter": "author_reported"
+    },
+    "secondary": {
+      "primary": false,
+      "filter": "scored"
+    }
+  },
+  "other_column": {
+    "id": "reported-other",
+    "short": "Other",
+    "label": "Other reported benchmark; exact protocol labeled",
+    "family": "reported-other",
+    "catch_all": true
+  }
 }
