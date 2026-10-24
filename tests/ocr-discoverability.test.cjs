@@ -149,7 +149,7 @@ test('score links use exact observation sources and long decimals round only for
  assert.ok(fallback.includes('href="'+data.sources[observation.source_id].url+'"'),'registered source URL remains the fallback');
  const template=fs.readFileSync(require.resolve('../src/ocr/index.njk'),'utf8');
  assert.match(popup,/Component values rounded for display; source data retains full precision/);
- assert.match(template,/Use ⓘ for benchmark details/);
+ assert.match(template,/ⓘ Source details · Prices in USD/);
 });
 
 
