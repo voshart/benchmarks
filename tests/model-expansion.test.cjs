@@ -14,7 +14,7 @@ test('every requested addition is discoverable without inventing core coverage',
 });
 test('Jina qualifies provisionally while LightOn task tests never manufacture rank families',()=>{
  const rows=build(data,data.config.snapshot_date,{min:0}).rows;
- const jina=rows.find(r=>r.id==='jina-ocr-v1');assert.equal(jina.coreCount,4);assert.equal(jina.rankStatus,'provisional');assert.ok(jina.provisionalReasons.some(r=>r.includes('author-reported')));
+ const jina=rows.find(r=>r.id==='jina-ocr-v1');assert.equal(jina.coreCount,5);assert.equal(jina.rankStatus,'provisional');assert.ok(jina.provisionalReasons.some(r=>r.includes('author-reported')));
  for(const size of ['0.8','1','4']){const row=rows.find(r=>r.id==='lightonocr-3-'+size+'b');assert.equal(row.coreCount,3);assert.ok(Number.isFinite(row.rank));assert.equal(row.count,1);assert.ok(row.rankContributions.every(c=>!c.benchmark.includes('gt-layout')));}
  const research=build(data,data.config.snapshot_date,{view:'new'});
  for(const id of ['jina-ocr-v1','lightonocr-3-4b','nemotron-parse-2','hiro-moss-ocr-0-3b'])assert.ok(research.rows.some(r=>r.id===id),id);
