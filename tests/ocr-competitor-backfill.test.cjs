@@ -48,3 +48,36 @@ test('Nemotron mode-specific quality and speed stay paired, multilingual soup st
  const recent=data.resultsByKey['nemotron-parse-2|moscar-nvidia-released-checkpoints-202610'][0];assert.equal(recent.metrics.overall,97.44);
  assert.equal(data.tests.find(t=>t.id==='moscar-nvidia-released-checkpoints-202610').core,false);
 });
+test('OXR source backfill keeps excluded categories, hosted deployments and altered scoring separate',()=>{
+ const result=build(data,undefined,{min:0}),get=id=>result.rows.find(r=>r.id===id);
+ for(const id of ['lightonocr-2-1b','lightonocr-1b-1025','deepseek-ocr-2','glm-ocr-zai-api']){
+  assert.equal(get(id).scores.olmocr,null);
+  assert.ok(get(id).rankContributions.some(c=>c.benchmark==='olmocr-no-headers-footers'));
+ }
+ assert.equal(get('glm-ocr').scores.olmocr.value,68.4);
+ assert.equal(data.models.find(m=>m.id==='glm-ocr-zai-api').access,'closed');
+ assert.equal(get('deepseek-ocr-2').scores['olmocr-no-headers-footers'].metrics.headers_footers,undefined);
+ for(const [id,variant] of [['falconocr','olmocr-falcon-paper-en'],['mineru2-5','olmocr-mineru-cdm-exprate']]){
+  assert.equal(get(id).scores.olmocr,null);
+  assert.ok(get(id).scores[variant]);
+  assert.ok(!get(id).rankContributions.some(c=>c.benchmark===variant),'one identity cannot create a comparative cohort');
+ }
+ assert.equal(data.resultsByKey['mineru2-5|olmocr-mineru-cdm-exprate'].length,2);
+ assert.equal(get('mineru-2-5-4').rank,null);
+ assert.equal(data.config.default_families,2);
+});
+test('RTX PRO 6000 observations stay visible without changing H100 speed, cost or quality',()=>{
+ const source='oxr-1-0-author-benchmarks',records=data.throughput.filter(r=>r.source_id===source);
+ const without={...data,throughput:data.throughput.filter(r=>r.source_id!==source)};
+ for(const r of records){
+  const model=data.models.find(m=>m.id===r.model),current=OCR.deployment(data,model),previous=OCR.deployment(without,model);
+  assert.equal(r.comparison_default,false);assert.equal(r.cost_eligible,false);
+  assert.deepEqual(current.speed,previous.speed);assert.deepEqual(current.reference,previous.reference);assert.deepEqual(current.cost,previous.cost);
+ }
+ const result=build(data,undefined,{min:0});
+ assert.deepEqual(result.rows.map(r=>[r.id,r.rank]),build(without,undefined,{min:0}).rows.map(r=>[r.id,r.rank]));
+ const subset={...result,rows:result.rows.filter(r=>['oxr-1-0','teleocr'].includes(r.id))};
+ const html=OCR.renderRows(subset,data);
+ for(const value of ['0.990373','100.972','557.77','0.135909','735.789','352.66'])assert.ok(html.includes(value),'exact timing value remains in details: '+value);
+ assert.match(html,/RTX PRO 6000 Blackwell/);
+});

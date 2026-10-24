@@ -1547,8 +1547,11 @@
     "title": "OXR-1.0 · author benchmark report",
     "url": "https://github.com/SoMarkAI/OXR/blob/62fbca8ef6c7c63b75b799fc8081f3eb6e667553/docs/benchmark.md",
     "kind": "author_reported",
-    "verified_on": "2026-10-23",
-    "note": "October 5 accuracy snapshot: full eight-category olmOCR and 1,651-page OmniDoc results. Other models’ quality rows are quotations, not new reproductions. SoMark also maintains DocParsingBench. Separate 100-page speed subset is not the accuracy corpus."
+    "verified_on": "2026-10-24",
+    "note": "October 5 OXR accuracy snapshot: its own full eight-category olmOCR and 1,651-page OmniDoc results. Peer quality rows quote published sources with different evaluation scopes; they are not new SoMark reproductions. SoMark also maintains DocParsingBench. The separate 21-model speed comparison uses one RTX PRO 6000 Blackwell and the same frozen 100-page workload; native decode tokens/s and end-to-end pages/s are distinct measurements.",
+    "revision": "62fbca8ef6c7c63b75b799fc8081f3eb6e667553",
+    "social_url": "https://x.com/somarkai/status/2112575002348503268",
+    "workload_manifest_url": "https://github.com/SoMarkAI/OXR/blob/62fbca8ef6c7c63b75b799fc8081f3eb6e667553/docs/frozen-100-pages.json"
   },
   "oxr-1-0-model": {
     "title": "OXR-1.0 · official model and license",
@@ -1577,5 +1580,88 @@
     "kind": "author_reported",
     "verified_on": "2026-10-23",
     "note": "Author changelog explicitly identifies August 21 v2 emission corrections, 76.92→76.69, and September 4 v3 updated weights, 76.69→77.50; prior weights remain in history. The pinned 76.69 observation belongs to v2. Current card/weights include v3 and must not be substituted. Historical exact weights/scorer SHA and first public release date remain unknown."
+  },
+  "olm-maintainer-components-f7cfe4c": {
+    "title": "olmOCR-bench maintainer table · pinned component evidence",
+    "url": "https://github.com/allenai/olmocr/blob/f7cfe4c22098b154c76b6ec950d1c0a464eecf8d/olmocr/bench/README.md",
+    "kind": "official",
+    "note": "Pinned repository f7cfe4c22098b154c76b6ec950d1c0a464eecf8d; README blob d1419ab9628d87cc767ca2d500edf02c6f67da1f. Publication is official; per-observation operator follows the explicit starred-author-report footnote.",
+    "verified_on": "2026-10-24"
+  },
+  "dots-ocr-author-olm-c0111ce": {
+    "title": "dots.ocr author card · olmOCR-bench result",
+    "url": "https://huggingface.co/rednote-hilab/dots.ocr/blob/c0111ce6bc07803dbc267932ffef0ae3a51dc951/README.md",
+    "kind": "author_reported",
+    "note": "Pinned model card c0111ce6bc07803dbc267932ffef0ae3a51dc951, section 3. The author removes header/footer output cells; the benchmark Headers and Footers category remains in the reported vector.",
+    "verified_on": "2026-10-24"
+  },
+  "qianfan-olm-paper-v1": {
+    "title": "Qianfan-OCR · full olmOCR author result",
+    "url": "https://arxiv.org/html/2603.13398v1#S6.SS1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-24",
+    "note": "Original Qianfan report, Table 3; all eight categories. Exact evaluation checkpoint, dataset/scorer revision and optional thinking configuration are unpinned."
+  },
+  "falcon-olm-english-paper-v1": {
+    "title": "FalconOCR · English-only olmOCR author result",
+    "url": "https://arxiv.org/html/2603.27365v1#S6.SS5",
+    "kind": "author_reported",
+    "verified_on": "2026-10-24",
+    "note": "Falcon Perception paper, Sections 6.5–6.6 and Table 10. Non-English documents are excluded; all eight categories remain. Exact Falcon checkpoint is not identified as 1.0 or 1.5."
+  },
+  "lighton2-olm-no-hf-be7c413": {
+    "title": "LightOnOCR 2 · pinned no-header/footer evaluation",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-2-1B/blob/be7c41313c30e940fe5571de59e5fabc779e00c8/.eval_results/olmocrbench.yaml",
+    "kind": "author_reported",
+    "verified_on": "2026-10-24",
+    "note": "olmOCR seven-category mean excluding headers/footers; H/F19.7 remains diagnostic only. Paper Appendix B: temperature0.2, top_p0.9, top_k0, three generations/page, maximum resolution1540, no retries or rotations. Paper Appendix C reports H/F19.74; YAML/OXR round it19.7. Keep each published vector intact.",
+    "revision": "be7c41313c30e940fe5571de59e5fabc779e00c8",
+    "original_source_url": "https://arxiv.org/html/2601.14251v1#S5.SS1",
+    "measurement_operator": "LightOn authors; paper Table1 own-model evaluation. YAML was transcribed by HF contributors."
+  },
+  "lighton1-olm-no-hf-7e3e7b0": {
+    "title": "LightOnOCR 1B · pinned no-header/footer evaluation",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-1B-1025/blob/7e3e7b0cb83e237e7d237af5a583a002ea632547/.eval_results/olmocrbench.yaml",
+    "kind": "author_reported",
+    "verified_on": "2026-10-24",
+    "note": "olmOCR seven-category mean excluding headers/footers; H/F35.5 remains diagnostic only. New exact1025 identity required; do not reuse LightOn2 or LightOn3. PaperTable1 Base99.5 versus YAML/OXR99.6 is a source discrepancy; retain YAML vector as one published observation with paper reference, do not silently substitute.",
+    "revision": "7e3e7b0cb83e237e7d237af5a583a002ea632547",
+    "original_source_url": "https://arxiv.org/html/2601.14251v1#S5.SS1",
+    "measurement_operator": "LightOn authors; paper Table1 own-model evaluation. YAML attributed to Bapt120."
+  },
+  "glm-api-olm-no-hf-2e85a62": {
+    "title": "GLM-OCR API · pinned no-header/footer evaluation",
+    "url": "https://huggingface.co/zai-org/GLM-OCR/blob/2e85a62840ccac27daa451df36c736c4636b8628/.eval_results/olmocrbench.yaml",
+    "kind": "community",
+    "verified_on": "2026-10-24",
+    "note": "olmOCR seven-category mean excluding headers/footers, hosted ZAI API. H/F95.8 diagnostic only. No exact backend/weights bridge; do not attach as canonical downloaded-weights GLM-OCR quality. Use distinct hosted identity or explicitly noncanonical context. Not a Z.ai author-reported result merely because the file resides on their model repo.",
+    "revision": "2e85a62840ccac27daa451df36c736c4636b8628",
+    "original_source_url": "https://huggingface.co/zai-org/GLM-OCR/blob/2e85a62840ccac27daa451df36c736c4636b8628/.eval_results/olmocrbench.yaml",
+    "measurement_operator": "API evaluation reported by HF user staghado; execution operator not independently established."
+  },
+  "lighton1-1025-pinned-card": {
+    "title": "LightOnOCR 1B · exact 1025 model card",
+    "url": "https://huggingface.co/lightonai/LightOnOCR-1B-1025/blob/7e3e7b0cb83e237e7d237af5a583a002ea632547/README.md",
+    "kind": "author_reported",
+    "verified_on": "2026-10-24",
+    "note": "Public Apache-2.0 weights; exact multilingual 1025 checkpoint, distinct from the GRPO, French, LightOn 2 and LightOn 3 variants. First release date not established in this audit."
+  },
+  "deepseek2-staghado-olm-no-hf": {
+    "title": "DeepSeek-OCR 2 · original no-header/footer rerun",
+    "url": "https://x.com/staghado/status/2016161372938117205",
+    "kind": "vendor_comparison",
+    "verified_on": "2026-10-24",
+    "note": "January 27 evaluation by Said Taghadouini, a LightOn author. The original chart excludes headers/footers and includes Base 99.6, omitted by later partial transcriptions. Exact run settings and weight/scorer commits are unpublished.",
+    "image_url": "https://pbs.twimg.com/media/G_rVlzsXsAEpc57.jpg",
+    "measurement_operator": "Said Taghadouini / LightOn author",
+    "source_date": "2026-01-27"
+  },
+  "mineru25-olm-cdm-paper-v1": {
+    "title": "MinerU2.5 · original CDM-ExpRate olmOCR variant",
+    "url": "https://arxiv.org/html/2509.22186v1",
+    "kind": "author_reported",
+    "verified_on": "2026-10-24",
+    "note": "Table 8 and Section 5.1.1 replace arXiv Math and Old Scans Math scoring with CDM ExpRate. The complete 75.2 vector is later quoted by AllenAI with an author-report asterisk. This is not a standard-scoring reproduction.",
+    "revision": "arXiv:2509.22186v1"
   }
 }
