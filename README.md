@@ -11,7 +11,7 @@ Static, data-driven [OCR](https://bench.voshart.com/ocr/) and [speech-to-text](h
 
 ## Local use
 
-Requires Node 20+; CI uses Node 22. Install the locked dependencies once:
+Requires a patched Node release (see `.nvmrc`); CI uses the same pin. Install the locked dependencies once:
 
 ```bash
 npm ci
