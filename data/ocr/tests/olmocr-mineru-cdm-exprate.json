@@ -1,0 +1,48 @@
+{
+  "id": "olmocr-mineru-cdm-exprate",
+  "short": "olm CDM",
+  "label": "olmOCR · MinerU CDM-ExpRate variant",
+  "source": "mineru25-olm-cdm-paper-v1",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "family": "olmocr",
+  "matrix_order": 3,
+  "aggregate_eligible": true,
+  "aggregate_priority": 100,
+  "scope": "Eight-category author aggregate with CDM ExpRate replacing standard arXiv Math and Old Scans Math scoring. Kept separate from standard olmOCR and no-header/footer results.",
+  "note": "Eight-category author aggregate with CDM ExpRate replacing standard arXiv Math and Old Scans Math scoring. Kept separate from standard olmOCR and no-header/footer results.",
+  "aggregate_note": "Separate whole-document protocol; at most one contribution per family. Requires at least two distinct model identities within this exact protocol; duplicated sources do not create a cohort.",
+  "metric_labels": {
+    "arxiv": "arXiv math · CDM ExpRate",
+    "base": "Base",
+    "headers_footers": "Headers / footers",
+    "long_tiny_text": "Long / tiny text",
+    "multi_column": "Multi-column",
+    "old_scans": "Old scans",
+    "old_scans_math": "Old-scan math · CDM ExpRate",
+    "tables": "Tables"
+  },
+  "metric_units": {
+    "arxiv": "percent",
+    "base": "percent",
+    "headers_footers": "percent",
+    "long_tiny_text": "percent",
+    "multi_column": "percent",
+    "old_scans": "percent",
+    "old_scans_math": "percent",
+    "tables": "percent"
+  },
+  "metric_directions": {
+    "arxiv": "higher",
+    "base": "higher",
+    "headers_footers": "higher",
+    "long_tiny_text": "higher",
+    "multi_column": "higher",
+    "old_scans": "higher",
+    "old_scans_math": "higher",
+    "tables": "higher"
+  }
+}

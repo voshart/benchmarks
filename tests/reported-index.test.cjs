@@ -36,7 +36,7 @@ test('search/access and parameters/speed/cost metadata never alter the index',()
  d.models.forEach((m,i)=>{m.parameters_million=10**i;m.download_size_mb=99999-i;});d.pricingByModel.a={usd_per_1000_pages:1e8};d.throughput=[{model:'a',pages_per_second:1e8}];assert.deepEqual(indexes(d),before);
 });
 test('all current models use unique family contributions; Chandra and Gemini receive actual qualified indices',()=>{
- const d=loadOCR(),r=Rank.build(d,undefined,{min:0});assert.equal(r.rows.filter(x=>x.rank!=null).length,161);
+ const d=loadOCR(),r=Rank.build(d,undefined,{min:0});assert.equal(r.rows.filter(x=>x.rank!=null).length,162);
  for(const row of r.rows){assert.equal(new Set(row.rankContributions.map(c=>c.family)).size,row.rankContributions.length);for(const c of row.rankContributions){assert.ok(c.cohortSize>=2);assert.ok(c.percentile>0&&c.percentile<100);}}
  const c=r.rows.find(x=>x.id==='chandra-2-5-api'),g=r.rows.find(x=>x.id==='gemini-3-8-flash');
  assert.ok(Math.abs(c.rank-83.33333333333333)<1e-10);assert.equal(c.rankStatus,'provisional');assert.deepEqual(c.rankContributions.map(x=>x.benchmark),['chandra-2-5-olm-no-hf']);

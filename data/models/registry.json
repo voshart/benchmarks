@@ -412,7 +412,8 @@
     "release_date": "2026-02-03",
     "release_provenance": "legacy_import",
     "access": "open",
-    "organization": "Z.ai"
+    "organization": "Z.ai",
+    "evidence_note": "The charted 75.2 no-header/footer result uses the hosted Z.ai API and is recorded separately as GLM-OCR (API). The open-model full-set observation remains separate."
   },
   {
     "id": "google-docai-ocr",
@@ -633,8 +634,10 @@
     "name": "LightOnOCR-2-1B",
     "release_date": null,
     "release_provenance": "unknown",
-    "access": "unknown",
-    "organization": null
+    "access": "open",
+    "organization": "LightOn AI",
+    "license": "Apache-2.0",
+    "source_id": "ocr-ref-fit-lightonocr-2-1b"
   },
   {
     "id": "lightonocr-3-0.8b",
@@ -5020,5 +5023,34 @@
     "source_id": "florin-parser-nano-v2-author-card",
     "configuration": "Historical corrected v2 run represented by the 76.69 row in pinned ParseBench 9af4102. KDL-derived parser with v2 Markdown-emission fixes; exact old weights, provider and scorer revisions unpinned.",
     "evidence_note": "AGPL-3.0 open-weight lineage. The author explicitly labels 76.69 as v2 and the later 77.50 weight update as v3. Current HF main is not asserted to be this historical evaluation checkpoint. Do not attach v3 scores or derive release date from the correction date."
+  },
+  {
+    "id": "lightonocr-1b-1025",
+    "name": "LightOnOCR-1B",
+    "organization": "LightOn AI",
+    "topics": [
+      "ocr"
+    ],
+    "access": "open",
+    "license": "Apache-2.0",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "lighton1-1025-pinned-card",
+    "configuration": "Exact LightOnOCR-1B-1025 multilingual checkpoint; no-header/footer evaluation.",
+    "evidence_note": "Distinct from GRPO/French variants and LightOnOCR 2/3. The original checkpoint suffix stays in details. No standard eight-category overall is inferred."
+  },
+  {
+    "id": "glm-ocr-zai-api",
+    "name": "GLM-OCR (API)",
+    "organization": "Z.ai",
+    "topics": [
+      "ocr"
+    ],
+    "access": "closed",
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "glm-api-olm-no-hf-2e85a62",
+    "configuration": "Hosted Z.ai API evaluation; exact backend revision and decoding settings unreported.",
+    "evidence_note": "The 75.2 source explicitly names the ZAI API and excludes headers/footers. No backend-to-open-weight equivalence or production tariff is inferred."
   }
 ]
