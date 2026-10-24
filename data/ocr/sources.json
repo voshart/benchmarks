@@ -1614,7 +1614,7 @@
     "url": "https://huggingface.co/lightonai/LightOnOCR-2-1B/blob/be7c41313c30e940fe5571de59e5fabc779e00c8/.eval_results/olmocrbench.yaml",
     "kind": "author_reported",
     "verified_on": "2026-10-24",
-    "note": "olmOCR seven-category mean excluding headers/footers; H/F19.7 remains diagnostic only. Paper Appendix B: temperature0.2, top_p0.9, top_k0, three generations/page, maximum resolution1540, no retries or rotations. Paper Appendix C reports H/F19.74; YAML/OXR round it19.7. Keep each published vector intact.",
+    "note": "Seven-category olmOCR aggregate excluding headers/footers. Original paper settings: temperature 0.2, top_p 0.9, top_k 0, three generations per page, 1540 px maximum resolution, no retries or rotations. Appendix C prints H/F 19.74; the pinned evaluation file rounds it to 19.7.",
     "revision": "be7c41313c30e940fe5571de59e5fabc779e00c8",
     "original_source_url": "https://arxiv.org/html/2601.14251v1#S5.SS1",
     "measurement_operator": "LightOn authors; paper Table1 own-model evaluation. YAML was transcribed by HF contributors."
@@ -1624,7 +1624,7 @@
     "url": "https://huggingface.co/lightonai/LightOnOCR-1B-1025/blob/7e3e7b0cb83e237e7d237af5a583a002ea632547/.eval_results/olmocrbench.yaml",
     "kind": "author_reported",
     "verified_on": "2026-10-24",
-    "note": "olmOCR seven-category mean excluding headers/footers; H/F35.5 remains diagnostic only. New exact1025 identity required; do not reuse LightOn2 or LightOn3. PaperTable1 Base99.5 versus YAML/OXR99.6 is a source discrepancy; retain YAML vector as one published observation with paper reference, do not silently substitute.",
+    "note": "Seven-category olmOCR aggregate excluding headers/footers. Exact multilingual 1025 checkpoint. The pinned evaluation file reports Base 99.6; original paper Table 1 prints 99.5. The displayed vector follows the pinned file. H/F 35.5 is diagnostic and excluded from overall.",
     "revision": "7e3e7b0cb83e237e7d237af5a583a002ea632547",
     "original_source_url": "https://arxiv.org/html/2601.14251v1#S5.SS1",
     "measurement_operator": "LightOn authors; paper Table1 own-model evaluation. YAML attributed to Bapt120."
@@ -1634,7 +1634,7 @@
     "url": "https://huggingface.co/zai-org/GLM-OCR/blob/2e85a62840ccac27daa451df36c736c4636b8628/.eval_results/olmocrbench.yaml",
     "kind": "community",
     "verified_on": "2026-10-24",
-    "note": "olmOCR seven-category mean excluding headers/footers, hosted ZAI API. H/F95.8 diagnostic only. No exact backend/weights bridge; do not attach as canonical downloaded-weights GLM-OCR quality. Use distinct hosted identity or explicitly noncanonical context. Not a Z.ai author-reported result merely because the file resides on their model repo.",
+    "note": "Seven-category olmOCR aggregate excluding headers/footers. Community evaluation of the hosted Z.ai API, reported by HF user staghado. Exact backend revision and settings are unknown. Hosting the file in the Z.ai model repository does not establish Z.ai as the evaluator.",
     "revision": "2e85a62840ccac27daa451df36c736c4636b8628",
     "original_source_url": "https://huggingface.co/zai-org/GLM-OCR/blob/2e85a62840ccac27daa451df36c736c4636b8628/.eval_results/olmocrbench.yaml",
     "measurement_operator": "API evaluation reported by HF user staghado; execution operator not independently established."
