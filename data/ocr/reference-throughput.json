@@ -34,7 +34,7 @@
       "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Qwen3VLForConditionalGeneration;2B class;28-layer2048-wide decoder. Full-page image to Markdown, not layout/crop pipeline. Full-page dense autoregressive vision-to-Markdown class; OCR fine-tuning/output lengths change performance. No same-checkpoint measurement. H100 full-page reference models: dots.ocr0.88,Chandra1.7,olmOCR2.54 pages/s. The broad range is a subjective pipeline-class allowance, NOT a parametric fit or same-architecture transfer.",
       "confidence": "low",
       "low": 0.2,
-      "high": 4.0,
+      "high": 4,
       "fit_class": "small_pinned_weights_runtime_conditional",
       "checkpoint_bytes": 4255064064
     },
@@ -96,7 +96,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
       "confidence": "low",
       "low": 0.2,
-      "high": 4.0,
+      "high": 4,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -196,7 +196,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
       "confidence": "low",
       "low": 0.4,
-      "high": 5.0,
+      "high": 5,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -214,7 +214,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
       "confidence": "low",
       "low": 0.1,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "small_pinned_weights_runtime_conditional",
       "checkpoint_bytes": 515034240
     },
@@ -246,7 +246,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
       "confidence": "low",
       "low": 0.2,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "documented_runtime_memory_requirement"
     },
     {
@@ -262,7 +262,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
       "confidence": "low",
       "low": 0.3,
-      "high": 4.0,
+      "high": 4,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -312,7 +312,7 @@
       "basis": "Native H100 source reports3.52pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
       "confidence": "low",
       "low": 1.4,
-      "high": 7.0,
+      "high": 7,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -401,7 +401,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
       "confidence": "low",
       "low": 0.2,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "runtime_fit_unverified"
     },
     {
@@ -566,7 +566,7 @@
       "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
       "basis": "Native H100 source reports2.54pages/s, but not this identical workload/board/batch. Apply an explicitly judgmental0.4–2× workload envelope. For a1k–2.5k baseline output budget,1k–3k target and30–80% decode share, simple fixed-plus-decode work gives roughly0.38–1.92×. This is a sensitivity scenario, not measured token statistics or empirical interval coverage. Original resolution/concurrency and host effects can exceed it.",
       "confidence": "low",
-      "low": 1.0,
+      "low": 1,
       "high": 5.1,
       "fit_class": "reported_single_gpu_configuration"
     },
@@ -583,7 +583,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
       "confidence": "low",
       "low": 0.2,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "runtime_fit_unverified"
     },
     {
@@ -759,7 +759,7 @@
       "basis": "Retained broad H100 family envelope for the common typical-page planning workload; no new precision is implied. Qwen3_5ForConditionalGeneration;9B language decoder,32layers;3GatedDeltaNet blocks per full-attention block; vision encoder.9B checkpoint is not MoE despite broad family marketing. Full-page multimodal generation class; hybridDeltaNet mismatch explicitly prevents close-family claim. Nonthinking OCR, optimized serving. Text runtime evidence is context only. H100 full-page reference models: dots.ocr0.88,Chandra1.7,olmOCR2.54 pages/s. The broad range is a subjective pipeline-class allowance, NOT a parametric fit or same-architecture transfer.",
       "confidence": "low",
       "low": 0.1,
-      "high": 4.0,
+      "high": 4,
       "fit_class": "small_named_checkpoint_unpinned"
     },
     {
@@ -795,7 +795,7 @@
       ],
       "fit": "About71.9GB checkpoint tensors leave limited80GB headroom for vision/KV/workspace. No guaranteed batched fit; a tested lower-precision or restricted-context setup is required before a numeric reference estimate. About 71.9 decimal GB of weights; runtime, vision activations, KV cache and graphs may exhaust remaining space. Batch 1 and bounded visual/context budgets are necessary but not sufficient proof. Native tensor storage≈71.904GB decimal, not peak VRAM.",
       "basis": "Original observations and configuration notes remain in Details.",
-      "checkpoint_bytes": 71903645408.0,
+      "checkpoint_bytes": 71903645408,
       "fit_class": "borderline_35b_bf16"
     },
     {
@@ -821,7 +821,7 @@
       ],
       "fit": "Native checkpoint tensors occupy about360GB before KV cache/vision/workspace: beyond80GB. Active MoE parameters do not reduce resident weights. Quantized/offloaded alternatives are not silently substituted. Published native checkpoint exceeds one 80GB GPU. Multi-GPU, offload, or a distinct quantized artifact requires a separately labeled scenario; active MoE parameters do not determine resident weights. Native tensor storage≈360.0GB decimal, not peak VRAM.",
       "basis": "Original observations and configuration notes remain in Details.",
-      "checkpoint_bytes": 359999963128.0,
+      "checkpoint_bytes": 359999963128,
       "fit_class": "native_checkpoint_exceeds_reference"
     },
     {
@@ -917,7 +917,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
       "confidence": "low",
       "low": 0.05,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "small_pinned_weights_runtime_conditional",
       "checkpoint_bytes": 512969856
     },
@@ -997,7 +997,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original hardware timing is context only, not a measured H100 ratio. The old direct-model/serial scenarios are retained separately in Details, not substituted for this warm reference throughput range.",
       "confidence": "low",
       "low": 0.1,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "small_pinned_weights_runtime_conditional",
       "checkpoint_bytes": 1746877568
     },
@@ -1053,7 +1053,7 @@
       "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact model source reports0.13s/image on200mixed text images. Start with reciprocal7.692images/s, then apply a judgmental0.25–2× allowance for page complexity and round outward. This does not reclassify the image test as measured document throughput.",
       "confidence": "low",
       "low": 1.9,
-      "high": 37.0,
+      "high": 37,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -1070,8 +1070,8 @@
       "fit": "Small/medium model or pipeline assumed resident on80GB under the stated workload. This is a planning fit, not a measured peak-VRAM certification; batching must stay within memory. Existing single GPU A100/H100/H20 evidence supports feasibility only in its reported runtime, precision and image/batch profile; not proof of all H100 SXM workloads.",
       "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact model source reports0.25s/image on200mixed text images. Start with reciprocal4images/s, then apply a judgmental0.25–2× allowance for page complexity and round outward. This does not reclassify the image test as measured document throughput.",
       "confidence": "low",
-      "low": 1.0,
-      "high": 18.0,
+      "low": 1,
+      "high": 18,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -1089,7 +1089,7 @@
       "basis": "Transfer the already broad A100 page scenario with an assumed1–2.3× H100 pipeline band. Paired author evidence varies with batching; CPU/layout work prevents a universal accelerator multiplier. Existing workload uncertainty is retained rather than double-counted. Exact model source reports0.29s/image on200mixed text images. Start with reciprocal3.448images/s, then apply a judgmental0.25–2× allowance for page complexity and round outward. This does not reclassify the image test as measured document throughput.",
       "confidence": "low",
       "low": 0.8,
-      "high": 16.0,
+      "high": 16,
       "fit_class": "reported_single_gpu_configuration"
     },
     {
@@ -1120,7 +1120,7 @@
       "confidence": "low",
       "path": "cpu",
       "low": 0.5,
-      "high": 5.0,
+      "high": 5,
       "fit_class": "cpu_or_gpu_backend_unverified"
     },
     {
@@ -1138,7 +1138,7 @@
       "basis": "H100 whole-page pipeline-class scenario, not a measured hardware ratio. Known H100 peers span dots.ocr0.88, Chandra1.7, olmOCR2 2.54 and LightOn2 5.71 pages/s on their source workloads. The selected broad range accounts for serial-to-batched transfer, different encoders/token generation and host work; no parameter-only scaling. Exact-model original timing is retained only as context because its consumer/H20 hardware, integration or GPU count is not a matched H100 experiment. ",
       "confidence": "low",
       "low": 0.2,
-      "high": 3.0,
+      "high": 3,
       "fit_class": "small_pinned_weights_runtime_conditional",
       "checkpoint_bytes": 1705971840
     },
@@ -1327,6 +1327,26 @@
       "fit": "Released BF16 runtime measured on one H10080GB; native double-pass configuration.",
       "basis": "Existing project0.4–2x workload envelope rounded outward, not statistical bounds. Source2078preparedpages,concurrency256 versus targetup16queuedpages/1000–3000totaloutputtokens. Excludes preparation/startup/warmup/finalwrites; includes 35 token-limited responses. Do not use triple-pass quality with this mode speed.",
       "fit_class": "reported_single_gpu_configuration"
+    },
+    {
+      "model": "oxr-1-0",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "as_of": "2026-10-24",
+      "source_ids": [
+        "oxr-1-0-author-benchmarks",
+        "ocr-plan-paddleocr-vl-1-6",
+        "ocr-speed-lighton2-1403-h100"
+      ],
+      "fit": "Assumes OXR-1.0 fits on one H100 80GB without offload, with compatible native inference pipeline. No measured H100 OXR run or peak-VRAM certification; treat as a planning scenario.",
+      "basis": "Cross-model, same-GPU ratio transfer: OXR 0.990373 pages/s divided by PaddleOCR-VL-1.6 0.690952 pages/s on SoMark's RTX PRO 6000 Blackwell 100-page workload = 1.433×. Multiply by the existing PaddleOCR-VL-1.6 H100 planning range 0.5–3.2 pages/s to obtain 0.72–4.59 pages/s. This is a heuristic family/workload transfer, not an H100 measurement, fitted hardware factor, statistical confidence interval, or guaranteed performance. OXR author ran both peers; the Paddle H100 envelope derives from different Paddle series/workloads. RTX tests use a frozen 100-page subset; H100 reference assumes warm queued pages up to 16 concurrent requests.",
+      "confidence": "low",
+      "low": 0.72,
+      "high": 4.59,
+      "fit_class": "cross_model_same_gpu_ratio_transfer",
+      "source_measurement_pages_per_second": 0.990373,
+      "anchor_model": "paddleocr-vl-1-6",
+      "anchor_measurement_pages_per_second": 0.690952
     }
   ]
 }
