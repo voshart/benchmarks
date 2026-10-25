@@ -57,7 +57,7 @@ test('GLM OpenOCR receipt retains the exact hard corpus, zero results, and sourc
   );
 });
 
-test('new GLM observation changes only its eligible OpenOCR cohort through existing family weighting', () => {
+test('GLM evidence propagates through connected ratings without rewriting other measurements', () => {
   const data = loadOCR(),
     without = structuredClone(data);
   const keep = (r) => !(r.model === 'glm-5-3-flash' && r.benchmark === 'openocr-hard');
@@ -74,14 +74,16 @@ test('new GLM observation changes only its eligible OpenOCR cohort through exist
     .filter((r) => r.rank !== prior.get(r.id).rank)
     .map((r) => r.id)
     .sort();
-  assert.deepEqual(
-    changed,
-    [...cohort].sort(),
-    'only the existing OpenOCR participants and GLM change numeric indices'
+  assert.ok(changed.includes('glm-5-3-flash'));
+  assert.ok(
+    changed.some((id) => !cohort.has(id)),
+    'shared opponents propagate rating updates'
   );
+  assert.ok(changed.every((id) => after.rows.find((r) => r.id === id).rank !== null));
   const glm = after.rows.find((r) => r.id === 'glm-5-3-flash');
   assert.deepEqual(glm.rankContributions.map((c) => c.family).sort(), ['openocr', 'puredoc']);
-  assert.equal(glm.rank, glm.rankContributions.reduce((sum, c) => sum + c.percentile, 0) / 2);
+  assert.equal(glm.rankMethod, 'pairwise');
+  assert.ok(Number.isFinite(glm.rank) && glm.rank > 0 && glm.rank < 100);
   assert.equal(glm.rankStatus, 'provisional');
   assert.match(glm.rankExplanation, /20 pages/);
   assert.equal(glm.scores.olmocr, null, 'small hard subset is not imported as full olmOCR-Bench');

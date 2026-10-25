@@ -48,7 +48,7 @@ test('browser renders updated snapshot dates, source links, contextual prices an
   );
   await new Promise((resolve) => setImmediate(resolve));
   assert.equal(element('historyDate').textContent, '2026-11-13');
-  assert.equal(element('coverage').value, '2');
+  assert.equal(element('coverage').value, '0');
   element('coverage').value = '0';
   element('coverage').handlers.change();
   assert.match(element('matrixBody').innerHTML, /Service \$4\.00/);
@@ -129,20 +129,20 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
   const expected = OCRComparison.enrich(result, data),
     all = BenchmarkRank.build(data, data.config.snapshot_date, { min: 0 });
   const original = ids();
-  assert.equal(data.config.default_families, 2);
-  assert.equal(element('coverage').value, '2');
+  assert.equal(data.config.default_families, 0);
+  assert.equal(element('coverage').value, '0');
   assert.deepEqual(
     result.rows,
-    all.rows.filter((row) => row.count >= 2),
+    all.rows,
     'default preserves surviving ranks, scores and contributions'
   );
   assert.deepEqual(
     original,
     result.rows.map((row) => row.id)
   );
-  assert.ok(original.length < all.rows.length);
-  assert.equal(original.includes('chandra-2-5-api'), false);
-  assert.equal(original.includes('gemini-4-argon'), false);
+  assert.equal(original.length, all.rows.length);
+  assert.equal(original.includes('chandra-2-5-api'), true);
+  assert.equal(original.includes('gemini-4-argon'), true);
   for (const key of [
     'model',
     'speed',
@@ -191,13 +191,13 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
   assert.ok(ids().includes('gemini-4-argon'));
   element('coverage').value = '2';
   element('coverage').handlers.change();
-  assert.equal(ids().length, original.length);
+  assert.equal(ids().length, all.rows.filter((r) => r.count >= 2).length);
   assert.equal(ids().includes('chandra-2-5-api'), false);
   element('modelSearch').value = 'Chandra 2.5';
   element('modelSearch').handlers.input();
   await new Promise((resolve) => setTimeout(resolve, 130));
   assert.equal(element('coverage').value, '0');
-  assert.deepEqual(ids(), ['chandra-2-5-api', 'datalab-accurate-20261020']);
+  assert.deepEqual(ids().sort(), ['chandra-2-5-api', 'datalab-accurate-20261020'].sort());
   assert.match(element('matrixBody').innerHTML, /Reported benchmark results/);
   assert.match(element('matrixBody').innerHTML, /86.9/);
   assert.match(element('matrixBody').innerHTML, /92.7/);
@@ -212,7 +212,7 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
     'clearing search retains the widened coverage until Reset'
   );
   element('ocrReset').handlers.click();
-  assert.equal(element('coverage').value, '2');
+  assert.equal(element('coverage').value, '0');
   assert.equal(element('modelSearch').value, '');
   assert.deepEqual(ids(), original);
   element('access').value = 'open';
@@ -229,6 +229,6 @@ test('OCR browser header sorting, assumptions, filters, history, and reset stay 
   assert.equal(element('ocrHourlyRate').value, 1);
   assert.equal(element('ocrInputTokens').value, 1000);
   assert.equal(element('historyDate').textContent, data.config.snapshot_date);
-  assert.equal(element('coverage').value, '2');
+  assert.equal(element('coverage').value, '0');
   assert.deepEqual(ids(), original);
 });

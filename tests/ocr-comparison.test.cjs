@@ -258,7 +258,7 @@ test('OCR speed details retain input, configuration and concurrency, with access
   const head = OCR.renderHead(result, { sortKey: 'speed', sortDirection: 'desc' });
   assert.match(head, /aria-sort="descending"/);
   assert.match(head, /<button type="button" class="column-sort" data-ocr-sort="speed"/);
-  assert.match(head, /Quality only; speed and cost never affect this index/);
+  assert.match(head, /Speed and cost do not affect the rating/);
 });
 
 test('OCR throughput validation rejects source/identity/unit/eligibility mistakes', () => {

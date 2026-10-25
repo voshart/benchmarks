@@ -78,8 +78,9 @@
       { id: 'model', short: 'Model', label: 'Model name' },
       {
         id: 'rank',
-        short: 'Rank index',
-        label: 'Quality only; speed and cost never affect this index'
+        short: 'Rating',
+        label:
+          'Estimated quality from shared benchmark comparisons. Higher is better; not an accuracy percentage. Open ◊ for evidence. Speed and cost do not affect the rating.'
       },
       {
         id: 'speed',

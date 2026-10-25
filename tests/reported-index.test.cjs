@@ -127,17 +127,14 @@ test('search/access and parameters/speed/cost metadata never alter the index', (
   d.throughput = [{ model: 'a', pages_per_second: 1e8 }];
   assert.deepEqual(indexes(d), before);
 });
-test('all current models use unique family contributions; Chandra and Gemini receive actual qualified indices', () => {
+test('current ratings count distinct comparison families and preserve Chandra and Gemini evidence', () => {
   const d = loadOCR(),
     r = Rank.build(d, undefined, { min: 0 });
   for (const row of r.rows) {
-    assert.equal(
-      new Set(row.rankContributions.map((c) => c.family)).size,
-      row.rankContributions.length
-    );
+    assert.equal(new Set(row.rankContributions.map((c) => c.family)).size, row.coreCount);
     for (const c of row.rankContributions) {
       assert.ok(c.cohortSize >= 2);
-      assert.ok(c.percentile > 0 && c.percentile < 100);
+      assert.ok(Number.isFinite(c.observation.value));
     }
   }
   const c = r.rows.find((x) => x.id === 'chandra-2-5-api'),

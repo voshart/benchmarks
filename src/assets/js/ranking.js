@@ -1,9 +1,13 @@
 /* Shared pure ranking engine: CommonJS + browser global. */
 (function (root, make) {
-  const api = make();
+  const api = make(
+    typeof module === 'object' && module.exports
+      ? require('./pairwise-ranking.js')
+      : root.BenchmarkPairwise
+  );
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.BenchmarkRank = api;
-})(globalThis, () => {
+})(globalThis, (Pairwise) => {
   const valid = (value) => typeof value === 'number' && Number.isFinite(value);
   const releases = (models, date, latest) =>
     models.filter((m) => (m.release_date ? m.release_date <= date : date >= latest));
@@ -30,7 +34,7 @@
     vendor_internal: 8
   };
 
-  function choose(data, model, test, preferPublication = false) {
+  function choose(data, model, test, preferPublication = false, comparableOnly = false) {
     const priority = (observation) =>
       evidenceOrder[
         preferPublication
@@ -39,7 +43,7 @@
       ] ?? 6;
     return (
       (data.resultsByKey[model + '|' + test] || [])
-        .filter(observed)
+        .filter(comparableOnly ? rankable : observed)
         .slice()
         .sort((a, b) => priority(a) - priority(b))[0] || null
     );
@@ -129,6 +133,10 @@
     const access = opts.access || 'all',
       query = (opts.query || '').trim().toLowerCase();
     const models = latestByLine(releases(data.models, cutoff, data.config.snapshot_date));
+    const pairwise =
+      data.config.rank_policy_version === 4
+        ? Pairwise.build(data, models, choose, qualification)
+        : null;
     const expanded = data.config.reported_index === true;
     const core = data.tests.filter((test) => test.core || (expanded && test.aggregate_eligible));
     // Select one mature variant for each family, globally, before applying UI filters.
@@ -299,7 +307,8 @@
           rankExplanation,
           rankContributions: contributions.map(({ cohort, ...item }) => item),
           price: data.pricingByModel[model.id]?.usd_per_1000_pages ?? null,
-          scores
+          scores,
+          ...(pairwise?.rows.get(model.id) || {})
         };
       })
       .filter(
@@ -339,7 +348,7 @@
       rows,
       columns: show,
       ranges,
-      matureCount: new Set(eligible.map((item) => item.test.family)).size,
+      matureCount: pairwise?.familyCount ?? new Set(eligible.map((item) => item.test.family)).size,
       coreTotal: new Set(core.map((test) => test.family)).size
     };
   }

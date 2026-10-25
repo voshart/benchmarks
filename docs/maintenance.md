@@ -8,7 +8,7 @@ Read [AGENTS.md](../AGENTS.md) for common evidence rules. Current topic policies
 2. Add a source to `data/<topic>/sources.json` if the publication is new. Preserve pinned revisions, verification date, provenance and unresolved limitations.
 3. Add a model to `data/models/registry.json` only if that exact configuration is new. Speech models require `topics: ["stt"]`; OCR models use `topics: ["ocr"]` or the inherited absent-topic convention. Verify release availability separately from the result date.
 4. Append one observation to `data/<topic>/results/<protocol-id>.jsonl`. Reuse the exact existing protocol only when the dataset, split, metric and execution conditions are comparable. Preserve alternate sources. See the topic examples.
-5. Run `npm run format` and `npm run build`. Review source selection and any changed comparison cohorts; new eligible measurements can legitimately change existing percentiles. Publish following AGENTS.md.
+5. Run `npm run format` and `npm run build`. Review source selection and any changed comparison cohorts; new eligible measurements can legitimately change connected model ratings. Publish following AGENTS.md.
 
 Most score updates touch an observation file and, when needed, a source and model record. No renderer or test-count adjustment should be needed.
 
@@ -18,21 +18,21 @@ Use a descriptive stable ID. Create `data/<topic>/tests/<id>.json` and the match
 
 Start with the closest compatible definition, then check every field against the topic schema. Declare the exact primary metric, its unit/direction, family and source. Make new protocols secondary and ineligible until comparability is established. Do not inherit eligibility merely because a result appears in a published table.
 
-For OCR, `primary`, `coverage` and `matrix_extra` belong in the definition. Specialized view membership and editorial family order belong in `data/ocr/config.json`. A normal new protocol needs no JavaScript changes. Speech selection lists live in `data/stt/config.json`; aggregate panels require deliberate review of corpus overlap and completeness.
+For OCR, `primary` and `matrix_extra` control columns. Coverage counts usable comparison families under policy v4. Specialized view membership and editorial family order belong in `data/ocr/config.json`. A normal new protocol needs no JavaScript changes. Speech selection lists live in `data/stt/config.json`; aggregate panels require deliberate review of corpus overlap and completeness.
 
 ## Change another kind of evidence
 
-| Change                                    | Edit                                                                                                           |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Model identity, access, release, lineage  | `data/models/registry.json` and the relevant source record                                                     |
-| Page/hour tariff                          | Topic `pricing.jsonl`; preserve the published currency/unit and configuration                                  |
-| Token tariff                              | Topic `pricing-tokens.jsonl`; never invent page/hour usage                                                     |
-| Measured speed                            | Topic `throughput.jsonl`, plus the exact workload definition when required                                     |
-| Assumed OCR speed/cost                    | `data/ocr/reference-throughput.json` or `throughput-estimates.jsonl`; preserve measured evidence separately    |
-| Speech artifact size or response latency  | `data/stt/sizes.jsonl` or `latency.jsonl`                                                                      |
-| OCR display membership, coverage or order | Benchmark definitions and `data/ocr/config.json`                                                               |
-| Ranking formula                           | Shared `ranking.js`, topic adaptation, relevant config, topic methodology and fixture tests in the same change |
-| Presentation                              | Topic template, shared CSS or the relevant rendering module                                                    |
+| Change                                    | Edit                                                                                                                                      |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Model identity, access, release, lineage  | `data/models/registry.json` and the relevant source record                                                                                |
+| Page/hour tariff                          | Topic `pricing.jsonl`; preserve the published currency/unit and configuration                                                             |
+| Token tariff                              | Topic `pricing-tokens.jsonl`; never invent page/hour usage                                                                                |
+| Measured speed                            | Topic `throughput.jsonl`, plus the exact workload definition when required                                                                |
+| Assumed OCR speed/cost                    | `data/ocr/reference-throughput.json` or `throughput-estimates.jsonl`; preserve measured evidence separately                               |
+| Speech artifact size or response latency  | `data/stt/sizes.jsonl` or `latency.jsonl`                                                                                                 |
+| OCR display membership, coverage or order | Benchmark definitions and `data/ocr/config.json`                                                                                          |
+| Ranking formula                           | Shared `ranking.js`, OCR `pairwise-ranking.js`, topic adaptation, relevant config, topic methodology and fixture tests in the same change |
+| Presentation                              | Topic template, shared CSS or the relevant rendering module                                                                               |
 
 The OCR deployment module selects speed/cost evidence independently of quality ranking. The OCR comparison module renders it; `bench.js` handles browser events. Speech similarly separates deployment estimates, protocol comparisons, matrix aggregation and page events. Keep these boundaries when adding behavior.
 
@@ -45,3 +45,12 @@ For behavioral changes, prefer small fixtures that exercise missing values, ties
 For a structural refactor, compare rankings, selected sources, deployment calculations and rendered rows before and after across current/historical views. Check the local pages with JavaScript enabled and disabled when templates or browser dependencies change. Keep evidence values untouched. CI runs the same build gate on pushes and pull requests.
 
 The [README](../README.md#deployment) records Cloudflare settings. Verify the newest commit's CI and production deployment. Confirm `/ocr/` and `/stt/`, their data endpoints, default rows, filters and source/details controls.
+
+## OCR rating changes
+
+Keep the visible table compact: rating explanations belong in the existing popover, not new
+control panels. Policy changes require tests for missing comparisons, source conflicts, identity
+clones, repeated family variants, disconnected components, historical cohorts and browser/build
+parity. Run `node scripts/audit-ocr-ranking.cjs` and inspect held-out prediction and family/source
+sensitivity before publishing a formula or eligibility change. Do not tune the prior or family
+weights to favor a named model. Do not add benchmark scores to fill gaps in a ranking.

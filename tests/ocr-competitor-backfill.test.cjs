@@ -154,7 +154,7 @@ test('OXR source backfill keeps excluded categories, hosted deployments and alte
   }
   assert.equal(data.resultsByKey['mineru2-5|olmocr-mineru-cdm-exprate'].length, 2);
   assert.equal(get('mineru-2-5-4').rank, null);
-  assert.equal(data.config.default_families, 2);
+  assert.equal(data.config.default_families, 0);
 });
 test('RTX PRO 6000 observations stay visible without changing H100 speed, cost or quality', () => {
   const source = 'oxr-1-0-author-benchmarks',

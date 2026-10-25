@@ -1,6 +1,6 @@
 # OCR data and methodology
 
-This is the current OCR schema and ranking policy (v3). Common provenance rules live in [AGENTS.md](../../AGENTS.md); the [maintenance guide](../../docs/maintenance.md) gives the update workflow. Speech uses its own policy.
+This is the current OCR schema and ranking policy (v4). Common provenance rules live in [AGENTS.md](../../AGENTS.md); the [maintenance guide](../../docs/maintenance.md) gives the update workflow. Speech uses its own policy.
 
 ## Files and records
 
@@ -32,26 +32,75 @@ Definitions require `id`, `short`, `label`, `source`, `family`, `primary_metric`
 
 | Field | Behavior |
 | --- | --- |
-| `primary` | Defaults to true. Selects headline columns and normal coverage membership. Use false for a secondary protocol. |
-| `coverage` | Optional boolean override for the display coverage count. Defaults to `primary !== false`; does not change ranking eligibility. |
+| `primary` | Defaults to true. Selects headline columns. Use false for a secondary protocol. |
+| `coverage` | Legacy primary-coverage metadata; v4 coverage counts families with usable comparisons, matching the rating. |
 | `core` | Canonical whole-document panel for its family. |
-| `aggregate_eligible` | Explicitly reviewed non-core whole-document variant that can contribute under v3. |
-| `aggregate_priority` | Lower wins within a model/family. Defaults to 0 for core panels, 1000 otherwise; ties use protocol ID. Never select the best percentile. |
+| `aggregate_eligible` | Explicitly reviewed non-core whole-document variant that can contribute under v4. |
+| `aggregate_priority` | Lower wins for each model pair within a family. Defaults to 0 for core panels, 1000 otherwise; ties use protocol ID. Never select the best percentile. |
 | `aggregate_caveat` | Explanation attached to any index using this qualified panel. |
 | `matrix_extra` | Includes an additional protocol column in the default matrix without making it primary or increasing coverage. |
 | `matrix_order` | Orders additional protocols within a family cell; does not affect ranking. |
 
 `config.views` maps each specialized view to an explicit `tests` list, or `primary: false` for secondary protocols. Optional `filter: "scored"` requires a matching score; `"author_reported"` requires author evidence. Omitted filters use the normal coverage minimum. `column_family_order` controls display only. `other_column` defines the non-sortable catch-all column with `catch_all: true`. Neither display membership nor filters changes reference cohorts.
 
-## Ranking policy v3
+## Ranking policy v4
 
-1. Select a finite observed primary metric by evidence preference: official benchmark publication, independent third party, community, model author, vendor/competitor, mixed/research, imported, secondary. Preserve alternatives and disclose disagreement. Publication and execution attribution remain distinct.
-2. Include only core or explicitly `aggregate_eligible` panels. Exclude assumptions, vendor-internal corpora and observations marked incomparable. Each exact panel needs at least two distinct `ranking_identity` values (falling back to model ID). Historical cohorts use verified release dates and the latest eligible generation per lineage; undated releases are current-only.
-3. Compute finite-cohort midrank percentiles within each exact panel: `100 × (N − average rank + 0.5) / N`. Respect metric direction; tied values share a percentile. Small panels cannot assign an automatic 100.
-4. For each model/family, use the first available eligible panel by fixed canonical-first priority. Average one percentile per family with equal weights. One family permits a provisional index; three remove only the limited-coverage qualification. These thresholds are recorded in `config.json`.
-5. Qualify indices for small cohorts, non-core protocol variants, own or reference-cohort source qualifications, conflicts and unknown/unreleased availability. Propagate cohort qualifications to every dependent index. Keep accessible ◊ explanations and exact source links. This is not a population estimate or an independent reproduction claim.
+The default view shows all current registered models, ordered by a best-effort Bradley–Terry rating.
+The compact 0–100 number is `100 × logistic(strength)`, not measured accuracy, a percentile, or a
+confidence percentage. Missing results are never losses. Models without usable comparisons remain
+visible with an em dash. The optional coverage filter counts distinct families that actually
+supply comparisons, including eligible secondary protocols. It does not change reference models.
 
-Legacy `min_models`/`min_organizations` fields remain in inherited definitions for the shared legacy maturity helper; OCR v3 does not use the old six-model/three-organization eligibility threshold. The default two-family display filter is separate from rank eligibility. Reset restores it; search can expose all registered models.
+1. Select the latest verified available generation per lineage for the chosen model-release cutoff.
+   Undated entries appear only in the latest cohort. This is a release-cohort view, not an as-of
+   reconstruction of which evidence had been published at that date.
+2. Admit only core or explicitly `aggregate_eligible` whole-document panels. Reject assumed,
+   vendor-internal and incomparable observations. Select a usable observation by the existing
+   evidence priority, not its score; retain all alternatives for display. A context-only preferred
+   display observation cannot suppress a comparable alternative for ranking.
+3. For every pair of exact model configurations, select the first eligible protocol both share in
+   each family, ordered by canonical-first `aggregate_priority`, then protocol ID. Compare only
+   within that exact protocol. Higher scores win (reverse for lower-is-better); exact ties count
+   as half a win. No benchmark-margin significance or independent trial count is inferred.
+4. Each distinct `ranking_identity` (fallback: model ID) allocates one comparison budget per family,
+   divided equally over its distinct opponent identities. For an identity pair with degrees
+   `d_a`, `d_b`, weight is `(1/d_a + 1/d_b)/2`. Divide that weight among configuration-pair edges
+   belonging to those identities. Do not compare configurations of the same identity against one
+   another. Repeated panels cannot multiply a pair's family vote; total family weight grows
+   linearly with participating identities instead of the number of possible pairs. This is
+   equal family budgeting per identity, not equal total weight for differently sized families.
+5. Fit the weighted Bradley–Terry logistic model jointly. Minimize weighted binary cross-entropy
+   plus `pairwise_prior / 2 × sum(strength_i² / active_configuration_count_for_identity_i)`.
+   The fixed default prior is 0.25. The common zero-centered prior limits sparse and undefeated
+   extremes; configuration copies share its budget. It is a modeling assumption, not invented
+   benchmark evidence. Deterministic coordinate Newton updates with line search must converge;
+   the renderer never substitutes unconverged ratings.
+6. Publish global ratings only for the largest connected comparison component, measured by
+   distinct identities, with lexical tie-breaking. Other components keep their results and an
+   explanation that global placement is unknown. A prior cannot calibrate disconnected groups.
+7. Mark all ratings as estimates. The existing popover explains family/opponent coverage,
+   source qualifications, non-core protocols, conflicts and unknown release dates. Qualifications
+   from the connected reference evidence also propagate. Speed, cost and UI filters never enter
+   the fit. Multiple exact panels may support a model's family through different opponents,
+   but its family count is still one.
+
+The model assumes a transferable overall OCR capability. Specialization, selective reporting,
+benchmark overlap, source execution differences and unreported uncertainty can violate that
+assumption. Tiny score differences are only observed ordering, not statistically established wins.
+Author reports remain eligible with attribution; no arbitrary publisher-based score discount is
+applied. Source classification still selects among alternative observations.
+
+The implementation is `src/assets/js/pairwise-ranking.js`, shared by Eleventy and the browser.
+The shared legacy percentile helpers remain available to speech and historical fixture tests;
+OCR config explicitly selects policy 4. Run `node scripts/audit-ocr-ranking.cjs` for deterministic
+five-fold held-out identity-pair predictions, prior-strength sensitivity, and leave-one-family /
+leave-one-source diagnostics. All comparisons of an identity pair are held out together; only
+pairs still connected in training are evaluated. These diagnostics assess consistency of the
+published evidence, not independent OCR accuracy or calibrated confidence intervals. The graph
+weights retain full-data topology during held-out prediction, while outcomes are withheld.
+
+References: [Bradley–Terry computation](https://jmlr.org/papers/v24/22-1086.html) and
+[incomplete comparison designs](https://proceedings.mlr.press/v162/bong22a.html).
 
 ## Speed and pricing
 

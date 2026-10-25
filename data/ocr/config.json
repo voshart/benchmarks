@@ -3,13 +3,13 @@
   "description": "Cross-benchmark scores, historical cohorts and documented prices.",
   "snapshot_date": "2026-10-22",
   "release_start": "2025-10-13",
-  "default_families": 2,
+  "default_families": 0,
   "min_core_for_rank": 3,
   "accent": "#637fa4",
-  "provisional_note": "Published whole-document comparisons can contribute regardless of operator. One eligible family permits a provisional index. Each exact panel needs at least two distinct model identities; finite-cohort midrank percentiles and fixed per-model/family priorities prevent singleton perfect scores and duplicate-family votes. Small cohorts, limited coverage and source qualifications are disclosed.",
+  "provisional_note": "Best-effort family-balanced Bradley–Terry ratings from shared exact-protocol comparisons. A common regularizing prior limits sparse-evidence extremes. Source qualifications, coverage and disconnected groups remain explicit.",
   "path": "/ocr/",
   "min_core_for_provisional": 1,
-  "rank_policy_version": 3,
+  "rank_policy_version": 4,
   "reported_index": true,
   "column_family_order": [
     "omnidoc",
@@ -32,27 +32,31 @@
         "omnidoc-v16",
         "puredoc",
         "docparsing"
-      ]
+      ],
+      "filter": "scored"
     },
     "robust": {
       "tests": [
         "wild",
         "real5",
         "drdoc"
-      ]
+      ],
+      "filter": "scored"
     },
     "multilingual": {
       "tests": [
         "mdp-private",
         "mdp-public",
         "more"
-      ]
+      ],
+      "filter": "scored"
     },
     "production": {
       "tests": [
         "ndi",
         "idp"
-      ]
+      ],
+      "filter": "scored"
     },
     "recognition": {
       "tests": [
@@ -107,5 +111,6 @@
     "label": "Other reported benchmark; exact protocol labeled",
     "family": "reported-other",
     "catch_all": true
-  }
+  },
+  "pairwise_prior": 0.25
 }

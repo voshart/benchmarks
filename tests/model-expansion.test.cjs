@@ -16,7 +16,7 @@ test('every requested addition is discoverable without inventing core coverage',
   }
   for (const id of ['docling-pipeline', 'amazon-textract', 'google-docai-ocr', 'tesseract']) {
     const row = catalog.rows.find((r) => r.id === id);
-    assert.equal(row.count, 0);
+    assert.equal(row.count, id === 'docling-pipeline' ? 1 : 0);
     if (id === 'docling-pipeline') assert.ok(Number.isFinite(row.rank));
     else assert.equal(row.rank, null);
     assert.equal(
@@ -35,7 +35,7 @@ test('Jina qualifies provisionally while LightOn task tests never manufacture ra
     const row = rows.find((r) => r.id === 'lightonocr-3-' + size + 'b');
     assert.equal(row.coreCount, 3);
     assert.ok(Number.isFinite(row.rank));
-    assert.equal(row.count, 1);
+    assert.equal(row.count, row.coreCount);
     assert.ok(row.rankContributions.every((c) => !c.benchmark.includes('gt-layout')));
   }
   const research = build(data, data.config.snapshot_date, { view: 'new' });

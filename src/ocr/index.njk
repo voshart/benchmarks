@@ -92,7 +92,7 @@ permalink: /ocr/index.html
                 value="{{ minimum }}"
                 {% if minimum == ocr.config.default_families %}selected{% endif %}
               >
-                {{ minimum }}+ primary benchmark families
+                {{ minimum }}+ comparison families
               </option>
             {% endfor %}</select
           ><select id="access">
@@ -162,12 +162,12 @@ permalink: /ocr/index.html
           H100 pages/s: rough estimates on one 80GB H100 setup, not a controlled benchmark. ≈ ranges
           sort by midpoint; overlap is not a proven winner. Hosted ranges, where shown, are
           hypothetical H100 equivalents, not API throughput. Original runs, workload and fit
-          exceptions are in Details. ◊ provisional rank: hover or click for reasons · * qualified
-          reported score · † contextual price · ‡ context-only score · — no comparable result.
-          Unranked means no comparable overall index, not necessarily no benchmarks. Every recorded
-          protocol keeps its score in the columns; unlike protocols do not share ranks. Each ⓘ opens
-          the exact protocol, component scores and source notes. Model Details retains alternate
-          observations. Speed and prices retain their source date in historical views.
+          exceptions are in Details. ◊ estimated rating: click for evidence · * qualified reported
+          score · † contextual price · ‡ context-only score · — no comparable result. Unranked means
+          no comparable overall index, not necessarily no benchmarks. Every recorded protocol keeps
+          its score in the columns; unlike protocols do not share ranks. Each ⓘ opens the exact
+          protocol, component scores and source notes. Model Details retains alternate observations.
+          Speed and prices retain their source date in historical views.
         </p>
       </section>
       <section id="pricingPanel" hidden>
@@ -291,25 +291,20 @@ permalink: /ocr/index.html
       <details class="method">
         <summary>Methodology, provenance & sources</summary>
         <p>
-          The overall index is the equal-weight mean of one within-panel percentile per benchmark
-          family. Published whole-document panels can contribute regardless of
-          self/vendor/competitor reporting. One family permits a provisional index; fewer than three
-          families, small cohorts and qualified evidence remain marked ◊. Each panel needs at least
-          two distinct model identities. A singleton score stays visible but cannot rank itself.
+          Rating estimates OCR quality from wins and ties on shared benchmarks. Shared opponents
+          connect models across exact protocols; each family has capped influence and sparse
+          evidence is pulled toward the midpoint. Higher is better. This is a best-effort estimate,
+          not an accuracy percentage. Open ◊ for the supporting families, opponents and source
+          qualifications.
         </p>
         <p>
-          Percentile = 100 × (N − average rank + 0.5) / N, with lower-error directions respected and
-          ties averaged. Small panels therefore do not give an automatic100. Each model uses its
-          canonical eligible panel when available, otherwise the first fixed-priority eligible
-          variant—not its best score. Different protocols are normalized separately and repeated
-          variants never add extra family votes. Coverage is unequal: this is an evidence-relative
-          index, not a prediction of universal quality. Assumed values, private internal tests and
-          component-only tasks are excluded; original observations and disagreements are retained.
-        </p>
-        <p>
-          Some older records were migrated from an existing research snapshot; their source links
-          are preserved, but they have not all been independently re-run. Missing model releases are
-          omitted from historic cohorts until the current snapshot.
+          Author and vendor reports are included with attribution. Missing scores are never treated
+          as failures. Assumed scores, private internal tests and component-only tasks do not affect
+          ratings. Models without a comparison path to the main cohort keep their scores but have no
+          overall rating. The date slider selects model releases, not evidence publication dates.
+          <a href="https://github.com/voshart/benchmarks/blob/main/data/ocr/README.md"
+            >Full methodology</a
+          >.
         </p>
         <div class="source-grid">
           {% for id, source in ocr.sources %}
@@ -326,6 +321,7 @@ permalink: /ocr/index.html
         {{ ocr.config.snapshot_date }}
       </footer>
     </main>
+    <script defer src="{{ '/assets/js/pairwise-ranking.js' | assetUrl }}"></script>
     <script defer src="{{ '/assets/js/ranking.js' | assetUrl }}"></script>
     <script defer src="{{ '/assets/js/rank-ui.js' | assetUrl }}"></script>
     <script defer src="{{ '/assets/js/ocr-deployment.js' | assetUrl }}"></script>

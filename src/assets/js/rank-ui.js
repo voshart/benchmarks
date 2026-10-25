@@ -17,6 +17,11 @@
   function renderRank(row, sources = {}) {
     if (row.rank == null) return `<span title="${escape(row.rankExplanation)}">Unranked</span>`;
     const value = row.rank.toFixed(1);
+    const label = row.rankMethod === 'pairwise' ? 'estimated rating' : 'provisional rank';
+    const accessibleLabel =
+      row.rankMethod === 'pairwise'
+        ? `Explain ${row.name} estimated rating`
+        : `Why ${row.name} has a provisional rank`;
     if (row.rankStatus !== 'provisional')
       return `<span title="${escape(row.rankExplanation)}">${value}</span>`;
     const id = 'rank-note-' + row.id.replace(/[^a-zA-Z0-9_-]/g, '-');
@@ -24,9 +29,9 @@
       .map((item) => `<li>${sourceLink(sources[item.observation.source_id], item.label)}</li>`)
       .join('');
     return (
-      `${value}<button type="button" class="rank-marker" popovertarget="${id}" title="${escape(row.rankExplanation)}" aria-label="Why ${escape(row.name)} has a provisional rank" aria-describedby="${id}">◊</button>` +
+      `${value}<button type="button" class="rank-marker" popovertarget="${id}" title="${escape(row.rankExplanation)}" aria-label="${escape(accessibleLabel)}" aria-describedby="${id}">◊</button>` +
       `<div id="${id}" class="rank-note" popover><button type="button" class="rank-note-close" popovertarget="${id}" popovertargetaction="hide" aria-label="Close rank explanation">×</button>` +
-      `<strong>${escape(row.name)} · provisional rank</strong><p>${escape(row.rankExplanation).replace(/\n/g, '<br>')}</p>` +
+      `<strong>${escape(row.name)} · ${label}</strong><p>${escape(row.rankExplanation).replace(/\n/g, '<br>')}</p>` +
       (links ? `<small>Contributing sources</small><ul>${links}</ul>` : '') +
       '</div>'
     );

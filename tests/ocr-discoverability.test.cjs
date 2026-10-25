@@ -23,15 +23,15 @@ const numericCells = (html) =>
   );
 const textContent = (html) => html.replace(/<[^>]*>/g, '');
 
-test('default uses two primary families while All registered preserves secondary-only evidence', () => {
+test('default includes sparse and secondary-only models; coverage remains an optional filter', () => {
   const data = loadOCR(),
     all = build(data, data.config.snapshot_date, { min: 0 }),
     filtered = build(data);
-  assert.equal(data.config.default_families, 2);
-  assert.ok(filtered.rows.length > 0 && filtered.rows.length < all.rows.length);
+  assert.equal(data.config.default_families, 0);
+  assert.ok(filtered.rows.length > 0);
   assert.deepEqual(
     filtered.rows,
-    all.rows.filter((row) => row.count >= 2),
+    all.rows,
     'default only filters visibility; survivor ranks, contributions and scores stay unchanged'
   );
   assert.deepEqual(
