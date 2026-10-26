@@ -82,7 +82,14 @@ function fixture() {
         label: 'Layout',
         mode: 'diagnostic',
         panels: [
-          { ...panels[0], id: 'order', keys: ['order'], direction: 'lower', unit: 'ratio', rating: false }
+          {
+            ...panels[0],
+            id: 'order',
+            keys: ['order'],
+            direction: 'lower',
+            unit: 'ratio',
+            rating: false
+          }
         ]
       },
       fields: {
@@ -154,7 +161,8 @@ test('source priority selects evidence, never the best component value', () => {
 test('missing components stay missing and genuine zero survives both sort directions', () => {
   const f = fixture();
   f.data.rawRecords[0].metrics.table = 0;
-  delete f.data.rawRecords.find((row) => row.model === 'c' && row.benchmark === 'one').metrics.table;
+  delete f.data.rawRecords.find((row) => row.model === 'c' && row.benchmark === 'one').metrics
+    .table;
   const asc = build(f, 'tables', { sortKey: 'first', sortDirection: 'asc' });
   const desc = build(f, 'tables', { sortKey: 'first', sortDirection: 'desc' });
   assert.equal(asc.rows[0].id, 'a');
@@ -190,7 +198,10 @@ test('context-only preferred display does not suppress a comparable alternative'
   const row = get(build(f), 'a');
   assert.equal(row.scores.first.value, 90);
   assert.equal(row.scores.first.comparable, false);
-  assert.equal(row.rankContributions.find((item) => item.benchmark === 'first').observation.value, 80);
+  assert.equal(
+    row.rankContributions.find((item) => item.benchmark === 'first').observation.value,
+    80
+  );
   assert.equal(row.count, 2);
   assert.notEqual(row.rank, null);
 });
@@ -238,7 +249,9 @@ test('identity copies share budgets rather than creating more benchmark evidence
   const baseline = build(f);
   f.data.models.push({ ...f.data.models[0], id: 'a-copy', name: 'A copy' });
   f.data.rawRecords.push(
-    ...f.data.rawRecords.filter((row) => row.model === 'a').map((row) => ({ ...row, model: 'a-copy' }))
+    ...f.data.rawRecords
+      .filter((row) => row.model === 'a')
+      .map((row) => ({ ...row, model: 'a-copy' }))
   );
   const copied = build(f);
   for (const id of ['a', 'b', 'c'])
@@ -252,7 +265,10 @@ test('disconnected multi-family components remain visible but unranked', () => {
   for (const id of ['three', 'four']) {
     f.data.tests.push({ ...f.data.tests[0], id, family: id });
     f.policy.views.tables.panels.push({ ...f.policy.views.tables.panels[0], id, benchmark: id });
-    for (const [model, table] of [['d', 80], ['e', 60]])
+    for (const [model, table] of [
+      ['d', 80],
+      ['e', 60]
+    ])
       f.data.rawRecords.push({ benchmark: id, model, source_id: 'official', metrics: { table } });
   }
   const result = build(f);
@@ -319,7 +335,13 @@ test('markup escapes model/source text, rejects unsafe source URLs and exposes e
 
 test('CommonJS and browser globals produce identical ratings and markup', () => {
   const context = vm.createContext({});
-  for (const name of ['pairwise-ranking', 'ranking', 'rank-ui', 'ocr-dimensions', 'ocr-dimensions-view'])
+  for (const name of [
+    'pairwise-ranking',
+    'ranking',
+    'rank-ui',
+    'ocr-dimensions',
+    'ocr-dimensions-view'
+  ])
     vm.runInContext(
       fs.readFileSync(path.join(__dirname, '../src/assets/js/' + name + '.js'), 'utf8'),
       context
