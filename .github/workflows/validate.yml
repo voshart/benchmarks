@@ -12,4 +12,10 @@ jobs:
         with:
           node-version-file: .nvmrc
       - run: npm ci --no-audit --no-fund
+      - name: Check formatting with actionable diff
+        run: npm run format && git diff --exit-code
       - run: npm run build
+      - name: Audit OCR comparisons and component coverage
+        run: |
+          node scripts/audit-ocr-ranking.cjs
+          node scripts/audit-ocr-dimensions.cjs
