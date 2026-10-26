@@ -32,7 +32,13 @@
     const columns = [
       { id: 'model', short: 'Model', label: 'Model name' },
       ...(result.view.mode === 'rating'
-        ? [{ id: 'rank', short: 'Table rating', label: 'Experimental relative rating; not accuracy' }]
+        ? [
+            {
+              id: 'rank',
+              short: 'Table rating',
+              label: 'Experimental relative rating; not accuracy'
+            }
+          ]
         : []),
       {
         id: 'families',
@@ -44,7 +50,11 @@
     return columns
       .map((column) => {
         const active = column.id === result.sortKey;
-        const state = active ? (result.sortDirection === 'asc' ? 'ascending' : 'descending') : 'none';
+        const state = active
+          ? result.sortDirection === 'asc'
+            ? 'ascending'
+            : 'descending'
+          : 'none';
         const unit = column.unit === 'percent' ? ' (%)' : column.unit === 'ratio' ? ' (ratio)' : '';
         const better = column.direction === 'lower' ? ' · lower is better' : ' · higher is better';
         const title = column.label + (column.unit ? better : '');
