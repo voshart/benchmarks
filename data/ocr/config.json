@@ -1,7 +1,7 @@
 {
   "title": "OCR evidence benchmark",
   "description": "Cross-benchmark scores, historical cohorts and documented prices.",
-  "snapshot_date": "2026-10-22",
+  "snapshot_date": "2026-10-26",
   "release_start": "2025-10-13",
   "default_families": 0,
   "min_core_for_rank": 3,
@@ -96,7 +96,11 @@
         "pubtabnet-xiaomi",
         "unimer-test-xiaomi",
         "chronicles-mature-xiaomi",
-        "ocr-vqa-xiaomi"
+        "ocr-vqa-xiaomi",
+        "parsebench-ocria-four-202610",
+        "olmocr-ocria-1288-202610",
+        "fr-bench-ocria-202610",
+        "omniparse-open-20261023"
       ],
       "filter": "author_reported"
     },

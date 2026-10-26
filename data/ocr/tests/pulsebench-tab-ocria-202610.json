@@ -1,0 +1,35 @@
+{
+  "id": "pulsebench-tab-ocria-202610",
+  "short": "Pulse crops",
+  "label": "PulseBench-Tab · OCRia cropped-table report",
+  "family": "pulsebench-tab",
+  "source": "ocria-report-202610",
+  "primary_metric": "mean",
+  "unit": "ratio",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": false,
+  "aggregate_priority": 125,
+  "matrix_extra": false,
+  "metric_labels": {
+    "mean": "mean",
+    "coverage": "coverage",
+    "median": "median",
+    "perfect_percent": "perfect percent"
+  },
+  "metric_units": {
+    "mean": "ratio",
+    "coverage": "percent",
+    "median": "ratio",
+    "perfect_percent": "percent"
+  },
+  "metric_directions": {
+    "mean": "higher",
+    "coverage": "higher",
+    "median": "higher",
+    "perfect_percent": "higher"
+  },
+  "note": "PDF Table 18: 1,820 cropped tables / nine languages. Mean and median T-LAG exclude unparseable predictions. Coverage and perfect-table counts retained; this is not full-page detection plus extraction. Diagnostic only; no overall or table-rating family vote.",
+  "scope": "1,820 cropped tables; nine languages"
+}

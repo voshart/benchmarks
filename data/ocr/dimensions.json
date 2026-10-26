@@ -8,17 +8,224 @@
       "min_families": 2,
       "description": "Experimental relative rating from table components, not whole-document totals. At least two comparison families and a path to the main comparison group are required. Family counts do not establish independent datasets or statistical confidence. TEDS-S and the clean/digital PureDoc columns are diagnostic only.",
       "panels": [
-        {"id":"omni-teds","benchmark":"omnidoc-v16","short":"OmniDoc TEDS","label":"Table TEDS","keys":["tables","table_teds"],"unit":"percent","direction":"higher","rating":true,"note":"Full v1.6 table component; not the overall score or TEDS-S."},
-        {"id":"omni-structure","benchmark":"omnidoc-v16","short":"OmniDoc TEDS-S","label":"Table structure TEDS-S","keys":["table_structure","table_teds_s"],"unit":"percent","direction":"higher","rating":false,"note":"Structure-only diagnostic; does not add a second OmniDoc vote."},
-        {"id":"pure-real","benchmark":"puredoc","short":"PureDoc real","label":"Real-degradation table TEDS","keys":["real_table_teds","real_tables"],"unit":"percent","direction":"higher","rating":true,"note":"Real-degradation track only. Clean and digital tracks are not averaged into this score."},
-        {"id":"pure-clean","benchmark":"puredoc","short":"PureDoc clean","label":"Clean table TEDS","keys":["clean_table_teds","clean_tables"],"unit":"percent","direction":"higher","rating":false,"note":"Clean-track diagnostic; no additional PureDoc rating vote."},
-        {"id":"pure-digital","benchmark":"puredoc","short":"PureDoc digital","label":"Digital-degradation table TEDS","keys":["digital_table_teds","digital_tables"],"unit":"percent","direction":"higher","rating":false,"note":"Digital-degradation diagnostic; no additional PureDoc rating vote."},
-        {"id":"dp-table","benchmark":"docparsing","short":"DocParsing","label":"Reported table component","keys":["tables"],"unit":"ratio","direction":"higher","rating":true,"note":"Source-native table ratio. Source execution and page-exclusion caveats remain applicable."},
-        {"id":"parse-table","benchmark":"parsebench-published-9af4102","short":"ParseBench","label":"Published table component","keys":["table"],"unit":"percent","direction":"higher","rating":true,"note":"Published 9af4102 panel, not a matched throughput run. Scorer/pipeline caveats remain applicable."},
-        {"id":"olm-table","benchmark":"olmocr","short":"olmOCR tables","label":"Table-category tests","keys":["tables"],"unit":"percent","direction":"higher","rating":true,"note":"Table-category rule pass rate, not TEDS. Compared only inside the full olmOCR protocol."},
-        {"id":"idp-table","benchmark":"idp","short":"IDP tables","label":"Table component","keys":["table"],"unit":"percent","direction":"higher","rating":true,"note":"Vendor-operated IDP table component; not an independent reproduction."},
-        {"id":"more-table","benchmark":"more","short":"MORE tables","label":"Table component","keys":["table"],"unit":"percent","direction":"higher","rating":true,"note":"Retains source execution/reused-baseline qualifications."},
-        {"id":"wild-table","benchmark":"wild","short":"Wild tables","label":"Table component","keys":["tables"],"unit":"percent","direction":"higher","rating":true,"note":"Related benchmark families can share evaluation conventions or data; do not interpret family counts as independence."}
+        {
+          "id": "omni-teds",
+          "benchmark": "omnidoc-v16",
+          "short": "OmniDoc TEDS",
+          "label": "Table TEDS",
+          "keys": [
+            "tables",
+            "table_teds"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Full v1.6 table component; not the overall score or TEDS-S."
+        },
+        {
+          "id": "omni-structure",
+          "benchmark": "omnidoc-v16",
+          "short": "OmniDoc TEDS-S",
+          "label": "Table structure TEDS-S",
+          "keys": [
+            "table_structure",
+            "table_teds_s"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "Structure-only diagnostic; does not add a second OmniDoc vote."
+        },
+        {
+          "id": "pure-real",
+          "benchmark": "puredoc",
+          "short": "PureDoc real",
+          "label": "Real-degradation table TEDS",
+          "keys": [
+            "real_table_teds",
+            "real_tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Real-degradation track only. Clean and digital tracks are not averaged into this score."
+        },
+        {
+          "id": "pure-clean",
+          "benchmark": "puredoc",
+          "short": "PureDoc clean",
+          "label": "Clean table TEDS",
+          "keys": [
+            "clean_table_teds",
+            "clean_tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "Clean-track diagnostic; no additional PureDoc rating vote."
+        },
+        {
+          "id": "pure-digital",
+          "benchmark": "puredoc",
+          "short": "PureDoc digital",
+          "label": "Digital-degradation table TEDS",
+          "keys": [
+            "digital_table_teds",
+            "digital_tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "Digital-degradation diagnostic; no additional PureDoc rating vote."
+        },
+        {
+          "id": "dp-table",
+          "benchmark": "docparsing",
+          "short": "DocParsing",
+          "label": "Reported table component",
+          "keys": [
+            "tables"
+          ],
+          "unit": "ratio",
+          "direction": "higher",
+          "rating": true,
+          "note": "Source-native table ratio. Source execution and page-exclusion caveats remain applicable."
+        },
+        {
+          "id": "parse-table",
+          "benchmark": "parsebench-published-9af4102",
+          "short": "ParseBench",
+          "label": "Published table component",
+          "keys": [
+            "table"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Published 9af4102 panel, not a matched throughput run. Scorer/pipeline caveats remain applicable."
+        },
+        {
+          "id": "olm-table",
+          "benchmark": "olmocr",
+          "short": "olmOCR tables",
+          "label": "Table-category tests",
+          "keys": [
+            "tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Table-category rule pass rate, not TEDS. Compared only inside the full olmOCR protocol."
+        },
+        {
+          "id": "idp-table",
+          "benchmark": "idp",
+          "short": "IDP tables",
+          "label": "Table component",
+          "keys": [
+            "table"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Vendor-operated IDP table component; not an independent reproduction."
+        },
+        {
+          "id": "more-table",
+          "benchmark": "more",
+          "short": "MORE tables",
+          "label": "Table component",
+          "keys": [
+            "table"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Retains source execution/reused-baseline qualifications."
+        },
+        {
+          "id": "wild-table",
+          "benchmark": "wild",
+          "short": "Wild tables",
+          "label": "Table component",
+          "keys": [
+            "tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Related benchmark families can share evaluation conventions or data; do not interpret family counts as independence."
+        },
+        {
+          "id": "ocria-parse-table",
+          "benchmark": "parsebench-ocria-four-202610",
+          "short": "Parse 4-cat tables",
+          "label": "Table component",
+          "keys": [
+            "tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Exact four-category author protocol. Existing five-category table panel keeps priority for shared pairs; no second ParseBench vote.",
+          "priority": 100
+        },
+        {
+          "id": "ocria-olm-table",
+          "benchmark": "olmocr-ocria-1288-202610",
+          "short": "olm 1288 tables",
+          "label": "Table-category tests",
+          "keys": [
+            "tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "Exact LlamaIndex rendering/operator cohort; reused baselines remain context-only.",
+          "priority": 100
+        },
+        {
+          "id": "opb-cell",
+          "benchmark": "omniparse-open-20261023",
+          "short": "OmniParse cells",
+          "label": "Table-cell family",
+          "keys": [
+            "tables"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": true,
+          "note": "5,386 table_cell checks of cells, headings and neighbours. Not the mixed table-tag slice.",
+          "priority": 100
+        },
+        {
+          "id": "pulse-crops",
+          "benchmark": "pulsebench-tab-ocria-202610",
+          "short": "Pulse crops mean",
+          "label": "Cropped-table T-LAG mean",
+          "keys": [
+            "mean"
+          ],
+          "unit": "ratio",
+          "direction": "higher",
+          "rating": false,
+          "note": "Only parseable predictions scored. Read coverage beside this mean; not end-to-end table extraction.",
+          "priority": 100
+        },
+        {
+          "id": "pulse-coverage",
+          "benchmark": "pulsebench-tab-ocria-202610",
+          "short": "Pulse coverage",
+          "label": "Parseable table coverage",
+          "keys": [
+            "coverage"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "Denominator: all 1,820 cropped tables. Not another ranking vote.",
+          "priority": 100
+        }
       ]
     },
     "layout": {
@@ -27,12 +234,90 @@
       "mode": "diagnostic",
       "description": "No combined layout rating. Reading-order errors, visual grounding and multi-column test performance are different tasks. Compare models within a named column; lower-is-better error metrics retain their original direction.",
       "panels": [
-        {"id":"omni-order","benchmark":"omnidoc-v16","short":"OmniDoc order","label":"Reading-order edit distance","keys":["reading_order_edit","read_order_edit"],"unit":"ratio","direction":"lower"},
-        {"id":"pure-order","benchmark":"puredoc","short":"PureDoc real order","label":"Real-degradation reading-order edit distance","keys":["real_reading_edit"],"unit":"ratio","direction":"lower"},
-        {"id":"parse-grounding","benchmark":"parsebench-published-9af4102","short":"Visual grounding","label":"Visual grounding","keys":["layout"],"unit":"percent","direction":"higher","note":"Source-native visual grounding, not reproduced EPR or reading-order accuracy."},
-        {"id":"olm-columns","benchmark":"olmocr","short":"olmOCR columns","label":"Multi-column-category tests","keys":["multi_column"],"unit":"percent","direction":"higher","note":"Document-category test performance; not a pure geometric layout metric."},
-        {"id":"more-order","benchmark":"more","short":"MORE order","label":"Reading-order component","keys":["reading_order"],"unit":"percent","direction":"higher"},
-        {"id":"wild-order","benchmark":"wild","short":"Wild order","label":"Reading-order edit distance","keys":["reading_order_edit","order_edit"],"unit":"ratio","direction":"lower"}
+        {
+          "id": "omni-order",
+          "benchmark": "omnidoc-v16",
+          "short": "OmniDoc order",
+          "label": "Reading-order edit distance",
+          "keys": [
+            "reading_order_edit",
+            "read_order_edit"
+          ],
+          "unit": "ratio",
+          "direction": "lower"
+        },
+        {
+          "id": "pure-order",
+          "benchmark": "puredoc",
+          "short": "PureDoc real order",
+          "label": "Real-degradation reading-order edit distance",
+          "keys": [
+            "real_reading_edit"
+          ],
+          "unit": "ratio",
+          "direction": "lower"
+        },
+        {
+          "id": "parse-grounding",
+          "benchmark": "parsebench-published-9af4102",
+          "short": "Visual grounding",
+          "label": "Visual grounding",
+          "keys": [
+            "layout"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "note": "Source-native visual grounding, not reproduced EPR or reading-order accuracy."
+        },
+        {
+          "id": "olm-columns",
+          "benchmark": "olmocr",
+          "short": "olmOCR columns",
+          "label": "Multi-column-category tests",
+          "keys": [
+            "multi_column"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "note": "Document-category test performance; not a pure geometric layout metric."
+        },
+        {
+          "id": "more-order",
+          "benchmark": "more",
+          "short": "MORE order",
+          "label": "Reading-order component",
+          "keys": [
+            "reading_order"
+          ],
+          "unit": "percent",
+          "direction": "higher"
+        },
+        {
+          "id": "wild-order",
+          "benchmark": "wild",
+          "short": "Wild order",
+          "label": "Reading-order edit distance",
+          "keys": [
+            "reading_order_edit",
+            "order_edit"
+          ],
+          "unit": "ratio",
+          "direction": "lower"
+        },
+        {
+          "id": "opb-layout",
+          "benchmark": "omniparse-open-20261023",
+          "short": "OmniParse layout",
+          "label": "Layout-kind test family",
+          "keys": [
+            "layout"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "Typed block/content association, not reading-order edit distance. Unsupported boxes remain missing.",
+          "priority": 100
+        }
       ]
     },
     "fields": {
@@ -41,8 +326,94 @@
       "mode": "diagnostic",
       "description": "No combined field-extraction rating. IDP KIE and NDI extraction are separate vendor-operated protocols, with different tasks and cohorts. These published components do not establish universal field-level F1 or invoice/form accuracy.",
       "panels": [
-        {"id":"idp-kie","benchmark":"idp","short":"IDP KIE","label":"Key information extraction","keys":["kie"],"unit":"percent","direction":"higher","note":"Vendor-operated IDP Core KIE component; retains its published scale, not a relabeled universal F1."},
-        {"id":"ndi-extract","benchmark":"ndi","short":"NDI extraction","label":"Published extraction component","keys":["extract"],"unit":"ratio","direction":"higher","note":"Separate vendor-reported extraction score. Not merged with IDP KIE or used in a global rating."}
+        {
+          "id": "idp-kie",
+          "benchmark": "idp",
+          "short": "IDP KIE",
+          "label": "Key information extraction",
+          "keys": [
+            "kie"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "note": "Vendor-operated IDP Core KIE component; retains its published scale, not a relabeled universal F1."
+        },
+        {
+          "id": "ndi-extract",
+          "benchmark": "ndi",
+          "short": "NDI extraction",
+          "label": "Published extraction component",
+          "keys": [
+            "extract"
+          ],
+          "unit": "ratio",
+          "direction": "higher",
+          "note": "Separate vendor-reported extraction score. Not merged with IDP KIE or used in a global rating."
+        }
+      ]
+    },
+    "charts-formatting": {
+      "label": "Charts / formatting",
+      "title": "Charts and formatting · benchmark-specific diagnostics",
+      "mode": "diagnostic",
+      "description": "Separate chart-data extraction and semantic-formatting results. No combined rating and no field-level KIE claim. Four-category author evaluations remain separate from five-category published panels.",
+      "panels": [
+        {
+          "id": "published-charts",
+          "benchmark": "parsebench-published-9af4102",
+          "short": "Published charts",
+          "label": "Chart component",
+          "keys": [
+            "chart"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "",
+          "priority": 100
+        },
+        {
+          "id": "published-format",
+          "benchmark": "parsebench-published-9af4102",
+          "short": "Published formatting",
+          "label": "Semantic formatting",
+          "keys": [
+            "text_formatting"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "",
+          "priority": 100
+        },
+        {
+          "id": "ocria-charts",
+          "benchmark": "parsebench-ocria-four-202610",
+          "short": "OCRia panel charts",
+          "label": "Chart data extraction",
+          "keys": [
+            "charts"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "",
+          "priority": 100
+        },
+        {
+          "id": "ocria-format",
+          "benchmark": "parsebench-ocria-four-202610",
+          "short": "OCRia panel formatting",
+          "label": "Semantic formatting",
+          "keys": [
+            "formatting"
+          ],
+          "unit": "percent",
+          "direction": "higher",
+          "rating": false,
+          "note": "",
+          "priority": 100
+        }
       ]
     }
   }

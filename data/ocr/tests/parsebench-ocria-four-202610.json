@@ -1,0 +1,38 @@
+{
+  "id": "parsebench-ocria-four-202610",
+  "short": "Parse 4-cat",
+  "label": "ParseBench · OCRia four-category report",
+  "family": "parsebench",
+  "source": "ocria-report-202610",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": true,
+  "aggregate_priority": 125,
+  "matrix_extra": false,
+  "metric_labels": {
+    "overall": "overall",
+    "tables": "tables",
+    "charts": "charts",
+    "formatting": "formatting",
+    "text": "text"
+  },
+  "metric_units": {
+    "overall": "percent",
+    "tables": "percent",
+    "charts": "percent",
+    "formatting": "percent",
+    "text": "percent"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "tables": "higher",
+    "charts": "higher",
+    "formatting": "higher",
+    "text": "higher"
+  },
+  "note": "LlamaIndex-operated four-category ParseBench: excludes visual grounding. PDF Table 4 ratios converted exactly to percent, without adding precision. Not interchangeable with the existing five-category published overall. All nine comparison rows retained.",
+  "aggregate_caveat": "LlamaIndex-operated four-category ParseBench: excludes visual grounding. PDF Table 4 ratios converted exactly to percent, without adding precision. Not interchangeable with the existing five-category published overall. All nine comparison rows retained."
+}

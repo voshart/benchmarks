@@ -8,7 +8,10 @@ test('competitor panels preserve full, subset and PDF-text-assisted protocols', 
   const rows = build(data, data.config.snapshot_date, { min: 0 }).rows;
   const get = (id) => rows.find((r) => r.id === id);
   assert.equal(data.resultsByKey['lightonocr-3-4b|chandra-2-5-olm-no-hf'][0].metrics.pp3, 86);
-  assert.equal(get('lightonocr-3-4b').coreCount, 3);
+  const lighton = get('lightonocr-3-4b');
+  assert.ok(lighton.coreCount >= 3, 'Retain the original whole-document family coverage');
+  assert.equal(lighton.coreCount, new Set(lighton.rankContributions.map((c) => c.family)).size);
+  assert.ok(lighton.rankContributions.every((c) => !c.benchmark.includes('gt-layout')));
   for (const id of ['marker2-pdf-pipeline', 'parsebench-published-9af4102']) {
     const t = data.tests.find((t) => t.id === id);
     assert.equal(t.core, false);

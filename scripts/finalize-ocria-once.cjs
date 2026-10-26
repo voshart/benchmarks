@@ -14,9 +14,10 @@ for (const { id } of ledger.protocols) {
   const rows = fs.readFileSync(file, 'utf8').trim().split('\n').map(JSON.parse);
   for (const row of rows) {
     if (row.evidence === 'secondary') {
-      row.measurement_operator = row.model === 'indra-ocr-omniparse-20261023'
-        ? 'Indra authors; republished by Datalab, exact source-run version unresolved'
-        : 'Original publication operator; reprinted by LlamaIndex, not a new LlamaIndex run';
+      row.measurement_operator =
+        row.model === 'indra-ocr-omniparse-20261023'
+          ? 'Indra authors; republished by Datalab, exact source-run version unresolved'
+          : 'Original publication operator; reprinted by LlamaIndex, not a new LlamaIndex run';
     }
   }
   fs.writeFileSync(file, rows.map((row) => JSON.stringify(row)).join('\n') + '\n');
@@ -27,21 +28,26 @@ function replace(file, before, after) {
   assert.equal(text.split(before).length - 1, 1, 'Exact patch anchor changed: ' + file);
   fs.writeFileSync(file, text.replace(before, after));
 }
-replace('tests/model-expansion.test.cjs',
+replace(
+  'tests/model-expansion.test.cjs',
   '    assert.equal(row.coreCount, 3);',
   `    assert.ok(row.coreCount >= 3, 'Previously established whole-document families remain');
     assert.equal(row.coreCount, new Set(row.rankContributions.map((c) => c.family)).size);
     assert.ok(row.rankContributions.every((c) => {
       const protocol = data.tests.find((t) => t.id === c.benchmark);
       return protocol.core || protocol.aggregate_eligible;
-    }));`);
-replace('tests/ocr-competitor-backfill.test.cjs',
+    }));`
+);
+replace(
+  'tests/ocr-competitor-backfill.test.cjs',
   "  assert.equal(get('lightonocr-3-4b').coreCount, 3);",
   `  const lighton = get('lightonocr-3-4b');
   assert.ok(lighton.coreCount >= 3, 'Retain the original whole-document family coverage');
   assert.equal(lighton.coreCount, new Set(lighton.rankContributions.map((c) => c.family)).size);
-  assert.ok(lighton.rankContributions.every((c) => !c.benchmark.includes('gt-layout')));`);
-replace('tests/ocr-comparison.test.cjs',
+  assert.ok(lighton.rankContributions.every((c) => !c.benchmark.includes('gt-layout')));`
+);
+replace(
+  'tests/ocr-comparison.test.cjs',
   "  assert.equal(r.rank, null);\n  assert.equal(r.scores['parsebench-nemotron35-triple'].value, 75.20375371099965);",
   `  // Scope the single-checkpoint triple-pass assertion to that protocol. Later,
   // independently recorded whole-document panels may legitimately connect this model.
@@ -49,10 +55,13 @@ replace('tests/ocr-comparison.test.cjs',
   const isolated = build(tripleOnly, data.config.snapshot_date, { min: 0 }).rows.find((row) => row.id === m.id);
   assert.equal(isolated.rank, null);
   assert.ok(r.rankContributions.every((c) => c.benchmark !== 'parsebench-nemotron35-triple'));
-  assert.equal(r.scores['parsebench-nemotron35-triple'].value, 75.20375371099965);`);
-replace('tests/releases-oct22.test.cjs',
+  assert.equal(r.scores['parsebench-nemotron35-triple'].value, 75.20375371099965);`
+);
+replace(
+  'tests/releases-oct22.test.cjs',
   "  assert.equal(ocr.config.snapshot_date, '2026-10-22');",
-  "  assert.ok(ocr.config.snapshot_date >= '2026-10-22', 'Current OCR snapshot includes the historical release audit');");
+  "  assert.ok(ocr.config.snapshot_date >= '2026-10-22', 'Current OCR snapshot includes the historical release audit');"
+);
 const extra = `
 
 test('OCRia renders only its H100 range in the main speed cell and preserves B200 in Details', () => {
@@ -75,5 +84,8 @@ test('OCRia renders only its H100 range in the main speed cell and preserves B20
 });
 `;
 const testfile = 'tests/ocria-20261026.test.cjs';
-if (!fs.readFileSync(testfile, 'utf8').includes('OCRia renders only its H100 range')) fs.appendFileSync(testfile, extra);
-console.log('Kept existing family columns; retained copied-source provenance; scoped historical test assumptions.');
+if (!fs.readFileSync(testfile, 'utf8').includes('OCRia renders only its H100 range'))
+  fs.appendFileSync(testfile, extra);
+console.log(
+  'Kept existing family columns; retained copied-source provenance; scoped historical test assumptions.'
+);

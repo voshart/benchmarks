@@ -598,7 +598,17 @@ test('small OCR additions separate page scenarios, text-only components and matc
   assert.match(d.reference.basis, /40\/2,078/);
   assert.ok(d.speed.pages_per_second > 10 && d.speed.pages_per_second < 11);
   const r = build(data, data.config.snapshot_date, { min: 0 }).rows.find((r) => r.id === m.id);
-  assert.equal(r.rank, null);
+  // Scope the single-checkpoint triple-pass assertion to that protocol. Later,
+  // independently recorded whole-document panels may legitimately connect this model.
+  const tripleOnly = {
+    ...data,
+    tests: data.tests.filter((t) => t.id === 'parsebench-nemotron35-triple')
+  };
+  const isolated = build(tripleOnly, data.config.snapshot_date, { min: 0 }).rows.find(
+    (row) => row.id === m.id
+  );
+  assert.equal(isolated.rank, null);
+  assert.ok(r.rankContributions.every((c) => c.benchmark !== 'parsebench-nemotron35-triple'));
   assert.equal(r.scores['parsebench-nemotron35-triple'].value, 75.20375371099965);
   assert.equal(r.scores.olmocr, null);
   assert.equal(

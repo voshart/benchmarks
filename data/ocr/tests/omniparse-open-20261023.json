@@ -1,0 +1,36 @@
+{
+  "id": "omniparse-open-20261023",
+  "short": "OP open",
+  "label": "OmniParseBench · open models Oct 23",
+  "family": "omniparse",
+  "source": "datalab-open-omniparse-20261023",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": true,
+  "aggregate_priority": 125,
+  "matrix_extra": false,
+  "metric_labels": {
+    "overall": "overall",
+    "text": "text",
+    "tables": "tables",
+    "layout": "layout"
+  },
+  "metric_units": {
+    "overall": "percent",
+    "text": "percent",
+    "tables": "percent",
+    "layout": "percent"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "text": "higher",
+    "tables": "higher",
+    "layout": "higher"
+  },
+  "note": "October 23 complete 17-model cohort. Tables is the table_cell family, not the table-tag composite. Overall is the mean of text/tables/layout. Unsupported layout and headline remain absent. Vendor pipelines and exceptions are preserved per observation; one family budget, not an extra vote per component.",
+  "scope": "Dataset 961c0f89; 16,288 tests / 2,937 pages / 92 languages; 5,386 table_cell tests",
+  "aggregate_caveat": "October 23 complete 17-model cohort. Tables is the table_cell family, not the table-tag composite. Overall is the mean of text/tables/layout. Unsupported layout and headline remain absent. Vendor pipelines and exceptions are preserved per observation; one family budget, not an extra vote per component."
+}
