@@ -1,0 +1,39 @@
+.dimension-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.dimension-nav a {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid currentColor;
+  border-radius: 0.4rem;
+  text-decoration: none;
+}
+.dimension-nav a[aria-current='page'] {
+  font-weight: 700;
+  border-width: 2px;
+}
+.ocr-dimensions-page .controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dimension-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dimension-table th,
+.dimension-table td {
+  padding: 0.65rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.dimension-table th:first-child {
+  text-align: left;
+}
+.dimension-table .rank-note {
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
