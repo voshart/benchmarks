@@ -12,9 +12,8 @@ for (const dimension of Object.keys(policy.views)) {
     panel: test.id,
     ratingEligible: test.aggregate_eligible,
     reported: result.rows.filter((row) => row.scores[test.id]).length,
-    comparable: result.rows.filter((row) =>
-      Rank.choose(result, row.id, test.id, false, true)
-    ).length
+    comparable: result.rows.filter((row) => Rank.choose(result, row.id, test.id, false, true))
+      .length
   }));
   summary[dimension] = {
     models: result.cohortCount,
@@ -27,7 +26,8 @@ for (const dimension of Object.keys(policy.views)) {
   );
   const graph = Pairwise.graph(result, models, Rank.choose);
   summary[dimension].connectedGroups = graph.components.map(
-    (component) => new Set(component.map((i) => graph.nodes[i].ranking_identity || graph.nodes[i].id)).size
+    (component) =>
+      new Set(component.map((i) => graph.nodes[i].ranking_identity || graph.nodes[i].id)).size
   );
   summary[dimension].leaveOneFamilyOut = [];
   const baseline = new Map(result.rows.map((row) => [row.id, row.rank]));
