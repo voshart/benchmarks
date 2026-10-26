@@ -101,7 +101,8 @@
               ? source?.kind || 'research'
               : record.evidence || source?.kind || 'imported');
         const reasons = [...(record.provisional_reasons || [])];
-        if (conflict) reasons.push('Conflicting metric aliases; context only, excluded from rating.');
+        if (conflict)
+          reasons.push('Conflicting metric aliases; context only, excluded from rating.');
         if (unclassifiedComponent)
           reasons.push('Component URL has no separately classified execution provenance.');
         const observation = {
@@ -112,7 +113,8 @@
           value,
           evidence,
           source_id: sourceId,
-          source_url: record.component_source_url || (componentId ? source?.url : record.source_url),
+          source_url:
+            record.component_source_url || (componentId ? source?.url : record.source_url),
           comparable:
             record.comparable !== false &&
             !conflict &&
@@ -180,10 +182,12 @@
         const result = pairwise?.rows.get(model.id);
         const count = result
           ? result.count
-          : new Set(projected.tests.filter((test) => observed(scores[test.id])).map((t) => t.family))
-              .size;
+          : new Set(
+              projected.tests.filter((test) => observed(scores[test.id])).map((t) => t.family)
+            ).size;
         let rank = result?.rank ?? null;
-        let explanation = result?.rankExplanation || 'Separate reported metrics; no combined rating.';
+        let explanation =
+          result?.rankExplanation || 'Separate reported metrics; no combined rating.';
         if (view.mode === 'rating') {
           if (count < view.min_families) {
             rank = null;
@@ -211,7 +215,9 @@
         };
       })
       .filter(Boolean);
-    const query = String(options.query || '').trim().toLowerCase();
+    const query = String(options.query || '')
+      .trim()
+      .toLowerCase();
     const minimum = Math.max(0, Number(options.min) || 0);
     const filtered = cohort.filter(
       (row) =>
