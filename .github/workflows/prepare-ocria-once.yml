@@ -1,0 +1,53 @@
+name: Prepare OCRia import once
+on:
+  push:
+    branches: [data/ocria-h100-20261026]
+    paths:
+      - scripts/import-ocria-20261026.cjs
+      - tests/ocria-20261026.test.cjs
+      - .github/workflows/prepare-ocria-once.yml
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.3.1
+        with:
+          ref: data/ocria-h100-20261026
+      - uses: actions/setup-node@v4.4.0
+        with:
+          node-version-file: .nvmrc
+      - run: npm ci --no-audit --no-fund
+      - name: Materialize reviewed source tables
+        run: |
+          node scripts/import-ocria-20261026.cjs
+          node <<'NODE'
+          const fs = require('node:fs');
+          const p = 'data/ocr/results/parsebench-ocria-four-202610.jsonl';
+          const rows = fs.readFileSync(p, 'utf8').trim().split('\n').map(JSON.parse);
+          rows.sort((a, b) => Number(b.source_id === 'ocria-announcement-20261022') - Number(a.source_id === 'ocria-announcement-20261022'));
+          fs.writeFileSync(p, rows.map(JSON.stringify).join('\n') + '\n');
+          NODE
+      - run: npm run format
+      - run: npm run build
+      - name: Audit quality and component comparison graphs
+        run: |
+          node scripts/audit-ocr-ranking.cjs
+          node scripts/audit-ocr-dimensions.cjs
+      - name: Commit only the reviewed import paths to the work branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/models/registry.json data/ocr src/ocr/index.njk scripts/import-ocria-20261026.cjs tests/ocria-20261026.test.cjs docs/ocria-2026-10-26.md
+          git diff --cached --stat
+          if ! git diff --cached --quiet; then
+            git commit -m 'Import verified OCRia and OmniParse evidence with hypothetical H100 range'
+            git push origin HEAD:data/ocria-h100-20261026
+          fi
+          git rev-parse HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ocria-site-preview
+          path: _site/
+          retention-days: 1
