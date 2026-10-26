@@ -4,6 +4,7 @@ on:
     branches: [data/ocria-h100-20261026]
     paths:
       - scripts/import-ocria-20261026.cjs
+      - scripts/finalize-ocria-once.cjs
       - tests/ocria-20261026.test.cjs
       - .github/workflows/prepare-ocria-once.yml
 permissions:
@@ -29,6 +30,7 @@ jobs:
           rows.sort((a, b) => Number(b.source_id === 'ocria-announcement-20261022') - Number(a.source_id === 'ocria-announcement-20261022'));
           fs.writeFileSync(p, rows.map(JSON.stringify).join('\n') + '\n');
           NODE
+          node scripts/finalize-ocria-once.cjs
       - run: npm run format
       - run: npm run build
       - name: Audit quality and component comparison graphs
@@ -39,7 +41,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/models/registry.json data/ocr src/ocr/index.njk scripts/import-ocria-20261026.cjs tests/ocria-20261026.test.cjs docs/ocria-2026-10-26.md
+          git add data/models/registry.json data/ocr src/ocr/index.njk scripts/import-ocria-20261026.cjs scripts/finalize-ocria-once.cjs tests/ocria-20261026.test.cjs tests/model-expansion.test.cjs tests/ocr-competitor-backfill.test.cjs tests/ocr-comparison.test.cjs tests/releases-oct22.test.cjs docs/ocria-2026-10-26.md
           git diff --cached --stat
           if ! git diff --cached --quiet; then
             git commit -m 'Import verified OCRia and OmniParse evidence with hypothetical H100 range'
