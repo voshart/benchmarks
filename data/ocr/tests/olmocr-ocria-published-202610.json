@@ -1,0 +1,49 @@
+{
+  "id": "olmocr-ocria-published-202610",
+  "short": "olm published",
+  "label": "olmOCR · OCRia published-configuration panel",
+  "family": "olmocr",
+  "source": "ocria-report-202610",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": false,
+  "aggregate_priority": 125,
+  "matrix_extra": false,
+  "metric_labels": {
+    "arxiv": "arxiv",
+    "old_scans_math": "old scans math",
+    "tables": "tables",
+    "old_scans": "old scans",
+    "headers_footers": "headers footers",
+    "multi_column": "multi column",
+    "long_tiny_text": "long tiny text",
+    "base": "base",
+    "overall": "overall"
+  },
+  "metric_units": {
+    "arxiv": "percent",
+    "old_scans_math": "percent",
+    "tables": "percent",
+    "old_scans": "percent",
+    "headers_footers": "percent",
+    "multi_column": "percent",
+    "long_tiny_text": "percent",
+    "base": "percent",
+    "overall": "percent"
+  },
+  "metric_directions": {
+    "arxiv": "higher",
+    "old_scans_math": "higher",
+    "tables": "higher",
+    "old_scans": "higher",
+    "headers_footers": "higher",
+    "multi_column": "higher",
+    "long_tiny_text": "higher",
+    "base": "higher",
+    "overall": "higher"
+  },
+  "note": "PDF Table 16. OCRia row is an author run; competitors are reprinted published baselines, not new LlamaIndex executions. Mixed rendering/pipelines. Diagnostic only; never pooled with Table 17. LightOnOCR-2 overall includes headers/footers, unlike its published seven-category headline."
+}

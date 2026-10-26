@@ -1415,6 +1415,42 @@
       "fit_class": "conditional_hosted_equivalent",
       "fit": "Hypothetical equivalent only. Plus is hosted; its architecture, parameter count and memory are not pinned. Assume an equivalent pipeline fits one 80GB H100; this condition is unverified. No claim of local weight availability or certified fit.",
       "basis": "Very broad 0.1–3 pages/s hosted-document-pipeline class scenario. Plus is distinct from the open 3B model; its speed is not inherited from that checkpoint. Architecture and auxiliary processing are unknown. Range is conditional on single-card fit, not a hardware normalization of an API measurement. Judgmental planning range, not measured throughput or a statistical confidence interval. Anchors are published H100 whole-page peer rates (dots.ocr 0.88, Chandra 1.7, olmOCR2 2.54, LightOn2 5.71 pages/s), not a parameter-count or FLOPS conversion. Assumes the shared warm 2048px / 1000–3000 total output-token workload with memory-fitting batching up to 16. Output expansion, page complexity, CPU work and runtime may put actual performance outside this range."
+    },
+    {
+      "model": "ocria-1",
+      "profile": "h100-80gb-v1",
+      "status": "estimated",
+      "evidence": "assumed",
+      "hypothetical": true,
+      "as_of": "2026-10-26",
+      "source_ids": [
+        "ocria-report-202610",
+        "ocria-h100-hardware",
+        "ocria-b200-hardware"
+      ],
+      "confidence": "low",
+      "low": 0.3,
+      "high": 6,
+      "fit_class": "hypothetical_hosted_runtime_port",
+      "fit": "Hypothetical access to the4B checkpoint, draft and compatible H100 implementation. Target1xH10080GB without offload or sharding, memory-fitting batching up to16. BF16/FP16 fallback; upper range assumes useful drafting/kernel optimizations can be ported without native NVFP4. No downloadable weights, successful port or peak-VRAM measurement is established.",
+      "basis": "Engineering planning envelope, not measured H100 throughput or API speed. Use Table20 c16=8.67 pages/s, not c64=10.21, to match the reference concurrency ceiling. Bandwidth-only sensitivity anchor8.67*(3.35/8)=3.6306 pages/s. Apply explicitly subjective0.08–1.65 runtime/precision/workload factors and round to0.3–6. The low end allows loss of custom speculative/quantized speedups; the high end assumes a useful compatible draft/runtime and lighter reference pages. The source4.1MP/image-token budget and output lengths differ from the common up-to2048px,1000–3000 output-token scenario. The ratio is not a universal GPU conversion; the factor range is not a fitted confidence interval. BF16 stock-vLLM baseline321–333 end-to-end tokens/s is retained as a warning that the optimized stack can dominate hardware scaling. No native NVFP4 support on H100 is assumed.",
+      "transfer_assumptions": {
+        "source_observation_id": "ocria-b200-c16-report-202610",
+        "source_pages_per_second": 8.67,
+        "source_concurrency": 16,
+        "target_max_concurrency": 16,
+        "source_bandwidth_tb_s": 8,
+        "target_bandwidth_tb_s": 3.35,
+        "subjective_runtime_workload_factors": [
+          0.08,
+          1.65
+        ],
+        "output_range_pages_per_second": [
+          0.3,
+          6
+        ],
+        "interval_kind": "judgmental scenario, not statistical confidence"
+      }
     }
   ]
 }

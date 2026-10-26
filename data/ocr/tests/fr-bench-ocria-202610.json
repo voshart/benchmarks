@@ -1,0 +1,48 @@
+{
+  "id": "fr-bench-ocria-202610",
+  "short": "French OCRia",
+  "label": "French PDF · OCRia operator panel",
+  "family": "fr-bench",
+  "source": "ocria-report-202610",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": true,
+  "aggregate_priority": 125,
+  "matrix_extra": false,
+  "metric_labels": {
+    "forms": "forms",
+    "graphics": "graphics",
+    "handwritten": "handwritten",
+    "long_table": "long table",
+    "long_table_2": "long table 2",
+    "multi_column": "multi column",
+    "tiny_text": "tiny text",
+    "overall": "overall"
+  },
+  "metric_units": {
+    "forms": "percent",
+    "graphics": "percent",
+    "handwritten": "percent",
+    "long_table": "percent",
+    "long_table_2": "percent",
+    "multi_column": "percent",
+    "tiny_text": "percent",
+    "overall": "percent"
+  },
+  "metric_directions": {
+    "forms": "higher",
+    "graphics": "higher",
+    "handwritten": "higher",
+    "long_table": "higher",
+    "long_table_2": "higher",
+    "multi_column": "higher",
+    "tiny_text": "higher",
+    "overall": "higher"
+  },
+  "note": "PDF Table 19: 2,318 tests on 721 difficult French pages. Separate LlamaIndex operator protocol; retains forms, graphics, handwriting and two long-table categories. Form pass rate is not schema-level KIE/F1.",
+  "scope": "721 French pages; 2,318 tests",
+  "aggregate_caveat": "PDF Table 19: 2,318 tests on 721 difficult French pages. Separate LlamaIndex operator protocol; retains forms, graphics, handwriting and two long-table categories. Form pass rate is not schema-level KIE/F1."
+}

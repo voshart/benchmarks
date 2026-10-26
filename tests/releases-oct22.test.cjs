@@ -29,7 +29,10 @@ test('October release audit adds bounded identities without mixing task catalogs
   );
   assert.match(fs.readFileSync('src/stt/index.njk', 'utf8'), /test.summary_label/);
   assert.equal(stt.config.snapshot_date, '2026-10-22');
-  assert.equal(ocr.config.snapshot_date, '2026-10-22');
+  assert.ok(
+    ocr.config.snapshot_date >= '2026-10-22',
+    'Current OCR snapshot includes the historical release audit'
+  );
 });
 
 test('Granite5.0 uses exact seven original columns, not publisher expanded-set average', () => {

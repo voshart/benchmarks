@@ -33,7 +33,14 @@ test('Jina qualifies provisionally while LightOn task tests never manufacture ra
   assert.ok(jina.provisionalReasons.some((r) => r.includes('author-reported')));
   for (const size of ['0.8', '1', '4']) {
     const row = rows.find((r) => r.id === 'lightonocr-3-' + size + 'b');
-    assert.equal(row.coreCount, 3);
+    assert.ok(row.coreCount >= 3, 'Previously established whole-document families remain');
+    assert.equal(row.coreCount, new Set(row.rankContributions.map((c) => c.family)).size);
+    assert.ok(
+      row.rankContributions.every((c) => {
+        const protocol = data.tests.find((t) => t.id === c.benchmark);
+        return protocol.core || protocol.aggregate_eligible;
+      })
+    );
     assert.ok(Number.isFinite(row.rank));
     assert.equal(row.count, row.coreCount);
     assert.ok(row.rankContributions.every((c) => !c.benchmark.includes('gt-layout')));

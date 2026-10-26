@@ -1,0 +1,25 @@
+{
+  "id": "parsebench-ocria-router-20261026",
+  "short": "Router recipe",
+  "label": "ParseBench · OCRia OpenDocRouter recipe",
+  "family": "parsebench",
+  "source": "opendocrouter-ocria-20261026",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": false,
+  "aggregate_priority": 125,
+  "matrix_extra": false,
+  "metric_labels": {
+    "overall": "overall"
+  },
+  "metric_units": {
+    "overall": "percent"
+  },
+  "metric_directions": {
+    "overall": "higher"
+  },
+  "note": "Five-category hosted recipe mean. Separate from report four-category scores. Grounding configuration is not pinned; one recorded recipe cannot establish a comparison cohort. Not independent evidence."
+}

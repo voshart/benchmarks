@@ -1685,5 +1685,61 @@
     "kind": "vendor",
     "verified_on": "2026-10-24",
     "note": "Public BF16 checkpoint; model tree identifies Qwen2.5-VL-3B-Instruct base (Hub reports approximately 4B stored parameters including vision components). Local inference instructions support feasibility. No matched H100 throughput measurement collected. No release date inferred."
+  },
+  "ocria-report-202610": {
+    "title": "OCRia-1 technical report, October 2026",
+    "url": "https://www.llamaindex.ai/ocria/ocria-1-technical-report.pdf",
+    "kind": "author_reported",
+    "note": "LlamaIndex author evaluation. Tables 3/4/16/17/18/19 and Appendix E. Four-category ParseBench is not the existing five-category overall. Table 16 reprints competitor baselines; Table 17 includes two reused baselines. Source-native precision and configurations remain distinct.",
+    "verified_on": "2026-10-26"
+  },
+  "ocria-announcement-20261022": {
+    "title": "OCRia-1 announcement and higher-precision plots",
+    "url": "https://www.llamaindex.ai/blog/parse-ocria-1",
+    "kind": "author_reported",
+    "note": "Same LlamaIndex operator, not independent corroboration of its PDF. Plots provide some higher-precision values; missing components are not borrowed. The announcement lists LightOnOCR-3 standardized olmOCR overall 81.2, while PDF Table 17 says 82.1; the PDF protocol import uses 82.1 and records the conflict.",
+    "verified_on": "2026-10-26"
+  },
+  "opendocrouter-ocria-20261026": {
+    "title": "OpenDocRouter OCRia recipe, tariffs and latency",
+    "url": "https://www.opendocrouter.ai/models",
+    "kind": "vendor",
+    "note": "OpenDocRouter is a LlamaIndex product, not independent corroboration. OCRia recipe version 2026-10-22. Overall averages five ParseBench categories; grounding recipe is not established as equivalent to the bare model. $13.04/1000 pages is a token-workload estimate; 2.2 seconds is median request latency, not batched throughput.",
+    "verified_on": "2026-10-26"
+  },
+  "ocria-router-ownership": {
+    "title": "LlamaIndex introduces OpenDocRouter",
+    "url": "https://www.llamaindex.ai/blog/introducing-opendocrouter",
+    "kind": "official",
+    "note": "Establishes common ownership and optional grounding engine, not independent model execution.",
+    "verified_on": "2026-10-26"
+  },
+  "datalab-open-omniparse-20261023": {
+    "title": "Datalab open-weight OmniParseBench comparison, October 23",
+    "url": "https://app.datalab.to/blog/open-ocr-models-omniparsebench",
+    "kind": "vendor_comparison",
+    "note": "Complete 17-row table, dataset revision 961c0f89; 16,288 tests on 2,937 pages. Preserve documented vendor pipelines, retries and deviations. Indra is reused repository evidence with ambiguous version presentation, not a new independent run. Hunyuan serving section specifies 1.5 despite the shortened headline label.",
+    "verified_on": "2026-10-26"
+  },
+  "omniparse-cell-family-961c0f89": {
+    "title": "OmniParseBench test families and pinned dataset",
+    "url": "https://huggingface.co/datasets/datalab-to/omni_parse_bench/tree/961c0f89",
+    "kind": "official",
+    "note": "The tables family comprises 5,386 table_cell tests. This is not the table-tag composite, which can include other test families.",
+    "verified_on": "2026-10-26"
+  },
+  "ocria-h100-hardware": {
+    "title": "NVIDIA H100 reference specifications",
+    "url": "https://www.nvidia.com/en-us/data-center/h100/",
+    "kind": "official",
+    "note": "H100 SXM: 80GB, 3.35 TB/s bandwidth. Hardware specifications constrain a planning scenario; they do not measure OCRia throughput.",
+    "verified_on": "2026-10-26"
+  },
+  "ocria-b200-hardware": {
+    "title": "NVIDIA DGX B200 specifications",
+    "url": "https://www.nvidia.com/en-us/data-center/dgx-b200/",
+    "kind": "official",
+    "note": "Eight B200 GPUs, 64 TB/s aggregate HBM bandwidth: 8 TB/s per GPU. Native FP4 is not an H100 execution path. Do not use system-wide throughput as single-GPU throughput.",
+    "verified_on": "2026-10-26"
   }
 }

@@ -5054,5 +5054,59 @@
     "source_id": "glm-api-olm-no-hf-2e85a62",
     "configuration": "Hosted Z.ai API evaluation; exact backend revision and decoding settings unreported.",
     "evidence_note": "The 75.2 source explicitly names the ZAI API and excludes headers/footers. No backend-to-open-weight equivalence or production tariff is inferred."
+  },
+  {
+    "id": "ocria-1",
+    "name": "OCRia-1 (4B)",
+    "organization": "LlamaIndex",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": "2026-10-22",
+    "release_provenance": "verified",
+    "release_source_id": "opendocrouter-ocria-20261026",
+    "source_id": "ocria-report-202610",
+    "ranking_identity": "ocria-1",
+    "configuration": "Reported OCRia-1 checkpoint. Report protocols are separate from the OpenDocRouter five-category recipe.",
+    "evidence_note": "Hosted availability verified through the versioned OpenDocRouter listing and LlamaParse announcement. Public downloadable weights were not established. H100 speed is hypothetical, not hosted API throughput.",
+    "price_context": {
+      "label": "Router ≈$13.04†",
+      "amount_per_1000_pages": 13.04,
+      "currency": "USD",
+      "verified_on": "2026-10-26",
+      "source_id": "opendocrouter-ocria-20261026",
+      "note": "Context only: OpenDocRouter recipe workload estimate, not a flat tariff or a matched cost for the report checkpoint. Actual routed recipe is listed separately."
+    }
+  },
+  {
+    "id": "ocria-1-opendocrouter-20261022",
+    "name": "OCRia-1 · OpenDocRouter recipe",
+    "organization": "LlamaIndex",
+    "access": "closed",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": "2026-10-22",
+    "release_provenance": "verified",
+    "release_source_id": "opendocrouter-ocria-20261026",
+    "source_id": "opendocrouter-ocria-20261026",
+    "ranking_identity": "ocria-1",
+    "configuration": "llamaindex/ocria-1, OpenDocRouter recipe version 2026-10-22. Five-category evaluation; grounding augmentation/configuration not pinned.",
+    "evidence_note": "Separate routed configuration; no report checkpoint accuracy or native GPU speed inherited. Operator is LlamaIndex."
+  },
+  {
+    "id": "indra-ocr-omniparse-20261023",
+    "name": "Indra OCR · Oct 23 reported run",
+    "organization": "Datalab",
+    "access": "open",
+    "topics": [
+      "ocr"
+    ],
+    "release_date": null,
+    "release_provenance": "unknown",
+    "source_id": "datalab-open-omniparse-20261023",
+    "configuration": "October 23 blog row 71.4. Serving section says v1.1 auto + math on CPU, while the post warns that the dataset card Indra version differs. Exact identity unresolved.",
+    "evidence_note": "Reused repository result, not a new Datalab rerun; kept context-only rather than silently mapped to the canonical Indra 1.1 entry."
   }
 ]
