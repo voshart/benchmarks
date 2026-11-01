@@ -1,0 +1,197 @@
+/* Scoped to the OCR cost chart; table layout and speech pages are unchanged. */
+.ocr-cost-chart {
+  margin-top: 2.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+}
+.ocr-cost-chart h2 {
+  margin: 0 0 0.35rem;
+  font: 400 clamp(1.5rem, 3vw, 2rem)/1.2 var(--serif);
+}
+.ocr-chart-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.4rem;
+  margin: 1rem 0;
+}
+.ocr-chart-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ocr-chart-controls select {
+  max-width: 100%;
+  padding: 0.35rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--paper);
+}
+.ocr-chart-status,
+.ocr-chart-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.ocr-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+.ocr-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.ocr-chart-legend i {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  flex: none;
+}
+.ocr-chart-legend .ocr-chart-quadrant-key {
+  border-radius: 2px;
+  background: #22c55e26;
+  border: 1px solid #22c55e75;
+}
+.ocr-chart-legend .ocr-chart-frontier-key {
+  width: 1.3rem;
+  height: 0;
+  border-top: 3px dotted var(--ink);
+  border-radius: 0;
+}
+.ocr-chart-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+.ocr-chart-svg {
+  display: block;
+  width: 100%;
+  min-width: 720px;
+  height: auto;
+  overflow: visible;
+  font-family: var(--sans);
+}
+.ocr-chart-quadrant {
+  fill: #22c55e18;
+}
+.ocr-chart-grid {
+  stroke: var(--rule);
+  stroke-opacity: 0.3;
+  stroke-width: 0.7;
+}
+.ocr-chart-tick {
+  fill: var(--muted);
+  font-size: 12px;
+}
+.ocr-chart-axis {
+  fill: var(--ink);
+  font-size: 14px;
+}
+.ocr-chart-zone-label {
+  fill: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.ocr-chart-frontier {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.ocr-chart-range {
+  fill: none;
+  stroke-width: 1.2;
+  opacity: 0.22;
+  pointer-events: none;
+}
+.ocr-chart-hit {
+  fill: transparent;
+}
+.ocr-chart-dot {
+  stroke: var(--paper);
+  stroke-width: 1.2;
+}
+.ocr-chart-point {
+  cursor: pointer;
+}
+.ocr-chart-point:hover .ocr-chart-dot,
+.ocr-chart-point:focus .ocr-chart-dot {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+.ocr-chart-label {
+  fill: var(--ink);
+  font-size: 12px;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+html[data-theme='dark'] .ocr-chart-dot {
+  filter: brightness(1.35);
+}
+.ocr-chart-readout {
+  min-height: 3.5rem;
+  padding: 0.8rem 1rem;
+  background: var(--paper2);
+  border-left: 3px solid var(--accent);
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.ocr-chart-readout strong {
+  font-weight: 600;
+}
+.ocr-chart-empty {
+  padding: 2rem 1rem;
+  border: 1px dashed var(--rule);
+}
+.ocr-chart-data {
+  margin: 1rem 0;
+}
+.ocr-chart-data summary {
+  cursor: pointer;
+}
+.ocr-chart-data table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.ocr-chart-data caption {
+  text-align: left;
+  padding: 0.75rem 0;
+}
+.ocr-chart-data th,
+.ocr-chart-data td {
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+.ocr-chart-data td:last-child {
+  min-width: 20rem;
+  white-space: normal;
+}
+@media (max-width: 600px) {
+  .ocr-chart-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .ocr-chart-legend {
+    font-size: 0.8rem;
+  }
+}
+@media print {
+  .ocr-chart-controls {
+    display: none;
+  }
+  .ocr-chart-svg {
+    min-width: 0;
+  }
+}

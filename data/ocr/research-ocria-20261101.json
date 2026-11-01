@@ -1,0 +1,30 @@
+{
+  "verified_on": "2026-11-01",
+  "model": "ocria-1",
+  "source_ids": [
+    "ocria-report-202610",
+    "opendocrouter-ocria-20261026"
+  ],
+  "model_profile": {
+    "base_model": "Qwen3.5-4B",
+    "sft_pages": 100979,
+    "real_pages": 82943,
+    "synthetic_pages": 18036,
+    "source_url": "https://www.llamaindex.ai/ocria/ocria-1-technical-report.pdf",
+    "source_location": "Sections 1, 2.1 and 3",
+    "evidence": "author_reported",
+    "note": "Training corpus metadata, not evaluation coverage; no new accuracy score or public weight release is established."
+  },
+  "throughput_observations": [
+    "ocria-b200-table21-c1-20261101",
+    "ocria-b200-table21-c8-20261101",
+    "ocria-router-p90-20261101"
+  ],
+  "omitted_claims": [
+    {
+      "claim": "Hosted five-category ParseBench tables=91.24 and charts=80.95",
+      "reason": "Not verified in the primary source category breakdown; do not import a secondary report or borrow the four-category checkpoint scores."
+    }
+  ],
+  "ranking_impact": "None. Additional observations are deployment evidence only; cost_eligible and comparison_default are false. Existing H100 planning range, prices and accuracy evidence are unchanged."
+}

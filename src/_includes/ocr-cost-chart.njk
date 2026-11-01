@@ -1,0 +1,37 @@
+<section id="ocrCostChart" class="ocr-cost-chart" aria-labelledby="ocrCostChartHeading">
+  <h2 id="ocrCostChartHeading">OCR rating vs. cost per 1,000 pages</h2>
+  <p class="key">
+    Higher quality, lower cost. Uses the same model cohort, filters and cost assumptions as the
+    table above. Rating is an estimate, not an accuracy percentage.
+  </p>
+  <div class="ocr-chart-controls">
+    <label
+      >Cost basis
+      <select data-chart-basis aria-label="Chart cost basis">
+        <option value="all">All comparable costs</option>
+        <option value="hosted">Hosted / API</option>
+        <option value="local">Local compute scenarios</option>
+      </select></label
+    >
+    <label
+      >Labels
+      <select data-chart-labels aria-label="Chart model labels">
+        <option value="frontier">Frontier models</option>
+        <option value="all">More model labels</option>
+        <option value="none">No labels</option>
+      </select></label
+    >
+    <label><input type="checkbox" data-chart-ranges checked /> Show cost ranges</label>
+  </div>
+  <div data-chart-output>{{ ocr.initial | ocrCostChart(ocr) | safe }}</div>
+  <p class="ocr-chart-note">
+    The dotted frontier uses central cost estimates (geometric midpoints for ranges), not proven
+    dominance. Overlapping planning ranges do not establish a winner. The green region is below
+    the plotted median cost and above the plotted median rating. Cost bases differ: API tariffs,
+    token scenarios and local compute estimates are not matched workload measurements. Context-only
+    prices, missing ratings and non-positive costs are excluded. Crowded labels are suppressed;
+    every point remains inspectable. The date slider selects releases, not historical tariffs.
+    This chart does not change any rating.
+  </p>
+  <noscript><p class="key">Static snapshot shown. Enable JavaScript for chart controls.</p></noscript>
+</section>
