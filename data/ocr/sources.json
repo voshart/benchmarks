@@ -1741,5 +1741,20 @@
     "kind": "official",
     "note": "Eight B200 GPUs, 64 TB/s aggregate HBM bandwidth: 8 TB/s per GPU. Native FP4 is not an H100 execution path. Do not use system-wide throughput as single-GPU throughput.",
     "verified_on": "2026-10-26"
+  },
+  "unlimited-ocr2-release-20261027": {
+    "title": "Baidu Unlimited-OCR 2 official release and open checkpoint",
+    "url": "https://github.com/baidu/Unlimited-OCR",
+    "kind": "official",
+    "verified_on": "2026-11-01",
+    "note": "Baidu project release log dates Unlimited-OCR 2 to 2026-10-27 and links the baidu/Unlimited-OCR-2 Hugging Face checkpoint (MIT license, open weights). The 'OCR-3.0 era' phrase is architecture branding, not model version 3. Model release is distinct from paper publication.",
+    "context_url": "https://huggingface.co/baidu/Unlimited-OCR-2"
+  },
+  "unlimited-ocr2-paper-v1": {
+    "title": "Unlimited OCR Works 2 · Baidu ERNIE paper (arXiv 2610.39308v1)",
+    "url": "https://arxiv.org/pdf/2610.39308",
+    "kind": "author_reported",
+    "verified_on": "2026-11-01",
+    "note": "Baidu-authored paper dated 2026-10-29, Tables 1–3. OmniDocBench v1.6 Table 3 does not explicitly call the subset 'full', but its TeleOCR 96.91 and OvisOCR2 96.47 baselines match the full-set panel. Exact checkpoint/scorer commit and per-row inference configuration not pinned. Table 1 MPDocBench (up to 30 pages) and Table 2 author-introduced MarathonDocBench (103–300 pages, 100 documents) are multi-page, document-level protocols. These author results are not independent reproductions; do not treat the multi-page panels as eligible global-rating comparisons."
   }
 }

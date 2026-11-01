@@ -1460,7 +1460,26 @@
     "release_date": "2026-06-30",
     "release_provenance": "legacy_import",
     "access": "unknown",
-    "organization": null
+    "organization": null,
+    "lineage": "unlimited-ocr"
+  },
+  {
+    "id": "unlimited-ocr-2",
+    "name": "Unlimited-OCR 2",
+    "organization": "Baidu",
+    "access": "open",
+    "release_date": "2026-10-27",
+    "release_provenance": "release_announcement",
+    "source_id": "unlimited-ocr2-release-20261027",
+    "release_source_id": "unlimited-ocr2-release-20261027",
+    "hub_id": "baidu/Unlimited-OCR-2",
+    "license": "MIT",
+    "topics": [
+      "ocr"
+    ],
+    "lineage": "unlimited-ocr",
+    "configuration": "Baidu 3B MoE model (about 0.5B active parameters); single-page and cross-page document parsing with SR-SWA. Local weights; published multi-page evaluation uses a custom SGLang runtime and post-processing.",
+    "evidence_note": "Baidu release announcement dated 2026-10-27, with downloadable MIT-licensed weights. Paper v1 scores are author-reported, not independently reproduced. No measured H100 pages/s or comparable price for this exact model; do not inherit v1's planning estimates."
   },
   {
     "id": "wevisdoc-2b",
