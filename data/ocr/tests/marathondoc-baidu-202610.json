@@ -1,0 +1,48 @@
+{
+  "id": "marathondoc-baidu-202610",
+  "short": "Marathon",
+  "label": "MarathonDocBench · Baidu paper Table 2 (2026)",
+  "source": "unlimited-ocr2-paper-v1",
+  "family": "marathondoc",
+  "primary_metric": "overall",
+  "unit": "percent",
+  "direction": "higher",
+  "core": false,
+  "primary": false,
+  "aggregate_eligible": false,
+  "matrix_extra": false,
+  "metric_labels": {
+    "overall": "Overall",
+    "text_edit": "Text edit distance",
+    "cross_page_text_edit": "Cross-page text edit distance",
+    "formula": "Formula CDM",
+    "tables": "Table TEDS",
+    "cross_page_tables": "Cross-page table TEDS",
+    "figures": "Figure F1",
+    "reading_order_edit": "Reading-order edit distance",
+    "headings": "Heading TEDS"
+  },
+  "metric_units": {
+    "overall": "percent",
+    "text_edit": "ratio",
+    "cross_page_text_edit": "ratio",
+    "formula": "percent",
+    "tables": "percent",
+    "cross_page_tables": "percent",
+    "figures": "percent",
+    "reading_order_edit": "ratio",
+    "headings": "percent"
+  },
+  "metric_directions": {
+    "overall": "higher",
+    "text_edit": "lower",
+    "cross_page_text_edit": "lower",
+    "formula": "higher",
+    "tables": "higher",
+    "cross_page_tables": "higher",
+    "figures": "higher",
+    "reading_order_edit": "lower",
+    "headings": "higher"
+  },
+  "note": "Baidu's author-created MarathonDocBench: 100 documents, 103–300 pages, long cross-page text/table structures, human-refined parser-derived annotations. Model authors' benchmark and execution; diagnostic-only, not a global OCR-quality vote. Dataset: https://huggingface.co/datasets/baidu/MarathonDocBench"
+}
