@@ -26,12 +26,14 @@
   <div data-chart-output>{{ ocr.initial | ocrCostChart(ocr) | safe }}</div>
   <p class="ocr-chart-note">
     The dotted frontier uses central cost estimates (geometric midpoints for ranges), not proven
-    dominance. Overlapping planning ranges do not establish a winner. The green region is below
-    the plotted median cost and above the plotted median rating. Cost bases differ: API tariffs,
-    token scenarios and local compute estimates are not matched workload measurements. Context-only
+    dominance. Overlapping planning ranges do not establish a winner. The green region is below the
+    plotted median cost and above the plotted median rating. Cost bases differ: API tariffs, token
+    scenarios and local compute estimates are not matched workload measurements. Context-only
     prices, missing ratings and non-positive costs are excluded. Crowded labels are suppressed;
-    every point remains inspectable. The date slider selects releases, not historical tariffs.
-    This chart does not change any rating.
+    every point remains inspectable. The date slider selects releases, not historical tariffs. This
+    chart does not change any rating.
   </p>
-  <noscript><p class="key">Static snapshot shown. Enable JavaScript for chart controls.</p></noscript>
+  <noscript
+    ><p class="key">Static snapshot shown. Enable JavaScript for chart controls.</p></noscript
+  >
 </section>

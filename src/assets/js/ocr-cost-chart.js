@@ -13,9 +13,7 @@
     );
   const money = (n) =>
     '$' +
-    (n < 0.01
-      ? Number(n.toPrecision(2))
-      : n.toLocaleString('en-US', { maximumFractionDigits: 2 }));
+    (n < 0.01 ? Number(n.toPrecision(2)) : n.toLocaleString('en-US', { maximumFractionDigits: 2 }));
   const safeURL = (url) => (/^https?:\/\//i.test(url || '') ? url : null);
   const localKinds = new Set(['H100 scenario', 'local compute', 'modeled compute']);
   const contextualKinds = new Set([
@@ -37,7 +35,7 @@
     DeepSeek: '#3b5bdb'
   };
   function color(organization) {
-    if (colors[organization]) return colors[organization];
+    if (Object.hasOwn(colors, organization)) return colors[organization];
     let hash = 0;
     for (const c of organization) hash = (hash * 31 + c.charCodeAt(0)) >>> 0;
     return `hsl(${hash % 360}, 59%, 46%)`;
@@ -241,7 +239,10 @@
           : edge;
     const organizations = [...new Set(all.map((p) => p.organization))].sort();
     const legend = organizations
-      .map((org) => `<span><i style="background:${color(org)}" aria-hidden="true"></i>${esc(org)}</span>`)
+      .map(
+        (org) =>
+          `<span><i style="background:${color(org)}" aria-hidden="true"></i>${esc(org)}</span>`
+      )
       .join('');
     const table = [...all]
       .sort((a, b) => b.rating - a.rating || a.cost - b.cost)
