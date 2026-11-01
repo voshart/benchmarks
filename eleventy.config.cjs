@@ -16,6 +16,10 @@ module.exports = function (config) {
   const ocrComparison = require('./src/assets/js/ocr-comparison.js');
   config.addFilter('ocrHead', ocrComparison.renderHead);
   config.addFilter('ocrRows', ocrComparison.renderRows);
+  const ocrCostChart = require('./src/assets/js/ocr-cost-chart.js');
+  config.addFilter('ocrCostChart', (result, data) =>
+    ocrCostChart.render(ocrComparison.enrich(result, data), data)
+  );
   const rankUI = require('./src/assets/js/rank-ui.js');
   const speech = require('./src/assets/js/speech.js');
   const speechMatrix = require('./src/assets/js/speech-matrix.js');

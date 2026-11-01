@@ -58,6 +58,12 @@
     const options = { ...assumptions(), sortKey, sortDirection };
     UI.head.innerHTML = OCRComparison.renderHead(result, options);
     UI.body.innerHTML = OCRComparison.renderRows(result, data, options);
+    if (globalThis.OCRCostChart)
+      globalThis.OCRCostChart.update(
+        $('ocrCostChart'),
+        OCRComparison.enrich(result, data, options),
+        data
+      );
   }
   UI.head.addEventListener('click', (event) => {
     const button = event.target.closest('[data-ocr-sort]');

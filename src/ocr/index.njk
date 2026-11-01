@@ -13,6 +13,7 @@ permalink: /ocr/index.html
       content="Documented cross-benchmark OCR scores, pricing and historical release cohorts."
     />
     <link rel="stylesheet" href="{{ '/assets/css/benchmark.css' | assetUrl }}" />
+    <link rel="stylesheet" href="{{ '/assets/css/ocr-chart.css' | assetUrl }}" />
     <script>
       (function () {
         try {
@@ -176,6 +177,7 @@ permalink: /ocr/index.html
           protocol, component scores and source notes. Model Details retains alternate observations.
           Speed and prices retain their source date in historical views.
         </p>
+        {% include "ocr-cost-chart.njk" %}
       </section>
       <section id="pricingPanel" hidden>
         <h2>Page rates & workload estimates</h2>
@@ -333,6 +335,7 @@ permalink: /ocr/index.html
     <script defer src="{{ '/assets/js/rank-ui.js' | assetUrl }}"></script>
     <script defer src="{{ '/assets/js/ocr-deployment.js' | assetUrl }}"></script>
     <script defer src="{{ '/assets/js/ocr-comparison.js' | assetUrl }}"></script>
+    <script defer src="{{ '/assets/js/ocr-cost-chart.js' | assetUrl }}"></script>
     <script defer src="{{ '/assets/js/bench.js' | assetUrl }}"></script>
   </body>
 </html>
