@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const { loadOCR } = require('../lib/load.cjs');
+const { validateData } = require('../lib/validate.cjs');
 const Rank = require('../src/assets/js/ranking.js');
 const Comparison = require('../src/assets/js/ocr-comparison.js');
 const Chart = require('../src/assets/js/ocr-cost-chart.js');
@@ -22,7 +23,8 @@ test('real chart points use the table cost selector and current filtered cohort'
   }
   const cheaper = Chart.points(Comparison.enrich(result, data, { hourlyRate: 1 }), data).points;
   for (const point of points.filter((p) => p.costKind === 'H100 scenario')) {
-    assert.equal(point.cost, cheaper.find((p) => p.id === point.id).cost * 2);
+    const expected = cheaper.find((p) => p.id === point.id).cost * 2;
+    assert.ok(Math.abs(point.cost - expected) <= 1e-12 * Math.max(1, expected));
   }
 });
 
@@ -54,6 +56,7 @@ test('OCRia supplement retains separate Table 21 B200 measurements and hosted p9
   }
   const latency = data.throughput.find((r) => r.id === 'ocria-router-p90-20261101');
   assert.equal(latency.model, 'ocria-1-opendocrouter-20261022');
+  assert.equal(latency.unit, 'p90_seconds_per_page');
   assert.equal(latency.p90_seconds_per_page, 9.3);
   assert.equal(latency.median_seconds_per_page, 2.2);
   assert.equal(latency.pages_per_second, undefined);
@@ -76,4 +79,19 @@ test('deployment enrichment does not add quality votes or fabricate an OCRia cos
   assert.ok(ocria);
   assert.equal(ocria.deployment.cost.value, null);
   assert.ok(!Chart.points(result, data).points.some((p) => p.id === 'ocria-1'));
+});
+
+test('p90 latency validates its unit and cannot become default throughput or compute evidence', () => {
+  const latency = data.throughput.find((r) => r.id === 'ocria-router-p90-20261101');
+  const validate = (patch) =>
+    validateData({
+      ...data,
+      throughput: data.throughput.map((r) => (r.id === latency.id ? { ...r, ...patch } : r))
+    });
+  assert.doesNotThrow(() => validate({}));
+  assert.throws(() => validate({ p90_seconds_per_page: NaN }), /invalid p90/);
+  assert.throws(() => validate({ p90_seconds_per_page: 1 }), /at least the median/);
+  assert.throws(() => validate({ pages_per_second: 1 / 9.3 }), /latency is not throughput/);
+  assert.throws(() => validate({ comparison_default: true }), /non-throughput default/);
+  assert.throws(() => validate({ cost_eligible: true }), /cost requires aggregate throughput/);
 });
