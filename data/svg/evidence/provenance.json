@@ -1,0 +1,35 @@
+{
+  "kernel_source_id": "448c2ac7f2654543",
+  "kernel_source_revision": "456eebfee1bec816e67ea9d775177af872d09859",
+  "operator": "Monotrace maintainer",
+  "date": "2026-11-04",
+  "dataset_revision": "53b406757e6941c2d3ba45c59b78adfcf6f6639b",
+  "dataset_parquet_sha256": "124ca9798ad286e3a6638dd79d3f9d83d5aed124bba10cd8111df3b7bebdd62b",
+  "renderer": "@resvg/resvg-js 2.6.2",
+  "renderer_settings": {
+    "background": "white",
+    "fonts": "system fonts disabled",
+    "font_input_width": 256,
+    "font_reference_and_score_width": 1024
+  },
+  "model_weights_sha256": "d73036b56966966d07975d696bde331762f37297e2f095de8cea0040c3aa0841",
+  "validation": {
+    "geometry_records": 9642,
+    "dino_values": 9642,
+    "unique_cases": 4821,
+    "evaluation_errors": 0,
+    "pilot_geometry_replay": "512 paired records,9 fields exactly identical",
+    "pilot_dino_replay": {
+      "paired_values": 512,
+      "max_absolute_score_delta": 2.980232238769531e-7
+    },
+    "source_syntax_checks": "Python and Node passed"
+  },
+  "limitations": [
+    "Released metric formula reproduced; paper baseline commands remain unverified",
+    "No direct StarVector or AutoTrace run",
+    "Cairo used only in the optional 64-case protocol diagnostic",
+    "No corner F1 or exact Bezier/cross-contour certification",
+    "Native quality profile, not a deployed Worker throughput or SLA test"
+  ]
+}

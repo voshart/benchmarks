@@ -2,6 +2,7 @@ const { loadOCR } = require('../lib/load.cjs');
 const { validateData } = require('../lib/validate.cjs');
 const { loadSTT } = require('../lib/load-stt.cjs');
 const { validateSTT } = require('../lib/validate-stt.cjs');
+const { loadSVG } = require('../lib/load-svg.cjs');
 const registry = require('../data/models/registry.json');
 require('node:assert/strict').equal(
   new Set(registry.map((model) => model.id)).size,
@@ -18,3 +19,5 @@ validateSTT(speech);
 console.log(
   `Validated ${speech.models.length} speech models, ${speech.rawRecords.length} accuracy observations and ${speech.throughput.length} throughput observations.`
 );
+const svg = loadSVG();
+console.log(`Validated ${svg.runs.length} SVG comparison groups.`);

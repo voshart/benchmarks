@@ -1,6 +1,8 @@
 # Maintenance
 
-Read [AGENTS.md](../AGENTS.md) for common evidence rules. Current topic policies are [OCR](../data/ocr/README.md) and [speech](../data/stt/README.md). This guide describes how to make changes; historical research notes are evidence, not operational instructions.
+Read [AGENTS.md](../AGENTS.md) for common evidence rules. Current topic policies are [OCR](../data/ocr/README.md), [speech](../data/stt/README.md) and [SVG tracers](../data/svg/README.md). This guide describes how to make changes; historical research notes are evidence, not operational instructions.
+
+SVG tracer data uses its own compact schema in `data/svg/results.json`, documented in the topic guide. Update its run/configuration/source records and aggregate evidence together; the OCR/speech JSONL workflow below does not apply to SVG. Published and maintainer-executed protocols remain separate.
 
 ## Update an existing score
 
@@ -44,7 +46,7 @@ For behavioral changes, prefer small fixtures that exercise missing values, ties
 
 For a structural refactor, compare rankings, selected sources, deployment calculations and rendered rows before and after across current/historical views. Check the local pages with JavaScript enabled and disabled when templates or browser dependencies change. Keep evidence values untouched. CI runs the same build gate on pushes and pull requests.
 
-The [README](../README.md#deployment) records Cloudflare settings. Verify the newest commit's CI and production deployment. Confirm `/ocr/` and `/stt/`, their data endpoints, default rows, filters and source/details controls.
+The [README](../README.md#deployment) records Cloudflare settings. Verify the newest commit's CI and production deployment. Confirm `/ocr/`, `/stt/` and `/svg/`, their data endpoints, default rows, filters and source/details controls.
 
 ## OCR rating changes
 

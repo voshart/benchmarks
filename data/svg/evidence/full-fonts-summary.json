@@ -1,0 +1,150 @@
+{
+  "scope": "full 4821-row SVG-Fonts test split",
+  "engines": [
+    {
+      "engine": "potrace",
+      "attempted": 4821,
+      "successful_traces": 4821,
+      "trace_failures": 0,
+      "evaluated": 4821,
+      "mean_dino_all_cases": 0.9884188461788361,
+      "mean_boundary_all_cases_including_256px_empty_output_penalty": 0.2759532038929932,
+      "mean_boundary_successful_traces": 0.2759532038929932,
+      "completed_empty_svgs": 5,
+      "completed_empty_svgs_with_visible_reference": 1,
+      "visible_references_without_ink_at_scoring_threshold_including_failures": 1,
+      "paired_successful_nonempty_visible_cases": 4813,
+      "mean_boundary_on_paired_successful_nonempty_visible_cases": 0.21456002227737717,
+      "median_boundary_all_cases": 0.20345721329716257,
+      "mean_iou_all_cases": 0.9699390267542136,
+      "mean_mae_all_cases": 0.002712936499422211,
+      "mean_worst_16px_mae_all_cases": 0.05760345642061794,
+      "mean_boundary_p95_all_cases": 0.640909234601313,
+      "mean_boundary_max_all_cases": 1.8043900297226858,
+      "median_segments_successful_nonempty_traces": 29,
+      "sampled_topology_mismatches_including_failed_traces": 354,
+      "full_run_dino_on_original_256": 0.9896769593469799,
+      "dino_on_additional_4565": 0.9883482926254857
+    },
+    {
+      "engine": "monotrace",
+      "attempted": 4821,
+      "successful_traces": 4819,
+      "trace_failures": 2,
+      "evaluated": 4821,
+      "mean_dino_all_cases": 0.9965039222375458,
+      "mean_boundary_all_cases_including_256px_empty_output_penalty": 0.3170236469351366,
+      "mean_boundary_successful_traces": 0.2109091101627503,
+      "completed_empty_svgs": 6,
+      "completed_empty_svgs_with_visible_reference": 2,
+      "visible_references_without_ink_at_scoring_threshold_including_failures": 4,
+      "paired_successful_nonempty_visible_cases": 4813,
+      "mean_boundary_on_paired_successful_nonempty_visible_cases": 0.10479347639191644,
+      "median_boundary_all_cases": 0.08848182943561506,
+      "mean_iou_all_cases": 0.9861166523502145,
+      "mean_mae_all_cases": 0.0011916746722139219,
+      "mean_worst_16px_mae_all_cases": 0.02409353070626975,
+      "mean_boundary_p95_all_cases": 0.5406399040858466,
+      "mean_boundary_max_all_cases": 1.2921141579342061,
+      "median_segments_successful_nonempty_traces": 32,
+      "sampled_topology_mismatches_including_failed_traces": 413,
+      "full_run_dino_on_original_256": 0.9969800368417054,
+      "dino_on_additional_4565": 0.9964772222728876
+    }
+  ],
+  "paired": {
+    "dino": {
+      "paired_cases": 4821,
+      "excluded_failed_pairs": 0,
+      "monotrace_better": 4427,
+      "ties": 21,
+      "monotrace_worse": 373
+    },
+    "boundary_mean_px": {
+      "paired_cases": 4821,
+      "excluded_failed_pairs": 0,
+      "monotrace_better": 4759,
+      "ties": 18,
+      "monotrace_worse": 44
+    },
+    "worst_16px_mae": {
+      "paired_cases": 4821,
+      "excluded_failed_pairs": 0,
+      "monotrace_better": 4761,
+      "ties": 19,
+      "monotrace_worse": 41
+    },
+    "boundary_max_px": {
+      "paired_cases": 4821,
+      "excluded_failed_pairs": 0,
+      "monotrace_better": 4449,
+      "ties": 112,
+      "monotrace_worse": 260
+    },
+    "segments": {
+      "paired_cases": 4813,
+      "excluded_failed_pairs": 8,
+      "monotrace_better": 1698,
+      "ties": 176,
+      "monotrace_worse": 2939
+    }
+  },
+  "failures": [
+    {
+      "id": "font-10956283854905512283_Y_upper",
+      "engine": "monotrace",
+      "corpus": "svg-fonts-test",
+      "ok": false,
+      "error": "{\"code\":\"geometry-unresolved\",\"kernel\":{\"abi_version\":1,\"source_id\":\"448c2ac7f2654543\",\"version\":\"0.1.0\"},\"message\":\"No valid bounded model for source span (unresolved_span)\",\"reason\":\"unresolved_span\",\"retry_lower_resolution\":false,\"schema_version\":1,\"stage\":\"trace\"}",
+      "failure_placeholder_sha256": "90d26d0a7d028ce6715d93cf37c8acd2eea0bf9323e72114d78b520e8f5ed1c1",
+      "seconds": 0.02062235701305326,
+      "iou": 0,
+      "mae": 0.05176526237936581,
+      "worst_16px_mae": 0.7546606924019608,
+      "boundary_mean_px": 256,
+      "boundary_p95_px": 256,
+      "boundary_max_px": 256,
+      "reference_components": 1,
+      "reference_holes": 0,
+      "components": 0,
+      "holes": 0,
+      "topology_mismatch": true,
+      "segments": 0,
+      "svg_contours": 0,
+      "evaluation_ok": true,
+      "dino": 0.7142856121063232
+    },
+    {
+      "id": "font-14309971360428559934_w_lower",
+      "engine": "monotrace",
+      "corpus": "svg-fonts-test",
+      "ok": false,
+      "error": "{\"code\":\"geometry-unresolved\",\"kernel\":{\"abi_version\":1,\"source_id\":\"448c2ac7f2654543\",\"version\":\"0.1.0\"},\"message\":\"Contour complexity budget exceeded (contour_segment_budget)\",\"reason\":\"contour_segment_budget\",\"retry_lower_resolution\":true,\"schema_version\":1,\"stage\":\"trace\"}",
+      "failure_placeholder_sha256": "90d26d0a7d028ce6715d93cf37c8acd2eea0bf9323e72114d78b520e8f5ed1c1",
+      "seconds": 0.11523706099251285,
+      "iou": 0,
+      "mae": 0.3042660170910405,
+      "worst_16px_mae": 0.995387178308824,
+      "boundary_mean_px": 256,
+      "boundary_p95_px": 256,
+      "boundary_max_px": 256,
+      "reference_components": 1,
+      "reference_holes": 0,
+      "components": 0,
+      "holes": 0,
+      "topology_mismatch": true,
+      "segments": 0,
+      "svg_contours": 0,
+      "evaluation_ok": true,
+      "dino": 0.6696932315826416
+    }
+  ],
+  "mean_policy": "All cases included. Failed traces use explicit blank scoring images. Any empty output against visible reference gets a 256px boundary penalty; blank output against blank reference gets zero. Conditional paired nonempty results are separately labeled.",
+  "published_scores_for_context_only": {
+    "potrace": 0.967,
+    "autotrace": 0.954,
+    "starvector_1b": 0.978,
+    "starvector_8b": 0.982
+  },
+  "comparability": "Full population removes our 256-case sampling uncertainty. Renderer, scoring size, implementation and baseline input settings remain different or unverified."
+}

@@ -13,6 +13,10 @@ module.exports = function (config) {
         .slice(0, 12)
   );
   config.addPassthroughCopy({ 'src/assets': 'assets' });
+  config.addPassthroughCopy({ 'data/svg/evidence': 'svg/evidence' });
+  const svgComparison = require('./src/assets/js/svg-comparison.js');
+  config.addFilter('svgHead', svgComparison.renderHead);
+  config.addFilter('svgRows', svgComparison.renderRows);
   const ocrComparison = require('./src/assets/js/ocr-comparison.js');
   config.addFilter('ocrHead', ocrComparison.renderHead);
   config.addFilter('ocrRows', ocrComparison.renderRows);

@@ -1,0 +1,65 @@
+{
+  "scope": "first 64 locked pilot cases, no tracing-input or fitting changes",
+  "means": [
+    {
+      "variant": "cairo-256",
+      "engine": "monotrace",
+      "count": 64,
+      "dino": 0.9962462866678834
+    },
+    {
+      "variant": "cairo-256",
+      "engine": "potrace",
+      "count": 64,
+      "dino": 0.9889203906059265
+    },
+    {
+      "variant": "cairo-512",
+      "engine": "monotrace",
+      "count": 64,
+      "dino": 0.996540424413979
+    },
+    {
+      "variant": "cairo-512",
+      "engine": "potrace",
+      "count": 64,
+      "dino": 0.9893221138045192
+    },
+    {
+      "variant": "python-port-api-default",
+      "engine": "potracer",
+      "count": 64,
+      "dino": 0.9894320806488395
+    },
+    {
+      "variant": "python-port-readme-example",
+      "engine": "potracer",
+      "count": 64,
+      "dino": 0.9895213693380356
+    },
+    {
+      "variant": "resvg-256",
+      "engine": "monotrace",
+      "count": 64,
+      "dino": 0.9953727647662163
+    },
+    {
+      "variant": "resvg-256",
+      "engine": "potrace",
+      "count": 64,
+      "dino": 0.9891463620588183
+    },
+    {
+      "variant": "resvg-512",
+      "engine": "monotrace",
+      "count": 64,
+      "dino": 0.9959028968587518
+    },
+    {
+      "variant": "resvg-512",
+      "engine": "potrace",
+      "count": 64,
+      "dino": 0.9874394554644823
+    }
+  ]
+}

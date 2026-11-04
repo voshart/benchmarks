@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "title": "SVG tracer benchmarks",
+  "snapshot_date": "2026-11-04",
+  "default_run": "fonts-full-20261104",
+  "affiliation": "Daniel Voshart develops Monotrace. The local comparisons were executed for this project; they are not independent evaluations.",
+  "metrics": {
+    "dino": {
+      "label": "DINO ↑",
+      "direction": "desc",
+      "precision": 5,
+      "description": "DINOv2 image-feature similarity. Higher is better; this is not a percentage accuracy or success rate."
+    },
+    "median_boundary": {
+      "label": "Median boundary ↓",
+      "direction": "asc",
+      "precision": 3,
+      "unit": " px",
+      "description": "Median of per-image symmetric boundary errors in native input pixels."
+    },
+    "mean_boundary": {
+      "label": "Mean boundary ↓",
+      "direction": "asc",
+      "precision": 3,
+      "unit": " px",
+      "description": "Mean of per-image symmetric boundary errors. For font runs, an empty output against visible reference carries a 256 px penalty; blank against blank is zero."
+    },
+    "iou": {
+      "label": "Ink IoU ↑",
+      "direction": "desc",
+      "precision": 4,
+      "description": "Mean intersection-over-union of thresholded ink masks. Higher is better."
+    },
+    "segments": {
+      "label": "Segments ↓",
+      "direction": "asc",
+      "precision": 1,
+      "description": "Median line/curve segment count. Full-run counts use successful nonempty outputs. Fewer segments do not establish better reconstruction."
+    },
+    "no_output": {
+      "label": "No output ↓",
+      "direction": "asc",
+      "precision": 0,
+      "description": "Visible reference images with no ink at scoring resolution, including explicit trace errors."
+    },
+    "trace_errors": {
+      "label": "Trace errors ↓",
+      "direction": "asc",
+      "precision": 0,
+      "description": "Explicit unsuccessful conversion attempts; an empty SVG can still be a completed conversion."
+    },
+    "topology": {
+      "label": "Topology flags ↓",
+      "direction": "asc",
+      "precision": 0,
+      "description": "Images whose sampled component/hole counts differ. Resolution-dependent; not an exact vector topology or fabrication check."
+    }
+  },
+  "models": {
+    "monotrace": {
+      "name": "Monotrace",
+      "version": "Native quality profile · kernel 448c2ac7f2654543",
+      "note": "Fixed kernel source revision 456eebfee1bec816e67ea9d775177af872d09859. Private implementation; no fitting policy was tuned on these runs."
+    },
+    "potrace": {
+      "name": "Potrace",
+      "version": "Original C 1.16 · defaults",
+      "note": "50% threshold PBM input, no dithering. Original C implementation, without the SVG Tools preprocessing or search harness."
+    },
+    "vtracer": {
+      "name": "VTracer",
+      "version": "Python 0.6.15 · binary defaults",
+      "note": "SVG generator identifies the internal engine as 0.6.12. Binary mode, other Python defaults."
+    },
+    "starvector-8b": {
+      "name": "StarVector-8B",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "starvector-1b": {
+      "name": "StarVector-1B",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "potrace-paper": {
+      "name": "Potrace",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "vtracer-paper": {
+      "name": "VTracer",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "live-paper": {
+      "name": "LIVE",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "autotrace-paper": {
+      "name": "AutoTrace",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "gpt4v-paper": {
+      "name": "GPT-4-V",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "diffvg-paper": {
+      "name": "DiffVG",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    },
+    "im2vec-paper": {
+      "name": "Im2Vec",
+      "version": "Configuration reported in SVG-Bench",
+      "note": "Published observation; exact baseline invocation/version was not reproduced here."
+    }
+  },
+  "sources": {
+    "local_full": {
+      "title": "Full font run · 2026-11-04",
+      "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/full-fonts-summary.json",
+      "operator": "Monotrace maintainer",
+      "attribution": "maintainer-run",
+      "note": "4,821 inputs, 9,642 case/engine evaluations. Fixed native kernel; all cases retained."
+    },
+    "local_pilot": {
+      "title": "Font and PolyFit pilot · 2026-11-04",
+      "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/pilot-summary.json",
+      "operator": "Monotrace maintainer",
+      "attribution": "maintainer-run",
+      "note": "256 hash-selected SVG-Fonts test cases and all 116 PolyFit binary inputs. Fixed settings."
+    },
+    "starvector": {
+      "title": "StarVector / SVG-Bench · CVPR 2025",
+      "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#models",
+      "operator": "StarVector authors",
+      "attribution": "published by StarVector authors",
+      "note": "Author-reported for StarVector; competitor-reported for other systems. Original baseline invocations remain unverified."
+    },
+    "fonts": {
+      "title": "SVG-Fonts test split",
+      "url": "https://huggingface.co/datasets/starvector/svg-fonts/tree/53b406757e6941c2d3ba45c59b78adfcf6f6639b",
+      "operator": "StarVector authors",
+      "attribution": "dataset source",
+      "note": "Pinned test parquet SHA256 124ca9798ad286e3a6638dd79d3f9d83d5aed124bba10cd8111df3b7bebdd62b"
+    },
+    "polyfit": {
+      "title": "PolyFit · SIGGRAPH 2020",
+      "url": "https://github.com/dedoardo/polyfit/tree/fea3bb9f28c2a44a55825529198e5c3796ac1fa6/data/binary",
+      "operator": "PolyFit authors",
+      "attribution": "dataset source",
+      "note": "Original monochrome raster inputs. This run does not include the PolyFit algorithm or original vector masters."
+    }
+  },
+  "runs": [
+    {
+      "id": "fonts-full-20261104",
+      "label": "SVG-Fonts · full test set",
+      "dataset": "SVG-Fonts",
+      "sample_count": 4821,
+      "source_id": "local_full",
+      "dataset_source": "fonts",
+      "primary": "dino",
+      "columns": [
+        "dino",
+        "median_boundary",
+        "mean_boundary",
+        "iou",
+        "segments",
+        "no_output"
+      ],
+      "summary": "4,821 images · 256 px inputs · measured 4 November 2026",
+      "method": "Original SVG framing, white background, no crop or automatic levels. Matched resvg 1024 px geometry renders, reported in native pixels. DINO uses resvg 256 px scoring images and the pinned DINOv2-base FP32 model.",
+      "caveat": "Monotrace has lower median error, while Potrace has a lower all-case mean after missing-output penalties. The published paper scores use a different or unverified pipeline.",
+      "rows": [
+        {
+          "model": "potrace",
+          "values": {
+            "dino": 0.9884188461788361,
+            "median_boundary": 0.20345721329716257,
+            "mean_boundary": 0.2759532038929932,
+            "iou": 0.9699390267542136,
+            "segments": 29,
+            "no_output": 1,
+            "trace_errors": 0,
+            "topology": 354
+          },
+          "note": "No explicit errors. One subpixel reference produces an empty SVG. Four completely white reference canvases are also retained.",
+          "conditional": {
+            "count": 4813,
+            "mean_boundary": 0.21456002227737717
+          }
+        },
+        {
+          "model": "monotrace",
+          "values": {
+            "dino": 0.9965039222375458,
+            "median_boundary": 0.08848182943561506,
+            "mean_boundary": 0.3170236469351366,
+            "iou": 0.9861166523502145,
+            "segments": 32,
+            "no_output": 4,
+            "trace_errors": 2,
+            "topology": 413
+          },
+          "note": "Two explicit errors (unresolved span and contour budget), plus two completed empty SVGs against visible reference. Four visible references have no scoring ink in total.",
+          "conditional": {
+            "count": 4813,
+            "mean_boundary": 0.10479347639191644
+          }
+        }
+      ]
+    },
+    {
+      "id": "fonts-pilot-20261104",
+      "label": "SVG-Fonts · 256-image pilot",
+      "dataset": "SVG-Fonts",
+      "sample_count": 256,
+      "source_id": "local_pilot",
+      "dataset_source": "fonts",
+      "primary": "dino",
+      "columns": [
+        "dino",
+        "mean_boundary",
+        "iou",
+        "segments",
+        "trace_errors"
+      ],
+      "summary": "256 hash-selected test images · 256 px inputs · measured 4 November 2026",
+      "method": "Lowest 256 SHA256 values of monotrace-external-first-pass-v1: plus the source filename. Matched resvg scoring and the same fixed kernel as the full run.",
+      "caveat": "The pilot is contained within the full test set. Do not count it as an additional independent dataset. One empty VTracer result incurs a 256 px penalty and inflates its mean boundary error.",
+      "rows": [
+        {
+          "model": "monotrace",
+          "values": {
+            "dino": 0.9969800382386893,
+            "mean_boundary": 0.09493453983305378,
+            "iou": 0.9850076366883419,
+            "segments": 32,
+            "trace_errors": 0,
+            "topology": 24
+          },
+          "note": "Native settings were fixed before the full-set expansion."
+        },
+        {
+          "model": "potrace",
+          "values": {
+            "dino": 0.9896769591141492,
+            "mean_boundary": 0.22246948819121412,
+            "iou": 0.9693728868408285,
+            "segments": 29,
+            "trace_errors": 0,
+            "topology": 19
+          },
+          "note": "Native settings were fixed before the full-set expansion."
+        },
+        {
+          "model": "vtracer",
+          "values": {
+            "dino": 0.9864294109866023,
+            "mean_boundary": 1.4442024675005043,
+            "iou": 0.9378301766843842,
+            "segments": 46,
+            "trace_errors": 0,
+            "topology": 25
+          },
+          "note": "Native settings were fixed before the full-set expansion."
+        }
+      ]
+    },
+    {
+      "id": "polyfit-binary-20261104",
+      "label": "PolyFit · binary inputs",
+      "dataset": "PolyFit binary",
+      "sample_count": 116,
+      "source_id": "local_pilot",
+      "dataset_source": "polyfit",
+      "primary": "iou",
+      "columns": [
+        "iou",
+        "mean_boundary",
+        "segments",
+        "topology",
+        "trace_errors"
+      ],
+      "summary": "116 original monochrome inputs · native resolution, generally around 32/64 px",
+      "method": "Matched resvg output renders at each original raster size. Geometry scores compare with the original raster pixels, not an original vector master.",
+      "caveat": "Measures raster reconstruction. It does not establish recovery of the artist’s intended curves, and the PolyFit algorithm itself was not run.",
+      "rows": [
+        {
+          "model": "monotrace",
+          "values": {
+            "dino": null,
+            "mean_boundary": 0.17652175189556954,
+            "iou": 0.9643971788057067,
+            "segments": 15,
+            "trace_errors": 0,
+            "topology": 4
+          },
+          "note": "All attempts completed. Pixel and sampled-topology metrics are resolution-dependent."
+        },
+        {
+          "model": "potrace",
+          "values": {
+            "dino": null,
+            "mean_boundary": 0.16561919814864373,
+            "iou": 0.9674455335358164,
+            "segments": 19,
+            "trace_errors": 0,
+            "topology": 0
+          },
+          "note": "All attempts completed. Pixel and sampled-topology metrics are resolution-dependent."
+        },
+        {
+          "model": "vtracer",
+          "values": {
+            "dino": null,
+            "mean_boundary": 1.080020870740688,
+            "iou": 0.8816034454873831,
+            "segments": 21.5,
+            "trace_errors": 0,
+            "topology": 7
+          },
+          "note": "All attempts completed. Pixel and sampled-topology metrics are resolution-dependent."
+        }
+      ]
+    },
+    {
+      "id": "svg-fonts-published-2025",
+      "label": "SVG-Bench · published font scores",
+      "dataset": "SVG-Fonts",
+      "sample_count": null,
+      "reported_sample_count": "about 4.8k test images",
+      "source_id": "starvector",
+      "dataset_source": "fonts",
+      "primary": "dino",
+      "columns": [
+        "dino"
+      ],
+      "summary": "CVPR 2025 published table · StarVector authors’ evaluation",
+      "method": "DINO scores transcribed from the pinned authors’ table. The released evaluator renders scoring images with CairoSVG at 512 px; exact baseline commands and input settings remain unverified.",
+      "caveat": "These scores form their own published comparison group. They cannot be used to rank Monotrace against StarVector or AutoTrace using the maintainer-run numbers.",
+      "rows": [
+        {
+          "model": "starvector-8b",
+          "values": {
+            "dino": 0.982
+          },
+          "note": "Author-reported model result."
+        },
+        {
+          "model": "starvector-1b",
+          "values": {
+            "dino": 0.978
+          },
+          "note": "Author-reported model result."
+        },
+        {
+          "model": "potrace-paper",
+          "values": {
+            "dino": 0.967
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        },
+        {
+          "model": "vtracer-paper",
+          "values": {
+            "dino": 0.964
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        },
+        {
+          "model": "live-paper",
+          "values": {
+            "dino": 0.956
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        },
+        {
+          "model": "autotrace-paper",
+          "values": {
+            "dino": 0.954
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        },
+        {
+          "model": "gpt4v-paper",
+          "values": {
+            "dino": 0.842
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        },
+        {
+          "model": "diffvg-paper",
+          "values": {
+            "dino": 0.821
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        },
+        {
+          "model": "im2vec-paper",
+          "values": {
+            "dino": 0.733
+          },
+          "note": "Competitor-reported baseline result from the StarVector authors."
+        }
+      ]
+    }
+  ]
+}
