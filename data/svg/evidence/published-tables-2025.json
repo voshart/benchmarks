@@ -1,0 +1,252 @@
+{
+  "verified_on": "2026-11-04",
+  "scope": "Published image-to-SVG/vectorization observations only. No local execution or text-to-SVG results.",
+  "tables": [
+    {
+      "run_id": "mmsvg-icon-omnisvg2025",
+      "source_id": "omnisvg_2025",
+      "source_url": "https://papers.nips.cc/paper_files/paper/2025/file/a510f05a574d4203ef3952973672fe2f-Paper-Conference.pdf",
+      "corroborating_url": "https://huggingface.co/datasets/OmniSVG/MMSVGBench",
+      "location": "Table 2, MMSVG-Icon, image-to-SVG columns",
+      "measurement_operator": "OmniSVG authors",
+      "sample_count": 150,
+      "rows": [
+        {
+          "model": "live-omnisvg2025",
+          "name_in_source": "LIVE",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "52.5k",
+            "dino_cosine": "0.932",
+            "ssim": "0.943",
+            "lpips": "0.106",
+            "mse": "0.011"
+          }
+        },
+        {
+          "model": "diffvg-omnisvg2025",
+          "name_in_source": "DiffVG",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "322.0k",
+            "dino_cosine": "0.940",
+            "ssim": "0.954",
+            "lpips": "0.066",
+            "mse": "0.002"
+          }
+        },
+        {
+          "model": "gpt4o-omnisvg2025",
+          "name_in_source": "GPT-4o",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "0.3k",
+            "dino_cosine": "0.860",
+            "ssim": "0.792",
+            "lpips": "0.403",
+            "mse": "0.124"
+          }
+        },
+        {
+          "model": "starvector8b-omnisvg2025",
+          "name_in_source": "StarVector(8B)",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "2.0k",
+            "dino_cosine": "0.895",
+            "ssim": "0.881",
+            "lpips": "0.231",
+            "mse": "0.059"
+          }
+        },
+        {
+          "model": "vtracer-omnisvg2025",
+          "name_in_source": "Vtracer",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "52.4k",
+            "dino_cosine": "0.993",
+            "ssim": "0.966",
+            "lpips": "0.039",
+            "mse": "0.002"
+          }
+        },
+        {
+          "model": "omnisvg4b-2025",
+          "name_in_source": "OmniSVG(4B)",
+          "attribution": "author-reported",
+          "cells": {
+            "tokens_k": "3.8k",
+            "dino_cosine": "0.993",
+            "ssim": "0.950",
+            "lpips": "0.050",
+            "mse": "0.006"
+          }
+        },
+        {
+          "model": "omnisvg8b-2025",
+          "name_in_source": "OmniSVG-L(8B)",
+          "attribution": "author-reported",
+          "cells": {
+            "tokens_k": "5.7k",
+            "dino_cosine": "0.922",
+            "ssim": "0.893",
+            "lpips": "0.235",
+            "mse": "0.040"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "mmsvg-illustration-omnisvg2025",
+      "source_id": "omnisvg_2025",
+      "source_url": "https://papers.nips.cc/paper_files/paper/2025/file/a510f05a574d4203ef3952973672fe2f-Paper-Conference.pdf",
+      "corroborating_url": "https://huggingface.co/datasets/OmniSVG/MMSVGBench",
+      "location": "Table 2, MMSVG-Illustration, image-to-SVG columns",
+      "measurement_operator": "OmniSVG authors",
+      "sample_count": 150,
+      "rows": [
+        {
+          "model": "live-omnisvg2025",
+          "name_in_source": "LIVE",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "52.2k",
+            "dino_cosine": "0.935",
+            "ssim": "0.950",
+            "lpips": "0.111",
+            "mse": "0.008"
+          }
+        },
+        {
+          "model": "diffvg-omnisvg2025",
+          "name_in_source": "DiffVG",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "322.0k",
+            "dino_cosine": "0.945",
+            "ssim": "0.955",
+            "lpips": "0.065",
+            "mse": "0.001"
+          }
+        },
+        {
+          "model": "gpt4o-omnisvg2025",
+          "name_in_source": "GPT-4o",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "0.4k",
+            "dino_cosine": "0.875",
+            "ssim": "0.854",
+            "lpips": "0.373",
+            "mse": "0.077"
+          }
+        },
+        {
+          "model": "starvector8b-omnisvg2025",
+          "name_in_source": "StarVector(8B)",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "2.6k",
+            "dino_cosine": "0.877",
+            "ssim": "0.900",
+            "lpips": "0.238",
+            "mse": "0.046"
+          }
+        },
+        {
+          "model": "vtracer-omnisvg2025",
+          "name_in_source": "Vtracer",
+          "attribution": "competitor-reported",
+          "cells": {
+            "tokens_k": "57.6k",
+            "dino_cosine": "0.994",
+            "ssim": "0.966",
+            "lpips": "0.035",
+            "mse": "0.002"
+          }
+        },
+        {
+          "model": "omnisvg4b-2025",
+          "name_in_source": "OmniSVG(4B)",
+          "attribution": "author-reported",
+          "cells": {
+            "tokens_k": "5.8k",
+            "dino_cosine": "0.899",
+            "ssim": "0.906",
+            "lpips": "0.237",
+            "mse": "0.034"
+          }
+        },
+        {
+          "model": "omnisvg8b-2025",
+          "name_in_source": "OmniSVG-L(8B)",
+          "attribution": "author-reported",
+          "cells": {
+            "tokens_k": "6.9k",
+            "dino_cosine": "0.905",
+            "ssim": "0.907",
+            "lpips": "0.231",
+            "mse": "0.031"
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "layertracer-vectorization-2025",
+      "source_id": "layertracer_2025",
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Song_LayerTracer_Cognitive-Aligned_Layered_SVG_Synthesis_via_Diffusion_Transformer_ICCV_2025_paper.pdf",
+      "corroborating_url": "https://arxiv.org/html/2502.01105v3#S4.T2",
+      "location": "Table 2, vectorization comparison; sample count from Section 4.1",
+      "measurement_operator": "LayerTracer authors",
+      "sample_count": 50,
+      "rows": [
+        {
+          "model": "diffvg-layertracer2025",
+          "name_in_source": "Diffvg",
+          "attribution": "competitor-reported",
+          "layer_wise": false,
+          "cells": {
+            "mse": "2.02e-4",
+            "reported_seconds": "393",
+            "paths": "256.00"
+          }
+        },
+        {
+          "model": "live-layertracer2025",
+          "name_in_source": "LIVE",
+          "attribution": "competitor-reported",
+          "layer_wise": true,
+          "cells": {
+            "mse": "5.21e-4",
+            "reported_seconds": "3147",
+            "paths": "46.00"
+          }
+        },
+        {
+          "model": "or-layertracer2025",
+          "name_in_source": "O&R",
+          "attribution": "competitor-reported",
+          "layer_wise": true,
+          "cells": {
+            "mse": "2.01e-4",
+            "reported_seconds": "612",
+            "paths": "64.00"
+          }
+        },
+        {
+          "model": "layertracer-2025",
+          "name_in_source": "Ours",
+          "attribution": "author-reported",
+          "layer_wise": true,
+          "cells": {
+            "mse": "1.96e-4",
+            "reported_seconds": "34",
+            "paths": "29.98"
+          }
+        }
+      ]
+    }
+  ],
+  "source_cell_convention": "Displayed numeric precision retained. LayerTracer powers of ten normalized to e notation; k denotes thousands."
+}

@@ -18,6 +18,9 @@
   display: flex;
   flex-wrap: wrap;
 }
+[data-enhanced='true'] .svg-nav {
+  display: none;
+}
 .svg-controls select {
   flex: 1 1 260px;
   max-width: 460px;
@@ -44,7 +47,8 @@
 .svg-page table {
   min-width: 760px;
 }
-.svg-page .svg-published table {
+.svg-page [data-columns='1'] table,
+.svg-page [data-columns='2'] table {
   min-width: 400px;
 }
 .svg-page th:first-child {

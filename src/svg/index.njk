@@ -52,10 +52,14 @@ permalink: /svg/index.html
       </nav>
       <div class="controls svg-controls">
         <select id="svgRun" aria-label="Dataset and execution protocol">
-          {% for run in svg.runs %}
-            <option value="{{ run.id }}" {% if run.id == svg.default_run %}selected{% endif %}>
-              {{ run.label }}
-            </option>
+          {% for group in svg.reportingGroups %}
+            <optgroup label="{{ group.label }}">
+              {% for run in group.runs %}
+                <option value="{{ run.id }}" {% if run.id == svg.default_run %}selected{% endif %}>
+                  {{ run.label }}
+                </option>
+              {% endfor %}
+            </optgroup>
           {% endfor %}
         </select>
         <input
@@ -67,12 +71,13 @@ permalink: /svg/index.html
         <button type="button" id="svgReset">Reset</button>
       </div>
       <p class="key" id="svgStatus" role="status">
-        Four separate comparison groups. Scores are comparable within each group.
+        {{ svg.runs.length }} separate comparison groups. Compare scores within each group.
       </p>
       {% for panel in svg.panels %}
         <section
           id="{{ panel.run.id }}"
-          class="svg-run{% if panel.run.id == 'svg-fonts-published-2025' %}svg-published{% endif %}"
+          class="svg-run"
+          data-columns="{{ panel.run.columns.length }}"
           data-svg-run="{{ panel.run.id }}"
           aria-labelledby="heading-{{ panel.run.id }}"
         >
@@ -101,7 +106,7 @@ permalink: /svg/index.html
           </div>
           <p class="key">
             ↑ higher is better · ↓ lower is better · px = native input pixels · — = unavailable.
-            Segment counts describe complexity, not quality.
+            Path, segment and token counts describe complexity, not quality.
           </p>
           <details class="method">
             <summary>Protocol & execution</summary>
@@ -115,10 +120,12 @@ permalink: /svg/index.html
               <a href="{{ svg.sources[panel.run.source_id].url }}">Result source ↗</a> ·
               <a href="{{ svg.sources[panel.run.dataset_source].url }}">Dataset revision ↗</a>
             </p>
-            {% if panel.run.sample_count == null %}
+            {% if panel.run.sample_count_note %}
+              <p>{{ panel.run.sample_count_note }}</p>
+            {% elif panel.run.sample_count == null %}
               <p>
-                The publication describes approximately 4.8k test images; its exact evaluated count
-                is unverified.
+                Exact evaluated count is unverified. Reported size:
+                {{ panel.run.reported_sample_count or 'unavailable' }}.
               </p>
             {% endif %}
           </details>
@@ -135,8 +142,9 @@ permalink: /svg/index.html
         <p>
           The local runs compare monochrome reconstruction at fixed settings. They do not measure
           color tracing, text semantics, editing quality, fabrication readiness or API performance.
-          There is no combined score across datasets, no speed ranking and no measured price
-          comparison.
+          Published color and layered-image reports stay separate from local monochrome runs. There
+          is no combined score across datasets or cross-study speed/price ranking. Published time
+          values in Details retain their source’s qualifications and are not our timing tests.
         </p>
         <p>
           The 4,821-image font run retains every input, including four blank references. Empty
@@ -146,10 +154,10 @@ permalink: /svg/index.html
           Details distinguishes these from the separately labeled 4,813-case paired nonempty mean.
         </p>
         <p>
-          DINO uses DINOv2-base FP32, averages all final-layer tokens, then maps cosine similarity
-          to (cosine + 1) / 2. The local scoring images use matched resvg renders at 256 px;
-          geometry uses matched 1024 px renders. The 256-image pilot is a subset of the full run,
-          not a second independent corpus.
+          Local font DINO uses DINOv2-base FP32, averages all final-layer tokens, then maps cosine
+          similarity to (cosine + 1) / 2. The local scoring images use matched resvg renders at 256
+          px; geometry uses matched 1024 px renders. The 256-image pilot is a subset of the full
+          run, not a second independent corpus.
         </p>
         <p>
           Potrace is the original C 1.16 command-line implementation with default tracing settings
@@ -182,7 +190,8 @@ permalink: /svg/index.html
           · <a href="/svg/evidence/full-fonts-summary.json">Full-run summary</a> ·
           <a href="/svg/evidence/pilot-summary.json">Pilot summary</a> ·
           <a href="/svg/evidence/provenance.json">Provenance</a> ·
-          <a href="/svg/evidence/protocol-diagnostic.json">64-case diagnostic summary</a>
+          <a href="/svg/evidence/protocol-diagnostic.json">64-case diagnostic summary</a> ·
+          <a href="/svg/evidence/published-tables-2025.json">Published table audit</a>
         </p>
         <div class="source-grid">
           {% for id, source in svg.sources %}
