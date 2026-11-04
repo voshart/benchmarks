@@ -1,0 +1,119 @@
+.svg-page main {
+  max-width: 1320px;
+}
+.svg-page .hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.svg-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 1rem 0;
+  font: 0.9rem var(--serif);
+}
+.svg-controls {
+  display: none;
+}
+[data-enhanced='true'] .svg-controls {
+  display: flex;
+  flex-wrap: wrap;
+}
+.svg-controls select {
+  flex: 1 1 260px;
+  max-width: 460px;
+}
+.svg-run {
+  margin: 1.8rem 0 2.5rem;
+  scroll-margin-top: 1rem;
+}
+.svg-run h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.svg-meta {
+  color: var(--muted);
+  font: 0.8rem var(--mono);
+}
+.svg-page thead button {
+  border: 0;
+  padding: 0.15rem 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+.svg-page table {
+  min-width: 760px;
+}
+.svg-page .svg-published table {
+  min-width: 400px;
+}
+.svg-page th:first-child {
+  min-width: 200px;
+  max-width: 270px;
+}
+.svg-version {
+  display: block;
+  font: normal 0.68rem var(--sans);
+  color: var(--muted);
+  white-space: normal;
+}
+.svg-detail {
+  width: 34rem;
+}
+.svg-detail dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3rem 1rem;
+}
+.svg-detail dt {
+  font-weight: normal;
+}
+.svg-detail dd {
+  margin: 0;
+  font: 0.8rem var(--mono);
+}
+.svg-empty {
+  text-align: left;
+}
+.svg-page .method {
+  margin-top: 0.8rem;
+}
+.svg-page .method p,
+.svg-page .method li {
+  max-width: 68rem;
+}
+.svg-affiliation {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.8rem;
+}
+.svg-page .source-grid {
+  columns: 1;
+}
+.svg-definitions dt {
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+.svg-definitions dd {
+  margin: 0.15rem 0 0.5rem;
+  color: var(--muted);
+}
+.svg-page .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 700px) {
+  .svg-page th:first-child {
+    min-width: 155px;
+    max-width: 190px;
+  }
+  .svg-controls input[type='search'] {
+    flex: 1 1 180px;
+    width: auto;
+  }
+}

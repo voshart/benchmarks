@@ -1,0 +1,210 @@
+---
+permalink: /svg/index.html
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ svg.title }}</title>
+    <meta
+      name="description"
+      content="SVG tracer comparisons with matched datasets, reconstruction metrics, failure counts and documented sources."
+    />
+    <link rel="canonical" href="https://bench.voshart.com/svg/" />
+    <link rel="stylesheet" href="{{ '/assets/css/benchmark.css' | assetUrl }}" />
+    <link rel="stylesheet" href="{{ '/assets/css/svg.css' | assetUrl }}" />
+    <script>
+      (function () {
+        try {
+          document.documentElement.dataset.theme =
+            localStorage.getItem('bench-theme') ||
+            (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="svg-page">
+    <main>
+      <header class="hero">
+        <div>
+          <small class="eyebrow"
+            ><a href="/">Voshart / Benchmarks</a> · <a href="/ocr/">OCR</a> ·
+            <a href="/stt/">Speech</a></small
+          >
+          <h1>SVG tracer benchmarks</h1>
+          <p>Raster to vector. Reconstruction quality, complexity and failures.</p>
+        </div>
+        <button
+          class="quiet"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle light and dark mode"
+        >
+          Theme
+        </button>
+      </header>
+      <nav class="svg-nav" aria-label="Comparison groups">
+        {% for run in svg.runs %}
+          <a href="#{{ run.id }}" data-svg-link="{{ run.id }}">{{ run.label }}</a>
+        {% endfor %}
+      </nav>
+      <div class="controls svg-controls">
+        <select id="svgRun" aria-label="Dataset and execution protocol">
+          {% for run in svg.runs %}
+            <option value="{{ run.id }}" {% if run.id == svg.default_run %}selected{% endif %}>
+              {{ run.label }}
+            </option>
+          {% endfor %}
+        </select>
+        <input
+          id="svgSearch"
+          type="search"
+          placeholder="Search tracers…"
+          aria-label="Search tracers in this group"
+        />
+        <button type="button" id="svgReset">Reset</button>
+      </div>
+      <p class="key" id="svgStatus" role="status">
+        Four separate comparison groups. Scores are comparable within each group.
+      </p>
+      {% for panel in svg.panels %}
+        <section
+          id="{{ panel.run.id }}"
+          class="svg-run{% if panel.run.id == 'svg-fonts-published-2025' %}svg-published{% endif %}"
+          data-svg-run="{{ panel.run.id }}"
+          aria-labelledby="heading-{{ panel.run.id }}"
+        >
+          <h2 id="heading-{{ panel.run.id }}">{{ panel.run.label }}</h2>
+          <p class="svg-meta">{{ panel.run.summary }}</p>
+          <p>{{ panel.run.caveat }}</p>
+          <div
+            class="table-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="{{ panel.run.label }} results; scroll horizontally for all metrics"
+          >
+            <table>
+              <caption class="sr-only">
+                {{ panel.run.label }}. {{ panel.run.summary }}.
+              </caption>
+              <thead>
+                <tr>
+                  {{ panel | svgHead(svg) | safe }}
+                </tr>
+              </thead>
+              <tbody>
+                {{ panel | svgRows(svg) | safe }}
+              </tbody>
+            </table>
+          </div>
+          <p class="key">
+            ↑ higher is better · ↓ lower is better · px = native input pixels · — = unavailable.
+            Segment counts describe complexity, not quality.
+          </p>
+          <details class="method">
+            <summary>Protocol & execution</summary>
+            <p>{{ panel.run.method }}</p>
+            <p>
+              Execution: {{ svg.sources[panel.run.source_id].operator }} ·
+              {{ svg.sources[panel.run.source_id].attribution }}.
+              {{ svg.sources[panel.run.source_id].note }}
+            </p>
+            <p>
+              <a href="{{ svg.sources[panel.run.source_id].url }}">Result source ↗</a> ·
+              <a href="{{ svg.sources[panel.run.dataset_source].url }}">Dataset revision ↗</a>
+            </p>
+            {% if panel.run.sample_count == null %}
+              <p>
+                The publication describes approximately 4.8k test images; its exact evaluated count
+                is unverified.
+              </p>
+            {% endif %}
+          </details>
+        </section>
+      {% endfor %}
+      <noscript
+        ><p>
+          All comparison groups and row details are available without JavaScript. JavaScript enables
+          group selection, search and sorting.
+        </p></noscript
+      >
+      <details class="method" id="methodology">
+        <summary>Metrics, limitations & sources</summary>
+        <p>
+          The local runs compare monochrome reconstruction at fixed settings. They do not measure
+          color tracing, text semantics, editing quality, fabrication readiness or API performance.
+          There is no combined score across datasets, no speed ranking and no measured price
+          comparison.
+        </p>
+        <p>
+          The 4,821-image font run retains every input, including four blank references. Empty
+          output against visible reference receives a 256 px boundary penalty; blank against blank
+          receives zero. Monotrace has two explicit trace errors and two additional empty outputs
+          against visible references. Potrace has one empty output against visible reference.
+          Details distinguishes these from the separately labeled 4,813-case paired nonempty mean.
+        </p>
+        <p>
+          DINO uses DINOv2-base FP32, averages all final-layer tokens, then maps cosine similarity
+          to (cosine + 1) / 2. The local scoring images use matched resvg renders at 256 px;
+          geometry uses matched 1024 px renders. The 256-image pilot is a subset of the full run,
+          not a second independent corpus.
+        </p>
+        <p>
+          Potrace is the original C 1.16 command-line implementation with default tracing settings
+          and 50% threshold PBM inputs, without the SVG Tools harness. VTracer uses Python package
+          0.6.15 in binary mode; its SVG header identifies engine 0.6.12. Monotrace uses a fixed
+          native quality profile, kernel source ID 448c2ac7f2654543. This page publishes aggregate
+          observations and provenance, not the private kernel or per-image output archive.
+        </p>
+        <p>
+          The StarVector authors’ published scores use a separate or unverified pipeline. A 64-image
+          diagnostic of renderers and Potrace implementations did not resolve the baseline gap.
+          AutoTrace and StarVector were not executed locally, so these observations do not establish
+          a matched win against either system.
+        </p>
+        <dl class="svg-definitions">
+          {% for id, metric in svg.metrics %}
+            <dt>{{ metric.label }}</dt>
+            <dd>{{ metric.description }}</dd>
+          {% endfor %}
+        </dl>
+        <p>
+          PolyFit inputs are original rasters, often around 32/64 px, without original vector
+          masters. Topology flags depend on sampled raster components and holes. Subpixel gaps or
+          curve artifacts can remain even with high similarity scores.
+        </p>
+        <p>
+          <a href="/svg/data.json" download="svg-tracer-results.json"
+            >Download comparison data JSON</a
+          >
+          · <a href="/svg/evidence/full-fonts-summary.json">Full-run summary</a> ·
+          <a href="/svg/evidence/pilot-summary.json">Pilot summary</a> ·
+          <a href="/svg/evidence/provenance.json">Provenance</a> ·
+          <a href="/svg/evidence/protocol-diagnostic.json">64-case diagnostic summary</a>
+        </p>
+        <div class="source-grid">
+          {% for id, source in svg.sources %}
+            <p>
+              <a href="{{ source.url }}" target="_blank" rel="noreferrer">{{ source.title }}</a
+              ><br /><small
+                >{{ source.operator }} · {{ source.attribution }}. {{ source.note }}</small
+              >
+            </p>
+          {% endfor %}
+        </div>
+      </details>
+      <p class="key svg-affiliation">{{ svg.affiliation }}</p>
+      <footer>
+        Evidence snapshot {{ svg.snapshot_date }} ·
+        <a href="https://github.com/voshart/benchmarks/tree/main/data/svg"
+          >Source data & methodology</a
+        >
+        · <a href="/">All benchmarks</a>
+      </footer>
+    </main>
+    <script defer src="{{ '/assets/js/svg-comparison.js' | assetUrl }}"></script>
+    <script defer src="{{ '/assets/js/svg-page.js' | assetUrl }}"></script>
+  </body>
+</html>
