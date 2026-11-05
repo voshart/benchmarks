@@ -1,0 +1,58 @@
+{
+  "scope": "entire 4821-row official test split",
+  "corpus": "fonts",
+  "pairing_evidence": "external_full_fonts_20261104",
+  "engine": "autotrace",
+  "autotrace_settings": "autotrace -color-count 2 -output-format svg -output-file out.svg <input.png flattened onto white as RGB>",
+  "cases": 4821,
+  "trace_failures": 0,
+  "empty_outputs_with_visible_reference": 0,
+  "median_boundary_all_cases": 0.38478914685983606,
+  "mean_boundary_all_cases_including_256px_empty_output_penalty": 0.5542934055636287,
+  "mean_boundary_nonempty": 0.5542934055636287,
+  "mean_iou_all_cases": 0.942184578333294,
+  "median_segments_nonempty": 38.0,
+  "sampled_topology_mismatches": 447,
+  "mean_seconds_informational": 0.03557570862823517,
+  "paired": {
+    "autotrace_vs_monotrace_dino": {
+      "autotrace_better": 82,
+      "ties": 5,
+      "autotrace_worse": 4734
+    },
+    "autotrace_vs_monotrace_boundary_mean_px": {
+      "autotrace_better": 24,
+      "ties": 19,
+      "autotrace_worse": 4778
+    },
+    "autotrace_vs_monotrace_iou": {
+      "autotrace_better": 17,
+      "ties": 19,
+      "autotrace_worse": 4785
+    },
+    "autotrace_vs_potrace_dino": {
+      "autotrace_better": 734,
+      "ties": 5,
+      "autotrace_worse": 4082
+    },
+    "autotrace_vs_potrace_boundary_mean_px": {
+      "autotrace_better": 144,
+      "ties": 75,
+      "autotrace_worse": 4602
+    },
+    "autotrace_vs_potrace_iou": {
+      "autotrace_better": 118,
+      "ties": 74,
+      "autotrace_worse": 4629
+    }
+  },
+  "mean_dino_all_cases": 0.9741684775880649,
+  "visible_reference_without_scoring_ink": 3,
+  "visible_reference_without_scoring_ink_ids": [
+    "font-12092603845065974277_o_lower",
+    "font-13025538156234212280_u_lower",
+    "font-15581482341023377589_four_lower"
+  ],
+  "blank_reference_cases": 4,
+  "summary_note": "empty_outputs_with_visible_reference (written by the run script) counts outputs with zero path segments and is always 0 for AutoTrace, which writes a background path; visible_reference_without_scoring_ink was computed from results.csv at packaging time."
+}

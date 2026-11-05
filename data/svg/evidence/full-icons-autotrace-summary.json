@@ -1,0 +1,54 @@
+{
+  "scope": "entire 2682-row official test split",
+  "corpus": "icons",
+  "pairing_evidence": "external_icons_20261105",
+  "engine": "autotrace",
+  "autotrace_settings": "autotrace -color-count 2 -output-format svg -output-file out.svg <input.png flattened onto white as RGB>",
+  "cases": 2682,
+  "trace_failures": 0,
+  "empty_outputs_with_visible_reference": 0,
+  "median_boundary_all_cases": 0.44399635167379786,
+  "mean_boundary_all_cases_including_256px_empty_output_penalty": 0.4622159223612214,
+  "mean_boundary_nonempty": 0.4622159223612214,
+  "mean_iou_all_cases": 0.7909505956642094,
+  "median_segments_nonempty": 69.0,
+  "sampled_topology_mismatches": 1499,
+  "mean_seconds_informational": 0.036087898829737716,
+  "paired": {
+    "autotrace_vs_monotrace_dino": {
+      "autotrace_better": 12,
+      "ties": 0,
+      "autotrace_worse": 2670
+    },
+    "autotrace_vs_monotrace_boundary_mean_px": {
+      "autotrace_better": 5,
+      "ties": 0,
+      "autotrace_worse": 2677
+    },
+    "autotrace_vs_monotrace_iou": {
+      "autotrace_better": 3,
+      "ties": 0,
+      "autotrace_worse": 2679
+    },
+    "autotrace_vs_potrace_dino": {
+      "autotrace_better": 114,
+      "ties": 0,
+      "autotrace_worse": 2568
+    },
+    "autotrace_vs_potrace_boundary_mean_px": {
+      "autotrace_better": 50,
+      "ties": 0,
+      "autotrace_worse": 2632
+    },
+    "autotrace_vs_potrace_iou": {
+      "autotrace_better": 21,
+      "ties": 0,
+      "autotrace_worse": 2661
+    }
+  },
+  "mean_dino_all_cases": 0.964505245799364,
+  "visible_reference_without_scoring_ink": 0,
+  "visible_reference_without_scoring_ink_ids": [],
+  "blank_reference_cases": 0,
+  "summary_note": "empty_outputs_with_visible_reference (written by the run script) counts outputs with zero path segments and is always 0 for AutoTrace, which writes a background path; visible_reference_without_scoring_ink was computed from results.csv at packaging time."
+}

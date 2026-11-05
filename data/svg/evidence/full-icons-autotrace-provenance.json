@@ -1,0 +1,69 @@
+{
+  "engine": "AutoTrace",
+  "source": {
+    "repository": "https://github.com/autotrace/autotrace",
+    "tag": "0.31.10",
+    "commit": "1a232b27818a46a05cd25edec09e2f77c4e9ac01",
+    "note": "Built from the git tag (no release tarball exists). The binary reports itself as \"AutoTrace version 0.40.0\"."
+  },
+  "build": {
+    "configure": "./configure --prefix=<local> --without-magick --without-pstoedit --with-png --disable-nls --disable-shared",
+    "CFLAGS": "-g -O2 -Wno-error=incompatible-pointer-types",
+    "compiler": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "source_modified": false,
+    "flag_reason": "GCC 15 rejects an old pointer-type mismatch in the BMP reader (src/input-bmp.c). The flag turns that error back into a warning; the benchmark reads PNG only.",
+    "autotools_from_apt": {
+      "autoconf": "2.72-3.1ubuntu2",
+      "automake": "1:1.18.1-3build1",
+      "libtool": "2.5.4-9",
+      "intltool": "0.51.0-7",
+      "gettext": "0.23.2-1",
+      "libglib2.0-dev": "2.88.0-1ubuntu0.1",
+      "libpng-dev": "1.6.57-1ubuntu0.1"
+    },
+    "input_formats_built": "ppm, pbm, pnm, png, tga, bmp, pgm, gf (no ImageMagick/GraphicsMagick readers)"
+  },
+  "command": "autotrace -color-count 2 -output-format svg -output-file <out.svg> <autotrace-input.png>",
+  "other_options": "tool defaults: corner-threshold 100, corner-always-threshold 60, corner-surround 4, error-threshold 2.0, filter-iterations 4, line-threshold 1, line-reversion-threshold 0.01, noise-removal 0.99, despeckle-level 0; outline (fill) output, no centerline, no background-color, no thresholding step",
+  "configuration_declared_before_scoring": true,
+  "configuration_rationale": "One configuration, chosen before any scoring run. Plain defaults on an antialiased input traced every grey level as its own region (about 700 paths with grey fills on a Fonts and an Icons input, 3-image unscored check), so the single-ink setting -color-count 2 was used. No other setting was tried or compared and no result was used to select it.",
+  "input_conversion": "input.png (the same 256 px file Monotrace and VTracer receive) alpha-composited onto white and saved as RGB PNG (autotrace-input.png). A pixel no-op for Fonts and Icons (alpha is 255 everywhere); required for PolyFit, whose inputs carry the shape in the alpha channel and which AutoTrace would otherwise read as a black block.",
+  "output_note": "AutoTrace emits a white background path plus a near-black ink path (fill about #030303); both are rendered as written. Segment counts therefore include the background path. The near-black ink fill is not pure black.",
+  "script": "scripts/external_extra_engine.py",
+  "script_sha256": "ecf8b0c16e466f54d9bd931096e8c76074b40e56c9bae7d6b609c7f837193772",
+  "packaging_script_sha256": "f47eaad63fabf75e33a2cd082a70288e0692f31e51a2906206ccf9c10e10ada8",
+  "script_changes": "Generalized the VTracer-only script: --engine vtracer|autotrace, --corpus fonts|icons|polyfit, an always-on hash verification of every case against the frozen manifest (abort on mismatch), an autotrace runner, a PolyFit scoring path (reference = input raster at native width, scale 1, as benchmark_external.score does for the pilot, no DINO), and IoU pairing counts. VTracer behaviour is unchanged.",
+  "renderer": "@resvg/resvg-js 2.6.2",
+  "model_weights_sha256": "d73036b56966966d07975d696bde331762f37297e2f095de8cea0040c3aa0841",
+  "dino_settings": {
+    "dtype": "float32",
+    "threads": 4,
+    "batch_size": 8,
+    "features": "reference features reused from the frozen runs' cache (same context hash: weights, processor, dtype); AutoTrace features computed fresh. Earlier runs used different thread/batch settings (VTracer Fonts: 8 threads, batch 16; Icons main run: 4 threads, batch 8)."
+  },
+  "tracing_workers": 6,
+  "timing": "Subprocess call time in a thread pool; informational only, not a speed comparison.",
+  "binary_sha256": "2c7889233a8c235bb6a392780bba48d6a78a84796e06111ceecaa74f681f5de7",
+  "scope": "Entire 2,682-image SVG-Icons test split",
+  "dataset_revision": "0dfc1bee713256e64d5c16d7427c4c29de823d70",
+  "parquet_sha256": "2d399ef765aa78005ef2edd3639389cbff6fa1f7c7f2fd5df5cf1cfa44255d59",
+  "frozen_manifest": "benchmarks/external_icons_20261105/manifest.json.gz",
+  "frozen_manifest_sha256": "d068fa408f559efd475be083ceaf3939f6c005b54095716df450cbbaee2f943d",
+  "pairing_evidence": "benchmarks/external_icons_20261105 (results.csv.gz, dino.json.gz) read-only; Monotrace and Potrace were NOT re-run",
+  "environment": {
+    "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.43",
+    "python": "3.12.14",
+    "node": "v24.22.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "Pillow": "13.0.0",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.22.1"
+  },
+  "case_integrity": "Every case's source (where one exists) and 256 px input hashes were verified against the frozen manifest before tracing; any mismatch aborts the run.",
+  "kernel_fitting_changed": false,
+  "failures_and_empty_outputs": {
+    "trace_failures": 0,
+    "empty_outputs_with_visible_reference": 0
+  }
+}
