@@ -226,4 +226,19 @@ test('SVG browser selector handles the derived overview and preserves ranks thro
   );
   assert(visible.parts['.svg-ranked-body'].innerHTML.includes('Rank 2 of 2'));
   assert.equal(visible.parts['.svg-unranked'].hidden, true);
+  let closed = false;
+  const link = {
+    dataset: { svgLink: data.overview.id },
+    closest: () => ({
+      hidePopover() {
+        closed = true;
+      }
+    })
+  };
+  events.click({
+    preventDefault() {},
+    target: { closest: (selector) => (selector === '[data-svg-link]' ? link : null) }
+  });
+  assert.equal(closed, true);
+  assert.equal(panels.find((panel) => !panel.hidden).dataset.svgRun, data.overview.id);
 });

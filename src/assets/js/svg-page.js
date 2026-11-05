@@ -45,7 +45,7 @@
           }
         });
         document.getElementById('svgStatus').textContent =
-          `${result.rankedRows.length} ranked · ${result.cohortCount} in full group${result.unrankedRows.length ? ' · ' + result.unrankedRows.length + ' incomplete' : ''}`;
+          `${result.rankedRows.length}${result.rankedRows.length === result.cohortCount ? '' : ' of ' + result.cohortCount} ranked${result.unrankedRows.length ? ' · ' + result.unrankedRows.length + ' incomplete' : ''}`;
       }
       select.addEventListener('change', () => {
         current = select.value;
@@ -88,6 +88,7 @@
         const link = event.target.closest('[data-svg-link]');
         if (link) {
           event.preventDefault();
+          link.closest('[popover]')?.hidePopover();
           current = link.dataset.svgLink;
           history.replaceState(null, '', '#' + current);
           select.value = current;
