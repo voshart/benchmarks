@@ -1,6 +1,5 @@
 (function () {
-  const theme = document.getElementById('themeToggle');
-  theme.addEventListener('click', () => {
+  document.getElementById('themeToggle').addEventListener('click', () => {
     const value = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = value;
     try {
@@ -13,102 +12,69 @@
       return response.json();
     })
     .then((data) => {
-      const select = document.getElementById('svgRun'),
-        search = document.getElementById('svgSearch');
-      let current = data.default_run,
-        sorts = {};
-      const views = SVGComparison.choices(data);
-      const validHash = location.hash.slice(1);
-      if (views.some((r) => r.id === validHash)) current = validHash;
-      select.value = current;
+      const mode = document.getElementById('svgMode'),
+        search = document.getElementById('svgSearch'),
+        complexity = document.getElementById('svgComplexity');
+      let key = 'index',
+        direction;
+      const validMode = (id) => data.matrix.modes.some((m) => m.id === id);
+      mode.value = validMode(location.hash.slice(1))
+        ? location.hash.slice(1)
+        : data.matrix.default_mode;
       function render() {
-        const selected = SVGComparison.selectPanels(data, current, search.value, sorts);
-        const results = new Map(selected.map((result) => [result.run.id, result]));
-        document.querySelectorAll('[data-svg-run]').forEach((panel) => {
-          const result = results.get(panel.dataset.svgRun);
-          panel.hidden =
-            !result || (selected.length > 1 && search.value.trim() !== '' && !result.rows.length);
-          if (!panel.hidden) {
-            panel.querySelectorAll('thead tr').forEach((head) => {
-              head.innerHTML = SVGComparison.renderHead(result, data);
-            });
-            panel.querySelector('.svg-ranked-body').innerHTML = SVGComparison.renderRows(
-              result,
-              data
-            );
-            panel.querySelector('.svg-unranked-body').innerHTML = SVGComparison.renderRows(
-              result,
-              data,
-              true
-            );
-            panel.querySelector('.svg-unranked').hidden = !result.unrankedRows.length;
-            panel.querySelector('.svg-unranked summary').textContent =
-              `${result.unrankedRows.length} without a complete score`;
-          }
+        const result = SVGMatrix.build(data, {
+          mode: mode.value,
+          query: search.value,
+          complexity: complexity.checked,
+          key,
+          direction
         });
-        const result = selected[0];
-        const matches = selected.reduce((sum, result) => sum + result.rows.length, 0);
+        document.getElementById('svgHead').innerHTML = SVGMatrix.renderHead(result, data);
+        document.getElementById('svgRows').innerHTML = SVGMatrix.renderRows(result, data);
         document.getElementById('svgStatus').textContent =
-          selected.length > 1
-            ? search.value.trim()
-              ? `${matches} matching ${matches === 1 ? 'result' : 'results'}`
-              : `${selected.length} comparisons · ranks apply within each`
-            : `${result.rankedRows.length}${result.rankedRows.length === result.cohortCount ? '' : ' of ' + result.cohortCount} ranked${result.unrankedRows.length ? ' · ' + result.unrankedRows.length + ' incomplete' : ''}`;
+          result.mode === 'gradient'
+            ? 'No gradient-specific measurements yet'
+            : `${result.rows.length} configurations · ${result.columns.length} dataset families · relative index`;
+        return result;
       }
-      select.addEventListener('change', () => {
-        current = select.value;
-        sorts = {};
-        history.replaceState(null, '', '#' + current);
+      mode.addEventListener('change', () => {
+        key = 'index';
+        direction = undefined;
+        history.replaceState(null, '', '#' + mode.value);
         render();
       });
       search.addEventListener('input', render);
+      complexity.addEventListener('change', () => {
+        if (!complexity.checked && data.matrix.complexity_metrics.includes(key)) {
+          key = 'index';
+          direction = undefined;
+        }
+        render();
+      });
       document.getElementById('svgReset').addEventListener('click', () => {
+        mode.value = data.matrix.default_mode;
         search.value = '';
-        sorts = {};
+        complexity.checked = false;
+        key = 'index';
+        direction = undefined;
+        history.replaceState(null, '', '#' + mode.value);
+        render();
+      });
+      document.getElementById('svgMatrix').addEventListener('click', (event) => {
+        const button = event.target.closest('[data-svg-sort]');
+        if (!button) return;
+        const previous = SVGMatrix.build(data, { mode: mode.value, key, direction });
+        const next = button.dataset.svgSort;
+        direction =
+          next === previous.key ? (previous.direction === 'asc' ? 'desc' : 'asc') : undefined;
+        key = next;
         render();
       });
       window.addEventListener('hashchange', () => {
-        const id = location.hash.slice(1);
-        if (views.some((run) => run.id === id)) {
-          current = id;
-          select.value = current;
-          search.value = '';
-          sorts = {};
-          render();
-        }
-      });
-      document.addEventListener('click', (event) => {
-        const button = event.target.closest('[data-svg-sort]');
-        if (button) {
-          const next = button.dataset.svgSort;
-          const panel = button.dataset.svgSortPanel || current;
-          const prior = SVGComparison.select(
-            data,
-            panel,
-            search.value,
-            sorts[panel]?.key,
-            sorts[panel]?.direction
-          );
-          const direction =
-            next === prior.key
-              ? prior.direction === 'asc'
-                ? 'desc'
-                : 'asc'
-              : next === 'name' || next === 'rank'
-                ? 'asc'
-                : data.metrics[next].direction;
-          sorts[panel] = { key: next, direction };
-          render();
-        }
-        const link = event.target.closest('[data-svg-link]');
-        if (link) {
-          event.preventDefault();
-          link.closest('[popover]')?.hidePopover();
-          current = link.dataset.svgLink;
-          history.replaceState(null, '', '#' + current);
-          select.value = current;
-          search.value = '';
-          sorts = {};
+        if (validMode(location.hash.slice(1))) {
+          mode.value = location.hash.slice(1);
+          key = 'index';
+          direction = undefined;
           render();
         }
       });
@@ -117,9 +83,7 @@
     })
     .catch(() => {
       delete document.body.dataset.enhanced;
-      document.querySelectorAll('[data-svg-run]').forEach((panel) => {
-        panel.hidden = false;
-      });
-      document.getElementById('svgStatus').textContent = 'All comparison groups are shown below.';
+      document.getElementById('svgStatus').textContent =
+        'All results shown. Interactive filters are unavailable.';
     });
 })();

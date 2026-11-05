@@ -19,6 +19,7 @@ Most updates belong in `data/`. Follow the file map instead of changing renderin
 ## Implementation and checks
 
 - Preserve the requested default views, filters, compact numeric cells, keyboard-accessible details and missing-values-last sorting. Changes to these behaviors need a task that requests them.
+- SVG tracers use one comparison matrix with colour filters. Keep local and published evidence together in that table, with exact configurations and source conflicts in details; do not split the interface into source-specific leaderboards.
 - Use plain JavaScript, semantic templates, system fonts and the existing shared CSS. Prefer a direct function or data field over a new framework. Keep calculations pure and reusable by Eleventy and the browser.
 - Use the checked-in formatter: `npm run format`. `npm run build` then checks formatting, validates all topics, runs all tests and builds the site. Resolve failures before shipping. Run narrower commands only to diagnose a failure.
 - Test algorithms with small fixtures and imports against their pinned sources. Do not freeze growing global catalog totals, exact current aggregate ranks or incidental source formatting. Preserve meaningful evidence-completeness checks.

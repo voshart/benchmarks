@@ -2,7 +2,7 @@
 
 Read [AGENTS.md](../AGENTS.md) for common evidence rules. Current topic policies are [OCR](../data/ocr/README.md), [speech](../data/stt/README.md) and [SVG tracers](../data/svg/README.md). This guide describes how to make changes; historical research notes are evidence, not operational instructions.
 
-SVG tracer data uses its own compact schema in `data/svg/results.json`, documented in the topic guide. Update its run/configuration/source records and aggregate evidence together; the OCR/speech JSONL workflow below does not apply to SVG. Published and maintainer-executed protocols remain separate.
+SVG tracer data uses its own compact schema in `data/svg/results.json`, documented in the topic guide. Update its run/configuration/source records and aggregate evidence together; the OCR/speech JSONL workflow below does not apply to SVG. Published and maintainer-executed protocols retain their exact identities in one SVG comparison matrix. The topic guide defines colour filters and within-protocol normalization.
 
 ## Update an existing score
 

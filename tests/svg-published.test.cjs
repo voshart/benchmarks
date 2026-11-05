@@ -62,12 +62,7 @@ test('published SVG metrics retain resolution, count and timing qualifications',
   const paper = data.runs.find((run) => run.id === 'mmsvg-icon-omnisvg2025');
   assert.equal(comparison.select(data, paper.id, 'Monotrace').rows.length, 0);
   assert.match(paper.sample_count_note, /exact evaluation file list/);
-  assert.equal(
-    data.reportingGroups
-      .find((group) => group.label === 'Maintainer runs')
-      .runs.some((run) => run.id === paper.id),
-    false
-  );
+  assert.equal(paper.report_type, 'published');
 });
 
 test('SVG published rows require explicit reporting type and row attribution', () => {

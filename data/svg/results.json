@@ -2,43 +2,43 @@
   "schema_version": 1,
   "title": "SVG tracer benchmarks",
   "snapshot_date": "2026-11-05",
-  "default_run": "overview",
+  "default_run": "all",
   "affiliation": "Daniel Voshart develops Monotrace. The local comparisons were executed for this project; they are not independent evaluations.",
   "metrics": {
     "dino": {
-      "label": "DINO \u2191",
+      "label": "DINO ↑",
       "direction": "desc",
       "precision": 5,
       "description": "DINOv2 image-feature similarity. Higher is better; this is not a percentage accuracy or success rate.",
       "role": "quality"
     },
     "median_boundary": {
-      "label": "Median boundary \u2193",
+      "label": "Median boundary ↓",
       "direction": "asc",
       "precision": 3,
       "unit": " px",
       "description": "Median of per-image symmetric boundary errors in native input pixels.",
-      "short": "Median px \u2193",
+      "short": "Median px ↓",
       "role": "quality"
     },
     "mean_boundary": {
-      "label": "Mean boundary \u2193",
+      "label": "Mean boundary ↓",
       "direction": "asc",
       "precision": 3,
       "unit": " px",
       "description": "Mean of per-image symmetric boundary errors. For font runs, an empty output against visible reference carries a 256 px penalty; blank against blank is zero.",
-      "short": "Mean px \u2193",
+      "short": "Mean px ↓",
       "role": "quality"
     },
     "iou": {
-      "label": "Ink IoU \u2191",
+      "label": "Ink IoU ↑",
       "direction": "desc",
       "precision": 4,
       "description": "Mean intersection-over-union of thresholded ink masks. Higher is better.",
       "role": "quality"
     },
     "segments": {
-      "label": "Segments \u2193",
+      "label": "Segments ↓",
       "direction": "asc",
       "precision": 1,
       "description": "Median line/curve segment count. Full-run counts use successful nonempty outputs. Fewer segments do not establish better reconstruction.",
@@ -46,59 +46,59 @@
       "role": "complexity"
     },
     "no_output": {
-      "label": "No output \u2193",
+      "label": "No output ↓",
       "direction": "asc",
       "precision": 0,
       "description": "Visible reference images with no ink at scoring resolution, including explicit trace errors.",
-      "short": "Empty \u2193",
+      "short": "Empty ↓",
       "role": "diagnostic"
     },
     "trace_errors": {
-      "label": "Trace errors \u2193",
+      "label": "Trace errors ↓",
       "direction": "asc",
       "precision": 0,
       "description": "Explicit unsuccessful conversion attempts; an empty SVG can still be a completed conversion.",
-      "short": "Errors \u2193",
+      "short": "Errors ↓",
       "role": "diagnostic"
     },
     "topology": {
-      "label": "Topology flags \u2193",
+      "label": "Topology flags ↓",
       "direction": "asc",
       "precision": 0,
       "description": "Images whose sampled component/hole counts differ. Resolution-dependent; not an exact vector topology or fabrication check.",
-      "short": "Topology \u2193",
+      "short": "Topology ↓",
       "role": "diagnostic"
     },
     "dino_cosine": {
-      "label": "DINO \u2191",
+      "label": "DINO ↑",
       "direction": "desc",
       "precision": 3,
-      "description": "DINOv2 feature cosine similarity reported by the OmniSVG authors. Do not assume the local font scorer\u2019s rescaling or preprocessing.",
+      "description": "DINOv2 feature cosine similarity reported by the OmniSVG authors. Do not assume the local font scorer’s rescaling or preprocessing.",
       "role": "quality"
     },
     "ssim": {
-      "label": "SSIM \u2191",
+      "label": "SSIM ↑",
       "direction": "desc",
       "precision": 3,
       "description": "Published structural similarity of reconstructed and reference rasters; compare within the selected protocol.",
       "role": "quality"
     },
     "lpips": {
-      "label": "LPIPS \u2193",
+      "label": "LPIPS ↓",
       "direction": "asc",
       "precision": 3,
       "description": "Published learned perceptual image patch distance; compare within the selected protocol.",
       "role": "quality"
     },
     "mse": {
-      "label": "MSE \u2193",
+      "label": "MSE ↓",
       "direction": "asc",
       "precision": 6,
       "description": "Published pixel mean squared error. Resolution, normalization and aggregation remain source-specific; not the local boundary error in pixels.",
       "role": "quality"
     },
     "tokens_k": {
-      "label": "Tokens \u2193",
+      "label": "Tokens ↓",
       "direction": "asc",
       "precision": 1,
       "unit": "k",
@@ -106,14 +106,14 @@
       "role": "complexity"
     },
     "paths": {
-      "label": "Paths \u2193",
+      "label": "Paths ↓",
       "direction": "asc",
       "precision": 2,
       "description": "Reported average number of SVG paths, not the local median curve-segment count. Fewer paths do not by themselves prove better reconstruction.",
       "role": "complexity"
     },
     "reported_seconds": {
-      "label": "Reported time \u2193",
+      "label": "Reported time ↓",
       "direction": "asc",
       "precision": 0,
       "unit": " s",
@@ -121,42 +121,42 @@
       "role": "time"
     },
     "mean_dino": {
-      "label": "Mean \u2191",
+      "label": "Mean ↑",
       "direction": "desc",
       "precision": 4,
       "description": "Calculated equal mean of all five published SVG-Bench DINO scores. Requires every component; not published as an aggregate by StarVector and not a cross-paper rating.",
       "role": "quality"
     },
     "stack": {
-      "label": "Stack \u2191",
+      "label": "Stack ↑",
       "direction": "desc",
       "precision": 3,
       "description": "Published SVG-Stack DINO score from the pinned StarVector table.",
       "role": "quality"
     },
     "fonts": {
-      "label": "Fonts \u2191",
+      "label": "Fonts ↑",
       "direction": "desc",
       "precision": 3,
       "description": "Published SVG-Fonts DINO score from the pinned StarVector table.",
       "role": "quality"
     },
     "icons": {
-      "label": "Icons \u2191",
+      "label": "Icons ↑",
       "direction": "desc",
       "precision": 3,
       "description": "Published SVG-Icons DINO score from the pinned StarVector table.",
       "role": "quality"
     },
     "emoji": {
-      "label": "Emoji \u2191",
+      "label": "Emoji ↑",
       "direction": "desc",
       "precision": 3,
       "description": "Published SVG-Emoji DINO score from the pinned StarVector table.",
       "role": "quality"
     },
     "diagrams": {
-      "label": "Diagrams \u2191",
+      "label": "Diagrams ↑",
       "direction": "desc",
       "precision": 3,
       "description": "Published SVG-Diagrams DINO score from the pinned StarVector table.",
@@ -166,137 +166,160 @@
   "models": {
     "monotrace": {
       "name": "Monotrace",
-      "version": "Native quality profile \u00b7 kernel 448c2ac7f2654543",
-      "note": "Fixed kernel source revision 456eebfee1bec816e67ea9d775177af872d09859. Private implementation; no fitting policy was tuned on these runs."
+      "version": "Native quality profile · kernel 448c2ac7f2654543",
+      "note": "Fixed kernel source revision 456eebfee1bec816e67ea9d775177af872d09859. Private implementation; no fitting policy was tuned on these runs.",
+      "configuration_label": "Native · our run"
     },
     "potrace": {
       "name": "Potrace",
-      "version": "Original C 1.16 \u00b7 defaults",
-      "note": "50% threshold PBM input, no dithering. Original C implementation, without the SVG Tools preprocessing or search harness."
+      "version": "Original C 1.16 · defaults",
+      "note": "50% threshold PBM input, no dithering. Original C implementation, without the SVG Tools preprocessing or search harness.",
+      "configuration_label": "1.16 · our run"
     },
     "vtracer": {
       "name": "VTracer",
-      "version": "Python 0.6.15 \u00b7 binary defaults",
-      "note": "SVG generator identifies the internal engine as 0.6.12. Binary mode, other Python defaults."
+      "version": "Python 0.6.15 · binary defaults",
+      "note": "SVG generator identifies the internal engine as 0.6.12. Binary mode, other Python defaults.",
+      "configuration_label": "0.6.15 · binary"
     },
     "starvector-8b": {
       "name": "StarVector-8B",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "starvector-1b": {
       "name": "StarVector-1B",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "potrace-paper": {
       "name": "Potrace",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "vtracer-paper": {
       "name": "VTracer",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "live-paper": {
       "name": "LIVE",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "autotrace-paper": {
       "name": "AutoTrace",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "gpt4v-paper": {
       "name": "GPT-4-V",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "diffvg-paper": {
       "name": "DiffVG",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "im2vec-paper": {
       "name": "Im2Vec",
       "version": "SVG-Bench reported configurations",
-      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced."
+      "note": "Reported method across dataset-specific configurations; not a verified single checkpoint or current release. Baseline invocation/version was not reproduced.",
+      "configuration_label": "StarVector table"
     },
     "live-omnisvg2025": {
       "name": "LIVE",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "diffvg-omnisvg2025": {
       "name": "DiffVG",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "gpt4o-omnisvg2025": {
       "name": "GPT-4o",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "starvector8b-omnisvg2025": {
       "name": "StarVector-8B",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "vtracer-omnisvg2025": {
       "name": "VTracer",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "omnisvg4b-2025": {
       "name": "OmniSVG-4B",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "omnisvg8b-2025": {
       "name": "OmniSVG-L-8B",
       "version": "Configuration in OmniSVG Table 2 (2025)",
-      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration."
+      "note": "Paper observation only; no result is inherited by a later release, current API snapshot or our local configuration.",
+      "configuration_label": "OmniSVG table"
     },
     "diffvg-layertracer2025": {
       "name": "DiffVG",
       "version": "Configuration in LayerTracer Table 2 (2025)",
-      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer."
+      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer.",
+      "configuration_label": "LayerTracer table"
     },
     "live-layertracer2025": {
       "name": "LIVE",
       "version": "Configuration in LayerTracer Table 2 (2025)",
-      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer."
+      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer.",
+      "configuration_label": "LayerTracer table"
     },
     "or-layertracer2025": {
       "name": "Optimize & Reduce",
       "version": "Configuration in LayerTracer Table 2 (2025)",
-      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer."
+      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer.",
+      "configuration_label": "LayerTracer table"
     },
     "layertracer-2025": {
       "name": "LayerTracer",
       "version": "Configuration in LayerTracer Table 2 (2025)",
-      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer."
+      "note": "Paper observation only; exact runtime revision is unverified. O&R denotes Optimize & Reduce. LayerTracer includes its layer prediction and vectorization pipeline, not standalone VTracer.",
+      "configuration_label": "LayerTracer table"
     }
   },
   "sources": {
     "local_full": {
-      "title": "Full font run \u00b7 2026-11-04",
+      "title": "Full font run · 2026-11-04",
       "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/full-fonts-summary.json",
       "operator": "Monotrace maintainer",
       "attribution": "maintainer-run",
       "note": "4,821 inputs, 9,642 case/engine evaluations. Fixed native kernel; all cases retained."
     },
     "local_pilot": {
-      "title": "Font and PolyFit pilot \u00b7 2026-11-04",
+      "title": "Font and PolyFit pilot · 2026-11-04",
       "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/pilot-summary.json",
       "operator": "Monotrace maintainer",
       "attribution": "maintainer-run",
       "note": "256 hash-selected SVG-Fonts test cases and all 116 PolyFit binary inputs. Fixed settings."
     },
     "starvector": {
-      "title": "StarVector / SVG-Bench \u00b7 CVPR 2025",
+      "title": "StarVector / SVG-Bench · CVPR 2025",
       "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#models",
       "operator": "StarVector authors",
       "attribution": "published by StarVector authors",
@@ -312,14 +335,14 @@
       "note": "Pinned test parquet SHA256 124ca9798ad286e3a6638dd79d3f9d83d5aed124bba10cd8111df3b7bebdd62b"
     },
     "polyfit": {
-      "title": "PolyFit \u00b7 SIGGRAPH 2020",
+      "title": "PolyFit · SIGGRAPH 2020",
       "url": "https://github.com/dedoardo/polyfit/tree/fea3bb9f28c2a44a55825529198e5c3796ac1fa6/data/binary",
       "operator": "PolyFit authors",
       "attribution": "dataset source",
       "note": "Original monochrome raster inputs. This run does not include the PolyFit algorithm or original vector masters."
     },
     "omnisvg_2025": {
-      "title": "OmniSVG \u00b7 NeurIPS 2025 \u00b7 Table 2",
+      "title": "OmniSVG · NeurIPS 2025 · Table 2",
       "url": "https://papers.nips.cc/paper_files/paper/2025/file/a510f05a574d4203ef3952973672fe2f-Paper-Conference.pdf",
       "operator": "OmniSVG authors",
       "attribution": "author-reported OmniSVG; competitor-reported baselines",
@@ -328,15 +351,15 @@
       "note": "Two color-image protocols. Reported baseline implementations use upstream settings; exact commits, hosted snapshot IDs and scoring details were not reproduced here."
     },
     "mmsvg_bench": {
-      "title": "MMSVGBench \u00b7 image2svg",
+      "title": "MMSVGBench · image2svg",
       "url": "https://huggingface.co/datasets/OmniSVG/MMSVGBench",
       "operator": "OmniSVG authors",
       "attribution": "dataset source",
       "verified_on": "2026-11-04",
-      "note": "Paper-defined synthetic GPT-4o image benchmark: 150 icons and 150 illustrations. No original vector masters. Current Hub card is corroboration, not a verified immutable match to the paper\u2019s exact image files."
+      "note": "Paper-defined synthetic GPT-4o image benchmark: 150 icons and 150 illustrations. No original vector masters. Current Hub card is corroboration, not a verified immutable match to the paper’s exact image files."
     },
     "layertracer_2025": {
-      "title": "LayerTracer \u00b7 ICCV 2025 \u00b7 Table 2",
+      "title": "LayerTracer · ICCV 2025 · Table 2",
       "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Song_LayerTracer_Cognitive-Aligned_Layered_SVG_Synthesis_via_Diffusion_Transformer_ICCV_2025_paper.pdf",
       "operator": "LayerTracer authors",
       "attribution": "author-reported LayerTracer; competitor-reported baselines",
@@ -346,7 +369,7 @@
       "note": "Default baseline settings are reported by the paper. Exact baseline revisions, evaluation file list, MSE normalization and inference timing environment remain unverified."
     },
     "layertracer_benchmark": {
-      "title": "LayerTracer \u00b7 Section 4.1 \u00b7 benchmark selection",
+      "title": "LayerTracer · Section 4.1 · benchmark selection",
       "url": "https://arxiv.org/html/2502.01105v3#S4.SS1",
       "operator": "LayerTracer authors",
       "attribution": "dataset source",
@@ -354,7 +377,7 @@
       "note": "50-image selection described with LayerSVG and Noto-Emoji. Exact case identifiers, dataset revisions and source proportions are not specified in the imported record."
     },
     "starvector_stack": {
-      "title": "SVG-Stack \u00b7 published dataset description",
+      "title": "SVG-Stack · published dataset description",
       "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#datasets---svg-bench",
       "operator": "StarVector authors",
       "attribution": "dataset source",
@@ -362,7 +385,7 @@
       "note": "Reported test size 5.7k. Original versus simplified baseline inputs remain unverified; the statistics describe dataset inputs, not model output complexity."
     },
     "starvector_fonts": {
-      "title": "SVG-Fonts \u00b7 published dataset description",
+      "title": "SVG-Fonts · published dataset description",
       "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#datasets---svg-bench",
       "operator": "StarVector authors",
       "attribution": "dataset source",
@@ -370,7 +393,7 @@
       "note": "Reported test size 4.8k. Original versus simplified baseline inputs remain unverified; the statistics describe dataset inputs, not model output complexity."
     },
     "starvector_icons": {
-      "title": "SVG-Icons \u00b7 published dataset description",
+      "title": "SVG-Icons · published dataset description",
       "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#datasets---svg-bench",
       "operator": "StarVector authors",
       "attribution": "dataset source",
@@ -378,7 +401,7 @@
       "note": "Reported test size 2.4k. Original versus simplified baseline inputs remain unverified; the statistics describe dataset inputs, not model output complexity."
     },
     "starvector_emoji": {
-      "title": "SVG-Emoji \u00b7 published dataset description",
+      "title": "SVG-Emoji · published dataset description",
       "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#datasets---svg-bench",
       "operator": "StarVector authors",
       "attribution": "dataset source",
@@ -386,7 +409,7 @@
       "note": "Reported test size 668. Original versus simplified baseline inputs remain unverified; the statistics describe dataset inputs, not model output complexity."
     },
     "starvector_diagrams": {
-      "title": "SVG-Diagrams \u00b7 published dataset description",
+      "title": "SVG-Diagrams · published dataset description",
       "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#datasets---svg-bench",
       "operator": "StarVector authors",
       "attribution": "dataset source",
@@ -397,7 +420,7 @@
   "runs": [
     {
       "id": "fonts-full-20261104",
-      "label": "Fonts \u00b7 our tests",
+      "label": "Fonts · our tests",
       "dataset": "SVG-Fonts",
       "sample_count": 4821,
       "source_id": "local_full",
@@ -411,7 +434,7 @@
         "segments",
         "no_output"
       ],
-      "summary": "4,821 images \u00b7 maintainer run \u00b7 DINO \u2191",
+      "summary": "4,821 images · maintainer run · DINO ↑",
       "method": "Original SVG framing, white background, no crop or automatic levels. Matched resvg 1024 px geometry renders, reported in native pixels. DINO uses resvg 256 px scoring images and the pinned DINOv2-base FP32 model.",
       "caveat": "Monotrace has lower median error, while Potrace has a lower all-case mean after missing-output penalties. The published paper scores use a different or unverified pipeline.",
       "rows": [
@@ -452,11 +475,14 @@
           }
         }
       ],
-      "report_type": "maintainer"
+      "report_type": "maintainer",
+      "family": "fonts",
+      "priority": 0,
+      "source_label": "Our full run"
     },
     {
       "id": "fonts-pilot-20261104",
-      "label": "Fonts \u00b7 our pilot",
+      "label": "Fonts · our pilot",
       "dataset": "SVG-Fonts",
       "sample_count": 256,
       "source_id": "local_pilot",
@@ -469,7 +495,7 @@
         "segments",
         "trace_errors"
       ],
-      "summary": "256 images \u00b7 subset of full run \u00b7 DINO \u2191",
+      "summary": "256 images · subset of full run · DINO ↑",
       "method": "Lowest 256 SHA256 values of monotrace-external-first-pass-v1: plus the source filename. Matched resvg scoring and the same fixed kernel as the full run.",
       "caveat": "The pilot is contained within the full test set. Do not count it as an additional independent dataset. One empty VTracer result incurs a 256 px penalty and inflates its mean boundary error.",
       "rows": [
@@ -510,11 +536,14 @@
           "note": "Native settings were fixed before the full-set expansion."
         }
       ],
-      "report_type": "maintainer"
+      "report_type": "maintainer",
+      "family": "fonts",
+      "priority": 1,
+      "source_label": "Our pilot"
     },
     {
       "id": "polyfit-binary-20261104",
-      "label": "PolyFit \u00b7 our tests",
+      "label": "PolyFit · our tests",
       "dataset": "PolyFit binary",
       "sample_count": 116,
       "source_id": "local_pilot",
@@ -527,9 +556,9 @@
         "topology",
         "trace_errors"
       ],
-      "summary": "116 images \u00b7 maintainer run \u00b7 IoU \u2191",
+      "summary": "116 images · maintainer run · IoU ↑",
       "method": "Matched resvg output renders at each original raster size. Geometry scores compare with the original raster pixels, not an original vector master.",
-      "caveat": "Measures raster reconstruction. It does not establish recovery of the artist\u2019s intended curves, and the PolyFit algorithm itself was not run.",
+      "caveat": "Measures raster reconstruction. It does not establish recovery of the artist’s intended curves, and the PolyFit algorithm itself was not run.",
       "rows": [
         {
           "model": "monotrace",
@@ -568,11 +597,14 @@
           "note": "All attempts completed. Pixel and sampled-topology metrics are resolution-dependent."
         }
       ],
-      "report_type": "maintainer"
+      "report_type": "maintainer",
+      "family": "polyfit",
+      "priority": 0,
+      "source_label": "Our run"
     },
     {
       "id": "svg-fonts-published-2025",
-      "label": "Fonts \u00b7 StarVector",
+      "label": "Fonts · StarVector",
       "dataset": "SVG-Fonts",
       "sample_count": null,
       "reported_sample_count": "4.8k test images",
@@ -582,7 +614,7 @@
       "columns": [
         "dino"
       ],
-      "summary": "StarVector authors \u00b7 DINO \u2191",
+      "summary": "StarVector authors · DINO ↑",
       "method": "Published DINO scores from the pinned Models table. Exact per-method commands, original versus simplified input variants and evaluated counts were not reproduced. Dataset-specific StarVector fine-tuning is described in the source.",
       "caveat": "Author/competitor reports; no direct comparison with our local scorer.",
       "rows": [
@@ -668,11 +700,14 @@
         "input_token_mean": 2121,
         "input_token_sd": 1868,
         "primitives": "Vector paths"
-      }
+      },
+      "family": "fonts",
+      "priority": 2,
+      "source_label": "StarVector table"
     },
     {
       "id": "mmsvg-icon-omnisvg2025",
-      "label": "Icons \u00b7 OmniSVG",
+      "label": "Icons · OmniSVG",
       "report_type": "published",
       "dataset": "MMSVGBench Icon",
       "sample_count": 150,
@@ -687,7 +722,7 @@
         "mse",
         "tokens_k"
       ],
-      "summary": "150 images \u00b7 OmniSVG authors \u00b7 DINO \u2191",
+      "summary": "150 images · OmniSVG authors · DINO ↑",
       "method": "Paper-defined GPT-4o raster inputs. DINOv2 cosine similarity, SSIM, LPIPS and pixel MSE are transcribed as published. Token lengths use Qwen2.5-VL; no conversion to bytes or segments. Exact scoring renderer, resolution and baseline commits were not independently reproduced.",
       "caveat": "Published by the OmniSVG authors, with their own models and competitor baselines. Color-image results are separate from our monochrome font runs; Monotrace was not evaluated in this study.",
       "rows": [
@@ -778,11 +813,14 @@
       ],
       "precisions": {
         "mse": 3
-      }
+      },
+      "family": "mmsvg-icon",
+      "priority": 0,
+      "source_label": "OmniSVG table"
     },
     {
       "id": "mmsvg-illustration-omnisvg2025",
-      "label": "Illustrations \u00b7 OmniSVG",
+      "label": "Illustrations · OmniSVG",
       "report_type": "published",
       "dataset": "MMSVGBench Illustration",
       "sample_count": 150,
@@ -797,7 +835,7 @@
         "mse",
         "tokens_k"
       ],
-      "summary": "150 images \u00b7 OmniSVG authors \u00b7 DINO \u2191",
+      "summary": "150 images · OmniSVG authors · DINO ↑",
       "method": "Paper-defined GPT-4o raster inputs. DINOv2 cosine similarity, SSIM, LPIPS and pixel MSE are transcribed as published. Token lengths use Qwen2.5-VL; no conversion to bytes or segments. Exact scoring renderer, resolution and baseline commits were not independently reproduced.",
       "caveat": "Published by the OmniSVG authors, with their own models and competitor baselines. Color-image results are separate from our monochrome font runs; Monotrace was not evaluated in this study.",
       "rows": [
@@ -888,11 +926,14 @@
       ],
       "precisions": {
         "mse": 3
-      }
+      },
+      "family": "mmsvg-illustration",
+      "priority": 0,
+      "source_label": "OmniSVG table"
     },
     {
       "id": "layertracer-vectorization-2025",
-      "label": "Layers \u00b7 LayerTracer",
+      "label": "Layers · LayerTracer",
       "report_type": "published",
       "dataset": "LayerTracer 50-image vectorization selection",
       "sample_count": 50,
@@ -904,7 +945,7 @@
         "mse",
         "paths"
       ],
-      "summary": "50 images \u00b7 LayerTracer authors \u00b7 MSE \u2193",
+      "summary": "50 images · LayerTracer authors · MSE ↓",
       "method": "Published raster-to-layered-SVG experiment, with default baseline settings as described in Section 4.1. MSE and average path counts are copied from Table 2. Text-to-SVG Table 1 and the nine-frame ablation in Table 3 are excluded. Exact scoring normalization and evaluation file list are unverified.",
       "caveat": "Published by the LayerTracer authors. Path counts are not curve-segment counts. This study was not reproduced here and does not include Monotrace; its pixel MSE is not comparable with font boundary error.",
       "rows": [
@@ -952,7 +993,10 @@
           "layer_wise": true,
           "note": "Author-reported by the LayerTracer authors. Layer-wise output: yes, as reported. Time is retained as source context in Details; inference hardware and timing boundaries are unverified. No failure count was published in this table."
         }
-      ]
+      ],
+      "family": "layertracer",
+      "priority": 0,
+      "source_label": "LayerTracer table"
     },
     {
       "id": "svg-stack-published-2025",
@@ -1036,7 +1080,7 @@
           "note": "Published by the StarVector authors. Per-dataset configuration; output complexity and failure count are not reported here."
         }
       ],
-      "label": "Stack \u00b7 StarVector",
+      "label": "Stack · StarVector",
       "dataset": "SVG-Stack",
       "dataset_source": "starvector_stack",
       "sample_count": null,
@@ -1044,7 +1088,7 @@
       "precisions": {
         "dino": 3
       },
-      "summary": "StarVector authors \u00b7 DINO \u2191",
+      "summary": "StarVector authors · DINO ↑",
       "method": "Published DINO scores from the pinned Models table. Exact per-method commands, original versus simplified input variants and evaluated counts were not reproduced. Dataset-specific StarVector fine-tuning is described in the source.",
       "caveat": "Author/competitor reports; no direct comparison with our local scorer.",
       "dataset_metadata": {
@@ -1052,7 +1096,10 @@
         "input_token_mean": 1822,
         "input_token_sd": 1808,
         "primitives": "All primitives"
-      }
+      },
+      "family": "stack",
+      "priority": 0,
+      "source_label": "StarVector table"
     },
     {
       "id": "svg-icons-published-2025",
@@ -1136,7 +1183,7 @@
           "note": "Published by the StarVector authors. Per-dataset configuration; output complexity and failure count are not reported here."
         }
       ],
-      "label": "Icons \u00b7 StarVector",
+      "label": "Icons · StarVector",
       "dataset": "SVG-Icons",
       "dataset_source": "starvector_icons",
       "sample_count": null,
@@ -1144,7 +1191,7 @@
       "precisions": {
         "dino": 3
       },
-      "summary": "StarVector authors \u00b7 DINO \u2191",
+      "summary": "StarVector authors · DINO ↑",
       "method": "Published DINO scores from the pinned Models table. Exact per-method commands, original versus simplified input variants and evaluated counts were not reproduced. Dataset-specific StarVector fine-tuning is described in the source.",
       "caveat": "Author/competitor reports; no direct comparison with our local scorer.",
       "dataset_metadata": {
@@ -1152,7 +1199,10 @@
         "input_token_mean": 2449,
         "input_token_sd": 1543,
         "primitives": "Vector paths"
-      }
+      },
+      "family": "icons",
+      "priority": 0,
+      "source_label": "StarVector table"
     },
     {
       "id": "svg-emoji-published-2025",
@@ -1236,7 +1286,7 @@
           "note": "Published by the StarVector authors. Per-dataset configuration; output complexity and failure count are not reported here."
         }
       ],
-      "label": "Emoji \u00b7 StarVector",
+      "label": "Emoji · StarVector",
       "dataset": "SVG-Emoji",
       "dataset_source": "starvector_emoji",
       "sample_count": null,
@@ -1244,7 +1294,7 @@
       "precisions": {
         "dino": 3
       },
-      "summary": "StarVector authors \u00b7 DINO \u2191",
+      "summary": "StarVector authors · DINO ↑",
       "method": "Published DINO scores from the pinned Models table. Exact per-method commands, original versus simplified input variants and evaluated counts were not reproduced. Dataset-specific StarVector fine-tuning is described in the source.",
       "caveat": "Author/competitor reports; no direct comparison with our local scorer.",
       "dataset_metadata": {
@@ -1252,7 +1302,10 @@
         "input_token_mean": 2551,
         "input_token_sd": 1805,
         "primitives": "All primitives"
-      }
+      },
+      "family": "emoji",
+      "priority": 0,
+      "source_label": "StarVector table"
     },
     {
       "id": "svg-diagrams-published-2025",
@@ -1336,7 +1389,7 @@
           "note": "Published by the StarVector authors. Per-dataset configuration; output complexity and failure count are not reported here."
         }
       ],
-      "label": "Diagrams \u00b7 StarVector",
+      "label": "Diagrams · StarVector",
       "dataset": "SVG-Diagrams",
       "dataset_source": "starvector_diagrams",
       "sample_count": null,
@@ -1344,7 +1397,7 @@
       "precisions": {
         "dino": 3
       },
-      "summary": "StarVector authors \u00b7 DINO \u2191",
+      "summary": "StarVector authors · DINO ↑",
       "method": "Published DINO scores from the pinned Models table. Exact per-method commands, original versus simplified input variants and evaluated counts were not reproduced. Dataset-specific StarVector fine-tuning is described in the source.",
       "caveat": "Author/competitor reports; no direct comparison with our local scorer.",
       "dataset_metadata": {
@@ -1352,12 +1405,15 @@
         "input_token_mean": 3486,
         "input_token_sd": 1918,
         "primitives": "All primitives"
-      }
+      },
+      "family": "diagrams",
+      "priority": 0,
+      "source_label": "StarVector table"
     }
   ],
   "overview": {
     "id": "svg-bench",
-    "label": "SVG-Bench \u00b7 five datasets",
+    "label": "SVG-Bench · five datasets",
     "report_type": "published",
     "source_id": "starvector",
     "dataset_source": "starvector",
@@ -1400,7 +1456,7 @@
         "column": "diagrams"
       }
     ],
-    "summary": "StarVector authors \u00b7 mean DINO \u2191 \u00b7 calculated here",
+    "summary": "StarVector authors · mean DINO ↑ · calculated here",
     "method": "Equal arithmetic mean of Stack, Fonts, Icons, Emoji and Diagrams from the same pinned StarVector publication. All five scores are required. This is a method-level summary of reported dataset-specific configurations, not one universal checkpoint. Rank is computed before search and sorting; exact ties share positions. Incomplete panels remain unranked.",
     "caveat": "This fixed-panel summary does not combine papers or local scores. No missing dataset is filled, and dataset input token statistics are not output sizes."
   },
@@ -1417,7 +1473,7 @@
         "model": "potrace-paper",
         "metric": "dino"
       },
-      "scope": "4,821 local images \u00b7 original C 1.16"
+      "scope": "4,821 local images · original C 1.16"
     },
     {
       "label": "VTracer",
@@ -1431,15 +1487,92 @@
         "model": "vtracer-paper",
         "metric": "dino"
       },
-      "scope": "256-image local pilot \u00b7 Python 0.6.15"
+      "scope": "256-image local pilot · Python 0.6.15"
     }
   ],
-  "landing": {
-    "id": "overview",
-    "label": "Overview \u00b7 our tests + published",
-    "panels": [
-      "fonts-full-20261104",
-      "svg-bench"
+  "matrix": {
+    "default_mode": "all",
+    "modes": [
+      {
+        "id": "all",
+        "label": "All colours"
+      },
+      {
+        "id": "single",
+        "label": "Single colour"
+      },
+      {
+        "id": "multi",
+        "label": "Multicolour"
+      },
+      {
+        "id": "gradient",
+        "label": "Gradients · no separate results yet"
+      }
+    ],
+    "columns": [
+      {
+        "id": "fonts",
+        "label": "Fonts",
+        "colour": "single",
+        "metric": "dino"
+      },
+      {
+        "id": "polyfit",
+        "label": "PolyFit",
+        "colour": "single",
+        "metric": "iou"
+      },
+      {
+        "id": "icons",
+        "label": "Icons",
+        "colour": "multi",
+        "metric": "dino"
+      },
+      {
+        "id": "stack",
+        "label": "Stack",
+        "colour": "multi",
+        "metric": "dino"
+      },
+      {
+        "id": "emoji",
+        "label": "Emoji",
+        "colour": "multi",
+        "metric": "dino"
+      },
+      {
+        "id": "diagrams",
+        "label": "Diagrams",
+        "colour": "multi",
+        "metric": "dino"
+      },
+      {
+        "id": "mmsvg-icon",
+        "label": "MMSVG icons",
+        "colour": "multi",
+        "metric": "dino_cosine"
+      },
+      {
+        "id": "mmsvg-illustration",
+        "label": "Illustrations",
+        "colour": "multi",
+        "metric": "dino_cosine"
+      },
+      {
+        "id": "layertracer",
+        "label": "Layers",
+        "colour": "multi",
+        "metric": "mse"
+      }
+    ],
+    "minimum_families": 1,
+    "full_coverage_families": 4,
+    "note": "One configuration per row. Relative index uses finite-cohort percentiles within exact protocols, averaged once per dataset family. It is a qualified summary, not a matched cross-study win. Multicolour includes mixed-colour datasets; the papers do not report isolated flat-only or gradient-only subsets.",
+    "complexity_metrics": [
+      "segments",
+      "paths",
+      "tokens_k"
     ]
   }
 }

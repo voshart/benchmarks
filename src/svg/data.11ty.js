@@ -3,7 +3,7 @@ module.exports = class {
     return { permalink: '/svg/data.json', eleventyExcludeFromCollections: true };
   }
   render() {
-    const { panels, reportingGroups, ...data } = require('../../lib/load-svg.cjs').loadSVG();
+    const { matrixResult, ...data } = require('../../lib/load-svg.cjs').loadSVG();
     return JSON.stringify(data);
   }
 };
