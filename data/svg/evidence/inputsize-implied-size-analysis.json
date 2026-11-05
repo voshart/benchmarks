@@ -1,0 +1,92 @@
+{
+  "pilot_curve_fit": {
+    "potrace": {
+      "pilot_dino": {
+        "64": 0.9463,
+        "96": 0.9659,
+        "128": 0.9751,
+        "256": 0.9897,
+        "512": 0.9962
+      },
+      "rmse_dino_units_all_five_sizes": {
+        "linear d~S": 0.0094,
+        "log-size d~lnS": 0.0052,
+        "power law ln(1-d)~lnS": 0.0017,
+        "exp ln(1-d)~S": 0.0062
+      }
+    },
+    "vtracer": {
+      "pilot_dino": {
+        "64": 0.9398,
+        "96": 0.9614,
+        "128": 0.9705,
+        "256": 0.9864,
+        "512": 0.9941
+      },
+      "rmse_dino_units_all_five_sizes": {
+        "linear d~S": 0.01,
+        "log-size d~lnS": 0.0055,
+        "power law ln(1-d)~lnS": 0.0008,
+        "exp ln(1-d)~S": 0.007
+      }
+    }
+  },
+  "full_split_implied_size_px": {
+    "fonts": {
+      "potrace": {
+        "published": 0.967,
+        "dino_96": 0.9643,
+        "dino_128": 0.9719,
+        "se_96": 0.0005,
+        "se_128": 0.0004,
+        "inside_tested_range": true,
+        "interpolated_or_extrapolated_size_px": {
+          "linear": 107.4,
+          "log-size": 106.4,
+          "power-law": 105.5
+        }
+      },
+      "vtracer": {
+        "published": 0.964,
+        "dino_96": 0.9602,
+        "dino_128": 0.9681,
+        "se_96": 0.0005,
+        "se_128": 0.0004,
+        "inside_tested_range": true,
+        "interpolated_or_extrapolated_size_px": {
+          "linear": 111.5,
+          "log-size": 110.3,
+          "power-law": 109.5
+        }
+      }
+    },
+    "icons": {
+      "potrace": {
+        "published": 0.972,
+        "dino_96": 0.9463,
+        "dino_128": 0.9615,
+        "se_96": 0.0006,
+        "se_128": 0.0005,
+        "inside_tested_range": false,
+        "interpolated_or_extrapolated_size_px": {
+          "linear": 150.2,
+          "log-size": 156.3,
+          "power-law": 168.8
+        }
+      },
+      "vtracer": {
+        "published": 0.94,
+        "dino_96": 0.9394,
+        "dino_128": 0.9604,
+        "se_96": 0.0005,
+        "se_128": 0.0004,
+        "inside_tested_range": true,
+        "interpolated_or_extrapolated_size_px": {
+          "linear": 97.0,
+          "log-size": 96.8,
+          "power-law": 96.7
+        }
+      }
+    }
+  }
+}

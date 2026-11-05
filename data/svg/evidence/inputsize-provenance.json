@@ -1,0 +1,82 @@
+{
+  "study": "tracer input-size sensitivity vs published star-vector baselines",
+  "client_date": "2026-11-05",
+  "kernel_commit": "456eebfee1bec816e67ea9d775177af872d09859",
+  "kernel_source_id": "448c2ac7f2654543",
+  "mtrace_profile": "quality",
+  "kernel_fitting_changed": false,
+  "mtrace_sha256": "9843a0a246efc566f6a0537625f535ecc2a62680c50ad21fc082178e06a40cf7",
+  "potrace_version": "1.16",
+  "potrace_sha256": "09e72041d3227d26051c2ff34709deff4c8367e5f5dd80f3d1d7ef346c9f0dfa",
+  "potrace_options": "CLI defaults, -s SVG; input thresholded at 50 percent to PBM, no dithering; variants: --turdsize 0, --opttolerance 0.5",
+  "mkbitmap_version": "1.16",
+  "mkbitmap_sha256": "57542620fd2d733a3fdb473a3ddac266141ccd56549575c5c4ce176b2bc41b6d",
+  "mkbitmap_variants": [
+    "defaults (radius-4 high-pass)",
+    "-n -s 2 (no filter, 2x upscale)"
+  ],
+  "vtracer": {
+    "version": "0.6.15",
+    "call": "convert_image_to_svg_py(png, svg, colormode='binary'), library defaults"
+  },
+  "renderer": "@resvg/resvg-js 2.6.2, white background, system fonts disabled",
+  "tracer_input_sizes_px": {
+    "pilot": [
+      64,
+      96,
+      128,
+      256,
+      512
+    ],
+    "full_splits": [
+      96,
+      128
+    ]
+  },
+  "reference_and_score_widths_px": {
+    "dino": 256,
+    "geometry": 1024
+  },
+  "dino": {
+    "model": "facebook/dinov2-base",
+    "weights_sha256": "d73036b56966966d07975d696bde331762f37297e2f095de8cea0040c3aa0841",
+    "dtype": "float32",
+    "formula": "(cosine(mean(last_hidden_state_reference), mean(last_hidden_state_trace)) + 1) / 2",
+    "threads": 8,
+    "batch_size": 16
+  },
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.22.1"
+  },
+  "cases": {
+    "pilot": "first 256 cases of the frozen Fonts manifest (hash order)",
+    "fonts_full": 4821,
+    "icons_full": 2682
+  },
+  "manifests": {
+    "fonts": {
+      "path": "benchmarks/external_full_fonts_20261104/manifest.json.gz",
+      "sha256": "5f673a38eaa757c5e31248e30694baa21a45abeb6c67b75f67183ea2cd39d978"
+    },
+    "icons": {
+      "path": "benchmarks/external_icons_20261105/manifest.json.gz",
+      "sha256": "d068fa408f559efd475be083ceaf3939f6c005b54095716df450cbbaee2f943d"
+    }
+  },
+  "published_targets_source": "https://github.com/joanrod/star-vector README results table, read 2026-11-05 (Fonts Potrace 0.967 / VTracer 0.964; Icons Potrace 0.972 / VTracer 0.940)",
+  "scripts_sha256": {
+    "external_protocol_sweep.py": "d1e09d99ac7596a952ae2b127a9d6f643b2b700f3a94afe6edcd6391a3d3e166",
+    "external_inputsize_analysis.py": "84ee297b130ea889073eb7ebb3defc88d87e76ee0d207fead86228356da331fe",
+    "external_full.py": "be9280befedb87daae2fb4b27fe32e6afb2936ba4cfdbb4dcee0aa1b6a8112a3",
+    "benchmark_external.py": "ca78fc27a2ec8de1ca39b87238c772763153349564c879e1430464df69e2869b"
+  },
+  "script_note": "Pilot sweeps ran before the --engines option and dino_se field were added to external_protocol_sweep.py; the hash above is the final script. The earlier version hash was not recorded.",
+  "workers": 6,
+  "full_split_launcher": "sequential Fonts then Icons, engines potrace vtracer monotrace, sizes 96 128",
+  "preregistration_sha256": "1e97bbb61e50ddda609e94a4ae3337b1969868b09d6a88d871b3b06de51cb4a0",
+  "geometry_audit_run": false,
+  "rust_tests_run": false,
+  "artwork_and_generated_svgs_published": false
+}

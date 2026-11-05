@@ -1,0 +1,99 @@
+{
+  "cases": 2682,
+  "sizes": [
+    96,
+    128
+  ],
+  "engines": [
+    "potrace",
+    "vtracer",
+    "monotrace"
+  ],
+  "model_weights_sha256": "d73036b56966966d07975d696bde331762f37297e2f095de8cea0040c3aa0841",
+  "rows": [
+    {
+      "size": 96,
+      "engine": "potrace",
+      "n": 2682,
+      "errors": 0,
+      "visible_reference_without_ink": 0,
+      "mean_dino": 0.9462961097602788,
+      "dino_se": 0.0005980566567498113,
+      "median_boundary_px": 0.7528846398212805,
+      "mean_boundary_px_all_cases": 0.8335806263266115,
+      "mean_iou": 0.6925304317709373,
+      "median_segments_nonempty": 66.0,
+      "topology_mismatches": 1777
+    },
+    {
+      "size": 96,
+      "engine": "vtracer",
+      "n": 2682,
+      "errors": 0,
+      "visible_reference_without_ink": 1,
+      "mean_dino": 0.9393597560129798,
+      "dino_se": 0.0005235725137750218,
+      "median_boundary_px": 1.5064872846080046,
+      "mean_boundary_px_all_cases": 1.959419518155314,
+      "mean_iou": 0.5713660873706,
+      "median_segments_nonempty": 76.0,
+      "topology_mismatches": 2582
+    },
+    {
+      "size": 96,
+      "engine": "monotrace",
+      "n": 2682,
+      "errors": 6,
+      "visible_reference_without_ink": 6,
+      "mean_dino": 0.964526722428516,
+      "dino_se": 0.0005231052953036281,
+      "median_boundary_px": 0.4049444776857165,
+      "mean_boundary_px_all_cases": 1.0652037512754278,
+      "mean_iou": 0.8122253520191007,
+      "median_segments_nonempty": 83.0,
+      "topology_mismatches": 1677
+    },
+    {
+      "size": 128,
+      "engine": "potrace",
+      "n": 2682,
+      "errors": 0,
+      "visible_reference_without_ink": 0,
+      "mean_dino": 0.9614643903253329,
+      "dino_se": 0.0004836664540179543,
+      "median_boundary_px": 0.5398270836979369,
+      "mean_boundary_px_all_cases": 0.5989819383559885,
+      "mean_iou": 0.7639345135406833,
+      "median_segments_nonempty": 78.0,
+      "topology_mismatches": 1594
+    },
+    {
+      "size": 128,
+      "engine": "vtracer",
+      "n": 2682,
+      "errors": 0,
+      "visible_reference_without_ink": 0,
+      "mean_dino": 0.9603699455280788,
+      "dino_se": 0.0004380128575276725,
+      "median_boundary_px": 0.791708335255585,
+      "mean_boundary_px_all_cases": 0.9026370850214854,
+      "mean_iou": 0.6704915358964969,
+      "median_segments_nonempty": 99.0,
+      "topology_mismatches": 1855
+    },
+    {
+      "size": 128,
+      "engine": "monotrace",
+      "n": 2682,
+      "errors": 4,
+      "visible_reference_without_ink": 4,
+      "mean_dino": 0.9769208570143609,
+      "dino_se": 0.00040100333258967226,
+      "median_boundary_px": 0.28422466313556055,
+      "mean_boundary_px_all_cases": 0.7287484106051757,
+      "mean_iou": 0.862189611741371,
+      "median_segments_nonempty": 94.0,
+      "topology_mismatches": 1552
+    }
+  ]
+}
