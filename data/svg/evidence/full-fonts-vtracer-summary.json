@@ -1,0 +1,39 @@
+{
+  "scope": "entire 4821-row official test split",
+  "pairing_evidence": "external_full_fonts_20261104",
+  "engine": "vtracer",
+  "vtracer_settings": "colormode='binary', library defaults, input.png",
+  "cases": 4821,
+  "trace_failures": 0,
+  "empty_outputs_with_visible_reference": 3,
+  "mean_dino_all_cases": 0.9851285554615449,
+  "median_boundary_all_cases": 0.432675410037263,
+  "mean_boundary_all_cases_including_256px_empty_output_penalty": 0.6470489466663657,
+  "mean_boundary_nonempty": 0.4884551250267032,
+  "mean_iou_all_cases": 0.9375290978892378,
+  "median_segments_nonempty": 47.0,
+  "sampled_topology_mismatches": 459,
+  "mean_seconds_informational": 0.003180017767632729,
+  "paired": {
+    "vtracer_vs_monotrace_dino": {
+      "vtracer_better": 218,
+      "ties": 20,
+      "vtracer_worse": 4583
+    },
+    "vtracer_vs_monotrace_boundary_mean_px": {
+      "vtracer_better": 15,
+      "ties": 18,
+      "vtracer_worse": 4788
+    },
+    "vtracer_vs_potrace_dino": {
+      "vtracer_better": 1613,
+      "ties": 104,
+      "vtracer_worse": 3104
+    },
+    "vtracer_vs_potrace_boundary_mean_px": {
+      "vtracer_better": 56,
+      "ties": 101,
+      "vtracer_worse": 4664
+    }
+  }
+}

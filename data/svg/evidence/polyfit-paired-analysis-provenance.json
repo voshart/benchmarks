@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-05",
+  "source_results": "benchmarks/external_pilot_20261104/results.csv",
+  "source_results_sha256": "baa5cfadc464c2a544891336d1c05a7bd41eeaee47d2c0c4403156b32a028004",
+  "polyfit_repository": "dedoardo/polyfit",
+  "polyfit_revision": "fea3bb9f28c2a44a55825529198e5c3796ac1fa6",
+  "inputs": "data/binary/*/input.png (116), hash-verified by external_fetch.py",
+  "kernel_commit": "456eebfee1bec816e67ea9d775177af872d09859",
+  "kernel_source_id": "448c2ac7f2654543",
+  "retrace_check": {
+    "cases": 116,
+    "identical_svg_sha256_to_frozen": {
+      "monotrace": 116,
+      "potrace": 116
+    },
+    "mismatches": [],
+    "mtrace_binary_sha256": "9843a0a246efc566f6a0537625f535ecc2a62680c50ad21fc082178e06a40cf7",
+    "potrace_binary_sha256": "09e72041d3227d26051c2ff34709deff4c8367e5f5dd80f3d1d7ef346c9f0dfa"
+  },
+  "bootstrap": {
+    "method": "percentile",
+    "resamples": 20000,
+    "seed": 20261105
+  },
+  "script": "scripts/external_polyfit_analysis.py",
+  "script_sha256": "2efebbc858adf132170e54e0bdd181e925b14f3478533cdb5c46bd696dd8a949",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "Pillow": "13.0.0",
+    "svgpathtools": "1.8.0"
+  },
+  "kernel_changed": false,
+  "tuning": false
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "entire 2682-row official test split",
+  "engine": "vtracer",
+  "vtracer_settings": "colormode='binary', library defaults, input.png",
+  "cases": 2682,
+  "trace_failures": 0,
+  "empty_outputs_with_visible_reference": 0,
+  "mean_dino_all_cases": 0.9790689260945402,
+  "median_boundary_all_cases": 0.43025025897936686,
+  "mean_boundary_all_cases_including_256px_empty_output_penalty": 0.46173526684844246,
+  "mean_boundary_nonempty": 0.46173526684844246,
+  "mean_iou_all_cases": 0.7929315471501802,
+  "median_segments_nonempty": 147.0,
+  "sampled_topology_mismatches": 1467,
+  "mean_seconds_informational": 0.003377775147137825,
+  "paired": {
+    "vtracer_vs_monotrace_dino": {
+      "vtracer_better": 47,
+      "ties": 0,
+      "vtracer_worse": 2635
+    },
+    "vtracer_vs_monotrace_boundary_mean_px": {
+      "vtracer_better": 11,
+      "ties": 0,
+      "vtracer_worse": 2671
+    },
+    "vtracer_vs_potrace_dino": {
+      "vtracer_better": 597,
+      "ties": 0,
+      "vtracer_worse": 2085
+    },
+    "vtracer_vs_potrace_boundary_mean_px": {
+      "vtracer_better": 115,
+      "ties": 0,
+      "vtracer_worse": 2567
+    }
+  }
+}

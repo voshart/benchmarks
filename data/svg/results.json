@@ -309,14 +309,14 @@
       "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/full-fonts-summary.json",
       "operator": "Monotrace maintainer",
       "attribution": "maintainer-run",
-      "note": "4,821 inputs, 9,642 case/engine evaluations. Fixed native kernel; all cases retained."
+      "note": "4,821 inputs, 9,642 case/engine evaluations. Fixed native kernel; all cases retained. VTracer full-run rows: full-fonts-vtracer-summary.json."
     },
     "local_pilot": {
       "title": "Font and PolyFit pilot · 2026-11-04",
       "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/pilot-summary.json",
       "operator": "Monotrace maintainer",
       "attribution": "maintainer-run",
-      "note": "256 hash-selected SVG-Fonts test cases and all 116 PolyFit binary inputs. Fixed settings."
+      "note": "256 hash-selected SVG-Fonts test cases and all 116 PolyFit binary inputs. Fixed settings. Paired per-case analysis: polyfit-paired-analysis.json (monotrace commit ec64742)."
     },
     "starvector": {
       "title": "StarVector / SVG-Bench · CVPR 2025",
@@ -428,7 +428,7 @@
       "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/full-icons-summary.json",
       "operator": "Monotrace maintainer",
       "attribution": "maintainer-run",
-      "note": "2,682 inputs, 5,364 case/engine evaluations. Fixed native kernel; all cases retained. Provenance: full-icons-provenance.json."
+      "note": "2,682 inputs, 5,364 case/engine evaluations. Fixed native kernel; all cases retained. Provenance: full-icons-provenance.json. VTracer rows: full-icons-vtracer-summary.json."
     }
   },
   "runs": [
@@ -450,7 +450,7 @@
       ],
       "summary": "4,821 images · maintainer run · DINO ↑",
       "method": "Original SVG framing, white background, no crop or automatic levels. Matched resvg 1024 px geometry renders, reported in native pixels. DINO uses resvg 256 px scoring images and the pinned DINOv2-base FP32 model.",
-      "caveat": "Monotrace has lower median error, while Potrace has a lower all-case mean after missing-output penalties. The published paper scores use a different or unverified pipeline.",
+      "caveat": "Monotrace has lower median error, while Potrace has a lower all-case mean after missing-output penalties. The published paper scores use a different or unverified pipeline. VTracer is a single untuned library configuration; published VTracer scores use a different or unverified pipeline.",
       "rows": [
         {
           "model": "potrace",
@@ -487,6 +487,20 @@
             "count": 4813,
             "mean_boundary": 0.10479347639191644
           }
+        },
+        {
+          "model": "vtracer",
+          "values": {
+            "dino": 0.9851285554615449,
+            "median_boundary": 0.432675410037263,
+            "mean_boundary": 0.6470489466663657,
+            "iou": 0.9375290978892378,
+            "segments": 47.0,
+            "no_output": 3,
+            "trace_errors": 0,
+            "topology": 459
+          },
+          "note": "VTracer 0.6.15 binary mode, library defaults, one untuned configuration, on the same 256 px input given to Monotrace. No explicit errors; three completed empty SVGs against visible references receive the 256 px penalty. All 4,821 source and input hashes were recreated and matched the frozen manifest; Potrace and Monotrace were not re-run. DINO features were recomputed with 8 threads and batch size 16 under the same formula and weights. Evidence: full-fonts-vtracer-summary.json, full-fonts-vtracer-provenance.json."
         }
       ],
       "report_type": "maintainer",
@@ -572,7 +586,7 @@
       ],
       "summary": "116 images · maintainer run · IoU ↑",
       "method": "Matched resvg output renders at each original raster size. Geometry scores compare with the original raster pixels, not an original vector master.",
-      "caveat": "Measures raster reconstruction. It does not establish recovery of the artist’s intended curves, and the PolyFit algorithm itself was not run.",
+      "caveat": "Measures raster reconstruction. It does not establish recovery of the artist’s intended curves, and the PolyFit algorithm itself was not run. The 116 files are 58 artworks at two size labels (not pixel sizes), so the effective sample is at most 58. Monotrace-minus-Potrace IoU is -0.0030 (paired bootstrap 95% interval [-0.0059, -0.0003] per case, [-0.0060, -0.0002] per artwork); the gap is at the -32 label (-0.0057) and not distinguishable from zero at -64 (-0.0004). There are no ground-truth vectors: IoU and boundary error measure fidelity to the thresholded raster only, so a lower score is not evidence of a worse contour. A three-row percentile index magnifies this small gap.",
       "rows": [
         {
           "model": "monotrace",
@@ -634,7 +648,7 @@
       ],
       "summary": "2,682 images · maintainer run · DINO ↑",
       "method": "Pinned starvector/svg-icons test parquet (revision 0dfc1bee713256e64d5c16d7427c4c29de823d70). Stroke-only line art rendered to 256 px white-background inputs, original framing, no crop or automatic levels. Matched resvg 1024 px geometry renders, reported in native pixels. DINO uses resvg 256 px scoring images and the pinned DINOv2-base FP32 model. Same scorer as the font run; kernel source revision is the font run's, but the binary was rebuilt and output equivalence was not tested.",
-      "caveat": "Monotrace has higher DINO and lower median and successful-trace boundary error, while Potrace has a lower all-case mean after the 256 px missing-output penalty for three Monotrace refusals. The full split is observed material, not a tuning holdout. The published StarVector table uses a different or unverified pipeline.",
+      "caveat": "Monotrace has higher DINO and lower median and successful-trace boundary error, while Potrace has a lower all-case mean after the 256 px missing-output penalty for three Monotrace refusals. The full split is observed material, not a tuning holdout. The published StarVector table uses a different or unverified pipeline. VTracer is a single untuned library configuration; published VTracer scores use a different or unverified pipeline.",
       "rows": [
         {
           "model": "potrace",
@@ -671,6 +685,20 @@
             "count": 2679,
             "mean_boundary": 0.14144081153702262
           }
+        },
+        {
+          "model": "vtracer",
+          "values": {
+            "dino": 0.9790689260945402,
+            "median_boundary": 0.43025025897936686,
+            "mean_boundary": 0.46173526684844246,
+            "iou": 0.7929315471501802,
+            "segments": 147.0,
+            "no_output": 0,
+            "trace_errors": 0,
+            "topology": 1467
+          },
+          "note": "VTracer 0.6.15 binary mode, library defaults, one untuned configuration, on the same 256 px input given to Monotrace (Potrace used the 50% PBM). No failures or empty outputs. Potrace and Monotrace rows are the frozen results; the VTracer run used an earlier revision of the helper script and reused reference DINO features. Evidence: full-icons-vtracer-summary.json, full-icons-vtracer-provenance.json."
         }
       ],
       "report_type": "maintainer",
@@ -1578,6 +1606,34 @@
         "metric": "dino"
       },
       "scope": "2,682 local images · original C 1.16"
+    },
+    {
+      "label": "VTracer · Fonts",
+      "local": {
+        "run_id": "fonts-full-20261104",
+        "model": "vtracer",
+        "metric": "dino"
+      },
+      "published": {
+        "run_id": "svg-fonts-published-2025",
+        "model": "vtracer-paper",
+        "metric": "dino"
+      },
+      "scope": "4,821 local images · Python 0.6.15"
+    },
+    {
+      "label": "VTracer · Icons",
+      "local": {
+        "run_id": "icons-full-20261105",
+        "model": "vtracer",
+        "metric": "dino"
+      },
+      "published": {
+        "run_id": "svg-icons-published-2025",
+        "model": "vtracer-paper",
+        "metric": "dino"
+      },
+      "scope": "2,682 local images · Python 0.6.15"
     }
   ],
   "matrix": {

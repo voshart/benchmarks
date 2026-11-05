@@ -59,7 +59,7 @@ test('SVG full-run observations preserve the source summary including failures',
     fs.readFileSync(path.join(__dirname, '../data/svg/evidence/full-fonts-summary.json'), 'utf8')
   );
   const run = data.runs.find((run) => run.source_id === 'local_full');
-  for (const row of run.rows) {
+  for (const row of run.rows.filter((row) => row.model !== 'vtracer')) {
     const engine = source.engines.find((engine) => engine.engine === row.model);
     assert.equal(run.sample_count, engine.attempted);
     assert.equal(row.values.dino, engine.mean_dino_all_cases);
@@ -124,5 +124,29 @@ test('SVG validation rejects ambiguous protocols, sources and invalid values', (
     const data = fresh();
     mutate(data);
     assert.throws(() => validateSVG(data));
+  }
+});
+
+test('VTracer full-run observations match their packaged summaries including failures', () => {
+  const data = loadSVG();
+  for (const [runId, file] of [
+    ['fonts-full-20261104', 'full-fonts-vtracer-summary.json'],
+    ['icons-full-20261105', 'full-icons-vtracer-summary.json']
+  ]) {
+    const source = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '../data/svg/evidence', file), 'utf8')
+    );
+    const run = data.runs.find((run) => run.id === runId),
+      row = run.rows.find((row) => row.model === 'vtracer');
+    assert.equal(run.sample_count, source.cases);
+    assert.equal(row.values.dino, source.mean_dino_all_cases);
+    assert.equal(row.values.median_boundary, source.median_boundary_all_cases);
+    assert.equal(
+      row.values.mean_boundary,
+      source.mean_boundary_all_cases_including_256px_empty_output_penalty
+    );
+    assert.equal(row.values.iou, source.mean_iou_all_cases);
+    assert.equal(row.values.no_output, source.empty_outputs_with_visible_reference);
+    assert.equal(row.values.trace_errors, source.trace_failures);
   }
 });

@@ -1,0 +1,1386 @@
+{
+ "all": {
+  "n": 116,
+  "monotrace_iou": 0.9643971788057067,
+  "potrace_iou": 0.9674455335358164,
+  "mean_iou_diff": -0.003048354730109656,
+  "iou_monotrace_better": 56,
+  "iou_ties": 1,
+  "iou_monotrace_worse": 59,
+  "boundary_monotrace_better": 61,
+  "boundary_monotrace_worse": 55,
+  "mean_boundary_diff_px": 0.010902553746925853
+ },
+ "label_32": {
+  "n": 58,
+  "monotrace_iou": 0.9508772295342424,
+  "potrace_iou": 0.956536061377749,
+  "mean_iou_diff": -0.005658831843506644,
+  "iou_monotrace_better": 22,
+  "iou_ties": 1,
+  "iou_monotrace_worse": 35,
+  "boundary_monotrace_better": 25,
+  "boundary_monotrace_worse": 33,
+  "mean_boundary_diff_px": 0.020534758886480042
+ },
+ "label_64": {
+  "n": 58,
+  "monotrace_iou": 0.977917128077171,
+  "potrace_iou": 0.9783550056938838,
+  "mean_iou_diff": -0.00043787761671266784,
+  "iou_monotrace_better": 34,
+  "iou_ties": 0,
+  "iou_monotrace_worse": 24,
+  "boundary_monotrace_better": 36,
+  "boundary_monotrace_worse": 22,
+  "mean_boundary_diff_px": 0.0012703486073716642
+ },
+ "bootstrap_monotrace_minus_potrace": {
+  "iou": {
+   "per_case_116": {
+    "mean": -0.003048354730109656,
+    "lo95": -0.005899560539603935,
+    "hi95": -0.00032334815061028254,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 116
+   },
+   "per_artwork_58": {
+    "mean": -0.003048354730109656,
+    "lo95": -0.005990009832346864,
+    "hi95": -0.00016928078457243169,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 58
+   },
+   "label_32_only_58": {
+    "mean": -0.005658831843506644,
+    "lo95": -0.01054176851097969,
+    "hi95": -0.0008067327968245011,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 58
+   },
+   "label_64_only_58": {
+    "mean": -0.00043787761671266784,
+    "lo95": -0.0029574382312628554,
+    "hi95": 0.0019880687918725367,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 58
+   }
+  },
+  "boundary_mean_px": {
+   "per_case_116": {
+    "mean": 0.010902553746925853,
+    "lo95": -0.0016334191007238573,
+    "hi95": 0.024160845974433277,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 116
+   },
+   "per_artwork_58": {
+    "mean": 0.010902553746925852,
+    "lo95": -0.00252941777703743,
+    "hi95": 0.024977365955481553,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 58
+   }
+  },
+  "boundary_p95_px": {
+   "per_case_116": {
+    "mean": -0.07401540032436986,
+    "lo95": -0.12573953825540435,
+    "hi95": -0.027341145476325945,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 116
+   },
+   "per_artwork_58": {
+    "mean": -0.07401540032436986,
+    "lo95": -0.1307894213383949,
+    "hi95": -0.02586206896551724,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 58
+   }
+  },
+  "coverage_mae": {
+   "per_case_116": {
+    "mean": 0.0005302180220463468,
+    "lo95": -5.4669595798160964e-05,
+    "hi95": 0.0011336813619786073,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 116
+   },
+   "per_artwork_58": {
+    "mean": 0.000530218022046347,
+    "lo95": -4.546652764295321e-05,
+    "hi95": 0.0011017981096920462,
+    "resamples": 20000,
+    "seed": 20261105,
+    "units": 58
+   }
+  }
+ },
+ "independence": {
+  "artworks": 58,
+  "padded_label_sizes": "many 32-labelled inputs are 42 x 42 and 64-labelled 74 x 74; the label is not the pixel size",
+  "dimension_pairs_most_common": [
+   [
+    "(32, 32) -> (64, 64)",
+    25
+   ],
+   [
+    "(42, 42) -> (74, 74)",
+    22
+   ],
+   [
+    "(52, 52) -> (84, 84)",
+    3
+   ],
+   [
+    "(42, 42) -> (76, 76)",
+    1
+   ],
+   [
+    "(42, 47) -> (74, 84)",
+    1
+   ],
+   [
+    "(32, 31) -> (64, 61)",
+    1
+   ]
+  ],
+  "bbox_scale_64_over_32_median_min_max": [
+   2.0,
+   1.6153846153846154,
+   2.242424242424242
+  ],
+  "median_iou_after_resize": {
+   "nearest": 0.928476453967391,
+   "bicubic": 0.9315544682743816,
+   "lanczos": 0.9320971532568878
+  },
+  "pixel_identical_to_nearest_resize": 0,
+  "correlation_of_iou_diff_across_sizes": 0.1769007067453013,
+  "rows": [
+   {
+    "artwork": "apple",
+    "ink_bbox_32": [
+     28,
+     32
+    ],
+    "ink_bbox_64": [
+     58,
+     64
+    ],
+    "bbox_scale_width": 2.0714285714285716,
+    "iou_after_resize": {
+     "nearest": 0.9519121544869368,
+     "bicubic": 0.9548729616989002,
+     "lanczos": 0.954855842185129
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "axe",
+    "ink_bbox_32": [
+     16,
+     32
+    ],
+    "ink_bbox_64": [
+     32,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9663366336633663,
+     "bicubic": 0.9663366336633663,
+     "lanczos": 0.9663366336633663
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "beach",
+    "ink_bbox_32": [
+     32,
+     28
+    ],
+    "ink_bbox_64": [
+     64,
+     56
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9213907785336357,
+     "bicubic": 0.9213907785336357,
+     "lanczos": 0.9213907785336357
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "bone",
+    "ink_bbox_32": [
+     32,
+     16
+    ],
+    "ink_bbox_64": [
+     64,
+     32
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9582089552238806,
+     "bicubic": 0.9582089552238806,
+     "lanczos": 0.9582089552238806
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "bow",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.9367965367965368,
+     "bicubic": 0.9367965367965368,
+     "lanczos": 0.9367965367965368
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "bunny",
+    "ink_bbox_32": [
+     30,
+     32
+    ],
+    "ink_bbox_64": [
+     60,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9284738041002278,
+     "bicubic": 0.9284738041002278,
+     "lanczos": 0.9293205654354765
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "castle",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.7952458130740141,
+     "bicubic": 0.7952458130740141,
+     "lanczos": 0.7956756756756757
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "cat",
+    "ink_bbox_32": [
+     26,
+     32
+    ],
+    "ink_bbox_64": [
+     54,
+     64
+    ],
+    "bbox_scale_width": 2.076923076923077,
+    "iou_after_resize": {
+     "nearest": 0.8926014319809069,
+     "bicubic": 0.9,
+     "lanczos": 0.9092002405291641
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "cloud",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.8773354995938262,
+     "bicubic": 0.8768606224627875,
+     "lanczos": 0.8770979967514889
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "cloudstation",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.967849223946785,
+     "bicubic": 0.967849223946785,
+     "lanczos": 0.967849223946785
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "crown",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.9173297966401415,
+     "bicubic": 0.9173663278833407,
+     "lanczos": 0.9173663278833407
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "dress2",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.8756947953511874,
+     "bicubic": 0.8761375126390293,
+     "lanczos": 0.8761375126390293
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "duck",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.8179356003611195,
+     "bicubic": 0.817498496692724,
+     "lanczos": 0.8182365332530845
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "dumbbell",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.9173482565647869,
+     "bicubic": 0.919723780750971,
+     "lanczos": 0.9176724137931035
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "enterprise",
+    "ink_bbox_32": [
+     52,
+     52
+    ],
+    "ink_bbox_64": [
+     84,
+     84
+    ],
+    "bbox_scale_width": 1.6153846153846154,
+    "iou_after_resize": {
+     "nearest": 0.8598967297762479,
+     "bicubic": 0.8592324901049734,
+     "lanczos": 0.859084652443221
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "evil-cat",
+    "ink_bbox_32": [
+     28,
+     31
+    ],
+    "ink_bbox_64": [
+     54,
+     63
+    ],
+    "bbox_scale_width": 1.9285714285714286,
+    "iou_after_resize": {
+     "nearest": 0.9023051591657519,
+     "bicubic": 0.9145534729878722,
+     "lanczos": 0.9129955947136564
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "extinguisher",
+    "ink_bbox_32": [
+     28,
+     32
+    ],
+    "ink_bbox_64": [
+     56,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9458041958041958,
+     "bicubic": 0.9458041958041958,
+     "lanczos": 0.9458041958041958
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "feather",
+    "ink_bbox_32": [
+     31,
+     30
+    ],
+    "ink_bbox_64": [
+     63,
+     62
+    ],
+    "bbox_scale_width": 2.032258064516129,
+    "iou_after_resize": {
+     "nearest": 0.865546218487395,
+     "bicubic": 0.8785046728971962,
+     "lanczos": 0.8767006802721088
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "fighter",
+    "ink_bbox_32": [
+     33,
+     24
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 2.242424242424242,
+    "iou_after_resize": {
+     "nearest": 0.21746641074856046,
+     "bicubic": 0.21906771532706695,
+     "lanczos": 0.2194513715710723
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "flag",
+    "ink_bbox_32": [
+     30,
+     35
+    ],
+    "ink_bbox_64": [
+     62,
+     72
+    ],
+    "bbox_scale_width": 2.066666666666667,
+    "iou_after_resize": {
+     "nearest": 0.9284791038345541,
+     "bicubic": 0.9292798620094869,
+     "lanczos": 0.9288486416558862
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "fragile",
+    "ink_bbox_32": [
+     42,
+     42
+    ],
+    "ink_bbox_64": [
+     74,
+     74
+    ],
+    "bbox_scale_width": 1.7619047619047619,
+    "iou_after_resize": {
+     "nearest": 0.8903107861060329,
+     "bicubic": 0.8912248628884827,
+     "lanczos": 0.8920402561756633
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "guitar2",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.947187141216992,
+     "bicubic": 0.947187141216992,
+     "lanczos": 0.947187141216992
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "hair",
+    "ink_bbox_32": [
+     28,
+     31
+    ],
+    "ink_bbox_64": [
+     56,
+     62
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.956793336803748,
+     "bicubic": 0.956793336803748,
+     "lanczos": 0.956793336803748
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "headphone",
+    "ink_bbox_32": [
+     32,
+     31
+    ],
+    "ink_bbox_64": [
+     62,
+     59
+    ],
+    "bbox_scale_width": 1.9375,
+    "iou_after_resize": {
+     "nearest": 0.08014726706315492,
+     "bicubic": 0.07757644394110985,
+     "lanczos": 0.07753254102999434
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "headphone2",
+    "ink_bbox_32": [
+     32,
+     28
+    ],
+    "ink_bbox_64": [
+     64,
+     58
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9315789473684211,
+     "bicubic": 0.9345300950369588,
+     "lanczos": 0.9353813559322034
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "horse",
+    "ink_bbox_32": [
+     28,
+     31
+    ],
+    "ink_bbox_64": [
+     56,
+     63
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9297029702970298,
+     "bicubic": 0.9402092675635276,
+     "lanczos": 0.9396809571286141
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "house",
+    "ink_bbox_32": [
+     32,
+     31
+    ],
+    "ink_bbox_64": [
+     64,
+     62
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9864176570458404,
+     "bicubic": 0.9864176570458404,
+     "lanczos": 0.9864176570458404
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "island",
+    "ink_bbox_32": [
+     30,
+     32
+    ],
+    "ink_bbox_64": [
+     60,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.8898055391868003,
+     "bicubic": 0.8898055391868003,
+     "lanczos": 0.8898055391868003
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "leaf",
+    "ink_bbox_32": [
+     32,
+     27
+    ],
+    "ink_bbox_64": [
+     64,
+     53
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9159127195316658,
+     "bicubic": 0.9293739967897271,
+     "lanczos": 0.9298339582217461
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "lips",
+    "ink_bbox_32": [
+     32,
+     22
+    ],
+    "ink_bbox_64": [
+     64,
+     42
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.947027027027027,
+     "bicubic": 0.9491341991341992,
+     "lanczos": 0.9512987012987013
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "lipstick",
+    "ink_bbox_32": [
+     10,
+     31
+    ],
+    "ink_bbox_64": [
+     20,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9771428571428571,
+     "bicubic": 0.9752851711026616,
+     "lanczos": 0.9752851711026616
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "mailbox",
+    "ink_bbox_32": [
+     24,
+     32
+    ],
+    "ink_bbox_64": [
+     48,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9059254734270006,
+     "bicubic": 0.9059254734270006,
+     "lanczos": 0.9059254734270006
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "music",
+    "ink_bbox_32": [
+     28,
+     32
+    ],
+    "ink_bbox_64": [
+     57,
+     64
+    ],
+    "bbox_scale_width": 2.0357142857142856,
+    "iou_after_resize": {
+     "nearest": 0.9084507042253521,
+     "bicubic": 0.9159811985898942,
+     "lanczos": 0.9170588235294118
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "note",
+    "ink_bbox_32": [
+     32,
+     30
+    ],
+    "ink_bbox_64": [
+     64,
+     60
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9457973291437549,
+     "bicubic": 0.9457973291437549,
+     "lanczos": 0.9457973291437549
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "pawn",
+    "ink_bbox_32": [
+     18,
+     32
+    ],
+    "ink_bbox_64": [
+     34,
+     64
+    ],
+    "bbox_scale_width": 1.8888888888888888,
+    "iou_after_resize": {
+     "nearest": 0.9279538904899135,
+     "bicubic": 0.9291907514450867,
+     "lanczos": 0.9251798561151079
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "pear",
+    "ink_bbox_32": [
+     20,
+     32
+    ],
+    "ink_bbox_64": [
+     38,
+     64
+    ],
+    "bbox_scale_width": 1.9,
+    "iou_after_resize": {
+     "nearest": 0.9213857428381079,
+     "bicubic": 0.9337349397590361,
+     "lanczos": 0.9343603482920295
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "phonecord",
+    "ink_bbox_32": [
+     24,
+     32
+    ],
+    "ink_bbox_64": [
+     48,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.8828596037898363,
+     "bicubic": 0.8828596037898363,
+     "lanczos": 0.8828596037898363
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "plane",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9696106362773029,
+     "bicubic": 0.9696106362773029,
+     "lanczos": 0.9696106362773029
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "plug",
+    "ink_bbox_32": [
+     30,
+     47
+    ],
+    "ink_bbox_64": [
+     62,
+     95
+    ],
+    "bbox_scale_width": 2.066666666666667,
+    "iou_after_resize": {
+     "nearest": 0.9683544303797469,
+     "bicubic": 0.972457627118644,
+     "lanczos": 0.972972972972973
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "plug2",
+    "ink_bbox_32": [
+     28,
+     32
+    ],
+    "ink_bbox_64": [
+     56,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9566145092460882,
+     "bicubic": 0.9566145092460882,
+     "lanczos": 0.9566145092460882
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "queen",
+    "ink_bbox_32": [
+     12,
+     28
+    ],
+    "ink_bbox_64": [
+     26,
+     55
+    ],
+    "bbox_scale_width": 2.1666666666666665,
+    "iou_after_resize": {
+     "nearest": 0.8525441329179647,
+     "bicubic": 0.8640167364016736,
+     "lanczos": 0.8679245283018868
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "quill",
+    "ink_bbox_32": [
+     31,
+     20
+    ],
+    "ink_bbox_64": [
+     64,
+     42
+    ],
+    "bbox_scale_width": 2.064516129032258,
+    "iou_after_resize": {
+     "nearest": 0.8653321201091901,
+     "bicubic": 0.8679417122040073,
+     "lanczos": 0.8671519563239308
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "ringbell",
+    "ink_bbox_32": [
+     26,
+     32
+    ],
+    "ink_bbox_64": [
+     52,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9759846301633045,
+     "bicubic": 0.9759846301633045,
+     "lanczos": 0.9759846301633045
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "rocket",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9383167799268165,
+     "bicubic": 0.9383167799268165,
+     "lanczos": 0.9383167799268165
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "share",
+    "ink_bbox_32": [
+     30,
+     30
+    ],
+    "ink_bbox_64": [
+     62,
+     62
+    ],
+    "bbox_scale_width": 2.066666666666667,
+    "iou_after_resize": {
+     "nearest": 0.8977556109725686,
+     "bicubic": 0.9060150375939849,
+     "lanczos": 0.9060150375939849
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "shirt",
+    "ink_bbox_32": [
+     30,
+     24
+    ],
+    "ink_bbox_64": [
+     60,
+     49
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9714003944773175,
+     "bicubic": 0.9714003944773175,
+     "lanczos": 0.9714003944773175
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "spaceship",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9592198581560284,
+     "bicubic": 0.9592198581560284,
+     "lanczos": 0.9592198581560284
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "spades",
+    "ink_bbox_32": [
+     30,
+     35
+    ],
+    "ink_bbox_64": [
+     56,
+     64
+    ],
+    "bbox_scale_width": 1.8666666666666667,
+    "iou_after_resize": {
+     "nearest": 0.8455497382198953,
+     "bicubic": 0.8444055944055944,
+     "lanczos": 0.8452797202797203
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "stomach",
+    "ink_bbox_32": [
+     26,
+     32
+    ],
+    "ink_bbox_64": [
+     52,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9456989247311828,
+     "bicubic": 0.9456989247311828,
+     "lanczos": 0.9456989247311828
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "strong",
+    "ink_bbox_32": [
+     30,
+     32
+    ],
+    "ink_bbox_64": [
+     62,
+     64
+    ],
+    "bbox_scale_width": 2.066666666666667,
+    "iou_after_resize": {
+     "nearest": 0.9450819672131148,
+     "bicubic": 0.9474332648870637,
+     "lanczos": 0.948623099054665
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "tabletennis",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.955108359133127,
+     "bicubic": 0.955108359133127,
+     "lanczos": 0.955108359133127
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "trophy",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9454461396208969,
+     "bicubic": 0.9454461396208969,
+     "lanczos": 0.9454461396208969
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "tulip",
+    "ink_bbox_32": [
+     18,
+     32
+    ],
+    "ink_bbox_64": [
+     38,
+     64
+    ],
+    "bbox_scale_width": 2.111111111111111,
+    "iou_after_resize": {
+     "nearest": 0.8717948717948718,
+     "bicubic": 0.8771784232365145,
+     "lanczos": 0.8804979253112033
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "umbrella",
+    "ink_bbox_32": [
+     32,
+     28
+    ],
+    "ink_bbox_64": [
+     64,
+     56
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.935,
+     "bicubic": 0.935,
+     "lanczos": 0.935
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "user",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9629629629629629,
+     "bicubic": 0.9629629629629629,
+     "lanczos": 0.9629629629629629
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "whale",
+    "ink_bbox_32": [
+     32,
+     22
+    ],
+    "ink_bbox_64": [
+     64,
+     42
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9028697571743929,
+     "bicubic": 0.9047970479704797,
+     "lanczos": 0.9040590405904059
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "wrench",
+    "ink_bbox_32": [
+     32,
+     32
+    ],
+    "ink_bbox_64": [
+     64,
+     64
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9406143344709897,
+     "bicubic": 0.9406143344709897,
+     "lanczos": 0.9406143344709897
+    },
+    "pixel_identical_to_nearest_resize": false
+   },
+   {
+    "artwork": "zeppelin",
+    "ink_bbox_32": [
+     32,
+     14
+    ],
+    "ink_bbox_64": [
+     64,
+     28
+    ],
+    "bbox_scale_width": 2.0,
+    "iou_after_resize": {
+     "nearest": 0.9274836838288615,
+     "bicubic": 0.9274836838288615,
+     "lanczos": 0.9274836838288615
+    },
+    "pixel_identical_to_nearest_resize": false
+   }
+  ]
+ },
+ "worst10": [
+  {
+   "id": "polyfit-axe-32",
+   "dims": [
+    42,
+    42
+   ],
+   "ink_pixels": 248,
+   "iou_diff": -0.0548340548340549,
+   "segments_monotrace_potrace": [
+    11,
+    12
+   ]
+  },
+  {
+   "id": "polyfit-extinguisher-32",
+   "dims": [
+    32,
+    32
+   ],
+   "ink_pixels": 423,
+   "iou_diff": -0.049148126705814255,
+   "segments_monotrace_potrace": [
+    21,
+    23
+   ]
+  },
+  {
+   "id": "polyfit-tulip-32",
+   "dims": [
+    32,
+    32
+   ],
+   "ink_pixels": 275,
+   "iou_diff": -0.04406059258160977,
+   "segments_monotrace_potrace": [
+    11,
+    20
+   ]
+  },
+  {
+   "id": "polyfit-pear-32",
+   "dims": [
+    34,
+    34
+   ],
+   "ink_pixels": 374,
+   "iou_diff": -0.04295759323232606,
+   "segments_monotrace_potrace": [
+    7,
+    13
+   ]
+  },
+  {
+   "id": "polyfit-stomach-32",
+   "dims": [
+    32,
+    32
+   ],
+   "ink_pixels": 450,
+   "iou_diff": -0.03563361192681269,
+   "segments_monotrace_potrace": [
+    10,
+    13
+   ]
+  },
+  {
+   "id": "polyfit-axe-64",
+   "dims": [
+    76,
+    76
+   ],
+   "ink_pixels": 994,
+   "iou_diff": -0.03317550214982512,
+   "segments_monotrace_potrace": [
+    12,
+    20
+   ]
+  },
+  {
+   "id": "polyfit-fighter-32",
+   "dims": [
+    42,
+    42
+   ],
+   "ink_pixels": 302,
+   "iou_diff": -0.03198575617930455,
+   "segments_monotrace_potrace": [
+    19,
+    25
+   ]
+  },
+  {
+   "id": "polyfit-quill-32",
+   "dims": [
+    42,
+    32
+   ],
+   "ink_pixels": 246,
+   "iou_diff": -0.03043137254901962,
+   "segments_monotrace_potrace": [
+    4,
+    6
+   ]
+  },
+  {
+   "id": "polyfit-bunny-32",
+   "dims": [
+    32,
+    32
+   ],
+   "ink_pixels": 528,
+   "iou_diff": -0.02752923632367954,
+   "segments_monotrace_potrace": [
+    37,
+    37
+   ]
+  },
+  {
+   "id": "polyfit-music-64",
+   "dims": [
+    74,
+    74
+   ],
+   "ink_pixels": 1654,
+   "iou_diff": -0.027470687002670302,
+   "segments_monotrace_potrace": [
+    12,
+    27
+   ]
+  }
+ ],
+ "best5": [
+  {
+   "id": "polyfit-queen-32",
+   "iou_diff": 0.03803685962490866
+  },
+  {
+   "id": "polyfit-umbrella-32",
+   "iou_diff": 0.02990934110409582
+  },
+  {
+   "id": "polyfit-beach-32",
+   "iou_diff": 0.026831891512742567
+  },
+  {
+   "id": "polyfit-whale-32",
+   "iou_diff": 0.026706231454005858
+  },
+  {
+   "id": "polyfit-bone-32",
+   "iou_diff": 0.026589677787282606
+  }
+ ],
+ "worst10_label_counts": {
+  "32": 8,
+  "64": 2
+ },
+ "monotrace_fewer_segments_in_worst10": 9,
+ "monotrace_fewer_segments_overall": 95,
+ "retrace_check": {
+  "cases": 116,
+  "identical_svg_sha256_to_frozen": {
+   "monotrace": 116,
+   "potrace": 116
+  },
+  "mismatches": [],
+  "mtrace_binary_sha256": "9843a0a246efc566f6a0537625f535ecc2a62680c50ad21fc082178e06a40cf7",
+  "potrace_binary_sha256": "09e72041d3227d26051c2ff34709deff4c8367e5f5dd80f3d1d7ef346c9f0dfa"
+ }
+}

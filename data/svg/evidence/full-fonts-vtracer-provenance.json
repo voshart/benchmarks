@@ -1,0 +1,40 @@
+{
+  "engine": "VTracer",
+  "version": "0.6.15",
+  "call": "vtracer.convert_image_to_svg_py(input.png, output.svg, colormode='binary')",
+  "settings": "library defaults for all other parameters; no tuning",
+  "input": "the same 256 px input.png given to Monotrace (Potrace gets the 50% PBM)",
+  "scope": "Entire 4,821-image SVG-Fonts test split",
+  "font_revision": "53b406757e6941c2d3ba45c59b78adfcf6f6639b",
+  "font_parquet_sha256": "124ca9798ad286e3a6638dd79d3f9d83d5aed124bba10cd8111df3b7bebdd62b",
+  "case_integrity": "All 4,821 reference SVG hashes and 256 px input.png hashes were recreated from the pinned parquet and verified against the frozen manifest before tracing; any mismatch aborts the run.",
+  "frozen_manifest_sha256": "5f673a38eaa757c5e31248e30694baa21a45abeb6c67b75f67183ea2cd39d978",
+  "pairing_evidence": "benchmarks/external_full_fonts_20261104 (results.csv.gz, dino.json.gz) read-only; Potrace and Monotrace were NOT re-run",
+  "script": "scripts/external_extra_engine.py",
+  "script_sha256": "3be75520e0821e3b21bdeb7136acf78a26a9f18b3645e83849e245ba5bb7a0b7",
+  "model_weights_sha256": "d73036b56966966d07975d696bde331762f37297e2f095de8cea0040c3aa0841",
+  "model_revision": "f9e44c814b77203eaa57a6bdbbd535f21ede1415",
+  "dino_settings": {
+    "dtype": "float32",
+    "threads": 8,
+    "batch_size": 16,
+    "features": "reference and VTracer features computed fresh (new cache); same formula and processor as the frozen run"
+  },
+  "tracing_workers": 5,
+  "renderer": "@resvg/resvg-js 2.6.2",
+  "environment": {
+    "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.43",
+    "python": "3.12.14",
+    "node": "v24.22.2",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.22.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "Pillow": "13.0.0",
+    "pyarrow": "26.0.1",
+    "shapely": "2.2.0",
+    "svgpathtools": "1.8.0",
+    "resvg_js": "2.6.2"
+  },
+  "timing": "Library call time in a thread pool; informational only, not a speed comparison."
+}
