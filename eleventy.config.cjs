@@ -17,6 +17,8 @@ module.exports = function (config) {
   const svgComparison = require('./src/assets/js/svg-comparison.js');
   config.addFilter('svgHead', svgComparison.renderHead);
   config.addFilter('svgRows', svgComparison.renderRows);
+  config.addFilter('svgUnranked', (result, data) => svgComparison.renderRows(result, data, true));
+  config.addFilter('svgDifferences', svgComparison.renderDifferences);
   const ocrComparison = require('./src/assets/js/ocr-comparison.js');
   config.addFilter('ocrHead', ocrComparison.renderHead);
   config.addFilter('ocrRows', ocrComparison.renderRows);

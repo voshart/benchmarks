@@ -10,7 +10,7 @@ permalink: /svg/index.html
     <title>{{ svg.title }}</title>
     <meta
       name="description"
-      content="SVG tracer comparisons with matched datasets, reconstruction metrics, failure counts and documented sources."
+      content="Ranked SVG tracer comparisons with published scores, complexity metrics and source differences."
     />
     <link rel="canonical" href="https://bench.voshart.com/svg/" />
     <link rel="stylesheet" href="{{ '/assets/css/benchmark.css' | assetUrl }}" />
@@ -34,7 +34,7 @@ permalink: /svg/index.html
             <a href="/stt/">Speech</a></small
           >
           <h1>SVG tracer benchmarks</h1>
-          <p>Raster to vector. Reconstruction quality, complexity and failures.</p>
+          <p>Quality, complexity and failures.</p>
         </div>
         <button
           class="quiet"
@@ -46,8 +46,8 @@ permalink: /svg/index.html
         </button>
       </header>
       <nav class="svg-nav" aria-label="Comparison groups">
-        {% for run in svg.runs %}
-          <a href="#{{ run.id }}" data-svg-link="{{ run.id }}">{{ run.label }}</a>
+        {% for panel in svg.panels %}
+          <a href="#{{ panel.run.id }}" data-svg-link="{{ panel.run.id }}">{{ panel.run.label }}</a>
         {% endfor %}
       </nav>
       <div class="controls svg-controls">
@@ -71,7 +71,7 @@ permalink: /svg/index.html
         <button type="button" id="svgReset">Reset</button>
       </div>
       <p class="key" id="svgStatus" role="status">
-        {{ svg.runs.length }} separate comparison groups. Compare scores within each group.
+        Ranks compare matched scores. Missing results stay unranked.
       </p>
       {% for panel in svg.panels %}
         <section
@@ -83,7 +83,6 @@ permalink: /svg/index.html
         >
           <h2 id="heading-{{ panel.run.id }}">{{ panel.run.label }}</h2>
           <p class="svg-meta">{{ panel.run.summary }}</p>
-          <p>{{ panel.run.caveat }}</p>
           <div
             class="table-scroll"
             tabindex="0"
@@ -99,110 +98,158 @@ permalink: /svg/index.html
                   {{ panel | svgHead(svg) | safe }}
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="svg-ranked-body">
                 {{ panel | svgRows(svg) | safe }}
               </tbody>
             </table>
           </div>
+          <details
+            class="comparison-note svg-unranked"
+            {% if not panel.unrankedRows.length %}hidden{% endif %}
+          >
+            <summary>{{ panel.unrankedRows.length }} without a complete score</summary>
+            <p>
+              Missing results are not failures. A complete panel is required for a mean and rank.
+            </p>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Incomplete {{ panel.run.label }} results"
+            >
+              <table>
+                <thead>
+                  <tr>
+                    {{ panel | svgHead(svg) | safe }}
+                  </tr>
+                </thead>
+                <tbody class="svg-unranked-body">
+                  {{ panel | svgUnranked(svg) | safe }}
+                </tbody>
+              </table>
+            </div>
+          </details>
           <p class="key">
-            ↑ higher is better · ↓ lower is better · px = native input pixels · — = unavailable.
-            Path, segment and token counts describe complexity, not quality.
+            ↑ higher · ↓ lower · — unavailable · ⓘ details. Complexity does not affect quality rank.
           </p>
           <details class="method">
-            <summary>Protocol & execution</summary>
+            <summary>About this benchmark</summary>
             <p>{{ panel.run.method }}</p>
+            <p>{{ panel.run.caveat }}</p>
             <p>
               Execution: {{ svg.sources[panel.run.source_id].operator }} ·
               {{ svg.sources[panel.run.source_id].attribution }}.
-              {{ svg.sources[panel.run.source_id].note }}
-            </p>
-            <p>
-              <a href="{{ svg.sources[panel.run.source_id].url }}">Result source ↗</a> ·
-              <a href="{{ svg.sources[panel.run.dataset_source].url }}">Dataset revision ↗</a>
             </p>
             {% if panel.run.sample_count_note %}
               <p>{{ panel.run.sample_count_note }}</p>
             {% elif panel.run.sample_count == null %}
               <p>
-                Exact evaluated count is unverified. Reported size:
+                Exact evaluated count unverified. Reported size:
                 {{ panel.run.reported_sample_count or 'unavailable' }}.
               </p>
             {% endif %}
+            {% if panel.run.dataset_metadata %}
+              <p>
+                Dataset inputs: {{ panel.run.dataset_metadata.input_token_mean }} ±
+                {{ panel.run.dataset_metadata.input_token_sd }} tokens;
+                {{ panel.run.dataset_metadata.primitives }}. These are input statistics, not tracer
+                output sizes.
+              </p>
+            {% endif %}
+            <p>
+              <a href="{{ svg.sources[panel.run.source_id].url }}">Result source ↗</a> ·
+              <a href="{{ svg.sources[panel.run.dataset_source].url }}">Dataset source ↗</a>
+            </p>
           </details>
         </section>
       {% endfor %}
+      <p class="svg-difference-note">
+        Our font scores differ from StarVector’s table.
+        <button class="quiet" type="button" popovertarget="svg-differences">Compare ⓘ</button>
+      </p>
+      <div id="svg-differences" popover class="rank-note svg-detail">
+        <button
+          class="rank-note-close"
+          type="button"
+          popovertarget="svg-differences"
+          popovertargetaction="hide"
+          aria-label="Close score differences"
+        >
+          ×
+        </button>
+        <h3>Where our results differ</h3>
+        {{ svg | svgDifferences | safe }}
+        <p>
+          <a href="#fonts-full-20261104" data-svg-link="fonts-full-20261104"
+            >View our full font run →</a
+          >
+          · <a href="/svg/evidence/protocol-diagnostic.json">Diagnostic data</a>
+        </p>
+      </div>
       <noscript
         ><p>
-          All comparison groups and row details are available without JavaScript. JavaScript enables
-          group selection, search and sorting.
+          All tables and details work without JavaScript. JavaScript enables selection, search and
+          sorting.
         </p></noscript
       >
       <details class="method" id="methodology">
-        <summary>Metrics, limitations & sources</summary>
+        <summary>Ranking, metrics & sources</summary>
         <p>
-          The local runs compare monochrome reconstruction at fixed settings. They do not measure
-          color tracing, text semantics, editing quality, fabrication readiness or API performance.
-          Published color and layered-image reports stay separate from local monochrome runs. There
-          is no combined score across datasets or cross-study speed/price ranking. Published time
-          values in Details retain their source’s qualifications and are not our timing tests.
+          Rank follows the selected benchmark’s quality metric, using every eligible row before
+          search. Ties share a rank. The SVG-Bench overview uses the equal mean of all five named
+          datasets from the same publication. It is calculated here, not reported by the authors.
+          Missing components stay unranked; no local or cross-paper scores fill gaps.
+          Dataset-specific configurations are not one universal checkpoint.
         </p>
         <p>
-          The 4,821-image font run retains every input, including four blank references. Empty
-          output against visible reference receives a 256 px boundary penalty; blank against blank
-          receives zero. Monotrace has two explicit trace errors and two additional empty outputs
-          against visible references. Potrace has one empty output against visible reference.
-          Details distinguishes these from the separately labeled 4,813-case paired nonempty mean.
+          Paths, segments and tokenizer lengths remain separate measures. Fewer elements do not
+          establish better reconstruction. Sorting any column changes display order, not quality
+          rank. Published input token statistics are not model output complexity. No shared speed or
+          price ranking is inferred.
         </p>
         <p>
-          Local font DINO uses DINOv2-base FP32, averages all final-layer tokens, then maps cosine
-          similarity to (cosine + 1) / 2. The local scoring images use matched resvg renders at 256
-          px; geometry uses matched 1024 px renders. The 256-image pilot is a subset of the full
-          run, not a second independent corpus.
+          Local font scores use matched resvg renders: 256 px for DINOv2-base FP32, with all
+          final-layer tokens averaged and cosine mapped to (cosine + 1) / 2; 1024 px for geometry,
+          reported in native pixels. All images are retained. Empty output against visible reference
+          gets a 256 px boundary penalty; blank against blank is zero. Conditional nonempty means
+          exclude those cases and are labeled in ⓘ.
         </p>
         <p>
-          Potrace is the original C 1.16 command-line implementation with default tracing settings
-          and 50% threshold PBM inputs, without the SVG Tools harness. VTracer uses Python package
-          0.6.15 in binary mode; its SVG header identifies engine 0.6.12. Monotrace uses a fixed
-          native quality profile, kernel source ID 448c2ac7f2654543. This page publishes aggregate
-          observations and provenance, not the private kernel or per-image output archive.
+          The pilot is contained in the full font run. PolyFit inputs are original rasters without
+          vector masters. Sampled topology is not exact vector certification. No local StarVector or
+          AutoTrace run is available. Source verification is not independent execution.
         </p>
+        <details class="comparison-note">
+          <summary>Metric definitions</summary>
+          <dl class="svg-definitions">
+            {% for id, metric in svg.metrics %}
+              <dt>{{ metric.label }}</dt>
+              <dd>{{ metric.description }}</dd>
+            {% endfor %}
+          </dl>
+        </details>
         <p>
-          The StarVector authors’ published scores use a separate or unverified pipeline. A 64-image
-          diagnostic of renderers and Potrace implementations did not resolve the baseline gap.
-          AutoTrace and StarVector were not executed locally, so these observations do not establish
-          a matched win against either system.
-        </p>
-        <dl class="svg-definitions">
-          {% for id, metric in svg.metrics %}
-            <dt>{{ metric.label }}</dt>
-            <dd>{{ metric.description }}</dd>
-          {% endfor %}
-        </dl>
-        <p>
-          PolyFit inputs are original rasters, often around 32/64 px, without original vector
-          masters. Topology flags depend on sampled raster components and holes. Subpixel gaps or
-          curve artifacts can remain even with high similarity scores.
-        </p>
-        <p>
-          <a href="/svg/data.json" download="svg-tracer-results.json"
-            >Download comparison data JSON</a
-          >
-          · <a href="/svg/evidence/full-fonts-summary.json">Full-run summary</a> ·
+          <a href="/svg/data.json" download="svg-tracer-results.json">Download data JSON</a> ·
+          <a href="/svg/evidence/starvector-models-2025.csv">StarVector table CSV</a> ·
+          <a href="/svg/evidence/starvector-provenance.json">StarVector provenance</a> ·
+          <a href="/svg/evidence/published-tables-2025.json">Other published tables</a> ·
+          <a href="/svg/evidence/full-fonts-summary.json">Full-run summary</a> ·
           <a href="/svg/evidence/pilot-summary.json">Pilot summary</a> ·
-          <a href="/svg/evidence/provenance.json">Provenance</a> ·
-          <a href="/svg/evidence/protocol-diagnostic.json">64-case diagnostic summary</a> ·
-          <a href="/svg/evidence/published-tables-2025.json">Published table audit</a>
+          <a href="/svg/evidence/provenance.json">Local provenance</a>
         </p>
-        <div class="source-grid">
-          {% for id, source in svg.sources %}
-            <p>
-              <a href="{{ source.url }}" target="_blank" rel="noreferrer">{{ source.title }}</a
-              ><br /><small
-                >{{ source.operator }} · {{ source.attribution }}. {{ source.note }}</small
-              >
-            </p>
-          {% endfor %}
-        </div>
+        <details class="comparison-note">
+          <summary>All sources</summary>
+          <div class="source-grid">
+            {% for id, source in svg.sources %}
+              <p>
+                <a href="{{ source.url }}" target="_blank" rel="noreferrer">{{ source.title }}</a
+                ><br /><small
+                  >{{ source.operator }} · {{ source.attribution }}. {{ source.note }}</small
+                >
+              </p>
+            {% endfor %}
+          </div>
+        </details>
       </details>
       <p class="key svg-affiliation">{{ svg.affiliation }}</p>
       <footer>

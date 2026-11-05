@@ -18,20 +18,34 @@
       let current = data.default_run,
         key,
         direction;
+      const views = SVGComparison.views(data);
       const validHash = location.hash.slice(1);
-      if (data.runs.some((r) => r.id === validHash)) current = validHash;
+      if (views.some((r) => r.id === validHash)) current = validHash;
       select.value = current;
       function render() {
         const result = SVGComparison.select(data, current, search.value, key, direction);
         document.querySelectorAll('[data-svg-run]').forEach((panel) => {
           panel.hidden = panel.dataset.svgRun !== current;
           if (!panel.hidden) {
-            panel.querySelector('thead tr').innerHTML = SVGComparison.renderHead(result, data);
-            panel.querySelector('tbody').innerHTML = SVGComparison.renderRows(result, data);
+            panel.querySelectorAll('thead tr').forEach((head) => {
+              head.innerHTML = SVGComparison.renderHead(result, data);
+            });
+            panel.querySelector('.svg-ranked-body').innerHTML = SVGComparison.renderRows(
+              result,
+              data
+            );
+            panel.querySelector('.svg-unranked-body').innerHTML = SVGComparison.renderRows(
+              result,
+              data,
+              true
+            );
+            panel.querySelector('.svg-unranked').hidden = !result.unrankedRows.length;
+            panel.querySelector('.svg-unranked summary').textContent =
+              `${result.unrankedRows.length} without a complete score`;
           }
         });
         document.getElementById('svgStatus').textContent =
-          `${result.rows.length} of ${result.run.rows.length} tracers · ${result.run.label}`;
+          `${result.rankedRows.length}${result.rankedRows.length === result.cohortCount ? '' : ' of ' + result.cohortCount} ranked${result.unrankedRows.length ? ' · ' + result.unrankedRows.length + ' incomplete' : ''}`;
       }
       select.addEventListener('change', () => {
         current = select.value;
@@ -47,7 +61,7 @@
       });
       window.addEventListener('hashchange', () => {
         const id = location.hash.slice(1);
-        if (data.runs.some((run) => run.id === id)) {
+        if (views.some((run) => run.id === id)) {
           current = id;
           select.value = current;
           search.value = '';
@@ -74,6 +88,7 @@
         const link = event.target.closest('[data-svg-link]');
         if (link) {
           event.preventDefault();
+          link.closest('[popover]')?.hidePopover();
           current = link.dataset.svgLink;
           history.replaceState(null, '', '#' + current);
           select.value = current;
@@ -86,6 +101,10 @@
       render();
     })
     .catch(() => {
+      delete document.body.dataset.enhanced;
+      document.querySelectorAll('[data-svg-run]').forEach((panel) => {
+        panel.hidden = false;
+      });
       document.getElementById('svgStatus').textContent = 'All comparison groups are shown below.';
     });
 })();
