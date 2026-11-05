@@ -67,16 +67,17 @@ permalink: /svg/index.html
         >
         <button type="button" id="svgReset">Reset</button>
       </div>
-      <p class="key" id="svgStatus" role="status">
-        {{ svg.matrixResult.rows.length }} configurations · relative index
-      </p>
+      <p class="key" id="svgStatus" role="status">{{ svg.matrixResult | svgMatrixStatus(svg) }}</p>
       <div
         class="table-scroll"
         tabindex="0"
         role="region"
         aria-label="SVG tracer comparison; scroll horizontally for all datasets"
       >
-        <table id="svgMatrix">
+        <table id="svgMatrix" style="--svg-metrics: {{ svg.matrixResult.columns.length }}">
+          <colgroup id="svgCols">
+            {{ svg.matrixResult | svgMatrixColumns(svg) | safe }}
+          </colgroup>
           <caption class="sr-only">
             One SVG tracer comparison. Relative index from matched tests. Exact configurations and
             sources in details.
@@ -91,8 +92,10 @@ permalink: /svg/index.html
           </tbody>
         </table>
       </div>
+      <p class="svg-scroll-hint">Swipe the table for more datasets →</p>
       <p class="key">
-        ↑ higher · ↓ lower · — unavailable · ⓘ sources & details. Index is relative, not accuracy.
+        ↑ higher · ↓ lower · — unavailable · ⓘ details. Rank is for this colour view; index uses
+        measured tests.
       </p>
       <p class="svg-difference-note">
         Our font scores differ from StarVector’s table.
@@ -152,6 +155,26 @@ permalink: /svg/index.html
           labeled separately. PolyFit inputs have no vector masters. Sampled topology is not exact
           vector certification.
         </p>
+        <details class="comparison-note">
+          <summary>Other monochrome tests Monotrace can enter</summary>
+          <p>
+            Complete released test splits were checked for black-only paint, gradients and embedded
+            images. These are eligible inputs, not new tracer scores. Icons are rasterized before
+            tracing; no centreline or original stroke structure recovery is implied.
+          </p>
+          <ul>
+            {% for test in svg.matrix.next_tests %}
+              <li>
+                <a href="{{ test.url }}">{{ test.dataset }}</a> · {{ test.rows }} inputs · not yet
+                measured. {{ test.note }}
+              </li>
+            {% endfor %}
+          </ul>
+          <p>
+            <a href="{{ svg.matrix.colour_audit }}">Complete colour audit & pinned file hashes</a>.
+            Related simplified variants do not add another independent family vote.
+          </p>
+        </details>
         <details class="comparison-note">
           <summary>Metric definitions</summary>
           <dl class="svg-definitions">

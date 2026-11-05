@@ -29,7 +29,55 @@
   font: inherit;
 }
 .svg-page #svgMatrix {
-  min-width: 1000px;
+  --svg-base-width: 19rem;
+  --svg-metric-width: 5.5rem;
+  table-layout: fixed;
+  width: calc(var(--svg-base-width) + var(--svg-metrics) * var(--svg-metric-width));
+  min-width: 0;
+}
+.svg-col-position {
+  width: 2rem;
+}
+.svg-col-name {
+  width: 10rem;
+}
+.svg-col-index {
+  width: 4rem;
+}
+.svg-col-count {
+  width: 3rem;
+}
+.svg-col-metric {
+  width: var(--svg-metric-width);
+}
+#svgMatrix [data-svg-col='position'] {
+  position: sticky;
+  left: 0;
+  min-width: 0;
+  max-width: none;
+  width: auto;
+  text-align: center;
+  background: var(--paper);
+  z-index: 4;
+}
+#svgMatrix [data-svg-col='name'] {
+  position: sticky;
+  left: 2rem;
+  text-align: left;
+  background: var(--paper);
+  z-index: 4;
+  overflow: hidden;
+}
+#svgMatrix thead [data-svg-col='position'],
+#svgMatrix thead [data-svg-col='name'] {
+  z-index: 5;
+}
+#svgStatus {
+  font: 0.75rem/1.4 var(--sans);
+  margin: 0.5rem 0;
+}
+.svg-scroll-hint {
+  display: none;
 }
 .svg-info {
   margin-left: 0.15rem;
@@ -120,8 +168,97 @@
   border: 0;
 }
 @media (max-width: 700px) {
+  .svg-page main {
+    padding: 1rem 1rem 2rem;
+  }
+  .svg-page .hero {
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+  }
+  .svg-page .hero > div {
+    min-width: 0;
+  }
+  .svg-page .hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.1;
+  }
+  .svg-page .eyebrow {
+    font-size: 0.75rem;
+  }
+  .svg-page .hero p {
+    font-size: 0.9rem;
+  }
+  .svg-page #themeToggle {
+    font-size: 0.8rem;
+  }
+  [data-enhanced='true'] .svg-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 0.4rem;
+    overflow: visible;
+    padding: 0.4rem 0;
+  }
+  .svg-controls select {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
   .svg-controls input[type='search'] {
-    flex: 1 1 160px;
-    width: auto;
+    width: 100%;
+  }
+  .svg-controls > * {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+  .svg-page .table-scroll {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: calc(100% + 2rem);
+  }
+  .svg-page #svgMatrix {
+    --svg-base-width: 15rem;
+    --svg-metric-width: 4.5rem;
+  }
+  .svg-col-name {
+    width: 7.25rem;
+  }
+  .svg-col-index {
+    width: 3.25rem;
+  }
+  .svg-col-count {
+    width: 2.5rem;
+  }
+  #svgMatrix th,
+  #svgMatrix td {
+    padding: 0.4rem 0.25rem;
+  }
+  #svgMatrix thead th {
+    white-space: normal;
+  }
+  #svgMatrix tbody th {
+    font-size: 0.7rem;
+  }
+  #svgMatrix .svg-version {
+    font-size: 0.61rem;
+  }
+  #svgMatrix .svg-info {
+    padding: 0 0.12rem;
+    font-size: 0.65rem;
+  }
+  #svgMatrix [data-svg-col='index'] {
+    text-align: right;
+  }
+  .svg-scroll-hint {
+    display: block;
+    font: 0.7rem var(--sans);
+    color: var(--muted);
+    margin: 0.35rem 0;
+  }
+  .svg-detail {
+    max-width: calc(100vw - 1rem);
+    padding: 0.75rem;
+  }
+  .svg-detail dl {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 0.5rem;
   }
 }

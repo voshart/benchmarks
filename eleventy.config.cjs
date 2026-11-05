@@ -15,6 +15,8 @@ module.exports = function (config) {
   config.addPassthroughCopy({ 'src/assets': 'assets' });
   config.addPassthroughCopy({ 'data/svg/evidence': 'svg/evidence' });
   const svgMatrix = require('./src/assets/js/svg-matrix.js');
+  config.addFilter('svgMatrixColumns', svgMatrix.renderColumns);
+  config.addFilter('svgMatrixStatus', svgMatrix.status);
   config.addFilter('svgMatrixHead', svgMatrix.renderHead);
   config.addFilter('svgMatrixRows', svgMatrix.renderRows);
   const svgComparison = require('./src/assets/js/svg-comparison.js');

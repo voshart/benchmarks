@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-11-05",
+  "operator": "Voshart benchmark maintainer",
+  "method": "Complete pinned test-parquet XML audit. Counts exact SVG elements, explicit fill/stroke tokens and opacity; opaque-black classification permits only listed simple vector tags with no unresolved CSS, paint servers, filters, masks or references. No image recolouring, tracer execution or quality score is performed.",
+  "paper_comparability": "These released file lists differ in size from the paper table. Dataset compatibility does not establish a matched paper-era score or justify filling any missing observation.",
+  "datasets": [
+    {
+      "dataset": "starvector/svg-icons",
+      "revision": "0dfc1bee713256e64d5c16d7427c4c29de823d70",
+      "split": "test",
+      "path": "data/test-00000-of-00001.parquet",
+      "source_url": "https://huggingface.co/datasets/starvector/svg-icons/resolve/0dfc1bee713256e64d5c16d7427c4c29de823d70/data/test-00000-of-00001.parquet",
+      "bytes": 4446331,
+      "sha256": "2d399ef765aa78005ef2edd3639389cbff6fa1f7c7f2fd5df5cf1cfa44255d59",
+      "rows": 2682,
+      "opaque_black_only_rows": 2682,
+      "gradient_rows": 0,
+      "embedded_image_rows": 0,
+      "nonunit_opacity_rows": 0,
+      "parse_error_rows": 0,
+      "colour_or_unresolved_rows": 0,
+      "element_counts": {
+        "path": 24095,
+        "svg": 2682
+      },
+      "explicit_paint_counts": {
+        "black": 24095,
+        "none": 24095
+      },
+      "monotrace_status": "eligible-unmeasured"
+    },
+    {
+      "dataset": "starvector/svg-icons-simple",
+      "revision": "e1918a27ba6649e856e5db0710d8a6c7046762c1",
+      "split": "test",
+      "path": "data/test-00000-of-00001.parquet",
+      "source_url": "https://huggingface.co/datasets/starvector/svg-icons-simple/resolve/e1918a27ba6649e856e5db0710d8a6c7046762c1/data/test-00000-of-00001.parquet",
+      "bytes": 4590947,
+      "sha256": "02cd88a8b8f5234975024a948c80a19f7a83092247685b1bef63c3db0b957227",
+      "rows": 2682,
+      "opaque_black_only_rows": 2682,
+      "gradient_rows": 0,
+      "embedded_image_rows": 0,
+      "nonunit_opacity_rows": 0,
+      "parse_error_rows": 0,
+      "colour_or_unresolved_rows": 0,
+      "element_counts": {
+        "path": 21656,
+        "svg": 2682
+      },
+      "explicit_paint_counts": {
+        "black": 21656,
+        "none": 21656
+      },
+      "monotrace_status": "eligible-unmeasured"
+    },
+    {
+      "dataset": "starvector/FIGR-SVG",
+      "revision": "ead610a5ad3fa5165061105b18d49f6acd84336f",
+      "split": "test",
+      "path": "data/test-00000-of-00001.parquet",
+      "source_url": "https://huggingface.co/datasets/starvector/FIGR-SVG/resolve/ead610a5ad3fa5165061105b18d49f6acd84336f/data/test-00000-of-00001.parquet",
+      "bytes": 9624342,
+      "sha256": "699f06af3224a16275e1d1b59e974e85cfe975638a670c0ef2e6675607cf7059",
+      "rows": 15000,
+      "opaque_black_only_rows": 15000,
+      "gradient_rows": 0,
+      "embedded_image_rows": 0,
+      "nonunit_opacity_rows": 0,
+      "parse_error_rows": 0,
+      "colour_or_unresolved_rows": 0,
+      "element_counts": {
+        "path": 15000,
+        "svg": 15000
+      },
+      "explicit_paint_counts": {},
+      "monotrace_status": "eligible-unmeasured"
+    },
+    {
+      "dataset": "starvector/svg-fonts-simple",
+      "revision": "453c739ea13ad2685127f721c333f14d99485299",
+      "split": "test",
+      "path": "data/test-00000-of-00001.parquet",
+      "source_url": "https://huggingface.co/datasets/starvector/svg-fonts-simple/resolve/453c739ea13ad2685127f721c333f14d99485299/data/test-00000-of-00001.parquet",
+      "bytes": 6024035,
+      "sha256": "86db32ae45896a18b938baba088b69d797ae2d5f6d3d79742753a0e2ea89d86d",
+      "rows": 4594,
+      "opaque_black_only_rows": 4594,
+      "gradient_rows": 0,
+      "embedded_image_rows": 0,
+      "nonunit_opacity_rows": 0,
+      "parse_error_rows": 0,
+      "colour_or_unresolved_rows": 0,
+      "element_counts": {
+        "path": 8660,
+        "svg": 4594
+      },
+      "explicit_paint_counts": {
+        "black": 8660,
+        "none": 8660
+      },
+      "monotrace_status": "eligible-unmeasured"
+    }
+  ]
+}

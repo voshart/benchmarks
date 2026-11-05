@@ -98,6 +98,7 @@
     });
     const key = [
       'index',
+      'position',
       'name',
       'count',
       ...columns.map((c) => c.id),
@@ -108,6 +109,7 @@
     const direction =
       options.direction ||
       (key === 'name' ||
+      key === 'position' ||
       data.matrix.complexity_metrics.includes(key) ||
       data.metrics[columns.find((c) => c.id === key)?.metric]?.direction === 'asc'
         ? 'asc'
@@ -120,7 +122,7 @@
         .includes(query)
     );
     const sortValue = (row) =>
-      ['index', 'count'].includes(key)
+      ['index', 'position', 'count'].includes(key)
         ? row[key]
         : row.complexity[key]
           ? row.complexity[key].row.values[key]
@@ -150,10 +152,10 @@
       showComplexity: options.complexity === true
     };
   }
-  function rankNote(row, data) {
+  function rankNote(row, data, result) {
     const counts = `${row.count} dataset ${row.count === 1 ? 'family' : 'families'}`;
     return finite(row.index)
-      ? `Relative index ${row.index.toFixed(1)} / 100 · position ${row.position}. Mean finite-cohort percentile across ${counts}; one vote per family. An estimate from different comparison cohorts, not accuracy or a matched win over every listed tracer. ${row.count < data.matrix.full_coverage_families ? 'Limited coverage. ' : ''}Published versions and execution conditions may differ; exact configurations remain separate. Complexity does not affect this index.`
+      ? `Relative index ${row.index.toFixed(1)} / 100 · rank ${row.position} of ${result.cohortCount} in this colour view. Mean finite-cohort percentile across ${counts}; one vote per family. An estimate from different comparison cohorts, not accuracy or a matched win over every listed tracer. ${row.count < data.matrix.full_coverage_families ? 'Limited coverage. ' : ''}Published versions and execution conditions may differ; exact configurations remain separate. Complexity does not affect this index.`
       : 'Unranked: no matched quality comparison. Missing scores are not failures.';
   }
   function sourceDetails(item, data) {
@@ -176,6 +178,12 @@
   }
   function renderHead(result, data) {
     const columns = [
+      {
+        id: 'position',
+        label: '#',
+        description:
+          'Rank among configurations in the selected colour view. Colour changes recalculate it; search and display sorting retain it.'
+      },
       { id: 'name', label: 'Tracer' },
       {
         id: 'index',
@@ -202,18 +210,18 @@
     return columns
       .map(
         (c) =>
-          `<th scope="col" aria-sort="${c.id === result.key ? (result.direction === 'asc' ? 'ascending' : 'descending') : 'none'}"><button type="button" data-svg-sort="${c.id}" title="${esc(c.description || 'Sort by tracer name')}">${esc(c.label)}${c.id === result.key ? (result.direction === 'asc' ? ' ▴' : ' ▾') : ''}</button></th>`
+          `<th scope="col" data-svg-col="${c.id}" aria-sort="${c.id === result.key ? (result.direction === 'asc' ? 'ascending' : 'descending') : 'none'}"><button type="button" data-svg-sort="${c.id}" title="${esc(c.description || 'Sort by tracer name')}">${esc(c.label)}${c.id === result.key ? (result.direction === 'asc' ? ' ▴' : ' ▾') : ''}</button></th>`
       )
       .join('');
   }
   function renderRows(result, data) {
     if (!result.rows.length)
-      return `<tr><td colspan="${3 + result.columns.length + (result.showComplexity ? data.matrix.complexity_metrics.length : 0)}" class="svg-empty">${result.mode === 'gradient' ? 'No gradient-specific results have been reported. The colour datasets mix flat artwork and gradients.' : 'No tracers match this filter.'}</td></tr>`;
+      return `<tr><td colspan="${4 + result.columns.length + (result.showComplexity ? data.matrix.complexity_metrics.length : 0)}" class="svg-empty">${result.mode === 'gradient' ? 'No gradient-specific results have been reported. The colour datasets mix flat artwork and gradients.' : 'No tracers match this filter.'}</td></tr>`;
     return result.rows
       .map((row) => {
         const id = 'svg-config-' + row.id;
         const allDetails = row.observations.map((o) => sourceDetails(o, data)).join('');
-        const title = `<h3>${esc(row.model.name)}</h3><p>${esc(row.model.version)}</p><p>${esc(row.model.note)}</p><p>${esc(rankNote(row, data))}</p>`;
+        const title = `<h3>${esc(row.model.name)}</h3><p>${esc(row.model.version)}</p><p>${esc(row.model.note)}</p><p>${esc(rankNote(row, data, result))}</p>`;
         const contributionDetails = row.contributions
           .map(
             (o) =>
@@ -227,11 +235,14 @@
             if (!item) return '<td>—</td>';
             const value = valueText(data, item.run, item.row, item.run.primary);
             const alternatives = row.observations.filter((o) => o.run.family === column.id);
+            const colourNote = column.colour_source
+              ? `<p>${esc(data.sources[column.colour_source].note)} <a href="${esc(data.sources[column.colour_source].url)}">Colour evidence ↗</a></p>`
+              : '';
             const note =
               alternatives.length > 1
                 ? '<p>Multiple protocols are available. The first result follows declared protocol priority; all observations are retained below.</p>'
                 : '';
-            return `<td class="score" style="--shade:${item.percentile == null ? 0 : ((30 * item.percentile) / 100).toFixed(1)}%">${esc(value)}${popover(id + '-' + column.id, `${row.model.name}: ${column.label} score and source`, `<h3>${esc(row.model.name)} · ${esc(column.label)}</h3>${note}${alternatives.map((o) => sourceDetails(o, data)).join('')}`)}</td>`;
+            return `<td class="score" style="--shade:${item.percentile == null ? 0 : ((30 * item.percentile) / 100).toFixed(1)}%">${esc(value)}${popover(id + '-' + column.id, `${row.model.name}: ${column.label} score and source`, `<h3>${esc(row.model.name)} · ${esc(column.label)}</h3>${colourNote}${note}${alternatives.map((o) => sourceDetails(o, data)).join('')}`)}</td>`;
           })
           .join('');
         const complexity = result.showComplexity
@@ -244,9 +255,29 @@
               })
               .join('')
           : '';
-        return `<tr data-model="${esc(row.id)}"><th scope="row">${esc(row.model.name)}${popover(id, `Details for ${row.model.name}, ${row.model.configuration_label}`, title + allDetails)}<small class="svg-version">${esc(row.model.configuration_label)}</small></th><td class="index">${index}${popover(id + '-index', `Index details for ${row.model.name}`, `<h3>${esc(row.model.name)} · relative index</h3><p>${esc(rankNote(row, data))}</p><ul>${contributionDetails}</ul>`)}</td><td>${row.count}</td>${cells}${complexity}</tr>`;
+        return `<tr data-model="${esc(row.id)}"><td class="svg-position" data-svg-col="position">${row.position ?? '—'}</td><th scope="row" data-svg-col="name">${esc(row.model.name)}${popover(id, `Details for ${row.model.name}, ${row.model.configuration_label}`, title + allDetails)}<small class="svg-version">${esc(row.model.configuration_label)}</small></th><td class="index" data-svg-col="index">${index}${popover(id + '-index', `Index details for ${row.model.name}`, `<h3>${esc(row.model.name)} · relative index</h3><p>${esc(rankNote(row, data, result))}</p><ul>${contributionDetails}</ul>`)}</td><td data-svg-col="count">${row.count}</td>${cells}${complexity}</tr>`;
       })
       .join('');
   }
-  return { build, renderHead, renderRows };
+  function renderColumns(result, data) {
+    return [
+      'position',
+      'name',
+      'index',
+      'count',
+      ...result.columns.map((column) => column.id),
+      ...(result.showComplexity ? data.matrix.complexity_metrics : [])
+    ]
+      .map(
+        (id) =>
+          `<col class="svg-col-${['position', 'name', 'index', 'count'].includes(id) ? id : 'metric'}" />`
+      )
+      .join('');
+  }
+  function status(result, data) {
+    if (result.mode === 'gradient') return 'No gradient-specific measurements yet';
+    const label = data.matrix.modes.find((mode) => mode.id === result.mode).label;
+    return `${label} · ${result.rows.length} configurations`;
+  }
+  return { build, renderHead, renderRows, renderColumns, status };
 });

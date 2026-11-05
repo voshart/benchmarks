@@ -415,6 +415,13 @@
       "attribution": "dataset source",
       "verified_on": "2026-11-05",
       "note": "Reported test size 472. Original versus simplified baseline inputs remain unverified; the statistics describe dataset inputs, not model output complexity."
+    },
+    "colour_audit_20261105": {
+      "title": "Released SVG test splits · complete colour audit",
+      "url": "https://huggingface.co/datasets/starvector/svg-icons/resolve/0dfc1bee713256e64d5c16d7427c4c29de823d70/data/test-00000-of-00001.parquet",
+      "operator": "Voshart benchmark maintainer",
+      "attribution": "maintainer inspection of released dataset XML, not tracer execution",
+      "note": "All 2,682 released SVG-Icons test rows use opaque black paths with no gradients or embedded images. Revision 0dfc1bee713256e64d5c16d7427c4c29de823d70. Released counts differ from the paper-era table; this audit does not supply new reconstruction scores."
     }
   },
   "runs": [
@@ -1526,8 +1533,9 @@
       {
         "id": "icons",
         "label": "Icons",
-        "colour": "multi",
-        "metric": "dino"
+        "colour": "single",
+        "metric": "dino",
+        "colour_source": "colour_audit_20261105"
       },
       {
         "id": "stack",
@@ -1568,11 +1576,46 @@
     ],
     "minimum_families": 1,
     "full_coverage_families": 4,
-    "note": "One configuration per row. Relative index uses finite-cohort percentiles within exact protocols, averaged once per dataset family. It is a qualified summary, not a matched cross-study win. Multicolour includes mixed-colour datasets; the papers do not report isolated flat-only or gradient-only subsets.",
+    "note": "One configuration per row. Relative index uses finite-cohort percentiles within exact protocols, averaged once per dataset family. Colour selection recalculates the index and ordinal position. A configuration measured only on monochrome tests can retain its index when the view changes. Released SVG-Icons is monochrome; mixed-colour aggregates do not isolate gradient-only performance.",
     "complexity_metrics": [
       "segments",
       "paths",
       "tokens_k"
+    ],
+    "colour_audit": "/svg/evidence/colour-audit-20261105.json",
+    "next_tests": [
+      {
+        "dataset": "starvector/svg-icons",
+        "rows": 2682,
+        "status": "eligible-unmeasured",
+        "url": "https://huggingface.co/datasets/starvector/svg-icons/resolve/0dfc1bee713256e64d5c16d7427c4c29de823d70/data/test-00000-of-00001.parquet",
+        "family": "icons",
+        "note": "Monochrome inputs verified; no Monotrace quality measurement yet."
+      },
+      {
+        "dataset": "starvector/svg-icons-simple",
+        "rows": 2682,
+        "status": "eligible-unmeasured",
+        "url": "https://huggingface.co/datasets/starvector/svg-icons-simple/resolve/e1918a27ba6649e856e5db0710d8a6c7046762c1/data/test-00000-of-00001.parquet",
+        "family": "icons",
+        "note": "Related font/icon variant; not an extra independent family vote."
+      },
+      {
+        "dataset": "starvector/FIGR-SVG",
+        "rows": 15000,
+        "status": "eligible-unmeasured",
+        "url": "https://huggingface.co/datasets/starvector/FIGR-SVG/resolve/ead610a5ad3fa5165061105b18d49f6acd84336f/data/test-00000-of-00001.parquet",
+        "family": "figr",
+        "note": "Monochrome inputs verified; no Monotrace quality measurement yet."
+      },
+      {
+        "dataset": "starvector/svg-fonts-simple",
+        "rows": 4594,
+        "status": "eligible-unmeasured",
+        "url": "https://huggingface.co/datasets/starvector/svg-fonts-simple/resolve/453c739ea13ad2685127f721c333f14d99485299/data/test-00000-of-00001.parquet",
+        "family": "fonts",
+        "note": "Related font/icon variant; not an extra independent family vote."
+      }
     ]
   }
 }

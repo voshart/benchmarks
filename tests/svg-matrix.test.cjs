@@ -192,6 +192,7 @@ test('SVG controller updates one matrix for mode, search, sorting, complexity, r
   const data = loadSVG();
   const node = () => ({
     value: '',
+    style: { setProperty() {} },
     checked: false,
     textContent: '',
     innerHTML: '',
@@ -209,6 +210,7 @@ test('SVG controller updates one matrix for mode, search, sorting, complexity, r
       'svgReset',
       'svgStatus',
       'svgMatrix',
+      'svgCols',
       'svgHead',
       'svgRows'
     ].map((id) => [id, node()])
@@ -266,4 +268,98 @@ test('SVG controller updates one matrix for mode, search, sorting, complexity, r
   await new Promise(setImmediate);
   assert.equal(body.dataset.enhanced, undefined);
   assert(ids.svgStatus.textContent.includes('All results shown'));
+});
+
+test('SVG ordinal rank recalculates for colour even when a monochrome-only index is unchanged', () => {
+  const data = fixture();
+  data.models['starvector-8b'] = loadSVG().models['starvector-8b'];
+  data.runs.push({
+    ...structuredClone(data.runs[0]),
+    id: 'colour-fixture',
+    family: 'emoji',
+    rows: [
+      { model: 'starvector-8b', values: { dino: 0.99 } },
+      { model: 'vtracer', values: { dino: 0.1 } }
+    ]
+  });
+  const all = matrix.build(data),
+    single = matrix.build(data, { mode: 'single' });
+  const before = all.rows.find((r) => r.id === 'monotrace'),
+    after = single.rows.find((r) => r.id === 'monotrace');
+  assert.equal(before.index, after.index);
+  assert.equal(before.position, after.position + 1);
+  assert(
+    matrix.renderRows(single, data).includes(`data-svg-col="position">${after.position}</td>`)
+  );
+  assert(matrix.renderHead(single, data).includes('data-svg-sort="position"'));
+  const sorted = matrix.build(data, { mode: 'single', key: 'position' });
+  assert.deepEqual(
+    sorted.rows.map((r) => r.position),
+    single.rows.map((r) => r.position)
+  );
+  assert.equal(
+    matrix.build(data, { mode: 'single', query: 'Monotrace' }).rows[0].position,
+    after.position
+  );
+});
+
+test('complete pinned SVG colour audit corrects Icons classification without filling a tracer score', () => {
+  const data = loadSVG(),
+    audit = JSON.parse(fs.readFileSync('data/svg/evidence/colour-audit-20261105.json', 'utf8'));
+  const icons = data.matrix.columns.find((c) => c.id === 'icons');
+  assert.equal(icons.colour, 'single');
+  assert(data.sources[icons.colour_source]);
+  for (const record of audit.datasets) {
+    assert.match(record.revision, /^[0-9a-f]{40}$/);
+    assert.match(record.sha256, /^[0-9a-f]{64}$/);
+    assert.equal(record.rows, record.opaque_black_only_rows);
+    for (const field of [
+      'gradient_rows',
+      'embedded_image_rows',
+      'parse_error_rows',
+      'colour_or_unresolved_rows'
+    ])
+      assert.equal(record[field], 0);
+    const eligibility = data.matrix.next_tests.find((t) => t.dataset === record.dataset);
+    assert.equal(eligibility.rows, record.rows);
+    assert.equal(eligibility.status, 'eligible-unmeasured');
+  }
+  const single = matrix.build(data, { mode: 'single' }),
+    multi = matrix.build(data, { mode: 'multi' });
+  assert(single.columns.some((c) => c.id === 'icons'));
+  assert(!multi.columns.some((c) => c.id === 'icons'));
+  const mono = single.rows.find((r) => r.id === 'monotrace');
+  assert.equal(mono.scores.icons, null, 'eligibility is not an observed reconstruction score');
+  const before = mono.index;
+  data.matrix.next_tests = [];
+  assert.equal(
+    matrix.build(data, { mode: 'single' }).rows.find((r) => r.id === 'monotrace').index,
+    before
+  );
+  assert.equal(
+    data.runs.find((r) => r.id === 'svg-icons-published-2025').sample_count,
+    null,
+    'released audit count does not become the paper evaluated count'
+  );
+});
+
+test('SVG column widths and status derive from the filtered matrix for server/browser parity', () => {
+  const data = loadSVG();
+  for (const mode of ['all', 'single', 'multi', 'gradient'])
+    for (const complexity of [false, true]) {
+      const result = matrix.build(data, { mode, complexity });
+      const count =
+        4 + result.columns.length + (complexity ? data.matrix.complexity_metrics.length : 0);
+      assert.equal((matrix.renderColumns(result, data).match(/<col /g) || []).length, count);
+      assert.equal((matrix.renderHead(result, data).match(/<th /g) || []).length, count);
+      assert(
+        matrix
+          .status(result, data)
+          .includes(
+            mode === 'gradient'
+              ? 'No gradient-specific'
+              : data.matrix.modes.find((m) => m.id === mode).label
+          )
+      );
+    }
 });

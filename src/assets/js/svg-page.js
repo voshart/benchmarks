@@ -29,12 +29,17 @@
           key,
           direction
         });
+        document.getElementById('svgCols').innerHTML = SVGMatrix.renderColumns(result, data);
+        document
+          .getElementById('svgMatrix')
+          .style.setProperty(
+            '--svg-metrics',
+            result.columns.length +
+              (result.showComplexity ? data.matrix.complexity_metrics.length : 0)
+          );
         document.getElementById('svgHead').innerHTML = SVGMatrix.renderHead(result, data);
         document.getElementById('svgRows').innerHTML = SVGMatrix.renderRows(result, data);
-        document.getElementById('svgStatus').textContent =
-          result.mode === 'gradient'
-            ? 'No gradient-specific measurements yet'
-            : `${result.rows.length} configurations · ${result.columns.length} dataset families · relative index`;
+        document.getElementById('svgStatus').textContent = SVGMatrix.status(result, data);
         return result;
       }
       mode.addEventListener('change', () => {
