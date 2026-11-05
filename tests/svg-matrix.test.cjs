@@ -303,6 +303,10 @@ test('SVG ordinal rank recalculates for colour even when a monochrome-only index
   );
 });
 
+function record_rows(audit, dataset) {
+  return audit.datasets.find((r) => r.dataset === dataset).rows;
+}
+
 test('complete pinned SVG colour audit corrects Icons classification without filling a tracer score', () => {
   const data = loadSVG(),
     audit = JSON.parse(fs.readFileSync('data/svg/evidence/colour-audit-20261105.json', 'utf8'));
@@ -321,6 +325,10 @@ test('complete pinned SVG colour audit corrects Icons classification without fil
     ])
       assert.equal(record[field], 0);
     const eligibility = data.matrix.next_tests.find((t) => t.dataset === record.dataset);
+    if (record.dataset === 'starvector/svg-icons') {
+      assert.equal(eligibility, undefined, 'measured SVG-Icons is no longer an unmeasured test');
+      continue;
+    }
     assert.equal(eligibility.rows, record.rows);
     assert.equal(eligibility.status, 'eligible-unmeasured');
   }
@@ -329,7 +337,14 @@ test('complete pinned SVG colour audit corrects Icons classification without fil
   assert(single.columns.some((c) => c.id === 'icons'));
   assert(!multi.columns.some((c) => c.id === 'icons'));
   const mono = single.rows.find((r) => r.id === 'monotrace');
-  assert.equal(mono.scores.icons, null, 'eligibility is not an observed reconstruction score');
+  const iconsRun = data.runs.find((r) => r.id === 'icons-full-20261105');
+  assert.equal(iconsRun.sample_count, record_rows(audit, 'starvector/svg-icons'));
+  assert.equal(iconsRun.report_type, 'maintainer');
+  assert.equal(
+    mono.scores.icons.row.values.dino,
+    iconsRun.rows.find((r) => r.model === 'monotrace').values.dino
+  );
+  assert(iconsRun.priority < data.runs.find((r) => r.id === 'svg-icons-published-2025').priority);
   const before = mono.index;
   data.matrix.next_tests = [];
   assert.equal(

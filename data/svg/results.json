@@ -422,6 +422,13 @@
       "operator": "Voshart benchmark maintainer",
       "attribution": "maintainer inspection of released dataset XML, not tracer execution",
       "note": "All 2,682 released SVG-Icons test rows use opaque black paths with no gradients or embedded images. Revision 0dfc1bee713256e64d5c16d7427c4c29de823d70. Released counts differ from the paper-era table; this audit does not supply new reconstruction scores."
+    },
+    "local_icons": {
+      "title": "Full SVG-Icons run · 2026-11-05",
+      "url": "https://github.com/voshart/benchmarks/blob/main/data/svg/evidence/full-icons-summary.json",
+      "operator": "Monotrace maintainer",
+      "attribution": "maintainer-run",
+      "note": "2,682 inputs, 5,364 case/engine evaluations. Fixed native kernel; all cases retained. Provenance: full-icons-provenance.json."
     }
   },
   "runs": [
@@ -608,6 +615,68 @@
       "family": "polyfit",
       "priority": 0,
       "source_label": "Our run"
+    },
+    {
+      "id": "icons-full-20261105",
+      "label": "Icons · our tests",
+      "dataset": "SVG-Icons",
+      "sample_count": 2682,
+      "source_id": "local_icons",
+      "dataset_source": "starvector_icons",
+      "primary": "dino",
+      "columns": [
+        "dino",
+        "median_boundary",
+        "mean_boundary",
+        "iou",
+        "segments",
+        "no_output"
+      ],
+      "summary": "2,682 images · maintainer run · DINO ↑",
+      "method": "Pinned starvector/svg-icons test parquet (revision 0dfc1bee713256e64d5c16d7427c4c29de823d70). Stroke-only line art rendered to 256 px white-background inputs, original framing, no crop or automatic levels. Matched resvg 1024 px geometry renders, reported in native pixels. DINO uses resvg 256 px scoring images and the pinned DINOv2-base FP32 model. Same scorer as the font run; kernel source revision is the font run's, but the binary was rebuilt and output equivalence was not tested.",
+      "caveat": "Monotrace has higher DINO and lower median and successful-trace boundary error, while Potrace has a lower all-case mean after the 256 px missing-output penalty for three Monotrace refusals. The full split is observed material, not a tuning holdout. The published StarVector table uses a different or unverified pipeline.",
+      "rows": [
+        {
+          "model": "potrace",
+          "values": {
+            "dino": 0.9878282587444667,
+            "median_boundary": 0.2516840879706983,
+            "mean_boundary": 0.2784439740970382,
+            "iou": 0.8793752019589486,
+            "segments": 108.0,
+            "no_output": 0,
+            "trace_errors": 0,
+            "topology": 1337
+          },
+          "note": "No explicit errors or empty outputs.",
+          "conditional": {
+            "count": 2679,
+            "mean_boundary": 0.2784473500913374
+          }
+        },
+        {
+          "model": "monotrace",
+          "values": {
+            "dino": 0.9951922613946828,
+            "median_boundary": 0.11490213199720724,
+            "mean_boundary": 0.4276360678999567,
+            "iou": 0.9439792887685672,
+            "segments": 123.0,
+            "no_output": 3,
+            "trace_errors": 3,
+            "topology": 1352
+          },
+          "note": "Three explicit geometry-unresolved refusals (icon-29348, icon-57934, icon-72947) retained with blank scoring images. 581 of 2,679 successful outputs carry review-connectivity.",
+          "conditional": {
+            "count": 2679,
+            "mean_boundary": 0.14144081153702262
+          }
+        }
+      ],
+      "report_type": "maintainer",
+      "family": "icons",
+      "priority": 0,
+      "source_label": "Our full run"
     },
     {
       "id": "svg-fonts-published-2025",
@@ -1208,7 +1277,7 @@
         "primitives": "Vector paths"
       },
       "family": "icons",
-      "priority": 0,
+      "priority": 1,
       "source_label": "StarVector table"
     },
     {
@@ -1495,6 +1564,20 @@
         "metric": "dino"
       },
       "scope": "256-image local pilot · Python 0.6.15"
+    },
+    {
+      "label": "Potrace · Icons",
+      "local": {
+        "run_id": "icons-full-20261105",
+        "model": "potrace",
+        "metric": "dino"
+      },
+      "published": {
+        "run_id": "svg-icons-published-2025",
+        "model": "potrace-paper",
+        "metric": "dino"
+      },
+      "scope": "2,682 local images · original C 1.16"
     }
   ],
   "matrix": {
@@ -1576,7 +1659,7 @@
     ],
     "minimum_families": 1,
     "full_coverage_families": 4,
-    "note": "One configuration per row. Relative index uses finite-cohort percentiles within exact protocols, averaged once per dataset family. Colour selection recalculates the index and ordinal position. A configuration measured only on monochrome tests can retain its index when the view changes. Released SVG-Icons is monochrome; mixed-colour aggregates do not isolate gradient-only performance.",
+    "note": "One configuration per row. Relative index uses finite-cohort percentiles within exact protocols, averaged once per dataset family. Colour selection recalculates the index and ordinal position. A configuration measured only on monochrome tests can retain its index when the view changes. Released SVG-Icons is monochrome and now has a full local run; mixed-colour aggregates do not isolate gradient-only performance.",
     "complexity_metrics": [
       "segments",
       "paths",
@@ -1584,14 +1667,6 @@
     ],
     "colour_audit": "/svg/evidence/colour-audit-20261105.json",
     "next_tests": [
-      {
-        "dataset": "starvector/svg-icons",
-        "rows": 2682,
-        "status": "eligible-unmeasured",
-        "url": "https://huggingface.co/datasets/starvector/svg-icons/resolve/0dfc1bee713256e64d5c16d7427c4c29de823d70/data/test-00000-of-00001.parquet",
-        "family": "icons",
-        "note": "Monochrome inputs verified; no Monotrace quality measurement yet."
-      },
       {
         "dataset": "starvector/svg-icons-simple",
         "rows": 2682,
