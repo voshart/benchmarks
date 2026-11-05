@@ -9,7 +9,7 @@ const fresh = () => JSON.parse(JSON.stringify(loadSVG()));
 test('SVG groups never mix published and locally executed observations', () => {
   const data = loadSVG();
   const published = data.runs.find((run) => run.source_id === 'starvector');
-  const local = comparison.select(data, data.default_run);
+  const local = comparison.select(data, 'fonts-full-20261104');
   assert(local.rows.every((row) => !published.rows.some((other) => other.model === row.model)));
   assert.equal(comparison.select(data, published.id, 'Monotrace').rows.length, 0);
   assert.equal(published.sample_count, null);
@@ -38,16 +38,19 @@ test('SVG missing scores sort last in either direction and measured zeros remain
 
 test('SVG filtering searches configuration and preserves metric order', () => {
   const data = loadSVG();
-  assert.equal(comparison.select(data, data.default_run, '  C 1.16 ').rows[0].model, 'potrace');
+  assert.equal(
+    comparison.select(data, 'fonts-full-20261104', '  C 1.16 ').rows[0].model,
+    'potrace'
+  );
   assert.match(
-    comparison.renderRows(comparison.select(data, data.default_run, 'absent'), data),
+    comparison.renderRows(comparison.select(data, 'fonts-full-20261104', 'absent'), data),
     /No tracers match/
   );
   assert.equal(
-    comparison.select(data, data.default_run, '', 'mean_boundary').rows[0].model,
+    comparison.select(data, 'fonts-full-20261104', '', 'mean_boundary').rows[0].model,
     'potrace'
   );
-  assert.equal(comparison.select(data, data.default_run).rows[0].model, 'monotrace');
+  assert.equal(comparison.select(data, 'fonts-full-20261104').rows[0].model, 'monotrace');
 });
 
 test('SVG full-run observations preserve the source summary including failures', () => {
@@ -80,7 +83,7 @@ test('SVG full-run observations preserve the source summary including failures',
 test('SVG row details escape evidence text and retain attribution and conditional scope', () => {
   const data = fresh();
   data.models.monotrace.name = '<script> & "tracer"';
-  const result = comparison.select(data, data.default_run);
+  const result = comparison.select(data, 'fonts-full-20261104');
   const html = comparison.renderRows(result, data);
   assert(!html.includes('<script>'));
   assert(html.includes('&lt;script&gt; &amp; &quot;tracer&quot;'));
@@ -89,7 +92,7 @@ test('SVG row details escape evidence text and retain attribution and conditiona
   assert(html.includes('4,813 cases'));
   assert(html.includes('Errors and empty outputs are excluded'));
   const head = comparison.renderHead(result, data);
-  assert(head.includes('aria-sort="descending"'));
+  assert(head.includes('aria-sort="ascending"'));
   assert(head.includes('data-svg-sort="mean_boundary"'));
 });
 

@@ -1,0 +1,12 @@
+{
+  "verified_on": "2026-11-05",
+  "url": "https://github.com/joanrod/star-vector/blob/0e083c1911760aa31bc576ca7f337a7f8ee605ec/README.md#models",
+  "revision": "0e083c1911760aa31bc576ca7f337a7f8ee605ec",
+  "table": "Models / SVG-Bench DinoScore",
+  "measurement_operator": "StarVector authors",
+  "raw_table": "starvector-models-2025.csv",
+  "missing_policy": "Source dash remains null; no value inferred.",
+  "configuration_note": "Dataset-specific StarVector fine-tuning; exact baseline invocations remain unverified.",
+  "complexity_note": "Dataset token mean and standard deviation are input statistics, not per-method output complexity.",
+  "derived_overview": "Equal mean of all five published values; computed at render time, not a source observation. Missing component means unranked."
+}
