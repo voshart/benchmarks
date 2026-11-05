@@ -10,6 +10,13 @@
       (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
     );
   const views = (data) => [...(data.overview ? [data.overview] : []), ...data.runs];
+  const choices = (data) => [...(data.landing ? [data.landing] : []), ...views(data)];
+  function selectPanels(data, id, query = '', sorts = {}) {
+    const ids = data.landing?.id === id ? data.landing.panels : [id];
+    return ids.map((panel) =>
+      select(data, panel, query, sorts[panel]?.key, sorts[panel]?.direction)
+    );
+  }
   const metric = (data, run, key) => ({
     ...data.metrics[key],
     precision: run.precisions?.[key] ?? data.metrics[key].precision
@@ -119,7 +126,7 @@
             : key === 'name'
               ? 'Sort by tracer name; configuration and sources in ⓘ'
               : data.metrics[key].description;
-        return `<th scope="col" aria-sort="${active ? (result.direction === 'asc' ? 'ascending' : 'descending') : 'none'}"><button type="button" data-svg-sort="${key}" title="${escape(title)}">${escape(label)}${active ? (result.direction === 'asc' ? ' ▴' : ' ▾') : ''}</button></th>`;
+        return `<th scope="col" aria-sort="${active ? (result.direction === 'asc' ? 'ascending' : 'descending') : 'none'}"><button type="button" data-svg-sort="${key}" data-svg-sort-panel="${escape(result.run.id)}" title="${escape(title)}">${escape(label)}${active ? (result.direction === 'asc' ? ' ▴' : ' ▾') : ''}</button></th>`;
       })
       .join('');
   }
@@ -169,5 +176,15 @@
       .join('');
     return `<table class="svg-difference-table"><caption>SVG-Fonts · DINO scores</caption><thead><tr><th scope="col">Tracer</th><th scope="col">Our run</th><th scope="col">StarVector table</th></tr></thead><tbody>${rows}</tbody></table><p>The scores differ, but the pipelines are not matched: renderer, scoring size, inputs and baseline versions differ or remain unverified. A 64-image diagnostic did not resolve the gap. These values are kept separate.</p><p>Monotrace has no result in the published five-dataset panel. Its local scores cannot establish a matched win over StarVector or AutoTrace.</p>`;
   }
-  return { views, materialize, select, format, renderHead, renderRows, renderDifferences };
+  return {
+    views,
+    choices,
+    selectPanels,
+    materialize,
+    select,
+    format,
+    renderHead,
+    renderRows,
+    renderDifferences
+  };
 });

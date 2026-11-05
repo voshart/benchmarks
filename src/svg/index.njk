@@ -26,7 +26,7 @@ permalink: /svg/index.html
     </script>
   </head>
   <body class="svg-page">
-    <main>
+    <main id="{{ svg.landing.id or 'svg-overview' }}">
       <header class="hero">
         <div>
           <small class="eyebrow"
@@ -71,7 +71,7 @@ permalink: /svg/index.html
         <button type="button" id="svgReset">Reset</button>
       </div>
       <p class="key" id="svgStatus" role="status">
-        Ranks compare matched scores. Missing results stay unranked.
+        Ranks stay within each comparison. Missing results stay unranked.
       </p>
       {% for panel in svg.panels %}
         <section
@@ -129,9 +129,6 @@ permalink: /svg/index.html
               </table>
             </div>
           </details>
-          <p class="key">
-            ↑ higher · ↓ lower · — unavailable · ⓘ details. Complexity does not affect quality rank.
-          </p>
           <details class="method">
             <summary>About this benchmark</summary>
             <p>{{ panel.run.method }}</p>
@@ -163,6 +160,9 @@ permalink: /svg/index.html
           </details>
         </section>
       {% endfor %}
+      <p class="key">
+        ↑ higher · ↓ lower · — unavailable · ⓘ details. Complexity does not affect quality rank.
+      </p>
       <p class="svg-difference-note">
         Our font scores differ from StarVector’s table.
         <button class="quiet" type="button" popovertarget="svg-differences">Compare ⓘ</button>

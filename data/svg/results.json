@@ -2,7 +2,7 @@
   "schema_version": 1,
   "title": "SVG tracer benchmarks",
   "snapshot_date": "2026-11-05",
-  "default_run": "svg-bench",
+  "default_run": "overview",
   "affiliation": "Daniel Voshart develops Monotrace. The local comparisons were executed for this project; they are not independent evaluations.",
   "metrics": {
     "dino": {
@@ -1433,5 +1433,13 @@
       },
       "scope": "256-image local pilot \u00b7 Python 0.6.15"
     }
-  ]
+  ],
+  "landing": {
+    "id": "overview",
+    "label": "Overview \u00b7 our tests + published",
+    "panels": [
+      "fonts-full-20261104",
+      "svg-bench"
+    ]
+  }
 }

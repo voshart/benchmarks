@@ -155,7 +155,7 @@ test('SVG validation prevents duplicate dataset votes, mixed sources and complex
   }
 });
 
-test('SVG browser selector handles the derived overview and preserves ranks through sorting', async () => {
+test('default SVG overview exposes local and published results with independent table sorting', async () => {
   const data = loadSVG();
   const node = () => ({
     value: '',
@@ -170,7 +170,7 @@ test('SVG browser selector handles the derived overview and preserves ranks thro
   const ids = Object.fromEntries(
     ['themeToggle', 'svgRun', 'svgSearch', 'svgReset', 'svgStatus'].map((id) => [id, node()])
   );
-  const panels = comparison.views(data).map((run) => {
+  const panels = data.panels.map(({ run }) => {
     const parts = Object.fromEntries(
       ['.svg-ranked-body', '.svg-unranked-body', '.svg-unranked', '.svg-unranked summary'].map(
         (key) => [key, node()]
@@ -198,7 +198,7 @@ test('SVG browser selector handles the derived overview and preserves ranks thro
       }
     },
     fetch: () => Promise.resolve({ ok: true, json: () => Promise.resolve(data) }),
-    location: { hash: '#' + data.overview.id },
+    location: { hash: '' },
     history: { replaceState() {} },
     window: { addEventListener() {} }
   };
@@ -207,25 +207,50 @@ test('SVG browser selector handles the derived overview and preserves ranks thro
     context
   );
   await new Promise(setImmediate);
-  assert.equal(ids.svgRun.value, data.overview.id);
-  assert.equal(panels.filter((panel) => !panel.hidden).length, 1);
-  assert.equal(panels.find((panel) => !panel.hidden).dataset.svgRun, data.overview.id);
+  assert.equal(ids.svgRun.value, data.landing.id);
+  assert.deepEqual(
+    panels.filter((panel) => !panel.hidden).map((panel) => panel.dataset.svgRun),
+    data.landing.panels
+  );
   assert.equal(body.dataset.enhanced, 'true');
-  ids.svgRun.value = 'fonts-full-20261104';
-  ids.svgRun.events.change();
+  const local = panels.find((panel) => panel.dataset.svgRun === 'fonts-full-20261104');
+  const published = panels.find((panel) => panel.dataset.svgRun === data.overview.id);
+  assert(local.parts['.svg-ranked-body'].innerHTML.includes('data-model="monotrace"'));
+  const publishedRows = published.parts['.svg-ranked-body'].innerHTML;
   events.click({
     target: {
       closest: (selector) =>
-        selector === '[data-svg-sort]' ? { dataset: { svgSort: 'segments' } } : null
+        selector === '[data-svg-sort]'
+          ? { dataset: { svgSort: 'segments', svgSortPanel: local.dataset.svgRun } }
+          : null
     }
   });
-  const visible = panels.find((panel) => !panel.hidden);
   assert(
-    visible.parts['.svg-ranked-body'].innerHTML.indexOf('data-model="potrace"') <
-      visible.parts['.svg-ranked-body'].innerHTML.indexOf('data-model="monotrace"')
+    local.parts['.svg-ranked-body'].innerHTML.indexOf('data-model="potrace"') <
+      local.parts['.svg-ranked-body'].innerHTML.indexOf('data-model="monotrace"')
   );
-  assert(visible.parts['.svg-ranked-body'].innerHTML.includes('Rank 2 of 2'));
-  assert.equal(visible.parts['.svg-unranked'].hidden, true);
+  assert(local.parts['.svg-ranked-body'].innerHTML.includes('Rank 2 of 2'));
+  assert.equal(local.parts['.svg-unranked'].hidden, true);
+  assert.equal(published.parts['.svg-ranked-body'].innerHTML, publishedRows);
+  events.click({
+    target: {
+      closest: (selector) =>
+        selector === '[data-svg-sort]'
+          ? { dataset: { svgSort: 'rank', svgSortPanel: local.dataset.svgRun } }
+          : null
+    }
+  });
+  assert(
+    local.parts['.svg-ranked-body'].innerHTML.indexOf('data-model="monotrace"') <
+      local.parts['.svg-ranked-body'].innerHTML.indexOf('data-model="potrace"')
+  );
+  ids.svgSearch.value = 'Monotrace';
+  ids.svgSearch.events.input();
+  assert.equal(local.hidden, false);
+  assert.equal(published.hidden, true);
+  assert(local.parts['.svg-ranked-body'].innerHTML.includes('Rank 1 of 2'));
+  ids.svgReset.events.click();
+  assert.equal(panels.filter((panel) => !panel.hidden).length, data.landing.panels.length);
   let closed = false;
   const link = {
     dataset: { svgLink: data.overview.id },
@@ -241,4 +266,25 @@ test('SVG browser selector handles the derived overview and preserves ranks thro
   });
   assert.equal(closed, true);
   assert.equal(panels.find((panel) => !panel.hidden).dataset.svgRun, data.overview.id);
+});
+
+test('SVG landing groups are validated without changing observation values or rank eligibility', () => {
+  const data = loadSVG();
+  const selected = comparison.selectPanels(data, data.default_run);
+  assert.deepEqual(
+    selected.map((result) => result.run.id),
+    data.landing.panels
+  );
+  assert.equal(selected[0].run.id, 'fonts-full-20261104');
+  assert(selected[0].rankedRows.some((row) => row.model === 'monotrace'));
+  assert(!selected[1].rows.some((row) => row.model === 'monotrace'));
+  assert.deepEqual(selected[1].rows, comparison.select(data, data.overview.id).rows);
+  for (const ids of [
+    ['missing', data.overview.id],
+    [data.overview.id, data.overview.id]
+  ]) {
+    const invalid = structuredClone(data);
+    invalid.landing.panels = ids;
+    assert.throws(() => validateSVG(invalid));
+  }
 });
